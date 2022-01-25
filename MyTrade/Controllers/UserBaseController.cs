@@ -11,7 +11,6 @@ namespace Mytrade.Controllers
     {
         //
         // GET: /Base/
-
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             // code involving this.Session // edited to simplify

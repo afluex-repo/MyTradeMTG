@@ -180,10 +180,15 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-
-                obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
-
-                obj.Result = "Yes";
+                if(ds.Tables[0].Rows[0]["TeamPermanent"].ToString()=="P")
+                {
+                    obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
+                    obj.Result = "Yes";
+                }
+                else
+                {
+                    obj.Result = "Sponsor Id is not Active";
+                }
 
             }
             else { obj.Result = "Invalid SponsorId"; }

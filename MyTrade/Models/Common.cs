@@ -21,6 +21,12 @@ namespace MyTrade.Models
         public string PinCode { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public string Fk_Paymentid { get; set; }
+        public string TransactionNo { get; set; }
+        public string TransactionDate { get; set; }
+        public string BankName { get; set; }
+        public string BranchName { get; set; }
+        public string Package { get; set; }
         public static string GenerateRandom()
         {
             Random r = new Random();
@@ -114,6 +120,24 @@ namespace MyTrade.Models
             int _max = 9999;
             Random _rdm = new Random();
             return _rdm.Next(_min, _max);
+        }
+        public DataSet BindProduct()
+        {
+            SqlParameter[] para =
+            {
+                  new SqlParameter("@ProductId", Package),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetProductList",para);
+            return ds;
+        }
+        public DataSet PaymentList()
+        {
+            SqlParameter[] para =
+            {
+                  new SqlParameter("@FK_paymentID", Fk_Paymentid),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentModeList", para);
+            return ds;
         }
     }
 }

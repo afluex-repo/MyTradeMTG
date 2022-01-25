@@ -18,6 +18,10 @@
     <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_custom.css">
     <style>
         .errortext {
             border: 2px solid red !important;
@@ -42,8 +46,8 @@
             <ul class="navbar-item theme-brand flex-row  text-center">
                 <li class="nav-item theme-logo">
                     <a href="index.html">
-                        <img src="~/assets/img/tradelogo.png"  class="navbar-logo" alt="logo"/>
-                     
+                        <img src="~/assets/img/tradelogo.png" class="navbar-logo" alt="logo" />
+
                     </a>
                 </li>
                 <li class="nav-item theme-text">
@@ -82,7 +86,7 @@
     <div class="sub-header-container">
         <header class="header navbar navbar-expand-sm">
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
-         
+
         </header>
     </div>
     <!--  END NAVBAR  -->
@@ -184,11 +188,12 @@
     <script src="plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="~/assets/js/app.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             App.init();
         });
     </script>
     <script src="~/assets/js/custom.js"></script>
+    <script src="~/plugins/table/datatable/datatables.js"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
     <script src="plugins/apex/apexcharts.min.js"></script>
