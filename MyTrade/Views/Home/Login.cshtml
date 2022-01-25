@@ -37,10 +37,10 @@
                     <div class="form-content">
                         <h1 class="">Sign In</h1>
                         <p class="">Log in to your account to continue.</p>
-                        @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm" }))
+                        @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "Form1" }))
                         {
                             <div id="username-field" class="field-wrapper input">
-                                <label for="username">Login Id</label>
+                                <label for="LoginId">Login Id</label>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
                             </div>

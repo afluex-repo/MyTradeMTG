@@ -109,6 +109,7 @@ namespace MyTrade.Models
         public string UserType { get; set; }
         public string FullName { get; set; }
         public string Pk_adminId { get; set; }
+        public string TeamPermanent { get; set; }
         public string FranchiseAdminID { get; set; }
         public string Profile { get; set; }
         public DataSet Login()

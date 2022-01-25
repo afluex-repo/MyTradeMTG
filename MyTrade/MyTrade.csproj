@@ -356,13 +356,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\API.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
@@ -392,7 +395,10 @@
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400d41d.eot" />
     <None Include="Properties\PublishProfiles\MyTrade.pubxml" />
     <Content Include="Views\Home\CompleteRegistration.cshtml" />
-    <Content Include="Views\User\ActivatePin.cshtml" />
+    <Content Include="Views\User\ActivateByPin.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
+    <Content Include="Views\Admin\Generate_EPin.cshtml" />
+    <Content Include="Views\Admin\UnUsedPin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

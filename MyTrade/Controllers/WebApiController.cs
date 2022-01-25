@@ -90,11 +90,19 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
 
-                obj.SponsorName = ds.Tables[0].Rows[0]["FullName"].ToString();
-
-                obj.Status = "0";
-                obj.Message = "Sponsor Name Fetched";
-                return Json(obj, JsonRequestBehavior.AllowGet);
+               if(ds.Tables[0].Rows[0]["FullName"].ToString()=="P")
+                {
+                    obj.SponsorName = ds.Tables[0].Rows[0]["FullName"].ToString();
+                    obj.Status = "0";
+                    obj.Message = "Sponsor Name Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+               else
+                {
+                    sponsorname.Status = "1";
+                    sponsorname.Message = "Invalid SponsorId"; return Json(sponsorname, JsonRequestBehavior.AllowGet);
+                }
+               
             }
             else
             {
@@ -103,7 +111,7 @@ namespace MyTrade.Controllers
             }
         }
         #endregion
-        #region SponsporName
+        #region getState
         public ActionResult GetState(Pincode Pindetails)
         {
             StateDetails obj = new StateDetails();
@@ -157,6 +165,7 @@ namespace MyTrade.Controllers
                                 obj.Password = dsResult.Tables[0].Rows[0]["Password"].ToString();
                                 obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
                                 obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
+                                obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
                                 obj.Status = "0";
                                 obj.Message = "Successfully Logged in";
 

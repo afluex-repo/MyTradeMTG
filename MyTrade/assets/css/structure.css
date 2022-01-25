@@ -1083,14 +1083,6 @@ code { color: #e7515a; }
 #sidebar ul.menu-categories .ps__rail-y {
     right: -4px!important;
 }
-
-
-/*  
-    ======================
-        Footer-wrapper
-    ======================
-*/
-
 .footer-wrapper {
     padding: 10px 20px 10px 18px;
     display: inline-block;
@@ -1100,7 +1092,8 @@ code { color: #e7515a; }
     width: 100%;
     border-top-left-radius: 6px;
     display: flex;
-    justify-content: space-between;
+   justify-content: space-evenly;
+    align-items: flex-end;
 }
 .main-container.sidebar-closed .footer-wrapper {
     border-radius: 0;
@@ -1121,13 +1114,6 @@ code { color: #e7515a; }
     height: 15px;
     vertical-align: text-top;
 }
-
-/*  
-    ======================
-        MEDIA QUERIES
-    ======================
-*/
-
 @media (min-width: 992px) {
     .sidebar-closed #sidebar .theme-brand li.theme-text a { display: none; }
 }
@@ -1140,19 +1126,7 @@ code { color: #e7515a; }
         position: relative;
         padding: 0 25px 0 16px;
     }
-
-    /*
-        =============
-            NavBar
-        =============
-    */
-
     .main-container.sidebar-closed #content { margin-left: 0; }
-    /*
-        =============
-            Sidebar
-        =============
-    */
     .shadow-bottom { width: 100%; }
     #content { margin-left: 0; }
     #sidebar .theme-brand {
@@ -1205,8 +1179,6 @@ code { color: #e7515a; }
     .layout-px-spacing {
         padding: 0 16px!important;
     }
-    /* display .overlay when it has the .active class */
-
     .overlay.show {
         display: block;
         opacity: .7;
