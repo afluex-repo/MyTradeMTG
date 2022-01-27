@@ -175,7 +175,7 @@ namespace MyTrade.Controllers
                 }
                 model.lst = lst;
             }
-            return View();
+            return View(model);
         }
         public ActionResult Tree()
         {
