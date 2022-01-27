@@ -136,6 +136,5 @@ namespace MyTrade.Controllers
             ViewBag.Fk_UserId = Session["Pk_UserId"].ToString();
             return View();
         }
-        public ActionResult
     }
 }
