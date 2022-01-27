@@ -136,5 +136,50 @@ namespace MyTrade.Controllers
             ViewBag.Fk_UserId = Session["Pk_UserId"].ToString();
             return View();
         }
+        public ActionResult GetUserList()
+        {
+            Profile obj = new Profile();
+            List<Profile> lst = new List<Profile>();
+            obj.LoginId = Session["LoginId"].ToString();
+            DataSet ds = obj.GettingUserProfile();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Profile objList = new Profile();
+                    objList.UserName = dr["Fullname"].ToString();
+                    objList.LoginIDD = dr["LoginId"].ToString();
+                    lst.Add(objList);
+                }
+            }
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PinList()
+        {
+            Pin model = new Pin();
+            List<Pin> lst = new List<Pin>();
+            model.FK_UserId = Session["Pk_userId"].ToString();
+            DataSet ds = model.GetPinList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    Pin obj = new Pin();
+                    obj.ePinNo = r["ePinNo"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.PinStatus = r["PinStatus"].ToString();
+                    obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    //obj.IsRegistered = r["IsRegistered"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View();
+        }
+        public ActionResult Tree()
+        {
+            return View();
+        }
     }
 }

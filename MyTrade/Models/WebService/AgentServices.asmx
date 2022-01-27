@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="AgentServices.asmx.cs" Class="HMGreenCityMLM.Models.WebService.Agent" %>
+﻿<%@ WebService Language="C#" CodeBehind="AgentServices.asmx.cs" Class="MyTrade.Models.WebService.Agent" %>
