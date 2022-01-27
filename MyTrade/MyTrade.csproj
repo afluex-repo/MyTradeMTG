@@ -232,6 +232,7 @@
     <Content Include="css\tree-responsive.css" />
     <Content Include="css\tree.css" />
     <Content Include="Global.asax" />
+    <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
     <Content Include="plugins\animate\animate.css" />
     <Content Include="plugins\apex\apexcharts.css" />
@@ -368,6 +369,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LevelTree.aspx.cs">
+      <DependentUpon>LevelTree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LevelTree.aspx.designer.cs">
+      <DependentUpon>LevelTree.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\AgentIncomes.cs" />
@@ -381,6 +389,8 @@
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
       <DependentUpon>AgentServices.asmx</DependentUpon>
@@ -415,6 +425,8 @@
     <Content Include="Views\Admin\UnUsedPin.cshtml" />
     <Content Include="Views\User\TopUp.cshtml" />
     <Content Include="Views\User\BinaryTree.cshtml" />
+    <Content Include="Views\User\PinList.cshtml" />
+    <Content Include="Views\User\Tree.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
