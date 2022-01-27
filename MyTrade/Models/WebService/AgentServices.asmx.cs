@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.Script.Services;
 using System.Web.Services;
+using MyTrade.Models;
+using MyTrade.DAL;
+using Mytrade.Models.DAL;
 
 namespace MyTrade.Models.WebService
 {

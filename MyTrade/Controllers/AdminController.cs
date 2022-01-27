@@ -165,5 +165,6 @@ namespace MyTrade.Controllers
             else { obj.Result = "Invalid LoginId"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+  
     }
 }

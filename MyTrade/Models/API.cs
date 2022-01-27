@@ -121,4 +121,41 @@ namespace MyTrade.Models
         }
     }
     #endregion
+    #region EpinDetails
+    public class EpinDetails
+    {
+ 
+        public string EPin { get; set; }
+        public string Fk_UserId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        //public DataSet ValidateEpin()
+        //{
+        //    SqlParameter[] para = {
+        //                              new SqlParameter("@EPin", EPin),
+
+        //                          };
+        //    DataSet ds = DBHelper.ExecuteQuery("ValidatePin", para);
+
+        //    return ds;
+        //}
+        public DataSet ActivateUser()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@EPinNo", EPin),
+                                      new SqlParameter("@Fk_UserId",Fk_UserId)
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+
+            return ds;
+        }
+    }
+    public class EpinDetails1
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string PinStatus { get; internal set; }
+    }
+    #endregion
 }

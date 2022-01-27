@@ -364,6 +364,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminReportsController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
@@ -375,6 +376,7 @@
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminReports.cs" />
     <Compile Include="Models\AgentIncomes.cs" />
     <Compile Include="Models\AgentModel.cs" />
     <Compile Include="Models\AgentPara.cs" />
@@ -421,6 +423,8 @@
     <Content Include="Views\Admin\UnUsedPin.cshtml" />
     <Content Include="Views\User\TopUp.cshtml" />
     <Content Include="Views\User\BinaryTree.cshtml" />
+    <Content Include="Views\AdminReports\AssociateList.cshtml" />
+    <Content Include="Views\AdminReports\TopupReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

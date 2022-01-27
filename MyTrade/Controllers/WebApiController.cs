@@ -221,5 +221,80 @@ namespace MyTrade.Controllers
         }
 
         #endregion
+        #region ActivateUser
+        //#region SponsporName
+        //public ActionResult ValidateEPinNo(EpinDetails epindetais)
+        //{
+        //    EpinDetails1 obj = new EpinDetails1();
+        //    DataSet ds = epindetais.ValidateEpin();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //       if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+        //            {
+        //            obj.PinStatus = ds.Tables[0].Rows[0]["PinStatus"].ToString();
+        //            obj.Status = "0";
+        //            obj.Message = "EPin Validate Sucessfully";
+        //        }
+        //        else
+        //        {
+        //            obj.Status = "1";
+        //            obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //        return Json(obj, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        obj.Status = "1";
+        //        obj.Message = "InValid Epin"; return Json(obj, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+        //#endregion
+        public ActionResult ActivateUser(EpinDetails model)
+        {
+            EpinDetails obj = new EpinDetails();
+
+            if (model.EPin == "" || model.EPin == null)
+            {
+                obj.Status = "1";
+                obj.Message = "Please Enter EPin No";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+           
+            try
+            {
+                DataSet dsResult = model.ActivateUser();
+                {
+                    if (dsResult != null && dsResult.Tables.Count > 0 && dsResult.Tables[0].Rows.Count > 0)
+                    {
+                        if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            obj.Status = "0";
+                            obj.Message = "User Activated Successfully";
+                            return Json(obj, JsonRequestBehavior.AllowGet);
+                           
+                        }
+                        else
+                        {
+
+                            obj.Status = "1";
+                            obj.Message = dsResult.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            return Json(obj, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                     
+
+                }
+
+
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
     }
 }

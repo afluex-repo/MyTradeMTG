@@ -5,8 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using MyTrade.Models;
 
-namespace HMGreenCityMLM.Models.DAL
+namespace Mytrade.Models.DAL
 {
     public class ReturnData
     {
