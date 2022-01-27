@@ -24,5 +24,16 @@ namespace MyTrade.Models
 
             return ds;
         }
+        public DataSet ActivateUser()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@EPinNo", EPin),
+                                      new SqlParameter("@Fk_UserId",Fk_UserId)
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+
+            return ds;
+        }
     }
 }

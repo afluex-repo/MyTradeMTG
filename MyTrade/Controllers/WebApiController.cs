@@ -90,7 +90,7 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
 
-               if(ds.Tables[0].Rows[0]["FullName"].ToString()=="P")
+               if(ds.Tables[0].Rows[0]["TeamPermanent"].ToString()=="P")
                 {
                     obj.SponsorName = ds.Tables[0].Rows[0]["FullName"].ToString();
                     obj.Status = "0";

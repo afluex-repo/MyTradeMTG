@@ -297,38 +297,7 @@ var chart = new ApexCharts(
 chart.render();
 
 
-// Donut Chart
 
-
-var donutChart = {
-    chart: {
-        height: 350,
-        type: 'donut',
-        toolbar: {
-          show: false,
-        }
-    },
-    // colors: ['#4361ee', '#888ea8', '#e3e4eb', '#d3d3d3'],
-    series: [44, 55, 41, 17],
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-            legend: {
-                position: 'bottom'
-            }
-        }
-    }]
-}
-
-var donut = new ApexCharts(
-    document.querySelector("#donut-chart"),
-    donutChart
-);
-
-donut.render();
 
 
 // Radial Chart

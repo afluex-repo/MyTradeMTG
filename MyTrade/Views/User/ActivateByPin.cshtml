@@ -17,7 +17,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Activate</h4>
                                 <span class="text-danger">
-                                    @TempData["createpin"]
+                                    @TempData["Activated"]
                                 </span>
                             </div>
                         </div>
@@ -61,13 +61,13 @@
             success: function (data) {
                 if (data.Result == "Yes") {
                     $("#EPin").removeClass('errortext');
-                    $('#EPin').attr('disabled', 'disabled');
+                    //$('#EPin').attr('disabled', 'disabled');
                     $('#EPin').focus();
                 }
                 else {
                     alert(data.Result);
                     $("#EPin").addClass('errortext');
-                    $('#EPin').removeAttr('disabled');
+                    //$('#EPin').removeAttr('disabled');
                     $('#EPin').focus();
                     $('#EPin').val('');
                 }
