@@ -370,9 +370,14 @@
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AgentIncomes.cs" />
+    <Compile Include="Models\AgentModel.cs" />
+    <Compile Include="Models\AgentPara.cs" />
     <Compile Include="Models\API.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\DAL\AgentDAL.cs" />
+    <Compile Include="Models\DAL\ReturnData.cs" />
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\Home.cs" />
@@ -419,7 +424,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DAL\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
