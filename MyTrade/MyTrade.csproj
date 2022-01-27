@@ -233,7 +233,10 @@
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
+    <Content Include="css\tree-responsive.css" />
+    <Content Include="css\tree.css" />
     <Content Include="Global.asax" />
+    <Content Include="Models\WebService\AgentServices.asmx" />
     <Content Include="plugins\animate\animate.css" />
     <Content Include="plugins\apex\apexcharts.css" />
     <Content Include="plugins\apex\apexcharts.min.js" />
@@ -370,14 +373,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AgentIncomes.cs" />
+    <Compile Include="Models\AgentModel.cs" />
+    <Compile Include="Models\AgentPara.cs" />
     <Compile Include="Models\API.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\DAL\AgentDAL.cs" />
+    <Compile Include="Models\DAL\ReturnData.cs" />
+    <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WebService\AgentServices.asmx.cs">
+      <DependentUpon>AgentServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -405,6 +419,8 @@
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Admin\Generate_EPin.cshtml" />
     <Content Include="Views\Admin\UnUsedPin.cshtml" />
+    <Content Include="Views\User\TopUp.cshtml" />
+    <Content Include="Views\User\BinaryTree.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
