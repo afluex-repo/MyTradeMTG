@@ -139,5 +139,10 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentModeList", para);
             return ds;
         }
+        public DataSet BindProductForTopUp()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
+            return ds;
+        }
     }
 }
