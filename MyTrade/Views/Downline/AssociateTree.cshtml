@@ -4,7 +4,7 @@
     ViewBag.Title = "AssociateTree";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-@using (Html.BeginForm("AssociateTree", "AssociateDashboard", FormMethod.Post, new { @id = "form1" }))
+@using (Html.BeginForm("AssociateTree", "User", FormMethod.Post, new { @id = "form1" }))
 {
 <div class="container">
     <div class="row layout-top-spacing">
@@ -55,7 +55,6 @@
                                                         foreach (var Item in Model.lstPlot)
                                                         {
                                                 <tr class="text-left">
-
                                                     <td>@i</td>
                                                     <td>
                                                         @if (Item.Status == "Down")
