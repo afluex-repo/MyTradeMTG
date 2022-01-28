@@ -222,33 +222,7 @@ namespace MyTrade.Controllers
 
         #endregion
         #region ActivateUser
-        //#region SponsporName
-        //public ActionResult ValidateEPinNo(EpinDetails epindetais)
-        //{
-        //    EpinDetails1 obj = new EpinDetails1();
-        //    DataSet ds = epindetais.ValidateEpin();
-        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-        //    {
-        //       if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-        //            {
-        //            obj.PinStatus = ds.Tables[0].Rows[0]["PinStatus"].ToString();
-        //            obj.Status = "0";
-        //            obj.Message = "EPin Validate Sucessfully";
-        //        }
-        //        else
-        //        {
-        //            obj.Status = "1";
-        //            obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //        }
-        //        return Json(obj, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        obj.Status = "1";
-        //        obj.Message = "InValid Epin"; return Json(obj, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-        //#endregion
+        
         public ActionResult ActivateUser(EpinDetails model)
         {
             EpinDetails obj = new EpinDetails();
@@ -282,6 +256,157 @@ namespace MyTrade.Controllers
                         }
                     }
                      
+
+                }
+
+
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+        #region Dashboard
+        public ActionResult GetDashboard(AssociateDashBoard associate)
+        {
+            DashboardResponse obj = new DashboardResponse();
+            DataSet ds = associate.GetAssociateDashboard();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                obj.TotalDownline = ds.Tables[0].Rows[0]["TotalDownline"].ToString();
+                obj.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
+                obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
+                obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                obj.Status = "0";
+                obj.Message = "Data Fetched";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                obj.Status = "1";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+        #region Tree
+        public ActionResult Tree(TreeAPI model)
+        {
+
+            UpdateProfile sta = new UpdateProfile();
+            TreeAPI obj = new TreeAPI();
+            if (model.LoginId == "" || model.LoginId == null)
+            {
+                model.Status = "1";
+                model.Message = "Please enter LoginId";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            if (model.Fk_headId == "" || model.Fk_headId == null)
+            {
+                model.Status = "1";
+                model.Message = "Please enter headId";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            try
+            {
+                DataSet ds = model.GetTree();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "0")
+                    {
+
+                        List<Tree1> GetGenelogy = new List<Tree1>();
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            Tree1 obj1 = new Tree1();
+                            obj1.Fk_UserId = r["Fk_UserId"].ToString();
+                            obj1.Fk_ParentId = r["Fk_ParentId"].ToString();
+                            obj1.Fk_SponsorId = r["Fk_SponsorId"].ToString();
+                            obj1.SponsorId = r["SponsorId"].ToString();
+                            obj1.LoginId = r["LoginId"].ToString();
+                            obj1.TeamPermanent = r["TeamPermanent"].ToString();
+                            obj1.MemberName = r["MemberName"].ToString();
+                            obj1.MemberLevel = r["MemberLevel"].ToString();
+                            obj1.Leg = r["Leg"].ToString();
+                            obj1.Id = r["Id"].ToString();
+
+                            obj1.ActivationDate = r["ActivationDate"].ToString();
+                            obj1.ActiveLeft = r["ActiveLeft"].ToString();
+                            obj1.ActiveRight = r["ActiveRight"].ToString();
+                            obj1.InactiveLeft = r["InactiveLeft"].ToString();
+                            obj1.InactiveRight = r["InactiveRight"].ToString();
+                            obj1.BusinessLeft = r["BusinessLeft"].ToString();
+                            obj1.BusinessRight = r["BusinessRight"].ToString();
+                            obj1.ImageURL = r["ImageURL"].ToString();
+                            GetGenelogy.Add(obj1);
+                        }
+                        obj.GetGenelogy = GetGenelogy;
+                        obj.Message = "Tree";
+                        obj.Status = "0";
+                        obj.LoginId = model.LoginId;
+                        obj.Fk_headId = model.Fk_headId;
+
+                    }
+                    else
+                    {
+                        sta.Status = "1";
+                        sta.Message = "No Data Found";
+                        return Json(sta, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+                else
+                {
+                    sta.Status = "1";
+                    sta.Message = "No Data Found";
+                    return Json(sta, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                sta.Status = "1";
+                sta.Message = ex.Message;
+                return Json(sta, JsonRequestBehavior.AllowGet);
+            }
+
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        #region ActivateUser
+
+        public ActionResult Topup (TopupByUser model)
+        {
+            TopupResponse obj = new TopupResponse();
+            model.TransactionDate= string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "mm/dd/yyyy");
+            try
+            {
+                DataSet dsResult = model.TopUp();
+                {
+                    if (dsResult != null && dsResult.Tables.Count > 0 && dsResult.Tables[0].Rows.Count > 0)
+                    {
+                        if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            obj.Status = "0";
+                            obj.Message = "TopUp Done successfully";
+                            return Json(obj, JsonRequestBehavior.AllowGet);
+
+                        }
+                        else
+                        {
+
+                            obj.Status = "1";
+                            obj.Message = dsResult.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            return Json(obj, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+
 
                 }
 

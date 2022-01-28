@@ -97,6 +97,125 @@ namespace MyTrade.Controllers
             #endregion
             return View(model);
         }
+        public ActionResult BlockAssociate(Profile obj, string LoginID)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = obj.BlockAssociate();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "User Blocked";
+                        FormName = "AssociateList";
+                        Controller = "AdminReports";
+                    }
+                    else
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "AssociateList";
+                        Controller = "AdminReports";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["BlockUnblock"] = ex.Message;
+                FormName = "AssociateList";
+                Controller = "AdminReports";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        public ActionResult UnblockAssociate(Profile obj, string LoginID)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                obj.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = obj.UnblockAssociate();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "User Blocked";
+                        FormName = "AssociateList";
+                        Controller = "AdminReports";
+                    }
+                    else
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "AssociateList";
+                        Controller = "AdminReports";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["BlockUnblock"] = ex.Message;
+                FormName = "AssociateList";
+                Controller = "AdminReports";
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+        public ActionResult ActivateUser(string FK_UserID)
+        {
+            Profile model = new Profile();
+            try
+            {
+                model.Fk_UserId = FK_UserID;
+                model.ProductID = "1";
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.ActivateUserByAdmin();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "User activated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["BlockUnblock"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
+        public ActionResult DeactivateUser(string lid)
+        {
+            Profile model = new Profile();
+            try
+            {
+                model.LoginId = lid;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+
+                DataSet ds = model.DeactivateUserByAdmin();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "User deactivated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["BlockUnblock"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
         #region topupreport
         public ActionResult TopupReport()
         {

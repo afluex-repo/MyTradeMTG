@@ -189,10 +189,6 @@
     <Content Include="assets\css\users\account-setting.css" />
     <Content Include="assets\css\users\user-profile.css" />
     <Content Include="assets\css\widgets\modules-widgets.css" />
-    <Content Include="assets\img\payment.png" />
-    <Content Include="assets\img\pin.png" />
-    <Content Include="assets\img\Trade1.png" />
-    <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\apps\contact.js" />
@@ -236,6 +232,7 @@
     <Content Include="css\tree-responsive.css" />
     <Content Include="css\tree.css" />
     <Content Include="Global.asax" />
+    <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
     <Content Include="plugins\animate\animate.css" />
     <Content Include="plugins\apex\apexcharts.css" />
@@ -365,7 +362,9 @@
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminReportsController.cs" />
+    <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\PermisssionsController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -373,6 +372,13 @@
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LevelTree.aspx.cs">
+      <DependentUpon>LevelTree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LevelTree.aspx.designer.cs">
+      <DependentUpon>LevelTree.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -387,8 +393,12 @@
     <Compile Include="Models\DAL\ReturnData.cs" />
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\EmployeeRegistrations.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Permisssions.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
       <DependentUpon>AgentServices.asmx</DependentUpon>
@@ -423,8 +433,14 @@
     <Content Include="Views\Admin\UnUsedPin.cshtml" />
     <Content Include="Views\User\TopUp.cshtml" />
     <Content Include="Views\User\BinaryTree.cshtml" />
+    <Content Include="Views\User\PinList.cshtml" />
+    <Content Include="Views\User\Tree.cshtml" />
     <Content Include="Views\AdminReports\AssociateList.cshtml" />
     <Content Include="Views\AdminReports\TopupReport.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeRegistration.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeDetails.cshtml" />
+    <Content Include="Views\Permisssions\SetPermission.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -36,4 +36,30 @@ namespace MyTrade.Models
             return ds;
         }
     }
+
+
+    public class Pin
+    {
+        public string FK_UserId { get; set; }
+        public string PK_PinId { get; set; }
+        public string PK_EPinDetailsId { get; set; }
+        public string ePinNo { get; set; }
+        public string PinAmount { get; set; }
+        public string PinStatus { get; set; }
+        public string IsRegistered { get; set; }
+        public string RegisteredTo { get; set; }
+        public List<Pin> lst { get; set; }
+        public string ProductName { get; internal set; }
+
+        public DataSet GetPinList()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", FK_UserId)
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetPin", para);
+
+            return ds;
+        }
+    }
 }

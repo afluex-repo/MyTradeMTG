@@ -154,5 +154,21 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
             return ds;
         }
+        public DataSet BindUserTypeForRegistration()
+        {
+
+            DataSet ds = DBHelper.ExecuteQuery("GetUserTypeForRegistration");
+
+            return ds;
+
+        }
+        public DataSet BindFormTypeMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@Parameter", 4) };
+            DataSet ds = DBHelper.ExecuteQuery("FormTypeMasterManage", para);
+
+            return ds;
+
+        }
     }
 }

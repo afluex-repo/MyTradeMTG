@@ -14,6 +14,10 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>AssociateList</h4>
+                                <span class="text-danger">
+                                    @TempData["BlockUnblock"]
+                                    @TempData["UpdateProfilebyadmin"]
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -89,8 +93,8 @@
                                         <th>Joining Date</th>
                                         <th>Mobile No</th>
                                         <th>Email Id</th>
-                                        @*<th></th>
-                                            <th></th>*@
+                                        <th></th>
+                                        <th></th>
                                         @*<th hidden="hidden"></th>*@
                                         @*<th></th>*@
                                     </tr>
@@ -103,62 +107,59 @@
                                             int i = 1;
                                             foreach (var Item in Model.lstassociate)
                                             {
-                                    <tr class="text-left">
-                                        <td>@i</td>
-                                        <td>@Item.Name (@Item.LoginId)</td>
-                                        <td>@Item.SponsorName (@Item.SponsorId)</td>
-                                        <td>@Item.Password</td>
-                                        <td>@Item.JoiningDate</td>
-                                        <td>@Item.Mobile</td>
-                                        <td>@Item.Email</td>
-                                        @*<td>
-                                                <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if (Item.isBlocked == "False")
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.Name (@Item.LoginId)</td>
+                                                    <td>@Item.SponsorName (@Item.SponsorId)</td>
+                                                    <td>@Item.Password</td>
+                                                    <td>@Item.JoiningDate</td>
+                                                    <td>@Item.Mobile</td>
+                                                    <td>@Item.Email</td>
+                                                    @*<td>
+                                                            <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
+                                                                Edit
+                                                            </a>
+                                                        </td>*@
+                                                    <td>
+                                                        @if (Item.isBlocked == "False")
                                                 {
-                                                    <a href="/AdminProfile/BlockAssociate?LoginID=@Item.LoginId" class="btn btn-danger btn-sm">
-                                                        Block
-                                                    </a>
+                                            <a href="/AdminReports/BlockAssociate?LoginID=@Item.LoginId" class="btn btn-danger btn-sm">
+                                                Block
+                                            </a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="/AdminProfile/UnblockAssociate?LoginID=@Item.LoginId" class="btn btn-success btn-sm">
-                                                        Unblock
-                                                    </a>
+                                            <a href="/AdminReports/UnblockAssociate?LoginID=@Item.LoginId" class="btn btn-success btn-sm">
+                                                Unblock
+                                            </a>
                                                 }
-                                            </td>
-                                            <td hidden="hidden">
-                                                @if (Item.Status == "Inactive")
-                                                {
-                                                    <a href="/AdminProfile/ActivateUser?FK_UserID=@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
-                                                        Activate
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="/AdminProfile/DeactivateUser?lid=@Item.LoginId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to deactivate this User ?')">
-                                                        Deactivate
-                                                    </a>
-                                                }
-                                            </td>*@
-                                        @*<td>
-                                                <a href="/AdminProfile/WelcomeLetter?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
-                                                    Print
-                                                </a>
-                                            </td>*@
-                                    </tr>
+                                                    </td>
+                                                    <td>
+                                                        @if (Item.Status == "Inactive")
+                                                        {
+                                                            <a href="/AdminReports/ActivateUser?FK_UserID=@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
+                                                                Activate
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="/AdminReports/DeactivateUser?lid=@Item.LoginId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to deactivate this User ?')">
+                                                                Deactivate
+                                                            </a>
+                                                        }
+                                                    </td>
+                                                    @*<td>
+                                                            <a href="/AdminProfile/WelcomeLetter?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
+                                                                Print
+                                                            </a>
+                                                        </td>*@
+                                                </tr>
                                                 i++;
                                             }
 
                                         }
                                     }
                                 </tbody>
-
-
-
                             </table>
                         </div>
 

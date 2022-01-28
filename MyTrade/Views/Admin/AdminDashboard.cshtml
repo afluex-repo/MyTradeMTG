@@ -1,4 +1,4 @@
-﻿@model MyTrade.Models.Admin
+﻿@model MyTrade.Models.Dashboard
 
 @{
     ViewBag.Title = "AdminDashboard";
@@ -6,7 +6,7 @@
 }
 <div class="layout-px-spacing">
     <div class="row layout-top-spacing">
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
             <div class="widget widget-card-four">
                 <div class="widget-content">
                     <div class="w-header">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
-                            <p class="value">5</p>
+                            <p class="value">@ViewBag.TotalUsers</p>
                         </div>
 
                     </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
             <div class="widget widget-card-four">
                 <div class="widget-content">
                     <div class="w-header">
@@ -48,13 +48,36 @@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
-                            <p class="value">2</p>
+                            <p class="value">@ViewBag.ActiveUsers</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-card-four">
+                <div class="widget-content">
+                    <div class="w-header">
+                        <div class="w-info">
+                            <h6 class="value">InActive Users</h6>
+                        </div>
+                        <div class="task-action">
+                            <div class="dropdown">
+                                <a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-content">
+                        <div class="w-info">
+                            <p class="value">@ViewBag.InActiveUsers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
             <div class="widget widget-card-four">
                 <div class="widget-content">
                     <div class="w-header">
@@ -71,7 +94,7 @@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
-                            <p class="value">2</p>
+                            <p class="value">@ViewBag.BlockedUsers</p>
                         </div>
                     </div>
                 </div>
@@ -123,7 +146,7 @@
         },
         labels: ['Active', 'InActive', 'Blocked'],
         colors: ['#4361ee', '#f10909', '#0e0e0e', ],
-        series: [44, 55, 45],
+        series: [@ViewBag.ActiveUsers, @ViewBag.InactiveUsers, @ViewBag.BlockedUsers],
         borderColor: '#F97300',
         responsive: [{
             breakpoint: 480,
@@ -153,9 +176,9 @@
             }
         },
         colors: ['#385830', '#f10909'],
-        labels: ['Tr1','Tr2'],
-        series: [44, 55],
-      
+        labels: ['Tr1', 'Tr2'],
+        series: [@ViewBag.Tr1Business, @ViewBag.Tr2Business],
+
         responsive: [{
             breakpoint: 480,
             options: {
