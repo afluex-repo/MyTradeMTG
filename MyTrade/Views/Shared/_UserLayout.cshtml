@@ -111,7 +111,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                        <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#accordionExample">
                             <li>
                                 <a href="/user/UserDashboard">Dashboard</a>
                             </li>
@@ -127,7 +127,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled show" id="Account" data-parent="#accordionExample">
+                        <ul class="collapse submenu list-unstyled" id="Account" data-parent="#accordionExample">
                             <li>
                                 <a href="/user/Topup">Topup</a>
                             </li>
@@ -143,26 +143,36 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled show" id="Team" data-parent="#accordionExample">
+                        <ul class="collapse submenu list-unstyled" id="Team" data-parent="#accordionExample">
                             <li>
                                 <a href="/user/BinaryTree">Binary Tree</a>
                             </li>
                             <li>
-                                <a href="/user/Downline">Downline</a>
+                                <a href="/Downline/DownLineList">Downline</a>
                             </li>
                             <li>
-                                <a href="/user/Direct">Direct</a>
+                                <a href="/Downline/DirectList">Direct</a>
                             </li>
                         </ul>
                     </li>
                     <li class="menu">
-                        <a href="/user/tree" aria-expanded="false" class="dropdown-toggle">
+                        <a href="#tree" aria-expanded="false" class="dropdown-toggle" data-toggle="collapse">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                <span>Level Tree</span>
+                                <span>Tree</span>
                             </div>
-                            
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
                         </a>
+                        <ul class="collapse submenu list-unstyled" id="tree" data-parent="#accordionExample">
+                            <li>
+                                <a href="/user/Tree">Level Tree</a>
+                            </li>
+                            <li>
+                                <a href="/Downline/AssociateTree">Downteam Tree</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="menu">
                         <a href="/user/PinList" aria-expanded="false" class="dropdown-toggle">

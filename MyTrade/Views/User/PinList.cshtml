@@ -1,5 +1,4 @@
 ﻿@model MyTrade.Models.Pin
-
 @{
     ViewBag.Title = "PinList";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -19,9 +18,7 @@
                     </div>
                 </div>
                 <div class="widget-content widget-content-area">
-
                     <div class="widget-content widget-content-area br-6">
-
                         <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                             <thead>
                                 <tr>
@@ -45,22 +42,17 @@
                                                 <td>@i</td>
                                                 <td>@Item.ePinNo</td>
                                                 <td>@Item.PinAmount</td>
-                                                <td> @Item.PinStatus</td>
-                                                <td>@Item.IsRegistered</td>
-                                                <td> @Item.RegisteredTo </td>
-
+                                                <td>@Item.PinStatus</td>
+                                                <td>@Item.RegisteredTo</td>
+                                                @*<td>@Item.RegisteredTo </td>*@
                                             </tr>
                                             i++;
                                         }
-
                                     }
                                 }
-
                             </tbody>
-
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
