@@ -355,6 +355,24 @@
     <Content Include="Web.config" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="WebsiteCss\js\appear.js" />
+    <Content Include="WebsiteCss\js\bootstrap.min.js" />
+    <Content Include="WebsiteCss\js\color-settings.js" />
+    <Content Include="WebsiteCss\js\jquery-ui.js" />
+    <Content Include="WebsiteCss\js\jquery.bootstrap-touchspin.js" />
+    <Content Include="WebsiteCss\js\jquery.countdown.js" />
+    <Content Include="WebsiteCss\js\jquery.fancybox.js" />
+    <Content Include="WebsiteCss\js\jquery.js" />
+    <Content Include="WebsiteCss\js\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="WebsiteCss\js\main.js" />
+    <Content Include="WebsiteCss\js\map-script.js" />
+    <Content Include="WebsiteCss\js\mixitup.js" />
+    <Content Include="WebsiteCss\js\owl.js" />
+    <Content Include="WebsiteCss\js\popper.min.js" />
+    <Content Include="WebsiteCss\js\script.js" />
+    <Content Include="WebsiteCss\js\util.js" />
+    <Content Include="WebsiteCss\js\validate.js" />
+    <Content Include="WebsiteCss\js\wow.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -383,6 +401,7 @@
     <Compile Include="Models\AgentModel.cs" />
     <Compile Include="Models\AgentPara.cs" />
     <Compile Include="Models\API.cs" />
+    <Compile Include="Models\AssociateBooking.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DAL\AgentDAL.cs" />
@@ -431,6 +450,7 @@
     <Content Include="Views\User\Tree.cshtml" />
     <Content Include="Views\Downline\DirectList.cshtml" />
     <Content Include="Views\Downline\DownLineList.cshtml" />
+    <Content Include="Views\Downline\AssociateTree.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
