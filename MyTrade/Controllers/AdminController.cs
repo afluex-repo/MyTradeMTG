@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Mytrade.Models;
 namespace MyTrade.Controllers
 {
     public class AdminController : AdminBaseController
@@ -14,7 +14,16 @@ namespace MyTrade.Controllers
         // GET: Admin
         public ActionResult AdminDashboard()
         {
-            return View();
+            Dashboard newdata = new Dashboard();
+            DataSet Ds = newdata.GetDashBoardDetails();
+
+            ViewBag.TotalUsers = Ds.Tables[1].Rows[0]["TotalUsers"].ToString();
+            ViewBag.BlockedUsers = Ds.Tables[1].Rows[0]["BlockedUsers"].ToString();
+            ViewBag.InactiveUsers = Ds.Tables[1].Rows[0]["InactiveUsers"].ToString();
+            ViewBag.ActiveUsers = Ds.Tables[1].Rows[0]["ActiveUsers"].ToString();
+            ViewBag.Tr1Business = Ds.Tables[2].Rows[0]["Tr1Business"].ToString();
+            ViewBag.Tr2Business = Ds.Tables[2].Rows[0]["Tr2Business"].ToString();
+            return View(newdata);
         }
         #region GeneratePin
         public ActionResult Generate_EPin()
@@ -165,5 +174,6 @@ namespace MyTrade.Controllers
             else { obj.Result = "Invalid LoginId"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+  
     }
 }

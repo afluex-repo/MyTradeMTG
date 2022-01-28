@@ -75,18 +75,6 @@ background-color: #ffffff;}
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-2">
-                                        <label for="FirstName">First Name</label> <span class="text-danger">*</span>
-                                     @Html.TextBoxFor(m=>m.FirstName,new {@class="form-control",@placeholder="First Name", @required = true })
-                                     
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="LastName">Last Name</label>
-                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
-
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6 mb-2">
                                         <label for="validationTooltipUsername">Leg</label> <span class="text-danger">*</span>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -100,6 +88,19 @@ background-color: #ffffff;}
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="FirstName">First Name</label> <span class="text-danger">*</span>
+                                     @Html.TextBoxFor(m=>m.FirstName,new {@class="form-control",@placeholder="First Name", @required = true })
+                                     
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="LastName">Last Name</label>
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">MobileNo</label> <span class="text-danger">*</span>
