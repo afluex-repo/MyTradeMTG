@@ -643,12 +643,12 @@
 </div>
 
 <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
-@*<script src="../../WebsiteCss/js/jquery.js"></script>*@
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="~/WebsiteCss/js/jquery.js"></script>
 <script type="text/javascript">
 
     var winHeight = $(window).height();
@@ -661,14 +661,12 @@
         $("a").popover('hide');
     });
     function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
-
         var loginid = 'LoginId - ' + ' ' + item2;
         var JoiningDate = 'JoiningDate - ' + ' ' + JoiningDate;
         $("#lblFk_UserId").text(item1);
         $("#lblMemberId").text(loginid);
         $('#lblParnetId').text(item5);
         $('#lblDisplayName').text(item3);
-
         $(".LoginId").html(item5);
         $("#lblJoiningDate").html(JoiningDate);
         $("#lblProductName").html(ProductName);
@@ -679,50 +677,31 @@
         else {
             $("#lblstatus").html('Status - Active');
         }
-
-
         $(".TotalMemberLeft").html(AllLeg1);
         $(".TotalMemberRight").html(AllLeg2);
-
         $(".TotalMemberTotal").html(parseFloat(AllLeg1) + parseFloat(AllLeg2));
-
         $(".ActiveLeft").html(PermanentLeg1);
         $(".ActiveRight").html(PermanentLeg2);
-
         $(".ActiveTotal").html(parseFloat(PermanentLeg1) + parseFloat(PermanentLeg2));
-
         $(".NonActiveLeft").html(InactiveLeft);
         $(".NonActiveRight").html(InactiveRight);
-
         $(".NonActiveTotal").html(parseFloat(InactiveLeft) + parseFloat(InactiveRight));
-
         $(".LeftBusiness").html(PCountLeg1);
         $(".RightBusiness").html(PCountLeg2);
-
         $(".TotalBusiness").html(parseFloat(PCountLeg1) + parseFloat(PCountLeg2));
-
         $(".ProductLeftBusiness").html(ProductLeftBusiness);
         $(".ProductRightBusiness").html(ProductRightBusiness);
-
         $(".ProductTotalBusiness").html(parseFloat(ProductLeftBusiness) + parseFloat(ProductRightBusiness));
-
-
         $(".PaidLeg1").html(PaidLeg1);
         $(".PaidLeg2").html(PaidLeg2);
-
         $(".TotalPaidLeg").html(parseFloat(PaidLeg1) + parseFloat(PaidLeg2));
-
         $(".BalanceLeft").html(BalanceLeft);
         $(".BalanceRight").html(BalanceRight);
-
         $(".LeftBusinessvol").html(AllBusinessLeft);
         $(".RightBusinessvol").html(AllBusinessRight);
-
         $(".TotalBusinessvol").html(parseFloat(AllBusinessLeft) + parseFloat(AllBusinessRight));
-
         $(".TotalBalance").html(parseFloat(BalanceLeft) + parseFloat(BalanceRight));
         $("#userimage").attr("src", Profilepic);
-
         if (winWidth < 998) {
             $("#member-details").addClass('active');
             $("#go-top").find('input[type="hidden"]').val(item1);
@@ -735,21 +714,16 @@
             placement: 'auto',
             trigger: 'hover',
             boundary: 'window'
-
         });
     }
     function closePopup(obj) {
-
         if (winWidth < 998) {
             $("#member-details").addClass('active');
         }
         else {
-
         }
         $('#' + obj.id).removeAttr("data-content", $("#member-details").html());
-
     }
-
     if (winWidth > 998) {
         $("#chart").on("mouseover", function () {
             // $("#member-details").addClass('active');
@@ -758,13 +732,8 @@
             // $("#member-details").removeClass('active');
         });
     }
-
-
-
     var Fk_UserId = "0";
     $("#btnRoot").click(function () {
-
-
         var loginid = $("#firtsMemberID").val();
         var topId = $("#linkGoUp").find("#lblRequest").val();
         if (parseInt(loginid) > parseInt(topId)) {
@@ -776,9 +745,7 @@
             $("#txtLoginID").val('');
             $("#hfCustomerId").val('');
         }
-
     });
-
     $("#linkGoUp").click(function () {
         $('#divload').show();
         $("#linkGoUp").attr("readonly", true);
@@ -795,9 +762,7 @@
                 Fk_UserId = $(this).find("#lblRequest").val();
                 GetDataFirst(Fk_UserId, "clicked");
             }
-
         }
-
         // GetData(Fk_UserId);
     });
 

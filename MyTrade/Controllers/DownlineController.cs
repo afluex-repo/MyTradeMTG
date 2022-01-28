@@ -156,5 +156,37 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
             return View(model);
         }
+        #region  associate tree
+        public ActionResult AssociateTree(AssociateBooking model, string AssociateID)
+        {
+            if (AssociateID != null)
+            {
+                model.Fk_UserId = AssociateID;
+            }
+            else
+            {
+                model.Fk_UserId = Session["Pk_UserId"].ToString();
+            }
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.GetDownlineTree();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.Fk_SponsorId = ds.Tables[0].Rows[0]["Fk_SponsorId"].ToString();
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.Fk_UserId = r["Pk_UserId"].ToString();
+                    obj.Fk_SponsorId = r["Fk_SponsorId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ActiveStatus = r["ActiveStatus"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            return View(model);
+        }
+        #endregion
     }
 }
