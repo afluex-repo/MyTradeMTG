@@ -30,14 +30,7 @@ namespace MyTrade.Models
                                         new SqlParameter("@Fk_ProductId",PackageId),
                                         new SqlParameter("@TopupDate", TopUpDate),
                                         new SqlParameter("@Amount", TotalAmount),
-                                        new SqlParameter("@Description", Remarks),
-                                          new SqlParameter("@PaymentMode", PaymentMode),
-                                            new SqlParameter("@TransactionNo", TransactionNo),
-                                              new SqlParameter("@TransactionDate", TransactionDate),
-                                                new SqlParameter("@BankName", BankName),
-                                                  new SqlParameter("@BankBranch", BankBranch)
-
-
+                                        new SqlParameter("@Description", Remarks)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
             return ds;

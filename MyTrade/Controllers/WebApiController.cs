@@ -384,7 +384,8 @@ namespace MyTrade.Controllers
         public ActionResult Topup (TopupByUser model)
         {
             TopupResponse obj = new TopupResponse();
-            model.TransactionDate= string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "mm/dd/yyyy");
+            model.TopUpDate = string.IsNullOrEmpty(model.TopUpDate) ? null : Common.ConvertToSystemDate(model.TopUpDate, "dd/mm/yyyy");
+            model.TransactionDate= string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
             try
             {
                 DataSet dsResult = model.TopUp();
@@ -394,7 +395,7 @@ namespace MyTrade.Controllers
                         if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
                             obj.Status = "0";
-                            obj.Message = "TopUp Done successfully";
+                            obj.Message = "Top-Up Done successfully";
                             return Json(obj, JsonRequestBehavior.AllowGet);
 
                         }

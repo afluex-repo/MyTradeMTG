@@ -189,7 +189,13 @@
     <Content Include="assets\css\users\account-setting.css" />
     <Content Include="assets\css\users\user-profile.css" />
     <Content Include="assets\css\widgets\modules-widgets.css" />
+    <Content Include="assets\img\payment.png" />
+    <Content Include="assets\img\pin.png" />
+    <Content Include="assets\img\Trade1.png" />
+    <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
+    <Content Include="assets\img\usericon.jpg" />
+    <Content Include="assets\img\WhatsApp Image 2022-01-21 at 12.05.04 PM.jpeg" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\apps\contact.js" />
     <Content Include="assets\js\apps\custom-mailbox.js" />
