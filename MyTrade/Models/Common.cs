@@ -170,14 +170,5 @@ namespace MyTrade.Models
             return ds;
 
         }
-        public static List<SelectListItem> Leg()
-        {
-            List<SelectListItem> Leg = new List<SelectListItem>();
-            Leg.Add(new SelectListItem { Text = "All", Value = null });
-            Leg.Add(new SelectListItem { Text = "Left", Value = "L" });
-            Leg.Add(new SelectListItem { Text = "Right", Value = "R" });
-
-            return Leg;
-        }
     }
 }

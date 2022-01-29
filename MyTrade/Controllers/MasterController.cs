@@ -13,5 +13,9 @@ namespace MyTrade.Controllers
         {
             return View();
         }
+        public ActionResult PackageMaster()
+        {
+            return View();
+        }
     }
 }

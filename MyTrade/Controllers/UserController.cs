@@ -110,25 +110,7 @@ namespace MyTrade.Controllers
             }
             ViewBag.ddlProduct = ddlProduct;
             #endregion
-            #region PaymentMode
-            Common com = new Common();
-            List<SelectListItem> ddlPayment = new List<SelectListItem>();
-            DataSet ds = com.PaymentList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                int paycount = 0;
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    if (paycount == 0)
-                    {
-                        ddlPayment.Add(new SelectListItem { Text = "Select Payment", Value = "0" });
-                    }
-                    ddlPayment.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
-                    paycount++;
-                }
-            }
-            ViewBag.ddlPayment = ddlPayment;
-            #endregion
+           
             return View(model);
         }
         [HttpPost]
@@ -138,15 +120,15 @@ namespace MyTrade.Controllers
             {
                 obj.LoginId = Session["LoginId"].ToString();
                 obj.AddedBy = Session["Pk_userId"].ToString();
-                obj.TopUpDate = Common.ConvertToSystemDate(obj.TopUpDate, "mm/dd/yyyy");
-                obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "mm/dd/yyyy");
+                obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
+                //obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/mm/yyyy");
                 obj.AddedBy = Session["Pk_userId"].ToString();
                 DataSet ds = obj.TopUp();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Topup"] = "TopUp Done successfully";
+                        TempData["Topup"] = "Top-Up Done successfully";
                     }
                     else
                     {

@@ -189,7 +189,13 @@
     <Content Include="assets\css\users\account-setting.css" />
     <Content Include="assets\css\users\user-profile.css" />
     <Content Include="assets\css\widgets\modules-widgets.css" />
+    <Content Include="assets\img\payment.png" />
+    <Content Include="assets\img\pin.png" />
+    <Content Include="assets\img\Trade1.png" />
+    <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
+    <Content Include="assets\img\usericon.jpg" />
+    <Content Include="assets\img\WhatsApp Image 2022-01-21 at 12.05.04 PM.jpeg" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\apps\contact.js" />
     <Content Include="assets\js\apps\custom-mailbox.js" />
@@ -352,6 +358,18 @@
     <Content Include="plugins\tagInput\tags-input.css" />
     <Content Include="plugins\tagInput\tags-input.js" />
     <Content Include="plugins\treeview\custom-jstree.js" />
+    <Content Include="TreeIcon\default.png" />
+    <Content Include="TreeIcon\girl-active.png" />
+    <Content Include="TreeIcon\girl-active1.png" />
+    <Content Include="TreeIcon\girl-block.png" />
+    <Content Include="TreeIcon\girl-block1.png" />
+    <Content Include="TreeIcon\girl-inactive.png" />
+    <Content Include="TreeIcon\girl-inactive1.png" />
+    <Content Include="TreeIcon\men-active.png" />
+    <Content Include="TreeIcon\men-active1.png" />
+    <Content Include="TreeIcon\men-block.png" />
+    <Content Include="TreeIcon\men-block1.png" />
+    <Content Include="TreeIcon\men-inactive.png" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
@@ -362,6 +380,7 @@
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminReportsController.cs" />
+    <Compile Include="Controllers\DownlineController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
@@ -387,6 +406,7 @@
     <Compile Include="Models\AgentModel.cs" />
     <Compile Include="Models\AgentPara.cs" />
     <Compile Include="Models\API.cs" />
+    <Compile Include="Models\AssociateBooking.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DAL\AgentDAL.cs" />
@@ -398,6 +418,7 @@
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
@@ -425,6 +446,7 @@
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400.woff" />
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400.woff2" />
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400d41d.eot" />
+    <Content Include="Models\WebService\AgentServices.asmx.bak" />
     <None Include="Properties\PublishProfiles\MyTrade.pubxml" />
     <Content Include="Views\Home\CompleteRegistration.cshtml" />
     <Content Include="Views\User\ActivateByPin.cshtml" />
@@ -441,6 +463,9 @@
     <Content Include="Views\EmployeeRegistration\EmployeeDetails.cshtml" />
     <Content Include="Views\Permisssions\SetPermission.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Downline\AssociateTree.cshtml" />
+    <Content Include="Views\Downline\DirectList.cshtml" />
+    <Content Include="Views\Downline\DownLineList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,10 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "BinaryTree";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-<link href="~/css/tree-responsive.css" rel="stylesheet" />
-<link href="~/css/tree.css" rel="stylesheet" />
+
+
+<link href="../../css/tree-responsive.css" rel="stylesheet" />
+<link href="../../css/tree.css" rel="stylesheet" />
 <style type="text/css">
     .ui-autocomplete-loading {
         background: white url("../img/player_loading.gif") right center no-repeat;
@@ -64,7 +65,7 @@
         }
 
     .tree li a {
-        width: 95px;
+        width: 100px;
         height: auto;
         border: 0;
         padding: 0;
@@ -152,12 +153,17 @@
         right: 0;
     }
 
+    .popover-content {
+        color: #29292b;
+        font-size: 13px;
+        /*background: #fffdea;
+            border: 1px solid #f3f0d6;*/
+        border: 1px solid #3d3d3f !important;
+    }
 
     .popover {
-        background: #f5f5f5 !important;
-        max-width: 100%;
-        z-index: 99;
-        width: 500px;
+        background: #fff !important;
+        max-width: 300px;
         webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
         -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
         box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
@@ -167,38 +173,37 @@
         display: none !important;
     }
 
-
+    .popover.bottom .arrow:after {
+        border-bottom-color: #29292b !important;
+    }
 
     .popover-content {
         float: left;
-        color: #29292b;
-        font-size: 13px;
-        background: #f5f5f5 !important;
+        width: 100%;
     }
 
-
-
-        .popover-content .table td, .popover-content .table th {
-            font-size: 11px;
+        .popover-content .table {
             border: 1px solid black;
-            border-left: 1px solid black;
-            word-wrap: break-word !important;
-            padding: 2px 2px;
-            word-break: break-all;
-            background: #f5f5f5 !important;
-            color: #29292b;
         }
 
-        .popover-content .table th {
-            background: #f5f5f5 !important;
-            color: #29292b;
-        }
+            .popover-content .table td, .popover-content .table th {
+                font-size: 11px;
+                border: 1px solid black;
+                border-left: 1px solid black;
+                word-wrap: break-word !important;
+                padding: 2px 2px;
+                word-break: break-all;
+            }
+
+            .popover-content .table th {
+                color: black;
+            }
 
     #member-details {
         position: absolute;
         right: -300px;
         width: 300px;
-        height: 500px;
+        height: auto;
         background-color: #fff;
         z-index: 99;
         top: 0px;
@@ -222,8 +227,6 @@
             margin: 0px;
             border-collapse: collapse;
             max-width: 100%;
-            width: 500px;
-            height: 500px;
         }
 
 
@@ -283,60 +286,40 @@
 
 
     i.men-active {
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-image: url(../../images/TreeIcon/men-active.png) !important;
-        /*background-image: url(~~/images/TreeIcon/men-active.png) !important;*/
         display: block;
         margin: 0 auto;
     }
 
-
-
-
     i.men-inactive {
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-image: url(../../images/TreeIcon/men-inactive.png) !important;
         display: block;
         margin: 0 auto;
     }
 
     i.girl-active {
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-image: url(../../images/TreeIcon/girl-active.png) !important;
         display: block;
         margin: 0 auto;
     }
 
     i.girl-inactive {
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-image: url(../../images/TreeIcon/girl-inactive.png) !important;
         display: block;
         margin: 0 auto;
     }
 
-    i.girl-hold {
-        width: 50px !important;
-        height: 50px !important;
-        background-image: url(../../images/TreeIcon/girl-hold.png) !important;
-        display: block;
-        margin: 0 auto;
-    }
-
-    i.men-hold {
-        width: 50px !important;
-        height: 50px !important;
-        background-image: url(../../images/TreeIcon/men-hold.png) !important;
-        display: block;
-        margin: 0 auto;
-    }
-
     i.join-member {
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-image: url(../../images/noimage.jpg) !important;
         display: block;
         margin: 0 auto;
@@ -359,8 +342,8 @@
     }
 
     i.men-block {
-        width: 50px;
-        height: 50px;
+        width: 50px !important;
+        height: 50px !important;
         background-image: url(../../images/TreeIcon/men-block.png) !important;
         display: block;
         margin: 0 auto;
@@ -459,15 +442,6 @@
     .family-tree .member-img.block-member {
         border: 2px solid #b33c18;
     }*/
-
-    member-details {
-        pointer-events: none;
-        /*z-index:99999*/
-    }
-
-    .main-menu {
-        z-index: 1 !important;
-    }
 </style>
 <style>
     #divload {
@@ -488,152 +462,171 @@
         vertical-align: top;
     }
 </style>
-<div class="tab-content">
-    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4">
-                                <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
-                                <input type="hidden" id="ToLoginID">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="hidden" name="hfCustomerId" id="hfCustomerId">
-                                <input type="hidden" name="HiddenField1" id="HiddenField1">
-                                <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
-                                <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
-                                    <input type="hidden" id="lblRequest" />Go Up
-                                </a>
-                                <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <div class="col-sm-12 col-md-12" id="chart">
-                                    <div class="tree family-tree clearfix" style="overflow-x:auto">
-                                        <ul>
-                                            <li id="firstRow">
-                                                <a href="" id="firstHead"></a>
-                                                <span id="rptRow1_lblFooter"></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="container-fluid" id="member-details">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-9">
-                                                                <button type="button" class="next-tree" onclick='ClickHere(this)'>
-                                                                    <a style="background-color: white;" title="Go Down" class="clip-tree"><i class="fa fa-users" aria-hidden="true"></i></a>
-                                                                </button>
-                                                                <div class="media-body">
-                                                                    <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:#fff">@ViewBag.Fk_UserId</h3>
-                                                                    <p class="mb-0" id="lblMemberId" style="text-align: center;color:#fff"></p>
-                                                                    <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:#fff"></p>
-                                                                    <p class="mb-0" id="lblstatus" style="text-align: center;color:#fff"></p>
-                                                                    <p style="display:none" id="lblFk_UserId"></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-md-3">
-                                                                <br />
-                                                                <button type="button" id="close">&times;</button>
-                                                                <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px;border:1px solid" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid #fff">
-                                                            <div class="col-md-6">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Topup Amount</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Activation Date</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Sponsor Details</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p id="lblParnetId" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff"></p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Type</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Left</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Right</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Active</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">InActive</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#fff">Total</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="TotalMemberRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="LeftBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="RightBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <p class="TotalBusinessvol" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</p>
-                                                            </div>
-                                                        </div>
 
+
+
+<div class="loader" id="divload"></div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <br />
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-md-2"></div>
+
+                        <div class="col-md-4">
+                            <input name="txtLoginID" type="text" maxlength="10" id="txtLoginID" class="form-control" placeholder="Search By Login ID" autocomplete="off">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="hidden" name="hfCustomerId" id="hfCustomerId">
+                            <input type="hidden" name="HiddenField1" id="HiddenField1">
+                            <button type="button" id="btnSearch" class="btn btn-success m-b-10 m-l-5">Search</button>
+                            <a id="linkGoUp" class="btn btn-info m-b-10 m-l-5">
+                                <input type="hidden" id="lblRequest" />Go Up
+                            </a>
+                            <a id="btnRoot" class="btn btn-primary m-b-10 m-l-5">Root</a>
+
+
+
+
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-12 col-md-12" id="chart">
+                                <div class="tree family-tree clearfix">
+                                    <ul>
+                                        <li id="firstRow">
+                                            <a href="" id="firstHead"></a>
+                                            <span id="rptRow1_lblFooter"></span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="container-fluid" id="member-details" style="background-color: white">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-10">
+                                                            <button type="button" class="next-tree" onclick='ClickHere(this)'>
+                                                                <a style="width: 100%; height: 50%; background-color: white;" title="Go Down" class="clip-tree"></a>
+
+                                                            </button>
+                                                            <div class="media-body">
+                                                                <h3 class="mb-0" id="lblDisplayName" style="text-align: center;color:black">@ViewBag.Fk_UserId</h3>
+                                                                <p class="mb-0" id="lblMemberId" style="text-align: center;color:black"></p>
+                                                                <p class="mb-0" id="lblSpillby" style="text-align: center;color:black"></p>
+                                                                <p class="mb-0" id="lblJoiningDate" style="text-align: center;color:black"></p>
+
+                                                                <p class="mb-0" id="lblstatus" style="text-align: center;color:black"></p>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="form-group col-md-2">
+                                                            <button type="button" id="close">&times;</button>
+                                                            <img src="../../images/treeicon.jpg" id="userimage" style="width: 50px; height: 50px" height="50" width="50" />
+                                                        </div>
+                                                        <div class="form-group col-md-12 table-responsive">
+                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                <tr>
+                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Topup Amount</td>
+                                                                    <th id="lblProductName" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
+                                                                    <th id="lblFk_UserId" style="display: none">: 0</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Activation Date</td>
+                                                                    <th id="lblupgradedate" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">: </th>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Spill Details</td>
+                                                                    <th id="lblParnetId" style="font-size: 13px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b" ">: </th>
+                                                                </tr>
+
+                                                            </table>
+                                                        </div>
+                                                        <div class="form-group col-md-12 table-responsive">
+                                                            <table class="display nowrap table table-hover table-striped table-bordered" style="border:1px solid black">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Type</b></th>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Left</b></th>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Right</b></th>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;"><b>Total</b></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Active</th>
+                                                                        <td data-title="ID" class="ActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="ActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="ActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">InActive</th>
+                                                                        <td data-title="ID" class="NonActiveLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="NonActiveRight" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="NonActiveTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total</th>
+                                                                        <td data-title="ID" class="TotalMemberLeft" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td class="TotalMemberRight" data-title="ID" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="TotalMemberTotal" style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                    </tr>
+                                                                    @*<tr>
+                                                                            <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Total Business</th>
+                                                                            <td data-title="ID" class="LeftBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                            <td class="RightBusinessvol" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                            <td data-title="ID" class="TotalBusinessvol" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+                                                                        </tr>*@
+                                                                    <tr>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Business Volume</th>
+                                                                        <td data-title="ID" class="LeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td class="RightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="TotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">Product Business</th>
+                                                                        <td data-title="ID" class="ProductLeftBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td class="ProductRightBusiness" data-title="ID" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+                                                                        <td data-title="ID" class="ProductTotalBusiness" style="font-size: 12px;border-bottom: 1px solid #29166f; border-top: 1px solid #29166f;color:#29292b">0</td>
+
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
+
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -642,88 +635,137 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+
 <input type="hidden" id="firtsMemberID" value="@ViewBag.Fk_UserId" />
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-<script src="../../WebsiteCss/js/jquery.js"></script>
 <script type="text/javascript">
-
     var winHeight = $(window).height();
     var winWidth = $(window).width();
-    var $j = jQuery.noConflict();
+
     $("body").click(function () {
         $("a").popover('hide');
     });
     $("a").click(function () {
         $("a").popover('hide');
     });
-    function openPopup(obj, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
+    function openPopup(obj, sponsorid, cssclaa, item1, item2, item3, item4, item5, JoiningDate, ProductName, AllLeg1, AllLeg2, PermanentLeg1, PermanentLeg2, InactiveLeft, InactiveRight, PCountLeg1, PCountLeg2, PaidLeg1, PaidLeg2, BalanceLeft, BalanceRight, Profilepic, ActivationDate, AllBusinessLeft, AllBusinessRight, ProductRightBusiness, ProductLeftBusiness) {
+
         var loginid = 'LoginId - ' + ' ' + item2;
         var JoiningDate = 'JoiningDate - ' + ' ' + JoiningDate;
         $("#lblFk_UserId").text(item1);
         $("#lblMemberId").text(loginid);
         $('#lblParnetId').text(item5);
         $('#lblDisplayName').text(item3);
+
+        if (sponsorid != '') {
+            $("#lblSpillby").html('Spill by - ' + sponsorid);
+        }
+        else {
+            $("#lblSpillby").html('Spill by - N/A');
+        }
         $(".LoginId").html(item5);
+
         $("#lblJoiningDate").html(JoiningDate);
         $("#lblProductName").html(ProductName);
         $("#lblupgradedate").html(ActivationDate);
-        if (ProductName == "No Package") {
-            $("#lblstatus").html('Status - InActive');
-        }
-        else {
+
+
+        if (cssclaa == "active-member") {
             $("#lblstatus").html('Status - Active');
         }
+        else if (cssclaa == "block-member") {
+            $("#lblstatus").html('Status - Block');
+        }
+        else if (cssclaa == "inactive-member") {
+            $("#lblstatus").html('Status - InActive');
+        }
+        //if (ProductName == "No Package") {
+        //    $("#lblstatus").html('Status - InActive');
+        //}
+        //else {
+        //    $("#lblstatus").html('Status - Active');
+        //}
+
+
         $(".TotalMemberLeft").html(AllLeg1);
         $(".TotalMemberRight").html(AllLeg2);
+
         $(".TotalMemberTotal").html(parseFloat(AllLeg1) + parseFloat(AllLeg2));
+
         $(".ActiveLeft").html(PermanentLeg1);
         $(".ActiveRight").html(PermanentLeg2);
+
         $(".ActiveTotal").html(parseFloat(PermanentLeg1) + parseFloat(PermanentLeg2));
+
         $(".NonActiveLeft").html(InactiveLeft);
         $(".NonActiveRight").html(InactiveRight);
+
         $(".NonActiveTotal").html(parseFloat(InactiveLeft) + parseFloat(InactiveRight));
+
         $(".LeftBusiness").html(PCountLeg1);
         $(".RightBusiness").html(PCountLeg2);
+
         $(".TotalBusiness").html(parseFloat(PCountLeg1) + parseFloat(PCountLeg2));
+
         $(".ProductLeftBusiness").html(ProductLeftBusiness);
         $(".ProductRightBusiness").html(ProductRightBusiness);
+
         $(".ProductTotalBusiness").html(parseFloat(ProductLeftBusiness) + parseFloat(ProductRightBusiness));
+
+
         $(".PaidLeg1").html(PaidLeg1);
         $(".PaidLeg2").html(PaidLeg2);
+
         $(".TotalPaidLeg").html(parseFloat(PaidLeg1) + parseFloat(PaidLeg2));
+
         $(".BalanceLeft").html(BalanceLeft);
         $(".BalanceRight").html(BalanceRight);
+
         $(".LeftBusinessvol").html(AllBusinessLeft);
         $(".RightBusinessvol").html(AllBusinessRight);
+
         $(".TotalBusinessvol").html(parseFloat(AllBusinessLeft) + parseFloat(AllBusinessRight));
+
         $(".TotalBalance").html(parseFloat(BalanceLeft) + parseFloat(BalanceRight));
         $("#userimage").attr("src", Profilepic);
+
         if (winWidth < 998) {
             $("#member-details").addClass('active');
             $("#go-top").find('input[type="hidden"]').val(item1);
         }
         $("#loading-image").hide();
+        console.log($("#member-details").html())
         $('#' + obj.id).attr("data-content", $("#member-details").html());
         $('[data-toggle="popover"]').popover({
             container: 'body',
             html: true,
-            placement: 'auto',
+            placement: 'bottom',
             trigger: 'hover',
-            boundary: 'window'
+
         });
     }
     function closePopup(obj) {
+
         if (winWidth < 998) {
             $("#member-details").addClass('active');
         }
         else {
+
         }
         $('#' + obj.id).removeAttr("data-content", $("#member-details").html());
+
     }
+
     if (winWidth > 998) {
         $("#chart").on("mouseover", function () {
             // $("#member-details").addClass('active');
@@ -732,8 +774,13 @@
             // $("#member-details").removeClass('active');
         });
     }
+
+
+
     var Fk_UserId = "0";
     $("#btnRoot").click(function () {
+
+
         var loginid = $("#firtsMemberID").val();
         var topId = $("#linkGoUp").find("#lblRequest").val();
         if (parseInt(loginid) > parseInt(topId)) {
@@ -745,7 +792,9 @@
             $("#txtLoginID").val('');
             $("#hfCustomerId").val('');
         }
+
     });
+
     $("#linkGoUp").click(function () {
         $('#divload').show();
         $("#linkGoUp").attr("readonly", true);
@@ -762,7 +811,9 @@
                 Fk_UserId = $(this).find("#lblRequest").val();
                 GetDataFirst(Fk_UserId, "clicked");
             }
+
         }
+
         // GetData(Fk_UserId);
     });
 
@@ -771,7 +822,6 @@
     var clicked = 0;
 
     function ClickHere(obj) {
-
         //if ($("#" + obj.id + "").find('input[type="hidden"]').val() == "-1") {
         //  return false;
         //}
@@ -799,68 +849,6 @@
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-
-        $("input").attr("autocomplete", "off");
-
-        var cityuse = [];
-        $("#loader").css({ 'display': '' });
-        $.ajax({
-            url: '/User/GetUserList',
-            type: 'Post',
-            success: function (response) {
-                if (response != null) {
-                    $(response).each(function (index, item) {
-                        cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
-                    });
-                    $('#txtLoginID').autocomplete({
-                        source: cityuse,
-                        select: function (event, ui) {
-                            var str = ui.item.label;
-                            var strsplit = str.split("(");
-
-                            $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-                        }
-                    })
-                }
-            }, error: function () {
-                alert('Some Thing wrong!');
-                $("#loader").css({ 'display': 'none' });
-            }
-        });
-        //$('#TopupType').val('RealEstate');
-    });
-    //$(document).ready(function () {
-    //    $("input").attr("autocomplete", "off");
-    //    var cityuse = [];
-    //    $("#loader").css({ 'display': '' });
-    //    $.ajax({
-    //        url: '/User/GetUserList',
-    //        type: 'Post',
-    //        success: function (response) {
-    //            if (response != null) {
-
-
-    //                $(response).each(function (index, item) {
-    //                    cityuse.push(item.UserName + "(" + item.LoginIDD + ")");
-    //                });
-
-    //                $('#txtLoginID').autocomplete({
-    //                    source: cityuse,
-    //                    select: function (event, ui) {
-    //                        var str = ui.item.label;
-    //                        var strsplit = str.split("(");
-
-    //                        $('#ToLoginID').val(strsplit[1].substr(0, strsplit[1].length - 1));
-    //                    }
-    //                })
-    //            }
-    //        }, error: function () {
-    //            alert('Some Thing wrong!');
-    //            $("#loader").css({ 'display': 'none' });
-    //        }
-    //    });
-    //});
 
     var winHeight = $(window).height();
     var winWidth = $(window).width();
@@ -889,37 +877,37 @@
         //
         $.ajax({
             type: "POST",
-            url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-            data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
+            url: "../../../Models/WebService/AgentServices.asmx/GetGeneology",
+            data: '{memID: ' + id + '}',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: OnSuccess,
             failure: function (response) {
-                alert("Failed: " + response.d);
+                console.log("Failed: " + response);
+                console.log(response);
             },
             error: function (response) {
-                alert("Error: " + response.d);
+                console.log("Error: " + response);
+                console.log(response);
             }
         });
 
 
         function OnSuccess(response) {
-
+            console.log(response)
             debugger;
             var ul = $("<ul></ul>");
             var freeBlock = "";
             var freeBlockL = "";
             var freeBlockR = "";
-            var model = response.d;
+            var model = response;
             if (!$.trim(model)) {
                 $(".alert-warning").show();
                 $("#lblWarning").text("No Member Found...For this Associate");
                 //$("#userTree").hide();
 
                 freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                //
                 freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                //
                 ul.append(freeBlockL + freeBlockR);
                 $("#firstRow").fadeIn(500);
                 window.setTimeout(function () {
@@ -927,15 +915,11 @@
                         $('#alertbox .alert').slideUp(500);
                     });
                 }, 2000);
-
             }
             else {
-
-
-
                 var $child = "";
                 var level = 0;
-                $.each(response.d, function (i, k) {
+                $.each(response, function (i, k) {
                     level++;
                 });
 
@@ -969,14 +953,6 @@
                             cssclass = "girl-inactive";
                         }
                     }
-                    else if (cssclaa == "hold-member") {
-                        if (Gender == "M") {
-                            cssclass = "men-hold";
-                        }
-                        else {
-                            cssclass = "girl-hold";
-                        }
-                    }
                     else {
                         cssclass = "join-member";
                     }
@@ -985,7 +961,7 @@
                         if (id != '-1') {
 
                             child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
+                                                      " onmouseover='openPopup(this," + '"' + item1.SponsorId + '"' + "," + '"' + cssclaa + '"' + "," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
 
                                                       "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle '></i></div></div><span class='name member-name'>" +
@@ -1006,7 +982,7 @@
                     else {
                         if (id != '-1') {
                             child = " <li id='level" + i + "'><a data-toggle='popover' id='levelLink" + i + "' href='" + item1.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                      " onmouseover='openPopup(this," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
+                                                      " onmouseover='openPopup(this," + '"' + item1.SponsorId + '"' + "," + '"' + cssclaa + '"' + "," + item1.Fk_UserId + "," + '"' + item1.LoginId + '"' + ", " + '"' + item1.MemberName + '"' + "," + '"' + item1.Leg + '"' + "," + '"' + item1.ParentLoginId + '"' + "," + '"' + item1.JoiningDate + '"' + "," + '"' + item1.ProductName + '"' + "," + '"' + item1.AllLeg1 + '"' + "," + '"' + item1.AllLeg2 + '"' + "," + '"' + item1.PermanentLeg1 + '"' + "," + '"' + item1.PermanentLeg2 + '"' + "," + '"' + item1.InactiveLeft + '"' + "," + '"' + item1.InactiveRight + '"' + "," + '"' + item1.PCountLeg1 + '"' + "," + '"' + item1.PCountLeg2 + '"' + "," + '"' + item1.PaidLeg1 + '"' + "," + '"' + item1.PaidLeg2 + '"' + "," + '"' + item1.BalanceLeft + '"' + "," + '"' + item1.BalanceRight + '"' + "," + '"' + item1.ProfilePic + '"' + "," + '"' + item1.ActivationDate + '"' + "," + '"' + item1.AllBusinessLeft + '"' + "," + '"' + item1.AllBusinessRight + '"' + "," + '"' + item1.ProductRightBusiness + '"' + "," + '"' + item1.ProductLeftBusiness + '"' + ")' " +
                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + " >" +
                                                       "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
                                                       " " + item1.LoginId + "</span> <span class='member-join-time'> " + item1.MemberName + "</span>" +
@@ -1021,7 +997,6 @@
                                                      "</a></li>";
                         }
                         freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item1.LoginId + "&amp;lg=" + item1.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                        //"Registration.cshtml?Pid=' + item1.LoginId + "&amp;lg=" + item1.Leg + "' it is use of up registration Pid
                         if (item1.Leg == 'L') {
                             ul.append(child + freeBlock);
                         }
@@ -1031,24 +1006,22 @@
 
                     }
 
-                    //if (winWidth > 766)
-                    {
+                    if (winWidth > 766) {
                         if (id != null) {
                             $.ajax({
                                 type: "POST",
-                                url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                                data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
+                                url:"../../../Models/WebService/AgentServices.asmx/GetGeneology",
+                                data: '{memID: ' + id + '}',
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function (response2) {
-                                    var model2 = response2.d;
+                                    var model2 = response2;
                                     var ul2 = $("<ul></ul>");
                                     var level2 = 0;
                                     if (!$.trim(model2)) {
                                         freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                        //Registration.cshtml?Pid='123466'&amp;lg=L
                                         freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                        //Registration.cshtml?Pid='123466'&amp;lg=R
+
                                         ul2.append(freeBlockL + freeBlockR);
                                         //$("#firstRow").fadeIn(2000);
                                         window.setTimeout(function () {
@@ -1059,7 +1032,7 @@
                                         $("#level" + i).append(ul2);
                                     }
                                     else {
-                                        $.each(response2.d, function (i1, k2) {
+                                        $.each(response2, function (i1, k2) {
                                             level2++;
                                         });
                                         $.each(model2, function (i1, item2) {
@@ -1091,21 +1064,13 @@
                                                     cssclass = "girl-inactive";
                                                 }
                                             }
-                                            else if (cssclaa == "hold-member") {
-                                                if (Gender == "M") {
-                                                    cssclass = "men-hold";
-                                                }
-                                                else {
-                                                    cssclass = "girl-hold";
-                                                }
-                                            }
                                             else {
                                                 cssclass = "join-member";
                                             }
                                             if (level2 == 2) {
                                                 if (id != '-1') {
                                                     child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                              " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
+                                                              " onmouseover='openPopup(this," + '"' + item2.SponsorId + '"' + "," + '"' + cssclaa + '"' + "," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
                                                               " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                               "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + "  rounded-circle'></i></div></div><span class='name member-name'>" +
                                                               " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
@@ -1125,7 +1090,7 @@
                                             else {
                                                 if (id != '-1') {
                                                     child = " <li id='level" + i + i1 + "'><a data-toggle='popover' id='levelLink" + i + i1 + "' href='" + item2.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                             " onmouseover='openPopup(this," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
+                                                             " onmouseover='openPopup(this," + '"' + item2.SponsorId + '"' + "," + '"' + cssclaa + '"' + "," + item2.Fk_UserId + "," + '"' + item2.LoginId + '"' + ", " + '"' + item2.MemberName + '"' + "," + '"' + item2.Leg + '"' + "," + '"' + item2.ParentLoginId + '"' + "," + '"' + item2.JoiningDate + '"' + "," + '"' + item2.ProductName + '"' + "," + '"' + item2.AllLeg1 + '"' + "," + '"' + item2.AllLeg2 + '"' + "," + '"' + item2.PermanentLeg1 + '"' + "," + '"' + item2.PermanentLeg2 + '"' + "," + '"' + item2.InactiveLeft + '"' + "," + '"' + item2.InactiveRight + '"' + "," + '"' + item2.PCountLeg1 + '"' + "," + '"' + item2.PCountLeg2 + '"' + "," + '"' + item2.PaidLeg1 + '"' + "," + '"' + item2.PaidLeg2 + '"' + "," + '"' + item2.BalanceLeft + '"' + "," + '"' + item2.BalanceRight + '"' + "," + '"' + item2.ProfilePic + '"' + "," + '"' + item2.ActivationDate + '"' + "," + '"' + item2.AllBusinessLeft + '"' + "," + '"' + item2.AllBusinessRight + '"' + "," + '"' + item2.ProductRightBusiness + '"' + "," + '"' + item2.ProductLeftBusiness + '"' + ")' " +
                                                              " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                              "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
                                                              " " + item2.LoginId + "</span> <span class='member-join-time'> " + item2.MemberName + "</span>" +
@@ -1141,7 +1106,6 @@
 
                                                 }
                                                 freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item2.LoginId + "&amp;lg=" + item2.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                //Registration.cshtml?Pid=" + item2.LoginId + "&amp;lg=" + item2.Leg + "
                                                 if (item2.Leg == 'L') {
                                                     ul2.append(child + freeBlock);
                                                 }
@@ -1149,24 +1113,22 @@
                                                     ul2.append(freeBlock + child);
                                                 }
                                             }
-                                            //if (winWidth > 980)
-                                            {
+                                            if (winWidth > 980) {
                                                 if (id != null) {
                                                     $.ajax({
                                                         type: "POST",
-                                                        url: "../../Models/WebService/AgentServices.asmx/GetGeneology",
-                                                        data: '{memID: ' + id + ',sessionid:' + $("#firtsMemberID").val() + '}',
+                                                        url: "../../../Models/WebService/AgentServices.asmx/GetGeneology",
+                                                        data: '{memID: ' + id + '}',
                                                         contentType: "application/json; charset=utf-8",
                                                         dataType: "json",
                                                         success: function (response3) {
-                                                            var model3 = response3.d;
+                                                            var model3 = response3;
                                                             var ul3 = $("<ul></ul>");
                                                             var level3 = 0;
                                                             if (!$.trim(model3)) {
                                                                 freeBlockL = "<li id='1'><a href='Registration.cshtml?Pid='123466'&amp;lg=L' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                                //Registration.cshtml?Pid='123466'&amp;lg=L
                                                                 freeBlockR = "<li id='2'><a href='Registration.cshtml?Pid='123466'&amp;lg=R' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                                //Registration.cshtml?Pid='123466'&amp;lg=R
+
                                                                 ul3.append(freeBlockL + freeBlockR);
                                                                 $("#firstRow").fadeIn(500);
                                                                 window.setTimeout(function () {
@@ -1177,7 +1139,7 @@
                                                                 $("#level" + i + i1).append(ul3);
                                                             }
                                                             else {
-                                                                $.each(response3.d, function (i2, k3) {
+                                                                $.each(response3, function (i2, k3) {
                                                                     level3++;
                                                                 });
                                                                 $.each(model3, function (i2, item3) {
@@ -1209,21 +1171,13 @@
                                                                             cssclass = "girl-inactive";
                                                                         }
                                                                     }
-                                                                    else if (cssclaa == "hold-member") {
-                                                                        if (Gender == "M") {
-                                                                            cssclass = "men-hold";
-                                                                        }
-                                                                        else {
-                                                                            cssclass = "girl-hold";
-                                                                        }
-                                                                    }
                                                                     else {
                                                                         cssclass = "join-member";
                                                                     }
                                                                     if (level3 == 2) {
                                                                         if (id != '-1') {
                                                                             child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + " rounded-circle' " +
-                                                                                      " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
+                                                                                      " onmouseover='openPopup(this," + '"' + item3.SponsorId + '"' + "," + '"' + cssclaa + '"' + "," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
                                                                                       " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                                                       "<div class='outer-ring " + cssclass + " rounded-circle'><div class='member-img " + cssclass + " rounded-circle'><i class='" + cssclass + " rounded-circle'></i></div></div><span class='name member-name'>" +
                                                                                       " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
@@ -1242,7 +1196,7 @@
                                                                     else {
                                                                         if (id != '-1') {
                                                                             child = " <li id='level" + i + i1 + i2 + "'><a data-toggle='popover' id='levelLink" + i + i1 + i2 + "' href='" + item3.Href + "' class='from " + cssclass + "' " +
-                                                                                        " onmouseover='openPopup(this," + item3.Fk_UserId + "," + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
+                                                                                        " onmouseover='openPopup(this," + '"' + item3.SponsorId + '"' + "," + '"' + cssclaa + '"' + "','" + item3.Fk_UserId + "','" + '"' + item3.LoginId + '"' + ", " + '"' + item3.MemberName + '"' + "," + '"' + item3.Leg + '"' + "," + '"' + item3.ParentLoginId + '"' + "," + '"' + item3.JoiningDate + '"' + "," + '"' + item3.ProductName + '"' + "," + '"' + item3.AllLeg1 + '"' + "," + '"' + item3.AllLeg2 + '"' + "," + '"' + item3.PermanentLeg1 + '"' + "," + '"' + item3.PermanentLeg2 + '"' + "," + '"' + item3.InactiveLeft + '"' + "," + '"' + item3.InactiveRight + '"' + "," + '"' + item3.PCountLeg1 + '"' + "," + '"' + item3.PCountLeg2 + '"' + "," + '"' + item3.PaidLeg1 + '"' + "," + '"' + item3.PaidLeg2 + '"' + "," + '"' + item3.BalanceLeft + '"' + "," + '"' + item3.BalanceRight + '"' + "," + '"' + item3.ProfilePic + '"' + "," + '"' + item3.ActivationDate + '"' + "," + '"' + item3.AllBusinessLeft + '"' + "," + '"' + item3.AllBusinessRight + '"' + "," + '"' + item3.ProductRightBusiness + '"' + "," + '"' + item3.ProductLeftBusiness + '"' + ")' " +
                                                                                        " onmouseout='closePopup(this)' href='#' " + clickOption + ">" +
                                                                                        "<div class='outer-ring " + cssclass + "'><div class='member-img " + cssclass + "'><i class='" + cssclass + "'></i></div></div><span class='name member-name'>" +
                                                                                        " " + item3.LoginId + "</span> <span class='member-join-time'> " + item3.MemberName + "</span>" +
@@ -1257,7 +1211,6 @@
                                                                                       "</a></li>";
                                                                         }
                                                                         freeBlock = "<li id='1'><a href='Registration.cshtml?Pid=" + item3.LoginId + "&amp;lg=" + item3.Leg + "' target='_blank'><img src='/Content/img/open-member.png'><br><span>Join Now</span></a></li>";
-                                                                        //Registration.cshtml?Pid=" + item3.LoginId + "&amp;lg=" + item3.Leg + "
                                                                         //if (item3.Leg == 'L') {
                                                                         //    ul3.append(child + freeBlock);
                                                                         //}
@@ -1271,10 +1224,12 @@
                                                             }
                                                         },
                                                         failure: function (response) {
-                                                            alert("Failed: " + response.d);
+                                                            console.log("Failed1: " + response);
+                                                            console.log(response);
                                                         },
                                                         error: function (response) {
-                                                            alert("Error: " + response.d);
+                                                            console.log("Error1" + response);
+                                                            console.log(response);
                                                         },
                                                         complete: function () {
                                                             $("#firstRow").fadeIn(1000);
@@ -1283,21 +1238,23 @@
                                                     });
                                                 }
                                             }
-                                            //else {
-                                            //    $("#firstRow").fadeIn(1000);
-                                            //    $("#firstHead").attr("style", "opacity:1;");
-                                            //    $('[id*="level"]').fadeIn(300);
-                                            //}
+                                            else {
+                                                $("#firstRow").fadeIn(1000);
+                                                $("#firstHead").attr("style", "opacity:1;");
+                                                $('[id*="level"]').fadeIn(300);
+                                            }
                                         });
                                         $("#level" + i).append(ul2);
                                     }
                                     $("#firstRow").append(ul);
                                 },
                                 failure: function (response) {
-                                    alert("Failed: " + response.d);
+                                    console.log("Failed2" + response);
+                                    console.log(response);
                                 },
                                 error: function (response) {
-                                    alert("Error: " + response.d);
+                                    console.log("Error2" + response);
+                                    console.log(response);
                                 },
                                 complete: function () {
                                     $("#firstRow").fadeIn(900);
@@ -1306,12 +1263,12 @@
                             });
                         }
                     }
-                    //else {
-                    //    $("#firstRow").fadeIn(1000);
-                    //    $("#firstHead").attr("style", "opacity:1;");
-                    //    $('[id*="level"]').fadeIn(500);
-                    //    $("#firstRow").append(ul);
-                    //}
+                    else {
+                        $("#firstRow").fadeIn(1000);
+                        $("#firstHead").attr("style", "opacity:1;");
+                        $('[id*="level"]').fadeIn(500);
+                        $("#firstRow").append(ul);
+                    }
                 });
                 $("#firstRow").append(ul);
             }
@@ -1321,6 +1278,7 @@
     }
 
     function GetDataFirst(id, text) {
+        debugger;
         $('#divload').show();
         $.ajax({
             type: "POST",
@@ -1332,24 +1290,40 @@
 
             failure: function (response) {
                 $('#divload').hide();
-                alert(response.d);
+                console.log('log 2', 'fail ' + response)
+                console.log(response)
 
             },
             error: function (response) {
                 $('#divload').hide();
-                alert(response.d);
+                console.log('log 2', 'error ' + response)
+                console.log(response)
             }
 
         });
 
         function OnSuccess2(response) {
-
-            var modal = response.d;
+            debugger;
+            console.log('log 2', 'pass ' + response)
+            console.log(response)
+            var modal = response;
             $.each(modal, function (i, item) {
 
                 $("#headClass span").text(item.MemberName + "(" + item.LoginId + ")");
                 var status = item.Status;
                 var gender = item.Gender;
+                var cssclaa = '';
+
+                if (status == "T") {
+                    cssclaa = "inactive-member"
+                }
+                else if (status == "P") {
+                    cssclaa = "active-member"
+                }
+                else {
+                    cssclaa = "block-member"
+                }
+
                 if (status == "T") {
                     if (gender == "M") {
                         status = "men-inactive"
@@ -1367,15 +1341,6 @@
                         status = "girl-active"
                     }
                 }
-                else if (status == "Y") {
-
-                    if (gender == "M") {
-                        status = "men-hold"
-                    }
-                    else {
-                        status = "girl-hold"
-                    }
-                }
                 else {
                     if (gender == "M") {
                         status = "men-block"
@@ -1389,7 +1354,7 @@
 
                 $firstHead.html("<div class='outer-ring " + status + "'><div class='member-img " + status + "'><i class='" + status + " rounded-circle'></i></div></div><span class='name member-name'>" + item.LoginId + "</span><span class='member-join-time'>" + item.MemberName + "</span>");
                 //$firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "', '" + item.ParentLoginId + "')");
-                $firstHead.attr("onmouseover", "openPopup(this,'" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
+                $firstHead.attr("onmouseover", "openPopup(this,'" + item.SponsorId + "','" + cssclaa + "','" + item.Fk_UserId + "','" + item.LoginId + "', '" + item.MemberName + "','" + item.Leg + "','" + item.ParentLoginId + "','" + item.JoiningDate + "','" + item.ProductName + "','" + item.AllLeg1 + "','" + item.AllLeg2 + "','" + item.PermanentLeg1 + "','" + item.PermanentLeg2 + "','" + item.InactiveLeft + "','" + item.InactiveRight + "','" + item.PCountLeg1 + "','" + item.PCountLeg2 + "','" + item.PaidLeg1 + "','" + item.PaidLeg2 + "','" + item.BalanceLeft + "','" + item.BalanceRight + "','" + item.ProfilePic + "','" + item.ActivationDate + "'," + '"' + item.AllBusinessLeft + '"' + "," + '"' + item.AllBusinessRight + '"' + "," + '"' + item.ProductRightBusiness + '"' + "," + '"' + item.ProductLeftBusiness + '"' + ")");
                 $firstHead.attr("data-toggle", "popover");
 
                 $("#firstHead").attr("onclick", "ClickHere(this;)");
@@ -1412,28 +1377,19 @@
 
     $(function () {
         $("#btnSearch").click(function () {
-
-            var txtLoginID = $('#txtLoginID').val();
-            if (txtLoginID == "") {
-                $('#ToLoginID').val(null);
-            } else {
-                var txtLoginID = $('#ToLoginID').val();
-                $('#txtLoginID').val(txtLoginID);
-            }
-
             if ($("#txtLoginID").val() != "") {
                 $.ajax({
-                    url: '../../../Models/WebService/AgentServices.asmx/SearchCustomersByLoginId2',
-                    data: "{ 'prefix': '" + $("#txtLoginID").val() + "'}",
-                    dataType: "json",
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/AgentServices/SearchCustomersByLoginId2?prefix=' + $("#txtLoginID").val(),
+                    //data: "{ 'prefix': '" + $("#txtLoginID").val() + "'}",
+                    //dataType: "json",
+                    method: "GET",
+                    //contentType: "application/json; charset=utf-8",
                     success: OnSuccessThis,
                     error: function (response) {
-                        alert(response.responseText);
+                        console.log(response.responseText);
                     },
                     failure: function (response) {
-                        alert(response.responseText);
+                        console.log(response.responseText);
                     },
                     select: function (e, i) {
                         $("[id$=hfCustomerId]").val(i.item.val);
@@ -1445,7 +1401,7 @@
             function OnSuccessThis(data) {
 
                 console.log(data);
-                var r = data.d;
+                var r = data;
                 $(r).each(function () {
                     $("[id$=hfCustomerId]").val(this.split('.')[1]);
                     if ($("#hfCustomerId").val() != "") {

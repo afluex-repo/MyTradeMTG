@@ -263,4 +263,36 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
     }
+    public class PaymentMode
+    {
+        public string PK_PaymentModeId { get; set; }
+        public string PaymentModeName { get; set; }
+    }
+    public class PaymentModeResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PaymentMode> lst { get; set; }
+        public DataSet PaymentList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentModeList");
+            return ds;
+        }
+    }
+    public class Package
+    {
+        public string PK_PackageId { get; set; }
+        public string PackageName { get; set; }
+    }
+    public class PackageResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<Package> lst { get; set; }
+        public DataSet PackageList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
+            return ds;
+        }
+    }
 }

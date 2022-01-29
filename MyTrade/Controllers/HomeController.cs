@@ -120,8 +120,15 @@ namespace MyTrade.Controllers
 
 
         }
-        public ActionResult Registration()
+        public ActionResult Registration(string PId)
         {
+            Home obj = new Home();
+            if (!string.IsNullOrEmpty(PId))
+            {
+                var d = Crypto.Decrypt(PId);
+                ViewBag.SponsorId = d.Split('|')[0];
+                ViewBag.Leg = d.Split('|')[1];
+            }
             return View();
         }
 
