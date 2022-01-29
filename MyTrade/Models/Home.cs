@@ -9,6 +9,8 @@ namespace MyTrade.Models
 {
     public class Home:Common
     {
+        public List<Home> lstMenu { get; set; }
+        public List<Home> lstsubmenu { get; set; }
         #region property
         public string SponsorId { get; set; }
         public string LoginId { get; set; }
@@ -19,9 +21,16 @@ namespace MyTrade.Models
         public string PanNo { get; set; }
         public string MobileNo { get; set; }
         public string Email { get; set; }
-        public string Leg { get; set; }
         public string RegistrationBy { get;  set; }
         public string Password { get;  set; }
+        public string Pk_AdminId { get;  set; }
+        public string MenuId { get;  set; }
+        public string MenuName { get;  set; }
+        public string Icon { get;  set; }
+        public string Url { get;  set; }
+        public string SubMenuId { get;  set; }
+        public string SubMenuName { get;  set; }
+        public string UserType { get;  set; }
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -61,6 +70,60 @@ namespace MyTrade.Models
                                 new SqlParameter("@Password",Password)};
             DataSet ds = DBHelper.ExecuteQuery("Login", para);
             return ds;
+        }
+        public DataSet loadHeaderMenu()
+        {
+            SqlParameter[] para = {
+                                new SqlParameter("@PK_AdminId", Pk_AdminId),
+                                 new SqlParameter("@UserType", UserType)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetMenuUserWise", para);
+            return ds;
+        }
+        public static Home GetMenus(string Pk_AdminId, string UserType)
+        {
+            Home model = new Home();
+            List<Home> lstmenu = new List<Home>();
+            List<Home> lstsubmenu = new List<Home>();
+
+            model.Pk_AdminId = Pk_AdminId;
+            model.UserType = UserType;
+            DataSet dsHeader = model.loadHeaderMenu();
+            if (dsHeader != null && dsHeader.Tables.Count > 0)
+            {
+                if (dsHeader.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsHeader.Tables[0].Rows)
+                    {
+                        Home obj = new Home();
+
+                        obj.MenuId = r["PK_FormTypeId"].ToString();
+                        obj.MenuName = r["FormType"].ToString();
+                        obj.Icon = r["Icon"].ToString();
+                        obj.Url = r["Url"].ToString();
+                        lstmenu.Add(obj);
+                    }
+
+                    model.lstMenu = lstmenu;
+                    foreach (DataRow r in dsHeader.Tables[1].Rows)
+                    {
+                        Home obj = new Home();
+                        obj.Url = r["Url"].ToString();
+                        obj.MenuId = r["FK_FormTypeId"].ToString();
+                        obj.SubMenuId = r["PK_FormId"].ToString();
+                        obj.SubMenuName = r["FormName"].ToString();
+                        lstsubmenu.Add(obj);
+                    }
+
+                    model.lstsubmenu = lstsubmenu;
+
+                }
+
+
+            }
+            return model;
+
         }
         #endregion
     }

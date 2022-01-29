@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Mytrade.Models.DAL;
+using MyTrade.DAL;
+using MyTrade.Models.DAL;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
-using MyTrade.Models;
-using MyTrade.DAL;
-using Mytrade.Models.DAL;
 
 namespace MyTrade.Models.WebService
 {
@@ -26,13 +22,11 @@ namespace MyTrade.Models.WebService
     {
         [ScriptMethod()]
         [WebMethod]
-        public List<AgentModel> GetGeneology(string memID, string sessionid)
+        public List<AgentModel> GetGeneology(string memID)
         {
             AgentModel model = new AgentModel();
             model.Fk_UserId = memID;
-            model.SessionPkId = sessionid;
             AgentDAL obj = new AgentDAL();
-
             DataTable dt = obj.GetTreeMembers(model);
             List<AgentModel> tree = new List<AgentModel>();
             foreach (DataRow dr in dt.Rows)
@@ -75,10 +69,19 @@ namespace MyTrade.Models.WebService
                     ActivationDate = dr["ActivationDate"].ToString(),
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
+                    ProductLeftBusiness = dr["ProductBusinessLeft"].ToString(),
+                    ProductRightBusiness = dr["ProductBusinessRight"].ToString(),
                 });
+
+
+
+
             }
             return tree;
+
         }
+
+
         [ScriptMethod()]
         [WebMethod]
         public List<AgentModel> GetGeneologyForAdmin(string memID)
@@ -128,9 +131,17 @@ namespace MyTrade.Models.WebService
                     ActivationDate = dr["ActivationDate"].ToString(),
                     AllBusinessLeft = dr["AllBusinessLeft"].ToString(),
                     AllBusinessRight = dr["AllBusinessRight"].ToString(),
+
+                    ProductLeftBusiness = dr["ProductBusinessLeft"].ToString(),
+                    ProductRightBusiness = dr["ProductBusinessRight"].ToString(),
                 });
+
+
+
+
             }
             return tree;
+
         }
 
         [ScriptMethod()]
@@ -178,7 +189,8 @@ namespace MyTrade.Models.WebService
                 model.ActivationDate = dr["ActivationDate"].ToString();
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
-               
+                //model.ProductLeftBusiness = dr["ProductLeftBusiness"].ToString();
+                //model.ProductRightBusiness = dr["ProductRightBusiness"].ToString();
                 List.Add(model);
             }
 
@@ -230,7 +242,8 @@ namespace MyTrade.Models.WebService
                 model.ActivationDate = dr["ActivationDate"].ToString();
                 model.AllBusinessLeft = dr["AllBusinessLeft"].ToString();
                 model.AllBusinessRight = dr["AllBusinessRight"].ToString();
-               
+                model.ProductLeftBusiness = dr["ProductLeftBusiness"].ToString();
+                model.ProductRightBusiness = dr["ProductRightBusiness"].ToString();
                 List.Add(model);
             }
 
@@ -238,7 +251,7 @@ namespace MyTrade.Models.WebService
         }
 
         [ScriptMethod()]
-        [WebMethod(EnableSession = true)]
+        [WebMethod]
         public List<string> SearchCustomersByLoginId2(string prefix)
         {
             List<string> list = new List<string>();
@@ -309,10 +322,5 @@ namespace MyTrade.Models.WebService
             }
             return list;
         }
-
-
-       
-
-
     }
 }

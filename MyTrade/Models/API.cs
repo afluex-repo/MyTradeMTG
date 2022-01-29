@@ -121,4 +121,146 @@ namespace MyTrade.Models
         }
     }
     #endregion
+    #region EpinDetails
+    public class EpinDetails
+    {
+ 
+        public string EPin { get; set; }
+        public string Fk_UserId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        //public DataSet ValidateEpin()
+        //{
+        //    SqlParameter[] para = {
+        //                              new SqlParameter("@EPin", EPin),
+
+        //                          };
+        //    DataSet ds = DBHelper.ExecuteQuery("ValidatePin", para);
+
+        //    return ds;
+        //}
+        public DataSet ActivateUser()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@EPinNo", EPin),
+                                      new SqlParameter("@Fk_UserId",Fk_UserId)
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+
+            return ds;
+        }
+    }
+    public class EpinDetails1
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string PinStatus { get; internal set; }
+    }
+    #endregion
+    public class AssociateDashBoard
+    {
+        public string Fk_UserId { get; set; }
+        public DataSet GetAssociateDashboard()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId), };
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
+            return ds;
+        }
+
+    }
+    public class DashboardResponse
+    {
+        public string TotalDownline { get; set; }
+        public string TotalDirect { get; set; }
+        public string TotalActive { get; set; }
+        public string TotalInActive { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
+    public class UpdateProfile
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
+    public class TreeAPI
+    {
+        public List<Tree1> GetGenelogy { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string Fk_headId { get; set; }
+        public DataSet GetTree()
+        {
+            SqlParameter[] para = {   new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@Fk_headId", Fk_headId)
+                                  };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetTree", para);
+            return ds;
+        }
+    }
+    public class Tree1
+    {
+       
+        public string SponsorId { get; set; }
+        public string Fk_ParentId { get; set; }
+        public string TeamPermanent { get; set; }
+        public string Fk_SponsorId { get; set; }
+        public string MemberName { get; set; }
+        public string MemberLevel { get; set; }
+        public string Id { get; set; }
+        public string ActivationDate { get; set; }
+        public string ActiveLeft { get; set; }
+        public string ActiveRight { get; set; }
+        public string InactiveLeft { get; set; }
+        public string InactiveRight { get; set; }
+        public string BusinessLeft { get; set; }
+        public string BusinessRight { get; set; }
+        public string ImageURL { get; set; }
+        public string Fk_UserId { get;  set; }
+        public string LoginId { get;  set; }
+        public string Leg { get;  set; }
+    }
+    public class TopupByUser
+    {
+        public string LoginId { get; set; }
+        public string PackageId { get; set; }
+        public string TopUpDate { get; set; }
+        public string Amount { get; set; }
+        public string Remarks { get; set; }
+        public string FK_UserId { get; set; }
+        public string PaymentMode { get; set; }
+        public string BankName { get; set; }
+        public string BankBranch { get; set; }
+        public string TransactionNo { get; set; }
+        public string TransactionDate { get; set; }
+        public string AddedBy { get; set; }
+        public string TotalAmount { get; set; }
+        public DataSet TopUp()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@AddedBy", AddedBy),
+                                        new SqlParameter("@Fk_ProductId",PackageId),
+                                        new SqlParameter("@TopupDate", TopUpDate),
+                                        new SqlParameter("@Amount", TotalAmount),
+                                        new SqlParameter("@Description", Remarks),
+                                          new SqlParameter("@PaymentMode", PaymentMode),
+                                            new SqlParameter("@TransactionNo", TransactionNo),
+                                              new SqlParameter("@TransactionDate", TransactionDate),
+                                                new SqlParameter("@BankName", BankName),
+                                                  new SqlParameter("@BankBranch", BankBranch)
+
+
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
+            return ds;
+        }
+    }
+    public class TopupResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
 }

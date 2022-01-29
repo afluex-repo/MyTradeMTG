@@ -17,6 +17,7 @@ namespace MyTrade.Controllers
         }
         public ActionResult Login()
         {
+            Session.Abandon();
             return View();
         }
         public ActionResult LoginAction(Home obj)
@@ -119,8 +120,15 @@ namespace MyTrade.Controllers
 
 
         }
-        public ActionResult Registration()
+        public ActionResult Registration(string PId)
         {
+            Home obj = new Home();
+            if (!string.IsNullOrEmpty(PId))
+            {
+                var d = Crypto.Decrypt(PId);
+                ViewBag.SponsorId = d.Split('|')[0];
+                ViewBag.Leg = d.Split('|')[1];
+            }
             return View();
         }
 
@@ -211,5 +219,23 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+        #region Menu
+        public virtual ActionResult Menu()
+        {
+            Home Menu = null;
+
+            if (Session["_Menu"] != null)
+            {
+                Menu = (Home)Session["_Menu"];
+            }
+            else
+            {
+
+                Menu = Home.GetMenus(Session["Pk_AdminId"].ToString(), Session["UserTypeName"].ToString()); // pass employee id here
+                Session["_Menu"] = Menu;
+            }
+            return PartialView("_Menu", Menu);
+        }
+        #endregion
     }
 }

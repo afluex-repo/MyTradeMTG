@@ -66,6 +66,35 @@ namespace MyTrade.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string DirectIncome { get; set; }
+        public DataSet BlockAssociate()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                  new SqlParameter("@BlockedBy", UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("BlockAssociate", para);
+            return ds;
+        }
+        public DataSet UnblockAssociate()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                  new SqlParameter("@BlockedBy", UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("UnblockAssociate", para);
+            return ds;
+        }
+        public DataSet DeactivateUserByAdmin()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId),
+                                   new SqlParameter("@UpdatedBy", UpdatedBy) };
+            DataSet ds = DBHelper.ExecuteQuery("DeactivateUser", para);
+            return ds;
+        }
+        public DataSet ActivateUserByAdmin()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserID", Fk_UserId),
+                                    new SqlParameter("@FK_ProductID", ProductID),
+                                    new SqlParameter("@UpdatedBy", UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUserByAdmin", para);
+            return ds;
+        }
 
     }
 }

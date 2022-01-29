@@ -19,7 +19,7 @@ namespace MyTrade.Controllers
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
+            List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
 
             Reports model = new Reports();
@@ -82,7 +82,7 @@ namespace MyTrade.Controllers
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
+            List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
             return View(model);
         }
@@ -92,7 +92,7 @@ namespace MyTrade.Controllers
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
+            List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
 
             Reports model = new Reports();
@@ -152,7 +152,7 @@ namespace MyTrade.Controllers
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
-            List<SelectListItem> Leg = Common.Leg();
+            List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
             return View(model);
         }

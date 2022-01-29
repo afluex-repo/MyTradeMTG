@@ -352,34 +352,32 @@
     <Content Include="plugins\tagInput\tags-input.css" />
     <Content Include="plugins\tagInput\tags-input.js" />
     <Content Include="plugins\treeview\custom-jstree.js" />
+    <Content Include="TreeIcon\default.png" />
+    <Content Include="TreeIcon\girl-active.png" />
+    <Content Include="TreeIcon\girl-active1.png" />
+    <Content Include="TreeIcon\girl-block.png" />
+    <Content Include="TreeIcon\girl-block1.png" />
+    <Content Include="TreeIcon\girl-inactive.png" />
+    <Content Include="TreeIcon\girl-inactive1.png" />
+    <Content Include="TreeIcon\men-active.png" />
+    <Content Include="TreeIcon\men-active1.png" />
+    <Content Include="TreeIcon\men-block.png" />
+    <Content Include="TreeIcon\men-block1.png" />
+    <Content Include="TreeIcon\men-inactive.png" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
-    <Content Include="WebsiteCss\js\appear.js" />
-    <Content Include="WebsiteCss\js\bootstrap.min.js" />
-    <Content Include="WebsiteCss\js\color-settings.js" />
-    <Content Include="WebsiteCss\js\jquery-ui.js" />
-    <Content Include="WebsiteCss\js\jquery.bootstrap-touchspin.js" />
-    <Content Include="WebsiteCss\js\jquery.countdown.js" />
-    <Content Include="WebsiteCss\js\jquery.fancybox.js" />
-    <Content Include="WebsiteCss\js\jquery.js" />
-    <Content Include="WebsiteCss\js\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="WebsiteCss\js\main.js" />
-    <Content Include="WebsiteCss\js\map-script.js" />
-    <Content Include="WebsiteCss\js\mixitup.js" />
-    <Content Include="WebsiteCss\js\owl.js" />
-    <Content Include="WebsiteCss\js\popper.min.js" />
-    <Content Include="WebsiteCss\js\script.js" />
-    <Content Include="WebsiteCss\js\util.js" />
-    <Content Include="WebsiteCss\js\validate.js" />
-    <Content Include="WebsiteCss\js\wow.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminReportsController.cs" />
     <Compile Include="Controllers\DownlineController.cs" />
+    <Compile Include="Controllers\EmployeeRegistrationController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\PermisssionsController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -397,6 +395,7 @@
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminReports.cs" />
     <Compile Include="Models\AgentIncomes.cs" />
     <Compile Include="Models\AgentModel.cs" />
     <Compile Include="Models\AgentPara.cs" />
@@ -408,7 +407,10 @@
     <Compile Include="Models\DAL\ReturnData.cs" />
     <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\EmployeeRegistrations.cs" />
     <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Tree.cs" />
@@ -438,6 +440,7 @@
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400.woff" />
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400.woff2" />
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400d41d.eot" />
+    <Content Include="Models\WebService\AgentServices.asmx.bak" />
     <None Include="Properties\PublishProfiles\MyTrade.pubxml" />
     <Content Include="Views\Home\CompleteRegistration.cshtml" />
     <Content Include="Views\User\ActivateByPin.cshtml" />
@@ -448,9 +451,15 @@
     <Content Include="Views\User\BinaryTree.cshtml" />
     <Content Include="Views\User\PinList.cshtml" />
     <Content Include="Views\User\Tree.cshtml" />
+    <Content Include="Views\AdminReports\AssociateList.cshtml" />
+    <Content Include="Views\AdminReports\TopupReport.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeRegistration.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmployeeDetails.cshtml" />
+    <Content Include="Views\Permisssions\SetPermission.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Downline\AssociateTree.cshtml" />
     <Content Include="Views\Downline\DirectList.cshtml" />
     <Content Include="Views\Downline\DownLineList.cshtml" />
-    <Content Include="Views\Downline\AssociateTree.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -461,6 +470,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\API\" />
+    <Folder Include="Views\Master\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <PropertyGroup>

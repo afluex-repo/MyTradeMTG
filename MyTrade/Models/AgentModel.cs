@@ -10,7 +10,6 @@ namespace MyTrade.Models
         public string AllBusinessLeft { get; set; }
         public string AllBusinessRight { get; set; }
         public string Fk_UserId { get; set; }
-        public string SessionPkId { get; set; }
         public string SessionId { get; set; }
         public string ParentId { get; set; }
         public string prefixText { get; set; }

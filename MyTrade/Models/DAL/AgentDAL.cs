@@ -15,7 +15,7 @@ namespace MyTrade.DAL
         {
             SqlParameter[] para ={
                                     new SqlParameter("@headID",Obj.Fk_UserId),
-                                    new SqlParameter("@SessionPkId",Obj.SessionPkId)
+                                    //new SqlParameter("@SessionPkId",Obj.SessionPkId)
                                 };
             DBHelper db = new DBHelper();
             DataSet ds = DBHelper.ExecuteQuery("GetTreeMembers", para);

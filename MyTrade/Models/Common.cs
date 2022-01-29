@@ -27,6 +27,7 @@ namespace MyTrade.Models
         public string BankName { get; set; }
         public string BranchName { get; set; }
         public string Package { get; set; }
+        public string Leg { get; set; }
         public static string GenerateRandom()
         {
             Random r = new Random();
@@ -87,12 +88,21 @@ namespace MyTrade.Models
         }
         public static List<SelectListItem> LegType()
         {
-            List<SelectListItem> Leg = new List<SelectListItem>();
-            Leg.Add(new SelectListItem { Text = "All", Value = null });
-            Leg.Add(new SelectListItem { Text = "Left", Value = "L" });
-            Leg.Add(new SelectListItem { Text = "Right", Value = "R" });
+            List<SelectListItem> LegType = new List<SelectListItem>();
+            LegType.Add(new SelectListItem { Text = "All", Value = null });
+            LegType.Add(new SelectListItem { Text = "Left", Value = "L" });
+            LegType.Add(new SelectListItem { Text = "Right", Value = "R" });
 
-            return Leg;
+            return LegType;
+        }
+        public static List<SelectListItem> BindTopupStatus()
+        {
+            List<SelectListItem> IncomeStatus = new List<SelectListItem>();
+            IncomeStatus.Add(new SelectListItem { Text = "All", Value = null });
+            IncomeStatus.Add(new SelectListItem { Text = "Calculated", Value = "1" });
+            IncomeStatus.Add(new SelectListItem { Text = "Pending", Value = "0" });
+
+            return IncomeStatus;
         }
         public DataSet GetMemberDetails()
         {
@@ -144,14 +154,21 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
             return ds;
         }
-        public static List<SelectListItem> Leg()
+        public DataSet BindUserTypeForRegistration()
         {
-            List<SelectListItem> Leg = new List<SelectListItem>();
-            Leg.Add(new SelectListItem { Text = "All", Value = null });
-            Leg.Add(new SelectListItem { Text = "Left", Value = "L" });
-            Leg.Add(new SelectListItem { Text = "Right", Value = "R" });
 
-            return Leg;
+            DataSet ds = DBHelper.ExecuteQuery("GetUserTypeForRegistration");
+
+            return ds;
+
+        }
+        public DataSet BindFormTypeMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@Parameter", 4) };
+            DataSet ds = DBHelper.ExecuteQuery("FormTypeMasterManage", para);
+
+            return ds;
+
         }
     }
 }

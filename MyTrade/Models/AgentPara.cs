@@ -355,7 +355,7 @@ namespace MyTrade.Models.DAL
         public string SGST { get; set; }
         public string IGST { get; set; }
 
-      
+
 
     }
 
