@@ -170,5 +170,13 @@ namespace MyTrade.Models
             return ds;
 
         }
+        public DataSet GetWalletBalance()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_USerID", Fk_UserId) };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletBalance", para);
+
+            return ds;
+
+        }
     }
 }

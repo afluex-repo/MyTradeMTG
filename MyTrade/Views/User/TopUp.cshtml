@@ -6,60 +6,66 @@
 
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-<div class="container">
-    <div class="row layout-top-spacing">
-        <div class="col-lg-12 col-12 layout-spacing">
-            <div class="statbox widget box box-shadow">
-                <div class="widget-header">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                            <h4>Top-Up</h4>
-                            <span class="text-danger">
-                                @TempData["TopUp"]
-                            </span>
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Top-Up</h4>
+                                <span class="text-danger">
+                                    @TempData["TopUp"]
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="widget-content widget-content-area">
-                    <div class="row mb-4">
-                        <div class="col-md-4">
-                            <label for="LoginId">LoginId</label>
-                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @disabled = "disabled" })
-                            <p class="text-success" id="spName"></p>
+                    <div class="widget-content widget-content-area">
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="Package">Package</label>
-                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
-                            <p class="text-success" id="spName"></p>
-                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="LoginId">LoginId</label>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @disabled = "disabled" })
+                                <p class="text-success" id="spName"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Package <span style="color:red">*</span></label>
+                                @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
+                                <p class="text-success" id="spName"></p>
+                            </div>
 
-                        <div class="col-md-4">
-                            <label for="Amount">Amount</label>
-                            <label style="color:red;font-weight:bold">1000 * </label>
-                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CalculateAmount();" })
-                        </div>
+                            <div class="col-md-4">
 
+                                <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
+                                <label for="Amount">Amount <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
+                            </div>
+
+                        </div>
+                        <div class="row mb-4">
+                            @*<div class="col-md-4">
+                                    <label for="Amount">Total Amount</label>
+                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Amount", @readonly = "true" })
+                                </div>*@
+                            <div class="col-md-4">
+                                <label for="TopUpDate">Top-Up Date <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @placeholder = "dd/mm/yy" })
+                            </div>
+                            <div class="col-md-8">
+                                <label for="Remarks">Remarks</label>
+                                @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @placeholder = "Remarks" })
+                            </div>
+                        </div>
+                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" onclick="return ValidateForm();" />
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-md-4">
-                            <label for="Amount">Total Amount</label>
-                            @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Amount", @readonly = "true" })
-                        </div>
-                        <div class="col-md-4">
-                            <label for="NoofPins">Top-Up Date</label>
-                            @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @placeholder = "dd/mm/yy" })
-                        </div>
-                        <div class="col-md-4">
-                            <label for="FinalAmount">Remarks</label>
-                            @Html.TextBoxFor(m => m.Remarks, new { @class = "form-control", @placeholder = "Remarks" })
-                        </div>
-                    </div>
-                    <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" />
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
@@ -87,6 +93,49 @@
         if (charCode != 46 && charCode > 31
           && (charCode < 48 || charCode > 57))
             return false;
+        return true;
+    }
+    function CheckAmount() {
+        debugger;
+        var Amount = $("#Amount").val();
+        var WalletBalance = $("#WalletAmount").val();
+        if (Amount != null && Amount != "" && Amount != "0") {
+            if (parseInt(Amount) % 1000 == 0) {
+                if (parseInt(Amount) > parseInt(WalletBalance)) {
+                    alert('Insufficient Amount');
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    $("#Amount").val('');
+                    return false;
+                }
+            }
+            else {
+                alert('Invalid Amount');
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                $("#Amount").val('');
+                return false;
+            }
+        }
+        return true;
+    }
+    function ValidateForm() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        if ($('#PackageId').val() == '0') {
+            $("#PackageId").addClass('errortext');
+            $('#PackageId').focus();
+            return false;
+        }
+        if ($('#TopUpDate').val() == '') {
+            $("#TopUpDate").addClass('errortext');
+            $('#TopUpDate').focus();
+            return false;
+        }
         return true;
     }
 </script>
