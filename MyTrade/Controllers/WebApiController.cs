@@ -421,5 +421,57 @@ namespace MyTrade.Controllers
             }
         }
         #endregion
+        #region getPaymentMode
+        public ActionResult GetPaymentMode()
+        {
+            List<PaymentMode> lst = new List<PaymentMode>();
+            PaymentModeResponse obj = new PaymentModeResponse();
+            DataSet ds = obj.PaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    PaymentMode model = new PaymentMode();
+                    model.PK_PaymentModeId = r["PK_paymentID"].ToString();
+                    model.PaymentModeName = r["PaymentMode"].ToString();
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        public ActionResult GetPackage()
+        {
+            List<Package> lst = new List<Package>();
+            PackageResponse obj = new PackageResponse();
+            DataSet ds = obj.PackageList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Package model = new Package();
+                    model.PK_PackageId = r["Pk_ProductId"].ToString();
+                    model.PackageName = r["ProductName"].ToString();
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
     }
 }
