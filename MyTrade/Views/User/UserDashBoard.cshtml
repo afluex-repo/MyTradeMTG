@@ -4,7 +4,25 @@
         ViewBag.Title = "UserDashBoard";
         Layout = "~/Views/Shared/_UserLayout.cshtml";
     }
-
+<style>
+    .referral{
+        font-weight: 600;
+        color: #ff0000;
+        font-size: 23px;
+        letter-spacing: 0;
+        }
+    .referral-url {
+    background-color: #f5e2e2;
+    padding: 5px 20px;
+    border: 1px solid red;
+    border-radius: 20px;
+}
+    @@media only screen and (min-width: 1200px){
+        .referral-url {
+            width: 600px;
+        }
+    }
+</style>
 
     <div class="layout-px-spacing">
         <div class="row layout-top-spacing">
@@ -96,23 +114,29 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <h2><u>Referral Link</u></h2>
-        </div>
-        <div class="row">
-            <div class="col-xl-1 col-lg-6 col-md-6 col-sm-12 col-12">
-                <b>Left:</b>
+        <div class="card">
+            <div class="card-body">
+                    <h6 class="referral"><u>Referral Link</u></h6>
+                <div class="row m-2">
+                    <div class="col-xl-1 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <h6><b>Left:</b></h6>
+                    </div>
+                    <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="referral-url">
+                            <a target="_blank" style="font-size: 14px;" href="http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"]+"|L")">http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"] + "|L")</a>
+                        </div>
+                        </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-xl-1 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <h6><b>Right:</b></h6>
+                    </div>
+                    <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="referral-url">
+                            <a target="_blank" style="font-size: 14px;" href="http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"]+"|R")">http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"] + "|R")</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
             </div>
-            <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
-                <a target="_blank" style="font-size: 14px;" href="http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"]+"|L")">http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"] + "|L")</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-1 col-lg-6 col-md-6 col-sm-12 col-12">
-                <b>Right:</b>
-            </div>
-            <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
-                <a target="_blank" style="font-size: 14px;" href="http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"]+"|R")">http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"] + "|R")</a>
-            </div>
-        </div>
     </div>

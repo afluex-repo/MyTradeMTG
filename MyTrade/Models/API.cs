@@ -295,4 +295,28 @@ namespace MyTrade.Models
             return ds;
         }
     }
+    public class Direct
+    {
+        public string FK_UserId { get; set; }
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string FK_SponosrId { get; set; }
+    }
+    public class DirectResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<Package> lst { get; set; }
+        public string FK_SUerId { get; set; }
+        public DataSet Direct()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@FK_USerId", FK_USerId),
+
+
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetDirectList",para);
+            return ds;
+        }
+    }
 }

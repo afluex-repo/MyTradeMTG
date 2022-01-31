@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">MobileNo</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo" })
+                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @onkeypress = "return isNumberKey(event);" })
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -186,6 +186,13 @@
                     }
                 }
             })
+        }
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
         }
         function confirmregistration() {
             $(".errortext").removeClass("errortext");
