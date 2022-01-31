@@ -307,7 +307,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public List<Package> lst { get; set; }
-        public string FK_SUerId { get; set; }
+        public string FK_USerId { get; set; }
         public DataSet Direct()
         {
             SqlParameter[] para = {
