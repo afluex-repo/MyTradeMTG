@@ -59,7 +59,8 @@ namespace MyTrade.Controllers
                     }
 
                 }
-                else {
+                else
+                {
                     FormName = "CompleteRegistration";
                     Controller = "Home";
                 }
@@ -110,7 +111,14 @@ namespace MyTrade.Controllers
             }
             ViewBag.ddlProduct = ddlProduct;
             #endregion
-           
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = objcomm.GetWalletBalance();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -186,7 +194,7 @@ namespace MyTrade.Controllers
             DataSet ds = model.GetPinList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                foreach(DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Pin obj = new Pin();
                     obj.ePinNo = r["ePinNo"].ToString();

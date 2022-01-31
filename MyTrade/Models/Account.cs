@@ -29,7 +29,7 @@ namespace MyTrade.Models
                                         new SqlParameter("@AddedBy", AddedBy),
                                         new SqlParameter("@Fk_ProductId",PackageId),
                                         new SqlParameter("@TopupDate", TopUpDate),
-                                        new SqlParameter("@Amount", TotalAmount),
+                                        new SqlParameter("@Amount", Amount),
                                         new SqlParameter("@Description", Remarks)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);

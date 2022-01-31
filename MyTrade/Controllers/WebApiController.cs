@@ -474,5 +474,30 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult DirectList()
+        {
+            List<Direct> lst = new List<Direct>();
+            DirectResponse obj = new DirectResponse();
+            DataSet ds = obj.Direct();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    //Direct model = new Direct();
+                    //model.PK_PackageId = r["Pk_ProductId"].ToString();
+                    //model.PackageName = r["ProductName"].ToString();
+                    //lst.Add(model);
+                }
+                //obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
     }
 }
