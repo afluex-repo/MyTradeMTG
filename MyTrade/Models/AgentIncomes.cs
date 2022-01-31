@@ -19,6 +19,6 @@ namespace MyTrade.Models
         public string programme { get; set; }
         public string GrossTotal { get; set; }
 
-      
+
     }
 }

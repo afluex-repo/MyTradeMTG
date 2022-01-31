@@ -23,31 +23,35 @@
     <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/forms/switches.css">
     <style>
-     .form-form-wrap {
-    max-width: 745px;
-    margin: 29px auto;
-    min-width: 745px;
-    min-height: 100%;
-    align-self: center;
-    width: 100%;
-    height: 100vh;
-    justify-content: center; 
-}
-     .field-wrapper{
-         width:100%;
-     }
- 
-  .errortext {
-        border: 2px solid red !important;
-        background-color: #ffd3c6 !important;
-    }
-body.form { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23e6e6e6'/%3E%3Cstop offset='1' stop-color='%23eaf1ff'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%234361ee' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%234361ee' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.5'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: cover;
-background-color: #ffffff;}
+        .form-form-wrap {
+            max-width: 745px;
+            margin: 29px auto;
+            min-width: 745px;
+            min-height: 100%;
+            align-self: center;
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        .field-wrapper {
+            width: 100%;
+        }
+
+        .errortext {
+            border: 2px solid red !important;
+            background-color: #ffd3c6 !important;
+        }
+
+        body.form {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23e6e6e6'/%3E%3Cstop offset='1' stop-color='%23eaf1ff'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%234361ee' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%234361ee' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.5'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #ffffff;
+        }
     </style>
 </head>
-<body  class="form">
+<body class="form">
     <div class="form-container outer">
         <div class="form-form">
             <div class="form-form-wrap">
@@ -58,43 +62,57 @@ background-color: #ffffff;}
                         <form class="text-left needs-validation" novalidate action="javascript:void(0);">
                             <div class="form">
                                 <div class="form-row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="SponsorId">SponsorId </label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);",@required=true })
-                                        @Html.ValidationMessageFor(m => m.LoginId)
-                                      
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="SponsorName">Sponsor name</label>
-                                        @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
-                                        <div class="invalid-tooltip">
+                                    @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
+                                    {
+                                    <h5 style="color: black; font-size: 14px;">Congratulations! For joining us under sponsor code: @ViewBag.SponsorId</h5>
+
+                                    <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6 mb-2">
+                                            <label for="SponsorId">SponsorId </label> <span class="text-danger">*</span>
+                                            @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @Placeholder = "Refer By", @onchange = "getsponsordetails(this);", @required = true })
+                                            @Html.ValidationMessageFor(m => m.LoginId)
+
                                         </div>
-                                    
-                                    </div>
-                                    
+                                        <div class="col-md-6 mb-2">
+                                            <label for="SponsorName">Sponsor name</label>
+                                            @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true" })
+                                            <div class="invalid-tooltip">
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="validationTooltipUsername">Leg</label> <span class="text-danger">*</span>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="form-check form-check-inline">
-                                                    &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
-                                                    <label for="inlineRadio1" class="pt-2 pl-2">Left</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
-                                                    <label for="inlineRadio2" class="pt-2 pl-2">Right</label>
+                                    @if (ViewBag.Leg != null && ViewBag.Leg != "")
+                                    {
+                                        <input type="hidden" value="@ViewBag.Leg" id="Leg" name="Leg" />
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6 mb-2">
+                                            <label for="validationTooltipUsername">Leg</label> <span class="text-danger">*</span>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="form-check form-check-inline">
+                                                        &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                                        <label for="inlineRadio1" class="pt-2 pl-2">Left</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                                        <label for="inlineRadio2" class="pt-2 pl-2">Right</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                     <div class="col-md-6 mb-2">
                                         <label for="FirstName">First Name</label> <span class="text-danger">*</span>
-                                     @Html.TextBoxFor(m=>m.FirstName,new {@class="form-control",@placeholder="First Name", @required = true })
-                                     
+                                        @Html.TextBoxFor(m=>m.FirstName,new {@class="form-control",@placeholder="First Name", @required = true })
+
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-2">
@@ -123,11 +141,11 @@ background-color: #ffffff;}
                                     </div>
                                 </div>
                                 <div class="d-sm-flex justify-content-between">
-                              
-                                        <input type="button" id="Confirm" onclick="return confirmregistration();" class="btn btn-outline-success mb-2" name="Confirm" value="Confirm" />
-                                        <input type="button" id="Register" onclick="return saveregistration();" class="btn btn-outline-info mb-2" style="display:none" name="Register" value="Register" />
-                                        <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-secondary mb-2" name="Edit" value="Edit" />
-                                
+
+                                    <input type="button" id="Confirm" onclick="return confirmregistration();" class="btn btn-outline-success mb-2" name="Confirm" value="Confirm" />
+                                    <input type="button" id="Register" onclick="return saveregistration();" class="btn btn-outline-info mb-2" style="display:none" name="Register" value="Register" />
+                                    <input type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-secondary mb-2" name="Edit" value="Edit" />
+
                                 </div>
                             </div>
                         </form>
@@ -159,7 +177,7 @@ background-color: #ffffff;}
                         $('#SponsorName').val(response.DisplayName);
                     }
                     else {
-                      
+
                         $("#SponsorId").addClass('errortext');
                         $('#SponsorName').val('');
                         $('#SponsorId').val('');
@@ -221,7 +239,7 @@ background-color: #ffffff;}
                 url: "/Home/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(),PinCode: $("#PinCode").val(), Leg: Leg },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
@@ -271,7 +289,7 @@ background-color: #ffffff;}
             return true;
         }
     </script>
-   
+
 </body>
 
 <!-- Mirrored from designreset.com/cork/ltr/demo4/auth_register_boxed.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Sep 2021 04:25:50 GMT -->

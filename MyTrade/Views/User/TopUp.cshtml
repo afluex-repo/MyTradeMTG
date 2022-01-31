@@ -43,7 +43,7 @@
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <label for="Amount">Total Amount</label>
-                            @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Amount", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Amount", @readonly = "true" })
                         </div>
                         <div class="col-md-4">
                             <label for="NoofPins">Top-Up Date</label>
@@ -52,30 +52,6 @@
                         <div class="col-md-4">
                             <label for="FinalAmount">Remarks</label>
                             @Html.TextBoxFor(m => m.Remarks, new { @class = "form-control", @placeholder = "Remarks" })
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-md-4">
-                            <label for="Fk_Paymentid">Payment Mode</label>
-                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
-                        </div>
-                    </div>
-                    <div class="row mb-4" style="display:none" id="divPaymentMode">
-                        <div class="col-md-3" id="divtransactiono">
-                            <label for="TransactionNo" id="lbltno">Transaction No</label>
-                            @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
-                        </div>
-                        <div class="col-md-3" id="divtrdate">
-                            <label for="TransactionDate" id="lbltdate">TransactionDate</label>
-                            @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
-                        </div>
-                        <div class="col-md-3" id="divbankname">
-                            <label for="BankName" id="lblbank">Bank Name</label>
-                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
-                        </div>
-                        <div class="col-md-3" id="divbankbranch">
-                            <label for="BranchName" id="lbltbranch">Branch Name</label>
-                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Branch Name" })
                         </div>
                     </div>
                     <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" />
@@ -99,8 +75,12 @@
     //});
     $(function () {
         var $j = jQuery.noConflict();
-        $("#TopUpDate").datepicker();
-        $("#TransactionDate").datepicker();
+        $("#TopUpDate").datepicker({
+            dateFormat: 'dd/mm/yy',
+        });
+        $("#TransactionDate").datepicker({
+            dateFormat: 'dd/mm/yy',
+        });
     });
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -108,139 +88,5 @@
           && (charCode < 48 || charCode > 57))
             return false;
         return true;
-    }
-    function CheckPayMode() {
-        debugger;
-        if ($('#PaymentMode').val() == '2') {
-            $('#lbltno').html('Cheque No.');
-            $('#lbltdate').html('Cheque Date');
-            $("#divtrdate").show();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").show();
-            $("#divbankbranch").show();
-            $("#TransactionNo").attr("placeholder", "Cheque No.");
-            $("#TransactionDate").attr("placeholder", "Cheque Date");
-        }
-        else if ($('#PaymentMode').val() == '3') {
-            $('#lbltno').html('NEFT No.');
-            $('#lbltdate').text('NEFT Date.');
-            $("#divPaymentMode").show();
-            $("#divtrdate").show();
-            $("#divtransactiono").show();
-            $("#divbankname").show();
-            $("#divbankbranch").show();
-            $("#TransactionNo").attr("placeholder", "NEFT No.");
-            $("#TransactionDate").attr("placeholder", "NEFT Date");
-        }
-        else if ($('#PaymentMode').val() == '4') {
-            $('#lbltdate').html('DD Date');
-            $('#lbltno').text('DD No.');
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divtrdate").show();
-            $("#divbankname").show();
-            $("#divbankbranch").show();
-            $("#TransactionNo").attr("placeholder", "DD No.");
-            $("#TransactionDate").attr("placeholder", "DD Date");
-        }
-        else if ($('#PaymentMode').val() == '5') {
-            $('#lbltdate').html('RTGS Date');
-            $('#lbltno').text('RTGS No.');
-            $("#divtrdate").show();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").show();
-            $("#divbankbranch").show();
-            $("#TransactionNo").attr("placeholder", "RTGS No.");
-            $("#TransactionDate").attr("placeholder", "RTGS Date");
-        }
-        else if ($('#PaymentMode').val() == '6') {
-            $('#lbltdate').html('IMPS Date');
-            $('#lbltno').text('IMPS No.');
-            $("#divtrdate").show();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").show();
-            $("#divbankbranch").show();
-            $("#TransactionNo").attr("placeholder", "IMPS No.");
-            $("#TransactionDate").attr("placeholder", "IMPS Date");
-        }
-        else if ($('#PaymentMode').val() == '7') {
-            $('#lbltno').text('Mobile No./UPI ID');
-            $("#divtrdate").hide();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").hide();
-            $("#divbankbranch").hide();
-            $("#TransactionNo").attr("placeholder", "Mobile No. / UPI ID");
-            $("#TransactionDate").val('');
-            $("#BankName").val('');
-            $("#BranchName").val('');
-        }
-        else if ($('#PaymentMode').val() == '8') {
-            $('#lbltno').text('Mobile No./UPI ID');
-            $("#divtrdate").hide();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").hide();
-            $("#divbankbranch").hide();
-            $("#TransactionNo").attr("placeholder", "Mobile No. / UPI ID");
-            $("#TransactionDate").val('');
-            $("#BankName").val('');
-            $("#BranchName").val('');
-        }
-        else if ($('#PaymentMode').val() == '9') {
-            $('#lbltno').text('Mobile No./UPI ID');
-            $("#divtrdate").hide();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").hide();
-            $("#divbankbranch").hide();
-            $("#TransactionNo").attr("placeholder", "Mobile No. / UPI ID");
-            $("#TransactionDate").val('');
-            $("#BankName").val('');
-            $("#BranchName").val('');
-        }
-        else if ($('#PaymentMode').val() == '10') {
-            $('#lbltno').text('Mobile No./UPI ID');
-            $("#divtrdate").hide();
-            $("#divPaymentMode").show();
-            $("#divtransactiono").show();
-            $("#divbankname").hide();
-            $("#divbankbranch").hide();
-            $("#TransactionNo").attr("placeholder", "Mobile No. / UPI ID");
-            $("#TransactionDate").val('');
-            $("#BankName").val('');
-            $("#BranchName").val('');
-        }
-        else {
-            $("#divPaymentMode").hide();
-            $("#divtransactiono").hide();
-            $("#divbankname").hide();
-            $("#divbankbranch").hide();
-            $("#divtrdate").hide();
-        }
-    }
-
-    //function FillAmount() {
-    //    var Productid = "";
-    //    Productid = $('#PackageId').val();
-    //    $.ajax({
-    //        url: "/User/FillAmount",
-    //        Type: "Get",
-    //        DataType: "JSON",
-    //        data: { Productid: Productid },
-    //        success: function (data) {
-    //            debugger;
-    //            $('#Amount').val(data.Amount);
-    //        }
-    //    });
-    //}
-    function CalculateAmount() {
-        debugger;
-        var no = $("#Amount").val();
-        var Total = parseFloat(no) * 1000;
-        $("#TotalAmount").val(Total);
     }
 </script>
