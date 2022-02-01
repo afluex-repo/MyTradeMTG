@@ -44,21 +44,6 @@
                                 <label for="Amount">Amount <span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
                             </div>
-
-                        </div>
-                        <div class="row mb-4">
-                            @*<div class="col-md-4">
-                                    <label for="Amount">Total Amount</label>
-                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Amount", @readonly = "true" })
-                                </div>*@
-                            <div class="col-md-4">
-                                <label for="TopUpDate">Top-Up Date <span style="color:red">*</span></label>
-                                @Html.TextBoxFor(m => m.TopUpDate, new { @class = "form-control", @placeholder = "dd/mm/yy" })
-                            </div>
-                            <div class="col-md-8">
-                                <label for="Remarks">Remarks</label>
-                                @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", @placeholder = "Remarks" })
-                            </div>
                         </div>
                         <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" onclick="return ValidateForm();" />
                     </div>
@@ -79,15 +64,15 @@
     //        dateFormat: 'dd/mm/yy',
     //    });
     //});
-    $(function () {
-        var $j = jQuery.noConflict();
-        $("#TopUpDate").datepicker({
-            dateFormat: 'dd/mm/yy',
-        });
-        $("#TransactionDate").datepicker({
-            dateFormat: 'dd/mm/yy',
-        });
-    });
+    //$(function () {
+    //    var $j = jQuery.noConflict();
+    //    $("#TopUpDate").datepicker({
+    //        dateFormat: 'dd/mm/yy',
+    //    });
+    //    $("#TransactionDate").datepicker({
+    //        dateFormat: 'dd/mm/yy',
+    //    });
+    //});
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -129,11 +114,6 @@
         if ($('#PackageId').val() == '0') {
             $("#PackageId").addClass('errortext');
             $('#PackageId').focus();
-            return false;
-        }
-        if ($('#TopUpDate').val() == '') {
-            $("#TopUpDate").addClass('errortext');
-            $('#TopUpDate').focus();
             return false;
         }
         return true;

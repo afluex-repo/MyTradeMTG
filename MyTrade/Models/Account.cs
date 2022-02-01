@@ -26,11 +26,9 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId),
-                                        new SqlParameter("@AddedBy", AddedBy),
+                                        new SqlParameter("@AddedBy", FK_UserId),
                                         new SqlParameter("@Fk_ProductId",PackageId),
-                                        new SqlParameter("@TopupDate", TopUpDate),
-                                        new SqlParameter("@Amount", Amount),
-                                        new SqlParameter("@Description", Remarks)
+                                        new SqlParameter("@Amount", Amount)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
             return ds;
