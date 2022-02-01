@@ -64,9 +64,9 @@
                                 <div class="form-row">
                                     @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
                                     {
-                                    <h5 style="color: black; font-size: 14px;">Congratulations! For joining us under sponsor code: @ViewBag.SponsorId</h5>
+                                        <h5 style="color: black; font-size: 14px;">Congratulations! For joining us under sponsor code: @ViewBag.SponsorId</h5>
 
-                                    <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
+                                        <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
                                     }
                                     else
                                     {
@@ -85,57 +85,58 @@
                                     }
                                 </div>
                                 <div class="form-row">
-                                    @if (ViewBag.Leg != null && ViewBag.Leg != "")
-                                    {
-                                        <input type="hidden" value="@ViewBag.Leg" id="Leg" name="Leg" />
-                                    }
-                                    else
-                                    {
-                                        <div class="col-md-6 mb-2">
-                                            <label for="validationTooltipUsername">Leg</label> <span class="text-danger">*</span>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="form-check form-check-inline">
-                                                        &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
-                                                        <label for="inlineRadio1" class="pt-2 pl-2">Left</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
-                                                        <label for="inlineRadio2" class="pt-2 pl-2">Right</label>
+                                    @*@if (ViewBag.Leg != null && ViewBag.Leg != "")
+                                        {
+                                            <input type="hidden" value="@ViewBag.Leg" id="Leg" name="Leg" />
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6 mb-2">
+                                                <label for="validationTooltipUsername">Leg</label> <span class="text-danger">*</span>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="form-check form-check-inline">
+                                                            &nbsp;<input type="radio" value="Left" @ViewBag.LeftChecked id="left" name="Leg" />
+                                                            <label for="inlineRadio1" class="pt-2 pl-2">Left</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" value="Right" id="right" name="Leg" @ViewBag.RightChecked />
+                                                            <label for="inlineRadio2" class="pt-2 pl-2">Right</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    }
+                                        }*@
                                     <div class="col-md-6 mb-2">
                                         <label for="FirstName">First Name</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m=>m.FirstName,new {@class="form-control",@placeholder="First Name", @required = true })
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name", @required = true })
 
                                     </div>
-
-                                </div>
-                                <div class="form-row">
                                     <div class="col-md-6 mb-2">
                                         <label for="LastName">Last Name</label>
                                         @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
 
                                     </div>
+                                </div>
+                                <div class="form-row">
+
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">MobileNo</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @onkeypress = "return isNumberKey(event);" })
+                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @onkeypress = "return isNumberKey(event);", @maxlength = "10" })
+                                    </div>
+                                    <div class="col-md-6 mb-5">
+                                        <label for="PinCode">PinCode</label>
+                                        @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return getstatecity()" })
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-4 mb-5">
-                                        <label for="PinCode">PinCode</label>
-                                        @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange="return getstatecity()" })
-                                    </div>
-                                    <div class="col-md-4 mb-5">
+
+                                    <div class="col-md-6 mb-5">
                                         <label for="City">City</label>
                                         @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @Disabled = "true" })
 
                                     </div>
-                                    <div class="col-md-4 mb-5">
+                                    <div class="col-md-6 mb-5">
                                         <label for="State">State</label>
                                         @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @Disabled = "true" })
                                     </div>

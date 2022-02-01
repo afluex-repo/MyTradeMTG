@@ -25,6 +25,16 @@ namespace MyTrade.Controllers
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Tr1Business = ds.Tables[1].Rows[0]["Tr1Business"].ToString();
+                if(ViewBag.Tr1Business== "")
+                {
+                    ViewBag.Tr1Business = 0;
+                }
+                ViewBag.Tr2Business = ds.Tables[1].Rows[0]["Tr2Business"].ToString();
             }
             return View(obj);
         }
@@ -128,9 +138,9 @@ namespace MyTrade.Controllers
             {
                 obj.LoginId = Session["LoginId"].ToString();
                 obj.AddedBy = Session["Pk_userId"].ToString();
-                obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
+                //  obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
                 //obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/mm/yyyy");
-                obj.AddedBy = Session["Pk_userId"].ToString();
+                obj.FK_UserId = Session["Pk_userId"].ToString();
                 DataSet ds = obj.TopUp();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

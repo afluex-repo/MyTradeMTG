@@ -49,7 +49,7 @@ namespace MyTrade.Models
         public string IsRegistered { get; set; }
         public string RegisteredTo { get; set; }
         public List<Pin> lst { get; set; }
-        public string ProductName { get; internal set; }
+        public string ProductName { get; set; }
 
         public DataSet GetPinList()
         {

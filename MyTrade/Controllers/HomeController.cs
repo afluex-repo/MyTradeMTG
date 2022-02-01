@@ -127,7 +127,7 @@ namespace MyTrade.Controllers
             {
                 var d = Crypto.Decrypt(PId);
                 ViewBag.SponsorId = d.Split('|')[0];
-                ViewBag.Leg = d.Split('|')[1];
+                //ViewBag.Leg = d.Split('|')[1];
             }
             return View();
         }
@@ -145,7 +145,7 @@ namespace MyTrade.Controllers
                 obj.MobileNo = MobileNo;
                 obj.RegistrationBy = "Web";
                 obj.PinCode = PinCode;
-                obj.Leg = Leg;
+                obj.Leg = null;
                 string password = Common.GenerateRandom();
                 obj.Password = Crypto.Encrypt(password);
                 DataSet ds = obj.Registration();
