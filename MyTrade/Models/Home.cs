@@ -31,6 +31,7 @@ namespace MyTrade.Models
         public string SubMenuId { get;  set; }
         public string SubMenuName { get;  set; }
         public string UserType { get;  set; }
+        public string ConfirmPassword { get; set; }
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
