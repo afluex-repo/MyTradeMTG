@@ -25,7 +25,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
-
+                ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
@@ -64,23 +64,23 @@ namespace MyTrade.Controllers
                     else
                     {
                         TempData["Activated"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "CompleteRegistration";
-                        Controller = "Home";
+                        FormName = "ActivateByPin";
+                        Controller = "User";
                     }
 
                 }
                 else
                 {
-                    FormName = "CompleteRegistration";
-                    Controller = "Home";
+                    FormName = "ActivateByPin";
+                    Controller = "User";
                 }
 
             }
             catch (Exception ex)
             {
                 TempData["Activated"] = ex.Message;
-                FormName = "CompleteRegistration";
-                Controller = "Home";
+                FormName = "ActivateByPin";
+                Controller = "User";
             }
             return RedirectToAction(FormName, Controller);
         }
@@ -109,6 +109,9 @@ namespace MyTrade.Controllers
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
+                ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
+                ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
+                ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)

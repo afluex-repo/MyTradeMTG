@@ -33,6 +33,7 @@ namespace MyTrade.Controllers
                 obj.Message = "Please Enter Mobile No";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
+
             //if (model.Leg == "" || model.Leg == null)
             //{
             //    obj.Status = "1";
@@ -42,14 +43,14 @@ namespace MyTrade.Controllers
             model.SponsorId = model.SponsorId;
             try
             {
-                string password = Common.GenerateRandom();
-                model.Password = Crypto.Encrypt(password);
                 model.RegistrationBy = "Mobile";
+                model.Password = Crypto.Encrypt(model.Password);
                 DataSet ds = model.Registration();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+                        obj.PK_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
                         obj.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         obj.FullName = ds.Tables[0].Rows[0]["Name"].ToString();
                         obj.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
@@ -60,6 +61,8 @@ namespace MyTrade.Controllers
                         obj.SponsorId = model.SponsorId;
                         obj.LastName = model.LastName;
                         obj.PinCode = model.PinCode;
+                        obj.Email = model.Email;
+                        obj.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                         obj.Status = "0";
                         obj.Message = "Registered Successfully";
                         return Json(obj, JsonRequestBehavior.AllowGet);
@@ -149,33 +152,24 @@ namespace MyTrade.Controllers
             }
             try
             {
+                model.Password = Crypto.Decrypt(model.Password);
                 DataSet dsResult = model.Login();
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         if ((dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
                         {
-                            if (model.Password == Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()))
-                            {
-
-                                obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
-                                obj.UserId = dsResult.Tables[0].Rows[0]["Pk_userId"].ToString();
-                                obj.UserType = dsResult.Tables[0].Rows[0]["UserType"].ToString();
-                                obj.FullName = dsResult.Tables[0].Rows[0]["FullName"].ToString();
-                                obj.Password = dsResult.Tables[0].Rows[0]["Password"].ToString();
-                                obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
-                                obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
-                                obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
-                                obj.Status = "0";
-                                obj.Message = "Successfully Logged in";
-
-                                return Json(obj, JsonRequestBehavior.AllowGet);
-
-                            }
-                            obj.Status = "1";
-                            obj.Message = "Incorrect LoginId Or Password";
+                            obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
+                            obj.UserId = dsResult.Tables[0].Rows[0]["Pk_userId"].ToString();
+                            obj.UserType = dsResult.Tables[0].Rows[0]["UserType"].ToString();
+                            obj.FullName = dsResult.Tables[0].Rows[0]["FullName"].ToString();
+                            obj.Password = Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString());
+                            obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
+                            obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
+                            obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
+                            obj.Status = "0";
+                            obj.Message = "Successfully Logged in";
                             return Json(obj, JsonRequestBehavior.AllowGet);
-
                         }
                         else if (dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
@@ -282,6 +276,7 @@ namespace MyTrade.Controllers
                 obj.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
                 obj.Status = "0";
                 obj.Message = "Data Fetched";
                 return Json(obj, JsonRequestBehavior.AllowGet);

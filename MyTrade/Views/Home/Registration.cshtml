@@ -121,22 +121,38 @@
                                 <div class="form-row">
 
                                     <div class="col-md-6 mb-2">
-                                        <label for="MobileNo">MobileNo</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @onkeypress = "return isNumberKey(event);", @maxlength = "10" })
+                                        <label for="MobileNo">Mobile No</label> <span class="text-danger">*</span>
+                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @maxlength = "10" })
                                     </div>
-                                    <div class="col-md-6 mb-5">
-                                        <label for="PinCode">PinCode</label>
-                                        @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return getstatecity()" })
+                                    <div class="col-md-6 mb-2">
+                                        <label for="Email">Email</label>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
                                     </div>
+
                                 </div>
                                 <div class="form-row">
 
-                                    <div class="col-md-6 mb-5">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="MobileNo">Password</label> <span class="text-danger">*</span>
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @onchange = "return checkPasswordComplexity();", @type = "Password" })
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="Email">Confirm Password</label>
+                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @onblur = "return validateConfPassword();", @type = "Password" })
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-5">
+                                        <label for="PinCode">PinCode</label>
+                                        @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return getstatecity()" })
+                                    </div>
+                                    <div class="col-md-4 mb-5">
                                         <label for="City">City</label>
                                         @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @Disabled = "true" })
 
                                     </div>
-                                    <div class="col-md-6 mb-5">
+                                    <div class="col-md-4 mb-5">
                                         <label for="State">State</label>
                                         @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @Disabled = "true" })
                                     </div>
@@ -212,11 +228,19 @@
                 $('#MobileNo').focus();
                 return false;
             }
+            if ($('#Password').val() == '') {
+                $("#Password").addClass('errortext');
+                $('#Password').focus();
+                return false;
+            }
             $("#MobileNo").attr("disabled", "disabled");
             $("#FirstName").attr("disabled", "disabled");
             $("#SponsorId").attr("disabled", "disabled");
             $("#LastName").attr("disabled", "disabled");
             $("#PinCode").attr("disabled", "disabled");
+            $("#Password").attr("disabled", "disabled");
+            $("#ConfirmPassword").attr("disabled", "disabled");
+            $("#Email").attr("disabled", "disabled");
             $('#Confirm').hide();
             $('#Edit').show();
             $('#Register').show();
@@ -228,6 +252,9 @@
             $("#SponsorId").attr("disabled", false);
             $("#LastName").attr("disabled", false);
             $("#PinCode").attr("disabled", false);
+            $("#Password").attr("disabled", false);
+            $("#ConfirmPassword").attr("disabled", false);
+            $("#Email").attr("disabled", false);
             $('#Confirm').show();
             $('#Edit').hide();
             $('#Register').hide();
@@ -247,7 +274,7 @@
                 url: "/Home/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val() },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
@@ -281,10 +308,7 @@
                         alert(data.Result);
 
                     }
-
-
                 }
-
             });
         }
         function isNumberKey(evt) {
@@ -295,6 +319,28 @@
                 return false;
 
             return true;
+        }
+        function checkPasswordComplexity(pwd) {
+            debugger;
+            var pwd = $("#Password").val();
+            var letter = /[a-zA-Z]/;
+            var number = /[0-9]/;
+            var valid = number.test(pwd) && letter.test(pwd); //match a letter _and_ a number
+            if (valid == false) {
+                alert('Password should be alpha numeric');
+            }
+        }
+        function validateConfPassword() {
+            var password = $('#Password').val();
+            var ConfirmPassword = $('#ConfirmPassword').val();
+            if (password != ConfirmPassword) {
+                $("#Password").addClass('errortext');
+                $("#ConfirmPassword").addClass('errortext');
+                $('#Password').val('');
+                $('#ConfirmPassword').val('');
+                alert("Password and Confirm Password are different")
+                return false;
+            }
         }
     </script>
 

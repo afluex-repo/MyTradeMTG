@@ -31,6 +31,7 @@ namespace MyTrade.Models
         public string SubMenuId { get;  set; }
         public string SubMenuName { get;  set; }
         public string UserType { get;  set; }
+        public string ConfirmPassword { get; set; }
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -51,6 +52,7 @@ namespace MyTrade.Models
 
                                    new SqlParameter("@SponsorId",SponsorId),
                                    new SqlParameter("@MobileNo",MobileNo),
+                                    new SqlParameter("@Email",Email),
                                    new SqlParameter("@FirstName",FirstName),
                                    new SqlParameter("@LastName",LastName),
                                     new SqlParameter("@RegistrationBy",RegistrationBy),
