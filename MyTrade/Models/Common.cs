@@ -140,6 +140,12 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductList",para);
             return ds;
         }
+        public DataSet BindPackageType()
+        {
+            
+            DataSet ds = DBHelper.ExecuteQuery("GetPackageType");
+            return ds;
+        }
         public DataSet PaymentList()
         {
             SqlParameter[] para =
