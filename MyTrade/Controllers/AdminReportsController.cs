@@ -304,8 +304,8 @@ namespace MyTrade.Controllers
                     Obj.Status = r["Status"].ToString();
                     Obj.PrintingDate = r["PrintingDate"].ToString();
                     Obj.Description = r["Description"].ToString();
-                    Obj.ReceiptNo = r["ReceiptNo"].ToString();
-                    Obj.BusinessType = r["Business"].ToString();
+                    //Obj.ReceiptNo = r["ReceiptNo"].ToString();
+                    //Obj.BusinessType = r["Business"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }

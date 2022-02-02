@@ -466,6 +466,8 @@
     <Content Include="Views\Downline\AssociateTree.cshtml" />
     <Content Include="Views\Downline\DirectList.cshtml" />
     <Content Include="Views\Downline\DownLineList.cshtml" />
+    <Content Include="Views\Master\PackageList.cshtml" />
+    <Content Include="Views\Master\PackageMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -476,7 +478,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\API\" />
-    <Folder Include="Views\Master\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <PropertyGroup>
