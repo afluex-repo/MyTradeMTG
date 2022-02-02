@@ -126,19 +126,19 @@
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="Email">Email</label>
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder="Email" })
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
                                     </div>
-                                   
+
                                 </div>
                                 <div class="form-row">
 
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">Password</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password",@onchange= "return checkPasswordComplexity();" })
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @onchange = "return checkPasswordComplexity();", @type = "Password" })
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="Email">Confirm Password</label>
-                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password",@onblur = "return validateConfPassword();" })
+                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @onblur = "return validateConfPassword();", @type = "Password" })
                                     </div>
 
                                 </div>
@@ -326,8 +326,7 @@
             var letter = /[a-zA-Z]/;
             var number = /[0-9]/;
             var valid = number.test(pwd) && letter.test(pwd); //match a letter _and_ a number
-            if (valid == false)
-            {
+            if (valid == false) {
                 alert('Password should be alpha numeric');
             }
         }

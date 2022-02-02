@@ -52,6 +52,7 @@ namespace MyTrade.Models
 
                                    new SqlParameter("@SponsorId",SponsorId),
                                    new SqlParameter("@MobileNo",MobileNo),
+                                    new SqlParameter("@Email",Email),
                                    new SqlParameter("@FirstName",FirstName),
                                    new SqlParameter("@LastName",LastName),
                                     new SqlParameter("@RegistrationBy",RegistrationBy),
