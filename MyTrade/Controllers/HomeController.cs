@@ -127,7 +127,7 @@ namespace MyTrade.Controllers
             {
                 var d = Crypto.Decrypt(PId);
                 ViewBag.SponsorId = d.Split('|')[0];
-                ViewBag.Leg = d.Split('|')[1];
+                //ViewBag.Leg = d.Split('|')[1];
             }
             return View();
         }
@@ -145,7 +145,7 @@ namespace MyTrade.Controllers
                 obj.MobileNo = MobileNo;
                 obj.RegistrationBy = "Web";
                 obj.PinCode = PinCode;
-                obj.Leg = Leg;
+                obj.Leg = null;
                 string password = Common.GenerateRandom();
                 obj.Password = Crypto.Encrypt(password);
                 DataSet ds = obj.Registration();
@@ -153,11 +153,13 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+                        Session["Pk_userId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["DisplayName"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["Transpassword"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+                        Session["Profile"] = "";
                         obj.Result = "1";
 
                     }
