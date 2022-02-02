@@ -33,6 +33,7 @@ namespace MyTrade.Controllers
                 obj.Message = "Please Enter Mobile No";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
+           
             //if (model.Leg == "" || model.Leg == null)
             //{
             //    obj.Status = "1";
@@ -42,14 +43,13 @@ namespace MyTrade.Controllers
             model.SponsorId = model.SponsorId;
             try
             {
-                string password = Common.GenerateRandom();
-                model.Password = Crypto.Encrypt(password);
                 model.RegistrationBy = "Mobile";
                 DataSet ds = model.Registration();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+                        obj.PK_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
                         obj.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         obj.FullName = ds.Tables[0].Rows[0]["Name"].ToString();
                         obj.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
@@ -60,6 +60,8 @@ namespace MyTrade.Controllers
                         obj.SponsorId = model.SponsorId;
                         obj.LastName = model.LastName;
                         obj.PinCode = model.PinCode;
+                        obj.Email = model.Email;
+                        obj.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                         obj.Status = "0";
                         obj.Message = "Registered Successfully";
                         return Json(obj, JsonRequestBehavior.AllowGet);
@@ -282,6 +284,7 @@ namespace MyTrade.Controllers
                 obj.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
                 obj.Status = "0";
                 obj.Message = "Data Fetched";
                 return Json(obj, JsonRequestBehavior.AllowGet);

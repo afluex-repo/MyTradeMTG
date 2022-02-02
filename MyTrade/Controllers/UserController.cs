@@ -109,6 +109,9 @@ namespace MyTrade.Controllers
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
+                ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
+                ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
+                ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)
