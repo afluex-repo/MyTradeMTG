@@ -494,11 +494,11 @@ namespace MyTrade.Models
     }
     public class PinDetails
     {
-        public string ePinNo { get; internal set; }
-        public string FromId { get; internal set; }
-        public string FromName { get; internal set; }
-        public string ToId { get; internal set; }
-        public string ToName { get; internal set; }
-        public string TransferDate { get; internal set; }
+        public string ePinNo { get;  set; }
+        public string FromId { get;  set; }
+        public string FromName { get;  set; }
+        public string ToId { get;  set; }
+        public string ToName { get;  set; }
+        public string TransferDate { get;  set; }
     }
 }

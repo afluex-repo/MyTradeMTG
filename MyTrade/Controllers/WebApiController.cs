@@ -683,6 +683,8 @@ namespace MyTrade.Controllers
             DataSet ds = req.GetTransferPinReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
+                model.Status = "0";
+                model.Message = "Record Found";
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     PinDetails obj = new PinDetails();
@@ -695,6 +697,11 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lst = lst;
+            }
+            else
+            {
+                model.Status = "1";
+                model.Message = "No Record Found";
             }
             return Json(model,JsonRequestBehavior.AllowGet);
         }
