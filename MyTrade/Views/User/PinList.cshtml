@@ -3,6 +3,8 @@
     ViewBag.Title = "PinList";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+@using (Html.BeginForm("PinList", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
 <div class="container">
     <div class="row layout-top-spacing">
         <div class="col-lg-12 col-12 layout-spacing">
@@ -12,16 +14,18 @@
                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                             <h4>Pin List</h4>
                             <span class="text-danger">
-                                @TempData["pin"]
+                                @TempData["Pin"]
+
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="widget-content widget-content-area">
-                    <div class="widget-content widget-content-area br-6">
-                        <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                    <div class="row">
+                        <table id="html5-extension" class="table table-hover non-hover">
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox" id="ckbCheckAll" /></th>
                                     <th>Sr No.</th>
                                     <th>E-Pin No</th>
                                     <th>Pin Amount</th>
@@ -38,28 +42,114 @@
                                         int i = 1;
                                         foreach (var Item in Model.lst)
                                         {
-                                            <tr class="text-left">
-                                                <td>@i</td>
-                                                <td>@Item.ePinNo</td>
-                                                <td>@Item.PinAmount</td>
-                                                <td>@Item.PinStatus</td>
-                                                <td>@Item.RegisteredTo</td>
-                                                @*<td>@Item.RegisteredTo </td>*@
-                                            </tr>
+                            <tr class="text-left">
+                                <td>
+                                    <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                    <input type="hidden" name="ePinNo_ @i" id="ePinNo_ @i" value="@Item.ePinNo" />
+                                </td>
+                                <td>@i</td>
+                                <td>@Item.ePinNo</td>
+                                <td>@Item.PinAmount</td>
+                                <td>@Item.PinStatus</td>
+                                <td>@Item.RegisteredTo</td>
+                                @*<td>@Item.RegisteredTo </td>*@
+                            </tr>
                                             i++;
                                         }
+
+                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
                                     }
                                 }
                             </tbody>
                         </table>
+                       </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                                <div class="form-group">
+                                    <label>
+                                        Login Id <span style="color: red">*</span>
+                                    </label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "GetMemberName();" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label> Name</label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" value="Transfer" name="btnMutipleTranser" onclick="return validate();" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+    function validate() {
+        $(".errortext").removeClass('errortext');
 
+        if (($("input[name*='chkSelect_']:checked").length) <= 0) {
+            alert("You must check at least 1 box");
+            return false;
+        }
+        if ($("#LoginId").val() == '') {
+            $("#LoginId").addClass('errortext');
+            $("#LoginId").focus();
+            return false;
+        }
+    }
+    function GetMemberName() {
+        debugger;
+        var LoginId = $('#LoginId');
+        $.ajax({
+            url: '/User/GetMemberName',
+            data: {
+                'LoginId': $('#LoginId').val()
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.DisplayName == null) {
+                    alert('Invalid Login ID')
+                    $("#LoginId").val('');
+                    $("#Name").val('');
+                    return;
+                }
+                $("#Name").val(data.DisplayName);
+            }
+        });
+    }
+    $(document).ready(function () {
+        $('#ckbCheckAll').on('click', function () {
+            if (this.checked) {
+                $('.checkBoxClass').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $('.checkBoxClass').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
 
+        $('.checkBoxClass').on('click', function () {
+            if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
+                $('#ckbCheckAll').prop('checked', true);
+            } else {
+                $('#ckbCheckAll').prop('checked', false);
+            }
+        });
+    });
+</script>
 
 
 

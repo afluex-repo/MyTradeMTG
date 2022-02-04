@@ -76,9 +76,11 @@
                 <img alt="logo" src="~/assets/img/tradelogo.png">
             </div>
             <div class="card-body my-2">
-                <h1 class="thank">Thank You</h1>
+                <h1 class="thank">Thank You @Session["DisplayName"]</h1>
                 <h6 class="card-title my-2">For Your Registration. Your Details are as Below <br />
                     <span class="credential"><span class="cred-head">Login ID:</span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
+                    <span class="credential"><span class="cred-head">Password:</span> <span class="cred-detail">@Session["Password"]</span></span>
+                
                 </h6>
                 <div class="d-flex justify-content-around mt-5">
                     <div class="field-wrapper">

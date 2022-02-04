@@ -470,6 +470,7 @@
     <Content Include="Views\Downline\DownLineList.cshtml" />
     <Content Include="Views\Master\PackageList.cshtml" />
     <Content Include="Views\Master\PackageMaster.cshtml" />
+    <Content Include="Views\User\PinTransferReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

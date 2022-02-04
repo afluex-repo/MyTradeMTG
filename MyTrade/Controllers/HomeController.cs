@@ -123,6 +123,8 @@ namespace MyTrade.Controllers
         public ActionResult Registration(string PId)
         {
             Home obj = new Home();
+            List<SelectListItem> Gender = Common.BindGender();
+            ViewBag.Gender = Gender;
             if (!string.IsNullOrEmpty(PId))
             {
                 var d = Crypto.Decrypt(PId);
@@ -132,7 +134,7 @@ namespace MyTrade.Controllers
             return View();
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName,  string MobileNo,   string PinCode, string Leg,string Password, string Email)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName,  string MobileNo,   string PinCode, string Leg,string Password, string Email,string Gender)
 
         {
             Home obj = new Home();
@@ -148,6 +150,7 @@ namespace MyTrade.Controllers
                 obj.Leg = null;
                 obj.Password = Crypto.Encrypt(Password);
                 obj.Email = Email;
+                obj.Gender = Gender;
                 DataSet ds = obj.Registration();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {

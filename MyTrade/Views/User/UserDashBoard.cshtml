@@ -53,13 +53,13 @@
                         <div class="w-info">
                             <h6 class="value">Total Direct</h6>
                         </div>
-                        <div class="task-action">
+                        @*<div class="task-action">
                             <div class="dropdown">
                                 <a>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
                                 </a>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
@@ -76,13 +76,13 @@
                         <div class="w-info">
                             <h6 class="value">Total Active</h6>
                         </div>
-                        <div class="task-action">
+                        @*<div class="task-action">
                             <div class="dropdown">
                                 <a>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
                                 </a>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
@@ -99,13 +99,13 @@
                         <div class="w-info">
                             <h6 class="value">Total In-Active</h6>
                         </div>
-                        <div class="task-action">
+                        @*<div class="task-action">
                             <div class="dropdown">
                                 <a>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
                                 </a>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
@@ -133,26 +133,30 @@
     }
 
     <br />
-    <div class="card">
-        <div class="card-body">
-            <div id="chartDonut" class="col-xl-12 layout-spacing">
+    @if (ViewBag.TotalDirect != "0")
+    {
+        <div class="card">
+            <div class="card-body">
+                <div id="chartDonut" class="col-xl-12 layout-spacing">
 
-                <div class="widget-header">
-                    <div class="row">
-                        <div class="col-xl-6 col-md-6 col-sm-6 col-6">
-                            <h4>User </h4>
-                            <div id="AssociateDetails1" style="width: 500px; height: 300px;"></div>
-                        </div>
-                        <div class="col-xl-6 col-md-6 col-sm-6 col-6">
-                            <h4>Business</h4>
-                            <div id="PayoutDetails1" style="width: 500px; height: 300px;"></div>
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                                <h4>User </h4>
+                                <div id="AssociateDetails1" style="width: 500px; height: 300px;"></div>
+                            </div>
+                            <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                                <h4>Business</h4>
+                                <div id="PayoutDetails1" style="width: 500px; height: 300px;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-           
         </div>
-    </div>
+    }
+
+
 </div>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -166,7 +170,12 @@
           ['InActive', @ViewBag.TotalInActive]
         ]);
         var bikeChart = new google.visualization.PieChart(document.getElementById('AssociateDetails1'));
-        bikeChart.draw(data);
+        bikeChart.draw(data, {
+            legend: {
+                position: 'labeled'
+            },
+            sliceVisibilityThreshold: 0
+        });
     }
 </script>
 <script type="text/javascript">
@@ -180,6 +189,12 @@
           ['Tr2 Business', @ViewBag.Tr2Business]
         ]);
         var bikeChart = new google.visualization.PieChart(document.getElementById('PayoutDetails1'));
-        bikeChart.draw(data);
+        //bikeChart.draw(data);
+        bikeChart.draw(data, {
+            legend: {
+                position: 'labeled'
+            },
+            sliceVisibilityThreshold: 0
+        });
     }
 </script>
