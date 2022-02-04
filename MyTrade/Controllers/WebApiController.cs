@@ -64,6 +64,7 @@ namespace MyTrade.Controllers
                         obj.Email = model.Email;
                         obj.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                         obj.Status = "0";
+                        obj.Gender = model.Gender;
                         obj.Message = "Registered Successfully";
                         return Json(obj, JsonRequestBehavior.AllowGet);
                     }
@@ -646,6 +647,56 @@ namespace MyTrade.Controllers
                 obj.Message = "No Record Found";
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TransferPin(TransferPin model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.ePinTransfer();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Transfer Successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PinTransferReport(PinReport req)
+        {
+            PinResponse model = new PinResponse();
+            List<PinDetails> lst = new List<PinDetails>();
+            DataSet ds = req.GetTransferPinReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    PinDetails obj = new PinDetails();
+                    obj.ePinNo = r["EpinNo"].ToString();
+                    obj.FromId = r["FromId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToId = r["ToId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.TransferDate = r["TransferDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
     }
 }

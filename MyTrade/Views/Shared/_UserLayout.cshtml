@@ -19,9 +19,10 @@
     <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
-    <link rel="stylesheet" type="text/css" href="~/assets/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
-    <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_custom.css">
+    <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
 
     <style>
         .errortext {
@@ -241,18 +242,24 @@
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="~/assets/js/app.js"></script>
-    <script src="~/plugins/highlight/highlight.pack.js"></script>
-    <script src="~/assets/js/scrollspyNav.js"></script>
+
     <script>
         $(document).ready(function () {
             App.init();
         });
     </script>
+    <script src="~/plugins/highlight/highlight.pack.js"></script>
     <script src="~/assets/js/custom.js"></script>
-    <script src="~/plugins/table/datatable/datatables.js"></script>
+    <script src="~/assets/js/scrollspyNav.js"></script>
+
     <!-- END GLOBAL MANDATORY SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-    <script src="~/assets/js/dashboard/dash_2.js"></script>
+    <script src="~/assets/js/scrollspyNav.js"></script>
+    <script src="~/plugins/table/datatable/datatables.js"></script>
+    <!-- NOTE TO ~/Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="~/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>

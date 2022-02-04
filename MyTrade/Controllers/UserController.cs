@@ -222,9 +222,128 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public ActionResult PinList(Pin model)
+        {
+            model.ParentLoginId = Session["LoginId"].ToString();
+
+            if (model.LoginId != model.ParentLoginId)
+            {
+                try
+                {
+                    string hdrows = Request["hdRows"].ToString();
+                    string chkselect = "";
+                    for (int i = 1; i < int.Parse(hdrows); i++)
+                    {
+                        try
+                        {
+                            chkselect = Request["chkSelect_ " + i];
+                            if (chkselect == "on")
+                            {
+                                model.ePinNo = Request["ePinNo_ " + i].ToString();
+                                DataSet ds = model.ePinTransfer();
+                                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                                {
+                                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                                    {
+                                        TempData["Pin"] = "Transfer Successfully";
+                                    }
+                                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                                    {
+                                        TempData["Pin"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                                    }
+                                }
+                            }
+                        }
+                        catch { chkselect = "0"; }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["Pin"] = ex.Message;
+                }
+            }
+            else
+            {
+                TempData["Pin"] = "You Can't transfer on the same Id";
+            }
+            return RedirectToAction("PinList");
+        }
         public ActionResult Tree()
         {
             return View();
         }
+        public ActionResult GetMemberName(string LoginId)
+        {
+            Home model = new Home();
+            try
+            {
+
+                model.LoginId = LoginId;
+                DataSet ds = model.GetMemberName();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+
+                    model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PinTransferReport(Pin model)
+        {
+            List<Pin> list = new List<Pin>();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.GetTransferPinReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Pin obj = new Pin();
+                    obj.ePinNo = r["EpinNo"].ToString();
+                    obj.FromId = r["FromId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToId = r["ToId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.TransferDate = r["TransferDate"].ToString();
+                    list.Add(obj);
+                }
+                model.lst = list;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "GetDetails")]
+        [ActionName("PinTransferReport")]
+        public ActionResult PinTransferReportDetails(Pin model)
+        {
+            List<Pin> list = new List<Pin>();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.GetTransferPinReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Pin obj = new Pin();
+                    obj.ePinNo = r["EpinNo"].ToString();
+                    obj.FromId = r["FromId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToId = r["ToId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.TransferDate = r["TransferDate"].ToString();
+                    list.Add(obj);
+                }
+                model.lst = list;
+            }
+            return View(model);
+        }
+
     }
 }

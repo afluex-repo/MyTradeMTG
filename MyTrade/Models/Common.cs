@@ -104,6 +104,13 @@ namespace MyTrade.Models
 
             return IncomeStatus;
         }
+        public static List<SelectListItem> BindGender()
+        {
+            List<SelectListItem> Gender = new List<SelectListItem>();
+            Gender.Add(new SelectListItem { Text = "Male", Value = "M" });
+            Gender.Add(new SelectListItem { Text = "Female", Value = "F" });
+            return Gender;
+        }
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
