@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from designreset.com/cork/ltr/demo4/pages_maintenence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Sep 2021 04:25:49 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,23 +17,85 @@
     <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/pages/error/style-maintanence.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+    <style>
+        .card {
+            background-image: linear-gradient(#adbaed, #e1e3ed);
+            padding: 40px 20px;
+            width: 500px;
+        }
 
+        .card-title {
+            font-weight: 600;
+        }
+
+        .maintanence-hero-img img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .btn:focus {
+            color: #fff !important;
+            background-color: #4361ee;
+        }
+
+        .maintanence a.btn {
+            width: 200px;
+            letter-spacing: 1px;
+        }
+
+        .foractivation-btn {
+            text-align: -webkit-center;
+            border-radius: 1rem;
+        }
+
+        .img-design {
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .cred-detail{
+            color: #910f10;
+        }
+        h1.thank {
+    font-weight: 600;
+    font-size: 50px;
+}
+    </style>
 </head>
 <body class="maintanence text-center">
 
     <div class="container-fluid maintanence-content">
-        <div class="">
+
+        <div class="card">
             <div class="maintanence-hero-img">
                 <img alt="logo" src="~/assets/img/tradelogo.png">
             </div>
-            <h1 class="error-title">Success</h1>
-            <p class="error-text">Thank you for your registration. Your Details are as Below</p>
-            <span class="error-text">Login ID: <span class="error-text text-danger">@Session["LoginId"]</span></span>
-            <span class="error-text">Password: <span class="error-text text-danger">@Session["Password"]</span> </span>
-           <br />
-            <br />
-            <a href="/User/ActivateByPin" target="_blank" class="btn btn-info">Go To Dashboard</a>
-            <a href="/Home/Registration" target="_blank" class="btn btn-info">Add New</a>
+            <div class="card-body my-2">
+                <h1 class="thank">Thank You</h1>
+                <h6 class="card-title my-2">For Your Registration. Your Details are as Below <br />
+                    <span class="credential"><span class="cred-head">Login ID:</span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
+                </h6>
+                <div class="d-flex justify-content-around mt-5">
+                    <div class="field-wrapper">
+                        <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                            <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
+                            <span style="white-space: nowrap">Go To Dashboard</span>
+                        </a>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <a href="/Home/Registration" target="_blank" class="btn btn-info foractivation-btn py-2">
+                            <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                            <span style="white-space: nowrap">Add New</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -45,5 +106,4 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 </body>
 
-<!-- Mirrored from designreset.com/cork/ltr/demo4/pages_maintenence.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 18 Sep 2021 04:25:50 GMT -->
 </html>

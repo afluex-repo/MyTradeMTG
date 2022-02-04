@@ -18,6 +18,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         //public string Leg { get; set; }
+        public string PK_UserId { get; set; }
         public string Password { get; set; }
         public string RegistrationBy { get; set; }
         public string SponsorId { get; set; }
@@ -27,6 +28,8 @@ namespace MyTrade.Models
         public string LoginId { get; set; }
         public string TransPassword { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+        public string ProfilePic { get; set; }
         public string PinCode { get; set; }
          public DataSet Registration()
         {
@@ -34,6 +37,7 @@ namespace MyTrade.Models
 
                                    new SqlParameter("@SponsorId",SponsorId),
                                    new SqlParameter("@MobileNo",MobileNo),
+                                   new SqlParameter("@Email",Email),
                                    new SqlParameter("@FirstName",FirstName),
                                    new SqlParameter("@LastName",LastName),
                                     new SqlParameter("@RegistrationBy",RegistrationBy),
@@ -175,6 +179,7 @@ namespace MyTrade.Models
         public string TotalDirect { get; set; }
         public string TotalActive { get; set; }
         public string TotalInActive { get; set; }
+        public string ActiveStatus { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
     }
@@ -359,7 +364,6 @@ namespace MyTrade.Models
         public string ePinNo { get; set; }
         public string PinAmount { get; set; }
         public string PinStatus { get; set; }
-        public string IsRegistered { get; set; }
         public string RegisteredTo { get; set; }
         public string ProductName { get; set; }
     }

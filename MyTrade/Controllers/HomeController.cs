@@ -132,7 +132,7 @@ namespace MyTrade.Controllers
             return View();
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName,  string MobileNo,   string PinCode, string Leg)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName,  string MobileNo,   string PinCode, string Leg,string Password, string Email)
 
         {
             Home obj = new Home();
@@ -146,8 +146,8 @@ namespace MyTrade.Controllers
                 obj.RegistrationBy = "Web";
                 obj.PinCode = PinCode;
                 obj.Leg = null;
-                string password = Common.GenerateRandom();
-                obj.Password = Crypto.Encrypt(password);
+                obj.Password = Crypto.Encrypt(Password);
+                obj.Email = Email;
                 DataSet ds = obj.Registration();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
