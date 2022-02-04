@@ -104,3 +104,4 @@ F:\Mona\Repositories\MyTrade\MyTrade\bin\System.Web.Http.xml
 F:\Mona\Repositories\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
 F:\Mona\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 F:\Mona\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
+D:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

@@ -47,16 +47,12 @@ namespace MyTrade.Models
         DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
             return ds;
         }
-
         public DataSet ProductList()
         {
             SqlParameter[] para = { new SqlParameter("@ProductID", Packageid) };
             DataSet ds = DBHelper.ExecuteQuery("ProductList", para);
             return ds;
         }
-
-
-
         public DataSet DeleteProduct()
         {
             SqlParameter[] para = { new SqlParameter("@ProductID", Packageid),
