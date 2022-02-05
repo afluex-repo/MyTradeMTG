@@ -21,8 +21,11 @@ namespace MyTrade.Controllers
             ViewBag.BlockedUsers = Ds.Tables[1].Rows[0]["BlockedUsers"].ToString();
             ViewBag.InactiveUsers = Ds.Tables[1].Rows[0]["InactiveUsers"].ToString();
             ViewBag.ActiveUsers = Ds.Tables[1].Rows[0]["ActiveUsers"].ToString();
-            ViewBag.Tr1Business = Ds.Tables[2].Rows[0]["Tr1Business"].ToString();
-            ViewBag.Tr2Business = Ds.Tables[2].Rows[0]["Tr2Business"].ToString();
+            if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[2].Rows.Count > 0)
+            {
+                ViewBag.Tr1Business = Ds.Tables[2].Rows[0]["Tr1Business"].ToString();
+                ViewBag.Tr2Business = Ds.Tables[2].Rows[0]["Tr2Business"].ToString();
+            }
             return View(newdata);
         }
         #region GeneratePin
@@ -105,7 +108,7 @@ namespace MyTrade.Controllers
         }
         public ActionResult UnUsedPin(Admin obj)
         {
-         
+
             List<Admin> lst = new List<Admin>();
             obj.Package = obj.Package == "0" ? null : obj.Package;
             DataSet ds = obj.GetUsedUnUsedPins();
@@ -125,9 +128,9 @@ namespace MyTrade.Controllers
                 }
                 obj.lstunusedpins = lst;
             }
-                #region Product Bind
+            #region Product Bind
 
-                Common objcomm = new Common();
+            Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             DataSet ds1 = objcomm.BindProduct();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
@@ -174,6 +177,6 @@ namespace MyTrade.Controllers
             else { obj.Result = "Invalid LoginId"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-  
+
     }
 }

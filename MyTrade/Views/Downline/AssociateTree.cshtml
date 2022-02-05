@@ -30,7 +30,10 @@
 
                                         </div>
                                         <div>
-                                            <a href="/Downline/AssociateTree?AssociateID=@ViewBag.Fk_SponsorId" id="btnDown" class="btn btn-info btn-sm">Back</a>
+                                            @if (@ViewBag.LoginId != Session["LoginId"].ToString())
+                                            {
+                                                <a href="/Downline/AssociateTree?AssociateID=@ViewBag.Fk_SponsorId" id="btnDown" class="btn btn-info btn-sm">Back</a>
+                                            }
                                         </div>
                                     </div>
                                     <div class="dt-responsive table-responsive">

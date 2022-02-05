@@ -24,6 +24,16 @@
             width: 600px;
         }
     }
+     .btn_my_referral {
+            position: absolute;
+            top: 0px;
+            right: 92px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+        }
+
 </style>
 
 <div class="layout-px-spacing">
@@ -123,8 +133,11 @@
                 <h6 class="referral"><u>Referral Link</u></h6>
                 <div class="row m-2">
                     <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="referral-url">
-                            <a target="_blank" style="font-size: 14px;" href="http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())">http://demo5.afluex.com/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())</a>
+                        <div class="referral-url copy">
+                            <a target="_blank" style="font-size: 14px;" href="http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())">http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())</a>
+                            @*<button type="button" id="btnLeft" class="btn_my_referral">
+                                <i class="far fa-copy" id="left"></i> Copy
+                            </button>*@
                         </div>
                     </div>
                 </div>
@@ -197,4 +210,32 @@
             sliceVisibilityThreshold: 0
         });
     }
+</script>
+<script>
+        (function () {
+            var copyButton = document.querySelector('.copy button');
+            var copyInput = document.querySelector('.copy input');
+            copyButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                var text = copyInput.select();
+                document.execCommand('copy');
+            });
+
+            copyInput.addEventListener('click', function () {
+                this.select();
+            });
+
+
+            var copyButton1 = document.querySelector('.copy1 button');
+            var copyInput1 = document.querySelector('.copy1 input');
+            copyButton1.addEventListener('click', function (e) {
+                e.preventDefault();
+                var text1 = copyInput1.select();
+                document.execCommand('copy');
+            });
+
+            copyInput1.addEventListener('click', function () {
+                this.select();
+            });
+        })();
 </script>
