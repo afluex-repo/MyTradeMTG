@@ -27,6 +27,10 @@
             background-size: cover;
             background-color: #ffffff;
         }
+          .maintanence-hero-img img {
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 <body class="form">
@@ -35,6 +39,9 @@
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
+                        <div class="maintanence-hero-img">
+                            <img alt="logo" src="~/assets/img/tradelogo.png">
+                        </div>
                         <h1 class="">Sign In</h1>
                         <p class="">Log in to your account to continue.</p>
                         @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "Form1" }))

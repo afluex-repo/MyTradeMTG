@@ -1,8 +1,241 @@
-﻿@model MyTrade.Models.User
+﻿@model MyTrade.Models.Dashboard
 
 @{
     ViewBag.Title = "UserDashBoard";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+<style>
+    .referral {
+        font-weight: 600;
+        color: #ff0000;
+        font-size: 23px;
+        letter-spacing: 0;
+    }
+
+    .referral-url {
+        background-color: #f5e2e2;
+        padding: 5px 20px;
+        border: 1px solid red;
+        border-radius: 20px;
+    }
+
+    @@media only screen and (min-width: 1200px) {
+        .referral-url {
+            width: 600px;
+        }
+    }
+     .btn_my_referral {
+            position: absolute;
+            top: 0px;
+            right: 92px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+        }
+
+</style>
+
+<div class="layout-px-spacing">
+    <div class="row layout-top-spacing">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-card-four">
+                <div class="widget-content">
+                    <div class="w-header">
+                        <div class="w-info">
+                            <h6 class="value">Total Downline</h6>
+                        </div>
+                    </div>
+                    <div class="w-content">
+                        <div class="w-info">
+                            <p class="value">@ViewBag.TotalDownline</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-card-four">
+                <div class="widget-content">
+                    <div class="w-header">
+                        <div class="w-info">
+                            <h6 class="value">Total Direct</h6>
+                        </div>
+                        @*<div class="task-action">
+                            <div class="dropdown">
+                                <a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                </a>
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="w-content">
+                        <div class="w-info">
+                            <p class="value">@ViewBag.TotalDirect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-card-four">
+                <div class="widget-content">
+                    <div class="w-header">
+                        <div class="w-info">
+                            <h6 class="value">Total Active</h6>
+                        </div>
+                        @*<div class="task-action">
+                            <div class="dropdown">
+                                <a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                </a>
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="w-content">
+                        <div class="w-info">
+                            <p class="value">@ViewBag.TotalActive</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-card-four">
+                <div class="widget-content">
+                    <div class="w-header">
+                        <div class="w-info">
+                            <h6 class="value">Total In-Active</h6>
+                        </div>
+                        @*<div class="task-action">
+                            <div class="dropdown">
+                                <a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                </a>
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="w-content">
+                        <div class="w-info">
+                            <p class="value">@ViewBag.TotalInActive</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.Status == "Active")
+    {
+        <div class="card">
+            <div class="card-body">
+                <h6 class="referral"><u>Referral Link</u></h6>
+                <div class="row m-2">
+                    <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="referral-url copy">
+                            <a target="_blank" style="font-size: 14px;" href="http://mytrade.in/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())">http://mytrade.in/Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())</a>
+                            @*<button type="button" id="btnLeft" class="btn_my_referral">
+                                <i class="far fa-copy" id="left"></i> Copy
+                            </button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <br />
+    @if (ViewBag.TotalDirect != "0")
+    {
+        <div class="card">
+            <div class="card-body">
+                <div id="chartDonut" class="col-xl-12 layout-spacing">
+
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                                <h4>User </h4>
+                                <div id="AssociateDetails1" style="width: 500px; height: 300px;"></div>
+                            </div>
+                            <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                                <h4>Business</h4>
+                                <div id="PayoutDetails1" style="width: 500px; height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
 
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawBikePieChart);
+    function drawBikePieChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['User', 'Status'],
+          ['Active', @ViewBag.TotalActive],
+          ['InActive', @ViewBag.TotalInActive]
+        ]);
+        var bikeChart = new google.visualization.PieChart(document.getElementById('AssociateDetails1'));
+        bikeChart.draw(data, {
+            legend: {
+                position: 'labeled'
+            },
+            sliceVisibilityThreshold: 0
+        });
+    }
+</script>
+<script type="text/javascript">
+
+    google.load("visualization", "", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawBikePieChart2);
+    function drawBikePieChart2() {
+        var data = google.visualization.arrayToDataTable([
+          ['Business', 'Rs.'],
+          ['Tr1 Business', @ViewBag.Tr1Business],
+          ['Tr2 Business', @ViewBag.Tr2Business]
+        ]);
+        var bikeChart = new google.visualization.PieChart(document.getElementById('PayoutDetails1'));
+        //bikeChart.draw(data);
+        bikeChart.draw(data, {
+            legend: {
+                position: 'labeled'
+            },
+            sliceVisibilityThreshold: 0
+        });
+    }
+</script>
+<script>
+        (function () {
+            var copyButton = document.querySelector('.copy button');
+            var copyInput = document.querySelector('.copy input');
+            copyButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                var text = copyInput.select();
+                document.execCommand('copy');
+            });
+
+            copyInput.addEventListener('click', function () {
+                this.select();
+            });
+
+
+            var copyButton1 = document.querySelector('.copy1 button');
+            var copyInput1 = document.querySelector('.copy1 input');
+            copyButton1.addEventListener('click', function (e) {
+                e.preventDefault();
+                var text1 = copyInput1.select();
+                document.execCommand('copy');
+            });
+
+            copyInput1.addEventListener('click', function () {
+                this.select();
+            });
+        })();
+</script>

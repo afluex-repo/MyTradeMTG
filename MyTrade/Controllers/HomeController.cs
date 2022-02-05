@@ -54,7 +54,7 @@ namespace MyTrade.Controllers
                                     FormName = "CompleteRegistration";
                                     Controller = "Home";
                                 }
-                                  
+
                             }
                             else
                             {
@@ -134,7 +134,7 @@ namespace MyTrade.Controllers
             return View();
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName,  string MobileNo,   string PinCode, string Leg,string Password, string Email,string Gender)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender)
 
         {
             Home obj = new Home();
@@ -164,7 +164,11 @@ namespace MyTrade.Controllers
                         Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
                         Session["Profile"] = "";
                         obj.Result = "1";
-
+                        if (obj.Email != "" && obj.Email != null)
+                        {
+                            string Body = "Dear " + Session["DisplayName"].ToString() + ",\t\nThank you for your registration. Your Details are as Below: \t\nLogin ID: " + Session["LoginId"].ToString() + "\t\nPassword: " + Session["Password"].ToString();
+                            BLMail.SendMail(obj.Email, "Registration Successful", Body, false);
+                        }
                     }
                     else
                     {
@@ -193,7 +197,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                if(ds.Tables[0].Rows[0]["TeamPermanent"].ToString()=="P")
+                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
                 {
                     obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
                     obj.Result = "Yes";

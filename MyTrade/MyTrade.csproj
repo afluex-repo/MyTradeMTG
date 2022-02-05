@@ -409,6 +409,7 @@
     <Compile Include="Models\AgentPara.cs" />
     <Compile Include="Models\API.cs" />
     <Compile Include="Models\AssociateBooking.cs" />
+    <Compile Include="Models\BLMail.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DAL\AgentDAL.cs" />
@@ -471,6 +472,7 @@
     <Content Include="Views\Master\PackageList.cshtml" />
     <Content Include="Views\Master\PackageMaster.cshtml" />
     <Content Include="Views\User\PinTransferReport.cshtml" />
+    <Content Include="Views\User\ConfirmActivation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

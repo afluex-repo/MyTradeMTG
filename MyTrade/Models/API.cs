@@ -184,6 +184,7 @@ namespace MyTrade.Models
         public string ActiveStatus { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
+        public string ReferralLink { get; set; }
     }
     public class UpdateProfile
     {

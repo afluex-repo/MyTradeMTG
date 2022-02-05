@@ -66,24 +66,25 @@ namespace MyTrade.Controllers
                         obj.Status = "0";
                         obj.Gender = model.Gender;
                         obj.Message = "Registered Successfully";
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        if (obj.Email != "" && obj.Email != null)
+                        {
+                            string Body = "Dear "+ obj.FullName + ",\t\nThank you for your registration. Your Details are as Below: \t\nLogin ID: " + obj.LoginId + "\t\nPassword: " + obj.Password;
+                            BLMail.SendMail(obj.Email, "Registration Successful", Body, false);
+                        }
                     }
                     else
                     {
                         obj.Status = "1";
                         obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        return Json(obj, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(obj, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 obj.Status = "1";
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                obj.Message = ex.Message;
             }
-
-
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
         #endregion
         #region SponsporName
@@ -237,8 +238,14 @@ namespace MyTrade.Controllers
                     {
                         if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
+                            string Email = dsResult.Tables[0].Rows[0]["Email"].ToString();
                             obj.Status = "0";
                             obj.Message = "User Activated Successfully";
+                            if (Email != null && Email != "")
+                            {
+                                string Body = "Dear User,</br> Your Account have been activated.";
+                                BLMail.SendMail(Email, "Activation Successful", Body, false);
+                            }
                             return Json(obj, JsonRequestBehavior.AllowGet);
 
                         }
@@ -278,8 +285,17 @@ namespace MyTrade.Controllers
                 obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                 obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
+                if(obj.ActiveStatus=="Active")
+                {
+                    obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + Crypto.Encrypt(ds.Tables[2].Rows[0]["LoginId"].ToString());
+                }
+                else
+                {
+                    obj.ReferralLink = "";
+                }
                 obj.Status = "0";
                 obj.Message = "Data Fetched";
+               
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
@@ -674,7 +690,7 @@ namespace MyTrade.Controllers
                 obj.Status = "1";
                 obj.Message = ex.Message;
             }
-            return Json(obj,JsonRequestBehavior.AllowGet);
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
         public ActionResult PinTransferReport(PinReport req)
         {
@@ -703,7 +719,7 @@ namespace MyTrade.Controllers
                 model.Status = "1";
                 model.Message = "No Record Found";
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }
