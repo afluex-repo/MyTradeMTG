@@ -116,6 +116,7 @@ namespace MyTrade.Models
         public string TeamPermanent { get; set; }
         public string FranchiseAdminID { get; set; }
         public string Profile { get; set; }
+        public string Gender { get; set; }
         public DataSet Login()
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),

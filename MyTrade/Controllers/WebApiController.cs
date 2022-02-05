@@ -167,6 +167,7 @@ namespace MyTrade.Controllers
                             obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
                             obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
                             obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
+                            obj.Gender = dsResult.Tables[0].Rows[0]["Sex"].ToString();
                             obj.Status = "0";
                             obj.Message = "Successfully Logged in";
                             return Json(obj, JsonRequestBehavior.AllowGet);
