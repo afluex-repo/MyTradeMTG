@@ -172,6 +172,7 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 ViewBag.Fk_SponsorId = ds.Tables[0].Rows[0]["Fk_SponsorId"].ToString();
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     AssociateBooking obj = new AssociateBooking();

@@ -49,6 +49,11 @@
             background-size: cover;
             background-color: #ffffff;
         }
+           .maintanence-hero-img img {
+            width: 100px;
+            height: 100px;
+        }
+
     </style>
 </head>
 <body class="form">
@@ -56,8 +61,12 @@
         <div class="form-form">
             <div class="form-form-wrap">
                 <div class="form-container">
+                  
                     <div class="form-content">
-                        <h1 class="">Register</h1>
+                        <div class="maintanence-hero-img">
+                            <img alt="logo" src="~/assets/img/tradelogo.png">
+                        </div>
+                        <h1 class="">Create An Account</h1>
                         <p class="signup-link register">Already have an account? <a href="/Home/Login">Log in</a></p>
                         <form class="text-left needs-validation" novalidate action="javascript:void(0);">
                             <div class="form">
@@ -125,7 +134,7 @@
                                         @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @maxlength = "10" })
                                     </div>
                                     <div class="col-md-6 mb-2">
-                                        <label for="Email">Email</label>
+                                        <label for="Email">Email <span class="text-danger">*</span></label>
                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
                                     </div>
 
@@ -237,6 +246,11 @@
                 $('#MobileNo').focus();
                 return false;
             }
+            if ($('#Email').val() == '') {
+                $("#Email").addClass('errortext');
+                $('#Email').focus();
+                return false;
+            }
             if ($('#Password').val() == '') {
                 $("#Password").addClass('errortext');
                 $('#Password').focus();
@@ -251,6 +265,7 @@
             $("#ConfirmPassword").attr("disabled", "disabled");
             $("#Gender").attr("disabled", "disabled");
             $("#Email").attr("disabled", "disabled");
+            $('#Confirm').attr("disabled", "disabled");
             $('#Confirm').hide();
             $('#Edit').show();
             $('#Register').show();
@@ -267,12 +282,14 @@
             $("#Gender").attr("disabled", false);
             $("#Email").attr("disabled", false);
             $('#Confirm').show();
+            $('#Confirm').attr("disabled", "disabled");
             $('#Edit').hide();
             $('#Register').hide();
 
         }
 
         function saveregistration() {
+            $('#Register').attr("disabled", "disabled");
             $("#divload").css({ 'display': '' });
             var Leg = "";
             if ($('#left').prop('checked')) {

@@ -26,11 +26,15 @@ namespace MyTrade.Controllers
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
+                if (ViewBag.Status=="InActive")
+                {
+                    return RedirectToAction("ActivateByPin", "User");
+                }
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
                 ViewBag.Tr1Business = ds.Tables[1].Rows[0]["Tr1Business"].ToString();
-                if(ViewBag.Tr1Business== "")
+                if (ViewBag.Tr1Business == "")
                 {
                     ViewBag.Tr1Business = 0;
                 }
@@ -57,8 +61,14 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+                        string Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                        if (Email != null && Email != "")
+                        {
+                            string Body = "Dear User,\t\n Your Account has been activated.";
+                            BLMail.SendMail(Email, "Activation Successful", Body, false);
+                        }
                         TempData["Activated"] = "User Activated Successfully";
-                        FormName = "UserDashboard";
+                        FormName = "ConfirmActivation";
                         Controller = "User";
                     }
                     else
@@ -344,6 +354,9 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
+        public ActionResult ConfirmActivation()
+        {
+            return View();
+        }
     }
 }
