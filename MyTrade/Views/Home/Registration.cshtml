@@ -131,7 +131,7 @@
 
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">Mobile No</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @maxlength = "10" })
+                                        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="Email">Email <span class="text-danger">*</span></label>
@@ -144,31 +144,28 @@
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">Password</label> <span class="text-danger">*</span>
                                         @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @onchange = "return checkPasswordComplexity();", @type = "Password" })
-                                        <label style="color:red;font-size:12px">Note: Password should be alpa-numeric.</label>
+                                       
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="Email">Confirm Password</label>
                                         @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @onblur = "return validateConfPassword();", @type = "Password" })
                                     </div>
-
+                                    <label style="color:red;font-size:12px;padding-left:10px">Note: Password should be alpha-numeric.</label>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-6 mb-5">
+                                    <div class="col-md-6">
                                         <label for="City">Gender</label>
                                         @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"),"-Select-", new { @class = "form-control" })
-                                        
                                     </div>
-                                    <div class="col-md-6 mb-5">
+                                    <div class="col-md-6">
                                         <label for="PinCode">PinCode</label>
                                         @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return getstatecity()" })
                                     </div>
-                  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-5">
                                         <label for="City">City</label>
                                         @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @Disabled = "true" })
-
                                     </div>
                                     <div class="col-md-6 mb-5">
                                         <label for="State">State</label>
@@ -302,7 +299,7 @@
                 url: "/Home/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender").val() },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender").val(), State: $("#State").val(), City: $("#City").val() },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';

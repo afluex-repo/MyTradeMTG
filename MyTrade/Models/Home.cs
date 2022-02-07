@@ -33,6 +33,8 @@ namespace MyTrade.Models
         public string UserType { get;  set; }
         public string ConfirmPassword { get; set; }
         public string Gender { get; set; }
+        public string ProfilePic { get; set; }
+        public HttpPostedFileBase postedFile { get; set; }
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -54,10 +56,13 @@ namespace MyTrade.Models
                                    new SqlParameter("@SponsorId",SponsorId),
                                    new SqlParameter("@MobileNo",MobileNo),
                                     new SqlParameter("@Email",Email),
+                                     new SqlParameter("@Gender",Gender),
                                    new SqlParameter("@FirstName",FirstName),
                                    new SqlParameter("@LastName",LastName),
                                     new SqlParameter("@RegistrationBy",RegistrationBy),
                                      new SqlParameter("@PinCode",PinCode),
+                                     new SqlParameter("@State",State),
+                                      new SqlParameter("@City",City),
                                      new SqlParameter("@Leg",Leg),
                                      new SqlParameter("@Password",Password)
 
@@ -136,6 +141,33 @@ namespace MyTrade.Models
 
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUserName", para);
+
+            return ds;
+        }
+        public DataSet UserProfile()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+
+            return ds;
+        }
+        public DataSet UpdateProfile()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@FirstName", FirstName),
+                                      new SqlParameter("@LastName", LastName),
+                                      new SqlParameter("@MobileNo", MobileNo),
+                                      new SqlParameter("@Email", Email),
+                                      new SqlParameter("@Gender", Gender),
+                                      new SqlParameter("@PinCode", PinCode),
+                                      new SqlParameter("@State", State),
+                                      new SqlParameter("@City", City),
+                                      new SqlParameter("@ProfilePic", ProfilePic),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
 
             return ds;
         }

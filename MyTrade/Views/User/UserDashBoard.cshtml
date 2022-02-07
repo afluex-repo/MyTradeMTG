@@ -4,6 +4,7 @@
     ViewBag.Title = "UserDashBoard";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .referral {
         font-weight: 600;
@@ -24,16 +25,41 @@
             width: 600px;
         }
     }
-     .btn_my_referral {
-            position: absolute;
-            top: 0px;
-            right: 92px;
-            font-size: 18px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: 700;
-        }
 
+    .btn_my_referral {
+        position: absolute;
+        top: 0px;
+        right: 92px;
+        font-size: 18px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .modal-footer {
+        border: none;
+    }
+
+    .s-icon a {
+        /* background-color: #eb8153; */
+        border-radius: 5px;
+        margin: 10px;
+        width: 35px;
+        height: 35px;
+        line-height: 33px;
+        display: inline-block;
+        text-align: center;
+        color: white;
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+    }
 </style>
 
 <div class="layout-px-spacing">
@@ -64,12 +90,12 @@
                             <h6 class="value">Total Direct</h6>
                         </div>
                         @*<div class="task-action">
-                            <div class="dropdown">
-                                <a>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
-                                </a>
-                            </div>
-                        </div>*@
+                                <div class="dropdown">
+                                    <a>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
@@ -87,12 +113,12 @@
                             <h6 class="value">Total Active</h6>
                         </div>
                         @*<div class="task-action">
-                            <div class="dropdown">
-                                <a>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
-                                </a>
-                            </div>
-                        </div>*@
+                                <div class="dropdown">
+                                    <a>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
@@ -110,12 +136,12 @@
                             <h6 class="value">Total In-Active</h6>
                         </div>
                         @*<div class="task-action">
-                            <div class="dropdown">
-                                <a>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
-                                </a>
-                            </div>
-                        </div>*@
+                                <div class="dropdown">
+                                    <a>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="5" cy="12" r="1"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>*@
                     </div>
                     <div class="w-content">
                         <div class="w-info">
@@ -132,12 +158,48 @@
             <div class="card-body">
                 <h6 class="referral"><u>Referral Link</u></h6>
                 <div class="row m-2">
-                    <div class="col-xl-11 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="referral-url copy">
                             <a target="_blank" style="font-size: 14px;" href="http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())">http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())</a>
                             @*<button type="button" id="btnLeft" class="btn_my_referral">
-                                <i class="far fa-copy" id="left"></i> Copy
-                            </button>*@
+                                    <i class="far fa-copy" id="left"></i> Copy
+                                </button>*@
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Share
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Share Link On</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card" style="border:none">
+                                            <div class="">
+                                                @if (Session["LoginId"].ToString() != "")
+                                                {
+                                                    var link = MyTrade.Crypto.Encrypt(Session["LoginId"].ToString());
+
+                                                    <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://mytrade.co.in//Home/Registration?Pid=@link. Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())" target="_blank" style="background:#42f560"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://www.instagram.com/?url=http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://mytrade.co.in//Home/Registration?Pid=@MyTrade.Crypto.Encrypt(Session["LoginId"].ToString())" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -211,31 +273,4 @@
         });
     }
 </script>
-<script>
-        (function () {
-            var copyButton = document.querySelector('.copy button');
-            var copyInput = document.querySelector('.copy input');
-            copyButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                var text = copyInput.select();
-                document.execCommand('copy');
-            });
 
-            copyInput.addEventListener('click', function () {
-                this.select();
-            });
-
-
-            var copyButton1 = document.querySelector('.copy1 button');
-            var copyInput1 = document.querySelector('.copy1 input');
-            copyButton1.addEventListener('click', function (e) {
-                e.preventDefault();
-                var text1 = copyInput1.select();
-                document.execCommand('copy');
-            });
-
-            copyInput1.addEventListener('click', function () {
-                this.select();
-            });
-        })();
-</script>

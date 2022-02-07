@@ -43,6 +43,7 @@ namespace MyTrade.Controllers
                                 Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                                 Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
+                                Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
                                 {
@@ -134,7 +135,7 @@ namespace MyTrade.Controllers
             return View();
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender,string State,string City)
 
         {
             Home obj = new Home();
@@ -151,6 +152,8 @@ namespace MyTrade.Controllers
                 obj.Password = Crypto.Encrypt(Password);
                 obj.Email = Email;
                 obj.Gender = Gender;
+                obj.State = State;
+                obj.City = City;
                 DataSet ds = obj.Registration();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {

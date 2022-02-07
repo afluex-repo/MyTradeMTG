@@ -473,6 +473,7 @@
     <Content Include="Views\Master\PackageMaster.cshtml" />
     <Content Include="Views\User\PinTransferReport.cshtml" />
     <Content Include="Views\User\ConfirmActivation.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -482,6 +483,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>

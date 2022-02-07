@@ -4,6 +4,7 @@ using MyTrade.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,7 +27,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
-                if (ViewBag.Status=="InActive")
+                if (ViewBag.Status == "InActive")
                 {
                     return RedirectToAction("ActivateByPin", "User");
                 }
@@ -256,7 +257,7 @@ namespace MyTrade.Controllers
                                 {
                                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                     {
-                                        TempData["Pin"] = "Transfer Successfully";
+                                        TempData["Pin"] = "Transferred Successfully";
                                     }
                                     else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                                     {
@@ -357,6 +358,64 @@ namespace MyTrade.Controllers
         public ActionResult ConfirmActivation()
         {
             return View();
+        }
+        public ActionResult UserProfile()
+        {
+            Home model = new Home();
+            List<SelectListItem> Gender = Common.BindGender();
+            ViewBag.Gender = Gender;
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                    model.SponsorName = ds.Tables[0].Rows[0]["SponsorName"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    model.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                    model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult UserProfile(Home model)
+        {
+            try
+            {
+                List<SelectListItem> Gender = Common.BindGender();
+                ViewBag.Gender = Gender;
+                if (model.postedFile != null)
+                {
+                    model.ProfilePic = "/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(model.postedFile.FileName);
+                    model.postedFile.SaveAs(Path.Combine(Server.MapPath(model.ProfilePic)));
+                }
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["UserProfile"] = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["UserProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["UserProfile"] = ex.Message;
+            }
+            return View(model);
         }
     }
 }
