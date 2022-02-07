@@ -9,7 +9,7 @@ namespace MyTrade.Models
 {
     public class API
     {
-        
+
     }
     #region Registratio
     public class RegistrationAPI
@@ -31,13 +31,15 @@ namespace MyTrade.Models
         public string Email { get; set; }
         public string ProfilePic { get; set; }
         public string PinCode { get; set; }
-         public DataSet Registration()
+        public string Gender { get; set; }
+        public DataSet Registration()
         {
             SqlParameter[] para = {
 
                                    new SqlParameter("@SponsorId",SponsorId),
                                    new SqlParameter("@MobileNo",MobileNo),
                                    new SqlParameter("@Email",Email),
+                                          new SqlParameter("@Gender",Gender),
                                    new SqlParameter("@FirstName",FirstName),
                                    new SqlParameter("@LastName",LastName),
                                     new SqlParameter("@RegistrationBy",RegistrationBy),
@@ -98,8 +100,8 @@ namespace MyTrade.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
-        public string State { get;  set; }
-        public string City { get;  set; }
+        public string State { get; set; }
+        public string City { get; set; }
     }
     #endregion
     #region Login
@@ -129,7 +131,7 @@ namespace MyTrade.Models
     #region EpinDetails
     public class EpinDetails
     {
- 
+
         public string EPin { get; set; }
         public string Fk_UserId { get; set; }
         public string Message { get; set; }
@@ -208,7 +210,7 @@ namespace MyTrade.Models
     }
     public class Tree1
     {
-       
+
         public string SponsorId { get; set; }
         public string Fk_ParentId { get; set; }
         public string TeamPermanent { get; set; }
@@ -224,9 +226,9 @@ namespace MyTrade.Models
         public string BusinessLeft { get; set; }
         public string BusinessRight { get; set; }
         public string ImageURL { get; set; }
-        public string Fk_UserId { get;  set; }
-        public string LoginId { get;  set; }
-        public string Leg { get;  set; }
+        public string Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string Leg { get; set; }
     }
     public class TopupByUser
     {
@@ -288,7 +290,7 @@ namespace MyTrade.Models
     }
     public class DirectRequest
     {
-        public string LoginId { get;  set; }
+        public string LoginId { get; set; }
         public string Name { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
@@ -334,17 +336,17 @@ namespace MyTrade.Models
         public string LoginId { get; set; }
         public string Name { get; set; }
         public string Mobile { get; set; }
-        public string Email { get;  set; }
+        public string Email { get; set; }
         public string Leg { get; set; }
         public string Package { get; set; }
-        public string JoiningDate { get;  set; }
-        public string PermanentDate { get;  set; }
+        public string JoiningDate { get; set; }
+        public string PermanentDate { get; set; }
         public string Status { get; set; }
     }
     public class PinRequest
     {
         public string FK_UserId { get; set; }
-      
+
         public DataSet GetPinList()
         {
             SqlParameter[] para = {
@@ -395,7 +397,7 @@ namespace MyTrade.Models
     {
         public string FK_ParentId { get; set; }
         public string PK_UserId { get; set; }
-        public string FK_SponsorId  { get; set; }
+        public string FK_SponsorId { get; set; }
         public string LoginId { get; set; }
         public string MemberName { get; set; }
         public string AssociateMemberName { get; set; }
@@ -423,12 +425,12 @@ namespace MyTrade.Models
     }
     public class AssciateBookingResponse
     {
-        public string ActiveStatus { get;  set; }
-        public string FirstName { get;  set; }
-        public string Fk_SponsorId { get;  set; }
-        public string Fk_UserId { get;  set; }
-        public string LoginId { get;  set; }
-        public string Status { get;  set; }
+        public string ActiveStatus { get; set; }
+        public string FirstName { get; set; }
+        public string Fk_SponsorId { get; set; }
+        public string Fk_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string Status { get; set; }
     }
     public class Wallet
     {
@@ -447,5 +449,57 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string Balance { get; set; }
+    }
+    public class TransferPin
+    {
+        public string EPinNo { get; set; }
+        public string LoginId { get; set; }
+        public DataSet ePinTransfer()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Epino",EPinNo),
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ePinTransfer", para);
+            return ds;
+        }
+    }
+    public class Reponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+    }
+    public class PinReport
+    {
+        public string LoginId { get; set; }
+        public string ToLoginId { get; set; }
+        public string ePinNo { get; set; }
+        public DataSet GetTransferPinReport()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FromLoginId",LoginId),
+                new SqlParameter("@ToLoginId",ToLoginId),
+                new SqlParameter("@EpinNo",ePinNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTransferPinReport", para);
+            return ds;
+        }
+    }
+    public class PinResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PinDetails> lst { get; set; }
+    }
+    public class PinDetails
+    {
+        public string ePinNo { get;  set; }
+        public string FromId { get;  set; }
+        public string FromName { get;  set; }
+        public string ToId { get;  set; }
+        public string ToName { get;  set; }
+        public string TransferDate { get;  set; }
     }
 }

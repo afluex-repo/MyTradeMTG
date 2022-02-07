@@ -32,6 +32,7 @@ namespace MyTrade.Models
         public string SubMenuName { get;  set; }
         public string UserType { get;  set; }
         public string ConfirmPassword { get; set; }
+        public string Gender { get; set; }
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -128,5 +129,15 @@ namespace MyTrade.Models
 
         }
         #endregion
+        public DataSet GetMemberName()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserName", para);
+
+            return ds;
+        }
     }
 }

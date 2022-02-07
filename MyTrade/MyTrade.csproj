@@ -470,6 +470,7 @@
     <Content Include="Views\Downline\DownLineList.cshtml" />
     <Content Include="Views\Master\PackageList.cshtml" />
     <Content Include="Views\Master\PackageMaster.cshtml" />
+    <Content Include="Views\User\PinTransferReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -497,7 +498,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53406/</IISUrl>
+          <IISUrl>http://localhost:53405/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

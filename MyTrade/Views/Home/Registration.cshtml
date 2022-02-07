@@ -135,6 +135,7 @@
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">Password</label> <span class="text-danger">*</span>
                                         @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @onchange = "return checkPasswordComplexity();", @type = "Password" })
+                                        <label style="color:red;font-size:12px">Note: Password should be alpa-numeric.</label>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="Email">Confirm Password</label>
@@ -143,16 +144,24 @@
 
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-4 mb-5">
+                                    <div class="col-md-6 mb-5">
+                                        <label for="City">Gender</label>
+                                        @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"),"-Select-", new { @class = "form-control" })
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb-5">
                                         <label for="PinCode">PinCode</label>
                                         @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return getstatecity()" })
                                     </div>
-                                    <div class="col-md-4 mb-5">
+                  
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-5">
                                         <label for="City">City</label>
                                         @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @Disabled = "true" })
 
                                     </div>
-                                    <div class="col-md-4 mb-5">
+                                    <div class="col-md-6 mb-5">
                                         <label for="State">State</label>
                                         @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @Disabled = "true" })
                                     </div>
@@ -240,6 +249,7 @@
             $("#PinCode").attr("disabled", "disabled");
             $("#Password").attr("disabled", "disabled");
             $("#ConfirmPassword").attr("disabled", "disabled");
+            $("#Gender").attr("disabled", "disabled");
             $("#Email").attr("disabled", "disabled");
             $('#Confirm').hide();
             $('#Edit').show();
@@ -254,6 +264,7 @@
             $("#PinCode").attr("disabled", false);
             $("#Password").attr("disabled", false);
             $("#ConfirmPassword").attr("disabled", false);
+            $("#Gender").attr("disabled", false);
             $("#Email").attr("disabled", false);
             $('#Confirm').show();
             $('#Edit').hide();
@@ -274,7 +285,7 @@
                 url: "/Home/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val() },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender").val() },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
