@@ -26,6 +26,10 @@ namespace MyTrade.Models
         public string ToDate { get; set; }
         public string Status { get; set; }
 
+        public string Password { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmNewPassword { get; set; }
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -68,5 +72,19 @@ namespace MyTrade.Models
             return ds;
         }
         #endregion
+
+
+
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para = {new SqlParameter("@OldPassword",Password),
+                                   new SqlParameter("@NewPassword",NewPassword),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AdminChangePassword", para);
+            return ds;
+
+        }
+
     }
 }

@@ -269,7 +269,7 @@ namespace MyTrade.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
-            
+
             return View(newdata);
         }
         [HttpPost]
@@ -282,7 +282,7 @@ namespace MyTrade.Controllers
                 newdata.ToLoginID = null;
             }
             List<AdminReports> lst1 = new List<AdminReports>();
-         
+
             newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
@@ -336,9 +336,81 @@ namespace MyTrade.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
-            
+
             return View(newdata);
         }
         #endregion
+
+        
+        public ActionResult DirectListForAdmin()
+        {
+            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
+            ViewBag.ddlStatus = AssociateStatus;
+            List<SelectListItem> Leg = Common.LegType();
+            ViewBag.ddlleg = Leg;
+
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.GetDirectList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.JoiningDate = r["JoiningDate"].ToString();
+                    obj.Leg = r["Leg"].ToString();
+                    obj.PermanentDate = (r["PermanentDate"].ToString());
+                    obj.Status = (r["Status"].ToString());
+                    obj.SponsorId = (r["LoginId"].ToString());
+                    obj.SponsorName = (r["Name"].ToString());
+                    obj.Package = (r["ProductName"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstDirect = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("DirectListForAdmin")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult DirectListForAdmin(AdminReports model)
+        {
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<AdminReports> lst = new List<AdminReports>();
+            //model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.GetDirectList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.Leg = r["Leg"].ToString();
+                    obj.JoiningDate = r["JoiningDate"].ToString();
+                    obj.PermanentDate = (r["PermanentDate"].ToString());
+                    obj.Status = (r["Status"].ToString());
+                    obj.SponsorId = (r["LoginId"].ToString());
+                    obj.SponsorName = (r["Name"].ToString());
+                    obj.Package = (r["ProductName"].ToString());
+                    lst.Add(obj);
+                }
+                model.lstDirect = lst;
+            }
+            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
+            ViewBag.ddlStatus = AssociateStatus;
+            List<SelectListItem> Leg = Common.LegType();
+            ViewBag.ddlleg = Leg;
+            return View(model);
+        }
+
+
+
     }
 }
