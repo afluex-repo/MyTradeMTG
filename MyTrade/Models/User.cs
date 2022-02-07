@@ -12,6 +12,9 @@ namespace MyTrade.Models
         #region property
         public string EPin { get; set; }
         public string PinStatus { get;  set; }
+        public string Password { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmNewPassword { get; set; }
         #endregion
         public DataSet ValidateEpin()
         {
@@ -35,6 +38,19 @@ namespace MyTrade.Models
 
             return ds;
         }
+
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para = {new SqlParameter("@OldPassword",Password),
+                                   new SqlParameter("@NewPassword",NewPassword),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UserChangePassword", para);
+            return ds;
+
+        }
+
+
     }
 
 
@@ -90,6 +106,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTransferPinReport", para);
             return ds;
         }
-
+     
     }
 }

@@ -358,5 +358,42 @@ namespace MyTrade.Controllers
         {
             return View();
         }
+
+
+        public ActionResult ChangePasswordForUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ChangePasswordForUser")]
+        public ActionResult ChangePasswordForUser(User model)
+        {
+            try
+            {
+                model.UpdatedBy = Session["Pk_userId"].ToString();
+                model.Password = Crypto.Encrypt(model.Password);
+                model.NewPassword = Crypto.Encrypt(model.NewPassword);
+                DataSet ds = model.ChangePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Password Changed  Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("ChangePasswordForUser", "User");
+        }
+
+
     }
 }
