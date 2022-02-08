@@ -68,6 +68,21 @@
             </ul>*@
             <ul class="navbar-item flex-row ml-md-auto">
                 <li class="nav-item dropdown user-profile-dropdown">
+                    @if (Session["Gender"] != null)
+                    {
+                        if (Session["Gender"].ToString() == "F")
+                        {
+
+                            <h6 style="color:white;margin-top:10px">Hello Mrs. @Session["FullName"]</h6>
+                        }
+                        else
+                        {
+                            <h6 style="color:white;margin-top:10px">Hello Mr. @Session["FullName"]</h6>
+                        }
+                    }
+                 
+                </li>
+                <li class="nav-item dropdown user-profile-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         @if (Session["Profile"].ToString() != "")
                         {
@@ -120,7 +135,7 @@
                     <li class="menu">
                         <a href="#Account" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 <span>Account</span>
                             </div>
                             <div>
@@ -179,6 +194,26 @@
                             </li>
                             <li>
                                 <a href="/User/PinTransferReport">Transfer Report</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu">
+                        <a href="#Setting" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Setting</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Setting" data-parent="#accordionExample">
+
+                            <li>
+                                <a href="/User/UserProfile">Profile</a>
+                            </li>
+                            <li>
+                                <a href="/User/ChangePasswordForUser">Change Password</a>
                             </li>
                         </ul>
                     </li>
