@@ -23,6 +23,7 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 ViewBag.TotalDownline = ds.Tables[0].Rows[0]["TotalDownline"].ToString();
+                ViewBag.TotalBusiness = ds.Tables[0].Rows[0]["TotalBusiness"].ToString();
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
@@ -381,6 +382,9 @@ namespace MyTrade.Controllers
                     model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
                     model.State = ds.Tables[0].Rows[0]["State"].ToString();
                     model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 }
             }
             return View(model);

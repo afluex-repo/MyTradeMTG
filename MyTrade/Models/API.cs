@@ -503,4 +503,94 @@ namespace MyTrade.Models
         public string ToName { get;  set; }
         public string TransferDate { get;  set; }
     }
+    public class Request
+    {
+        public string FK_UserId { get; set; }
+        public DataSet UserProfile()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FK_UserId",FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+            return ds;
+        }
+
+    }
+    public class ProfileAPI
+    {
+        public string Status { get; set; }
+        public string Message { get;  set; }
+        public string FK_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public string MobileNo { get; set; }
+        public string Email { get; set; }
+        public string PinCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+        public string ProfilePic { get; set; }
+        public string AadharNo { get; set; }
+        public string PanNo { get; set; }
+        public DataSet UpdateProfile()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@FirstName", FirstName),
+                                      new SqlParameter("@LastName", LastName),
+                                      new SqlParameter("@MobileNo", MobileNo),
+                                      new SqlParameter("@Email", Email),
+                                      new SqlParameter("@Gender", Gender),
+                                      new SqlParameter("@PinCode", PinCode),
+                                      new SqlParameter("@State", State),
+                                      new SqlParameter("@City", City),
+                                      new SqlParameter("@ProfilePic", ProfilePic),
+                                      new SqlParameter("@AadharNo", AadharNo),
+                                      new SqlParameter("@PanNo", PanNo),
+                                      new SqlParameter("@Address", Address),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
+
+            return ds;
+        }
+    }
+    public class Password
+    {
+        public string FK_UserId { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para = {
+                                     
+                                      new SqlParameter("@OldPassword", OldPassword),
+                                      new SqlParameter("@NewPassword", NewPassword),
+                                       new SqlParameter("@UpdatedBy", FK_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UserChangePassword", para);
+
+            return ds;
+        }
+    }
+    public class ActivateUser
+    {
+        public string ePinNo { get; set; }
+        public string FK_UserId { get; set; }
+        public DataSet ActivateUserByPin()
+        {
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@Fk_UserId", FK_UserId),
+                                      new SqlParameter("@EPinNo", ePinNo)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+
+            return ds;
+        }
+    }
 }

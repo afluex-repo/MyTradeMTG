@@ -166,6 +166,9 @@ namespace MyTrade.Models
                                       new SqlParameter("@State", State),
                                       new SqlParameter("@City", City),
                                       new SqlParameter("@ProfilePic", ProfilePic),
+                                      new SqlParameter("@AadharNo", AdharNo),
+                                      new SqlParameter("@PanNo", PanNo),
+                                      new SqlParameter("@Address", Address),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
 

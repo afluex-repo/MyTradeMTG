@@ -73,11 +73,11 @@
                         if (Session["Gender"].ToString() == "F")
                         {
 
-                            <h6 style="color:white;margin-top:10px">Hello Mrs. @Session["FullName"]</h6>
+                            <h6 style="color:white;margin-top:10px">Hello Mrs. @Session["FullName"] (@Session["LoginId"])</h6>
                         }
                         else
                         {
-                            <h6 style="color:white;margin-top:10px">Hello Mr. @Session["FullName"]</h6>
+                            <h6 style="color:white;margin-top:10px">Hello Mr. @Session["FullName"] (@Session["LoginId"])</h6>
                         }
                     }
                  
