@@ -33,6 +33,7 @@ namespace MyTrade.Models
         public string UserType { get;  set; }
         public string ConfirmPassword { get; set; }
         public string Gender { get; set; }
+        public string Name { get; set; }
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -137,6 +138,17 @@ namespace MyTrade.Models
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUserName", para);
 
+            return ds;
+        }
+
+
+        public DataSet ForgetPassword()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Email",Email)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
         }
     }
