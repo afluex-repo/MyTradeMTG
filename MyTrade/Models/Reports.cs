@@ -39,11 +39,11 @@ namespace MyTrade.Models
         public string FK_InvestmentID { get; set; }
         public string MemberAccNo { get; set; }
         public string IFSCCode { get; set; }
-        public string BankName { get; set; }
+        //public string BankName { get; set; }
         public string MaturityDate { get; set; }
         public string Description { get; set; }
         public string Pk_PaidBoosterId { get; set; }
-        public string TransactionNo { get; set; }
+        //public string TransactionNo { get; set; }
         public string EncryptName { get; set; }
         public string AchievementDate { get; set; }
         public bool IsDownline { get; set; }
@@ -52,7 +52,7 @@ namespace MyTrade.Models
         public string TransferDate { get; set; }
         public string ToActivationDate { get; set; }
         public string PAN { get; set; }
-        public string Leg { get; set; }
+        //public string Leg { get; set; }
         public string LoginId { get; set; }
         public string PayoutLoginId { get; set; }
 
@@ -83,7 +83,7 @@ namespace MyTrade.Models
 
         public List<Reports> lstunpaidincomes { get; set; }
 
-        public string TransactionDate { get; set; }
+        //public string TransactionDate { get; set; }
         public string BankBranch { get; set; }
 
         public string FromName { get; set; }
@@ -121,7 +121,7 @@ namespace MyTrade.Models
 
         public string UpgradtionDate { get; set; }
 
-        public string Package { get; set; }
+        //public string Package { get; set; }
         public string PaymentDate { get; set; }
         public string PaymentMode { get; set; }
         public string Quantity { get; set; }
@@ -136,8 +136,7 @@ namespace MyTrade.Models
         public List<Reports> lstpermission { get; set; }
         public string FormName { get; set; }
         public string FormType { get; set; }
-
-
+        
         public string LastTopUpAmount { get; set; }
         public bool IsNewBusiness { get; set; }
         public string LastTopUpDate { get; set; }

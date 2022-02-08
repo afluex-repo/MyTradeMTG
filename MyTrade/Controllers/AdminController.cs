@@ -178,5 +178,90 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ChangePassword")]
+        public ActionResult ChangePassword(Admin model)
+        {
+            try
+            {
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ChangePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Password Changed  Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("ChangePassword", "Admin");
+        }
+
+
+        public ActionResult PinTransferReportForAdmin()
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.GetTransferPinReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.ePinNo = r["EpinNo"].ToString();
+                    obj.FromId = r["FromId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToId = r["ToId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.TransferDate = r["TransferDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPinTransfer = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "GetDetails")]
+        [ActionName("PinTransferReportForAdmin")]
+        public ActionResult PinTransferReportForAdmin(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            model.ePinNo = model.ePinNo == "0" ? null : model.ePinNo;
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.ToLoginID = model.ToLoginID == "0" ? null : model.ToLoginID;
+            DataSet ds = model.GetTransferPinReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.ePinNo = r["EpinNo"].ToString();
+                    obj.FromId = r["FromId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToId = r["ToId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.TransferDate = r["TransferDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPinTransfer = lst;
+            }
+            return View(model);
+        }
+
+
     }
 }

@@ -19,6 +19,8 @@ namespace MyTrade.Models
         public string JoiningDate { get;  set; }
         public string LoginId { get;  set; }
         public List<AdminReports> lstassociate { get; set; }
+        public List<AdminReports> lstPinTransfer { get; set; }
+        public List<AdminReports> lstDirect { get; set; }
         public string Mobile { get;  set; }
         public string Name { get;  set; }
         public string Password { get;  set; }
@@ -35,6 +37,18 @@ namespace MyTrade.Models
         public string PaymentMode { get;  set; }
         public string BusinessType { get;  set; }
         public string ReceiptNo { get;  set; }
+
+        public string FromLoginID { get; set; }
+        public string ePinNo { get; set; }
+        public string FromId { get; set; }
+        public string FromName { get; set; }
+        public string ToId { get; set; }
+        public string ToName { get; set; }
+        public string TransferDate { get; set; }
+        public string FromActivationDate { get; set; }
+        public string ToActivationDate { get; set; }
+        public string PermanentDate { get; set; }
+
         #region associatelist
         public DataSet GetAssociateList()
         {
@@ -68,5 +82,36 @@ namespace MyTrade.Models
             return ds;
         }
         #endregion
+
+        public DataSet GetTransferPinReport()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FromLoginId",LoginId),
+                new SqlParameter("@ToLoginId",ToLoginID),
+                new SqlParameter("@EpinNo",ePinNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTransferPinReportForAdmin", para);
+            return ds;
+        }
+
+        public DataSet GetDirectList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name", Name),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@FromActivationDate", FromActivationDate),
+                                    new SqlParameter("@ToActivationDate", ToActivationDate),
+                                    new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@Status", Status),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetDirectListForAdmin", para);
+            return ds;
+        }
+
+
+
+
     }
 }

@@ -151,9 +151,10 @@
                                         @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @onblur = "return validateConfPassword();", @type = "Password" })
                                     </div>
                                     <label style="color:red;font-size:12px;padding-left:10px">Note: Password should be alpha-numeric.</label>
+                                    
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-2">
                                         <label for="City">Gender</label>
                                         @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"),"-Select-", new { @class = "form-control" })
                                     </div>
@@ -163,6 +164,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
+                                  
                                     <div class="col-md-6 mb-5">
                                         <label for="City">City</label>
                                         @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @Disabled = "true" })
