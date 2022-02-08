@@ -475,6 +475,7 @@
     <Content Include="Views\User\ConfirmActivation.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\User\ChangePasswordForUser.cshtml" />
+    <Content Include="Views\Home\ForgetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

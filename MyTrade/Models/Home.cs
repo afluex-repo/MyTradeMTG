@@ -35,6 +35,9 @@ namespace MyTrade.Models
         public string Gender { get; set; }
         public string ProfilePic { get; set; }
         public HttpPostedFileBase postedFile { get; set; }
+        public string Name { get; set; }
+        public string ePinNo { get; set; }
+        
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -144,6 +147,19 @@ namespace MyTrade.Models
 
             return ds;
         }
+
+        public DataSet GetInActiveUser()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetInActiveUser", para);
+
+            return ds;
+        }
+        
+
         public DataSet UserProfile()
         {
             SqlParameter[] para = {
@@ -169,6 +185,17 @@ namespace MyTrade.Models
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
 
+            return ds;
+        }
+
+
+        public DataSet ForgetPassword()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Email",Email)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
         }
     }

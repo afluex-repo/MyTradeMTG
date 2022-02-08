@@ -284,12 +284,12 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-        public ActionResult GetMemberName(string LoginId)
+        public ActionResult GetMemberName(string LoginId,string ePinNo)
         {
             Home model = new Home();
             try
             {
-
+                model.ePinNo = ePinNo;
                 model.LoginId = LoginId;
                 DataSet ds = model.GetMemberName();
 
@@ -297,6 +297,30 @@ namespace MyTrade.Controllers
                 {
 
                     model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetInActiveUser(string LoginId)
+        {
+            Home model = new Home();
+            try
+            {
+               
+                model.LoginId = LoginId;
+                DataSet ds = model.GetInActiveUser();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
                     model.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
                 }
 
@@ -451,6 +475,33 @@ namespace MyTrade.Controllers
                 TempData["msg"] = ex.Message;
             }
             return RedirectToAction("ChangePasswordForUser", "User");
+        }
+        
+        public ActionResult ActivatePin(string ePinNo, string Fk_UserId)
+        {
+            try
+            {
+                Pin model = new Pin();
+                model.ePinNo = ePinNo;
+                model.FK_UserId = Fk_UserId;
+                DataSet ds = model.ActivatePin();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Pin"] = "Pin Activated  Successfully";
+                    }
+                    else
+                    {
+                        TempData["Pin"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Pin"] = ex.Message;
+            }
+            return RedirectToAction("PinList", "User");
         }
 
 

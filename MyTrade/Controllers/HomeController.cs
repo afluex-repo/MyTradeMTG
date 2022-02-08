@@ -1,8 +1,11 @@
-﻿using MyTrade.Models;
+﻿using MyTrade.Filter;
+using MyTrade.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -249,5 +252,67 @@ namespace MyTrade.Controllers
             return PartialView("_Menu", Menu);
         }
         #endregion
+
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ForgetPassword")]
+        [OnAction(ButtonName = "forgetpassword")]
+        public ActionResult ForgetPassword(Home model)
+        {
+
+            SmtpClient smtpClient = new SmtpClient();
+            MailMessage message = new MailMessage();
+
+            try
+            {
+                DataSet ds = model.ForgetPassword();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                        model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        model.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
+
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + model.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + model.Password;
+
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("developer2.afluex@gmail.com","deve@486");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
+                        TempData["Login"] = "password sent your email-id successfully.";
+                    }
+
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Login"] = ex.Message;
+            }
+            return RedirectToAction("Login", "Home");
+        }
+
     }
 }
