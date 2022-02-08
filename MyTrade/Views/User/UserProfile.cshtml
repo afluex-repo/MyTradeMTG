@@ -1,0 +1,156 @@
+﻿@model MyTrade.Models.Home
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<style>
+     .errortext {
+            border: 2px solid red !important;
+            background-color: #ffd3c6 !important;
+        }
+</style>
+@using (Html.BeginForm("UserProfile", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Profile</h4>
+                                <span class="text-danger">
+                                    @TempData["UserProfile"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="LoginId">Login Id</label>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Sponsor Id <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Sponsor Name <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="LoginId">First Name <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Last Name </label>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Mobile No <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control",@maxlength="10", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                        
+                            <div class="col-md-4">
+                                <label for="Package">Email <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Gender <span style="color:red">*</span></label>
+                                <input type="hidden" id="hdf" value="@Model.Gender">
+                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Pin Code </label>
+                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return getstatecity()" })
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                           
+                            <div class="col-md-4">
+                                <label for="Package">State </label>
+                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "true" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">City </label>
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "true" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Package">Photo </label>
+                                <br />
+                              <input type="file" id="postedFile" class="form-control" name="postedFile"/>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                           
+                        </div>
+                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Update" onclick="return ValidateForm();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+<script>
+    function getstatecity() {
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: "/Home/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#PinCode").val() },
+            success: function (data) {
+                if (data.Result == "1") {
+                    $("#State").val(data.State);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#State").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    $("#PinCode").addClass('errortext');
+                    $('#PinCode').focus();
+                    alert(data.Result);
+
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        $("#Gender").val($("#hdf").val()).attr("selected", "selected");
+    })
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+        && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function ValidateForm() {
+        $(".errortext").removeClass("errortext");
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+        return true;
+    }
+</script>

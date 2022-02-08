@@ -49,8 +49,7 @@ namespace MyTrade.Models
             return ds;
 
         }
-
-
+        
     }
 
 
@@ -75,6 +74,10 @@ namespace MyTrade.Models
         public string ToName { get;  set; }
         public string TransferDate { get;  set; }
         public string ToLoginId { get; set; }
+
+        public string Login_Id { get; set; }
+
+        public string UserName { get; set; }
         public DataSet GetPinList()
         {
             SqlParameter[] para = {
@@ -106,6 +109,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTransferPinReport", para);
             return ds;
         }
-     
+
+        public DataSet ActivatePin()
+        {
+            SqlParameter[] para = {new SqlParameter("@Fk_UserId",FK_UserId),
+                                   new SqlParameter("@EPinNo",ePinNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+            return ds;
+        }
+
+
+
     }
 }

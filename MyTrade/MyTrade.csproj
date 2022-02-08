@@ -473,9 +473,7 @@
     <Content Include="Views\Master\PackageMaster.cshtml" />
     <Content Include="Views\User\PinTransferReport.cshtml" />
     <Content Include="Views\User\ConfirmActivation.cshtml" />
-    <Content Include="Views\Admin\ChangePassword.cshtml" />
-    <Content Include="Views\Admin\PinTransferReportForAdmin.cshtml" />
-    <Content Include="Views\AdminReports\DirectListForAdmin.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\User\ChangePasswordForUser.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <None Include="Web.Debug.config">
@@ -487,6 +485,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
