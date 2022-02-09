@@ -131,14 +131,20 @@ namespace MyTrade.Controllers
             ViewBag.Gender = Gender;
             if (!string.IsNullOrEmpty(PId))
             {
-                var d = Crypto.Decrypt(PId);
-                ViewBag.SponsorId = d.Split('|')[0];
+                obj.Fk_UserId = PId;
+                // var d = Crypto.Decrypt(PId);
+                DataSet ds = obj.GetMemberNameWithUserId();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.SponsorId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                }
+               // ViewBag.SponsorId = d.Split('|')[0];
                 //ViewBag.Leg = d.Split('|')[1];
             }
             return View();
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender,string State,string City)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City)
 
         {
             Home obj = new Home();
@@ -289,7 +295,7 @@ namespace MyTrade.Controllers
                             mail.IsBodyHtml = true;
                             using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                             {
-                                smtp.Credentials = new NetworkCredential("developer2.afluex@gmail.com","deve@486");
+                                smtp.Credentials = new NetworkCredential("developer2.afluex@gmail.com", "deve@486");
                                 smtp.EnableSsl = true;
                                 smtp.Send(mail);
                             }

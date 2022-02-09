@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <style>
-     .errortext {
-            border: 2px solid red !important;
-            background-color: #ffd3c6 !important;
-        }
+    .errortext {
+        border: 2px solid red !important;
+        background-color: #ffd3c6 !important;
+    }
 </style>
 @using (Html.BeginForm("UserProfile", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -18,7 +18,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Profile</h4>
+                                <h4>Profile Details</h4>
                                 <span class="text-danger">
                                     @TempData["UserProfile"]
                                 </span>
@@ -29,15 +29,15 @@
                         <div class="row mb-4">
                             <div class="col-md-4">
                                 <label for="LoginId">Login Id</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @readonly = "true" })
                             </div>
                             <div class="col-md-4">
                                 <label for="Package">Sponsor Id <span style="color:red">*</span></label>
-                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @readonly = "true" })
                             </div>
                             <div class="col-md-4">
                                 <label for="Package">Sponsor Name <span style="color:red">*</span></label>
-                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @readonly = "true" })
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -55,7 +55,6 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                        
                             <div class="col-md-4">
                                 <label for="Package">Email <span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
@@ -71,7 +70,6 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                           
                             <div class="col-md-4">
                                 <label for="Package">State </label>
                                 @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "true" })
@@ -80,14 +78,45 @@
                                 <label for="Package">City </label>
                                 @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "true" })
                             </div>
+
+                        </div>
+
+                    </div>
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Update Profile</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row mb-4">
                             <div class="col-md-4">
                                 <label for="Package">Photo </label>
                                 <br />
-                              <input type="file" id="postedFile" class="form-control" name="postedFile"/>
+                                <input type="file" id="postedFile" class="form-control" name="postedFile" onchange="readURL(this)" />
+
+                            </div>
+                            <div class="col-md-4">
+                                <img src="@Model.ProfilePic" height="100px" width="100px" id="imgPic" />
+
                             </div>
                         </div>
                         <div class="row mb-4">
-                           
+                            <div class="col-md-4">
+                                <label for="AdharNo">Aadhar No. </label>
+                                @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @maxlength = "12", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="PanNo">PAN No. </label>
+                                @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @onchange = "return validatePan();" })
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Address">Address </label>
+                                <input type="hidden" id="hdfAddress" value="@Model.Address" />
+                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                            </div>
                         </div>
                         <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Update" onclick="return ValidateForm();" />
                     </div>
@@ -124,6 +153,7 @@
     }
     $(document).ready(function () {
         $("#Gender").val($("#hdf").val()).attr("selected", "selected");
+        $("#Address").text($("#hdfAddress").val());
     })
     function isNumberKey(evt) {
 
@@ -152,5 +182,28 @@
             return false;
         }
         return true;
+    }
+    function validatePan() {
+        var panVal = $('#PanNo').val();
+        var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+
+        if (regpan.test(panVal)) {
+            $("#PanNo").removeClass('errortext');
+        } else {
+            alert("Invalid PAN Number");
+            $("#PanNo").val('');
+            $("#PanNo").addClass('errortext');
+        }
+    }
+    function readURL(input) {
+        debugger;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgPic')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 </script>
