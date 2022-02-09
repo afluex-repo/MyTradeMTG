@@ -143,14 +143,14 @@
 
                                     <div class="col-md-6 mb-2">
                                         <label for="MobileNo">Password</label> <span class="text-danger">*</span>
-                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @onchange = "return checkPasswordComplexity();", @type = "Password" })
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password",  @type = "Password" })
                                        
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label for="Email">Confirm Password</label>
                                         @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @onblur = "return validateConfPassword();", @type = "Password" })
                                     </div>
-                                    <label style="color:red;font-size:12px;padding-left:10px">Note: Password should be alpha-numeric.</label>
+                                    @*<label style="color:red;font-size:12px;padding-left:10px">Note: Password should be alpha-numeric.</label>*@
                                     
                                 </div>
                                 <div class="form-row">
@@ -346,16 +346,6 @@
                 return false;
 
             return true;
-        }
-        function checkPasswordComplexity(pwd) {
-            debugger;
-            var pwd = $("#Password").val();
-            var letter = /[a-zA-Z]/;
-            var number = /[0-9]/;
-            var valid = number.test(pwd) && letter.test(pwd); //match a letter _and_ a number
-            if (valid == false) {
-                alert('Password should be alpha numeric');
-            }
         }
         function validateConfPassword() {
             var password = $('#Password').val();

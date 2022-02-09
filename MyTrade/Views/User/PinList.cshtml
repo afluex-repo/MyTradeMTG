@@ -32,6 +32,7 @@
                                     <th>Pin Status</th>
                                     @*<th>Is Registered</th>*@
                                     <th>Registered To</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,6 +54,14 @@
                                 <td>@Item.PinStatus</td>
                                 <td>@Item.RegisteredTo</td>
                                 @*<td>@Item.RegisteredTo </td>*@
+                                @if (Item.PinStatus == "Available")
+                                {
+                                    <td><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
                             </tr>
                                             i++;
                                         }
@@ -87,6 +96,41 @@
                             </div>
                         </div>
                     </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.HiddenFor(m => m.ePinNo)
+<div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" style="color: red">Activate User</h6>
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+            </div>
+            <div class="modal-body" style="color: black">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Login Id</label>
+                            @Html.TextBoxFor(m => m.Login_Id, new { @class = "form-control", @placeholder = "LoginId" ,@onchange= "return GetInActiveUser();" })
+                        <input type="hidden" id="UserId" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Name</label>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Name",@readonly=true })
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-sm btn-success pull-right" onclick="return ActivatePin()" value="Activate" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -128,6 +172,29 @@
             }
         });
     }
+    function GetInActiveUser() {
+        debugger;
+       
+        $.ajax({
+            url: '/User/GetInActiveUser',
+            data: {
+                'LoginId': $('#Login_Id').val()
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.DisplayName == null) {
+                    alert('Invalid Login ID')
+                    $("#Login_Id").val(''); 
+                    $("#UserId").val('');
+                    $("#UserName").val('');
+                    return;
+                }
+                $("#UserId").val(data.Fk_UserId);
+                $("#UserName").val(data.DisplayName);
+            }
+        });
+    }
     $(document).ready(function () {
         $('#ckbCheckAll').on('click', function () {
             if (this.checked) {
@@ -152,4 +219,58 @@
 </script>
 
 
+
+<script>
+    function ValidateLogId()
+    {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+        return true;
+    }
+    function openPopup(ePinNo) {
+        $("#ePinNo").val(ePinNo);
+        $("#myModal").modal('show');
+    }
+
+    function closeModal() {
+        $("#myModal").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
+    function ActivatePin() {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#Login_Id').val() == '') {
+            $("#Login_Id").addClass('errortext');
+            $('#Login_Id').focus();
+            return false;
+        }
+      
+        var r = confirm('Are you sure you want to activate this user ?');
+        if (r == true) {
+            $.ajax({
+                url: "/User/ActivatePin",
+                Type: "Get",
+                DataType: "JSON",
+                data: { ePinNo: $("#ePinNo").val(), Fk_UserId: $("#UserId").val() },
+                success: function (data)
+                {
+                    alert("User activated successfully");
+                    $("#myModal").modal('hide');
+                }
+            });
+        }
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
 

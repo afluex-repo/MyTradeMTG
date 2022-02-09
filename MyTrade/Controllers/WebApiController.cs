@@ -288,7 +288,7 @@ namespace MyTrade.Controllers
                 obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
                 if (obj.ActiveStatus == "Active")
                 {
-                    obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + Crypto.Encrypt(ds.Tables[2].Rows[0]["LoginId"].ToString());
+                    obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
                 }
                 else
                 {
