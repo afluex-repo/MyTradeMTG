@@ -505,5 +505,58 @@ namespace MyTrade.Controllers
         }
 
 
+        public ActionResult BankDetailsUpdate()
+        {
+           
+           User model = new User();
+           model.Fk_UserId = Session["Pk_userId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                   
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                    model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                    model.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                    model.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                    model.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                    model.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                    model.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+                }
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("BankDetailsUpdate")]
+        public ActionResult BankDetailsUpdate(User model)
+        {
+            try
+            {
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.BankDetailsUpdate();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Bank Details Update Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("BankDetailsUpdate", "User");
+        }
+
     }
 }
