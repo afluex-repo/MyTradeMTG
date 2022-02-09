@@ -476,6 +476,7 @@
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\User\ChangePasswordForUser.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\User\BankDetailsUpdate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

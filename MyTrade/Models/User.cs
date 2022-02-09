@@ -15,6 +15,16 @@ namespace MyTrade.Models
         public string Password { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmNewPassword { get; set; }
+
+        public string AdharNo { get; set; }
+        public string PanNumber { get; set; }
+        public string AccountNo { get; set; }
+        public string IFSCCode { get; set; }
+
+        public string NomineeName { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+
         #endregion
         public DataSet ValidateEpin()
         {
@@ -49,7 +59,37 @@ namespace MyTrade.Models
             return ds;
 
         }
-        
+
+        public DataSet BankDetailsUpdate()
+        {
+            SqlParameter[] para = {
+                                   new SqlParameter("@FK_UserId",Fk_UserId),
+                                   new SqlParameter("@PanNo",PanNumber),
+                                   new SqlParameter("@AadharNo",AdharNo),
+                                   new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@Branch",BranchName),
+                                   new SqlParameter("@AccountNo",AccountNo),
+                                    new SqlParameter("@IFSCCode",IFSCCode),
+                                     new SqlParameter("@NomineeName",NomineeName),
+                                    new SqlParameter("@NomineeRelation",NomineeRelation),
+                                     new SqlParameter("@NomineeAge",NomineeAge),
+                                      new SqlParameter("@UpdatedBy",Fk_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
+            return ds;
+        }
+
+        public DataSet UserProfile()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+
+            return ds;
+        }
+
+
     }
 
 
