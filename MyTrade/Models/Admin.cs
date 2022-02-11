@@ -107,8 +107,6 @@ namespace MyTrade.Models
 
             return ds;
         }
-        
-
         public DataSet ApproveDeclineEwalletRequest()
         {
             SqlParameter[] para = {
