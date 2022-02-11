@@ -30,6 +30,17 @@ namespace MyTrade.Models
         public string NewPassword { get; set; }
         public string ConfirmNewPassword { get; set; }
 
+        public string RequestID { get; set; }
+        public string UserId { get; set; }
+        public string RequestCode { get; set; }
+        public string PaymentMode { get; set; }
+        public string BankBranch { get; set; }
+        public string ChequeDDNo { get; set; }
+        public string ChequeDDDate { get; set; }
+
+        public string PaymentType { get; set; }
+        public List<Admin> lstWallet { get; set; }
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -85,6 +96,49 @@ namespace MyTrade.Models
             return ds;
 
         }
+
+        public DataSet GetEwalletRequestDetails()
+        {
+            SqlParameter[] para = {
+                                   new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetails", para);
+
+            return ds;
+        }
+        
+
+        public DataSet ApproveDeclineEwalletRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",RequestID),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@AddedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApproveDeclineEwalletRequest", para);
+            return ds;
+        }
+
+        public DataSet SavePaymentType()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PaymentType",PaymentType),
+                 new SqlParameter("@Status",Status),
+                
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SavePaymentType", para);
+            return ds;
+        }
+
+        public DataSet GetPaymentType()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
+            return ds;
+        }
+        
+
 
     }
 }

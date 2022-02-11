@@ -111,6 +111,21 @@ namespace MyTrade.Models
             Gender.Add(new SelectListItem { Text = "Female", Value = "F" });
             return Gender;
         }
+
+        public static List<SelectListItem> BindPaymentMode()
+        {
+            List<SelectListItem> PaymentMode = new List<SelectListItem>();
+            PaymentMode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+            PaymentMode.Add(new SelectListItem { Text = "Cash", Value = "Cash" });
+            PaymentMode.Add(new SelectListItem { Text = "Cheque", Value = "Cheque" });
+            PaymentMode.Add(new SelectListItem { Text = "NEFT", Value = "NEFT" });
+            PaymentMode.Add(new SelectListItem { Text = "RTGS", Value = "RTGS" });
+            PaymentMode.Add(new SelectListItem { Text = "Demand Draft", Value = "DD" });
+            return PaymentMode;
+        }
+
+
+
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
