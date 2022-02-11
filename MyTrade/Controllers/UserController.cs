@@ -416,38 +416,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        [HttpPost]
-        public ActionResult UserProfile(Home model)
-        {
-            try
-            {
-                List<SelectListItem> Gender = Common.BindGender();
-                ViewBag.Gender = Gender;
-                if (model.postedFile != null)
-                {
-                    model.ProfilePic = "/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(model.postedFile.FileName);
-                    model.postedFile.SaveAs(Path.Combine(Server.MapPath(model.ProfilePic)));
-                }
-                model.Fk_UserId = Session["Pk_userId"].ToString();
-                DataSet ds = model.UpdateProfile();
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        TempData["UserProfile"] = "Profile Updated Successfully";
-                    }
-                    else
-                    {
-                        TempData["UserProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["UserProfile"] = ex.Message;
-            }
-            return View(model);
-        }
+        
 
 
         public ActionResult ChangePasswordForUser()
@@ -564,6 +533,67 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("BankDetailsUpdate", "User");
         }
-
+        public ActionResult ViewProfile()
+        {
+            Home model = new Home();
+            List<SelectListItem> Gender = Common.BindGender();
+            ViewBag.Gender = Gender;
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                    model.SponsorName = ds.Tables[0].Rows[0]["SponsorName"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    model.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                    model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    model.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ViewProfile(Home model)
+        {
+            try
+            {
+                List<SelectListItem> Gender = Common.BindGender();
+                ViewBag.Gender = Gender;
+                if (model.postedFile != null)
+                {
+                    model.ProfilePic = "/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(model.postedFile.FileName);
+                    model.postedFile.SaveAs(Path.Combine(Server.MapPath(model.ProfilePic)));
+                }
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["UserProfile"] = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["UserProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["UserProfile"] = ex.Message;
+            }
+            return View(model);
+        }
     }
 }
