@@ -386,6 +386,7 @@
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
+    <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -424,6 +425,7 @@
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserWallet.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
       <DependentUpon>AgentServices.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -477,6 +479,9 @@
     <Content Include="Views\User\ChangePasswordForUser.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\User\BankDetailsUpdate.cshtml" />
+    <Content Include="Views\Wallet\AddWallet.cshtml" />
+    <Content Include="Views\Admin\WalletList.cshtml" />
+    <Content Include="Views\Admin\PaymentTypeMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -543,7 +543,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "Bank Details Update Successfully";
+                        TempData["msg"] = "Bank Details Updated Successfully";
                     }
                     else
                     {
@@ -557,6 +557,7 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("BankDetailsUpdate", "User");
         }
+        
 
     }
 }
