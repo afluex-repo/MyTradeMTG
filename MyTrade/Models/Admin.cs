@@ -41,7 +41,7 @@ namespace MyTrade.Models
         public string PaymentTypeId { get; set; }
         public string PaymentType { get; set; }
         public List<Admin> lstWallet { get; set; }
-
+        public string WalletId { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -124,7 +124,6 @@ namespace MyTrade.Models
             SqlParameter[] para = {
                 
                   new SqlParameter("@PaymentTypeId",PaymentTypeId),
-                new SqlParameter("@PaymentType",PaymentType),
                  new SqlParameter("@Status",Status),
                 new SqlParameter("@AddedBy",AddedBy)
             };

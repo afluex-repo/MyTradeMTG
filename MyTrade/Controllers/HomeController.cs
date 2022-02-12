@@ -16,7 +16,7 @@ namespace MyTrade.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return Redirect("~/MyTradeWebsite/index.html");
         }
         public ActionResult Login()
         {
@@ -319,6 +319,5 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Login", "Home");
         }
-
     }
 }
