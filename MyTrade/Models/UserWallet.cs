@@ -47,8 +47,14 @@ namespace MyTrade.Models
             return ds;
         }
 
-      
-        
+        public DataSet GetPaymentMode()
+        {
+         
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentModeList");
+
+            return ds;
+        }
+
 
     }
 }

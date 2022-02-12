@@ -43,7 +43,8 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Payment Mode<span style="color: red">*</span>
-                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @data_size = "7", @data_style = "select-with-transition", @onchange = "getpaymentdetails();" })
+                                        @*@Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @data_size = "7", @data_style = "select-with-transition", @onchange = "getpaymentdetails();" })*@
+                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control",@onchange = "getpaymentdetails();" })
                                     </div>
                                 </div>
                             </div>
