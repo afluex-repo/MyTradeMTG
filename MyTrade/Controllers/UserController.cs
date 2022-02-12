@@ -29,6 +29,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 if (ViewBag.Status == "InActive")
                 {

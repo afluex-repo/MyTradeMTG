@@ -542,15 +542,6 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@FK_UserId", FK_UserId),
-                                      new SqlParameter("@FirstName", FirstName),
-                                      new SqlParameter("@LastName", LastName),
-                                      new SqlParameter("@MobileNo", MobileNo),
-                                      new SqlParameter("@Email", Email),
-                                      new SqlParameter("@Gender", Gender),
-                                      new SqlParameter("@PinCode", PinCode),
-                                      new SqlParameter("@State", State),
-                                      new SqlParameter("@City", City),
-                                      new SqlParameter("@ProfilePic", ProfilePic),
                                       new SqlParameter("@AadharNo", AadharNo),
                                       new SqlParameter("@PanNo", PanNo),
                                       new SqlParameter("@Address", Address),
