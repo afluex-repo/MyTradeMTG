@@ -1086,7 +1086,7 @@ code { color: #e7515a; }
 .footer-wrapper {
     padding: 10px 20px 10px 18px;
     display: inline-block;
-    background: transparent;
+    background: #eff0f2;
     font-weight: 600;
     font-size: 12px;
     width: 100%;
