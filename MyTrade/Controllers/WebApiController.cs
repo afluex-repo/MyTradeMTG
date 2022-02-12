@@ -905,5 +905,37 @@ namespace MyTrade.Controllers
 
 
 
+        [HttpPost]
+        public ActionResult AddWallet(AddWalletRequest model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.AddWallet();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "E-Wallet save successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
     }
 }

@@ -615,6 +615,35 @@ namespace MyTrade.Models
     }
 
 
+    public class AddWalletRequest
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string PaymentMode { get; set; }
+        public string Amount { get; set; }
+        public string DDChequeNo { get; set; }
+        public string DDChequeDate { get; set; }
+        public string BankBranch { get; set; }
+        public string BankName { get; set; }
+        public string AddedBy { get; set; }
+        public DataSet AddWallet()
+        {
+            SqlParameter[] para = {
+                                     new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Amount", Amount),
+                                      new SqlParameter("@PaymentMode", PaymentMode) ,
+                                      new SqlParameter("@DDChequeNo", DDChequeNo) ,
+                                      new SqlParameter("@DDChequeDate", DDChequeDate) ,
+                                      new SqlParameter("@BankBranch", BankBranch) ,
+                                          new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
+            return ds;
+        }
+    }
+    
 
 
     public class Password
