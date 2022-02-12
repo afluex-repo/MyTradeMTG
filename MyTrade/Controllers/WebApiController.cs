@@ -755,6 +755,9 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        
+
         [HttpPost]
         public ActionResult UpdateProfile(ProfileAPI model)
         {
@@ -841,5 +844,66 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public ActionResult GetBankDetails(BankDetailsUpdateRequest model)
+        {
+            BankDetailsUpdateAPIResponse obj = new BankDetailsUpdateAPIResponse();
+            DataSet ds = model.BankDetailsEdit();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                obj.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                obj.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                obj.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                obj.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                obj.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                obj.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                obj.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateBankDetails(BankDetailsUpdateAPIResponse model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.BankUpdate();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Bank Details Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }
