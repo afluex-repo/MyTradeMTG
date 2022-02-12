@@ -263,5 +263,186 @@ namespace MyTrade.Controllers
         }
 
 
+
+        public ActionResult WalletList()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetEwalletRequestDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.RequestID = r["PK_RequestID"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.RequestCode = r["RequestCode"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.ChequeDDNo = r["ChequeDDNo"].ToString();
+                    obj.ChequeDDDate = r["ChequeDDDate"].ToString();
+                    obj.WalletId = r["WalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWallet = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "GetDetails")]
+        [ActionName("WalletList")]
+        public ActionResult WalletList(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetEwalletRequestDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.RequestID = r["PK_RequestID"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.RequestCode = r["RequestCode"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.ChequeDDNo = r["ChequeDDNo"].ToString();
+                    obj.ChequeDDDate = r["ChequeDDDate"].ToString();
+                    obj.WalletId = r["WalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWallet = lst;
+            }
+            return View(model);
+        }
+
+
+
+        public ActionResult Approve(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+               model.RequestID = id;
+                model.Status = (model.Status="Approved");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApproveDeclineEwalletRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Ewallet Request Approved Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("WalletList", "Admin");
+        }
+
+        public ActionResult DeClined(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.RequestID = id;
+                model.Status = (model.Status = "Declined");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApproveDeclineEwalletRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Ewallet Request Declined Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("WalletList", "Admin");
+        }
+
+        public ActionResult PaymentTypeMaster()
+        {
+
+            #region ddlSites
+            Admin obj = new Admin();
+            int count = 0;
+            List<SelectListItem> ddlPaymentRype = new List<SelectListItem>();
+            DataSet ds1 = obj.GetPaymentType();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPaymentRype.Add(new SelectListItem { Text = "-Select-", Value = "" });
+                    }
+                    ddlPaymentRype.Add(new SelectListItem { Text = r["PaymentType"].ToString(), Value = r["PK_PaymentTypeId"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlPaymentRype = ddlPaymentRype;
+
+            #endregion
+
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [OnAction(ButtonName = "Save")]
+        [ActionName("PaymentTypeMaster")]
+        public ActionResult PaymentTypeMaster(Admin model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SavePaymentType();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Payment type save successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("PaymentTypeMaster", "Admin");
+        }
+
     }
 }
