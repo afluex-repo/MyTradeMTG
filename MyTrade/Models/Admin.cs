@@ -37,7 +37,8 @@ namespace MyTrade.Models
         public string BankBranch { get; set; }
         public string ChequeDDNo { get; set; }
         public string ChequeDDDate { get; set; }
-
+        
+        public string PaymentTypeId { get; set; }
         public string PaymentType { get; set; }
         public List<Admin> lstWallet { get; set; }
 
@@ -118,12 +119,13 @@ namespace MyTrade.Models
             return ds;
         }
 
-        public DataSet SavePaymentType()
+        public DataSet UpdatePaymentType()
         {
             SqlParameter[] para = {
+                
+                  new SqlParameter("@PaymentTypeId",PaymentTypeId),
                 new SqlParameter("@PaymentType",PaymentType),
                  new SqlParameter("@Status",Status),
-                
                 new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("SavePaymentType", para);

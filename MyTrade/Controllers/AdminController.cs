@@ -411,19 +411,20 @@ namespace MyTrade.Controllers
         }
 
         [HttpPost]
-        [OnAction(ButtonName = "Save")]
+        [OnAction(ButtonName = "Update")]
         [ActionName("PaymentTypeMaster")]
         public ActionResult PaymentTypeMaster(Admin model)
         {
             try
             {
                 model.AddedBy = Session["Pk_AdminId"].ToString();
-                DataSet ds = model.SavePaymentType();
+                //model.PaymentTypeId = model.PaymentTypeId;
+                DataSet ds = model.UpdatePaymentType();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "Payment type save successfully";
+                        TempData["msg"] = "Payment type update successfully";
                     }
                     else
                     {
