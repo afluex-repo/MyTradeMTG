@@ -559,6 +559,64 @@ namespace MyTrade.Models
             return ds;
         }
     }
+
+
+
+    public class BankDetailsUpdateRequest
+    {
+        public string FK_UserId { get; set; }
+        public DataSet BankDetailsEdit()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FK_UserId",FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+            return ds;
+        }
+
+    }
+
+
+    public class BankDetailsUpdateAPIResponse
+    {
+        
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Fk_UserId { get; set; }
+        public string PanNumber { get; set; }
+        public string AdharNo { get; set; }
+        public string BankName { get; set; }
+        public string BranchName { get; set; }
+        public string AccountNo { get; set; }
+        public string IFSCCode { get; set; }
+        public string NomineeName { get; set; }
+        public string NomineeRelation { get; set; }
+        public string NomineeAge { get; set; }
+
+        public DataSet BankUpdate()
+        {
+            SqlParameter[] para = {
+                                 new SqlParameter("@FK_UserId", Fk_UserId),
+                                   new SqlParameter("@PanNo", PanNumber),
+                                   new SqlParameter("@AadharNo", AdharNo),
+                                   new SqlParameter("@BankName", BankName),
+                                     new SqlParameter("@Branch", BranchName),
+                                   new SqlParameter("@AccountNo", AccountNo),
+                                    new SqlParameter("@IFSCCode", IFSCCode),
+                                     new SqlParameter("@NomineeName", NomineeName),
+                                    new SqlParameter("@NomineeRelation", NomineeRelation),
+                                     new SqlParameter("@NomineeAge", NomineeAge),
+                                      new SqlParameter("@UpdatedBy", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
+            return ds;
+        }
+    }
+
+
+
+
     public class Password
     {
         public string FK_UserId { get; set; }
@@ -593,4 +651,7 @@ namespace MyTrade.Models
             return ds;
         }
     }
+
+
+    
 }
