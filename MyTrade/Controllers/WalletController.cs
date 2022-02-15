@@ -84,7 +84,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Wallet"] = "E-Wallet save successfully";
+                        TempData["Wallet"] = "Requested successfully";
                     }
                     else
                     {

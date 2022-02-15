@@ -520,6 +520,44 @@ try {
   
   chart.render();
   
+  var donutChart1 = {
+      chart: {
+          height: 300,
+          type: 'donut',
+          toolbar: {
+              show: false,
+          }
+      },
+      labels: ['Active', 'InActive', 'Blocked'],
+      colors: ['#4361ee', '#f10909', '#0e0e0e', ],
+      series: ["353", "75755", "57"],
+      borderColor: '#F97300',
+      responsive: [{
+          breakpoint: 480,
+          options: {
+              chart: {
+                  width: 200
+              },
+              legend: {
+                  position: 'bottom'
+              }
+          }
+      }]
+  }
+
+  var donut1 = new ApexCharts(
+      document.querySelector("#chart-user"),
+      donutChart1
+  );
+
+  donut1.render();
+
+  var chart = new ApexCharts(
+   document.querySelector("#chart-2"),
+   options
+
+
+);
   /*
       =============================================
           Perfect Scrollbar | Recent Activities
@@ -527,7 +565,7 @@ try {
   */
  $('.mt-container').each(function(){ const ps = new PerfectScrollbar($(this)[0]); });
   
-  const topSellingProduct = new PerfectScrollbar('.widget-table-three .table-scroll table', {
+  const topSellingProduct = new PerfectScrollbar('.widget-table-four .table-scroll table', {
     wheelSpeed:.5,
     swipeEasing:!0,
     minScrollbarLength:40,

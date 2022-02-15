@@ -284,6 +284,9 @@ namespace MyTrade.Controllers
                     obj.BankBranch = r["BankBranch"].ToString();
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
+                    obj.WalletId = r["WalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
@@ -315,6 +318,9 @@ namespace MyTrade.Controllers
                     obj.BankBranch = r["BankBranch"].ToString();
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
+                    obj.WalletId = r["WalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
@@ -329,8 +335,8 @@ namespace MyTrade.Controllers
             try
             {
                 Admin model = new Admin();
-               model.RequestID = id;
-                model.Status = (model.Status="Approved");
+                model.RequestID = id;
+                model.Status = (model.Status = "Approved");
                 model.UpdatedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.ApproveDeclineEwalletRequest();
                 if (ds != null && ds.Tables.Count > 0)
@@ -386,6 +392,7 @@ namespace MyTrade.Controllers
             #region ddlSites
             Admin obj = new Admin();
             int count = 0;
+            List<Admin> lst = new List<Admin>();
             List<SelectListItem> ddlPaymentRype = new List<SelectListItem>();
             DataSet ds1 = obj.GetPaymentType();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
@@ -402,12 +409,23 @@ namespace MyTrade.Controllers
             }
 
             ViewBag.ddlPaymentRype = ddlPaymentRype;
-
             #endregion
-
-
-
-            return View();
+            foreach (DataRow dr in ds1.Tables[0].Rows)
+            {
+                Admin model = new Admin();
+                model.PaymentType = dr["PaymentType"].ToString();
+                if (dr["IsActive"].ToString() == "True")
+                {
+                    model.Status = "Active";
+                }
+                else
+                {
+                    model.Status = "Inactive";
+                }
+                lst.Add(model);
+            }
+            obj.lstWallet = lst;
+            return View(obj);
         }
 
         [HttpPost]
