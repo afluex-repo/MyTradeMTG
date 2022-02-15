@@ -75,6 +75,12 @@
         padding: 20px 18px 12px 18px;
         background-color: rgb(115, 70, 211);
     }
+    .divfix{
+        background-color: #d2d4d8;
+    }
+    .new{
+        margin-top: -60px;
+    }
 </style>
 
 <div class="layout-px-spacing">
@@ -95,92 +101,145 @@
                     </div>
                 </div>
             </div>*@
-        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-            <div class="widget-one widget">
-                <div class="widget-content">
-                    <div class="w-numeric-value">
-                        <div class="w-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                        </div>
-                        <div class="w-content">
-                            <span class="w-value">@ViewBag.TotalDirect</span>
-                            <span class="w-numeric-title">Total Direct</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-            <div class="widget-four widget">
-                <div class="widget-content">
-                    <div class="w-numeric-value">
-                        <div class="w-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                        </div>
-                        <div class="w-content">
-                            <span class="w-value">@ViewBag.TotalActive</span>
-                            <span class="w-numeric-title">Total Active</span>
+        @*<div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget-one widget">
+                    <div class="widget-content">
+                        <div class="w-numeric-value">
+                            <div class="w-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="w-content">
+                                <span class="w-value">@ViewBag.TotalDirect</span>
+                                <span class="w-numeric-title">Total Direct</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-            <div class="widget-five widget">
-                <div class="widget-content">
-                    <div class="w-numeric-value">
-                        <div class="w-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                        </div>
-                        <div class="w-content">
-                            <span class="w-value">@ViewBag.TotalInActive</span>
-                            <span class="w-numeric-title">Total In-Active</span>
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget-four widget">
+                    <div class="widget-content">
+                        <div class="w-numeric-value">
+                            <div class="w-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="w-content">
+                                <span class="w-value">@ViewBag.TotalActive</span>
+                                <span class="w-numeric-title">Total Active</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget-five widget">
+                    <div class="widget-content">
+                        <div class="w-numeric-value">
+                            <div class="w-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="w-content">
+                                <span class="w-value">@ViewBag.TotalInActive</span>
+                                <span class="w-numeric-title">Total In-Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+       
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-account-invoice-three divfix p-4">
+                        <div class="widget-heading">
+                            <div class="wallet-usr-info">
+                                <div class="usr-name">
+                                    <span>
+                                        @if (Session["Profile"].ToString() != "")
+                                        {
+                                            <img src="@Session["Profile"]" alt="admin-profile" class="img-fluid" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/assets/img/usericon.jpg" alt="admin-profile" class="img-fluid" />
+                                        }
+                                        @Session["FullName"].ToString()
+                                    </span>
+                                </div>
+                                <div class="add">
+                                    <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+                                </div>
+                            </div>
+                            <div class="wallet-balance">
+                                <p>Total Business</p>
+                                <h5 class=""><span class="w-currency">Rs.</span> @ViewBag.TotalBusiness</h5>
+                            </div>
+                        </div>
+                        <div class="widget-amount">
+                            <div class="w-a-info funds-received">
+                                <span>Self <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></span>
+                                <p>Rs. @ViewBag.SelfBusiness</p>
+                            </div>
+                            <div class="w-a-info funds-spent">
+                                <span>Team <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></span>
+                                <p>Rs. @ViewBag.TeamBusiness</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                    <div class="widget widget-account-invoice-three divfix p-4">
+                        <div class="widget-heading">
+                            <div class="wallet-usr-info">
+                                <div class="usr-name">
+                                    <span>
+                                        @if (Session["Profile"].ToString() != "")
+                                        {
+                                            <img src="@Session["Profile"]" alt="admin-profile" class="img-fluid" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/assets/img/usericon.jpg" alt="admin-profile" class="img-fluid" />
+                                        }
+                                        @Session["FullName"].ToString()
+                                    </span>
+                                </div>
+                                <div class="add">
+                                    <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+                                </div>
+                            </div>
+                            <div class="wallet-balance">
+                                <p>Total Direct</p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.TotalDirect</h5>
+                            </div>
+                        </div>
+                        <div class="widget-amount">
+                            <div class="w-a-info funds-received">
+                                <span>Active <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></span>
+                                <p> @ViewBag.TotalActive</p>
+                            </div>
+                            <div class="w-a-info funds-spent">
+                                <span>In-Active <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></span>
+                                <p> @ViewBag.TotalInActive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-            <div class="widget widget-account-invoice-three">
+            <div class="widget widget-chart-two divfix">
                 <div class="widget-heading">
-                    <div class="wallet-usr-info">
-                        <div class="usr-name">
-                            <span>
-                                @if (Session["Profile"].ToString() != "")
-                                {
-                                    <img src="@Session["Profile"]" alt="admin-profile" class="img-fluid" />
-                                }
-                                else
-                                {
-                                    <img src="~/assets/img/usericon.jpg" alt="admin-profile" class="img-fluid" />
-                                }
-                                @Session["FullName"].ToString()
-                            </span>
-                        </div>
-                        <div class="add">
-                            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
-                        </div>
-                    </div>
-                    <div class="wallet-balance">
-                        <p>Total Business</p>
-                        <h5 class=""><span class="w-currency">Rs.</span> @ViewBag.TotalBusiness</h5>
-                    </div>
+                    <h5 class="">User Details</h5>
                 </div>
-                <div class="widget-amount">
-                    <div class="w-a-info funds-received">
-                        <span>Self <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></span>
-                        <p>Rs. @ViewBag.SelfBusiness</p>
-                    </div>
-                    <div class="w-a-info funds-spent">
-                        <span>Team <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></span>
-                        <p>Rs. @ViewBag.TeamBusiness</p>
-                    </div>
+                <div class="widget-content">
+                    <div id="chart-user" class=""></div>
                 </div>
             </div>
         </div>
+
+
+
         <div id="alertCustom" class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
 
-            <div class="statbox widget box box-shadow">
+            <div class="statbox widget box box-shadow divfix new">
                 <div class="widget-header">
                     <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
@@ -211,11 +270,11 @@
                                                 {
                                                     var link = Session["Pk_UserId"].ToString();
 
-                                                <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://mytrade.co.in//Home/Registration?Pid=@link. Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
-                                                <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
-                                                <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
-                                                <span class="s-icon"><a href="https://www.instagram.com/?url=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
-                                                <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://mytrade.co.in//Home/Registration?Pid=@link. Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://www.instagram.com/?url=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                                                    <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
                                                 }
                                             </div>
                                         </div>
@@ -268,19 +327,12 @@
 
         </div>
         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-            <div class="widget widget-chart-two">
-                <div class="widget-heading">
-                    <h5 class="">User Details</h5>
-                </div>
-                <div class="widget-content">
-                    <div id="chart-user" class=""></div>
-                </div>
-            </div>
+            
         </div>
         @if (ViewBag.TotalBusiness != "0.00")
         {
             <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                <div class="widget widget-chart-two">
+                <div class="widget widget-chart-two divfix">
                     <div class="widget-heading">
                         <h5 class="">Business Details</h5>
                     </div>

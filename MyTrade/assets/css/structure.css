@@ -82,6 +82,7 @@ code { color: #e7515a; }
     margin-bottom: 0;
     margin-left: 212px;
     transition: .600s;
+    background-color: #9591913d;
 }
 .main-container-fluid > .main-content > .container {
     float: left;
