@@ -246,7 +246,7 @@ namespace MyTrade.Controllers
             {
                 try
                 {
-                    string hdrows = Request["hdRows"].ToString();
+                    string hdrows = Request["hdRows"].Count().ToString();
                     string chkselect = "";
                     for (int i = 1; i < int.Parse(hdrows); i++)
                     {
