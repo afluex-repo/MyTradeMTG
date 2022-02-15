@@ -82,7 +82,7 @@ code { color: #e7515a; }
     margin-bottom: 0;
     margin-left: 212px;
     transition: .600s;
-    background-color: #9591913d;
+    background-color: #dbdbdb73;
 }
 .main-container-fluid > .main-content > .container {
     float: left;
@@ -177,7 +177,7 @@ code { color: #e7515a; }
 }
 .navbar {
     padding: 0;
-    background: #0e1726;
+    background: #22396c;
 }
 .navbar .theme-brand {
     padding: 0.9px 0 0.9px 27px!important;
@@ -701,13 +701,13 @@ code { color: #e7515a; }
     -webkit-box-shadow: 0px 0px 15px 1px rgba(138, 132, 206, 0.03);;
     -moz-box-shadow: 0px 0px 15px 1px rgba(138, 132, 206, 0.03);;
     box-shadow: 0px 20px 20px rgba(126,142,177,0.12);;
-    background: #fafafa;
+    background: #910f10;
     border-radius: 0;
     padding: 9px 0;
     justify-content: flex-start;
     min-height: 53px;
     width: 100%;
-    border-bottom: 1px solid #ebedf2;
+    border-bottom: 1px solid #910f10;
 }
 .sub-header-container .navbar .toggle-sidebar,
 .sub-header-container .navbar .sidebarCollapse {
@@ -718,7 +718,7 @@ code { color: #e7515a; }
 .sub-header-container .navbar .sidebarCollapse svg {
     width: 20px;
     height: 20px;
-    color: #3b3f5c;
+    color: #ffffff;
     vertical-align: text-top;
 }
 .page-header {
