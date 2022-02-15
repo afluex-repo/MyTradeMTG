@@ -25,6 +25,10 @@
                             <div class="col-md-4">
                                 <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
                             </div>
+                            @if (ViewBag.WalletBalance == "0")
+                            {
+                                <a class="btn btn-primary" href="/Wallet/AddWallet">Add Fund</a>
+                            }
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-4">

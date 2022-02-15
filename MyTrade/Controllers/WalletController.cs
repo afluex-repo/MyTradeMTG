@@ -39,11 +39,34 @@ namespace MyTrade.Controllers
         public ActionResult AddWallet()
         {
             #region ddlpaymentmode
-            List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
-            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            //List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
+            //ViewBag.ddlpaymentmode = ddlpaymentmode;
             #endregion
             UserWallet obj = new UserWallet();
             obj.LoginId = Session["LoginId"].ToString();
+            
+            #region ddlpaymentmode
+
+            int count = 0;
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet ds1 = obj.GetPaymentMode();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+
+            #endregion
+
             return View(obj);
         }
 
@@ -61,7 +84,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Wallet"] = "E-Wallet save successfully";
+                        TempData["Wallet"] = "Requested successfully";
                     }
                     else
                     {

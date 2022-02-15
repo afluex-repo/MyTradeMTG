@@ -60,13 +60,14 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string sponsorId { get; set; }
+  
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
                                       new SqlParameter("@LoginId", sponsorId),
 
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetMemberName", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetMemberDetailsMobile", para);
 
             return ds;
         }
@@ -541,15 +542,6 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@FK_UserId", FK_UserId),
-                                      new SqlParameter("@FirstName", FirstName),
-                                      new SqlParameter("@LastName", LastName),
-                                      new SqlParameter("@MobileNo", MobileNo),
-                                      new SqlParameter("@Email", Email),
-                                      new SqlParameter("@Gender", Gender),
-                                      new SqlParameter("@PinCode", PinCode),
-                                      new SqlParameter("@State", State),
-                                      new SqlParameter("@City", City),
-                                      new SqlParameter("@ProfilePic", ProfilePic),
                                       new SqlParameter("@AadharNo", AadharNo),
                                       new SqlParameter("@PanNo", PanNo),
                                       new SqlParameter("@Address", Address),
@@ -615,6 +607,35 @@ namespace MyTrade.Models
     }
 
 
+    public class AddWalletRequest
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string PaymentMode { get; set; }
+        public string Amount { get; set; }
+        public string DDChequeNo { get; set; }
+        public string DDChequeDate { get; set; }
+        public string BankBranch { get; set; }
+        public string BankName { get; set; }
+        public string AddedBy { get; set; }
+        public DataSet AddWallet()
+        {
+            SqlParameter[] para = {
+                                     new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Amount", Amount),
+                                      new SqlParameter("@PaymentMode", PaymentMode) ,
+                                      new SqlParameter("@DDChequeNo", DDChequeNo) ,
+                                      new SqlParameter("@DDChequeDate", DDChequeDate) ,
+                                      new SqlParameter("@BankBranch", BankBranch) ,
+                                          new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
+            return ds;
+        }
+    }
+    
 
 
     public class Password
@@ -638,15 +659,15 @@ namespace MyTrade.Models
     public class ActivateUser
     {
         public string ePinNo { get; set; }
-        public string FK_UserId { get; set; }
+        public string LoginId { get; set; }
         public DataSet ActivateUserByPin()
         {
             SqlParameter[] para = {
 
-                                      new SqlParameter("@Fk_UserId", FK_UserId),
+                                      new SqlParameter("@LoginId", LoginId),
                                       new SqlParameter("@EPinNo", ePinNo)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUserMobile", para);
 
             return ds;
         }

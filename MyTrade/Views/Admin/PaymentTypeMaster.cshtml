@@ -27,7 +27,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         PaymentType <span style="color: red">*</span>
-                                            @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlPaymentRype, "Value", "Text"), new { @class = "form-control"})
+                                            @Html.DropDownListFor(m => m.PaymentTypeId, new SelectList(ViewBag.ddlPaymentRype, "Value", "Text"), new { @class = "form-control"})
                                     </div>
                                 </div>
                             </div>
@@ -50,6 +50,40 @@
                                     <input class="btn btn-success pull-left" type="submit" value="Submit" id="Update" name="Update" onclick="return validateform();" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="widget-content widget-content-area br-6">
+
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Payment Type</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstWallet != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstWallet)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.PaymentType</td>
+                                                    <td>@Item.Status</td>
+                                                   
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>

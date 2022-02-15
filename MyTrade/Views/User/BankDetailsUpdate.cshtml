@@ -23,95 +23,84 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Adhar Number<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @placeholder = "Adhar Number",@maxlength="12", @onkeypress = "return isNumberKey(event);" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Adhar Number</label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @placeholder = "Adhar Number", @maxlength = "12", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Pan Number<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @placeholder = "Pan Number", @maxlength = "10", @onkeypress = "return validatePan(event);" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Pan Number</label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @placeholder = "Pan Number", @maxlength = "10", @onkeypress = "return validatePan(event);" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Bank Name<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group ">
+                                    <label>
+                                        Bank Name
+                                    </label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Account Number<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.AccountNo, new { @class = "form-control", @placeholder = "Account Number",@onkeypress ="return isNumberKey(event);" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Account Number
+                                    </label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.AccountNo, new { @class = "form-control", @placeholder = "Account Number", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Branch Name<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Branch Name</label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        IFSC Code<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        IFSC Code
+                                    </label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Nominee Name<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @placeholder = "Nominee Name", @onkeypress = "return onlyAlphabets();" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Nominee Name
+                                    </label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @placeholder = "Nominee Name", @onkeypress = "return onlyAlphabets();" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Nominee Age<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @placeholder = "Nominee Age" , @onkeypress = "return isNumberKey(event);" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nominee Age</label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @placeholder = "Nominee Age", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Nominee Relation<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @onkeypress = "return onlyAlphabets();" })
-                                    </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nominee Relation</label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @onkeypress = "return onlyAlphabets();" })
                                 </div>
+                                
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <input class="btn btn-success pull-left" type="submit" value="Update" id="Update" name="Update" onclick="return validate();" />
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 }
 <script>
-    function validate()
-    {
+    function validate() {
         if ($('#AdharNo').val() == '') {
             $("#AdharNo").addClass('errortext');
             $('#AdharNo').focus();
