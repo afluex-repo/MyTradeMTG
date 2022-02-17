@@ -67,27 +67,27 @@ document.write(`
                 </div>
             </div>
 
-            <div class ="map-image"><img src="assets/img/map.png" alt="map"></div>
+            <div class ="map-image"><img src="~/MyTradeWebsite/assets/img/map.png" alt="map"></div>
 		</footer>
         <!--End Footer Area-->
 
         <div class ="go-top"><i class ="fas fa-arrow-up"></i></div>
 
         <!--Links of JS files-->
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/meanmenu.js"></script>
-        <script src="assets/js/nice-select.min.js"></script>
-        <script src="assets/js/slick.min.js"></script>
-        <script src="assets/js/magnific-popup.min.js"></script>
-		<script src="assets/js/appear.min.js"></script>
-        <script src="assets/js/odometer.min.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/parallax.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/form-validator.min.js"></script>
-        <script src="assets/js/contact-form-script.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/meanmenu.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/nice-select.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/slick.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/magnific-popup.min.js"></script>
+		<script src="~/MyTradeWebsite/assets/js/appear.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/odometer.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/owl.carousel.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/parallax.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/wow.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/form-validator.min.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/contact-form-script.js"></script>
+        <script src="~/MyTradeWebsite/assets/js/main.js"></script>
     </body>
 
 </html>
