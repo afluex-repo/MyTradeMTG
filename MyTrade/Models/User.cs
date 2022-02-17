@@ -29,6 +29,14 @@ namespace MyTrade.Models
         public decimal Amount { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
+        public string BankBranch { get; set; }
+        public string PK_RequestID { get; set; }
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string ProductName { get; set; }
+        
+
+        public List<User> lstEpinRequest { get; set; }
 
 
 
@@ -107,11 +115,33 @@ namespace MyTrade.Models
                                    new SqlParameter("@BankBranch",BranchName),
                                    new SqlParameter("@ChequeDDNo",TransactionNo),
                                    new SqlParameter("@ChequeDDDate",TransactionDate),
-                                   new SqlParameter("@AddedBy",AddedBy)
+                                      new SqlParameter("@AddedBy",AddedBy)
+                                   
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveEpinRequest", para);
             return ds;
         }
+
+
+        public DataSet GetEPinRequestDetails()
+        {
+          
+            DataSet ds = DBHelper.ExecuteQuery("GetEPinRequestDetails");
+            return ds;
+        }
+
+        
+   public DataSet DeleteEPinRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@PK_RequestID",PK_RequestID),
+                                   new SqlParameter("@DeletedBy",PK_RequestID)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteEPinRequest", para);
+            return ds;
+        }
+
+
 
 
     }

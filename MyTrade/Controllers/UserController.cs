@@ -288,7 +288,7 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-        public ActionResult GetMemberName(string LoginId,string ePinNo)
+        public ActionResult GetMemberName(string LoginId, string ePinNo)
         {
             Home model = new Home();
             try
@@ -317,7 +317,7 @@ namespace MyTrade.Controllers
             Home model = new Home();
             try
             {
-               
+
                 model.LoginId = LoginId;
                 DataSet ds = model.GetInActiveUser();
 
@@ -417,7 +417,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
+
 
 
         public ActionResult ChangePasswordForUser()
@@ -453,7 +453,7 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("ChangePasswordForUser", "User");
         }
-        
+
         public ActionResult ActivatePin(string ePinNo, string Fk_UserId)
         {
             try
@@ -484,15 +484,15 @@ namespace MyTrade.Controllers
 
         public ActionResult BankDetailsUpdate()
         {
-           
-           User model = new User();
-           model.Fk_UserId = Session["Pk_userId"].ToString();
+
+            User model = new User();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.UserProfile();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
                 {
-                   
+
                     model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
@@ -615,6 +615,30 @@ namespace MyTrade.Controllers
 
         public ActionResult EPinRequest()
         {
+            User model = new User();
+            List<User> list = new List<User>();
+            DataSet dss = model.GetEPinRequestDetails();
+            model.LoginId= dss.Tables[0].Rows[0]["LoginId"].ToString();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.PK_RequestID = r["PK_RequestID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.Amount =Convert.ToDecimal( r["Amount"].ToString());
+                    obj.Fk_Paymentid = r["PaymentMode"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch= r["BankBranch"].ToString();
+                    obj.TransactionNo = r["ChequeDDNo"].ToString();
+                    obj.TransactionDate = r["ChequeDDDate"].ToString();
+                    list.Add(obj);
+                }
+                model.lstEpinRequest = list;
+            }
+
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -658,7 +682,7 @@ namespace MyTrade.Controllers
 
             #endregion
 
-            return View();
+            return View(model);
         }
 
 
@@ -670,24 +694,24 @@ namespace MyTrade.Controllers
         {
             try
             {
-                    model.AddedBy = Session["Pk_userId"].ToString();
+                model.AddedBy = Session["Pk_userId"].ToString();
                 model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
                 DataSet ds = model.SaveEpinRequest();
-                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                        {
-                            TempData["success"] = "E_pin request save successfully";
-                        }
-                        else if (ds.Tables[0].Rows[0][0].ToString() == "0")
-                        {
-                            TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        }
+                        TempData["success"] = "E_pin request save successfully";
                     }
-                    else
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
                         TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
+                }
+                else
+                {
+                    TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -698,8 +722,36 @@ namespace MyTrade.Controllers
 
 
 
-
-
+        public ActionResult DeleteEPinRequest(string Id)
+        {
+            try
+            {
+                User model = new User();
+                model.PK_RequestID = Id;
+                DataSet ds = model.DeleteEPinRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "E_pin request deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("EPinRequest", "User");
+        }
+        
 
     }
 }

@@ -707,6 +707,7 @@
     <Content Include="Views\Admin\PinTransferReportForAdmin.cshtml" />
     <Content Include="Views\AdminReports\ViewProfileForAdmin.cshtml" />
     <Content Include="Views\User\EPinRequest.cshtml" />
+    <Content Include="Views\Admin\EPinRequestList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
