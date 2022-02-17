@@ -30,49 +30,46 @@
                                 <div class="form-group">
                                     <label for="SponosorId">Sponosor Id</label>
                                     @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", placeholder = "Sponsor Id" })
-
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="SponosorName">Sponsor Name</label>
-                                    @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", placeholder = "Sponsor Id" })
+                                    @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", placeholder = "Sponsor Name",@onkeypress = "return onlyAlphabets();" })
 
                                 </div>
                             </div>
-
-
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="FirstName">First Name</label>
-                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name",@onkeypress = "return onlyAlphabets();" })
 
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="LastName">Last Name</label>
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name", @onkeypress = "return onlyAlphabets();" })
 
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="FirstName">Gender</label>
-                                    @*<input type="hidden" id="hdf" value="@Model.Gender">*@
+                                    <input type="hidden" id="hdf" value="@Model.Gender">
                                     @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="phone">Mobile No</label>
-                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", placeholder = "Mobile No" })
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control",maxlength="10", placeholder = "Mobile No",@onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", @onchange = "return ValidateEmail(event);" })
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -115,7 +112,7 @@
                                 <div class="form-group ">
                                     <label>
                                         Bank Name
-                                    </label><span style="color: red">*</span>
+                                    </label>
                                     @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
                                 </div>
                             </div>
@@ -123,13 +120,13 @@
                                 <div class="form-group">
                                     <label>
                                         Account Number
-                                    </label><span style="color: red">*</span>
+                                    </label>
                                     @Html.TextBoxFor(m => m.AccountNo, new { @class = "form-control", @placeholder = "Account Number", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Branch Name</label><span style="color: red">*</span>
+                                    <label>Branch Name</label>
                                     @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
                                 </div>
                             </div>
@@ -137,7 +134,7 @@
                                 <div class="form-group">
                                     <label>
                                         IFSC Code
-                                    </label><span style="color: red">*</span>
+                                    </label>
                                     @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
                                 </div>
                             </div>
@@ -145,19 +142,19 @@
                                 <div class="form-group">
                                     <label>
                                         Nominee Name
-                                    </label><span style="color: red">*</span>
+                                    </label>
                                     @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @placeholder = "Nominee Name", @onkeypress = "return onlyAlphabets();" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nominee Age</label><span style="color: red">*</span>
+                                    <label>Nominee Age</label>
                                     @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @placeholder = "Nominee Age", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nominee Relation</label><span style="color: red">*</span>
+                                    <label>Nominee Relation</label>
                                     @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @onkeypress = "return onlyAlphabets();" })
                                 </div>
                             </div>
@@ -177,3 +174,63 @@
 
 }
 
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+
+<script>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+    function validatePan() {
+        var panVal = $('#PanNo').val();
+        var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+
+        if (regpan.test(panVal)) {
+            $("#PanNo").removeClass('errortext');
+        } else {
+            alert("Invalid PAN Number");
+            $("#PanNo").val('');
+            $("#PanNo").addClass('errortext');
+        }
+    }
+
+    function ValidateEmail(event) {
+        var panVal = $('#Email').val();
+        var regpan = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+        if (regpan.test(panVal)) {
+            $("#Email").removeClass('errortext');
+        } else {
+            alert("Invalid Email ID");
+            $("#Email").val('');
+            $("#Email").addClass('errortext');
+        }
+    }
+
+ $(document).ready(function () {
+     $("#Gender").val($("#hdf").val()).attr("selected", "selected");
+ })
+
+</script>

@@ -596,5 +596,110 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+        public ActionResult GetMemberName(string LoginId)
+        {
+            Common obj = new Common();
+            obj.ReferBy = LoginId;
+            DataSet ds = obj.GetMemberDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
+                obj.Result = "Yes";
+            }
+            else { obj.Result = "Invalid LoginId"; }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult EPinRequest()
+        {
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
+            #region PaymentMode
+            Common com = new Common();
+            List<SelectListItem> ddlPayment = new List<SelectListItem>();
+            DataSet ds = com.PaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                int paycount = 0;
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (paycount == 0)
+                    {
+                        ddlPayment.Add(new SelectListItem { Text = "Select Payment", Value = "0" });
+                    }
+                    ddlPayment.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    paycount++;
+                }
+            }
+
+            ViewBag.ddlPayment = ddlPayment;
+
+            #endregion
+
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [ActionName("EPinRequest")]
+        [OnAction(ButtonName = "btnsave")]
+        public ActionResult UserTypeMaster(User model)
+        {
+            try
+            {
+                    model.AddedBy = Session["Pk_userId"].ToString();
+                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
+                DataSet ds = model.SaveEpinRequest();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            TempData["success"] = "E_pin request save successfully";
+                        }
+                        else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                        {
+                            TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+            }
+            catch (Exception ex)
+            {
+                TempData["success"] = ex.Message;
+            }
+            return RedirectToAction("EPinRequest", "User");
+        }
+
+
+
+
+
+
     }
 }
