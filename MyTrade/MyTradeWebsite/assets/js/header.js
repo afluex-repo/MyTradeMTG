@@ -21,7 +21,6 @@ document.write(`
 		<link rel="stylesheet" href="assets/css/odometer.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
-
         <title>My Trade</title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
