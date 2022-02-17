@@ -78,6 +78,7 @@ namespace MyTrade.Models
         public string VisitorId { get; set; }
         public string Mobile { get; set; }
         public string PK_VisitorId { get; set; }
+        public string FK_RootId { get; set; }
         #endregion
         public DataSet List()
         {
@@ -246,6 +247,7 @@ namespace MyTrade.Models
             SqlParameter[] para = {
                                         new SqlParameter("@Pk_UserId", Fk_UserId),
                                           new SqlParameter("@LoginId", LoginId),
+                                            new SqlParameter("@Fk_RootId", FK_RootId),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateDownlineTree", para);
             return ds;

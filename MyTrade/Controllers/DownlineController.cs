@@ -128,7 +128,7 @@ namespace MyTrade.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult DownLineListBy(Reports model)
         {
-           
+
             List<Reports> lst = new List<Reports>();
             model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetDownlineList();
@@ -159,7 +159,7 @@ namespace MyTrade.Controllers
         #region  associate tree
         public ActionResult AssociateTree(AssociateBooking model, string AssociateID)
         {
-            if (AssociateID != null)
+            if (AssociateID != null && AssociateID != "")
             {
                 model.Fk_UserId = AssociateID;
             }
@@ -167,6 +167,7 @@ namespace MyTrade.Controllers
             {
                 model.Fk_UserId = Session["Pk_UserId"].ToString();
             }
+            model.FK_RootId = "1";
             List<AssociateBooking> lst = new List<AssociateBooking>();
             DataSet ds = model.GetDownlineTree();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

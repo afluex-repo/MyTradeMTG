@@ -5289,11 +5289,11 @@ Login Area CSS
         box-shadow: 1px 2px 20px 0px #1e3c66;
         border-radius: 35px;
 }
-.main-body{
-  /*background-position: center center;
+.main-body {
+    /*background-position: center center;
   background-size: cover;*/
-  background-repeat: no-repeat;
-  background-image: url(../img/login.jpg);
+    background-repeat: no-repeat;
+    background-image: url('../img/login.jpg');
 }
 .loginimg{
     background-color: #ffffff;

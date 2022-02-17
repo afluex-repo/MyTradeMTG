@@ -59,28 +59,34 @@ namespace MyTrade
         }
         public void BindTree(TreeNode ParentNode, DataSet DsData)
         {
-
             foreach (DataRow d in dsResult.Tables[0].Select("Parentid  = " + ParentNode.Value))
             {
-
-                if (dtParent.Rows.Contains(ParentNode.Value) == false)
-                {
-                    Count = Count + 1;
-                    i = i + 1;
-                    DataRow dr1 = dtParent.NewRow();
-                    dr1["ParentId"] = ParentNode.Value;
-                    dr1["Id"] = i;
-                    dtParent.Rows.Add(dr1);
-                }
+                //DataRow dr1 = dtParent.NewRow();
+                //bool contains = dtParent.AsEnumerable().Any(row => ParentNode.Value == row.Field<String>("ParentId"));
+                //if (contains == false)
+                //{
+                //    Count = Count + 1;
+                //    i = i + 1;
+                //    dr1["ParentId"] = ParentNode.Value;
+                //    dr1["Id"] = i;
+                //    dtParent.Rows.Add(dr1);
+                //}
                 TreeNode ChildNode = new TreeNode();
                 if (ParentNode.Value != obj.LoginId)
                     ParentNode.ImageUrl = ParentNode.ImageUrl;
                 ChildNode.Value = d["PK_UserId"].ToString();
                 ChildNode.Text = d["AssociateMemberName"].ToString();
+                //dtParent.Columns.Add("Child", typeof(string));
+                //dr1["Child"] = ChildNode.Text;
                 // ChildNode.ToolTip = ChildNode.Text;
                 ParentNode.ChildNodes.Add(ChildNode);
                 BindTree(ChildNode, dsResult);
                 trvBroker.DataBind();
+
+                //if (dtParent.Select().ToList().Exists(row => row["ParentId"].ToString() != ParentNode.Value))
+                //{
+
+                //}
             }
         }
 

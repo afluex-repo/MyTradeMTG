@@ -28,6 +28,7 @@ namespace MyTrade.Models
         public string BranchName { get; set; }
         public string Package { get; set; }
         public string Leg { get; set; }
+        public string ProfilePic { get; set; }
         public static string GenerateRandom()
         {
             Random r = new Random();
