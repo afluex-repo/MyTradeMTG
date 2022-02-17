@@ -14,7 +14,7 @@
                 <HoverNodeStyle Font-Underline="True" ForeColor="#6666AA" />
                 <LeafNodeStyle ForeColor="Red" ImageUrl="~/TreeIcon/men-inactive.png" NodeSpacing="5px" />
                 <NodeStyle CssClass="gridViewToolTip" Font-Names="Tahoma" Font-Size="8pt" ForeColor="Black" HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
-                <ParentNodeStyle Font-Bold="False" ImageUrl="~/TreeIcon/men-active.png" NodeSpacing="5px" Width="200px" />
+                <ParentNodeStyle Font-Bold="False" ImageUrl="~/TreeIcon/men-active.png" NodeSpacing="5px" Width="200px" ForeColor="Orange" />
                 <RootNodeStyle BackColor="Orange" Font-Bold="True" Font-Names="Times New Roman" ForeColor="White" NodeSpacing="5px" Width="200px" />
                 <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" HorizontalPadding="0px" VerticalPadding="0px" />
             </asp:TreeView>

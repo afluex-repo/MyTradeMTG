@@ -284,11 +284,48 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PinList");
         }
-        public ActionResult Tree()
+        public ActionResult Tree(string LoginId)
         {
-            return View();
+            Tree model = new Tree();
+            if(LoginId !="" && LoginId !=null)
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.LoginId = LoginId;
+             
+            }
+            else
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.PK_UserId = Session["Pk_UserId"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.DisplayName = Session["FullName"].ToString();
+            }
+            List<TreeMembers> lst = new List<TreeMembers>();
+            DataSet ds = model.GetLevelMembersCount();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    TreeMembers obj = new TreeMembers();
+                    obj.LevelName = r["LevelNo"].ToString();
+                    obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[1].Rows.Count>0)
+            {
+                ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+            }
+            return View(model);
         }
-        public ActionResult GetMemberName(string LoginId,string ePinNo)
+        public ActionResult GetMemberName(string LoginId, string ePinNo)
         {
             Home model = new Home();
             try
@@ -317,7 +354,7 @@ namespace MyTrade.Controllers
             Home model = new Home();
             try
             {
-               
+
                 model.LoginId = LoginId;
                 DataSet ds = model.GetInActiveUser();
 
@@ -417,7 +454,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
+
 
 
         public ActionResult ChangePasswordForUser()
@@ -453,7 +490,7 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("ChangePasswordForUser", "User");
         }
-        
+
         public ActionResult ActivatePin(string ePinNo, string Fk_UserId)
         {
             try
@@ -484,15 +521,15 @@ namespace MyTrade.Controllers
 
         public ActionResult BankDetailsUpdate()
         {
-           
-           User model = new User();
-           model.Fk_UserId = Session["Pk_userId"].ToString();
+
+            User model = new User();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.UserProfile();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
                 {
-                   
+
                     model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
@@ -595,6 +632,31 @@ namespace MyTrade.Controllers
                 TempData["UserProfile"] = ex.Message;
             }
             return View(model);
+        }
+        public JsonResult GetTreeMembers(string Level,string PK_UserId)
+        {
+            Tree model = new Tree();
+            model.PK_UserId = PK_UserId;
+            model.Level = Level;
+            List<MemberDetails> lst = new List<MemberDetails>();
+            DataSet ds = model.GetLevelMembers();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    MemberDetails obj = new MemberDetails();
+                    obj.PK_UserId = r["PK_UserId"].ToString();
+                    obj.MemberName = r["MemberName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.ProfilePic = r["ProfilePic"].ToString();
+                    obj.SelfBV = r["SelfBV"].ToString();
+                    obj.TeamBV = r["TeamBV"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstMember = lst;
+            }
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
     }
 }

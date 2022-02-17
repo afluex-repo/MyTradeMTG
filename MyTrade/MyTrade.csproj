@@ -560,6 +560,12 @@
     <Content Include="plugins\tagInput\tags-input.css" />
     <Content Include="plugins\tagInput\tags-input.js" />
     <Content Include="plugins\treeview\custom-jstree.js" />
+    <Content Include="ProfilePicture\21a06f50-2827-4435-87a8-03493fbaefd9.jpg" />
+    <Content Include="ProfilePicture\88073707-10d5-474e-9eb8-7ac32f461d13.jpeg" />
+    <Content Include="ProfilePicture\9d7de410-fd73-4bce-81f6-6efc0c97b9ed.jpeg" />
+    <Content Include="ProfilePicture\a8fb03fb-1b41-4ebb-a162-fd006080574c.jpeg" />
+    <Content Include="ProfilePicture\c94c4405-509c-4993-919f-98a7c6e536c3.jpg" />
+    <Content Include="ProfilePicture\ced2e5ce-0abc-472b-ae53-4662da8a12e3.jpeg" />
     <Content Include="TreeIcon\default.png" />
     <Content Include="TreeIcon\girl-active.png" />
     <Content Include="TreeIcon\girl-active1.png" />
@@ -714,7 +720,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
