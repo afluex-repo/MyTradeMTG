@@ -1,0 +1,330 @@
+﻿@model MyTrade.Models.Home
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Links of CSS files -->
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/slick.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/meanmenu.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/odometer.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/style.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite/assets/css/responsive.css">
+
+    <title>My Trade</title>
+
+    <link rel="icon" type="image/png" href="~/MyTradeWebsite/assets/img/favicon.png">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="shadow"></div>
+            <div class="box"></div>
+        </div>
+    </div>
+    <!-- End Preloader -->
+    <!-- Start Signup Area -->
+    <section class="signup-area">
+        <div class="row m-0">
+            <div class="col-lg-6 col-md-12 p-0">
+                <div class="signup-image">
+                    <!-- <img src="assets/img/signup-bg.jpg" alt="image"> -->
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 p-0">
+                <div class="signup-content">
+                    <div class="d-table">
+                        <div class="d-table-cell">
+                            <div class="signup-form">
+                                <div class="logo">
+                                    <a href="index.html"><img src="~/MytradeWebsite/assets/img/logo.png" alt="image" width="150px"></a>
+                                    <h6 class="logo-tagline">One Step Towards Success</h6>
+                                </div>
+
+                                <h3>Registration</h3>
+                                <p>Already signed up? <a href="/Home/Login">Log in</a></p>
+
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true,@placeholder="Sponsor Id" })
+                                                @Html.ValidationMessageFor(m => m.LoginId)
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                             @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true", @placeholder = "Sponsor Name" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control",  @placeholder = "First Name" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control",  @placeholder = "Last Name" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "MobileNo", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @type = "Password" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @onblur = "return validateConfPassword();", @type = "Password" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @placeholder = "PinCode", @onchange = "return getstatecity()" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @Disabled = "true" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @Disabled = "true" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-group">
+                                        <input type="password" name="password" id="password" placeholder="Create a password" class="form-control">
+                                    </div> -->
+
+                                    <button type="submit" class="btn btn-primary">Sign Up</button>
+
+                                    <div class="forgot-password d-flex justify-content-between mt-2">
+                                        <a href="index.html">Back To Home</a>
+                                        <a href="/Home/Login">Back To Login</a>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Login Area -->
+    <!-- Links of JS files -->
+    <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/meanmenu.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/nice-select.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/slick.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/magnific-popup.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/appear.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/odometer.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/owl.carousel.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/parallax.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/wow.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/form-validator.min.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/contact-form-script.js"></script>
+    <script src="~/MyTradeWebsite/assets/js/main.js"></script>
+    <script>
+        function getsponsordetails(obj) {
+            $("#divload").css({ 'display': '' });
+            $(".errortext").removeClass("errortext");
+            $.ajax({
+                url: '/Home/GetSponserDetails',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { 'ReferBy': $(obj).val() },
+                success: function (response) {
+                    if (response.Result == "Yes") {
+                        $('#SponsorName').val(response.DisplayName);
+                    }
+                    else {
+
+                        $("#SponsorId").addClass('errortext');
+                        $('#SponsorName').val('');
+                        $('#SponsorId').val('');
+                        $('#SponsorId').focus();
+                        alert(response.Result);
+                    }
+                }
+            })
+        }
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+        function confirmregistration() {
+            $(".errortext").removeClass("errortext");
+            if ($('#SponsorId').val() == '') {
+                $("#SponsorId").addClass('errortext');
+                $('#SponsorId').focus();
+                return false;
+            }
+            if ($('#FirstName').val() == '') {
+                $("#FirstName").addClass('errortext');
+                $('#FirstName').focus();
+                return false;
+            }
+            if ($('#MobileNo').val() == '') {
+                $("#MobileNo").addClass('errortext');
+                $('#MobileNo').focus();
+                return false;
+            }
+            if ($('#Email').val() == '') {
+                $("#Email").addClass('errortext');
+                $('#Email').focus();
+                return false;
+            }
+            if ($('#Password').val() == '') {
+                $("#Password").addClass('errortext');
+                $('#Password').focus();
+                return false;
+            }
+            $("#MobileNo").attr("disabled", "disabled");
+            $("#FirstName").attr("disabled", "disabled");
+            $("#SponsorId").attr("disabled", "disabled");
+            $("#LastName").attr("disabled", "disabled");
+            $("#PinCode").attr("disabled", "disabled");
+            $("#Password").attr("disabled", "disabled");
+            $("#ConfirmPassword").attr("disabled", "disabled");
+            $("#Gender").attr("disabled", "disabled");
+            $("#Email").attr("disabled", "disabled");
+            $('#Confirm').attr("disabled", "disabled");
+            $('#Confirm').hide();
+            $('#Edit').show();
+            $('#Register').show();
+        }
+        function editregistration() {
+            $("#MobileNo").attr("disabled", false);
+            $("#FirstName").attr("disabled", false);
+            $("#LastName").attr("disabled", false);
+            $("#SponsorId").attr("disabled", false);
+            $("#LastName").attr("disabled", false);
+            $("#PinCode").attr("disabled", false);
+            $("#Password").attr("disabled", false);
+            $("#ConfirmPassword").attr("disabled", false);
+            $("#Gender").attr("disabled", false);
+            $("#Email").attr("disabled", false);
+            $('#Confirm').show();
+            $('#Confirm').attr("disabled", "disabled");
+            $('#Edit').hide();
+            $('#Register').hide();
+
+        }
+
+        function saveregistration() {
+            $('#Register').attr("disabled", "disabled");
+            $("#divload").css({ 'display': '' });
+            var Leg = "";
+            if ($('#left').prop('checked')) {
+                Leg = "L";
+            }
+            else {
+                Leg = "R";
+            }
+            $.ajax({
+                url: "/Home/RegistrationAction",
+                Type: "Get",
+                DataType: "JSON",
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender").val(), State: $("#State").val(), City: $("#City").val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                    }
+                    else {
+                        $("#divload").css({ 'display': 'none' });
+                        alert(data.Result);
+                    }
+                }
+
+            });
+        }
+        function getstatecity() {
+            $(".errortext").removeClass("errortext");
+            $.ajax({
+                url: "/Home/GetStateCity",
+                Type: "Get",
+                DataType: "JSON",
+                data: { PinCode: $("#PinCode").val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        $("#State").val(data.State);
+                        $("#City").val(data.City);
+                    }
+                    else {
+                        $("#State").val('');
+                        $("#City").val('');
+                        $("#PinCode").val('');
+                        $("#PinCode").addClass('errortext');
+                        $('#PinCode').focus();
+                        alert(data.Result);
+
+                    }
+                }
+            });
+        }
+        function isNumberKey(evt) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+        function validateConfPassword() {
+            var password = $('#Password').val();
+            var ConfirmPassword = $('#ConfirmPassword').val();
+            if (password != ConfirmPassword) {
+                $("#Password").addClass('errortext');
+                $("#ConfirmPassword").addClass('errortext');
+                $('#Password').val('');
+                $('#ConfirmPassword').val('');
+                alert("Password and Confirm Password are different")
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -6,9 +6,11 @@ document.write(`
 					<div class ="col-lg-3 col-sm-6 col-md-6">
 						<div class ="single-footer-widget">
 							<div class ="logo">
+                            <div class="text-center">
 								<a href="index.html"><img src="assets/img/logo.png" alt="logo" width="100px"></a>
-                                <h6 class="logo-tagline">One Step Towards Success</h6>
-                                <p>We offer a powerful trading software, an automated trading bot that has helped 5000+traders to get results - now it can help you too!</p>
+                                <h6 class ="logo-tagline">One Step Towards Success</h6>
+                                </div>
+                                <p style="text-align: justify;">We offer a powerful trading software, an automated trading bot that has helped 5000+traders to get results -now it can help you too!</p>
 							</div>
 
 							<ul class ="social-links">
@@ -25,8 +27,9 @@ document.write(`
                             <h3>Company</h3>
 
 							<ul class ="list">
-								<li><a href="about.html">About Us</a></li>
-								<li><a href="#">Services</a></li>
+                                <li><a href="about.html">About Us</a></li>
+								<li><a href="forex.html">Forex</a></li>
+								<li><a href="services.html">Services</a></li>
 								<li><a href="coming.html">Product</a></li>
 								
 							</ul>
@@ -38,8 +41,9 @@ document.write(`
                             <h3>Support</h3>
 
 							<ul class ="list">
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Terms & Condition</a></li>
+                                <li><a href="index.html">Recharge & Bill</a></li>
+								<li><a href="terms&condition.html">Terms & Condition</a></li>
+                                <li><a href="privacy.html">Privacy Policy</a></li>
 								<li><a href="contact.html">Contact Us</a></li>
 							</ul>
 						</div>
@@ -50,9 +54,9 @@ document.write(`
 							<h3>Address</h3>
 
 							<ul class ="footer-contact-info">
-								<li><span>Location: </span> 72/2 Purba Road Dumdum Kolkata - 700030 West Bengal</li>
-								<li><span>Email: </span> <a href="mailto:support@mytrade.co.in">support@mytrade.co.in</a></li>
-								<li><span>Mobile: </span> <a href="tel:7050193183">70 5019 3183</a></li>
+								<li><span>Address : </span> 72/2 Purba Road Dumdum Kolkata -700030 West Bengal</li>
+								<li><span><i class ="fas fa-envelope"></i> &nbsp; </span> <a href="mailto:support@mytrade.co.in">support@mytrade.co.in</a></li>
+								<li><span><i class="fab fa-whatsapp"></i> &nbsp; </span> <a href="tel:7050193183">70 5019 3183</a></li>
                             </ul>
 						</div>
 					</div>

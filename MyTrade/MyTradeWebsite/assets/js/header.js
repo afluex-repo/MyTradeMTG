@@ -41,10 +41,10 @@ document.write(`
             <div class ="luvion-responsive-nav">
                 <div class ="container">
                     <div class ="luvion-responsive-menu">
-                        <div class ="logo">
+                        <div class ="logo" style="width: 100px">
                             <a href="index.html">
-                                <img src="assets/img/logo.png" alt="logo" width="100px">
-                                <img src="assets/img/logo.png" alt="logo" width="100px">
+                                <img src="assets/img/logo.png" alt="logo">
+                                <img src="assets/img/logo.png" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -68,11 +68,13 @@ document.write(`
 
                                 <li class ="nav-item"><a href="forex.html" class ="nav-link">Forex</a></li>
 
+                                <li class ="nav-item"><a href="services.html" class ="nav-link">Services</a></li>
+
                                 <li class ="nav-item"><a href="coming.html" class ="nav-link">Products</a></li>
 
-                                <li class ="nav-item"><a href="#" class ="nav-link">Bill & Recharge <i class ="fas fa-chevron-down"></i></a>
+                                <li class ="nav-item"><a class ="nav-link">Recharge & Bill<i class ="fas fa-chevron-down"></i></a>
                                     <ul class ="dropdown-menu">
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Mobile</a></li>
+                                        <li class ="nav-item"><a href="#recharge&bill" class ="nav-link">Mobile</a></li>
 
                                         <li class ="nav-item"><a href="#" class ="nav-link">DTH</a></li>
 

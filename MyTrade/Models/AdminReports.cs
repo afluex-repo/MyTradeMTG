@@ -48,6 +48,26 @@ namespace MyTrade.Models
         public string FromActivationDate { get; set; }
         public string ToActivationDate { get; set; }
         public string PermanentDate { get; set; }
+        public string Gender { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MobileNo { get; set; }
+
+        public string AdharNo { get; set; }
+        public string PanNo { get; set; }
+
+
+        public string AccountNo { get; set; }
+        public string IFSCCode { get; set; }
+        public string NomineeName { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+
+        
+
+
+
+
 
         #region associatelist
         public DataSet GetAssociateList()
@@ -110,6 +130,13 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetAdminProfileDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdminProfileDetails", para);
+            return ds;
+        }
 
 
 
