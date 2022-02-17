@@ -421,7 +421,12 @@ Navbar Area CSS
   background-color: white;
     border-radius: 8px;
 }
-
+ @media only screen and (max-width: 767px){
+.navbar-brand img {
+  background-color: white;
+    border-radius: 8px;
+}
+}
 .navbar-brand img:nth-child(2) {
   display: none;
 }
@@ -973,6 +978,10 @@ Navbar Area CSS
 }
 
 @media only screen and (max-width: 991px) {
+  .logo a img {
+  background-color: white;
+    border-radius: 8px;
+}
   .luvion-responsive-nav {
     display: block;
   }
@@ -1014,14 +1023,14 @@ Navbar Area CSS
     top: 3px;
   }
   .luvion-responsive-nav .others-options .login-btn {
-    color: #22396c;
+    color: #ffffff;
     font-size: 15px;
-    font-weight: 400;
+    font-weight: 600;
     font-family: "Raleway", sans-serif;
   }
   .luvion-responsive-nav .others-options .login-btn i {
     margin-right: 2px;
-    color: #910f10;
+    color: #ffffff;
   }
   .luvion-responsive-nav .others-options .login-btn:hover {
     color: #ee0979;
@@ -1534,7 +1543,7 @@ Main Banner Area CSS
   position: relative;
   padding-top: 100px;
   padding-bottom: 50px;
-  background-image: url(../img/banner-image/bg.jpg);
+  background-image: url(../img/banner-image/bgt.jpeg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1569,7 +1578,7 @@ Main Banner Area CSS
 .banner-item-content h1 {
   margin-bottom: 0;
   color: #ffffff;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 700;
 }
 
@@ -1801,7 +1810,7 @@ Featured Boxes Area CSS
 .featured-boxes-area {
   position: relative;
   z-index: 1;
-  margin-top: -100px;
+  margin-top: -10%;
 }
 
 .featured-boxes-inner {
@@ -4474,11 +4483,27 @@ Page Title Area CSS
 }
 
 .page-title-area.item-bg1 {
-  background-image: url(../img/ab.jpg);
+  background-image: url(../img/forex.jpg);
 }
 
 .page-title-area.item-bg2 {
-  background-image: url(../img/contact.jpeg);
+  background-image: url(../img/contact.jpg);
+}
+
+.page-title-area.item-bg3 {
+  background-image: url(../img/about.jpg);
+}
+
+.page-title-area.item-bg4 {
+  background-image: url(../img/services1.jpeg);
+}
+
+.page-title-area.item-bg5 {
+  background-image: url(../img/terms.jpg);
+}
+
+.page-title-area.item-bg6 {
+  background-image: url(../img/privacy.png);
 }
 
 .page-title-content {
@@ -5232,8 +5257,8 @@ Login Area CSS
 .login-image {
   height: 100%;
   width: 100%;
-  background-image: url(../img/login-bg.png);
-  background-color: #f5a8a9;
+  background-image: url(../img/login.png);
+  /*background-color: #f0dbfc78;*/
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -5244,8 +5269,8 @@ Login Area CSS
 }*/
 
 .login-content {
-  height: 100vh;
-  background-image: url(../img/login.jpg);
+  /*height: 100vh;*/
+  /*background-image: url(../img/login.jpg);*/
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -5254,13 +5279,33 @@ Login Area CSS
 .login-content .login-form {
   text-align: center;
   max-width: 500px;
-  margin-left: auto;
+  margin-left: 0;/*auto*/
   margin-right: auto;
-  background-color: #f1f1f78c;
-    border-radius: 10px;
-    padding: 30px 40px;
 }
-
+.col-lg-8.col-md-8.col-sm-8.logincol {
+    position: absolute;
+    top: 10%;
+    bottom: auto;
+        box-shadow: 1px 2px 20px 0px #1e3c66;
+        border-radius: 35px;
+}
+.main-body{
+  /*background-position: center center;
+  background-size: cover;*/
+  background-repeat: no-repeat;
+  background-image: url(../img/login.jpg);
+}
+.loginimg{
+    background-color: #ffffff;
+    border-radius: 35px 0 0 35px;
+    padding: 20px 50px;
+    background-image: url(../img/login.png);
+}
+.loginform{
+    background-color: #ffc444cf;
+    border-radius: 0 35px 35px 0;
+    padding: 20px 50px;
+}
 .login-content .login-form .logo {
   margin-bottom: 35px;
 }
@@ -5298,6 +5343,7 @@ Login Area CSS
   height: 50px;
   font-family: "Raleway", sans-serif;
   font-size: 14px;
+  border-radius: 30px;
 }
 
 .login-content .login-form form .btn {
@@ -5380,11 +5426,12 @@ Signup Area CSS
 =================================================*/
 .signup-image {
   height: 100%;
-  width: 100%;
-  background-image: url(../img/signup-bg.jpg);
+  width: 85%;
+  background-image: url(../img/signup.png);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  float: right;
 }
 
 .signup-image img {
@@ -5397,13 +5444,16 @@ Signup Area CSS
 
 .signup-content .signup-form {
   text-align: center;
-  max-width: 500px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #ffc444cf;
+    border-radius: 10px;
+    padding: 30px 40px;
 }
 
 .signup-content .signup-form .logo {
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 
 .signup-content .signup-form .logo a {

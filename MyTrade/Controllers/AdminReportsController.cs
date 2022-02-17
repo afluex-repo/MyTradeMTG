@@ -411,6 +411,40 @@ namespace MyTrade.Controllers
         }
 
 
+        public ActionResult ViewProfileForAdmin(string Id)
+        {
+            AdminReports model = new AdminReports();
+            List<SelectListItem> Gender = Common.BindGender();
+            ViewBag.Gender = Gender;
+            if (Id!=null)
+            {
+                model.Fk_UserId = Id;
+                DataSet ds = model.GetAdminProfileDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    model.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    model.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                    model.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+                    model.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                    model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                    model.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                    model.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                }  
+            }
+            return View(model);
+        }
 
     }
 }
