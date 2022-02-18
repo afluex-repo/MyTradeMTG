@@ -25,6 +25,22 @@ namespace MyTrade.Models
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
 
+
+        public decimal Amount { get; set; }
+        public string NoofPins { get; set; }
+        public string FinalAmount { get; set; }
+        public string BankBranch { get; set; }
+        public string PK_RequestID { get; set; }
+        public string Name { get; set; }
+        public string LoginId { get; set; }
+        public string ProductName { get; set; }
+        
+
+        public List<User> lstEpinRequest { get; set; }
+
+
+
+
         #endregion
         public DataSet ValidateEpin()
         {
@@ -89,6 +105,44 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet SaveEpinRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@FK_PackageId",Package),
+                                   new SqlParameter("@Amount",Amount),
+                                   new SqlParameter("@PaymentMode",Fk_Paymentid),
+                                   new SqlParameter("@BankName",BankName),
+                                   new SqlParameter("@BankBranch",BranchName),
+                                   new SqlParameter("@ChequeDDNo",TransactionNo),
+                                   new SqlParameter("@ChequeDDDate",TransactionDate),
+                                      new SqlParameter("@AddedBy",AddedBy)
+                                   
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveEpinRequest", para);
+            return ds;
+        }
+
+
+        public DataSet GetEPinRequestDetails()
+        {
+          
+            DataSet ds = DBHelper.ExecuteQuery("GetEPinRequestDetails");
+            return ds;
+        }
+
+        
+   public DataSet DeleteEPinRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@PK_RequestID",PK_RequestID),
+                                   new SqlParameter("@DeletedBy",PK_RequestID)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteEPinRequest", para);
+            return ds;
+        }
+
+
+
 
     }
 
@@ -103,6 +157,7 @@ namespace MyTrade.Models
         public string PK_EPinDetailsId { get; set; }
         public string ePinNo { get; set; }
         public string PinAmount { get; set; }
+        public string Amount { get; set; }
         public string PinStatus { get; set; }
         public string IsRegistered { get; set; }
         public string RegisteredTo { get; set; }
@@ -158,8 +213,13 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
             return ds;
         }
+        public DataSet GetPaymentType()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
+            return ds;
+        }
 
 
-
+       
     }
 }

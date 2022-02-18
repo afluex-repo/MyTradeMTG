@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MyTrade.Models
 {
-    public class Admin :Common
+    public class Admin : Common
     {
         #region property
         public string LoginId { get; set; }
@@ -37,18 +37,22 @@ namespace MyTrade.Models
         public string BankBranch { get; set; }
         public string ChequeDDNo { get; set; }
         public string ChequeDDDate { get; set; }
-        
+
         public string PaymentTypeId { get; set; }
         public string PaymentType { get; set; }
         public List<Admin> lstWallet { get; set; }
         public string WalletId { get; set; }
+        public string Name { get; set; }
+        public string PK_RequestID { get; set; }
+        public List<Admin> lstEpinRequest { get; set; }
+        public string ProductName { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
         {
             SqlParameter[] para = {
 
-                                       
+
                                         new SqlParameter("@NoofPins", NoofPins),
                                          new SqlParameter("@LoginId", LoginId),
                                          new SqlParameter("@CreatedBy", AddedBy),
@@ -122,7 +126,7 @@ namespace MyTrade.Models
         public DataSet UpdatePaymentType()
         {
             SqlParameter[] para = {
-                
+
                   new SqlParameter("@PaymentTypeId",PaymentTypeId),
                  new SqlParameter("@Status",Status),
                 new SqlParameter("@AddedBy",AddedBy)
@@ -136,7 +140,31 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
             return ds;
         }
-        
+
+        public DataSet GetEPinRequestDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Name",Name),
+                 new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@Todate",ToDate)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetEPinRequestDetails", para);
+            return ds;
+        }
+
+
+        public DataSet AcceptRejectEPinRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",RequestID),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@AddedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AcceptRejectEPinRequest", para);
+            return ds;
+        }
 
 
     }

@@ -633,30 +633,162 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public JsonResult GetTreeMembers(string Level,string PK_UserId)
+
+        public ActionResult GetMemberName(string LoginId)
         {
-            Tree model = new Tree();
-            model.PK_UserId = PK_UserId;
-            model.Level = Level;
-            List<MemberDetails> lst = new List<MemberDetails>();
-            DataSet ds = model.GetLevelMembers();
+            Common obj = new Common();
+            obj.ReferBy = LoginId;
+            DataSet ds = obj.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
+                obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
+                obj.Result = "Yes";
+            }
+            else { obj.Result = "Invalid LoginId"; }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult EPinRequest()
+        {
+            User model = new User();
+            List<User> list = new List<User>();
+            DataSet dss = model.GetEPinRequestDetails();
+            model.LoginId= dss.Tables[0].Rows[0]["LoginId"].ToString();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.PK_RequestID = r["PK_RequestID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.Amount =Convert.ToDecimal( r["Amount"].ToString());
+                    obj.Fk_Paymentid = r["PaymentMode"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch= r["BankBranch"].ToString();
+                    obj.TransactionNo = r["ChequeDDNo"].ToString();
+                    obj.TransactionDate = r["ChequeDDDate"].ToString();
+                    list.Add(obj);
+                }
+                model.lstEpinRequest = list;
+            }
+
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+
+            ViewBag.ddlProduct = ddlProduct;
+
+            #endregion
+            #region PaymentMode
+            Common com = new Common();
+            List<SelectListItem> ddlPayment = new List<SelectListItem>();
+            DataSet ds = com.PaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                int paycount = 0;
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    MemberDetails obj = new MemberDetails();
-                    obj.PK_UserId = r["PK_UserId"].ToString();
-                    obj.MemberName = r["MemberName"].ToString();
-                    obj.LoginId = r["LoginId"].ToString();
-                    obj.Level = r["Lvl"].ToString();
-                    obj.ProfilePic = r["ProfilePic"].ToString();
-                    obj.SelfBV = r["SelfBV"].ToString();
-                    obj.TeamBV = r["TeamBV"].ToString();
-                    lst.Add(obj);
+                    if (paycount == 0)
+                    {
+                        ddlPayment.Add(new SelectListItem { Text = "Select Payment", Value = "0" });
+                    }
+                    ddlPayment.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    paycount++;
                 }
-                model.lstMember = lst;
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+
+            ViewBag.ddlPayment = ddlPayment;
+
+            #endregion
+
+            return View(model);
         }
+
+
+
+        [HttpPost]
+        [ActionName("EPinRequest")]
+        [OnAction(ButtonName = "btnsave")]
+        public ActionResult UserTypeMaster(User model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_userId"].ToString();
+                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
+                DataSet ds = model.SaveEpinRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["success"] = "E_pin request save successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["success"] = ex.Message;
+            }
+            return RedirectToAction("EPinRequest", "User");
+        }
+
+
+
+        public ActionResult DeleteEPinRequest(string Id)
+        {
+            try
+            {
+                User model = new User();
+                model.PK_RequestID = Id;
+                DataSet ds = model.DeleteEPinRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "E_pin request deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("EPinRequest", "User");
+        }
+        
+
     }
 }
