@@ -138,7 +138,7 @@ namespace MyTrade.Controllers
                 {
                     ViewBag.SponsorId = ds.Tables[0].Rows[0]["LoginId"].ToString();
                 }
-               // ViewBag.SponsorId = d.Split('|')[0];
+                // ViewBag.SponsorId = d.Split('|')[0];
                 //ViewBag.Leg = d.Split('|')[1];
             }
             return View();
@@ -295,7 +295,7 @@ namespace MyTrade.Controllers
                             mail.IsBodyHtml = true;
                             using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                             {
-                                smtp.Credentials = new NetworkCredential("developer2.afluex@gmail.com", "deve@486");
+                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
                                 smtp.EnableSsl = true;
                                 smtp.Send(mail);
                             }
@@ -318,6 +318,10 @@ namespace MyTrade.Controllers
                 TempData["Login"] = ex.Message;
             }
             return RedirectToAction("Login", "Home");
+        }
+        public ActionResult SignUp()
+        {
+            return View();
         }
     }
 }

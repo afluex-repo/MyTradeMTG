@@ -45,7 +45,7 @@
     bottom: 9px;
     left: 15px;
 }
-.user-profile .widget-content-area .user-info { margin-top: 40px; }
+.user-profile .widget-content-area .user-info { margin-top: 10px; }
 .user-profile .widget-content-area .user-info img {
     border-radius: 9px;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);

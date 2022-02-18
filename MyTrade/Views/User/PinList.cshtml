@@ -5,73 +5,72 @@
 }
 @using (Html.BeginForm("PinList", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-<div class="container">
-    <div class="row layout-top-spacing">
-        <div class="col-lg-12 col-12 layout-spacing">
-            <div class="statbox widget box box-shadow">
-                <div class="widget-header">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                            <h4>Pin List</h4>
-                            <span class="text-danger">
-                                @TempData["Pin"]
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Pin List</h4>
+                                <span class="text-danger">
+                                    @TempData["Pin"]
 
-                            </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="widget-content widget-content-area">
-                    <div class="row">
-                        <table id="html5-extension" class="table table-hover non-hover">
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="ckbCheckAll" /></th>
-                                    <th>Sr No.</th>
-                                    <th>E-Pin No</th>
-                                    <th>Pin Amount</th>
-                                    <th>Pin Status</th>
-                                    @*<th>Is Registered</th>*@
-                                    <th>Registered To</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
-                                {
-                                    if (Model.lst != null)
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            <table id="html5-extension" class="table table-hover non-hover">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="ckbCheckAll" /></th>
+                                        <th>Sr No.</th>
+                                        <th>E-Pin No</th>
+                                        <th>Pin Amount</th>
+                                        <th>Pin Status</th>
+                                        @*<th>Is Registered</th>*@
+                                        <th>Registered To</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                     {
-                                        int i = 1;
-                                        foreach (var Item in Model.lst)
+                                        if (Model.lst != null)
                                         {
-                            <tr class="text-left">
-                                <td>
-                                    <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
-                                    <input type="hidden" name="ePinNo_ @i" id="ePinNo_ @i" value="@Item.ePinNo" />
-                                </td>
-                                <td>@i</td>
-                                <td>@Item.ePinNo</td>
-                                <td>@Item.PinAmount</td>
-                                <td>@Item.PinStatus</td>
-                                <td>@Item.RegisteredTo</td>
-                                @*<td>@Item.RegisteredTo </td>*@
-                                @if (Item.PinStatus == "Available")
-                                {
-                                    <td><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                            </tr>
-                                            i++;
+                                            int i = 1;
+                                            foreach (var Item in Model.lst)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>
+                                                        <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                        <input type="hidden" name="ePinNo_ @i" id="ePinNo_ @i" value="@Item.ePinNo" />
+                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                    </td>
+                                                    <td>@i</td>
+                                                    <td>@Item.ePinNo</td>
+                                                    <td>@Item.PinAmount</td>
+                                                    <td>@Item.PinStatus</td>
+                                                    <td>@Item.RegisteredTo</td>
+                                                    @*<td>@Item.RegisteredTo </td>*@
+                                                    @if (Item.PinStatus == "Available")
+                                                    {
+                                                        <td><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                </tr>
+                                                i++;
+                                            }
                                         }
-
-                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
                                     }
-                                }
-                            </tbody>
-                        </table>
-                       </div>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="row">
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
                                 <div class="form-group">
@@ -96,45 +95,45 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@Html.HiddenFor(m => m.ePinNo)
-<div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" style="color: red">Activate User</h6>
-                <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
-            </div>
-            <div class="modal-body" style="color: black">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Login Id</label>
-                            @Html.TextBoxFor(m => m.Login_Id, new { @class = "form-control", @placeholder = "LoginId" ,@onchange= "return GetInActiveUser();" })
-                        <input type="hidden" id="UserId" />
+    @Html.HiddenFor(m => m.ePinNo)
+    <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" style="color: red">Activate User</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Login Id</label>
+                                @Html.TextBoxFor(m => m.Login_Id, new { @class = "form-control", @placeholder = "LoginId", @onchange = "return GetInActiveUser();" })
+                                <input type="hidden" id="UserId" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Name</label>
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Name",@readonly=true })
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Name", @readonly = true })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="button" class="btn btn-sm btn-success pull-right" onclick="return ActivatePin()" value="Activate" />
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="button" class="btn btn-sm btn-success pull-right" onclick="return ActivatePin()" value="Activate" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
@@ -174,7 +173,7 @@
     }
     function GetInActiveUser() {
         debugger;
-       
+
         $.ajax({
             url: '/User/GetInActiveUser',
             data: {
@@ -185,7 +184,7 @@
             success: function (data) {
                 if (data.DisplayName == null) {
                     alert('Invalid Login ID')
-                    $("#Login_Id").val(''); 
+                    $("#Login_Id").val('');
                     $("#UserId").val('');
                     $("#UserName").val('');
                     return;
@@ -221,8 +220,7 @@
 
 
 <script>
-    function ValidateLogId()
-    {
+    function ValidateLogId() {
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {
             $("#LoginId").addClass('errortext');
@@ -249,7 +247,7 @@
             $('#Login_Id').focus();
             return false;
         }
-      
+
         var r = confirm('Are you sure you want to activate this user ?');
         if (r == true) {
             $.ajax({
@@ -257,8 +255,7 @@
                 Type: "Get",
                 DataType: "JSON",
                 data: { ePinNo: $("#ePinNo").val(), Fk_UserId: $("#UserId").val() },
-                success: function (data)
-                {
+                success: function (data) {
                     alert("User activated successfully");
                     $("#myModal").modal('hide');
                 }

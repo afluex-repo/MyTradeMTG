@@ -246,7 +246,7 @@ namespace MyTrade.Controllers
             {
                 try
                 {
-                    string hdrows = Request["hdRows"].ToString();
+                    string hdrows = Request["hdRows"].Count().ToString();
                     string chkselect = "";
                     for (int i = 1; i < int.Parse(hdrows); i++)
                     {
@@ -284,9 +284,46 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PinList");
         }
-        public ActionResult Tree()
+        public ActionResult Tree(string LoginId)
         {
-            return View();
+            Tree model = new Tree();
+            if(LoginId !="" && LoginId !=null)
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.LoginId = LoginId;
+             
+            }
+            else
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.PK_UserId = Session["Pk_UserId"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.DisplayName = Session["FullName"].ToString();
+            }
+            List<TreeMembers> lst = new List<TreeMembers>();
+            DataSet ds = model.GetLevelMembersCount();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    TreeMembers obj = new TreeMembers();
+                    obj.LevelName = r["LevelNo"].ToString();
+                    obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[1].Rows.Count>0)
+            {
+                ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+            }
+            return View(model);
         }
         public ActionResult GetMemberName(string LoginId, string ePinNo)
         {
