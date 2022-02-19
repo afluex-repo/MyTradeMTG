@@ -114,7 +114,7 @@
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 <select name="Gender" id="Gender" class="form-select" required>
-                                                    <option>-Select-</option>
+                                                    <option value="0">-Select-</option>
                                                     <option value="M">Male</option>
                                                     <option value="F">Female</option>
                                                     <option value="O">Other</option>
@@ -277,7 +277,7 @@
             $("#Gender").attr("disabled", false);
             $("#Email").attr("disabled", false);
             $('#Confirm').show();
-            $('#Confirm').attr("disabled", "disabled");
+            $('#Confirm').attr("disabled", false);
             $('#divReg').hide();
         }
         function saveregistration() {

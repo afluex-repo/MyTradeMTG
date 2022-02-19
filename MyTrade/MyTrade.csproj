@@ -587,6 +587,7 @@
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
@@ -721,6 +722,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
+    <Folder Include="Views\Report\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <PropertyGroup>

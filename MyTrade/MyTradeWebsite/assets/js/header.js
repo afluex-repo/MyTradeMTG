@@ -1,3 +1,4 @@
+/// <reference path="header.js" />
 document.write(`
 <!doctype html>
 <html lang="zxx">
@@ -23,7 +24,7 @@ document.write(`
         <link rel="stylesheet" href="assets/css/responsive.css">
         <title>My Trade</title>
 
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="../img/favicon.png">
     </head>
 
         <!--Preloader-->
