@@ -44,7 +44,7 @@ namespace MyTrade.Controllers
             #endregion
             UserWallet obj = new UserWallet();
             obj.LoginId = Session["LoginId"].ToString();
-            
+
             #region ddlpaymentmode
 
             int count = 0;
@@ -98,6 +98,124 @@ namespace MyTrade.Controllers
                 TempData["Wallet"] = ex.Message;
             }
             return RedirectToAction("AddWallet", "Wallet");
+        }
+        public ActionResult ROIWallet()
+        {
+            UserWallet model = new UserWallet();
+            List<UserWallet> lst = new List<UserWallet>();
+            DataSet ds = model.GetROIWalletDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTps = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ROIWallet")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ROIWallet(UserWallet model)
+        {
+            List<UserWallet> lst = new List<UserWallet>();
+            model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetROIWalletDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTps = lst;
+            }
+            return View(model);
+
+        }
+        
+        public ActionResult ROIIncomeReports()
+        {
+            UserWallet model = new UserWallet();
+            List<UserWallet> lst = new List<UserWallet>();
+            DataSet ds = model.GetROIIncomeReportsDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.Date = r["TopUpDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROIIncome = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ROIIncomeReports")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ROIIncomeReports(UserWallet model)
+        {
+            List<UserWallet> lst = new List<UserWallet>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetROIIncomeReportsDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.Date = r["TopUpDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROIIncome = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult ViewROI(string Id)
+        {
+            UserWallet model = new UserWallet();
+            List<UserWallet> lst = new List<UserWallet>();
+            DataSet ds = model.GetROIDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.ROI = r["Pk_ROIId"].ToString();
+                    obj.ROI = r["ROI"].ToString();
+                    obj.Date = r["ROIDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROI = lst;
+            }
+            return View(model);
         }
 
     }
