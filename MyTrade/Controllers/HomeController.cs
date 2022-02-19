@@ -48,7 +48,7 @@ namespace MyTrade.Controllers
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
                                 Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
-                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
+                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O")
                                 {
                                     FormName = "UserDashBoard";
                                     Controller = "User";

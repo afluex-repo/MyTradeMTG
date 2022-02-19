@@ -627,6 +627,7 @@
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserReports.cs" />
     <Compile Include="Models\UserWallet.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
       <DependentUpon>AgentServices.asmx</DependentUpon>
@@ -711,6 +712,10 @@
     <Content Include="Views\User\EPinRequest.cshtml" />
     <Content Include="Views\Admin\EPinRequestList.cshtml" />
     <Content Include="Views\AdminReports\ViewProfile.cshtml" />
+    <Content Include="Views\Report\PayoutWalletLedger.cshtml" />
+    <Content Include="Views\Report\LevelIncomeTr1.cshtml" />
+    <Content Include="Views\Report\LevelIncomeTr2.cshtml" />
+    <Content Include="Views\Report\PayoutDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -722,7 +727,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
-    <Folder Include="Views\Report\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <PropertyGroup>
