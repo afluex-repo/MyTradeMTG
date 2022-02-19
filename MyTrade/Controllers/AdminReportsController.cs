@@ -455,6 +455,8 @@ namespace MyTrade.Controllers
         {
             try
             {
+                List<SelectListItem> Gender = Common.BindGender();
+                ViewBag.Gender = Gender;
                 model.UpdatedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.UpdateAdminProfile();
                 if (ds != null && ds.Tables.Count > 0)
@@ -473,7 +475,7 @@ namespace MyTrade.Controllers
             {
                 TempData["AdminProfile"] = ex.Message;
             }
-            return RedirectToAction("ViewProfileForAdmin", "AdminReports");
+            return View(model);
         }
 
 
@@ -504,6 +506,47 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AssociateList", "AdminReports");
         }
+
+        public ActionResult ViewProfile(string Id)
+        {
+            AdminReports model = new AdminReports();
+            List<SelectListItem> Gender = Common.BindGender();
+            ViewBag.Gender = Gender;
+            if (Id != null)
+            {
+                model.Fk_UserId = Id;
+                DataSet ds = model.GetAdminProfileDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    ViewBag.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                    ViewBag.SponsorName = ds.Tables[0].Rows[0]["SponserName"].ToString();
+                    ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                    ViewBag.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    ViewBag.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    ViewBag.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    ViewBag.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                    ViewBag.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+                    ViewBag.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                    ViewBag.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                    ViewBag.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                    ViewBag.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                }
+            }
+            return View(model);
+        }
+             
+
+
+
 
 
 

@@ -186,6 +186,7 @@
     <Content Include="assets\css\scrollspyNav.css" />
     <Content Include="assets\css\structure.css" />
     <Content Include="assets\css\tables\table-basic.css" />
+    <Content Include="assets\css\user-profile.css" />
     <Content Include="assets\css\users\account-setting.css" />
     <Content Include="assets\css\users\user-profile.css" />
     <Content Include="assets\css\widgets\modules-widgets.css" />
@@ -708,6 +709,7 @@
     <Content Include="Views\AdminReports\ViewProfileForAdmin.cshtml" />
     <Content Include="Views\User\EPinRequest.cshtml" />
     <Content Include="Views\Admin\EPinRequestList.cshtml" />
+    <Content Include="Views\AdminReports\ViewProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
