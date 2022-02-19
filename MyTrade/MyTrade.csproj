@@ -711,6 +711,9 @@
     <Content Include="Views\User\EPinRequest.cshtml" />
     <Content Include="Views\Admin\EPinRequestList.cshtml" />
     <Content Include="Views\AdminReports\ViewProfile.cshtml" />
+    <Content Include="Views\Wallet\ROIWallet.cshtml" />
+    <Content Include="Views\Wallet\ROIIncomeReports.cshtml" />
+    <Content Include="Views\Wallet\ViewROI.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -736,7 +739,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

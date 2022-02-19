@@ -8,6 +8,9 @@
     .user-profile .widget-content-area .user-info-list ul.contacts-block {
     max-width: 260px !important;
 }
+        .user-profile .widget-content-area .user-info-list ul.contacts-block li {
+            margin-bottom: 22px !important;
+        }
 </style>
 
 @using (Html.BeginForm("ViewProfile", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
