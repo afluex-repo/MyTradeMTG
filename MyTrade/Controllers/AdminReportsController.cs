@@ -341,7 +341,7 @@ namespace MyTrade.Controllers
         }
         #endregion
 
-        
+
         public ActionResult DirectListForAdmin()
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
@@ -416,13 +416,15 @@ namespace MyTrade.Controllers
             AdminReports model = new AdminReports();
             List<SelectListItem> Gender = Common.BindGender();
             ViewBag.Gender = Gender;
-            if (Id!=null)
+            if (Id != null)
             {
                 model.Fk_UserId = Id;
                 DataSet ds = model.GetAdminProfileDetails();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    model.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                    model.SponsorName = ds.Tables[0].Rows[0]["SponserName"].ToString();
                     model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
                     model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
                     model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
@@ -441,10 +443,112 @@ namespace MyTrade.Controllers
                     model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     model.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                     model.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
-                }  
+                }
             }
             return View(model);
         }
+
+        [HttpPost]
+        [ActionName("ViewProfileForAdmin")]
+        [OnAction(ButtonName = "Update")]
+        public ActionResult ViewProfileForAdmin(AdminReports model)
+        {
+            try
+            {
+                List<SelectListItem> Gender = Common.BindGender();
+                ViewBag.Gender = Gender;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateAdminProfile();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["AdminProfile"] = "User profile updated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["AdminProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["AdminProfile"] = ex.Message;
+            }
+            return View(model);
+        }
+
+
+
+        public ActionResult DeleteUerDetails(string Id)
+        {
+            try
+            {
+                AdminReports model = new AdminReports();
+                model.Fk_UserId = Id;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.DeleteUerDetails();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "User deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
+
+        public ActionResult ViewProfile(string Id)
+        {
+            AdminReports model = new AdminReports();
+            List<SelectListItem> Gender = Common.BindGender();
+            ViewBag.Gender = Gender;
+            if (Id != null)
+            {
+                model.Fk_UserId = Id;
+                DataSet ds = model.GetAdminProfileDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    ViewBag.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                    ViewBag.SponsorName = ds.Tables[0].Rows[0]["SponserName"].ToString();
+                    ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                    ViewBag.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    ViewBag.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                    ViewBag.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                    ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    ViewBag.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                    ViewBag.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+                    ViewBag.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                    ViewBag.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                    ViewBag.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                    ViewBag.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                }
+            }
+            return View(model);
+        }
+             
+
+
+
+
+
 
     }
 }

@@ -457,5 +457,127 @@ namespace MyTrade.Controllers
             return RedirectToAction("PaymentTypeMaster", "Admin");
         }
 
+        public ActionResult EPinRequestList()
+        {
+            Admin model = new Admin();
+            List<Admin> list = new List<Admin>();
+            DataSet dss = model.GetEPinRequestDetails();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_RequestID = r["PK_RequestID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Fk_Paymentid = r["PaymentMode"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.TransactionNo = r["ChequeDDNo"].ToString();
+                    obj.TransactionDate = r["ChequeDDDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    list.Add(obj);
+                }
+                model.lstEpinRequest = list;
+            }
+            return View();
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "GetDetails")]
+        [ActionName("EPinRequestList")]
+        public ActionResult EPinRequestList(Admin model)
+        {
+            List<Admin> list = new List<Admin>();
+            model.Name = model.Name == "0" ? null : model.Name;
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet dss = model.GetEPinRequestDetails();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_RequestID = r["PK_RequestID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Fk_Paymentid = r["PaymentMode"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.TransactionNo = r["ChequeDDNo"].ToString();
+                    obj.TransactionDate = r["ChequeDDDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    list.Add(obj);
+                }
+                model.lstEpinRequest = list;
+            }
+            return View(model);
+        }
+
+
+        public ActionResult AcceptedEPinRequest(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.RequestID = id;
+                model.Status = (model.Status = "Accepted");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.AcceptRejectEPinRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "EPin Request Accepted Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("EPinRequestList", "Admin");
+        }
+
+        public ActionResult RejectedEPinRequest(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.RequestID = id;
+                model.Status = (model.Status = "Rejected");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.AcceptRejectEPinRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "EPin Request Rejected Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("EPinRequestList", "Admin");
+        }
+
+
+
+
     }
 }
