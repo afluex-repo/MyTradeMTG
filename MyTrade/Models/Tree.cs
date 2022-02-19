@@ -19,6 +19,11 @@ namespace MyTrade.Models
         public string TotalDirect { get; set; }
         public string TotalActive { get; set; }
         public string TotalInactive { get; set; }
+        public string TotalTeam { get; set; }
+        public string TotalActiveTeam { get; set; }
+        public string TotalInActiveTeam { get; set; }
+        public string SponsorName { get; set; }
+        public string Color { get; set; }
         public DataSet GetLevelTreeData()
         {
             SqlParameter[] para = {
@@ -66,5 +71,8 @@ namespace MyTrade.Models
         public string ProfilePic { get; set; }
         public string SelfBV { get; set; }
         public string TeamBV { get; set; }
+        public string Status { get; set; }
+        public string SponsorName { get; set; }
+        public string Color { get; set; }
     }
 }

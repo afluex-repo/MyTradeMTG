@@ -284,14 +284,14 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PinList");
         }
-        public ActionResult Tree(string LoginId)
+        public ActionResult Tree(string LoginId, string Id)
         {
             Tree model = new Tree();
-            if(LoginId !="" && LoginId !=null)
+            if (LoginId != "" && LoginId != null)
             {
                 model.RootAgentCode = Session["LoginId"].ToString();
                 model.LoginId = LoginId;
-             
+                model.PK_UserId = Id;
             }
             else
             {
@@ -301,10 +301,11 @@ namespace MyTrade.Controllers
                 model.DisplayName = Session["FullName"].ToString();
             }
             List<TreeMembers> lst = new List<TreeMembers>();
+            List<MemberDetails> lstMember = new List<MemberDetails>();
             DataSet ds = model.GetLevelMembersCount();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                foreach(DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     TreeMembers obj = new TreeMembers();
                     obj.LevelName = r["LevelNo"].ToString();
@@ -313,16 +314,44 @@ namespace MyTrade.Controllers
                 }
                 model.lst = lst;
             }
-            if(ds!=null && ds.Tables.Count>0 && ds.Tables[1].Rows.Count>0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
                 ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
+                model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
                 model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
                 model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
                 model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
                 model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
                 model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
                 model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
             }
+            model.Level = "1";
+            DataSet ds1 = model.GetLevelMembers();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    MemberDetails obj = new MemberDetails();
+                    obj.PK_UserId = r["PK_UserId"].ToString();
+                    obj.MemberName = r["MemberName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.ProfilePic = r["ProfilePic"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.SelfBV = r["SelfBV"].ToString();
+                    obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.Color = r["Color"].ToString();
+                    lstMember.Add(obj);
+                }
+                model.lstMember = lstMember;
+            }
+
             return View(model);
         }
         public ActionResult GetMemberName(string LoginId, string ePinNo)
@@ -633,7 +662,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public JsonResult GetTreeMembers(string Level,string PK_UserId)
+        public JsonResult GetTreeMembers(string Level, string PK_UserId)
         {
             Tree model = new Tree();
             model.PK_UserId = PK_UserId;
@@ -652,11 +681,14 @@ namespace MyTrade.Controllers
                     obj.ProfilePic = r["ProfilePic"].ToString();
                     obj.SelfBV = r["SelfBV"].ToString();
                     obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.Color = r["Color"].ToString();
                     lst.Add(obj);
                 }
                 model.lstMember = lst;
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+        //public ActionResult 
     }
 }

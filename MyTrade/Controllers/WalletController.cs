@@ -99,6 +99,9 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AddWallet", "Wallet");
         }
-
+        public ActionResult ROIWallet()
+        {
+            return View();
+        }
     }
 }
