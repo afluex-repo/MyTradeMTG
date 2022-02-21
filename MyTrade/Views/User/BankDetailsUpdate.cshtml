@@ -88,7 +88,16 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Update" id="Update" name="Update" onclick="return validate();" />
+                                    <input type="hidden" name="IsVerified" value="@Model.IsVerified" />
+                                    @if (Model.IsVerified == "True")
+                                    {
+                                <button id="my-button" disabled class="btn btn-success pull-left">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <input class="btn btn-success pull-left" type="submit" value="Update" id="Update" name="Update" onclick="return validate();" />
+                                    }
+
                                 </div>
                             </div>
                         </div>
@@ -100,6 +109,13 @@
     </div>
 }
 <script>
+
+    $(document).ready(function () {
+        $('#my-button').prop('disabled', true);
+    });
+
+
+
     function validate() {
         if ($('#AdharNo').val() == '') {
             $("#AdharNo").addClass('errortext');
