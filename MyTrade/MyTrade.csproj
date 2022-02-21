@@ -716,6 +716,9 @@
     <Content Include="Views\Report\LevelIncomeTr1.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr2.cshtml" />
     <Content Include="Views\Report\PayoutDetail.cshtml" />
+    <Content Include="Views\Wallet\ROIIncomeReports.cshtml" />
+    <Content Include="Views\Wallet\ROIWallet.cshtml" />
+    <Content Include="Views\Wallet\ViewROI.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
