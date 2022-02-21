@@ -261,6 +261,6 @@ E:\Divya\repository\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
 E:\Divya\repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
 E:\Divya\repository\MyTrade\MyTrade\bin\System.Web.Http.xml
 E:\Divya\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
-E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
+E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

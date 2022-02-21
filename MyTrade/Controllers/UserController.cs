@@ -647,7 +647,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public ActionResult GetMemberName(string LoginId)
+        public ActionResult GetMemberDetails(string LoginId)
         {
             Common obj = new Common();
             obj.ReferBy = LoginId;
