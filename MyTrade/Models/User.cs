@@ -169,10 +169,11 @@ namespace MyTrade.Models
         public string ToName { get;  set; }
         public string TransferDate { get;  set; }
         public string ToLoginId { get; set; }
-
+        public string Response { get; set; }
         public string Login_Id { get; set; }
 
         public string UserName { get; set; }
+        public string Message { get; set; }
         public DataSet GetPinList()
         {
             SqlParameter[] para = {
