@@ -30,6 +30,14 @@ namespace MyTrade.Controllers
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                 ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
+                ViewBag.TotalROI = ds.Tables[0].Rows[0]["TotalROIWalletAmount"].ToString();
+                ViewBag.TotalPayout = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
+                ViewBag.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
+                ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
+                ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
+                ViewBag.TotalIncome = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
+                ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
+                ViewBag.LevelIncomeTr2 = "0";
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 if (ViewBag.Status == "InActive")
                 {
@@ -534,7 +542,7 @@ namespace MyTrade.Controllers
                 model.Response = "0";
                 model.Message = ex.Message;
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult BankDetailsUpdate()
         {
@@ -544,7 +552,8 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                { model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                {
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                     model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
@@ -663,7 +672,7 @@ namespace MyTrade.Controllers
             User model = new User();
             List<User> list = new List<User>();
             DataSet dss = model.GetEPinRequestDetails();
-            model.LoginId= dss.Tables[0].Rows[0]["LoginId"].ToString();
+            model.LoginId = dss.Tables[0].Rows[0]["LoginId"].ToString();
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in dss.Tables[0].Rows)
@@ -673,10 +682,10 @@ namespace MyTrade.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
-                    obj.Amount =Convert.ToDecimal( r["Amount"].ToString());
+                    obj.Amount = Convert.ToDecimal(r["Amount"].ToString());
                     obj.Fk_Paymentid = r["PaymentMode"].ToString();
                     obj.BankName = r["BankName"].ToString();
-                    obj.BankBranch= r["BankBranch"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
                     obj.TransactionNo = r["ChequeDDNo"].ToString();
                     obj.TransactionDate = r["ChequeDDDate"].ToString();
                     list.Add(obj);

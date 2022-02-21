@@ -156,7 +156,7 @@
     </div>
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-@*<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>*@
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script>
     function validate() {
         $(".errortext").removeClass('errortext');
@@ -228,11 +228,7 @@
                     this.checked = false;
                 });
             }
-            var values = $('input:checkbox:checked.checkBoxClass').map(function () {
-                return this.value;
-            }).get();
-            console.log(values);
-            //$("#lblPins").text($('.checkBoxClass:checked').length);
+            $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
         });
 
        
@@ -244,11 +240,7 @@
         } else {
             $('#ckbCheckAll').prop('checked', false);
         }
-        var values = $('input:checkbox:checked.checkBoxClass').map(function () {
-            return this.value;
-        }).get();
-        console.log(values);
-        //$("#lblPins").text($('.checkBoxClass:checked').length);
+        $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
     });
     
 </script>
