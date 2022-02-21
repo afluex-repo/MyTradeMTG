@@ -544,7 +544,9 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                { model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                {
+                    model.IsVerified = ds.Tables[0].Rows[0]["IsVerified"].ToString();
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                     model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();

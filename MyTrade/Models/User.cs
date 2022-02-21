@@ -34,8 +34,7 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string LoginId { get; set; }
         public string ProductName { get; set; }
-        
-
+        public string IsVerified { get; set; }
         public List<User> lstEpinRequest { get; set; }
 
 
