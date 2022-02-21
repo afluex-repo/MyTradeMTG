@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MyTrade.Models
 {
-    public class Admin :Common
+    public class Admin : Common
     {
         #region property
         public string LoginId { get; set; }
@@ -26,13 +26,33 @@ namespace MyTrade.Models
         public string ToDate { get; set; }
         public string Status { get; set; }
 
+        public string Password { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmNewPassword { get; set; }
+
+        public string RequestID { get; set; }
+        public string UserId { get; set; }
+        public string RequestCode { get; set; }
+        public string PaymentMode { get; set; }
+        public string BankBranch { get; set; }
+        public string ChequeDDNo { get; set; }
+        public string ChequeDDDate { get; set; }
+
+        public string PaymentTypeId { get; set; }
+        public string PaymentType { get; set; }
+        public List<Admin> lstWallet { get; set; }
+        public string WalletId { get; set; }
+        public string Name { get; set; }
+        public string PK_RequestID { get; set; }
+        public List<Admin> lstEpinRequest { get; set; }
+        public string ProductName { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
         {
             SqlParameter[] para = {
 
-                                       
+
                                         new SqlParameter("@NoofPins", NoofPins),
                                          new SqlParameter("@LoginId", LoginId),
                                          new SqlParameter("@CreatedBy", AddedBy),
@@ -68,5 +88,84 @@ namespace MyTrade.Models
             return ds;
         }
         #endregion
+
+
+
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para = {new SqlParameter("@OldPassword",Password),
+                                   new SqlParameter("@NewPassword",NewPassword),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AdminChangePassword", para);
+            return ds;
+
+        }
+
+        public DataSet GetEwalletRequestDetails()
+        {
+            SqlParameter[] para = {
+                                   new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetails", para);
+
+            return ds;
+        }
+        public DataSet ApproveDeclineEwalletRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",RequestID),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@AddedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApproveDeclineEwalletRequest", para);
+            return ds;
+        }
+
+        public DataSet UpdatePaymentType()
+        {
+            SqlParameter[] para = {
+
+                  new SqlParameter("@PaymentTypeId",PaymentTypeId),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SavePaymentType", para);
+            return ds;
+        }
+
+        public DataSet GetPaymentType()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
+            return ds;
+        }
+
+        public DataSet GetEPinRequestDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Name",Name),
+                 new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@Todate",ToDate)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetEPinRequestDetails", para);
+            return ds;
+        }
+
+
+        public DataSet AcceptRejectEPinRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",RequestID),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@AddedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AcceptRejectEPinRequest", para);
+            return ds;
+        }
+
+
     }
 }

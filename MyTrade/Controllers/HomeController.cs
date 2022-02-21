@@ -1,8 +1,11 @@
-﻿using MyTrade.Models;
+﻿using MyTrade.Filter;
+using MyTrade.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,7 +16,7 @@ namespace MyTrade.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return Redirect("~/MyTradeWebsite/index.html");
         }
         public ActionResult Login()
         {
@@ -43,8 +46,9 @@ namespace MyTrade.Controllers
                                 Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                                 Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
+                                Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
-                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
+                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
                                 {
                                     FormName = "UserDashBoard";
                                     Controller = "User";
@@ -127,14 +131,20 @@ namespace MyTrade.Controllers
             ViewBag.Gender = Gender;
             if (!string.IsNullOrEmpty(PId))
             {
-                var d = Crypto.Decrypt(PId);
-                ViewBag.SponsorId = d.Split('|')[0];
+                obj.Fk_UserId = PId;
+                // var d = Crypto.Decrypt(PId);
+                DataSet ds = obj.GetMemberNameWithUserId();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.SponsorId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                }
+                // ViewBag.SponsorId = d.Split('|')[0];
                 //ViewBag.Leg = d.Split('|')[1];
             }
             return View();
         }
 
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City)
 
         {
             Home obj = new Home();
@@ -151,6 +161,8 @@ namespace MyTrade.Controllers
                 obj.Password = Crypto.Encrypt(Password);
                 obj.Email = Email;
                 obj.Gender = Gender;
+                obj.State = State;
+                obj.City = City;
                 DataSet ds = obj.Registration();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -197,7 +209,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
+                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O")
                 {
                     obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
                     obj.Result = "Yes";
@@ -246,5 +258,70 @@ namespace MyTrade.Controllers
             return PartialView("_Menu", Menu);
         }
         #endregion
+
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ForgetPassword")]
+        [OnAction(ButtonName = "forgetpassword")]
+        public ActionResult ForgetPassword(Home model)
+        {
+
+            SmtpClient smtpClient = new SmtpClient();
+            MailMessage message = new MailMessage();
+
+            try
+            {
+                DataSet ds = model.ForgetPassword();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                        model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        model.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
+
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + model.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + model.Password;
+
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
+                        TempData["Login"] = "password sent your email-id successfully.";
+                    }
+
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Login"] = ex.Message;
+            }
+            return RedirectToAction("Login", "Home");
+        }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
     }
 }

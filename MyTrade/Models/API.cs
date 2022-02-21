@@ -60,13 +60,14 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string sponsorId { get; set; }
+  
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
                                       new SqlParameter("@LoginId", sponsorId),
 
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetMemberName", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetMemberDetailsMobile", para);
 
             return ds;
         }
@@ -118,6 +119,7 @@ namespace MyTrade.Models
         public string TeamPermanent { get; set; }
         public string FranchiseAdminID { get; set; }
         public string Profile { get; set; }
+        public string Gender { get; set; }
         public DataSet Login()
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
@@ -502,4 +504,175 @@ namespace MyTrade.Models
         public string ToName { get;  set; }
         public string TransferDate { get;  set; }
     }
+    public class Request
+    {
+        public string FK_UserId { get; set; }
+        public DataSet UserProfile()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FK_UserId",FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+            return ds;
+        }
+
+    }
+    public class ProfileAPI
+    {
+        public string Status { get; set; }
+        public string Message { get;  set; }
+        public string FK_UserId { get; set; }
+        public string LoginId { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public string MobileNo { get; set; }
+        public string Email { get; set; }
+        public string PinCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+        public string ProfilePic { get; set; }
+        public string AadharNo { get; set; }
+        public string PanNo { get; set; }
+        public DataSet UpdateProfile()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@AadharNo", AadharNo),
+                                      new SqlParameter("@PanNo", PanNo),
+                                      new SqlParameter("@Address", Address),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
+
+            return ds;
+        }
+    }
+
+
+
+    public class BankDetailsUpdateRequest
+    {
+        public string FK_UserId { get; set; }
+        public DataSet BankDetailsEdit()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FK_UserId",FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+            return ds;
+        }
+
+    }
+
+
+    public class BankDetailsUpdateAPIResponse
+    {
+        
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Fk_UserId { get; set; }
+        public string PanNumber { get; set; }
+        public string AdharNo { get; set; }
+        public string BankName { get; set; }
+        public string BranchName { get; set; }
+        public string AccountNo { get; set; }
+        public string IFSCCode { get; set; }
+        public string NomineeName { get; set; }
+        public string NomineeRelation { get; set; }
+        public string NomineeAge { get; set; }
+
+        public DataSet BankUpdate()
+        {
+            SqlParameter[] para = {
+                                 new SqlParameter("@FK_UserId", Fk_UserId),
+                                   new SqlParameter("@PanNo", PanNumber),
+                                   new SqlParameter("@AadharNo", AdharNo),
+                                   new SqlParameter("@BankName", BankName),
+                                     new SqlParameter("@Branch", BranchName),
+                                   new SqlParameter("@AccountNo", AccountNo),
+                                    new SqlParameter("@IFSCCode", IFSCCode),
+                                     new SqlParameter("@NomineeName", NomineeName),
+                                    new SqlParameter("@NomineeRelation", NomineeRelation),
+                                     new SqlParameter("@NomineeAge", NomineeAge),
+                                      new SqlParameter("@UpdatedBy", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
+            return ds;
+        }
+    }
+
+
+    public class AddWalletRequest
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string PaymentMode { get; set; }
+        public string Amount { get; set; }
+        public string DDChequeNo { get; set; }
+        public string DDChequeDate { get; set; }
+        public string BankBranch { get; set; }
+        public string BankName { get; set; }
+        public string AddedBy { get; set; }
+        public DataSet AddWallet()
+        {
+            SqlParameter[] para = {
+                                     new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Amount", Amount),
+                                      new SqlParameter("@PaymentMode", PaymentMode) ,
+                                      new SqlParameter("@DDChequeNo", DDChequeNo) ,
+                                      new SqlParameter("@DDChequeDate", DDChequeDate) ,
+                                      new SqlParameter("@BankBranch", BankBranch) ,
+                                          new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
+            return ds;
+        }
+    }
+    
+
+
+    public class Password
+    {
+        public string FK_UserId { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para = {
+                                     
+                                      new SqlParameter("@OldPassword", OldPassword),
+                                      new SqlParameter("@NewPassword", NewPassword),
+                                       new SqlParameter("@UpdatedBy", FK_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UserChangePassword", para);
+
+            return ds;
+        }
+    }
+    public class ActivateUser
+    {
+        public string ePinNo { get; set; }
+        public string LoginId { get; set; }
+        public DataSet ActivateUserByPin()
+        {
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@EPinNo", ePinNo)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUserMobile", para);
+
+            return ds;
+        }
+    }
+
+
+    
 }

@@ -68,7 +68,7 @@ namespace MyTrade.Controllers
                         obj.Message = "Registered Successfully";
                         if (obj.Email != "" && obj.Email != null)
                         {
-                            string Body = "Dear "+ obj.FullName + ",\t\nThank you for your registration. Your Details are as Below: \t\nLogin ID: " + obj.LoginId + "\t\nPassword: " + obj.Password;
+                            string Body = "Dear " + obj.FullName + ",\t\nThank you for your registration. Your Details are as Below: \t\nLogin ID: " + obj.LoginId + "\t\nPassword: " + obj.Password;
                             BLMail.SendMail(obj.Email, "Registration Successful", Body, false);
                         }
                     }
@@ -94,19 +94,12 @@ namespace MyTrade.Controllers
             DataSet ds = sponsorname.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-
-                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
-                {
+                
                     obj.SponsorName = ds.Tables[0].Rows[0]["FullName"].ToString();
                     obj.Status = "0";
                     obj.Message = "Sponsor Name Fetched";
                     return Json(obj, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    sponsorname.Status = "1";
-                    sponsorname.Message = "Invalid SponsorId"; return Json(sponsorname, JsonRequestBehavior.AllowGet);
-                }
+                
 
             }
             else
@@ -141,6 +134,7 @@ namespace MyTrade.Controllers
         public ActionResult Login(LoginAPI model)
         {
             LoginAPI obj = new LoginAPI();
+            Reponse res = new Reponse();
             if (model.LoginId == "" || model.LoginId == null)
             {
                 obj.Status = "1";
@@ -154,65 +148,75 @@ namespace MyTrade.Controllers
             }
             try
             {
-                model.Password = Crypto.Decrypt(model.Password);
+               
                 DataSet dsResult = model.Login();
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        if ((dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
+                        if (model.Password == Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString()))
                         {
-                            obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
-                            obj.UserId = dsResult.Tables[0].Rows[0]["Pk_userId"].ToString();
-                            obj.UserType = dsResult.Tables[0].Rows[0]["UserType"].ToString();
-                            obj.FullName = dsResult.Tables[0].Rows[0]["FullName"].ToString();
-                            obj.Password = Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString());
-                            obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
-                            obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
-                            obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
-                            obj.Status = "0";
-                            obj.Message = "Successfully Logged in";
-                            return Json(obj, JsonRequestBehavior.AllowGet);
-                        }
-                        else if (dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
-                        {
-                            obj.Status = "0";
-                            obj.Message = "Successfully Logged in";
-                            obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
-                            obj.Pk_adminId = dsResult.Tables[0].Rows[0]["Pk_adminId"].ToString();
-                            obj.UserType = dsResult.Tables[0].Rows[0]["UsertypeName"].ToString();
-                            obj.FullName = dsResult.Tables[0].Rows[0]["Name"].ToString();
-
-                            if (dsResult.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                            if ((dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
                             {
-                                obj.FranchiseAdminID = dsResult.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
+                                obj.UserId = dsResult.Tables[0].Rows[0]["Pk_userId"].ToString();
+                                obj.UserType = dsResult.Tables[0].Rows[0]["UserType"].ToString();
+                                obj.FullName = dsResult.Tables[0].Rows[0]["FullName"].ToString();
+                                obj.Password = Crypto.Decrypt(dsResult.Tables[0].Rows[0]["Password"].ToString());
+                                obj.Profile = dsResult.Tables[0].Rows[0]["Profile"].ToString();
+                                obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
+                                obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
+                                obj.Gender = dsResult.Tables[0].Rows[0]["Sex"].ToString();
+                                obj.Status = "0";
+                                obj.Message = "Successfully Logged in";
+                                return Json(obj, JsonRequestBehavior.AllowGet);
                             }
+                            else if (dsResult.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
+                            {
+                                obj.Status = "0";
+                                obj.Message = "Successfully Logged in";
+                                obj.LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
+                                obj.Pk_adminId = dsResult.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                obj.UserType = dsResult.Tables[0].Rows[0]["UsertypeName"].ToString();
+                                obj.FullName = dsResult.Tables[0].Rows[0]["Name"].ToString();
 
+                                if (dsResult.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                                {
+                                    obj.FranchiseAdminID = dsResult.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                }
+                            }
+                            else
+                            {
+                                res.Status = "1";
+                                res.Message = "Incorrect LoginId Or Password";
+                                return Json(res, JsonRequestBehavior.AllowGet);
+                            }
                         }
                         else
                         {
-                            obj.Status = "1";
-                            obj.Message = "Incorrect LoginId Or Password";
-                            return Json(obj, JsonRequestBehavior.AllowGet);
+
+                            res.Status = "1";
+                            res.Message = "Invalid LoginId or Password.";
+                            return Json(res, JsonRequestBehavior.AllowGet);
                         }
                     }
                     else
                     {
 
-                        obj.Status = "1";
-                        obj.Message = "Invalid LoginId or Password.";
-                        return Json(obj, JsonRequestBehavior.AllowGet);
+                        res.Status = "1";
+                        res.Message = "Invalid LoginId or Password.";
+                        return Json(res, JsonRequestBehavior.AllowGet);
                     }
 
                 }
 
 
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(res, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                obj.Status = "1";
-                obj.Message = "Invalid LoginId or Password.";
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                res.Status = "1";
+                res.Message = "Invalid LoginId or Password.";
+                return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -285,9 +289,9 @@ namespace MyTrade.Controllers
                 obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
                 obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
-                if(obj.ActiveStatus=="Active")
+                if (obj.ActiveStatus == "Active")
                 {
-                    obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + Crypto.Encrypt(ds.Tables[2].Rows[0]["LoginId"].ToString());
+                    obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
                 }
                 else
                 {
@@ -295,7 +299,7 @@ namespace MyTrade.Controllers
                 }
                 obj.Status = "0";
                 obj.Message = "Data Fetched";
-               
+
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
@@ -721,5 +725,220 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult UserProfile(Request model)
+        {
+            ProfileAPI obj = new ProfileAPI();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                obj.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                obj.FK_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                obj.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                obj.SponsorName = ds.Tables[0].Rows[0]["SponsorName"].ToString();
+                obj.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                obj.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                obj.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
+                obj.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                obj.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                obj.State = ds.Tables[0].Rows[0]["State"].ToString();
+                obj.City = ds.Tables[0].Rows[0]["City"].ToString();
+                obj.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                obj.AadharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                obj.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                obj.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        
+
+        [HttpPost]
+        public ActionResult UpdateProfile(ProfileAPI model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(Password model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                model.OldPassword = Crypto.Encrypt(model.OldPassword);
+                model.NewPassword = Crypto.Encrypt(model.NewPassword);
+                DataSet ds = model.ChangePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Password Changed  Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult ActivateUserByPin(ActivateUser model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.ActivateUserByPin();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "User Activated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult GetBankDetails(BankDetailsUpdateRequest model)
+        {
+            BankDetailsUpdateAPIResponse obj = new BankDetailsUpdateAPIResponse();
+            DataSet ds = model.BankDetailsEdit();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                obj.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                obj.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
+                obj.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                obj.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                obj.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                obj.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
+                obj.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                obj.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                obj.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateBankDetails(BankDetailsUpdateAPIResponse model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.BankUpdate();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Bank Details Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult AddWallet(AddWalletRequest model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.AddWallet();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "E-Wallet save successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
     }
 }

@@ -7,34 +7,63 @@ using System.Web;
 
 namespace MyTrade.Models
 {
-    public class AdminReports :Common
+    public class AdminReports : Common
     {
-       public List<AdminReports> lsttopupreport { get; set; }
+        public List<AdminReports> lsttopupreport { get; set; }
 
         public string isBlocked { get; set; }
 
-        public string Email { get;  set; }
-        public string FromDate { get;  set; }
-        public bool IsDownline { get;  set; }
-        public string JoiningDate { get;  set; }
-        public string LoginId { get;  set; }
+        public string Email { get; set; }
+        public string FromDate { get; set; }
+        public bool IsDownline { get; set; }
+        public string JoiningDate { get; set; }
+        public string LoginId { get; set; }
         public List<AdminReports> lstassociate { get; set; }
-        public string Mobile { get;  set; }
-        public string Name { get;  set; }
-        public string Password { get;  set; }
-        public string SponsorId { get;  set; }
-        public string SponsorName { get;  set; }
-        public string Status { get;  set; }
-        public string ToDate { get;  set; }
-        public string ToLoginID { get;  set; }
-        public string UpgradtionDate { get;  set; }
-        public string Amount { get;  set; }
-        public string TopupBy { get;  set; }
-        public string PrintingDate { get;  set; }
-        public string Description { get;  set; }
-        public string PaymentMode { get;  set; }
-        public string BusinessType { get;  set; }
-        public string ReceiptNo { get;  set; }
+        public List<AdminReports> lstPinTransfer { get; set; }
+        public List<AdminReports> lstDirect { get; set; }
+        public string Mobile { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
+        public string Status { get; set; }
+        public string ToDate { get; set; }
+        public string ToLoginID { get; set; }
+        public string UpgradtionDate { get; set; }
+        public string Amount { get; set; }
+        public string TopupBy { get; set; }
+        public string PrintingDate { get; set; }
+        public string Description { get; set; }
+        public string PaymentMode { get; set; }
+        public string BusinessType { get; set; }
+        public string ReceiptNo { get; set; }
+
+        public string FromLoginID { get; set; }
+        public string ePinNo { get; set; }
+        public string FromId { get; set; }
+        public string FromName { get; set; }
+        public string ToId { get; set; }
+        public string ToName { get; set; }
+        public string TransferDate { get; set; }
+        public string FromActivationDate { get; set; }
+        public string ToActivationDate { get; set; }
+        public string PermanentDate { get; set; }
+        public string Gender { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MobileNo { get; set; }
+
+        public string AdharNo { get; set; }
+        public string PanNo { get; set; }
+
+
+        public string AccountNo { get; set; }
+        public string IFSCCode { get; set; }
+        public string NomineeName { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+        //public string SponserName { get; set; }
+
         #region associatelist
         public DataSet GetAssociateList()
         {
@@ -68,5 +97,83 @@ namespace MyTrade.Models
             return ds;
         }
         #endregion
+
+        public DataSet GetTransferPinReport()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FromLoginId",LoginId),
+                new SqlParameter("@ToLoginId",ToLoginID),
+                new SqlParameter("@EpinNo",ePinNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTransferPinReportForAdmin", para);
+            return ds;
+        }
+
+        public DataSet GetDirectList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name", Name),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate),
+                                    new SqlParameter("@FromActivationDate", FromActivationDate),
+                                    new SqlParameter("@ToActivationDate", ToActivationDate),
+                                    new SqlParameter("@Leg", Leg),
+                                    new SqlParameter("@Status", Status),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetDirectListForAdmin", para);
+            return ds;
+        }
+
+        public DataSet GetAdminProfileDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdminProfileDetails", para);
+            return ds;
+        }
+        
+        public DataSet UpdateAdminProfile()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@PK_UserId",Fk_UserId),
+                      new SqlParameter("@SponsorId",SponsorId),
+                                   new SqlParameter("@SponserName",SponsorName),
+                                   new SqlParameter("@FirstName",FirstName),
+                                   new SqlParameter("@LastName",LastName),
+                                     new SqlParameter("@Sex",Gender),
+                                   new SqlParameter("@Mobile",MobileNo),
+                                    new SqlParameter("@Email",Email),
+                                     new SqlParameter("@PinCode",PinCode),
+                                    new SqlParameter("@State",State),
+                                     new SqlParameter("@City",City),
+                                   new SqlParameter("@PanNo",PanNo),
+                                    new SqlParameter("@Address",Address),
+                                   new SqlParameter("@AadharNo",AdharNo),
+                                   new SqlParameter("@BankName",BankName),
+                                     new SqlParameter("@Branch",BranchName),
+                                   new SqlParameter("@AccountNo",AccountNo),
+                                    new SqlParameter("@IFSCCode",IFSCCode),
+                                     new SqlParameter("@NomineeName",NomineeName),
+                                    new SqlParameter("@NomineeRelation",NomineeRelation),
+                                     new SqlParameter("@NomineeAge",NomineeAge),
+                                      new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateAdminProfile", para);
+            return ds;
+        }
+
+
+        
+
+        public DataSet DeleteUerDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId),
+                                    new SqlParameter("@DeletedBy",UpdatedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteUerDetails", para);
+            return ds;
+        }
+
     }
 }
