@@ -194,6 +194,7 @@
     <Content Include="assets\img\dash.png" />
     <Content Include="assets\img\payment.png" />
     <Content Include="assets\img\pin.png" />
+    <Content Include="assets\img\sample-mp4-file.mp4" />
     <Content Include="assets\img\Trade1.png" />
     <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
