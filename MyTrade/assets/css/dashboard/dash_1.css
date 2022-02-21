@@ -955,12 +955,14 @@
     align-self: center;
     font-size: 19px;
     color: #fff;
+    white-space: nowrap;
 }
 .widget-account-invoice-three .widget-heading h5 {
-    font-size: 28px;
+    font-size: 22px;
     color: #fff;
     margin-top: 0;
     font-weight: 500;
+    white-space: nowrap;
 }
 .widget-account-invoice-three .widget-heading h5 .w-currency {
     color: #bfc9d4;

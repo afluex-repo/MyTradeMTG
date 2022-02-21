@@ -31,7 +31,7 @@ document.write(`
 								<li><a href="forex.html">Forex</a></li>
 								<li><a href="services.html">Services</a></li>
 								<li><a href="coming.html">Product</a></li>
-								
+
 							</ul>
 						</div>
 					</div>
@@ -74,7 +74,7 @@ document.write(`
         <div class ="go-top"><i class ="fas fa-arrow-up"></i></div>
 
         <!--Links of JS files-->
-        <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
+           <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/meanmenu.js"></script>
         <script src="assets/js/nice-select.min.js"></script>
