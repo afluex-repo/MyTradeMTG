@@ -31,9 +31,23 @@
 
     <link rel="icon" type="image/png" href="~/MyTradeWebsite/assets/img/favicon.png">
     <style>
-  .errortext {
+        .errortext {
             border: 2px solid red !important;
             background-color: #ffd3c6 !important;
+        }
+
+        @@media only screen and (max-width: 991px) {
+            #formdiv {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        @@media only screen and (max-width: 991px) {
+            .logo a img {
+                background-color: transparent;
+                border-radius: 8px;
+            }
         }
     </style>
 </head>
@@ -69,26 +83,38 @@
                                 <p>Already signed up? <a href="/Home/Login">Log in</a></p>
 
                                 <form action="/Home/RegistrationAction" method="post">
-                                    <div class="row">
+                                    <div class="row" id="formdiv">
+                                        <div>
+                                            <div class="form-group" style="display:none"></div>
+                                        </div>
+                                        @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
+                                        {
+                                            <h5 style="color: black; font-size: 14px;">Congratulations! For joining us under sponsor code: @ViewBag.SponsorId</h5>
+                                            <input type="hidden" value="@ViewBag.SponsorId" i acceptd="SponsorId" name="SponsorId" />
+                                        }
+                                        else
+                                        {
+                                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
+                                                    @Html.ValidationMessageFor(m => m.LoginId)
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true", @placeholder = "Sponsor Name" })
+                                                </div>
+                                            </div>
+                                        }
+
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true,@placeholder="Sponsor Id*" })
-                                                @Html.ValidationMessageFor(m => m.LoginId)
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true" })
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
-                                             @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true", @placeholder = "Sponsor Name" })
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control",  @placeholder = "First Name*", @required="true" })
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control",  @placeholder = "Last Name" })
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
@@ -122,8 +148,8 @@
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                             @*<div class="form-group">
-                                                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control" })
-                                            </div>*@
+                                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control" })
+                                                </div>*@
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
@@ -147,17 +173,17 @@
                                     </div> -->
                                     <button type="button" class="btn btn-primary" onclick="return confirmregistration();" id="Confirm">Confirm</button>
                                     <div class="row" id="divReg" style="display: none">
-                                        <div class="col-sm-12 col-md-6 col-lg-6"">
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
                                             <button type="button" class="btn btn-primary" onclick="return saveregistration();" id="Register">Sign Up</button>
                                         </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-6" ">
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
                                             <button type="button" class="btn btn-primary" onclick="return editregistration();" id="Edit">Edit</button>
                                         </div>
                                     </div>
-                                
+
                                     @*<button type="submit" id="Confirm" onclick="return confirmregistration();" class="btn btn-primary" name="Confirm" value="Confirm" />
-                                    <button type="button" id="Register" onclick="return saveregistration();" class="btn btn-primary" style="display:none" name="Register" value="Register" />
-                                    <button type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-primary" name="Edit" value="Edit" />*@
+                                        <button type="button" id="Register" onclick="return saveregistration();" class="btn btn-primary" style="display:none" name="Register" value="Register" />
+                                        <button type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-primary" name="Edit" value="Edit" />*@
                                     @*<button type="submit" class="btn btn-primary">Sign Up</button>*@
 
                                     <div class="forgot-password d-flex justify-content-between mt-2">
