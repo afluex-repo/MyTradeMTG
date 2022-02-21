@@ -56,7 +56,7 @@
                                                     else
                                                     {
                                                         <td>
-                                                            <input class="checkBoxClass" type="checkbox" checked disabled="disabled" />
+                                                            <input class="checkBoxClass1" type="checkbox"  disabled="disabled" />
                                                         </td>
                                                         
                                                     }
@@ -83,7 +83,15 @@
                             </table>
                         </div>
                         <div class="row">
-                            Selected Pins: <label id="lblPins">0</label>
+                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                                <div class="form-group">
+                                    <label>
+                                        <b style="color:red">Selected Pins: <label id="lblPins">0</label></b>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
                                 <div class="form-group">
                                     <label>
@@ -148,6 +156,7 @@
     </div>
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+@*<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>*@
 <script>
     function validate() {
         $(".errortext").removeClass('errortext');
@@ -207,7 +216,9 @@
         });
     }
     $(document).ready(function () {
+        debugger;
         $('#ckbCheckAll').on('click', function () {
+            debugger;
             if (this.checked) {
                 $('.checkBoxClass').each(function () {
                     this.checked = true;
@@ -217,18 +228,29 @@
                     this.checked = false;
                 });
             }
+            var values = $('input:checkbox:checked.checkBoxClass').map(function () {
+                return this.value;
+            }).get();
+            console.log(values);
+            //$("#lblPins").text($('.checkBoxClass:checked').length);
         });
 
-        $('.checkBoxClass').on('click', function () {
-            debugger;
-            if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
-                $('#ckbCheckAll').prop('checked', true);
-            } else {
-                $('#ckbCheckAll').prop('checked', false);
-            }
-            $("#lblPins").val($('.checkBoxClass').length);
-        });
+       
     });
+    $('.checkBoxClass').on('click', function () {
+        debugger;
+        if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
+            $('#ckbCheckAll').prop('checked', true);
+        } else {
+            $('#ckbCheckAll').prop('checked', false);
+        }
+        var values = $('input:checkbox:checked.checkBoxClass').map(function () {
+            return this.value;
+        }).get();
+        console.log(values);
+        //$("#lblPins").text($('.checkBoxClass:checked').length);
+    });
+    
 </script>
 
 
@@ -284,6 +306,8 @@
             });
         }
     }
+    
+
 </script>
 <style>
     .errortext {
