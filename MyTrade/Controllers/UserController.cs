@@ -510,9 +510,9 @@ namespace MyTrade.Controllers
         }
         public ActionResult ActivatePin(string ePinNo, string Fk_UserId)
         {
+            Pin model = new Pin();
             try
             {
-                Pin model = new Pin();
                 model.ePinNo = ePinNo;
                 model.FK_UserId = Fk_UserId;
                 DataSet ds = model.ActivatePin();
@@ -520,19 +520,21 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Pin"] = "Pin Activated  Successfully";
+                        model.Response = "1";
                     }
                     else
                     {
-                        TempData["Pin"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Response = "0";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["Pin"] = ex.Message;
+                model.Response = "0";
+                model.Message = ex.Message;
             }
-            return RedirectToAction("PinList", "User");
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
         public ActionResult BankDetailsUpdate()
         {

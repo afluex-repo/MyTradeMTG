@@ -627,6 +627,7 @@
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserReports.cs" />
     <Compile Include="Models\UserWallet.cs" />
     <Compile Include="Models\WebService\AgentServices.asmx.cs">
       <DependentUpon>AgentServices.asmx</DependentUpon>
@@ -711,8 +712,12 @@
     <Content Include="Views\User\EPinRequest.cshtml" />
     <Content Include="Views\Admin\EPinRequestList.cshtml" />
     <Content Include="Views\AdminReports\ViewProfile.cshtml" />
-    <Content Include="Views\Wallet\ROIWallet.cshtml" />
+    <Content Include="Views\Report\PayoutWalletLedger.cshtml" />
+    <Content Include="Views\Report\LevelIncomeTr1.cshtml" />
+    <Content Include="Views\Report\LevelIncomeTr2.cshtml" />
+    <Content Include="Views\Report\PayoutDetail.cshtml" />
     <Content Include="Views\Wallet\ROIIncomeReports.cshtml" />
+    <Content Include="Views\Wallet\ROIWallet.cshtml" />
     <Content Include="Views\Wallet\ViewROI.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -725,7 +730,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
-    <Folder Include="Views\Report\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <PropertyGroup>
@@ -739,7 +743,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

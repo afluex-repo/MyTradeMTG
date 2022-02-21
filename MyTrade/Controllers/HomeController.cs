@@ -48,7 +48,7 @@ namespace MyTrade.Controllers
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
                                 Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
-                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
+                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
                                 {
                                     FormName = "UserDashBoard";
                                     Controller = "User";
@@ -209,7 +209,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
+                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O")
                 {
                     obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
                     obj.Result = "Yes";
