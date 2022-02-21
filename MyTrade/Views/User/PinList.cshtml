@@ -44,11 +44,22 @@
                                             foreach (var Item in Model.lst)
                                             {
                                                 <tr class="text-left">
-                                                    <td>
-                                                        <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
-                                                        <input type="hidden" name="ePinNo_ @i" id="ePinNo_ @i" value="@Item.ePinNo" />
-                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                                    </td>
+                                                    @if (Item.PinStatus == "Available")
+                                                    {
+                                                        <td>
+
+                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                            <input type="hidden" name="ePinNo_ @i" id="ePinNo_ @i" value="@Item.ePinNo" />
+                                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <input class="checkBoxClass" type="checkbox" checked disabled="disabled" />
+                                                        </td>
+                                                        
+                                                    }
                                                     <td>@i</td>
                                                     <td>@Item.ePinNo</td>
                                                     <td>@Item.PinAmount</td>
@@ -72,12 +83,13 @@
                             </table>
                         </div>
                         <div class="row">
+                            Selected Pins: <label id="lblPins">0</label>
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
                                 <div class="form-group">
                                     <label>
                                         Login Id <span style="color: red">*</span>
                                     </label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "GetMemberName();" })
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "return GetMemberName();" })
 
                                 </div>
                             </div>
@@ -154,7 +166,7 @@
         debugger;
         var LoginId = $('#LoginId');
         $.ajax({
-            url: '/User/GetMemberName',
+            url: '/User/GetMemberDetails',
             data: {
                 'LoginId': $('#LoginId').val()
             },
@@ -208,11 +220,13 @@
         });
 
         $('.checkBoxClass').on('click', function () {
+            debugger;
             if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
                 $('#ckbCheckAll').prop('checked', true);
             } else {
                 $('#ckbCheckAll').prop('checked', false);
             }
+            $("#lblPins").val($('.checkBoxClass').length);
         });
     });
 </script>
@@ -256,7 +270,15 @@
                 DataType: "JSON",
                 data: { ePinNo: $("#ePinNo").val(), Fk_UserId: $("#UserId").val() },
                 success: function (data) {
-                    alert("User activated successfully");
+                    if (data != null) {
+                        if (data.Response == "1") {
+                            alert("User activated successfully");
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+
                     $("#myModal").modal('hide');
                 }
             });
