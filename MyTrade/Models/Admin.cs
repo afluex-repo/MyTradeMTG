@@ -105,6 +105,7 @@ namespace MyTrade.Models
         public DataSet GetEwalletRequestDetails()
         {
             SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",Fk_UserId),
                                    new SqlParameter("@FromDate",FromDate),
                                    new SqlParameter("@ToDate",ToDate)
             };

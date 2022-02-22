@@ -125,6 +125,8 @@ namespace MyTrade.Controllers
         {
             Account model = new Account();
             model.LoginId = Session["LoginId"].ToString();
+            model.BankName = Session["Bank"].ToString();
+            model.BankBranch = Session["Branch"].ToString();
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();

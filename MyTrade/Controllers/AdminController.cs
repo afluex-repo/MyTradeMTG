@@ -281,6 +281,7 @@ namespace MyTrade.Controllers
                     obj.PaymentMode = r["PaymentMode"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
+                    obj.TransactionDate = r["RequestedDate"].ToString();
                     obj.BankBranch = r["BankBranch"].ToString();
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
