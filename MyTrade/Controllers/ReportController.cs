@@ -79,6 +79,8 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -104,6 +106,8 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -178,6 +182,7 @@ namespace MyTrade.Controllers
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.ClosingDate = r["ClosingDate"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     lst.Add(obj);
@@ -205,6 +210,7 @@ namespace MyTrade.Controllers
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.ClosingDate = r["ClosingDate"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     lst.Add(obj);
