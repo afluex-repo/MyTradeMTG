@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
     <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
-
+    <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <style>
         .errortext {
             border: 2px solid red !important;
@@ -249,7 +249,9 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Pin" data-parent="#accordionExample">
-
+                            <li>
+                                <a href="/User/EPinRequest">Request For Pin</a>
+                            </li>
                             <li>
                                 <a href="/User/PinList">Pin List</a>
                             </li>
@@ -293,10 +295,10 @@
                                 <a href="/Report/PayoutWalletLedger">Payout Wallet</a>
                             </li>
                             <li>
-                                <a href="/Report/LevelIncomeTr1">Level Income Tr1</a>
+                                <a href="/Report/LevelIncomeTr1">Level Income TTP</a>
                             </li>
                             <li>
-                                <a href="/Report/LevelIncomeTr2">Level Income Tr2</a>
+                                <a href="/Report/LevelIncomeTr2">Level Income TPS</a>
                             </li>
                             <li>
                                 <a href="/Report/PayoutDetail">Payout Detail</a>
@@ -419,6 +421,12 @@
     <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <!-- toastr -->
+    <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
+    <!--  END CUSTOM SCRIPTS FILE  -->
     <script>
         $('#html5-extension').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-sm-12 col-md-6 d-flex justify-content-md-start justify-content-center'B><'col-sm-12 col-md-6 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3'f>>>" +
