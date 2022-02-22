@@ -179,6 +179,7 @@ namespace MyTrade.Models
         public DataSet GetPinList()
         {
             SqlParameter[] para = {
+                  new SqlParameter("@PinStatus", PinStatus),
                                       new SqlParameter("@FK_UserId", FK_UserId)
 
                                   };
