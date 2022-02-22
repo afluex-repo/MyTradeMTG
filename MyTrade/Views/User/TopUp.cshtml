@@ -14,9 +14,9 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Top-Up</h4>
-                                <span class="text-danger">
+                                @*<span class="text-danger">
                                     @TempData["TopUp"]
-                                </span>
+                                </span>*@
                             </div>
                         </div>
                     </div>
@@ -46,13 +46,21 @@
                                 <label for="Amount">Amount <span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
                             </div>
+                            <div class="col-md-4">
+                                <label for="Mode">Mode<span style="color:red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentdetails();" })
+                            </div>
+                            <div class="col-md-4">
+                                <br />
+                                <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" onclick="return ValidateForm();" />
+                            </div>
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
                             </div>
                         </div>
-                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" onclick="return ValidateForm();" />
+
                     </div>
                 </div>
             </div>
@@ -94,7 +102,12 @@
         if (Amount != null && Amount != "" && Amount != "0") {
             if (parseInt(Amount) % 1000 == 0) {
                 if (parseInt(Amount) > parseInt(WalletBalance)) {
-                    alert('Insufficient Amount');
+                    Snackbar.show({
+                        text: "Insufficient Amount",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
                     $("#Amount").addClass('errortext');
                     $('#Amount').focus();
                     $("#Amount").val('');
@@ -102,7 +115,12 @@
                 }
             }
             else {
-                alert('Invalid Amount');
+                Snackbar.show({
+                    text: "Invalid Amount",
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
                 $("#Amount").addClass('errortext');
                 $('#Amount').focus();
                 $("#Amount").val('');
@@ -126,3 +144,30 @@
         return true;
     }
 </script>
+
+@if (TempData["msg"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["msg"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}

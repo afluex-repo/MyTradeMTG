@@ -165,6 +165,7 @@ namespace MyTrade.Controllers
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.PayoutDetail();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -191,6 +192,7 @@ namespace MyTrade.Controllers
             List<UserReports> lst = new List<UserReports>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.PayoutDetail();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
