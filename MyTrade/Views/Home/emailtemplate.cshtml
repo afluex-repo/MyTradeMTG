@@ -97,12 +97,20 @@ h3.wcm-name {
             height: 200px;
         }
     }
+    @@media only screen and (max-width: 500px){
+        .wlc-img {
+            margin-top: 0px;
+        }
+        .email-logo{
+            width: 100px;
+        }
+}
 </style>
 
 <div class="d-flex justify-content-center align-items-center" style='width:100%; background:#fff;'>
     <div class="email-template my-5 pt-5">
         <div class="upper-ribbon"><div class="ribbon3"></div></div>
-        <div class="pt-4"><img src="~/MyTradeWebsite/assets/img/logo.png" width="150" /></div>
+        <div class="pt-4"><img src="~/MyTradeWebsite/assets/img/logo.png" width="150" class="email-logo" /></div>
         <div class="d-flex justify-content-center wlc-img">
             <img src="~/assets/img/welcome.png" width="250" />
         </div>
