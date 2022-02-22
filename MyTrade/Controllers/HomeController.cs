@@ -204,6 +204,10 @@ namespace MyTrade.Controllers
         {
             return View();
         }
+        public ActionResult emailtemplate()
+        {
+            return View();
+        }
         public ActionResult GetSponserDetails(string ReferBy)
         {
             Common obj = new Common();
