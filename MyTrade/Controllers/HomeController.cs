@@ -47,6 +47,8 @@ namespace MyTrade.Controllers
                                 Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
                                 Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
+                                Session["Branch"] = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                                Session["Bank"] = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
                                 {
