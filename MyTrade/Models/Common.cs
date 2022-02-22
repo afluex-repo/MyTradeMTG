@@ -84,7 +84,7 @@ namespace MyTrade.Models
             AssociateStatus.Add(new SelectListItem { Text = "All", Value = null });
             AssociateStatus.Add(new SelectListItem { Text = "Active", Value = "P" });
             AssociateStatus.Add(new SelectListItem { Text = "Inactive", Value = "T" });
-            AssociateStatus.Add(new SelectListItem { Text = "Blocked", Value = "B" });
+            AssociateStatus.Add(new SelectListItem { Text = "TPS ID", Value = "B" });
             return AssociateStatus;
         }
         public static List<SelectListItem> LegType()

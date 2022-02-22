@@ -262,6 +262,8 @@ namespace MyTrade.Controllers
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
+                    obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+                    
                     lst.Add(obj);
                 }
                 model.lst = lst;
