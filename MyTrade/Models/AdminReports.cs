@@ -175,5 +175,15 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet ViewProfileVeriFy()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId),
+                                    new SqlParameter("@UpdatedBy",UpdatedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ViewProfileVeriFy", para);
+            return ds;
+        }
+
+
     }
 }

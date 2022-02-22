@@ -16,9 +16,9 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12 text-center">
                                 <h4 style="color:#910f10">Activate</h4>
-                                <span class="text-danger">
+                                @*<span class="text-danger">
                                     @TempData["Activated"]
-                                </span>
+                                </span>*@
                             </div>
                         </div>
                     </div>
@@ -77,3 +77,17 @@
 
     }
 </script>
+
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}

@@ -93,6 +93,15 @@
                                                         <input type="text" class="form-control mb-4" id="location" placeholder="City" value="@Model.City" disabled="disabled">
                                                     </div>
                                                 </div>
+                                                @if (Model.Address != null && Model.Address != "")
+                                                {
+                                                    <div class="col-md-12" id="addr">
+                                                        <div class="form-group">
+                                                            <label for="Address">Address</label>
+                                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", disabled = "disabled" })
+                                                        </div>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -121,32 +130,36 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="AdharNo">Aadhar No. </label>
-                                                        @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @maxlength = "12", @onkeypress = "return isNumberKey(event);" })
+                                            @*<div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="AdharNo">Aadhar No. </label>
+                                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @maxlength = "12", @onkeypress = "return isNumberKey(event);" })
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="PanNo">PAN No. </label>
-                                                        @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @onchange = "return validatePan();" })
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="PanNo">PAN No. </label>
+                                                            @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control", @onchange = "return validatePan();" })
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div>*@
                                             <div class="row">
-                                                <div class="col-md-6">
+                                               @if (Model.Address == null || Model.Address == "")
+                                               { <div class="col-md-6" id="addrhide">
                                                     <div class="form-group">
                                                         <label for="Address">Address </label>
                                                         <input type="hidden" id="hdfAddress" value="@Model.Address" />
                                                         @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
                                                     </div>
                                                 </div>
+
+                                               }
+                                               
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <br />
-                                                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Update" onclick="return ValidateForm();" />
+                                                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Update" onclick="return DisableAddress();" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -184,6 +197,13 @@
         function OpenProfile() {
             $("#divProfile").show();
         }
+        function DisableAddress() {
+            $("#addr").show();
+            $("#addrhide").hide();
+            //$("#btn_Pin").attr("disabled", "true");
+        }
+
+
     </script>
 }
 
