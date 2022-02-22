@@ -483,7 +483,7 @@ namespace MyTrade.Controllers
                 }
                 model.lstEpinRequest = list;
             }
-            return View();
+            return View(model);
         }
         [HttpPost]
         [OnAction(ButtonName = "GetDetails")]
