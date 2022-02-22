@@ -44,7 +44,8 @@ namespace MyTrade.Controllers
             #endregion
             UserWallet obj = new UserWallet();
             obj.LoginId = Session["LoginId"].ToString();
-
+            obj.BankBranch = Session["Branch"].ToString();
+            obj.BankName = Session["Bank"].ToString();
             #region ddlpaymentmode
 
             int count = 0;
@@ -84,18 +85,18 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Wallet"] = "Requested successfully";
+                        TempData["msg"] = "Requested successfully";
                     }
                     else
                     {
-                        TempData["Wallet"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else { }
             }
             catch (Exception ex)
             {
-                TempData["Wallet"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("AddWallet", "Wallet");
         }
@@ -221,6 +222,36 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
+        public ActionResult WalletList()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.GetEwalletRequestDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.RequestID = r["PK_RequestID"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.RequestCode = r["RequestCode"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.TransactionDate = r["RequestedDate"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.ChequeDDNo = r["ChequeDDNo"].ToString();
+                    obj.ChequeDDDate = r["ChequeDDDate"].ToString();
+                    obj.WalletId = r["WalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWallet = lst;
+            }
+            return View(model);
+        }
     }
 }

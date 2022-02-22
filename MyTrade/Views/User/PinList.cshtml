@@ -25,10 +25,10 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Pin Status</label>
-                                    <select id="" name="" class="form-control">
+                                    <select id="PinStatus" name="PinStatus" class="form-control">
                                         <option value="">-Select-</option>
-                                        <option value="Used">Used</option>
-                                        <option value="Available">Available</option>
+                                        <option value="P">Used</option>
+                                        <option value="T">Available</option>
                                     </select>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                                     else
                                                     {
                                                         <td>
-                                                            <input class="checkBoxClass1" type="checkbox"  disabled="disabled" />
+                                                            <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
                                                         </td>
 
                                                     }
@@ -251,7 +251,7 @@
             $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
         });
 
-       
+
     });
     $('.checkBoxClass').on('click', function () {
         debugger;
@@ -262,7 +262,7 @@
         }
         $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
     });
-    
+
 </script>
 
 
@@ -318,7 +318,7 @@
             });
         }
     }
-    
+
 
 </script>
 <style>

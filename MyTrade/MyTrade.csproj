@@ -199,7 +199,6 @@
     <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
     <Content Include="assets\img\usericon.jpg" />
-    <Content Include="assets\img\welcome.png" />
     <Content Include="assets\img\WhatsApp Image 2022-01-21 at 12.05.04 PM.jpeg" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\apps\contact.js" />
@@ -721,7 +720,11 @@
     <Content Include="Views\Wallet\ROIIncomeReports.cshtml" />
     <Content Include="Views\Wallet\ROIWallet.cshtml" />
     <Content Include="Views\Wallet\ViewROI.cshtml" />
-    <Content Include="Views\Home\emailtemplate.cshtml" />
+    <Content Include="Views\Wallet\WalletList.cshtml" />
+    <Content Include="Views\Admin\ROIWalletForAdmin.cshtml" />
+    <Content Include="Views\Admin\ROIIncomeReportsForAdmin.cshtml" />
+    <Content Include="Views\Admin\ViewROIForAdmin.cshtml" />
+    <Content Include="Views\Admin\PayoutWalletLedgerForAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

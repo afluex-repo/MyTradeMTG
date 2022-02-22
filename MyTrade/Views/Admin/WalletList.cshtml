@@ -62,10 +62,7 @@
                                                 <th>Name</th>
                                                 <th>Amount</th>
                                                 <th>Payment Mode</th>
-                                                <th>Bank Name</th>
-                                                <th>Bank Branch</th>
-                                                <th>Cheque DDNo</th>
-                                                <th>Cheque DD Date</th>
+                                                <th>Requested Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -84,11 +81,15 @@
                                                             <td>@Item.LoginId</td>
                                                             <td>@Item.DisplayName</td>
                                                             <td>@Item.Amount</td>
-                                                            <td>@Item.PaymentMode</td>
-                                                            <td>@Item.BankName</td>
-                                                            <td>@Item.BankBranch</td>
-                                                            <td>@Item.ChequeDDNo</td>
-                                                            <td>@Item.ChequeDDDate</td>
+                                                            @if(@Item.PaymentMode=="Cash")
+                                                            {
+                                                                <td>@Item.PaymentMode</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
+                                                            }
+                                                            <td>@Item.TransactionDate</td>
                                                             @if (Item.Status == "Pending")
                                                         {
                                                                 <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a></td>

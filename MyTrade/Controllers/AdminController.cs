@@ -281,6 +281,7 @@ namespace MyTrade.Controllers
                     obj.PaymentMode = r["PaymentMode"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
+                    obj.TransactionDate = r["RequestedDate"].ToString();
                     obj.BankBranch = r["BankBranch"].ToString();
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
@@ -577,7 +578,147 @@ namespace MyTrade.Controllers
         }
 
 
+        public ActionResult ROIWalletForAdmin()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetROIWalletDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTps = lst;
+            }
+            return View(model);
+        }
 
+
+        [HttpPost]
+        [ActionName("ROIWalletForAdmin")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ROIWalletForAdmin(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetROIWalletDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTps = lst;
+            }
+            return View(model);
+
+        }
+
+        public ActionResult ROIIncomeReportsForAdmin()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetROIIncomeReportsDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.Date = r["TopUpDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROIIncome = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult ViewROIForAdmin(string Id)
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetROIDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.ROI = r["Pk_ROIId"].ToString();
+                    obj.ROI = r["ROI"].ToString();
+                    obj.Date = r["ROIDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROI = lst;
+            }
+            return View(model);
+        }
+
+
+        public ActionResult PayoutWalletLedgerForAdmin()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.PayoutWalletLedger();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_PayoutWalletId = r["PK_PayoutWalletId"].ToString();
+                    obj.Fk_UserId = r["FK_UserId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult PayoutWalletLedgerForAdmin(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.PayoutWalletLedger();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_PayoutWalletId = r["PK_PayoutWalletId"].ToString();
+                    obj.Fk_UserId = r["FK_UserId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
 
     }
 }
