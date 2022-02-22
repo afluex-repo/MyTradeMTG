@@ -7,11 +7,11 @@ using System.Web;
 
 namespace MyTrade.Models
 {
-    public class User:Common
+    public class User : Common
     {
         #region property
         public string EPin { get; set; }
-        public string PinStatus { get;  set; }
+        public string PinStatus { get; set; }
         public string Password { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmNewPassword { get; set; }
@@ -34,8 +34,7 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string LoginId { get; set; }
         public string ProductName { get; set; }
-        
-
+        public string IsVerified { get; set; }
         public List<User> lstEpinRequest { get; set; }
 
 
@@ -116,7 +115,7 @@ namespace MyTrade.Models
                                    new SqlParameter("@ChequeDDNo",TransactionNo),
                                    new SqlParameter("@ChequeDDDate",TransactionDate),
                                       new SqlParameter("@AddedBy",AddedBy)
-                                   
+
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveEpinRequest", para);
             return ds;
@@ -125,13 +124,14 @@ namespace MyTrade.Models
 
         public DataSet GetEPinRequestDetails()
         {
-          
-            DataSet ds = DBHelper.ExecuteQuery("GetEPinRequestDetails");
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEPinRequestDetailsForUser", para);
             return ds;
         }
 
-        
-   public DataSet DeleteEPinRequest()
+
+        public DataSet DeleteEPinRequest()
         {
             SqlParameter[] para = {
                                   new SqlParameter("@PK_RequestID",PK_RequestID),
@@ -163,11 +163,11 @@ namespace MyTrade.Models
         public string RegisteredTo { get; set; }
         public List<Pin> lst { get; set; }
         public string ProductName { get; set; }
-        public string FromId { get;  set; }
-        public string FromName { get;  set; }
-        public string ToId { get;  set; }
-        public string ToName { get;  set; }
-        public string TransferDate { get;  set; }
+        public string FromId { get; set; }
+        public string FromName { get; set; }
+        public string ToId { get; set; }
+        public string ToName { get; set; }
+        public string TransferDate { get; set; }
         public string ToLoginId { get; set; }
         public string Response { get; set; }
         public string Login_Id { get; set; }
@@ -221,6 +221,6 @@ namespace MyTrade.Models
         }
 
 
-       
+
     }
 }

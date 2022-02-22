@@ -183,6 +183,11 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
             return ds;
         }
+        public DataSet BindProductForJoining()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoining");
+            return ds;
+        }
         public DataSet BindUserTypeForRegistration()
         {
 

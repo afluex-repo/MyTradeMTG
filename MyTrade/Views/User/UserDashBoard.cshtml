@@ -105,9 +105,14 @@
     }
 
     .widget-account-invoice-three.third .widget-heading {
-        background: linear-gradient(135deg, #1abc9c 0%, #6eedd2 100%);
+        background: linear-gradient(60deg,#26c6da,#008090);
     }
-
+      .widget-account-invoice-three.four .widget-heading {
+          background: linear-gradient(60deg,#d6af3c,#865c00);
+    }
+       .widget-account-invoice-three.five .widget-heading {
+          background: linear-gradient(60deg,#efbb70,#fb8c00);
+    }
     .carousel-caption {
         bottom: -16px;
         background-color: #282828ba;
@@ -135,12 +140,12 @@
 
 
 
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
             <div class="widget widget-account-invoice-three one">
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p>Total Business</p>
-                        <h5 class=""><span class="w-currency">Rs.</span> @ViewBag.TotalBusiness</h5>
+                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalBusiness</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
@@ -155,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
             <div class="widget widget-account-invoice-three second">
                 <div class="widget-heading">
                     <div class="wallet-balance">
@@ -175,8 +180,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
-            <div class="widget widget-account-invoice-three second">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
+            <div class="widget widget-account-invoice-three four">
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p>Total Team</p>
@@ -195,8 +200,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
-            <div class="widget widget-account-invoice-three second">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
+            <div class="widget widget-account-invoice-three five">
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p>Total Level Income</p>
@@ -204,18 +209,18 @@
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
-                            <p>Level Tr1 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
+                            <p> TTP <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TotalIncome</</h5>
                         </div>
                         <div class="seconddiv">
-                            <p>Level Tr2 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
+                            <p> TPS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
                             <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr2</h5>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-2">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
             <div class="widget widget-account-invoice-three third">
                 <div class="widget-heading">
                     <div class="wallet-balance">
@@ -224,7 +229,7 @@
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
-                            <p>ROI <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
+                            <p>TPS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
                             <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</</h5>
                         </div>
                         <div class="seconddiv">
@@ -235,29 +240,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
-            <div class="widget widget-chart-two ">
-                <div class="widget-heading">
-                    <h5 class="">User Details</h5>
-                </div>
-                <div class="widget-content1">
-                    <div id="chart-user" class=""></div>
-                </div>
-            </div>
-        </div>
-        @if (ViewBag.TotalBusiness != "0.00")
-        {
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
-                <div class="widget widget-chart-two ">
-                    <div class="widget-heading">
-                        <h5 class="">Business Details</h5>
-                    </div>
-                    <div class="widget-content1">
-                        <div id="chart-user2" class=""></div>
-                    </div>
-                </div>
-            </div>
-        }
+
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
             <div class="widget widget-chart-two ">
                 <div class="widget-heading">
@@ -305,6 +288,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
+            <div class="widget widget-chart-two ">
+                <div class="widget-heading">
+                    <h5 class="">User Details</h5>
+                </div>
+                <div class="widget-content1">
+                    <div id="chart-user" class=""></div>
+                </div>
+            </div>
+        </div>
+        @if (ViewBag.TotalBusiness != "0.00")
+        {
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
+                <div class="widget widget-chart-two ">
+                    <div class="widget-heading">
+                        <h5 class="">Business Details</h5>
+                    </div>
+                    <div class="widget-content1">
+                        <div id="chart-user2" class=""></div>
+                    </div>
+                </div>
+            </div>
+        }
 
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
             <div class="widget widget-chart-two ">
@@ -457,7 +464,7 @@
                 show: false,
             }
         },
-        labels: ['Tr1', 'Tr2'],
+        labels: ['TTP', 'TPS'],
         colors: ['#d7740f', '#168733'],
         series: [@ViewBag.Tr1Business, @ViewBag.Tr2Business],
         borderColor: '#F97300',

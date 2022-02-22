@@ -543,10 +543,33 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-             
-
-
-
+        
+        public ActionResult ViewProfileVeriFy(string Id)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Fk_UserId = Id;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ViewProfileVeriFy();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["verify"] = "Profile verify successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["verify"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["verify"] = ex.Message;
+            }
+            return RedirectToAction("ViewProfile","AdminReports",new { Id = Id });
+        }
 
 
 

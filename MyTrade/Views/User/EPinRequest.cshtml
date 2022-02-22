@@ -15,9 +15,6 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>E_Pin Request</h4>
-                                <span class="text-danger">
-                                    @TempData["success"]
-                                </span>
                             </div>
                         </div>
                     </div>
@@ -54,14 +51,6 @@
                             </div>
                         </div>
                         <div class="row mb-4" style="display:none" id="divPaymentMode">
-                            <div class="col-md-3" id="divtransactiono">
-                                <label for="TransactionNo" id="lbltno">Transaction No</label>
-                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
-                            </div>
-                            <div class="col-md-3" id="divtrdate">
-                                <label for="TransactionDate" id="lbltdate">TransactionDate</label>
-                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
-                            </div>
                             <div class="col-md-3" id="divbankname">
                                 <label for="BankName" id="lblbank">Bank Name</label>
                                 @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
@@ -70,6 +59,15 @@
                                 <label for="BranchName" id="lbltbranch">Branch Name</label>
                                 @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
                             </div>
+                            <div class="col-md-3" id="divtransactiono">
+                                <label for="TransactionNo" id="lbltno">Transaction No</label>
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
+                            </div>
+                            <div class="col-md-3" id="divtrdate">
+                                <label for="TransactionDate" id="lbltdate">TransactionDate</label>
+                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
+                            </div>
+                         
                         </div>
                         <input class="btn btn-success pull-left" type="submit" value="Request Pin" id="btnsave" name="btnsave" onclick="return validateform();" />
                     </div>
@@ -83,9 +81,9 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>E_Pin Request List</h4>
-                                <span class="text-danger">
-                                    @TempData["msg"]
-                                </span>
+                                @*<span class="text-danger">
+                                        @TempData["msg"]
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -98,14 +96,11 @@
                                     <th>Login Id</th>
                                     @*<th>Package</th>*@
                                     <th>Product Name</th>
+                                    <th>No. of Pins</th>
                                     <th>Amount</th>
                                     @*<th>No Of Pins</th>*@
                                     @*<th>Final Amount</th>*@
-                                    <th>Payment Mode</th>
-                                    <th>Bank Name</th>
-                                    <th>Bank Branch</th>
-                                    <th>Cheque DDNo</th>
-                                    <th>Cheque DD Date</th>
+                                    <th>Payment Details</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -121,16 +116,14 @@
                                                 <td>@i</td>
                                                 <td>@Item.Name</td>
                                                 <td>@Item.LoginId</td>
-                                                @*<td>@Item.Package</td>*@
                                                 <td>@Item.ProductName</td>
+                                                <td>@Item.NoofPins</td>
+                                                @*<td>@Item.Package</td>*@
+                                              
                                                 <td>@Item.Amount</td>
                                                 @*<td>@Item.NoofPins</td>
-                                                <td>@Item.FinalAmount</td>*@
-                                                <td>@Item.Fk_Paymentid</td>
-                                                <td>@Item.BankName</td>
-                                                <td>@Item.BankBranch</td>
-                                                <td>@Item.TransactionNo</td>
-                                                <td>@Item.TransactionDate</td>
+                                                    <td>@Item.FinalAmount</td>*@
+                                                <td>@Item.Fk_Paymentid -(@Item.BankName, @Item.BankBranch, <b>Txn No.-</b>@Item.TransactionNo, <b>Txn Date-</b>@Item.TransactionDate) </td>
                                                 <td><a href="/User/DeleteEPinRequest?Id=@Item.PK_RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to delete this e_pin request ?') ">Delete</a></td>
                                             </tr>
                                             i++;
@@ -157,6 +150,7 @@
 </script>
 
 <script>
+
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -506,6 +500,17 @@
             $("#BankName").val('');
             $("#BranchName").val('');
         }
+        else if ($('#Fk_Paymentid').val() == '11') {
+            $('#lbltno').html('Transaction No.');
+            $('#lbltdate').html('Transaction Date');
+            $("#divtrdate").show();
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#TransactionNo").attr("placeholder", "Transaction No.");
+            $("#TransactionDate").attr("placeholder", "Transaction Date");
+        }
         else {
             $("#divPaymentMode").hide();
             $("#divtransactiono").hide();
@@ -517,6 +522,32 @@
     }
 </script>
 
+@if (TempData["msg"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["msg"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
 
 <style>
     .errortext {

@@ -86,7 +86,7 @@ namespace MyTrade.Controllers
                     }
                     else
                     {
-                        TempData["Activated"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         FormName = "ActivateByPin";
                         Controller = "User";
                     }
@@ -101,7 +101,7 @@ namespace MyTrade.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Activated"] = ex.Message;
+                TempData["error"] = ex.Message;
                 FormName = "ActivateByPin";
                 Controller = "User";
             }
@@ -155,6 +155,27 @@ namespace MyTrade.Controllers
                 ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
+            #region ddlpaymentmode
+            UserWallet obj = new UserWallet();
+            int count1 = 0;
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet ds2 = obj.GetPaymentMode();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -172,18 +193,18 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Topup"] = "Top-Up Done successfully";
+                        TempData["msg"] = "Top-Up Done successfully";
                     }
                     else
                     {
-                        TempData["Topup"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else { }
             }
             catch (Exception ex)
             {
-                TempData["Topup"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("Topup", "User");
         }
@@ -269,11 +290,11 @@ namespace MyTrade.Controllers
                                 {
                                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                     {
-                                        TempData["Pin"] = "Transferred Successfully";
+                                        TempData["msg"] = "Transferred Successfully";
                                     }
                                     else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                                     {
-                                        TempData["Pin"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                                     }
                                 }
                             }
@@ -283,12 +304,12 @@ namespace MyTrade.Controllers
                 }
                 catch (Exception ex)
                 {
-                    TempData["Pin"] = ex.Message;
+                    TempData["error"] = ex.Message;
                 }
             }
             else
             {
-                TempData["Pin"] = "You Can't transfer on the same Id";
+                TempData["error"] = "You Can't transfer on the same Id";
             }
             return RedirectToAction("PinList");
         }
@@ -506,13 +527,13 @@ namespace MyTrade.Controllers
                     }
                     else
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("ChangePasswordForUser", "User");
         }
@@ -553,6 +574,7 @@ namespace MyTrade.Controllers
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
                 {
+                    model.IsVerified = ds.Tables[0].Rows[0]["IsVerified"].ToString();
                     model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
@@ -582,13 +604,13 @@ namespace MyTrade.Controllers
                     }
                     else
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("BankDetailsUpdate", "User");
         }
@@ -640,17 +662,17 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["UserProfile"] = "Profile Updated Successfully";
+                        TempData["msg"] = "Profile Updated Successfully";
                     }
                     else
                     {
-                        TempData["UserProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["UserProfile"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return View(model);
         }
@@ -671,13 +693,17 @@ namespace MyTrade.Controllers
         {
             User model = new User();
             List<User> list = new List<User>();
+            model.LoginId = Session["LoginId"].ToString();
+            model.BankName = Session["Bank"].ToString();
+            model.BranchName = Session["Branch"].ToString();
             DataSet dss = model.GetEPinRequestDetails();
-            model.LoginId = dss.Tables[0].Rows[0]["LoginId"].ToString();
+
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in dss.Tables[0].Rows)
                 {
                     User obj = new User();
+                    obj.NoofPins = r["NoOfPins"].ToString();
                     obj.PK_RequestID = r["PK_RequestID"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
@@ -696,7 +722,7 @@ namespace MyTrade.Controllers
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
+            DataSet ds1 = objcomm.BindProductForJoining();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
@@ -741,32 +767,37 @@ namespace MyTrade.Controllers
         [HttpPost]
         [ActionName("EPinRequest")]
         [OnAction(ButtonName = "btnsave")]
-        public ActionResult UserTypeMaster(User model)
+        public ActionResult EPinRequest(User model)
         {
             try
             {
                 model.AddedBy = Session["Pk_userId"].ToString();
                 model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
+                if(model.Fk_Paymentid=="12")
+                {
+                    model.BankName = null;
+                    model.BranchName = null;
+                }
                 DataSet ds = model.SaveEpinRequest();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["success"] = "E_pin request save successfully";
+                        TempData["msg"] = "E_pin request save successfully";
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else
                 {
-                    TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["success"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("EPinRequest", "User");
         }
@@ -785,17 +816,17 @@ namespace MyTrade.Controllers
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else
                 {
-                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("EPinRequest", "User");
         }
