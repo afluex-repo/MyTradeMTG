@@ -720,6 +720,7 @@
     <Content Include="Views\Wallet\ROIIncomeReports.cshtml" />
     <Content Include="Views\Wallet\ROIWallet.cshtml" />
     <Content Include="Views\Wallet\ViewROI.cshtml" />
+    <Content Include="Views\Wallet\WalletList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
