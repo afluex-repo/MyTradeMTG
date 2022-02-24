@@ -82,9 +82,9 @@ namespace MyTrade.Models
         {
             List<SelectListItem> AssociateStatus = new List<SelectListItem>();
             AssociateStatus.Add(new SelectListItem { Text = "All", Value = null });
-            AssociateStatus.Add(new SelectListItem { Text = "Active", Value = "P" });
+            AssociateStatus.Add(new SelectListItem { Text = "Active", Value = "O" });
             AssociateStatus.Add(new SelectListItem { Text = "Inactive", Value = "T" });
-            AssociateStatus.Add(new SelectListItem { Text = "Blocked", Value = "B" });
+            AssociateStatus.Add(new SelectListItem { Text = "TPS ID", Value = "P" });
             return AssociateStatus;
         }
         public static List<SelectListItem> LegType()
@@ -181,6 +181,11 @@ namespace MyTrade.Models
         public DataSet BindProductForTopUp()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
+            return ds;
+        }
+        public DataSet BindProductForJoining()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoining");
             return ds;
         }
         public DataSet BindUserTypeForRegistration()

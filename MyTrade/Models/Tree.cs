@@ -46,6 +46,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetLevelMembersCount", para);
             return ds;
         }
+        public DataSet GetLevelMembersCountTR1()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@AgentCode", LoginId),
+                                      new SqlParameter("@RootAgentCode", RootAgentCode),
+
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelMembersCountTR1", para);
+            return ds;
+        }
         public DataSet GetLevelMembers()
         {
             SqlParameter[] para = {

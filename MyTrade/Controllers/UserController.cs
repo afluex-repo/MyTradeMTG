@@ -29,7 +29,24 @@ namespace MyTrade.Controllers
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                ViewBag.TPSId = ds.Tables[0].Rows[0]["TPSId"].ToString();
                 ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
+                ViewBag.TotalROI = ds.Tables[0].Rows[0]["TotalROIWalletAmount"].ToString();
+                ViewBag.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
+                ViewBag.TotalWalletAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalROIWalletAmount"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]);
+                ViewBag.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
+                ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
+                ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
+                ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
+                ViewBag.TotalIncome = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
+                ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
+                ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
+                ViewBag.LevelIncomeTR1ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR1ForPayout"].ToString();
+                ViewBag.LevelIncomeTR2ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR2ForPayout"].ToString();
+                ViewBag.TotalPayout = ds.Tables[0].Rows[0]["TotalPayout"].ToString();
+                ViewBag.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
+                ViewBag.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
+                ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 if (ViewBag.Status == "InActive")
                 {
@@ -78,7 +95,7 @@ namespace MyTrade.Controllers
                     }
                     else
                     {
-                        TempData["Activated"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         FormName = "ActivateByPin";
                         Controller = "User";
                     }
@@ -93,7 +110,7 @@ namespace MyTrade.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Activated"] = ex.Message;
+                TempData["error"] = ex.Message;
                 FormName = "ActivateByPin";
                 Controller = "User";
             }
@@ -117,6 +134,8 @@ namespace MyTrade.Controllers
         {
             Account model = new Account();
             model.LoginId = Session["LoginId"].ToString();
+            model.BankName = Session["Bank"].ToString();
+            model.BankBranch = Session["Branch"].ToString();
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -147,6 +166,27 @@ namespace MyTrade.Controllers
                 ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
+            #region ddlpaymentmode
+            UserWallet obj = new UserWallet();
+            int count1 = 0;
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet ds2 = obj.GetPaymentMode();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -164,18 +204,18 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["Topup"] = "Top-Up Done successfully";
+                        TempData["msg"] = "Top-Up Done successfully";
                     }
                     else
                     {
-                        TempData["Topup"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else { }
             }
             catch (Exception ex)
             {
-                TempData["Topup"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("Topup", "User");
         }
@@ -231,6 +271,8 @@ namespace MyTrade.Controllers
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
+                    obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+                    
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -238,7 +280,36 @@ namespace MyTrade.Controllers
             return View(model);
         }
         [HttpPost]
+        [OnAction(ButtonName = "btnSearch")]
+        [ActionName("PinList")]
         public ActionResult PinList(Pin model)
+        {
+            List<Pin> lst = new List<Pin>();
+            model.FK_UserId = Session["Pk_userId"].ToString();
+            DataSet ds = model.GetPinList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Pin obj = new Pin();
+                    obj.ePinNo = r["ePinNo"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.PinStatus = r["PinStatus"].ToString();
+                    obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    //obj.IsRegistered = r["IsRegistered"].ToString();
+                    obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnMutipleTranser")]
+        [ActionName("PinList")]
+        public ActionResult PinListTransfer(Pin model)
         {
             model.ParentLoginId = Session["LoginId"].ToString();
 
@@ -261,11 +332,11 @@ namespace MyTrade.Controllers
                                 {
                                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                     {
-                                        TempData["Pin"] = "Transferred Successfully";
+                                        TempData["msg"] = "Transferred Successfully";
                                     }
                                     else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                                     {
-                                        TempData["Pin"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                                     }
                                 }
                             }
@@ -275,12 +346,12 @@ namespace MyTrade.Controllers
                 }
                 catch (Exception ex)
                 {
-                    TempData["Pin"] = ex.Message;
+                    TempData["error"] = ex.Message;
                 }
             }
             else
             {
-                TempData["Pin"] = "You Can't transfer on the same Id";
+                TempData["error"] = "You Can't transfer on the same Id";
             }
             return RedirectToAction("PinList");
         }
@@ -498,13 +569,13 @@ namespace MyTrade.Controllers
                     }
                     else
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("ChangePasswordForUser", "User");
         }
@@ -534,7 +605,7 @@ namespace MyTrade.Controllers
                 model.Response = "0";
                 model.Message = ex.Message;
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult BankDetailsUpdate()
         {
@@ -544,7 +615,9 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                { model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                {
+                    model.IsVerified = ds.Tables[0].Rows[0]["IsVerified"].ToString();
+                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNumber = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                     model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
@@ -573,13 +646,13 @@ namespace MyTrade.Controllers
                     }
                     else
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("BankDetailsUpdate", "User");
         }
@@ -631,17 +704,17 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["UserProfile"] = "Profile Updated Successfully";
+                        TempData["msg"] = "Profile Updated Successfully";
                     }
                     else
                     {
-                        TempData["UserProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["UserProfile"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return View(model);
         }
@@ -662,21 +735,25 @@ namespace MyTrade.Controllers
         {
             User model = new User();
             List<User> list = new List<User>();
+            model.LoginId = Session["LoginId"].ToString();
+            model.BankName = Session["Bank"].ToString();
+            model.BranchName = Session["Branch"].ToString();
             DataSet dss = model.GetEPinRequestDetails();
-            model.LoginId= dss.Tables[0].Rows[0]["LoginId"].ToString();
+
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in dss.Tables[0].Rows)
                 {
                     User obj = new User();
+                    obj.NoofPins = r["NoOfPins"].ToString();
                     obj.PK_RequestID = r["PK_RequestID"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
-                    obj.Amount =Convert.ToDecimal( r["Amount"].ToString());
+                    obj.Amount = Convert.ToDecimal(r["Amount"].ToString());
                     obj.Fk_Paymentid = r["PaymentMode"].ToString();
                     obj.BankName = r["BankName"].ToString();
-                    obj.BankBranch= r["BankBranch"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
                     obj.TransactionNo = r["ChequeDDNo"].ToString();
                     obj.TransactionDate = r["ChequeDDDate"].ToString();
                     list.Add(obj);
@@ -687,7 +764,7 @@ namespace MyTrade.Controllers
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
+            DataSet ds1 = objcomm.BindProductForJoining();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
@@ -732,32 +809,37 @@ namespace MyTrade.Controllers
         [HttpPost]
         [ActionName("EPinRequest")]
         [OnAction(ButtonName = "btnsave")]
-        public ActionResult UserTypeMaster(User model)
+        public ActionResult EPinRequest(User model)
         {
             try
             {
                 model.AddedBy = Session["Pk_userId"].ToString();
                 model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
+                if(model.Fk_Paymentid=="12")
+                {
+                    model.BankName = null;
+                    model.BranchName = null;
+                }
                 DataSet ds = model.SaveEpinRequest();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["success"] = "E_pin request save successfully";
+                        TempData["msg"] = "E_pin request save successfully";
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else
                 {
-                    TempData["success"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["success"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("EPinRequest", "User");
         }
@@ -776,17 +858,17 @@ namespace MyTrade.Controllers
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else
                 {
-                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("EPinRequest", "User");
         }
@@ -816,6 +898,75 @@ namespace MyTrade.Controllers
                 model.lstMember = lst;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult TreeTTP(string LoginId, string Id)
+        {
+            Tree model = new Tree();
+            if (LoginId != "" && LoginId != null)
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.LoginId = LoginId;
+                model.PK_UserId = Id;
+            }
+            else
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.PK_UserId = Session["Pk_UserId"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.DisplayName = Session["FullName"].ToString();
+            }
+            List<TreeMembers> lst = new List<TreeMembers>();
+            List<MemberDetails> lstMember = new List<MemberDetails>();
+            DataSet ds = model.GetLevelMembersCountTR1();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    TreeMembers obj = new TreeMembers();
+                    obj.LevelName = r["LevelNo"].ToString();
+                    obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
+                model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
+                model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+            }
+            model.Level = "1";
+            DataSet ds1 = model.GetLevelMembers();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    MemberDetails obj = new MemberDetails();
+                    obj.PK_UserId = r["PK_UserId"].ToString();
+                    obj.MemberName = r["MemberName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.ProfilePic = r["ProfilePic"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.SelfBV = r["SelfBV"].ToString();
+                    obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.Color = r["Color"].ToString();
+                    lstMember.Add(obj);
+                }
+                model.lstMember = lstMember;
+            }
+            return View(model);
         }
     }
 }

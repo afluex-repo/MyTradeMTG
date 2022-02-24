@@ -194,6 +194,7 @@
     <Content Include="assets\img\dash.png" />
     <Content Include="assets\img\payment.png" />
     <Content Include="assets\img\pin.png" />
+    <Content Include="assets\img\sample-mp4-file.mp4" />
     <Content Include="assets\img\Trade1.png" />
     <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
@@ -719,6 +720,13 @@
     <Content Include="Views\Wallet\ROIIncomeReports.cshtml" />
     <Content Include="Views\Wallet\ROIWallet.cshtml" />
     <Content Include="Views\Wallet\ViewROI.cshtml" />
+    <Content Include="Views\Wallet\WalletList.cshtml" />
+    <Content Include="Views\User\TreeTTP.cshtml" />
+    <Content Include="Views\Admin\PayoutWalletLedgerForAdmin.cshtml" />
+    <Content Include="Views\Admin\ROIIncomeReportsForAdmin.cshtml" />
+    <Content Include="Views\Admin\ROIWalletForAdmin.cshtml" />
+    <Content Include="Views\Admin\ViewROIForAdmin.cshtml" />
+    <Content Include="Views\Home\emailtemplate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

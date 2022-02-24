@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
     <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
-
+    <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <style>
         .errortext {
             border: 2px solid red !important;
@@ -194,6 +194,28 @@
                         </a>
                     </li>
                     <li class="menu">
+                        <a href="#Wallet" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Wallet</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Wallet" data-parent="#accordionExample">
+                            <li>
+                                <a href="/Wallet/AddWallet">Recharge Wallet</a>
+                            </li>
+                            <li>
+                                <a href="/Wallet/WalletList">Wallet Request List</a>
+                            </li>
+                            <li>
+                                <a href="#">Wallet Ledger</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu">
                         <a href="#Account" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -230,8 +252,12 @@
                                 <a href="/Downline/DirectList">Direct</a>
                             </li>
                             <li>
-                                <a href="/user/Tree">Level Tree</a>
+                                <a href="/user/TreeTTP">Level Tree TTP</a>
                             </li>
+                            <li>
+                                <a href="/user/Tree">Level Tree TPS</a>
+                            </li>
+                           
                             <li>
                                 <a href="/Downline/AssociateTree">Downteam Tree</a>
                             </li>
@@ -249,7 +275,9 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Pin" data-parent="#accordionExample">
-
+                            <li>
+                                <a href="/User/EPinRequest">Request For Pin</a>
+                            </li>
                             <li>
                                 <a href="/User/PinList">Pin List</a>
                             </li>
@@ -293,13 +321,36 @@
                                 <a href="/Report/PayoutWalletLedger">Payout Wallet</a>
                             </li>
                             <li>
-                                <a href="/Report/LevelIncomeTr1">Level Income Tr1</a>
+                                <a href="/Report/LevelIncomeTr1">Level Income TTP</a>
                             </li>
                             <li>
-                                <a href="/Report/LevelIncomeTr2">Level Income Tr2</a>
+                                <a href="/Report/LevelIncomeTr2">Level Income TPS</a>
                             </li>
                             <li>
                                 <a href="/Report/PayoutDetail">Payout Detail</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu">
+                        <a href="#Forex" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Forex Trading</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Forex" data-parent="#accordionExample">
+
+                            <li>
+                                <a href="https://fbs.partners?ibl=49471&ibp=27409756" target="_blank">Self trading Account</a>
+                            </li>
+                            <li>
+                                <a href="#">Auto Trading Account</a>
+                            </li>
+                            <li>
+                                <a href="#">Forex Business Partner</a>
                             </li>
                         </ul>
                     </li>
@@ -383,7 +434,7 @@
         <div id="content" class="main-content p-1">
             @*<div class="card">
                 <div class="card-body">*@
-            @RenderBody();
+            @RenderBody()
             @*</div>
                 </div>*@
 
@@ -419,6 +470,12 @@
     <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <!-- toastr -->
+    <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
+    <!--  END CUSTOM SCRIPTS FILE  -->
     <script>
         $('#html5-extension').DataTable({
             "dom": "<'dt--top-section'<'row'<'col-sm-12 col-md-6 d-flex justify-content-md-start justify-content-center'B><'col-sm-12 col-md-6 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3'f>>>" +

@@ -22,7 +22,25 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <table id="html5-extension" class="table table-hover non-hover">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Pin Status</label>
+                                    <select id="PinStatus" name="PinStatus" class="form-control">
+                                        <option value="">-Select-</option>
+                                        <option value="P">Used</option>
+                                        <option value="T">Available</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top:15px;">
+                                <div class="form-group">
+                                    <br />
+                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="btnSearch" value="Search" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table id="html5-extension" class="table table-hover non-hover" data-page-length='10'>
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" id="ckbCheckAll" /></th>
@@ -32,6 +50,7 @@
                                         <th>Pin Status</th>
                                         @*<th>Is Registered</th>*@
                                         <th>Registered To</th>
+                                        <th>Pin Generation Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -56,9 +75,9 @@
                                                     else
                                                     {
                                                         <td>
-                                                            <input class="checkBoxClass" type="checkbox" checked disabled="disabled" />
+                                                            <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
                                                         </td>
-                                                        
+
                                                     }
                                                     <td>@i</td>
                                                     <td>@Item.ePinNo</td>
@@ -66,6 +85,7 @@
                                                     <td>@Item.PinStatus</td>
                                                     <td>@Item.RegisteredTo</td>
                                                     @*<td>@Item.RegisteredTo </td>*@
+                                                    <td>@Item.PinGenerationDate</td>
                                                     @if (Item.PinStatus == "Available")
                                                     {
                                                         <td><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
@@ -83,7 +103,15 @@
                             </table>
                         </div>
                         <div class="row">
-                            Selected Pins: <label id="lblPins">0</label>
+                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                                <div class="form-group">
+                                    <label>
+                                        <b style="color:red">Selected Pins: <label id="lblPins">0</label></b>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
                                 <div class="form-group">
                                     <label>
@@ -148,6 +176,7 @@
     </div>
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script>
     function validate() {
         $(".errortext").removeClass('errortext');
@@ -207,7 +236,9 @@
         });
     }
     $(document).ready(function () {
+        debugger;
         $('#ckbCheckAll').on('click', function () {
+            debugger;
             if (this.checked) {
                 $('.checkBoxClass').each(function () {
                     this.checked = true;
@@ -217,18 +248,21 @@
                     this.checked = false;
                 });
             }
+            $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
         });
 
-        $('.checkBoxClass').on('click', function () {
-            debugger;
-            if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
-                $('#ckbCheckAll').prop('checked', true);
-            } else {
-                $('#ckbCheckAll').prop('checked', false);
-            }
-            $("#lblPins").val($('.checkBoxClass').length);
-        });
+
     });
+    $('.checkBoxClass').on('click', function () {
+        debugger;
+        if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
+            $('#ckbCheckAll').prop('checked', true);
+        } else {
+            $('#ckbCheckAll').prop('checked', false);
+        }
+        $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
+    });
+
 </script>
 
 
@@ -284,7 +318,35 @@
             });
         }
     }
+
+
 </script>
+@if (TempData["msg"] != null)
+{
+<script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["msg"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+</script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
 <style>
     .errortext {
         border: 1px solid red !important;

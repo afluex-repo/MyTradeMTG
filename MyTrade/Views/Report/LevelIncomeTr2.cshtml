@@ -15,7 +15,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Level Income Tr2</h4>
+                                <h4>Level Income TPS</h4>
                             </div>
                         </div>
                     </div>
@@ -48,9 +48,11 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>Payout No</th>
                                         <th>From Member</th>
                                         <th>Business Amount</th>
                                         <th>Income</th>
+                                        <th>Percentage</th>
                                         <th>Level</th>
                                         <th>Transaction Date</th>
                                     </tr>
@@ -68,6 +70,7 @@
                                                     <td>@Item.FromName</td>
                                                     <td>@Item.BusinessAmount</td>
                                                     <td>@Item.Amount</td>
+                                                    <th>@Item.Percentage</th>
                                                     <td>@Item.Level</td>
                                                     <td>@Item.TransactionDate</td>
                                                 </tr>

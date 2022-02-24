@@ -79,6 +79,8 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -104,6 +106,8 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -165,6 +169,7 @@ namespace MyTrade.Controllers
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.PayoutDetail();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -177,6 +182,7 @@ namespace MyTrade.Controllers
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.ClosingDate = r["ClosingDate"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     lst.Add(obj);
@@ -191,6 +197,7 @@ namespace MyTrade.Controllers
             List<UserReports> lst = new List<UserReports>();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.PayoutDetail();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -203,6 +210,7 @@ namespace MyTrade.Controllers
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.ClosingDate = r["ClosingDate"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
                     lst.Add(obj);

@@ -79,6 +79,7 @@ namespace MyTrade.Models
         public string Mobile { get; set; }
         public string PK_VisitorId { get; set; }
         public string FK_RootId { get; set; }
+        public string ActivationDate { get; set; }
         #endregion
         public DataSet List()
         {

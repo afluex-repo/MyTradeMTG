@@ -29,8 +29,10 @@ namespace MyTrade.Models
         public string LevelIncomeTR1 { get; set; }
         public string LevelIncomeTR2 { get; set; }
         public string GrossAmount { get;  set; }
+        public string ProcessingFee { get; set; }
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
+        public string Percentage { get; set; }
         public DataSet PayoutWalletLedger()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),

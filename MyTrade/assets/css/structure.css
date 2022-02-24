@@ -229,7 +229,7 @@ code {
     z-index: 1030;
     box-shadow: 6px 7px 14px 3px #aeb1b96b !important;
     height:70px;
-    /*border-bottom: 1px solid #0e1726;*/
+    background-color: #ffffff;
 }
 
     .header-container .navbar {
