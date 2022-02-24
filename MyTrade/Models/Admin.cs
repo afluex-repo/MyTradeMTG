@@ -46,6 +46,22 @@ namespace MyTrade.Models
         public string PK_RequestID { get; set; }
         public List<Admin> lstEpinRequest { get; set; }
         public string ProductName { get; set; }
+        public List<Admin> lstTps { get; set; }
+        public string CrAmount { get; set; }
+        public string DrAmount { get; set; }
+        public string Narration { get; set; }
+        public string RoiWalletId { get; set; }
+
+        public string Date { get; set; }
+        public string TopUpAmount { get; set; }
+        public string ROIId { get; set; }
+        public string ROI { get; set; }
+        public List<Admin> lstROIIncome { get; set; }
+        public List<Admin> lstROI { get; set; }
+        public List<Admin> lst { get; set; }
+        public string PK_PayoutWalletId { get; set; }
+        
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -167,6 +183,43 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetROIWalletDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetROIWalletDetails", para);
+            return ds;
+        }
+
+        public DataSet GetROIIncomeReportsDetails()
+        {
+            SqlParameter[] para = {
+                  new SqlParameter("@Fk_UserId", Fk_UserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("GetROIIncomeReportsDetails", para);
+            return ds;
+        }
+        public DataSet GetROIDetails()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails");
+            return ds;
+        }
+        public DataSet PayoutWalletLedger()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutWalletLedger", para);
+            return ds;
+        }
 
     }
 }

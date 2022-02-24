@@ -721,6 +721,12 @@
     <Content Include="Views\Wallet\ROIWallet.cshtml" />
     <Content Include="Views\Wallet\ViewROI.cshtml" />
     <Content Include="Views\Wallet\WalletList.cshtml" />
+    <Content Include="Views\User\TreeTTP.cshtml" />
+    <Content Include="Views\Admin\PayoutWalletLedgerForAdmin.cshtml" />
+    <Content Include="Views\Admin\ROIIncomeReportsForAdmin.cshtml" />
+    <Content Include="Views\Admin\ROIWalletForAdmin.cshtml" />
+    <Content Include="Views\Admin\ViewROIForAdmin.cshtml" />
+    <Content Include="Views\Home\emailtemplate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -749,7 +755,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53405/</IISUrl>
+          <IISUrl>http://localhost:53406/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

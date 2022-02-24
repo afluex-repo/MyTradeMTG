@@ -1,14 +1,13 @@
-﻿@model MyTrade.Models.UserReports
+﻿@model MyTrade.Models.Admin
 
 @{
-    ViewBag.Title = "PayoutDetail";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = "PayoutWalletLedgerForAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-
-@using (Html.BeginForm("PayoutDetail", "Report", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("PayoutWalletLedgerForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -17,7 +16,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Payout Details</h4>
+                                <h4>Payout Wallet</h4>
                             </div>
                         </div>
                     </div>
@@ -50,14 +49,10 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>Closing Date</th>
-                                        <th>Payout No</th>
-                                        <th>Level Income TTP</th>
-                                        <th>Level Income TPS</th>
-                                        <th>Gross Amount</th>
-                                        <th>TDS Amount</th>
-                                        <th>Processing Fee</th>
-                                        <th>Net Amount</th>
+                                        <th>Narration</th>
+                                        <th>Cr. Amount</th>
+                                        <th>Dr. Amount</th>
+                                        <th>Transaction Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -70,14 +65,10 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.ClosingDate</td>
-                                                    <td>@Item.PayoutNo</td>
-                                                    <td>@Item.LevelIncomeTR1</td>
-                                                    <td>@Item.LevelIncomeTR2</td>
-                                                    <td>@Item.GrossAmount</td>
-                                                    <td>@Item.TDSAmount</td>
-                                                    <td>@Item.ProcessingFee</td>
-                                                    <td>@Item.NetAmount</td>
+                                                    <td>@Item.Narration</td>
+                                                    <td>@Item.CrAmount</td>
+                                                    <td>@Item.DrAmount</td>
+                                                    <td>@Item.TransactionDate</td>
                                                 </tr>
                                                 i++;
                                             }
@@ -102,5 +93,7 @@
         mode: "range"
     });
 </script>
+
+
 
 

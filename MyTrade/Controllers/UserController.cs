@@ -29,15 +29,24 @@ namespace MyTrade.Controllers
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                ViewBag.TPSId = ds.Tables[0].Rows[0]["TPSId"].ToString();
                 ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
                 ViewBag.TotalROI = ds.Tables[0].Rows[0]["TotalROIWalletAmount"].ToString();
-                ViewBag.TotalPayout = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
+                ViewBag.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
+                ViewBag.TotalWalletAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalROIWalletAmount"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]);
                 ViewBag.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
+                ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
                 ViewBag.TotalIncome = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
-                ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
-                ViewBag.LevelIncomeTr2 = "0";
+                ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
+                ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
+                ViewBag.LevelIncomeTR1ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR1ForPayout"].ToString();
+                ViewBag.LevelIncomeTR2ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR2ForPayout"].ToString();
+                ViewBag.TotalPayout = ds.Tables[0].Rows[0]["TotalPayout"].ToString();
+                ViewBag.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
+                ViewBag.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
+                ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 if (ViewBag.Status == "InActive")
                 {
@@ -271,7 +280,36 @@ namespace MyTrade.Controllers
             return View(model);
         }
         [HttpPost]
+        [OnAction(ButtonName = "btnSearch")]
+        [ActionName("PinList")]
         public ActionResult PinList(Pin model)
+        {
+            List<Pin> lst = new List<Pin>();
+            model.FK_UserId = Session["Pk_userId"].ToString();
+            DataSet ds = model.GetPinList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Pin obj = new Pin();
+                    obj.ePinNo = r["ePinNo"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.PinStatus = r["PinStatus"].ToString();
+                    obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    //obj.IsRegistered = r["IsRegistered"].ToString();
+                    obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnMutipleTranser")]
+        [ActionName("PinList")]
+        public ActionResult PinListTransfer(Pin model)
         {
             model.ParentLoginId = Session["LoginId"].ToString();
 
@@ -860,6 +898,75 @@ namespace MyTrade.Controllers
                 model.lstMember = lst;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult TreeTTP(string LoginId, string Id)
+        {
+            Tree model = new Tree();
+            if (LoginId != "" && LoginId != null)
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.LoginId = LoginId;
+                model.PK_UserId = Id;
+            }
+            else
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.PK_UserId = Session["Pk_UserId"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.DisplayName = Session["FullName"].ToString();
+            }
+            List<TreeMembers> lst = new List<TreeMembers>();
+            List<MemberDetails> lstMember = new List<MemberDetails>();
+            DataSet ds = model.GetLevelMembersCountTR1();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    TreeMembers obj = new TreeMembers();
+                    obj.LevelName = r["LevelNo"].ToString();
+                    obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
+                model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
+                model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+            }
+            model.Level = "1";
+            DataSet ds1 = model.GetLevelMembers();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    MemberDetails obj = new MemberDetails();
+                    obj.PK_UserId = r["PK_UserId"].ToString();
+                    obj.MemberName = r["MemberName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.ProfilePic = r["ProfilePic"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.SelfBV = r["SelfBV"].ToString();
+                    obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.Color = r["Color"].ToString();
+                    lstMember.Add(obj);
+                }
+                model.lstMember = lstMember;
+            }
+            return View(model);
         }
     }
 }
