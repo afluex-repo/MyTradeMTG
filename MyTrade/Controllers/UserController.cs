@@ -29,15 +29,17 @@ namespace MyTrade.Controllers
                 ViewBag.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 ViewBag.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 ViewBag.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                ViewBag.TPSId = ds.Tables[0].Rows[0]["TPSId"].ToString();
                 ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
                 ViewBag.TotalROI = ds.Tables[0].Rows[0]["TotalROIWalletAmount"].ToString();
                 ViewBag.TotalPayout = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
                 ViewBag.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
+                ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
                 ViewBag.TotalIncome = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
-                ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
-                ViewBag.LevelIncomeTr2 = "0";
+                ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
+                ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 if (ViewBag.Status == "InActive")
                 {

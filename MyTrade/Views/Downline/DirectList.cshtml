@@ -62,14 +62,14 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="table-responsive">
-                            <table class="table table-hover non-hover" data-page-length='10' id="html5-extension">
+                            <table class="table table-hover non-hover" data-page-length='20' id="html5-extension">
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>LoginId</th>
                                         <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Email Id</th>
+                                        <th>Sponsor Id</th>
+                                        <th>Sponosor Name</th>
                                         @*<th>Leg</th>*@
                                         @*<th>Joining Date</th>*@
                                         <th>Package</th>
@@ -88,11 +88,12 @@
                                                 <tr class="text-left">
                                                     <td>@i</td>
 
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
                                                     <td>@Item.SponsorId</td>
                                                     <td>@Item.SponsorName</td>
-
-                                                    <td>@Item.Mobile</td>
-                                                    <td>@Item.Email</td>
+                                                    @*<td>@Item.Mobile</td>
+                                                    <td>@Item.Email</td>*@
                                                     @*<td>@Item.Leg</td>*@
                                                     @*<td>@Item.JoiningDate</td>*@
                                                     <td>@Item.Package</td>
