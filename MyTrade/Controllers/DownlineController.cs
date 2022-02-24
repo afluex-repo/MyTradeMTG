@@ -34,12 +34,14 @@ namespace MyTrade.Controllers
                     Reports obj = new Reports();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.Email = r["Email"].ToString();
+                    obj.SponsorId = r["SponsorId"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
                     obj.Leg = r["Leg"].ToString();
                     obj.PermanentDate = (r["PermanentDate"].ToString());
                     obj.Status = (r["Status"].ToString());
-                    obj.SponsorId = (r["LoginId"].ToString());
-                    obj.SponsorName = (r["Name"].ToString());
+                    obj.LoginId = (r["LoginId"].ToString());
+                    obj.Name = (r["Name"].ToString());
                     obj.Package = (r["ProductName"].ToString());
                     lst.Add(obj);
                 }
@@ -183,6 +185,9 @@ namespace MyTrade.Controllers
                     obj.FirstName = r["FirstName"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.ActiveStatus = r["ActiveStatus"].ToString();
+                    obj.SponsorID = r["SponsorId"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.ActivationDate = r["PermanentDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

@@ -726,6 +726,7 @@
     <Content Include="Views\Admin\ROIIncomeReportsForAdmin.cshtml" />
     <Content Include="Views\Admin\ROIWalletForAdmin.cshtml" />
     <Content Include="Views\Admin\ViewROIForAdmin.cshtml" />
+    <Content Include="Views\Home\emailtemplate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

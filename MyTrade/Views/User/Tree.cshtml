@@ -95,11 +95,15 @@
                                         </li>
                                         <li class="contacts-block__item">
                                             <i class="fa fa-rupee-sign" style="margin-right:20px"></i> Self BV : 0
-                                            <b style="margin-left:20px">$</b> Self BV : 0
                                         </li>
                                         <li class="contacts-block__item">
                                             <i class="fa fa-rupee-sign" style="margin-right:20px"></i> Team BV : 0
-                                            <b style="margin-left:10px">$</b> Team BV : 0
+                                        </li>
+                                        <li class="contacts-block__item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Self BV: 0
+                                        </li>
+                                        <li class="contacts-block__item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Team BV: 0
                                         </li>
                                     </ul>
                                 </div>
@@ -216,8 +220,8 @@
                                             <center><a href="/User/Tree?LoginId=@item.LoginId&Id=@item.PK_UserId"><img class="level-img" src="@item.ProfilePic" height="50" width="50" style="border:5px solid @item.Color" /></a></center>
                                         </div>
                                         <p class="text-center">@item.MemberName</p>
-                                        <p class="text-center">(@item.LoginId)</p>
-                                        <p class="text-center">(Sponsor- @item.SponsorName) at Level : @item.Level</p>
+                                        <p class="text-center">@item.LoginId</p>
+                                        <p class="text-center">Sponsor- @item.SponsorName at Level : @item.Level</p>
                                         <p class="text-center">Self BV : @item.SelfBV</p>
                                         <p class="text-center">Team BV : @item.TeamBV</p>
                                     </div>
@@ -245,7 +249,7 @@
                     if (data.lstMember != null) {
                         for (var i = 0; i < data.lstMember.length; i++) {
 
-                            $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="/User/Tree?LoginId=' + data.lstMember[i].LoginId + '&Id=' + data.lstMember[i].PK_UserId + '"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">(' + data.lstMember[i].LoginId + ')</p><p class="text-center">(Sponsor- ' + data.lstMember[i].SponsorName + ') at Level : ' + data.lstMember[i].Level + '</p><p class="text-center">Self BV : ' + data.lstMember[i].SelfBV + '</p><p class="text-center">Team BV : ' + data.lstMember[i].TeamBV + '</p></div></div></div>')
+                            $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="/User/Tree?LoginId=' + data.lstMember[i].LoginId + '&Id=' + data.lstMember[i].PK_UserId + '"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p><p class="text-center">Self BV : ' + data.lstMember[i].SelfBV + '</p><p class="text-center">Team BV : ' + data.lstMember[i].TeamBV + '</p></div></div></div>')
                         }
                     }
                 }
