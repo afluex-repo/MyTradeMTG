@@ -726,13 +726,10 @@
     <Content Include="Views\Admin\ROIIncomeReportsForAdmin.cshtml" />
     <Content Include="Views\Admin\ROIWalletForAdmin.cshtml" />
     <Content Include="Views\Admin\ViewROIForAdmin.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Wallet\WalletLedgerList.cshtml" />
     <Content Include="Views\User\TopUpList.cshtml" />
     <Content Include="Views\Admin\LevelIncomeTr1ForAdmin.cshtml" />
-=======
     <Content Include="Views\Home\emailtemplate.cshtml" />
->>>>>>> c6d5ef78a5137de4a318917401bf4bc15ca5e0e0
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
