@@ -265,3 +265,4 @@ E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+F:\Mona\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

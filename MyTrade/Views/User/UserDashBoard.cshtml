@@ -239,16 +239,16 @@
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p>Wallet Amount</p>
-                        <h5 class=""><span class="w-currency"></span>Rs. 0.00</h5>
+                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalWalletAmount</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>TTP</p>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</</h5>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.LevelIncomeTr1</</h5>
                         </div>
                         <div class="seconddiv">
                             <p>TPS</p>
-                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalPayout</h5>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalROI</h5>
                         </div>
                     </div>
                 </div>
@@ -262,16 +262,16 @@
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p>Payout</p>
-                        <h5 class=""><span class="w-currency"></span>Rs. 0.00</h5>
+                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalPayout</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>TTP</p>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</</h5>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.LevelIncomeTR1ForPayout</</h5>
                         </div>
                         <div class="seconddiv">
                             <p>TPS</p>
-                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalPayout</h5>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.LevelIncomeTR2ForPayout</h5>
                         </div>
                     </div>
                 </div>
@@ -282,16 +282,16 @@
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p>E-Pin</p>
-                        <h5 class=""><span class="w-currency"></span>Rs. 0.00</h5>
+                        <h5 class=""><span class="w-currency"></span> @ViewBag.TotalPins</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Used</p>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</</h5>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.UsedPins</</h5>
                         </div>
                         <div class="seconddiv">
                             <p>Available</p>
-                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalPayout</h5>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.AvailablePins</h5>
                         </div>
                     </div>
                 </div>
@@ -302,16 +302,16 @@
                 <div class="widget-heading">
                     <div class="wallet-balance">
                         <p></p>
-                        <h5 class=""><span class="w-currency"></span>Rs. 0.00</h5>
+                        <h5 class=""><span class="w-currency"></span></h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Recharge</p>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</</h5>
+                            <h5 class=""><span class="w-currency"></span></</h5>
                         </div>
                         <div class="seconddiv">
                             <p>Bill Payment</p>
-                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalPayout</h5>
+                            <h5 class=""><span class="w-currency"></span> </h5>
                         </div>
                     </div>
                 </div>
