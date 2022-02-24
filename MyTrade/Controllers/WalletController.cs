@@ -42,6 +42,12 @@ namespace MyTrade.Controllers
             //List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
             //ViewBag.ddlpaymentmode = ddlpaymentmode;
             #endregion
+
+            #region ddlpaymentType
+            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            ViewBag.ddlpaymentType = ddlpaymentType;
+            #endregion
+            
             UserWallet obj = new UserWallet();
             obj.LoginId = Session["LoginId"].ToString();
             obj.BankBranch = Session["Branch"].ToString();
@@ -250,6 +256,58 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult WalletLedgerList()
+        {
+            UserWallet model = new UserWallet();
+            List<UserWallet> lst = new List<UserWallet>();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.GetEWalletDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWalletLedger = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("WalletLedgerList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult WalletLedgerList(UserWallet model)
+        {
+            List<UserWallet> lst = new List<UserWallet>();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetEWalletDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWalletLedger = lst;
             }
             return View(model);
         }

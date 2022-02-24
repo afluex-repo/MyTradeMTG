@@ -70,16 +70,12 @@
                                             <th>Sr No.</th>
                                             <th>Name</th>
                                             <th>Login Id</th>
-                                            <th>Product Name</th>
                                             @*<th>Package</th>*@
+                                            <th>Product Name</th>
+                                            <th>No Of Pins</th>
                                             <th>Amount</th>
-                                            @*<th>No Of Pins</th>
-                                            <th>Final Amount</th>*@
-                                            <th>Payment Mode</th>
-                                            <th>Bank Name</th>
-                                            <th>Bank Branch</th>
-                                            <th>Cheque DDNo</th>
-                                            <th>Cheque DD Date</th>
+                                            @*<th>Final Amount</th>*@
+                                            <th>Payment Details</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -98,14 +94,10 @@
                                                         <td>@Item.LoginId</td>
                                                         @*<td>@Item.Package</td>*@
                                                         <td>@Item.ProductName</td>
+                                                        <td>@Item.NoofPins</td>
                                                         <td>@Item.Amount</td>
-                                                        @*<td>@Item.NoofPins</td>
-                                                        <td>@Item.FinalAmount</td>*@
-                                                        <td>@Item.Fk_Paymentid</td>
-                                                        <td>@Item.BankName</td>
-                                                        <td>@Item.BankBranch</td>
-                                                        <td>@Item.TransactionNo</td>
-                                                        <td>@Item.TransactionDate</td>
+                                                        @*<td>@Item.FinalAmount</td>*@
+                                                        <td>@Item.Fk_Paymentid -(@Item.BankName, @Item.BankBranch, <b>Txn No.-</b>@Item.TransactionNo, <b>Txn Date-</b>@Item.TransactionDate) </td>
                                                         <td>@Item.Status</td>
                                                         @if (Item.Status == "Pending")
                                                         {

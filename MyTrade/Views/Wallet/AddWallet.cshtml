@@ -23,7 +23,7 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Id<span style="color: red">*</span>
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Amount<span style="color: red">*</span>
@@ -39,7 +39,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        Payment Type<span style="color: red">*</span>
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"  id="paymentmode"  style="display: none">
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Payment Mode<span style="color: red">*</span>
@@ -81,7 +89,6 @@
                                     </div>
                                 </div>
                             </div>
-                           
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -112,6 +119,11 @@
         if ($('#Amount').val() == '') {
             $("#Amount").addClass('errortext');
             $('#Amount').focus();
+            return false;
+        }
+        if ($('#PaymentType').val() == '') {
+            $("#PaymentType").addClass('errortext');
+            $('#PaymentType').focus();
             return false;
         }
         if (($("#PaymentMode option:selected").text()) != 'Cash') {
@@ -189,6 +201,18 @@
             }
         });
     }
+
+    function getpaymentTypedetails() {
+        debugger;
+        if ($('#PaymentType').val() == 'Offline') {
+            $("#paymentmode").show();
+        }
+        else if ($('#PaymentType').val() == 'Online') {
+            $("#paymentmode").hide();
+        }
+    }
+
+
     function getpaymentdetails() {
         debugger;
         var paymentmode = ($("#PaymentMode option:selected").text());
