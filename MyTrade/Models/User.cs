@@ -175,7 +175,10 @@ namespace MyTrade.Models
         public string UserName { get; set; }
         public string Message { get; set; }
         public string PinGenerationDate { get; set; }
+        public string FromLoginId { get; set; }
         
+
+
         public DataSet GetPinList()
         {
             SqlParameter[] para = {
