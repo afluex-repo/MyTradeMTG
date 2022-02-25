@@ -49,6 +49,7 @@
                                     <tr>
                                         <th>S No.</th>
                                         <th>Name</th>
+                                        <th>Product Name</th>
                                         <th>Topup Amount</th>
                                         @*<th>Used For</th>*@
                                         <th>BV</th>
@@ -70,13 +71,14 @@
                                                 <tr class="text-left">
                                                     <td>@i</td>
                                                     <td>@Item.Name</td>
+                                                    <td>@Item.ProductName</td>
                                                     <td>@Item.PinAmount</td>
                                                     @*<td>@Item.UsedFor</td>*@
                                                     <td>@Item.BV</td>
                                                     @*<td>@Item.IsCalculated</td>*@
                                                     <td>@Item.TransactionBy</td>
                                                     <td>@Item.Status</td>
-                                                    <td>@Item.ROIPercentage</td>
+                                                    <td>@Item.ROIPercentage %</td>
                                                     <td>@Item.TopUpDate</td>
                                                 </tr>
                                                 i++;
