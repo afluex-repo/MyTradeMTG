@@ -61,7 +61,13 @@
                                 <label> Transaction Date</label> <span style="color: red">*</span>
                                 @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
                             </div>
+                            <div class="col-md-3" id="Remarks"  style="display: none">
+                                Remark
+                                @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
+                            </div>
                         </div>
+
+                     
                         <div class="col-md-12">
                             <br />
                             <input class="btn btn-success pull-left" type="submit" value="Submit" id="Save" name="Save" onclick="return validateform();" />
@@ -203,6 +209,10 @@
     function getpaymentTypedetails() {
         debugger;
         if ($('#PaymentType').val() == 'Offline') {
+            $("#PaymentMode").val(10);
+            $("#chequeno").show();
+            $("#divQr").show();
+            $("#chequdate").show();
             $("#paymentmode").show();
         }
         else if ($('#PaymentType').val() == 'Online') {
@@ -210,7 +220,6 @@
             $("#divPaymentMode").hide();
         }
     }
-
 
     function getpaymentdetails() {
         debugger;
@@ -221,6 +230,7 @@
             $("#chequeno").hide();
             $("#chequdate").hide();
             $("#divQr").hide();
+            $("#Remarks").show();
         }
         else if (paymentmode == "UPI") {
             $("#divPaymentMode").show();
@@ -233,6 +243,8 @@
             $("#chequeno").show();
             $("#divQr").show();
             $("#chequdate").show();
+            $("#Remarks").hide();
+            $("#PaymentMode").val(10);
             $("#BankName").attr("placeholder", "UPI Id");
             $("#DDChequeNo").attr("placeholder", "Transaction Id");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
@@ -244,6 +256,8 @@
             $("#divQr").hide();
             $("#chequeno").show();
             $("#chequdate").show();
+            $("#Remarks").hide();
+            $("#PaymentMode").val(10);
             $('#lbltno').html('Transaction No');
             $('#lblbank').html('Bank Name');
             $('#lbltno').html('Transaction No');
