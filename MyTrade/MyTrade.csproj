@@ -731,6 +731,8 @@
     <Content Include="Views\User\TopUpList.cshtml" />
     <Content Include="Views\Admin\LevelIncomeTr1ForAdmin.cshtml" />
     <Content Include="Views\Home\emailtemplate.cshtml" />
+    <Content Include="Views\Admin\LevelIncomeTr2ForAdmin.cshtml" />
+    <Content Include="Views\Admin\PayoutDetailForAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
