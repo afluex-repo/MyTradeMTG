@@ -14,7 +14,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Recharge Wallet</h4>
+                                <h4>Wallet Request</h4>
                                 @*<span class="text-danger">
                                         @TempData["Wallet"]
                                     </span>*@
@@ -79,6 +79,9 @@
 
 
 <script>
+    $(document).ready(function () {
+        $("#PaymentType").val("Online");
+    });
     function validateform() {
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {
@@ -220,6 +223,7 @@
             $("#divQr").hide();
         }
         else if (paymentmode == "UPI") {
+            $("#divPaymentMode").show();
             $('#lbltno').html('Transaction Id');
             $('#lblbank').html('UPI Id');
             $("#bankname").show();
@@ -234,6 +238,7 @@
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
         }
         else {
+            $("#divPaymentMode").show();
             $("#bankname").show();
             $("#bankbranch").show();
             $("#divQr").hide();
