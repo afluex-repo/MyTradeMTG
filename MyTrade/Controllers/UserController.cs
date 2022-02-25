@@ -482,6 +482,8 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     list.Add(obj);
                 }
                 model.lst = list;
@@ -507,6 +509,8 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     list.Add(obj);
                 }
                 model.lst = list;

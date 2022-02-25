@@ -38,7 +38,7 @@ namespace MyTrade.Models
         public List<UserWallet> lstWalletLedger { get; set; }
         public string PaymentType { get; set; }
         public string Pk_EwalletId { get; set; }
-        
+        public string Remark { get; set; }
 
         public DataSet GetMemberDetails()
         {
