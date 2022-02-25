@@ -1007,6 +1007,10 @@ namespace MyTrade.Controllers
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
+            model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
