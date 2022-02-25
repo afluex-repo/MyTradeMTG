@@ -35,7 +35,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string ROIPercentage { get; set; }
         public string Pk_userId { get; set; }
-        
+        public string PaymentType { get; set; }
 
 
         public DataSet TopUp()
