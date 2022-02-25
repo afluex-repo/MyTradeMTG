@@ -60,8 +60,15 @@ namespace MyTrade.Models
         public List<Admin> lstROI { get; set; }
         public List<Admin> lst { get; set; }
         public string PK_PayoutWalletId { get; set; }
+        public List<Admin> lstlevelIncome { get; set; }
         
-
+        public string FromName { get; set; }
+        public string FromLoginId { get; set; }
+        public string BusinessAmount { get; set; }
+        public string Percentage { get; set; }
+        public string PayoutNo { get; set; }
+        public string Level { get; set; }
+        
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -220,6 +227,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutWalletLedger", para);
             return ds;
         }
+
+        public DataSet LevelIncomeTr1()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr1", para);
+            return ds;
+        }
+
 
     }
 }

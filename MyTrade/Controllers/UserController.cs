@@ -968,5 +968,67 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+
+        public ActionResult TopUpList()
+        {
+            Account model = new Account();
+            List<Account> lst = new List<Account>();
+            model.Pk_userId = Session["PK_UserId"].ToString();
+           model.LoginId = Session["LoginId"].ToString();
+            DataSet ds1 = model.GetTopUpDetails();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Account obj = new Account();
+                    obj.InvestmentId = r["Pk_InvestmentId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.IsCalculated = r["IsCalculated"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ROIPercentage = r["ROIPercentage"].ToString();
+                    obj.TopUpDate = r["TopUpDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTopUp = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("TopUpList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult TopUpList(Account model)
+        {
+            List<Account> lst = new List<Account>();
+            model.Pk_userId = Session["PK_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds1 = model.GetTopUpDetails();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Account obj = new Account();
+                    obj.InvestmentId = r["Pk_InvestmentId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.IsCalculated = r["IsCalculated"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ROIPercentage = r["ROIPercentage"].ToString();
+                    obj.TopUpDate = r["TopUpDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTopUp = lst;
+            }
+            return View(model);
+        }
+
     }
 }
