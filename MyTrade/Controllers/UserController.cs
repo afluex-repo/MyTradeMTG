@@ -166,6 +166,10 @@ namespace MyTrade.Controllers
                 ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
+            #region ddlpaymentType
+            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            ViewBag.ddlpaymentType = ddlpaymentType;
+            #endregion
             #region ddlpaymentmode
             UserWallet obj = new UserWallet();
             int count1 = 0;
