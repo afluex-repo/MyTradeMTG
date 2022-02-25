@@ -81,6 +81,7 @@ namespace MyTrade.Controllers
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.Status = r["Status"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -108,6 +109,7 @@ namespace MyTrade.Controllers
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.Status = r["Status"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -131,6 +133,9 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.Status = r["Status"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -156,6 +161,9 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.Status = r["Status"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
