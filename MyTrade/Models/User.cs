@@ -108,16 +108,11 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                   new SqlParameter("@FK_PackageId",Package),
-                                   new SqlParameter("@Amount",Amount),
-                                   new SqlParameter("@PaymentMode",Fk_Paymentid),
-                                   new SqlParameter("@BankName",BankName),
-                                   new SqlParameter("@BankBranch",BranchName),
-                                   new SqlParameter("@ChequeDDNo",TransactionNo),
-                                   new SqlParameter("@ChequeDDDate",TransactionDate),
-                                      new SqlParameter("@AddedBy",AddedBy)
-
+                                   new SqlParameter("@NoofPins",NoofPins),
+                                   new SqlParameter("@FK_UserId",AddedBy),
+                                    new SqlParameter("@Amount",FinalAmount),
             };
-            DataSet ds = DBHelper.ExecuteQuery("SaveEpinRequest", para);
+            DataSet ds = DBHelper.ExecuteQuery("GenerateEPinByUser", para);
             return ds;
         }
 

@@ -29,16 +29,28 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-3">
-                                Id<span style="color: red">*</span>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);", @Readonly = "true" })
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        Id<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);", @Readonly = "true" })
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
-                                Amount<span style="color: red">*</span>
-                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event);" })
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        Amount<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event);" })
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
-                                Payment Type<span style="color: red">*</span>
-                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        Payment Type<span style="color: red">*</span>
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3" id="paymentmode" style="display: none">
                                 Payment Mode<span style="color: red">*</span>
@@ -79,7 +91,7 @@
                             </div>
                         </div>
 
-                     
+
                         <div class="col-md-12">
                             <br />
                             <input class="btn btn-success pull-left" type="submit" value="Submit" id="Save" name="Save" onclick="return validateform();" />
@@ -122,7 +134,7 @@
             $('#PaymentMode').focus();
             return false;
         }
-        if (($("#PaymentMode option:selected").text()) != 'Cash' && ($("#PaymentMode option:selected").text())!="UPI") {
+        if (($("#PaymentMode option:selected").text()) != 'Cash' && ($("#PaymentMode option:selected").text()) != "UPI") {
             if ($('#BankName').val() == '') {
                 $("#BankName").addClass('errortext');
                 $('#BankName').focus();
@@ -144,8 +156,7 @@
                 return false;
             }
         }
-        else if($("#PaymentMode option:selected").text()=="UPI")
-        {
+        else if ($("#PaymentMode option:selected").text() == "UPI") {
             if ($('#BankName').val() == '') {
                 $("#BankName").addClass('errortext');
                 $('#BankName').focus();
@@ -239,6 +250,7 @@
             $("#paymentmode").show();
             $("#divQr").show();
             $("#divbankname").show();
+            $("#BankName").val('');
             $("#divtransactiono").show();
             $("#divPaymentMode").show();
             $("#Remarks").hide();
@@ -300,8 +312,8 @@
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
-            $('#Fk_BankId').val('0');
-            $('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '4') {
             $('#lblbank').html('Bank Name.');
@@ -316,8 +328,8 @@
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "DD No.");
             $("#DDChequeDate").attr("placeholder", "DD Isue Date");
-            $('#Fk_BankId').val('0');
-            $('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '5') {
             $('#lblbank').html('Bank Name.');
@@ -332,8 +344,8 @@
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
-            $('#Fk_BankId').val('0');
-            $('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '6') {
             $('#lblbank').html('Bank Name.');
@@ -348,8 +360,8 @@
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
-            $('#Fk_BankId').val('0');
-            $('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '10') {
             $("#spntrannumber").show();
@@ -365,13 +377,14 @@
             $("#Remarks").hide();
             $("#divQr").show();
             $("#divbankname").show();
+            $("#BankName").val('');
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#lblbank").attr("placeholder", "UPI ID");
             $("#DDChequeNo").attr("placeholder", "Transaction ID");
             $("#DDChequeNo").attr("placeholder", "Transaction Date.");
-            $('#Fk_BankId').val('0');
-            $('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
         }
         else {
             $('#Fk_BankId').attr('disabled', false);

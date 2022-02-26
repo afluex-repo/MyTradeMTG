@@ -21,14 +21,15 @@
 
                     <div class="widget-content widget-content-area">
                         <div class="row mb-4">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
                                 <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
+
+                                @if (ViewBag.WalletBalance == "0")
+                                {
+                                    <a class="btn btn-primary" style="float: right;" href="/Wallet/AddWallet">Add Fund</a>
+                                }
                             </div>
-                            @if (ViewBag.WalletBalance == "0")
-                            {
-                                <a class="btn btn-primary" href="/Wallet/AddWallet">Add Fund</a>
-                            }
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-4">
@@ -80,11 +81,13 @@
                                 </div>
 
                             </div>*@
-                        <div class="row">
-                            <input class="btn btn-success pull-left" type="submit" value="Request Pin" id="btnsave" name="btnsave" onclick="return validateform();" />
-                        </div>
+                        <div class="col-md-4">
+                            <div class="row mb-4">
+                                <input class="btn btn-success pull-left" type="submit" value="Request Pin" id="btnsave" name="btnsave" onclick="return validateform();" />
+                            </div>
+                            </div>
 
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -211,166 +214,161 @@
             $('#NoofPins').focus();
             return false;
         }
-        if ($('#Fk_Paymentid').val() == '0') {
-            $('#Fk_Paymentid').addClass('errortext');
-            $('#Fk_Paymentid').focus();
-            return false;
-        }
-        if ($('#Fk_Paymentid').val() == '2') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#TransactionDate').val() == '') {
-                $("#TransactionDate").addClass('errortext');
-                $('#TransactionDate').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BranchName').val() == '') {
-                $("#BranchName").addClass('errortext');
-                $('#BranchName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
-        else if ($('#Fk_Paymentid').val() == '3') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#TransactionDate').val() == '') {
-                $("#TransactionDate").addClass('errortext');
-                $('#TransactionDate').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BranchName').val() == '') {
-                $("#BranchName").addClass('errortext');
-                $('#BranchName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
-        else if ($('#Fk_Paymentid').val() == '4') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#TransactionDate').val() == '') {
-                $("#TransactionDate").addClass('errortext');
-                $('#TransactionDate').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BranchName').val() == '') {
-                $("#BranchName").addClass('errortext');
-                $('#BranchName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
-        else if ($('#Fk_Paymentid').val() == '5') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#TransactionDate').val() == '') {
-                $("#TransactionDate").addClass('errortext');
-                $('#TransactionDate').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BranchName').val() == '') {
-                $("#BranchName").addClass('errortext');
-                $('#BranchName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
-        else if ($('#Fk_Paymentid').val() == '6') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#TransactionDate').val() == '') {
-                $("#TransactionDate").addClass('errortext');
-                $('#TransactionDate').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-            if ($('#BranchName').val() == '') {
-                $("#BranchName").addClass('errortext');
-                $('#BranchName').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
-        else if ($('#Fk_Paymentid').val() == '7') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
+        //if ($('#Fk_Paymentid').val() == '2') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#TransactionDate').val() == '') {
+        //        $("#TransactionDate").addClass('errortext');
+        //        $('#TransactionDate').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BankName').val() == '') {
+        //        $("#BankName").addClass('errortext');
+        //        $('#BankName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BranchName').val() == '') {
+        //        $("#BranchName").addClass('errortext');
+        //        $('#BranchName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '3') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#TransactionDate').val() == '') {
+        //        $("#TransactionDate").addClass('errortext');
+        //        $('#TransactionDate').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BankName').val() == '') {
+        //        $("#BankName").addClass('errortext');
+        //        $('#BankName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BranchName').val() == '') {
+        //        $("#BranchName").addClass('errortext');
+        //        $('#BranchName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '4') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#TransactionDate').val() == '') {
+        //        $("#TransactionDate").addClass('errortext');
+        //        $('#TransactionDate').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BankName').val() == '') {
+        //        $("#BankName").addClass('errortext');
+        //        $('#BankName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BranchName').val() == '') {
+        //        $("#BranchName").addClass('errortext');
+        //        $('#BranchName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '5') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#TransactionDate').val() == '') {
+        //        $("#TransactionDate").addClass('errortext');
+        //        $('#TransactionDate').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BankName').val() == '') {
+        //        $("#BankName").addClass('errortext');
+        //        $('#BankName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BranchName').val() == '') {
+        //        $("#BranchName").addClass('errortext');
+        //        $('#BranchName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '6') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#TransactionDate').val() == '') {
+        //        $("#TransactionDate").addClass('errortext');
+        //        $('#TransactionDate').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BankName').val() == '') {
+        //        $("#BankName").addClass('errortext');
+        //        $('#BankName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //    if ($('#BranchName').val() == '') {
+        //        $("#BranchName").addClass('errortext');
+        //        $('#BranchName').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '7') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
 
-        }
-        else if ($('#Fk_Paymentid').val() == '8') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
-        else if ($('#Fk_Paymentid').val() == '9') {
-            if ($('#TransactionNo').val() == '') {
-                $("#TransactionNo").addClass('errortext');
-                $('#TransactionNo').focus();
-                $("#divload").css({ 'display': 'none' });
-                return false;
-            }
-        }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '8') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
+        //else if ($('#Fk_Paymentid').val() == '9') {
+        //    if ($('#TransactionNo').val() == '') {
+        //        $("#TransactionNo").addClass('errortext');
+        //        $('#TransactionNo').focus();
+        //        $("#divload").css({ 'display': 'none' });
+        //        return false;
+        //    }
+        //}
         return true;
 
     }
