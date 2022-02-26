@@ -1,13 +1,15 @@
 ﻿@model MyTrade.Models.Admin
 
 @{
-    ViewBag.Title = "PayoutWalletLedgerForAdmin";
+    ViewBag.Title = "PayoutDetailForAdmin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-@using (Html.BeginForm("PayoutWalletLedgerForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("PayoutDetailForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -16,7 +18,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Payout Wallet</h4>
+                                <h4>Payout Details</h4>
                             </div>
                         </div>
                     </div>
@@ -45,30 +47,38 @@
                             </div>
                         </div>
                         <div class="row">
-                            <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                            <table id="html5-extension" class="table table-hover non-hover">
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>Narration</th>
-                                        <th>Cr. Amount</th>
-                                        <th>Dr. Amount</th>
-                                        <th>Transaction Date</th>
+                                        <th>Closing Date</th>
+                                        <th>Payout No</th>
+                                        <th>Level Income TTP</th>
+                                        <th>Level Income TPS</th>
+                                        <th>Gross Amount</th>
+                                        <th>TDS Amount</th>
+                                        <th>Processing Fee</th>
+                                        <th>Net Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lst != null)
+                                        if (Model.lstPayout != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lst)
+                                            foreach (var Item in Model.lstPayout)
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.Narration</td>
-                                                    <td>@Item.CrAmount</td>
-                                                    <td>@Item.DrAmount</td>
-                                                    <td>@Item.TransactionDate</td>
+                                                    <td>@Item.ClosingDate</td>
+                                                    <td>@Item.PayoutNo</td>
+                                                    <td>@Item.LevelIncomeTR1</td>
+                                                    <td>@Item.LevelIncomeTR2</td>
+                                                    <td>@Item.GrossAmount</td>
+                                                    <td>@Item.TDSAmount</td>
+                                                    <td>@Item.ProcessingFee</td>
+                                                    <td>@Item.NetAmount</td>
                                                 </tr>
                                                 i++;
                                             }

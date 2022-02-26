@@ -125,6 +125,14 @@ namespace MyTrade.Models
             return PaymentMode;
         }
 
+        public static List<SelectListItem> BindPaymentType()
+        {
+            List<SelectListItem> PaymentType = new List<SelectListItem>();
+            PaymentType.Add(new SelectListItem { Text = "-Select-", Value = "" });
+            PaymentType.Add(new SelectListItem { Text = "Offline", Value = "Offline" });
+            PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
+            return PaymentType;
+        }
 
 
         public DataSet GetMemberDetails()

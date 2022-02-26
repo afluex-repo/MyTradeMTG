@@ -22,6 +22,24 @@ namespace MyTrade.Models
         public string TransactionDate { get; set; }
         public string AddedBy { get; set; }
         public string TotalAmount { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public List<Account> lstTopUp { get; set; }
+        public string InvestmentId { get; set; }
+        public string Name { get; set; }
+        public string PinAmount { get; set; }
+        public string UsedFor { get; set; }
+        public string BV { get; set; }
+        public string IsCalculated { get; set; }
+        public string TransactionBy { get; set; }
+        public string Status { get; set; }
+        public string ROIPercentage { get; set; }
+        public string Pk_userId { get; set; }
+        public string PaymentType { get; set; }
+        public string ProductName { get; set; }
+        
+
+
         public DataSet TopUp()
         {
             SqlParameter[] para = {
@@ -33,5 +51,21 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
             return ds;
         }
+
+        public DataSet GetTopUpDetails()
+        {
+            SqlParameter[] para = {
+                                       new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetTopUpDetails", para);
+            return ds;
+        }
+
+        
+
+
     }
 }

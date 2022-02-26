@@ -15,8 +15,8 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Top-Up</h4>
                                 @*<span class="text-danger">
-                                    @TempData["TopUp"]
-                                </span>*@
+                                        @TempData["TopUp"]
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -31,27 +31,40 @@
                             }
                         </div>
                         <div class="row mb-4">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="LoginId">LoginId</label>
                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @disabled = "disabled" })
                                 <p class="text-success" id="spName"></p>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="Package">Package <span style="color:red">*</span></label>
                                 @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
                                 <p class="text-success" id="spName"></p>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
                                 <label for="Amount">Amount <span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
+                                <span style="color:red">Min  : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> Max : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
                             </div>
-                            <div class="col-md-3">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="Amount">
+                                    Payment Type
+                                </label><span style="color: red">*</span>
+                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                            </div>
+                            <div class="col-md-4" id="paymentmode" style="display: none">
                                 <label for="Mode">Mode<span style="color:red">*</span></label>
                                 @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
                             </div>
                         </div>
                         <div class="row mb-4" style="display:none" id="divPaymentMode">
+                            <div class="col-md-3" id="divQr" style="display: none">
+                                <label id="lblQr"> Scan QR </label>
+                                <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                            </div>
                             <div class="col-md-3" id="divbankname">
                                 <label for="BankName" id="lblbank">Bank Name</label>
                                 @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
@@ -73,11 +86,11 @@
                         <div class="col-md-4">
                             <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" onclick="return ValidateForm();" />
                         </div>
-                        <div class="row mb-4">
+                        @*<div class="row mb-4">
                             <div class="col-md-12">
                                 <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
                             </div>
-                        </div>
+                        </div>*@
 
                     </div>
                 </div>
@@ -102,6 +115,20 @@
     //        dateFormat: 'dd/mm/yy',
     //    });
     //});
+    function getpaymentTypedetails() {
+        debugger;
+        if ($('#PaymentType').val() == 'Offline') {
+            $("#paymentmode").show();
+        }
+        else if ($('#PaymentType').val() == 'Online') {
+            $("#paymentmode").hide();
+            $("#divPaymentMode").hide();
+            $("#BankName").val('');
+            $("#BankBranch").val('');
+            $("#TransactionNo").val('');
+            $("#TransactionDate").val('');
+        }
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -145,29 +172,105 @@
     }
     function ValidateForm() {
         $(".errortext").removeClass("errortext");
-        if ($('#Amount').val() == '') {
-            $("#Amount").addClass('errortext');
-            $('#Amount').focus();
-            return false;
-        }
         if ($('#PackageId').val() == '0') {
             $("#PackageId").addClass('errortext');
             $('#PackageId').focus();
             return false;
         }
+        //if ($('#Amount').val() == '') {
+        //    $("#Amount").addClass('errortext');
+        //    $('#Amount').focus();
+        //    return false;
+        //}
+        if ($('#PackageId').val() == '0') {
+            $("#PackageId").addClass('errortext');
+            $('#PackageId').focus();
+            return false;
+        }
+        if ($('#PaymentType').val() == '') {
+            $("#PaymentType").addClass('errortext');
+            $('#PaymentType').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
+        if (($("#PaymentMode option:selected").text()) != 'Cash' && ($("#PaymentMode option:selected").text()) != "UPI") {
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+            }
+            if ($('#TransactionNo').val() == '') {
+                $("#TransactionNo").addClass('errortext');
+                $('#TransactionNo').focus();
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                return false;
+            }
+        }
+        else if ($("#PaymentMode option:selected").text() == "UPI") {
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                return false;
+            }
+            if ($('#TransactionNo').val() == '') {
+                $("#TransactionNo").addClass('errortext');
+                $('#TransactionNo').focus();
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                return false;
+            }
+        }
+        else {
+
+        }
         return true;
     }
     function CheckPayMode() {
         debugger;
-       if ($('#PaymentMode').val() == '11') {
+        if ($('#PaymentMode').val() != '1' && $('#PaymentMode').val() != "10") {
             $('#lbltno').html('Transaction No.');
             $('#lbltdate').html('Transaction Date');
+            $('#lblbank').html('Bank Name');
             $("#divtrdate").show();
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
+            $("#divQr").hide();
+            $("#BankName").attr("placeholder", "Bank Name");
             $("#TransactionNo").attr("placeholder", "Transaction No.");
+            $("#TransactionDate").attr("placeholder", "Transaction Date");
+        }
+        else if ($('#PaymentMode').val() == "10") {
+            $('#lbltno').html('Transaction Id');
+            $('#lbltdate').html('Transaction Date');
+            $('#lblbank').html('UPI Id');
+            $("#BankName").val('');
+            $("#BankBranch").val('');
+            $("#divtrdate").show();
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divQr").show();
+            $("#divbankbranch").hide();
+            $("#BankName").attr("placeholder", "UPI Id");
+            $("#TransactionNo").attr("placeholder", "Transaction Id");
             $("#TransactionDate").attr("placeholder", "Transaction Date");
         }
         else {
@@ -176,6 +279,7 @@
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divtrdate").hide();
+            $("#divQr").hide();
         }
 
     }

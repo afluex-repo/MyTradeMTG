@@ -166,6 +166,10 @@ namespace MyTrade.Controllers
                 ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
+            #region ddlpaymentType
+            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            ViewBag.ddlpaymentType = ddlpaymentType;
+            #endregion
             #region ddlpaymentmode
             UserWallet obj = new UserWallet();
             int count1 = 0;
@@ -258,6 +262,7 @@ namespace MyTrade.Controllers
         {
             Pin model = new Pin();
             List<Pin> lst = new List<Pin>();
+            model.PinStatus = (model.PinStatus="T");
             model.FK_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.GetPinList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -482,6 +487,8 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     list.Add(obj);
                 }
                 model.lst = list;
@@ -507,6 +514,8 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     list.Add(obj);
                 }
                 model.lst = list;
@@ -761,6 +770,17 @@ namespace MyTrade.Controllers
                 model.lstEpinRequest = list;
             }
 
+
+            #region Check Balance
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet dsss = model.GetWalletBalance();
+            if (dsss != null && dsss.Tables.Count > 0 && dsss.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = dsss.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
+
+
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -968,5 +988,74 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+
+        public ActionResult TopUpList()
+        {
+            Account model = new Account();
+            List<Account> lst = new List<Account>();
+            model.Pk_userId = Session["PK_UserId"].ToString();
+           model.LoginId = Session["LoginId"].ToString();
+            DataSet ds1 = model.GetTopUpDetails();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Account obj = new Account();
+                    obj.InvestmentId = r["Pk_InvestmentId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.IsCalculated = r["IsCalculated"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ROIPercentage = r["ROIPercentage"].ToString();
+                    obj.TopUpDate = r["TopUpDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    
+                    lst.Add(obj);
+                }
+                model.lstTopUp = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("TopUpList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult TopUpList(Account model)
+        {
+            List<Account> lst = new List<Account>();
+            model.Pk_userId = Session["PK_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds1 = model.GetTopUpDetails();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Account obj = new Account();
+                    obj.InvestmentId = r["Pk_InvestmentId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.IsCalculated = r["IsCalculated"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ROIPercentage = r["ROIPercentage"].ToString();
+                    obj.TopUpDate = r["TopUpDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTopUp = lst;
+            }
+            return View(model);
+        }
+
     }
 }

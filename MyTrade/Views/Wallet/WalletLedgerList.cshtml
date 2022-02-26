@@ -1,12 +1,12 @@
-﻿@model MyTrade.Models.Admin
+﻿@model MyTrade.Models.UserWallet
 
 @{
-    ViewBag.Title = "ROIWalletForAdmin";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "WalletLedgerList";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 
-@using (Html.BeginForm("ROIWalletForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("WalletLedgerList", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -15,7 +15,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>TPS Wallet</h4>
+                                <h4>Wallet Ledger</h4>
                                 <span class="text-danger">
                                     @TempData["Package"]
                                 </span>
@@ -58,10 +58,10 @@
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lstTps != null)
+                                        if (Model.lstWalletLedger != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lstTps)
+                                            foreach (var Item in Model.lstWalletLedger)
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>

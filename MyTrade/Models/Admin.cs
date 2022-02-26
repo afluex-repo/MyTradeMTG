@@ -60,8 +60,25 @@ namespace MyTrade.Models
         public List<Admin> lstROI { get; set; }
         public List<Admin> lst { get; set; }
         public string PK_PayoutWalletId { get; set; }
-        
+        public List<Admin> lstlevelIncome { get; set; }
+        public List<Admin> lstlevel { get; set; }
+        public List<Admin> lstPayout { get; set; }
 
+        public string FromName { get; set; }
+        public string FromLoginId { get; set; }
+        public string BusinessAmount { get; set; }
+        public string Percentage { get; set; }
+        public string PayoutNo { get; set; }
+        public string Level { get; set; }
+
+        public string LevelIncomeTR1 { get; set; }
+        public string LevelIncomeTR2 { get; set; }
+        public string ClosingDate { get; set; }
+        public string GrossAmount { get; set; }
+        public string ProcessingFee { get; set; }
+        public string TDSAmount { get; set; }
+        public string NetAmount { get; set; }
+        
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -221,5 +238,36 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet LevelIncomeTr1()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr1", para);
+            return ds;
+        }
+
+        public DataSet LevelIncomeTr2()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr2", para);
+            return ds;
+        }
+
+
+        public DataSet PayoutDetail()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_Userid", Fk_UserId),
+                new SqlParameter("@PayoutNo", PayoutNo),
+                  new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
+            return ds;
+        }
     }
 }

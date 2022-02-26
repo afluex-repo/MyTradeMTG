@@ -1,13 +1,14 @@
 ﻿@model MyTrade.Models.Admin
 
 @{
-    ViewBag.Title = "PayoutWalletLedgerForAdmin";
+    ViewBag.Title = "LevelIncomeTr2ForAdmin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-@using (Html.BeginForm("PayoutWalletLedgerForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("LevelIncomeTr2ForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -16,7 +17,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Payout Wallet</h4>
+                                <h4>Level Income TPS</h4>
                             </div>
                         </div>
                     </div>
@@ -45,29 +46,34 @@
                             </div>
                         </div>
                         <div class="row">
-                            <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                            <table id="html5-extension" class="table table-hover non-hover">
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>Narration</th>
-                                        <th>Cr. Amount</th>
-                                        <th>Dr. Amount</th>
+                                        <th>Payout No</th>
+                                        <th>From Member</th>
+                                        <th>Business Amount</th>
+                                        <th>Income</th>
+                                        <th>Percentage</th>
+                                        <th>Level</th>
                                         <th>Transaction Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lst != null)
+                                        if (Model.lstlevel != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lst)
+                                            foreach (var Item in Model.lstlevel)
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.Narration</td>
-                                                    <td>@Item.CrAmount</td>
-                                                    <td>@Item.DrAmount</td>
+                                                    <td>@Item.FromName</td>
+                                                    <td>@Item.BusinessAmount</td>
+                                                    <td>@Item.Amount</td>
+                                                    <th>@Item.Percentage</th>
+                                                    <td>@Item.Level</td>
                                                     <td>@Item.TransactionDate</td>
                                                 </tr>
                                                 i++;
@@ -93,6 +99,8 @@
         mode: "range"
     });
 </script>
+
+
 
 
 

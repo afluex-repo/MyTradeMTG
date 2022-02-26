@@ -479,6 +479,8 @@ namespace MyTrade.Controllers
                     obj.TransactionNo = r["ChequeDDNo"].ToString();
                     obj.TransactionDate = r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.NoofPins = r["NoOfPins"].ToString();
+                    
                     list.Add(obj);
                 }
                 model.lstEpinRequest = list;
@@ -716,6 +718,167 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lst = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult LevelIncomeTr1ForAdmin()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.LevelIncomeTr1();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstlevelIncome = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("LevelIncomeTr1ForAdmin")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult LevelIncomeTr1ForAdmin(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.LevelIncomeTr1();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstlevelIncome = lst;
+            }
+            return View(model);
+        }
+
+
+        public ActionResult LevelIncomeTr2ForAdmin()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.LevelIncomeTr2();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstlevel = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("LevelIncomeTr2ForAdmin")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult LevelIncomeTr2ForAdmin(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.LevelIncomeTr2();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstlevel = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult PayoutDetailForAdmin()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.PayoutDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["Fk_Userid"].ToString();
+                    obj.LevelIncomeTR1 = r["LevelIncomeTR1"].ToString();
+                    obj.LevelIncomeTR2 = r["LevelIncomeTR2"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
+                    obj.TDSAmount = r["TDSAmount"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayout = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("PayoutDetailForAdmin")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult PayoutDetailForAdmin(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.PayoutDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["Fk_Userid"].ToString();
+                    obj.LevelIncomeTR1 = r["LevelIncomeTR1"].ToString();
+                    obj.LevelIncomeTR2 = r["LevelIncomeTR2"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
+                    obj.TDSAmount = r["TDSAmount"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayout = lst;
             }
             return View(model);
         }

@@ -35,6 +35,11 @@ namespace MyTrade.Models
         public List<UserWallet> lstTps { get; set; }
         public List<UserWallet> lstROIIncome { get; set; }
         public List<UserWallet> lstROI { get; set; }
+        public List<UserWallet> lstWalletLedger { get; set; }
+        public string PaymentType { get; set; }
+        public string Pk_EwalletId { get; set; }
+        public string Remark { get; set; }
+
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
@@ -56,6 +61,7 @@ namespace MyTrade.Models
                                       new SqlParameter("@DDChequeDate", DDChequeDate) ,
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                           new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@Remarks", Remark),
                                             new SqlParameter("@AddedBy", AddedBy)
                                      };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
@@ -99,6 +105,18 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetEWalletDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetEWalletDetails", para);
+            return ds;
+        }
 
 
 
