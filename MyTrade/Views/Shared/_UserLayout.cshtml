@@ -244,6 +244,7 @@
                             </div>
                         </a>
                     </li>
+
                     <li class="menu">
                         <a href="#Wallet" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -255,15 +256,26 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Wallet" data-parent="#accordionExample">
-                            <li>
-                                <a href="/Wallet/AddWallet">Wallet Request</a>
-                            </li>
-                            <li>
-                                <a href="/Wallet/WalletList">Wallet Request List</a>
-                            </li>
-                            <li>
-                                <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
-                            </li>
+                            @if (Session["IdActivated"] != null)
+                            {
+                                if (Convert.ToBoolean(Session["IdActivated"]) == true)
+                                {
+                                    <li>
+                                        <a href="/Wallet/AddWallet">Wallet Request</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Wallet/WalletList">Wallet Request List</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
+                                    </li>
+
+                                }
+                                else
+                                {
+                                }
+                            }
+
                         </ul>
                     </li>
                     <li class="menu">
@@ -278,12 +290,22 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Account" data-parent="#accordionExample">
-                            <li>
-                                <a href="/user/Topup">Topup</a>
-                            </li>
-                            <li>
-                                <a href="/user/TopUpList">Topup List</a>
-                            </li>
+                            @if (Session["IdActivated"] != null)
+                            {
+                                if (Convert.ToBoolean(Session["IdActivated"]) == true)
+                                {
+                                    <li>
+                                        <a href="/user/Topup">Topup</a>
+                                    </li>
+                                    <li>
+                                        <a href="/user/TopUpList">Topup List</a>
+                                    </li>
+                                }
+                                else
+                                {
+
+                                }
+                            }
                         </ul>
                     </li>
                     <li class="menu">
@@ -330,9 +352,15 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Pin" data-parent="#accordionExample">
-                            <li>
-                                <a href="/User/EPinRequest">Request For Pin</a>
-                            </li>
+                            @if (Session["IdActivated"] != null)
+                            {
+                                if (Convert.ToBoolean(Session["IdActivated"]) == true)
+                                {
+                                    <li>
+                                        <a href="/User/EPinRequest">Request For Pin</a>
+                                    </li>
+                                }
+                            }
                             <li>
                                 <a href="/User/PinList">Pin List</a>
                             </li>
