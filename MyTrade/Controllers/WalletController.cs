@@ -38,7 +38,7 @@ namespace MyTrade.Controllers
             //List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
             //ViewBag.ddlpaymentmode = ddlpaymentmode;
             #endregion
-
+            
             #region ddlpaymentType
             List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
             ViewBag.ddlpaymentType = ddlpaymentType;
@@ -48,8 +48,17 @@ namespace MyTrade.Controllers
             obj.LoginId = Session["LoginId"].ToString();
             obj.BankBranch = Session["Branch"].ToString();
             obj.BankName = Session["Bank"].ToString();
+            
+            #region Check Balance
+            obj.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = obj.GetWalletBalance();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
+            
             #region ddlpaymentmode
-
             int count = 0;
             List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
             DataSet ds1 = obj.GetPaymentMode();
@@ -69,7 +78,7 @@ namespace MyTrade.Controllers
             ViewBag.ddlpaymentmode = ddlpaymentmode;
 
             #endregion
-
+           
             return View(obj);
         }
 
@@ -82,6 +91,12 @@ namespace MyTrade.Controllers
             {
                 model.DDChequeDate = string.IsNullOrEmpty(model.DDChequeDate) ? null : Common.ConvertToSystemDate(model.DDChequeDate, "dd/mm/yyyy");
                 model.AddedBy = Session["Pk_userId"].ToString();
+
+                if (model.PaymentMode == "1")
+                {
+                    model.BankName = null;
+                    model.BankBranch = null;
+                }
                 DataSet ds = model.SaveEwalletRequest();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

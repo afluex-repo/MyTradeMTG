@@ -262,7 +262,7 @@ namespace MyTrade.Controllers
         {
             Pin model = new Pin();
             List<Pin> lst = new List<Pin>();
-            model.PinStatus = (model.PinStatus="T");
+          model.PinStatus = (model.PinStatus="T");
             model.FK_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.GetPinList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -277,7 +277,8 @@ namespace MyTrade.Controllers
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
-                    
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.GST = r["IGST"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -304,6 +305,8 @@ namespace MyTrade.Controllers
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.GST = r["IGST"].ToString();
 
                     lst.Add(obj);
                 }
