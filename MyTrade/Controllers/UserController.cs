@@ -262,7 +262,7 @@ namespace MyTrade.Controllers
         {
             Pin model = new Pin();
             List<Pin> lst = new List<Pin>();
-            model.PinStatus = (model.PinStatus="T");
+          model.PinStatus = (model.PinStatus="T");
             model.FK_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.GetPinList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -275,9 +275,11 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.Amount = r["TotalAmount"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
-                    
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.GST = r["IGST"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -302,8 +304,11 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.Amount = r["TotalAmount"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.GST = r["IGST"].ToString();
 
                     lst.Add(obj);
                 }
@@ -845,7 +850,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "E_pin request save successfully";
+                        TempData["msg"] = "E_pin generated successfully";
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {

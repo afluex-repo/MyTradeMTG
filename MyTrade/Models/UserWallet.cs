@@ -39,6 +39,10 @@ namespace MyTrade.Models
         public string PaymentType { get; set; }
         public string Pk_EwalletId { get; set; }
         public string Remark { get; set; }
+        public string Fk_Paymentid { get; set; }
+        public string BranchName { get; set; }
+
+
 
         public DataSet GetMemberDetails()
         {
@@ -116,6 +120,15 @@ namespace MyTrade.Models
 
             DataSet ds = DBHelper.ExecuteQuery("GetEWalletDetails", para);
             return ds;
+        }
+
+        public DataSet GetWalletBalance()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_USerID", FK_UserId) };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletBalance", para);
+
+            return ds;
+
         }
 
 

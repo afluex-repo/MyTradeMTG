@@ -47,7 +47,10 @@
                                         <th><input type="checkbox" id="ckbCheckAll" /></th>
                                         <th>Sr No.</th>
                                         <th>E-Pin No</th>
+                                        <th>Package Name</th>
                                         <th>Pin Amount</th>
+                                        <th>GST</th>
+                                        <th>Total amount</th>
                                         <th>Pin Status</th>
                                         @*<th>Is Registered</th>*@
                                         <th>Registered To</th>
@@ -82,7 +85,10 @@
                                                     }
                                                     <td>@i</td>
                                                     <td>@Item.ePinNo</td>
+                                                    <td>@Item.ProductName</td>
                                                     <td>@Item.PinAmount</td>
+                                                    <td>@Item.GST</td>
+                                                    <td>@Item.Amount</td>
                                                     <td>@Item.PinStatus</td>
                                                     <td>@Item.RegisteredTo</td>
                                                     @*<td>@Item.RegisteredTo </td>*@
@@ -270,6 +276,7 @@
 
 <script>
     function ValidateLogId() {
+        jQuery.noConflict();
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {
             $("#LoginId").addClass('errortext');
@@ -279,16 +286,19 @@
         return true;
     }
     function openPopup(ePinNo) {
+        jQuery.noConflict();
         $("#ePinNo").val(ePinNo);
         $("#myModal").modal('show');
     }
 
     function closeModal() {
+        jQuery.noConflict();
         $("#myModal").hide();
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 
     function ActivatePin() {
+        jQuery.noConflict();
         $(".errortext").removeClass("errortext");
 
         if ($('#Login_Id').val() == '') {
