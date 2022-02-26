@@ -25,12 +25,8 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetMemberDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-
-
                 obj.DisplayName = ds.Tables[0].Rows[0]["FullName"].ToString();
-
                 obj.Result = "Yes";
-
             }
             else { obj.Result = "No"; }
             return Json(obj, JsonRequestBehavior.AllowGet);

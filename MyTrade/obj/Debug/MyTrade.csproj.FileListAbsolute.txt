@@ -105,3 +105,4 @@ D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
