@@ -176,7 +176,7 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string PinGenerationDate { get; set; }
         public string FromLoginId { get; set; }
-        
+        public string GST { get; set; }
 
 
         public DataSet GetPinList()

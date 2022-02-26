@@ -113,6 +113,8 @@ namespace MyTrade.Controllers
                     DataSet ds = obj.ProductList();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
+                        
+                        obj.PackageTypeId = ds.Tables[0].Rows[0]["Pk_PackageTypeId"].ToString();
                         obj.Packageid = ds.Tables[0].Rows[0]["Pk_ProductId"].ToString();
                         obj.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                         obj.ProductPrice = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
