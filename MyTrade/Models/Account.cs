@@ -37,9 +37,9 @@ namespace MyTrade.Models
         public string Pk_userId { get; set; }
         public string PaymentType { get; set; }
         public string ProductName { get; set; }
+        public string Remark { get; set; }
+
         
-
-
         public DataSet TopUp()
         {
             SqlParameter[] para = {
