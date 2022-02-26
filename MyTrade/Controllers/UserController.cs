@@ -262,6 +262,7 @@ namespace MyTrade.Controllers
         {
             Pin model = new Pin();
             List<Pin> lst = new List<Pin>();
+            model.PinStatus = (model.PinStatus="T");
             model.FK_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.GetPinList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -486,6 +487,8 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     list.Add(obj);
                 }
                 model.lst = list;
@@ -511,6 +514,8 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     list.Add(obj);
                 }
                 model.lst = list;
@@ -765,6 +770,17 @@ namespace MyTrade.Controllers
                 model.lstEpinRequest = list;
             }
 
+
+            #region Check Balance
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet dsss = model.GetWalletBalance();
+            if (dsss != null && dsss.Tables.Count > 0 && dsss.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = dsss.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
+
+
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -996,6 +1012,8 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.ROIPercentage = r["ROIPercentage"].ToString();
                     obj.TopUpDate = r["TopUpDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -1031,6 +1049,7 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.ROIPercentage = r["ROIPercentage"].ToString();
                     obj.TopUpDate = r["TopUpDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;

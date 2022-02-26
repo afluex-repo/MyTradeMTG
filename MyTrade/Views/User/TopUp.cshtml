@@ -45,6 +45,7 @@
                                 <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
                                 <label for="Amount">Amount <span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
+                                <span style="color:red">Min  : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> Max : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -85,11 +86,11 @@
                         <div class="col-md-4">
                             <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Submit" onclick="return ValidateForm();" />
                         </div>
-                        <div class="row mb-4">
+                        @*<div class="row mb-4">
                             <div class="col-md-12">
                                 <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
                             </div>
-                        </div>
+                        </div>*@
 
                     </div>
                 </div>

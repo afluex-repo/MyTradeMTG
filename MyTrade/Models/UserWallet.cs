@@ -38,7 +38,7 @@ namespace MyTrade.Models
         public List<UserWallet> lstWalletLedger { get; set; }
         public string PaymentType { get; set; }
         public string Pk_EwalletId { get; set; }
-        
+        public string Remark { get; set; }
 
         public DataSet GetMemberDetails()
         {
@@ -61,6 +61,7 @@ namespace MyTrade.Models
                                       new SqlParameter("@DDChequeDate", DDChequeDate) ,
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                           new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@Remarks", Remark),
                                             new SqlParameter("@AddedBy", AddedBy)
                                      };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);

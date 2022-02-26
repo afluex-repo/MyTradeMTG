@@ -22,6 +22,16 @@
                     <div class="widget-content widget-content-area">
                         <div class="row mb-4">
                             <div class="col-md-4">
+                                <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+                                <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
+                            </div>
+                            @if (ViewBag.WalletBalance == "0")
+                            {
+                                <a class="btn btn-primary" href="/Wallet/AddWallet">Add Fund</a>
+                            }
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4">
                                 <label for="Package">Login Id</label>
                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "LoginId", @disabled = "disabled" })
                                 <p class="text-success" id="spName"></p>
@@ -43,36 +53,37 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="FinalAmount">Final Amount</label>
-                                @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount", @disabled = "disabled" })
+                                <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
+                                @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
                             </div>
-                            <div class="col-md-4">
-                                <label for="Fk_Paymentid">Payment Mode</label>
-                                @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
-                            </div>
+                            @*<div class="col-md-4">
+                                    <label for="Fk_Paymentid">Payment Mode</label>
+                                    @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
+                                </div>*@
                         </div>
-                        <div class="row mb-4" style="display:none" id="divPaymentMode">
-                            <div class="col-md-3" id="divbankname">
-                                <label for="BankName" id="lblbank">Bank Name</label>
-                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
-                            </div>
-                            <div class="col-md-3" id="divbankbranch">
-                                <label for="BranchName" id="lbltbranch">Branch Name</label>
-                                @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
-                            </div>
-                            <div class="col-md-3" id="divtransactiono">
-                                <label for="TransactionNo" id="lbltno">Transaction No</label>
-                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
-                            </div>
-                            <div class="col-md-3" id="divtrdate">
-                                <label for="TransactionDate" id="lbltdate">TransactionDate</label>
-                                @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
-                            </div>
-                         
-                        </div>
+                        @*<div class="row mb-4" style="display:none" id="divPaymentMode">
+                                <div class="col-md-3" id="divbankname">
+                                    <label for="BankName" id="lblbank">Bank Name</label>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
+                                </div>
+                                <div class="col-md-3" id="divbankbranch">
+                                    <label for="BranchName" id="lbltbranch">Branch Name</label>
+                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
+                                </div>
+                                <div class="col-md-3" id="divtransactiono">
+                                    <label for="TransactionNo" id="lbltno">Transaction No</label>
+                                    @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
+                                </div>
+                                <div class="col-md-3" id="divtrdate">
+                                    <label for="TransactionDate" id="lbltdate">TransactionDate</label>
+                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
+                                </div>
+
+                            </div>*@
                         <div class="row">
                             <input class="btn btn-success pull-left" type="submit" value="Request Pin" id="btnsave" name="btnsave" onclick="return validateform();" />
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -166,7 +177,16 @@
         var Amount = $('#Amount').val();
         var NoofPins = $('#NoofPins').val();
         var finalamt = parseInt(Amount) * parseInt(NoofPins);
+        var WalletAmount = $("#WalletAmount").val();
         $('#FinalAmount').val(finalamt);
+        if (finalamt > WalletAmount) {
+            Snackbar.show({
+                text: "Insufficient Amount",
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        }
     }
 
     function validateform() {
@@ -520,8 +540,52 @@
             $("#divbankbranch").hide();
             $("#divtrdate").hide();
         }
-
     }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+
+    function CheckAmount() {
+        debugger;
+        var FinalAmount = $("#FinalAmount").val();
+        var WalletBalance = $("#WalletAmount").val();
+        if (FinalAmount != null && FinalAmount != "" && FinalAmount != "0") {
+            if (parseInt(FinalAmount) % 1000 == 0) {
+                if (parseInt(FinalAmount) > parseInt(WalletBalance)) {
+                    Snackbar.show({
+                        text: "Insufficient Amount",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                    $("#FinalAmount").addClass('errortext');
+                    $('#FinalAmount').focus();
+                    $("#FinalAmount").val('');
+                    return false;
+                }
+            }
+            else {
+                Snackbar.show({
+                    text: "Invalid Amount",
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+                $("#FinalAmount").addClass('errortext');
+                $('#FinalAmount').focus();
+                $("#FinalAmount").val('');
+                return false;
+            }
+        }
+        return true;
+    }
+
 </script>
 
 @if (TempData["msg"] != null)

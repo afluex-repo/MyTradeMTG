@@ -26,9 +26,10 @@
                                 <div class="form-group">
                                     <label>Pin Status</label>
                                     <select id="PinStatus" name="PinStatus" class="form-control">
-                                        <option value="">-Select-</option>
-                                        <option value="P">Used</option>
+                                        @*<option value="">-Select-</option>*@
                                         <option value="T">Available</option>
+                                        <option value="P">Used</option>
+                                      
                                     </select>
                                 </div>
                             </div>
@@ -182,7 +183,7 @@
         $(".errortext").removeClass('errortext');
 
         if (($("input[name*='chkSelect_']:checked").length) <= 0) {
-            alert("You must check at least 1 box");
+            alert("You must check at least 1 pin");
             return false;
         }
         if ($("#LoginId").val() == '') {
