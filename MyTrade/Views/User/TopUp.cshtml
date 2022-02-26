@@ -22,13 +22,14 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row mb-4">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+
+                                @if (ViewBag.WalletBalance == "0")
+                                {
+                                    <a class="btn btn-primary" style="float: right;" href="/Wallet/AddWallet">Add Fund</a>
+                                }
                             </div>
-                            @if (ViewBag.WalletBalance == "0")
-                            {
-                                <a class="btn btn-primary" href="/Wallet/AddWallet">Add Fund</a>
-                            }
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-4">

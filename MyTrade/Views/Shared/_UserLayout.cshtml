@@ -95,6 +95,11 @@
             background-size: cover;
             margin: -50px 0 0 -50px; /* is width and height divided by two */
         }
+
+        .trade-name {
+            margin-left: 13px;
+            white-space: initial;
+        }
     </style>
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 </head>
@@ -162,6 +167,23 @@
                     </a>
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                         <div class="">
+                            <div class="dropdown-item  d-block d-sm-none">
+                                <div class="trade-name">
+                                    @if (Session["Gender"] != null)
+                                    {
+                                        if (Session["Gender"].ToString() == "F")
+                                        {
+
+                                            <h6 style="color:black;margin-top:10px">Hello Mrs. @Session["FullName"] (@Session["LoginId"])</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6 style="color:black;margin-top:10px">Hello Mr. @Session["FullName"] (@Session["LoginId"])</h6>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
                             <div class="dropdown-item">
                                 <a class="" href="/User/ViewProfile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>  Profile</a>
                             </div>
@@ -226,7 +248,7 @@
                     <li class="menu">
                         <a href="#Wallet" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-folder-open"></i>
                                 <span>My Trade Wallet</span>
                             </div>
                             <div>
@@ -259,7 +281,8 @@
                     <li class="menu">
                         <a href="#Account" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                @*<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>*@
+                                <i class="fa fa-address-book"></i>
                                 <span>Account</span>
                             </div>
                             <div>
@@ -288,7 +311,7 @@
                     <li class="menu">
                         <a href="#Team" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-users"></i>
                                 <span>Team</span>
                             </div>
                             <div>
@@ -321,7 +344,7 @@
                     <li class="menu">
                         <a href="#Pin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-thumb-tack"></i>
                                 <span>Pin Management</span>
                             </div>
                             <div>
@@ -349,7 +372,7 @@
                     <li class="menu">
                         <a href="#ROI" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-money"></i>
                                 <span>TPS</span>
                             </div>
                             <div>
@@ -369,7 +392,7 @@
                     <li class="menu">
                         <a href="#Rewards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-trophy"></i>
                                 <span>Rewards</span>
                             </div>
                             <div>
@@ -388,7 +411,7 @@
                     <li class="menu">
                         <a href="#Payout" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-cubes"></i>
                                 <span>Payout</span>
                             </div>
                             <div>
@@ -413,7 +436,7 @@
                     <li class="menu">
                         <a href="#Forex" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <i class="fa fa-bar-chart"></i>
                                 <span>Forex Trading</span>
                             </div>
                             <div>
