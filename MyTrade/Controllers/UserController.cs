@@ -33,7 +33,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
                 ViewBag.TotalROI = ds.Tables[0].Rows[0]["TotalROIWalletAmount"].ToString();
                 ViewBag.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
-                ViewBag.TotalWalletAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalROIWalletAmount"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]);
+                ViewBag.TotalWalletAmount = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
                 ViewBag.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
