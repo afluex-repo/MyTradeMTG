@@ -47,6 +47,7 @@
                                 <label for="Amount">Amount <span style="color:red">*</span></label>
                                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
                                 <span style="color:red">Min  : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> Max : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
+                                <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax"/>
                             </div>
                         </div>
                         @*<div class="row mb-4">
@@ -156,6 +157,22 @@
                     $('#Amount').focus();
                     $("#Amount").val('');
                     return false;
+                }
+                else if(parseInt(Amount)>parseInt(@ViewBag.ToAmount))
+                {
+                    Snackbar.show({
+                        text: "Amount should not be greater than max smount",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    $("#Amount").val('');
+                    return false;
+                }
+                else {
+
                 }
             }
             else {

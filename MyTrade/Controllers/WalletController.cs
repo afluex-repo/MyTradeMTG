@@ -77,8 +77,10 @@ namespace MyTrade.Controllers
 
             ViewBag.ddlpaymentmode = ddlpaymentmode;
 
+
+            obj.PaymentType = "Offline";
             #endregion
-           
+
             return View(obj);
         }
 
