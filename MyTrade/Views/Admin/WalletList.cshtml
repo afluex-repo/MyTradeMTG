@@ -50,68 +50,64 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="widget-content widget-content-area br-6">
-                                <div class="table-responsive">
-                                    <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
-                                        <thead>
-                                            <tr>
-                                                <th>Sr No.</th>
-                                                @*<th>Request Code</th>*@
-                                                <th>Login Id</th>
-                                                <th>Name</th>
-                                                <th>Amount</th>
-                                                <th>Payment Mode</th>
-                                                <th>Requested Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model != null)
+                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        @*<th>Request Code</th>*@
+                                        <th>Login Id</th>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                        <th>Payment Mode</th>
+                                        <th>Requested Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                         {
                                             if (Model.lstWallet != null)
                                             {
                                                 int i = 1;
                                                 foreach (var Item in Model.lstWallet)
                                                 {
-                                                        <tr class="text-left">
-                                                            <td>@i</td>
-                                                            @*<td>@Item.RequestCode</td>*@
-                                                            <td>@Item.LoginId</td>
-                                                            <td>@Item.DisplayName</td>
-                                                            <td>@Item.Amount</td>
-                                                            @if(@Item.PaymentMode=="Cash")
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                @*<td>@Item.RequestCode</td>*@
+                                                <td>@Item.LoginId</td>
+                                                <td>@Item.DisplayName</td>
+                                                <td>@Item.Amount</td>
+                                                @if(@Item.PaymentMode=="Cash")
                                                             {
-                                                                <td>@Item.PaymentMode</td>
+                                                            <td>@Item.PaymentMode</td>
                                                             }
                                                             else
                                                             {
-                                                                <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
+                                                            <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
                                                             }
-                                                            <td>@Item.TransactionDate</td>
-                                                            @if (Item.Status == "Pending")
+                                                <td>@Item.TransactionDate</td>
+                                                @if (Item.Status == "Pending")
                                                         {
-                                                                <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a></td>
+                                                            <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a></td>
                                                         }
                                                         else if (Item.Status == "Approved")
                                                         {
-                                                                <td><a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a></td>
+                                                            <td><a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a></td>
                                                         }
                                                         else if (Item.Status == "Declined")
                                                         {
-                                                                <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a></td>
+                                                            <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a></td>
                                                         }
                                                         else
                                                         {
                                                         }
-                                                        </tr>
+                                            </tr>
                                                     i++;
                                                 }
                                             }
                                         }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

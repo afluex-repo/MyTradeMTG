@@ -55,7 +55,7 @@ namespace MyTrade.Models
         //public string Leg { get; set; }
         public string LoginId { get; set; }
         public string PayoutLoginId { get; set; }
-
+        public string Ids { get; set; }
         public string Name { get; set; }
 
         public string JoiningDate { get; set; }
@@ -255,7 +255,9 @@ namespace MyTrade.Models
         public DataSet GetDirectList()
         {
 
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+            SqlParameter[] para = {
+                                    new SqlParameter("@PK_UserIds", Ids),
+                                    new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@Name", Name),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),

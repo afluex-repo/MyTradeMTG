@@ -322,5 +322,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+        public ActionResult DeleteWallet(UserWallet model)
+        {
+            try
+            {
+                model.FK_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = model.DeleteWallet();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Wallet deleted successfully";
+                    }
+                    else
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return RedirectToAction("WalletList", "Wallet");
+
+        }
+
+            
     }
 }
