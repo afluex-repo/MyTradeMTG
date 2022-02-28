@@ -124,12 +124,30 @@ namespace MyTrade.Models
 
         public DataSet GetWalletBalance()
         {
-            SqlParameter[] para = { new SqlParameter("@PK_USerID", FK_UserId) };
+            SqlParameter[] para = { new SqlParameter("@PK_USerID", FK_UserId)
+
+            };
             DataSet ds = DBHelper.ExecuteQuery("GetWalletBalance", para);
 
             return ds;
 
         }
+
+
+
+        public DataSet DeleteWallet()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_USerID", FK_UserId),
+                  new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteWallet", para);
+
+            return ds;
+
+        }
+
+        
 
 
 
