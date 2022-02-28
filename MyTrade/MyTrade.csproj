@@ -200,6 +200,8 @@
     <Content Include="assets\img\tradelogo.jpeg" />
     <Content Include="assets\img\tradelogo.png" />
     <Content Include="assets\img\usericon.jpg" />
+    <Content Include="assets\img\ViewProfile.jpg" />
+    <Content Include="assets\img\welcome.png" />
     <Content Include="assets\img\WhatsApp Image 2022-01-21 at 12.05.04 PM.jpeg" />
     <Content Include="assets\js\app.js" />
     <Content Include="assets\js\apps\contact.js" />
@@ -243,6 +245,8 @@
     <Content Include="Coming.html" />
     <Content Include="css\tree-responsive.css" />
     <Content Include="css\tree.css" />
+    <Content Include="EmailTemplateActivation.html" />
+    <Content Include="EmailTemplateRegistration.html" />
     <Content Include="Global.asax" />
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
@@ -444,8 +448,11 @@
     <Content Include="MyTradeWebsite\forex.html" />
     <Content Include="MyTradeWebsite\index.html" />
     <Content Include="MyTradeWebsite\login.html" />
+    <Content Include="MyTradeWebsite\privacy.html" />
+    <Content Include="MyTradeWebsite\services.html" />
     <Content Include="MyTradeWebsite\sign-up.html" />
     <Content Include="MyTradeWebsite\team.html" />
+    <Content Include="MyTradeWebsite\terms&amp;condition.html" />
     <Content Include="plugins\animate\animate.css" />
     <Content Include="plugins\apex\apexcharts.css" />
     <Content Include="plugins\apex\apexcharts.min.js" />

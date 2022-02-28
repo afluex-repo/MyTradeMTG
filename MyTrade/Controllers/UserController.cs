@@ -86,8 +86,14 @@ namespace MyTrade.Controllers
                         string Email = ds.Tables[0].Rows[0]["Email"].ToString();
                         if (Email != null && Email != "")
                         {
-                            string Body = "Dear User,\t\n Your Account has been activated.";
-                            BLMail.SendMail(Email, "Activation Successful", Body, false);
+                            try
+                            {
+                                BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Session["Password"].ToString(), "Activation Successful", Email);
+                            }
+                            catch(Exception ex)
+                            {
+
+                            }
                         }
                         TempData["Activated"] = "User Activated Successfully";
                         FormName = "ConfirmActivation";
