@@ -1019,7 +1019,7 @@ namespace MyTrade.Controllers
                     obj.ROIPercentage = r["ROIPercentage"].ToString();
                     obj.TopUpDate = r["TopUpDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
-                    
+                    obj.PackageDays = r["PackageDays"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;

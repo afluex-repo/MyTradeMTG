@@ -41,7 +41,9 @@ namespace MyTrade.Models
         public string Remark { get; set; }
         public string Fk_Paymentid { get; set; }
         public string BranchName { get; set; }
-
+        public string PK_RequestID { get; set; }
+        public string Balance { get; set; }
+        
 
 
         public DataSet GetMemberDetails()
@@ -138,10 +140,10 @@ namespace MyTrade.Models
         public DataSet DeleteWallet()
         {
             SqlParameter[] para = {
-                new SqlParameter("@PK_USerID", FK_UserId),
-                  new SqlParameter("@AddedBy", AddedBy)
+                new SqlParameter("@PK_RequestID", PK_RequestID),
+                  new SqlParameter("@DeletedBy", AddedBy)
             };
-            DataSet ds = DBHelper.ExecuteQuery("DeleteWallet", para);
+            DataSet ds = DBHelper.ExecuteQuery("DeleteWalletRequest", para);
 
             return ds;
 

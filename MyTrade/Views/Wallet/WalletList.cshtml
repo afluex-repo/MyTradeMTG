@@ -34,34 +34,33 @@
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
+                                    {
+                                        if (Model.lstWallet != null)
                                         {
-                                            if (Model.lstWallet != null)
+                                            int i = 1;
+                                            foreach (var Item in Model.lstWallet)
                                             {
-                                                int i = 1;
-                                                foreach (var Item in Model.lstWallet)
-                                                {
-                                        <tr class="text-left">
-                                            <td>@i</td>
-                                            @*<td>@Item.RequestCode</td>*@
-                                            <td>@Item.Amount</td>
-                                            @if (@Item.PaymentMode == "Cash")
-                                                        {
-                                                        <td>@Item.PaymentMode</td>
-                                                        }
-                                                        else
-                                                        {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    @*<td>@Item.RequestCode</td>*@
+                                                    <td>@Item.Amount</td>
+                                                    @if (@Item.PaymentMode == "Cash")
+                                                    {
+                                                        <td>@Item.PaymentMode, Remarks-@Item.Remark</td>
+                                                    }
+                                                    else
+                                                    {
                                                         <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
-                                                        }
-                                            <td>@Item.TransactionDate</td>
-                                            <td>@Item.Status</td>
+                                                    }
 
-
-                                            <td><a href="/Wallet/DeleteWallet?id=@Item.PK_RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to delete this wallet ?') ">Delete</a></td>
-                                        </tr>
-                                                    i++;
-                                                }
+                                                    <td>@Item.TransactionDate</td>
+                                                    <td>@Item.Status</td>
+                                                    <td><a href="/Wallet/DeleteWallet?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to delete this wallet request ?') ">Delete</a></td>
+                                                </tr>
+                                                i++;
                                             }
                                         }
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -72,5 +71,33 @@
     </div>
 }
 
+
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+@if (TempData["msg"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["msg"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
 
 
