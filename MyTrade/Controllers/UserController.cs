@@ -33,7 +33,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalBlocked = ds.Tables[0].Rows[0]["TotalBlocked"].ToString();
                 ViewBag.TotalROI = ds.Tables[0].Rows[0]["TotalROIWalletAmount"].ToString();
                 ViewBag.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
-                ViewBag.TotalWalletAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalROIWalletAmount"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]);
+                ViewBag.TotalWalletAmount = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
                 ViewBag.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
@@ -275,6 +275,7 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.Amount = r["TotalAmount"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
@@ -303,6 +304,7 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.Amount = r["TotalAmount"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
@@ -849,7 +851,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "E_pin request save successfully";
+                        TempData["msg"] = "E_pin generated successfully";
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
