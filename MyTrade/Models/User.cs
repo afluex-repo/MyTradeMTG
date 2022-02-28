@@ -35,6 +35,8 @@ namespace MyTrade.Models
         public string LoginId { get; set; }
         public string ProductName { get; set; }
         public string IsVerified { get; set; }
+        public string Image { get; set; }
+        
         public List<User> lstEpinRequest { get; set; }
 
 
@@ -88,6 +90,8 @@ namespace MyTrade.Models
                                      new SqlParameter("@NomineeName",NomineeName),
                                     new SqlParameter("@NomineeRelation",NomineeRelation),
                                      new SqlParameter("@NomineeAge",NomineeAge),
+                                         new SqlParameter("@PanImage",Image),
+                                     
                                       new SqlParameter("@UpdatedBy",Fk_UserId)
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
