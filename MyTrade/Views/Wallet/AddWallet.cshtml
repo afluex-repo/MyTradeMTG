@@ -243,9 +243,7 @@
     function getpaymentTypedetails() {
         debugger;
         if ($('#PaymentType').val() == 'Offline') {
-            $('#lblbank').html('UPI ID.');
-            $('#txnNo').html('Transaction ID.');
-            $('#txndt').html('Transaction Date.');
+        
             $("#PaymentMode").val(10);
             $("#paymentmode").show();
             $("#divQr").show();
@@ -254,6 +252,10 @@
             $("#divtransactiono").show();
             $("#divPaymentMode").show();
             $("#Remarks").hide();
+            $("#lblbank").show();
+            $('#lblbank').html('UPI ID.');
+            $('#txnNo').html('Transaction ID.');
+            $('#txndt').html('Transaction Date.');
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "UPI ID");
             $("#DDChequeNo").attr("placeholder", "Transaction Date.");
@@ -286,29 +288,30 @@
             $("#divQr").hide();
         }
         else if ($('#PaymentMode').val() == '2') {
-            $('#lblbank').html('Bank Name.');
-            $('#txnNo').html('Cheque No.');
-            $('#txndt').html('Cheque Date');
+    
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
             $("#Remarks").hide();
             $("#divQr").hide();
+            $('#lblbank').html('Bank Name.');
+            $('#txnNo').html('Cheque No.');
+            $('#txndt').html('Cheque Date');
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Cheque No.");
             $("#DDChequeDate").attr("placeholder", "Cheque Date");
         }
         else if ($('#PaymentMode').val() == '3') {
-            $('#lblbank').html('Bank Name.');
-            $('#txndt').html('Transaction Date');
-            $('#txnNo').text('Transaction No.');
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
             $("#Remarks").hide();
             $("#divQr").hide();
+            $('#lblbank').html('Bank Name.');
+            $('#txndt').html('Transaction Date');
+            $('#txnNo').text('Transaction No.');
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
@@ -316,31 +319,31 @@
             //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '4') {
-            $('#lblbank').html('Bank Name.');
-            $('#txndt').html('DD Isue Date');
-            $('#txnNo').text('DD No.');
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
             $("#Remarks").hide();
             $("#divQr").hide();
+            $('#lblbank').html('Bank Name.');
+            $('#txndt').html('DD Issue Date');
+            $('#txnNo').text('DD No.');
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "DD No.");
-            $("#DDChequeDate").attr("placeholder", "DD Isue Date");
+            $("#DDChequeDate").attr("placeholder", "DD Issue Date");
             //$('#Fk_BankId').val('0');
             //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '5') {
-            $('#lblbank').html('Bank Name.');
-            $('#txndt').html('Transaction Date');
-            $('#txnNo').text('Transaction No.');
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
             $("#Remarks").hide();
             $("#divQr").hide();
+            $('#lblbank').html('Bank Name.');
+            $('#txndt').html('Transaction Date');
+            $('#txnNo').text('Transaction No.');
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
@@ -348,15 +351,15 @@
             //$('#Fk_BankId').attr('disabled', false);
         }
         else if ($('#PaymentMode').val() == '6') {
-            $('#lblbank').html('Bank Name.');
-            $('#txndt').html('Transaction Date');
-            $('#txnNo').text('Transaction No.');
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
             $("#divbankbranch").show();
             $("#Remarks").hide();
             $("#divQr").hide();
+            $('#lblbank').html('Bank Name.');
+            $('#txndt').html('Transaction Date');
+            $('#txnNo').text('Transaction No.');
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
@@ -365,9 +368,6 @@
         }
         else if ($('#PaymentMode').val() == '10') {
             $("#spntrannumber").show();
-            $('#lblbank').html('UPI ID.');
-            $('#txnNo').text('Transaction ID.');
-            $('#txndt').html('Transaction Date.');
             //$('#txnNo').text('UPI ID');
             $("#divPaymentMode").hide();
             $("#divtransactiono").show();
@@ -380,9 +380,12 @@
             $("#BankName").val('');
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
+            $('#lblbank').html('UPI ID.');
+            $('#txnNo').text('Transaction ID.');
+            $('#txndt').html('Transaction Date.');
             $("#lblbank").attr("placeholder", "UPI ID");
             $("#DDChequeNo").attr("placeholder", "Transaction ID");
-            $("#DDChequeNo").attr("placeholder", "Transaction Date.");
+            $("#DDChequeDate").attr("placeholder", "Transaction Date.");
             //$('#Fk_BankId').val('0');
             //$('#Fk_BankId').attr('disabled', false);
         }

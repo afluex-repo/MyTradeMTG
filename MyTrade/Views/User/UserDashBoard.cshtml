@@ -190,10 +190,10 @@
                             <p>In-Active </p>
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TotalInActive</h5>
                         </div>
-                        <div class="seconddiv">
+                        @*<div class="seconddiv">
                             <p>TPS Id </p>
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TPSId</h5>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -214,10 +214,10 @@
                             <p>In-Active </p>
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamInActive</h5>
                         </div>
-                        <div class="seconddiv">
+                        @*<div class="seconddiv">
                             <p>TPS Id </p>
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamTPSId</h5>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -246,14 +246,10 @@
             <div class="widget widget-account-invoice-three third">
                 <div class="widget-heading">
                     <div class="wallet-balance">
-                        <p>Wallet Amount</p>
-                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalWalletAmount</h5>
+                        <p>TPS Wallet</p>
+                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
-                        <div class="fisrtdiv">
-                            <p>TTP</p>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.LevelIncomeTr1</</h5>
-                        </div>
                         <div class="seconddiv">
                             <p>TPS</p>
                             <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalROI</h5>
@@ -269,17 +265,17 @@
             <div class="widget widget-account-invoice-three six">
                 <div class="widget-heading">
                     <div class="wallet-balance">
-                        <p>Payout</p>
-                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalPayout</h5>
+                        <p>Wallet</p>
+                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalWalletAmount</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
-                            <p>TTP</p>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.LevelIncomeTR1ForPayout</</h5>
+                            <p>Payout</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalPayoutWallet</</h5>
                         </div>
                         <div class="seconddiv">
                             <p>TPS</p>
-                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.LevelIncomeTR2ForPayout</h5>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalROI</h5>
                         </div>
                     </div>
                 </div>
@@ -309,12 +305,12 @@
             <div class="widget widget-account-invoice-three eight">
                 <div class="widget-heading">
                     <div class="wallet-balance">
-                        <a href="~/MyTradeWebsite/Coming.html" class="btn btn-danger mb-2 mr-2"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>&nbsp;  Recharge</a>
+                        <a href="~/Coming.html" class="btn btn-danger mb-2 mr-2"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>&nbsp;  Recharge</a>
                         @*<p><a href="~/MyTradeWebsite/Coming.html"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  Recharge</a></p>*@
                     </div>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
-                            <a href="~/MyTradeWebsite/Coming.html" class="btn btn-secondary mb-2 mr-2"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;  Bill Payment</a>
+                            <a href="~/Coming.html" class="btn btn-secondary mb-2 mr-2"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;  Bill Payment</a>
                             @*<p><a href="~/MyTradeWebsite/Coming.html"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  Bill Payment</a></p>*@
                         </div>
                     </div>
@@ -347,6 +343,20 @@
                 </div>
             </div>
         }
+        else
+        {
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                <div class="widget widget-chart-two ">
+                    <div class="widget-heading">
+                        <h5 class="">Business Details</h5>
+                    </div>
+                    <div class="widget-content1">
+                     No Business
+                    </div>
+                </div>
+            </div>
+        }
+        
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-chart-two ">
                 <div class="widget-heading">
