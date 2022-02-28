@@ -48,7 +48,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Payment Type<span style="color: red">*</span>
-                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onload = "getpaymentTypedetails();" })
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,8 @@
 
 <script>
     $(document).ready(function () {
-        $("#PaymentType").val("Online");
+        $("#PaymentType").val("Offline");
+        getpaymentTypedetails();
     });
     function validateform() {
         $(".errortext").removeClass("errortext");
@@ -256,9 +257,9 @@
             $('#lblbank').html('UPI ID.');
             $('#txnNo').html('Transaction ID.');
             $('#txndt').html('Transaction Date.');
-            $("#lblbank").attr("placeholder", "Bank Name");
-            $("#DDChequeNo").attr("placeholder", "UPI ID");
-            $("#DDChequeNo").attr("placeholder", "Transaction Date.");
+            $("#BankName").attr("placeholder", "UPI Id");
+            $("#DDChequeNo").attr("placeholder", "Transaction No");
+            $("#DDChequeDate").attr("placeholder", "Transaction Date.");
         }
         else if ($('#PaymentType').val() == 'Online') {
             $("#paymentmode").hide();

@@ -13,7 +13,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Pin List</h4>
+                                <h4>Pin Transfer Report</h4>
                                 <span class="text-danger">
                                     @TempData["Pin"]
 
@@ -62,13 +62,14 @@
                                                     <th>Sr No.</th>
                                                     <th>EPin No</th>
                                                     <th>Pin Amount</th>
+                                                    <th>BV</th>
                                                     <th>Package Name</th>
-                                                    <th>From Id</th>
-                                                    <th>From Name</th>
+                                                    @*<th>From Id</th>
+                                                    <th>From Name</th>*@
                                                     <th>To Id</th>
                                                     <th>To Name</th>
                                                     <th>Transfer Date</th>
-                                                    <th>BV</th>
+                                                 
                                                     
                                                 </tr>
 
@@ -88,13 +89,13 @@
                                                                 </td>
                                                                 <td>@Item.ePinNo</td>
                                                                 <td>@Item.PinAmount</td>
+                                                                <td>@Item.BV</td>
                                                                 <td>@Item.ProductName</td>
-                                                                <td>@Item.FromId</td>
-                                                                <td>@Item.FromName</td>
+                                                                @*<td>@Item.FromId</td>
+                                                                <td>@Item.FromName</td>*@
                                                                 <td>@Item.ToId</td>
                                                                 <td>@Item.ToName</td>
                                                                 <td>@Item.TransferDate</td>
-                                                                <td>@Item.BV</td>
                                                             </tr>
                                                             i++;
                                                         }

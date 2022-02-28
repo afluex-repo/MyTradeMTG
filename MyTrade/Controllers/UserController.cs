@@ -88,7 +88,7 @@ namespace MyTrade.Controllers
                         {
                             try
                             {
-                                BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Session["Password"].ToString(), "Activation Successful", Email);
+                                BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", Email);
                             }
                             catch(Exception ex)
                             {
@@ -1025,7 +1025,7 @@ namespace MyTrade.Controllers
                     obj.ROIPercentage = r["ROIPercentage"].ToString();
                     obj.TopUpDate = r["TopUpDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
-                    
+                    obj.PackageDays = r["PackageDays"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;

@@ -77,8 +77,10 @@ namespace MyTrade.Controllers
 
             ViewBag.ddlpaymentmode = ddlpaymentmode;
 
+
+            obj.PaymentType = "Offline";
             #endregion
-           
+
             return View(obj);
         }
 
@@ -264,6 +266,7 @@ namespace MyTrade.Controllers
                     obj.WalletId = r["WalletId"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.DisplayName = r["Name"].ToString();
+                    obj.Remark = r["Remark"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
@@ -287,10 +290,16 @@ namespace MyTrade.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    //obj.Balance = r["Balance"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;
+                ViewBag.TotalCrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.TotalDrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.Available= double.Parse(ds.Tables[0].Compute("sum(CrAmount)-sum(DrAmount)", "").ToString()).ToString("n2");
             }
+
+
             return View(model);
         }
 
@@ -316,24 +325,30 @@ namespace MyTrade.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    //obj.Balance = r["Balance"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;
+                ViewBag.TotalCrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.TotalDrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.Available = double.Parse(ds.Tables[0].Compute("sum(CrAmount)-sum(DrAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
 
-        public ActionResult DeleteWallet(UserWallet model)
+        public ActionResult DeleteWallet(string id)
         {
             try
             {
-                model.FK_UserId = Session["Pk_UserId"].ToString();
+                UserWallet model = new UserWallet();
+                model.AddedBy = Session["Pk_UserId"].ToString();
+                model.PK_RequestID = id;
                 DataSet ds = model.DeleteWallet();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["msg"] = "Wallet deleted successfully";
+                        TempData["msg"] = "Wallet requested deleted successfully";
                     }
                     else
                     {
