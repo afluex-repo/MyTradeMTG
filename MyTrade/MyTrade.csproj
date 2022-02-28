@@ -321,6 +321,7 @@
     <Content Include="MyTradeWebsite\assets\img\experience-img1.png" />
     <Content Include="MyTradeWebsite\assets\img\faq.png" />
     <Content Include="MyTradeWebsite\assets\img\favicon.png" />
+    <Content Include="MyTradeWebsite\assets\img\fb.png" />
     <Content Include="MyTradeWebsite\assets\img\features-img1.png" />
     <Content Include="MyTradeWebsite\assets\img\forexloose.png" />
     <Content Include="MyTradeWebsite\assets\img\forext.png" />
@@ -343,6 +344,7 @@
     <Content Include="MyTradeWebsite\assets\img\icon\global.png" />
     <Content Include="MyTradeWebsite\assets\img\icon\global1.png" />
     <Content Include="MyTradeWebsite\assets\img\icon\real-estate.png" />
+    <Content Include="MyTradeWebsite\assets\img\insta.png" />
     <Content Include="MyTradeWebsite\assets\img\invoicing-image\1.png" />
     <Content Include="MyTradeWebsite\assets\img\invoicing-image\2.png" />
     <Content Include="MyTradeWebsite\assets\img\invoicing-image\3.png" />
@@ -420,6 +422,8 @@
     <Content Include="MyTradeWebsite\assets\img\team-img2.jpg" />
     <Content Include="MyTradeWebsite\assets\img\team-img3.jpg" />
     <Content Include="MyTradeWebsite\assets\img\team-img4.jpg" />
+    <Content Include="MyTradeWebsite\assets\img\twitter.png" />
+    <Content Include="MyTradeWebsite\assets\img\youtube.png" />
     <Content Include="MyTradeWebsite\assets\js\appear.min.js" />
     <Content Include="MyTradeWebsite\assets\js\bootstrap.bundle.min.js" />
     <Content Include="MyTradeWebsite\assets\js\contact-form-script.js" />
