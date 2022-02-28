@@ -14,6 +14,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Wallet List</h4>
 
+
                             </div>
                         </div>
                     </div>
@@ -28,6 +29,7 @@
                                         <th>Payment Mode</th>
                                         <th>Requested Date</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,6 +54,9 @@
                                                         }
                                             <td>@Item.TransactionDate</td>
                                             <td>@Item.Status</td>
+
+
+                                            <td><a href="/Wallet/DeleteWallet?id=@Item.PK_RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to delete this wallet ?') ">Delete</a></td>
                                         </tr>
                                                     i++;
                                                 }
@@ -59,8 +64,6 @@
                                         }
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
                 </div>
