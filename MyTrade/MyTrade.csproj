@@ -747,6 +747,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="PanUpload\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />

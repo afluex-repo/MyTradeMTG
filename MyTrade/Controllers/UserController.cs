@@ -641,16 +641,24 @@ namespace MyTrade.Controllers
                     model.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
                     model.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
                     model.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
+                    model.Image = ds.Tables[0].Rows[0]["PanImage"].ToString();
                 }
             }
             return View(model);
         }
         [HttpPost]
         [ActionName("BankDetailsUpdate")]
-        public ActionResult BankDetailsUpdate(User model)
+        public ActionResult BankDetailsUpdate(User model, HttpPostedFileBase Image)
         {
             try
             {
+
+                if (Image != null)
+                {
+                    model.Image = "../PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    Image.SaveAs(Path.Combine(Server.MapPath(model.Image)));
+                }
+                
                 model.Fk_UserId = Session["Pk_userId"].ToString();
                 DataSet ds = model.BankDetailsUpdate();
                 if (ds != null && ds.Tables.Count > 0)
