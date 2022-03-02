@@ -38,8 +38,10 @@ namespace MyTrade.Models
         public string PaymentType { get; set; }
         public string ProductName { get; set; }
         public string Remark { get; set; }
-
+        public string PackageDays { get; set; }
         
+
+
         public DataSet TopUp()
         {
             SqlParameter[] para = {

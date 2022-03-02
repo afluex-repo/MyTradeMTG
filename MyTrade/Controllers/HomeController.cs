@@ -149,10 +149,8 @@ namespace MyTrade.Controllers
         }
 
         public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City)
-
         {
             Home obj = new Home();
-
             try
             {
                 obj.SponsorId = SponsorId;
@@ -182,8 +180,14 @@ namespace MyTrade.Controllers
                         obj.Result = "1";
                         if (obj.Email != "" && obj.Email != null)
                         {
-                            string Body = "Dear " + Session["DisplayName"].ToString() + ",\t\nThank you for your registration. Your Details are as Below: \t\nLogin ID: " + Session["LoginId"].ToString() + "\t\nPassword: " + Session["Password"].ToString();
-                            BLMail.SendMail(obj.Email, "Registration Successful", Body, false);
+                            try
+                            {
+                                BLMail.SendRegistrationMail(Session["DisplayName"].ToString(), Session["LoginId"].ToString(), Session["PassWord"].ToString(), "Registration Successful", obj.Email);
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
                         }
                     }
                     else

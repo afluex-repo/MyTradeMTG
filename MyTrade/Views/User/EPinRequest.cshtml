@@ -55,7 +55,7 @@
                             <div class="col-md-4">
                                 <label for="FinalAmount">Final Amount</label>
                                 <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
+                                @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount(GST Included)", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
                             </div>
                             @*<div class="col-md-4">
                                     <label for="Fk_Paymentid">Payment Mode</label>
@@ -85,9 +85,9 @@
                             <div class="row mb-4">
                                 <input class="btn btn-success pull-left" type="submit" value="Generate" id="btnsave" name="btnsave" onclick="return validateform();" />
                             </div>
-                            </div>
-
                         </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,7 +118,8 @@
     function getfinalamount() {
         var Amount = $('#Amount').val();
         var NoofPins = $('#NoofPins').val();
-        var finalamt = parseInt(Amount) * parseInt(NoofPins);
+        var GST = NoofPins * (parseInt(Amount) * 18 / 100);
+        var finalamt = parseInt(Amount) * parseInt(NoofPins) +GST;
         var WalletAmount = $("#WalletAmount").val();
         $('#FinalAmount').val(finalamt);
         if (finalamt > WalletAmount) {
@@ -128,6 +129,8 @@
                 backgroundColor: '#e7515a',
                 pos: 'top-right'
             });
+            $('#NoofPins').val('');
+            $('#FinalAmount').val('');
         }
     }
 
@@ -313,6 +316,7 @@
     }
 
     function FillAmount() {
+        debugger;
         var Productid = "";
 
         Productid = $('#Package').val();

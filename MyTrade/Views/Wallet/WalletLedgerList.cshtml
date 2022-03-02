@@ -51,6 +51,7 @@
                                         <th>S No.</th>
                                         <th>Cr Amount</th>
                                         <th>Dr Amount</th>
+                                        @*<th>Balance</th>*@
                                         <th>Narration</th>
                                         <th>Date</th>
                                     </tr>
@@ -67,6 +68,7 @@
                                                     <td>@i</td>
                                                     <td>@Item.CrAmount</td>
                                                     <td>@Item.DrAmount</td>
+                                                    @*<td>@Item.Balance</td>*@
                                                     <td>@Item.Narration</td>
                                                     <td>@Item.TransactionDate</td>
                                                 </tr>
@@ -75,6 +77,14 @@
                                         }
                                     }
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                       <th></th>
+                                        <th>Total Cr Amount : @ViewBag.TotalCrAmount</th>
+                                        <th> Total Dr Amount : @ViewBag.TotalDrAmount</th>
+                                        <th>Available Balance : @ViewBag.Available</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

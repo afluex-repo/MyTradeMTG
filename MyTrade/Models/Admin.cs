@@ -78,7 +78,9 @@ namespace MyTrade.Models
         public string ProcessingFee { get; set; }
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
+        public string Remark { get; set; }
         
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()

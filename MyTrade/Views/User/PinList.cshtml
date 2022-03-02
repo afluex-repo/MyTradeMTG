@@ -29,7 +29,7 @@
                                         @*<option value="">-Select-</option>*@
                                         <option value="T">Available</option>
                                         <option value="P">Used</option>
-                                      
+
                                     </select>
                                 </div>
                             </div>
@@ -48,12 +48,18 @@
                                         <th>Sr No.</th>
                                         <th>E-Pin No</th>
                                         <th>Package Name</th>
+                                       
                                         <th>Pin Amount</th>
-                                        <th>GST</th>
+                                        <th>BV</th>
+                                        <th>GST (18 %)</th>
                                         <th>Total amount</th>
                                         <th>Pin Status</th>
                                         @*<th>Is Registered</th>*@
-                                        <th>Registered To</th>
+                                        @if (Model.PinStatus == "P")
+                                        {
+                                            <th>Registered To</th>
+                                        }
+                                        
                                         <th>Pin Generation Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -87,15 +93,23 @@
                                                     <td>@Item.ePinNo</td>
                                                     <td>@Item.ProductName</td>
                                                     <td>@Item.PinAmount</td>
+                                                    <td>@Item.PinAmount</td>
                                                     <td>@Item.GST</td>
                                                     <td>@Item.Amount</td>
                                                     <td>@Item.PinStatus</td>
-                                                    <td>@Item.RegisteredTo</td>
+                                                    @if (Item.PinStatus == "Used")
+                                                    {
+                                                        <td>@Item.RegisteredTo</td>
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
                                                     @*<td>@Item.RegisteredTo </td>*@
                                                     <td>@Item.PinGenerationDate</td>
                                                     @if (Item.PinStatus == "Available")
                                                     {
-                                                        <td><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
+                                                        <td style="width:200px;"><a    style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
                                                     }
                                                     else
                                                     {
@@ -334,7 +348,7 @@
 </script>
 @if (TempData["msg"] != null)
 {
-<script>
+    <script>
         $(document).ready(function () {
             Snackbar.show({
                 text: '@TempData["msg"]',
@@ -343,7 +357,7 @@
                 pos: 'top-right'
             });
         });
-</script>
+    </script>
 }
 @if (TempData["error"] != null)
 {
