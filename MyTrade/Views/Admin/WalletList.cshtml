@@ -60,6 +60,7 @@
                                         <th>Amount</th>
                                         <th>Payment Mode</th>
                                         <th>Requested Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -86,17 +87,29 @@
                                                             <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
                                                             }
                                                 <td>@Item.TransactionDate</td>
+                                                <td>@Item.Status</td>
                                                 @if (Item.Status == "Pending")
                                                         {
-                                                            <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a></td>
+                                                            <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a>
+                                                                <a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>
+                                                
+                                                </td>
                                                         }
                                                         else if (Item.Status == "Approved")
                                                         {
-                                                            <td><a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a></td>
+                                                            <td>@*<a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>*@
+                                                
+                                                @*<span>Approved</span>*@
+                                                
+                                                
+                                                </td>
                                                         }
                                                         else if (Item.Status == "Declined")
                                                         {
-                                                            <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a></td>
+                                                            <td>@*<a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a>*@
+                                                
+                                                                @*<span>Declined</span>*@
+                                                </td>
                                                         }
                                                         else
                                                         {

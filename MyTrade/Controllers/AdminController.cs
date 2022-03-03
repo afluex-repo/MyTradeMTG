@@ -480,7 +480,7 @@ namespace MyTrade.Controllers
                     obj.TransactionDate = r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.NoofPins = r["NoOfPins"].ToString();
-                    
+
                     list.Add(obj);
                 }
                 model.lstEpinRequest = list;
@@ -882,6 +882,202 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+        public ActionResult DistributePayment()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.DistributePayment();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_UserId = r["Pk_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.TPSLevelIncome = r["TPSLevelIncome"].ToString();
+                    obj.TPPLevelIncome = r["TPPLevelIncome"].ToString();
+                    obj.GrossAmount = r["GrossIncome"].ToString();
+                    obj.ProcessingFee = r["Processing"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.NetAmount = r["NetIncome"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributePayment = lst;
+                ViewBag.TPSLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPSLevelIncome)", "").ToString()).ToString("n2");
+                ViewBag.TPPLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPPLevelIncome)", "").ToString()).ToString("n2");
+                ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
+            }
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("DistributePayment")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult DistributePayment(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            //Admin model = new Admin();
+            //model.ClosingDate = string.IsNullOrEmpty(model.ClosingDate) ? null : Common.ConvertToSystemDate(model.ClosingDate, "dd/MM/yyyy");
+            DataSet ds = model.DistributePayment();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.TPSLevelIncome = r["TPSLevelIncome"].ToString();
+                    obj.TPPLevelIncome = r["TPPLevelIncome"].ToString();
+                    obj.GrossAmount = r["GrossIncome"].ToString();
+                    obj.ProcessingFee = r["Processing"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.NetAmount = r["NetIncome"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributePayment = lst;
+                ViewBag.TPSLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPSLevelIncome)", "").ToString()).ToString("n2");
+                ViewBag.TPPLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPPLevelIncome)", "").ToString()).ToString("n2");
+                ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
+            }
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            return View(model);
+        }
+
+
+
+
+
+        //[HttpPost]
+        //public ActionResult DistributePayment(Admin model)
+        //{
+        //    try
+        //    {
+        //        model.UpdatedBy = Session["Pk_AdminId"].ToString();
+
+        //        DataSet ds = model.SaveDistributePayment();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                TempData["msg"] = "Distribute payment successfully";
+        //            }
+        //            else
+        //            {
+        //                TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["msg"] = ex.Message;
+        //    }
+        //    return RedirectToAction("DistributePayment", "Admin");
+        //}
+
+        public ActionResult DistributePaymentTPS()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.DistributePaymentTPS();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.TPS = r["TPS"].ToString();
+                    obj.GrossAmount = r["GrossIncome"].ToString();
+                    obj.ProcessingFee = r["Processing"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.NetAmount = r["NetIncome"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributePaymentTPP = lst;
+                ViewBag.TPS = double.Parse(ds.Tables[0].Compute("sum(TPS)", "").ToString()).ToString("n2");
+                ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
+            }
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("DistributePaymentTPS")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult DistributePaymentTPS(Admin model)
+        {
+            //Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            //model.ClosingDate = string.IsNullOrEmpty(model.ClosingDate) ? null : Common.ConvertToSystemDate(model.ClosingDate, "dd/MM/yyyy");
+            DataSet ds = model.DistributePaymentTPS();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.TPS = r["TPS"].ToString();
+                    obj.GrossAmount = r["GrossIncome"].ToString();
+                    obj.ProcessingFee = r["Processing"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.NetAmount = r["NetIncome"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributePaymentTPP = lst;
+                ViewBag.TPS = double.Parse(ds.Tables[0].Compute("sum(TPS)", "").ToString()).ToString("n2");
+                ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
+            }
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            return View(model);
+        }
+
+
+        //[HttpPost]
+        //public ActionResult DistributePaymentTPS(Admin model)
+        //{
+        //    try
+        //    {
+        //        model.UpdatedBy = Session["Pk_AdminId"].ToString();
+        //        DataSet ds = model.SaveDistributePaymentTPS();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                TempData["msg"] = "Distribute payment TPS successfully";
+        //            }
+        //            else
+        //            {
+        //                TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["msg"] = ex.Message;
+        //    }
+        //    return RedirectToAction("DistributePaymentTPS", "Admin");
+        //}
 
     }
 }
