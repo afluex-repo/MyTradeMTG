@@ -1051,8 +1051,96 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
+        public ActionResult GetTPPLevelIncome(string LoginId, string ClosingDate)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            model.LoginId = LoginId;
+            model.ClosingDate = ClosingDate;
+            DataSet dspayout = model.GetTPPAmountById();
+            if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+            {
+                //if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                //{
+                    model.Result = "yes";
+                    if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dspayout.Tables[0].Rows)
+                        {
+                            Reports obj = new Reports();
+                            obj.LoginId = r["LoginId"].ToString();
+                            obj.Name = r["Name"].ToString();
+                            obj.Amount = r["Amount"].ToString();
+                            obj.Level = r["Lvl"].ToString();
+                            obj.CurrentDate = r["CurrentDate"].ToString();
+                            obj.UsedFor = r["UsedFor"].ToString();
+                            lst.Add(obj);
+                        }
+                        model.lsttopupreport = lst;
+                    //}
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTPSLevelIncome(string LoginId, string ClosingDate)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            model.LoginId = LoginId;
+            model.ClosingDate = ClosingDate;
+            DataSet dspayout = model.GetTPSAmountById();
+            if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+            {
+                //if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                //{
+                model.Result = "yes";
+                if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.Level = r["Lvl"].ToString();
+                        obj.CurrentDate = r["CurrentDate"].ToString();
+                        obj.UsedFor = r["UsedFor"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lsttopupreporttps = lst;
+                    //}
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetPayoutReportforAmount(string Fk_UserId)
+        {
+            Reports model = new Reports();
+            List<Reports> lst = new List<Reports>();
+            model.Fk_UserId = Fk_UserId;
+            DataSet dspayout = model.GetpayoutByAmount();
+            if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
+            {
+                if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                {
+                    model.Result = "yes";
+                    if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in dspayout.Tables[0].Rows)
+                        {
+                            Reports obj = new Reports();
+                            obj.PayoutNo = r["PayoutNo"].ToString();
+                            obj.ClosingDate = r["ClosingDate"].ToString();
+                            obj.NetAmount = r["NetAmount"].ToString();
 
-
+                            lst.Add(obj);
+                        }
+                        model.lsttopupreport = lst;
+                    }
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         //[HttpPost]
         //public ActionResult DistributePaymentTPS(Admin model)
         //{

@@ -8,7 +8,16 @@
 
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-
+<style>
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 350px !important;
+        overflow-y: scroll;
+    }
+</style>
 @using (Html.BeginForm("DistributePayment", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -28,17 +37,17 @@
                     <div class="widget-content widget-content-area">
                         <div class="row">
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
-                                    <div class="form-group">
-                                        <label>Last Closing Date : </label>
-                                        @Html.DisplayFor(m => m.LastClosingDate)
-                                        <br />
-                                        <label>Last Payout No : </label>
-                                        @Html.DisplayFor(m => m.PayoutNo)
+                                <div class="form-group">
+                                    <label>Last Closing Date : </label>
+                                    @Html.DisplayFor(m => m.LastClosingDate)
+                                    <br />
+                                    <label>Last Payout No : </label>
+                                    @Html.DisplayFor(m => m.PayoutNo)
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label> Clossing Date</label>
+                                    <label> Closing Date</label>
                                     @Html.TextBoxFor(m => m.ClosingDate, new { @class = "form-control", @Placeholder = "Closing Date" })
 
                                 </div>
@@ -46,12 +55,12 @@
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
                                     <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" onclick="return Validate()" />
-                                    @*<input type="submit" class="btn btn-success" value="Distribute Payment" name="btnSearch" onclick="return Validate()" />*@
+                                  
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <table id="html5-extension" class="table table-hover non-hover",data-page-length='25'>
+                        <div class="row"> 
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
@@ -65,6 +74,19 @@
                                         <th>Net Amount</th>
                                     </tr>
                                 </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>@ViewBag.TPSLevelIncome </th>
+                                        <th>@ViewBag.TPPLevelIncome</th>
+                                        <th>@ViewBag.GrossIncome</th>
+                                        <th>@ViewBag.Processing</th>
+                                        <th>@ViewBag.TDS</th>
+                                        <th>@ViewBag.NetIncome</th>
+                                    </tr>
+                                </tfoot>
                                 <tbody>
                                     @if (Model != null)
                                     {
@@ -77,36 +99,25 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.TPSLevelIncome</td>
+                                                    <td><a href="#" class="td-content product-brand text-danger" onclick="OpenTPP('@Item.LoginId');">@Item.TPPLevelIncome</a></td>
+                                                    <td><a href="#" class="td-content product-brand text-danger" onclick="OpenTPS('@Item.LoginId');">@Item.TPSLevelIncome</a></td>
 
-                                                    <td><a href="#" class="btn btn-dark btn-sm" onclick="openDeletePopup('@Item.Pk_UserId');">Show</a></td>
-
-                                                    <td>@Item.TPPLevelIncome</td>
                                                     <td>@Item.GrossAmount</td>
-                                                    <td>@Item.ProcessingFee</td>
                                                     <td>@Item.TDSAmount</td>
+                                                    <td>@Item.ProcessingFee</td>
                                                     <td>@Item.NetAmount</td>
                                                 </tr>
                                                 i++;
                                             }
                                         }
                                     }
+
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th>@ViewBag.TPSLevelIncome </th>
-                                        <th>@ViewBag.TPPLevelIncome</th>
-                                        <th>@ViewBag.GrossIncome</th>
-                                        <th>@ViewBag.Processing</th>
-                                        <th>@ViewBag.TDS</th>
-                                        <th>@ViewBag.NetIncome</th> 
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
+                          
                         </div>
+                        <input type="submit" class="btn btn-success" value="Distribute Payment" name="btnSearch" onclick="return Validate()" />
                     </div>
                 </div>
             </div>
@@ -115,28 +126,41 @@
 
     ////modal
 
-    @Html.HiddenFor(m => m.Pk_UserId)
-    <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
+    @Html.HiddenFor(m => m.LoginId)
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" id="myModal" role="dialog" data-backdrop="static"  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" style="color: red">REASON</h6>
+                    <h6 class="modal-title">TTP Level Income Details</h6>
                     <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
 
                 </div>
                 <div class="modal-body" style="color: black">
                     <div class="row">
                         <div class="col-md-12">
-                            @*<div class="form-group">
-                                <label>Delete Remark</label>
-                                @Html.TextAreaFor(m => m.DeleteRemarks, new { @class = "form-control", @placeholder = "Remark for delete" })
-                            </div>*@
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="button" class="btn btn-sm btn-danger pull-right" onclick="return DeleteReceipt()" value="Delete Reciept" />
+                            <div class="panel-body table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="tblData">
+                                    <thead>
+                                        <tr>
+                                            <th>CurrentDate</th>
+                                            <th>LoginId</th>
+                                            <th>From Name</th>
+                                            <th>Amount</th>
+                                            <th>Level</th>
+                                            @*<th>UsedFor</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            @*<td></td>*@
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -144,42 +168,152 @@
             </div>
         </div>
     </div>
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" id="myModalTPS" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalTPS" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title">TPS Level Income Details</h6>
+                            <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+
+                        </div>
+                        <div class="modal-body" style="color: black">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body table-responsive">
+                                        <table class="table table-striped table-bordered table-hover" id="tblDataTPS">
+                                            <thead>
+                                                <tr>
+                                                    <th>CurrentDate</th>
+                                                    <th>LoginId</th>
+                                                    <th>From Name</th>
+                                                    <th>Amount</th>
+                                                    <th>Level</th>
+                                                </tr>
+                                                <tr></tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @*<td></td>*@
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 }
 
-<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
-    $(document).ready(function () {
-    })
-    $('#ClosingDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-        changeYear: true,
-        changeMonth: true
-    });
-    function Validate() {
+    //$(document).ready(function () {
+      
+    //})
+    //var f3 = flatpickr(document.getElementById('ClosingDate'),
+    //{
+    //     //mode: "range"
+    //});
+    function OpenTPP(LoginId) {
+        $("#LoginId").val(LoginId);
         $(".errortext").removeClass("errortext");
+        debugger
         if ($('#ClosingDate').val() == '') {
             $("#ClosingDate").addClass('errortext');
             $('#ClosingDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        $.ajax({
+            url: "/Admin/GetTPPLevelIncome",
+            Type: "Get",
+            DataType: "JSON",
+            data: { LoginId: $("#LoginId").val(), ClosingDate: $("#ClosingDate").val() },
+            success: function (data) {
+                console.log(data)
+                $('#tblData').find("tr:not(:first)").remove();
+                if (data.lsttopupreport.length > 0) {
+                    //$("#tblData").append('<thead><tr><th>LoginId</th></tr></thead>')
+                    for (var i = 0; i < data.lsttopupreport.length; i++) {
+                        $("#tblData").append('<tr></td><td id="CurrentDate' + i + ' " >' + data.lsttopupreport[i].CurrentDate +
+                            '<td id="LoginId' + i + ' " >' + data.lsttopupreport[i].LoginId +
+                            '</td><td id="Name' + i + ' " >' + data.lsttopupreport[i].Name +
+                             '</td><td id="Amount' + i + ' " >' + data.lsttopupreport[i].Amount +
+                              '</td><td id="Level' + i + ' " >' + data.lsttopupreport[i].Level +
+                               
+                                //'</td><td id="UsedFor' + i + ' " >' + data.lsttopupreport[i].UsedFor +
+                            '</td></tr>')
+                    }
+                    $.noConflict();
+                    $("#myModal").modal('show');
+                    keyboard: false;
+                    backdrop: 'static';
+                }
+            }
+        });
+    }
+    function closeModal() {
+        $("#myModal").hide();
+        $("#myModalTPS").hide();
+        $('#ClosingDate').val('');
+        location.reload();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+    function OpenTPS(LoginId) {
+        $("#LoginId").val(LoginId);
+        $(".errortext").removeClass("errortext");
+        debugger
+        if ($('#ClosingDate').val() == '') {
+            $("#ClosingDate").addClass('errortext');
+            $('#ClosingDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        $.ajax({
+            url: "/Admin/GetTPSLevelIncome",
+            Type: "Get",
+            DataType: "JSON",
+            data: { LoginId: $("#LoginId").val(), ClosingDate: $("#ClosingDate").val() },
+            success: function (data) {
+                console.log(data)
+                $('#tblDataTPS').find("tr:not(:first)").remove();
+                if (data.lsttopupreporttps.length > 0) {
+                    //$("#tblData").append('<thead><tr><th>LoginId</th></tr></thead>')
+                    for (var i = 0; i < data.lsttopupreporttps.length; i++) {
+                        $("#tblDataTPS").append('<tr></td><td id="CurrentDate' + i + ' " >' + data.lsttopupreporttps[i].CurrentDate +
+                            '<td id="LoginId' + i + ' " >' + data.lsttopupreporttps[i].LoginId +
+                            '</td><td id="Name' + i + ' " >' + data.lsttopupreporttps[i].Name +
+                             '</td><td id="Amount' + i + ' " >' + data.lsttopupreporttps[i].Amount +
+                              '</td><td id="Level' + i + ' " >' + data.lsttopupreporttps[i].Level +
+                               
+                                //'</td><td id="UsedFor' + i + ' " >' + data.lsttopupreporttps[i].UsedFor +
+                            '</td></tr>')
+                    }
+                    $.noConflict();
+                    $("#myModalTPS").modal('show');
+                }
+            }
+        });
+    }
+    function Validate(LoginId) {
+        if ($('#ClosingDate').val() == '') {
+            $("#ClosingDate").addClass('errortext');
+            $('#ClosingDate').focus();
+            $("#divload").css({ 'display': 'none' });
             return false;
         }
     }
-
-    function openDeletePopup(ReceiptID) {
-        debugger;
-        $("#Pk_UserId").val(ReceiptID);
-        $("#myModal").modal('show');
-    }
-
-    function closeModal() {
-        $("#myModal").hide();
-    }
-
-    </script>
-
-
+</script>
 
 
 
