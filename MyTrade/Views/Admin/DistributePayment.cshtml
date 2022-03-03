@@ -40,7 +40,6 @@
                                 <div class="form-group">
                                     <label> Clossing Date</label>
                                     @Html.TextBoxFor(m => m.ClosingDate, new { @class = "form-control", @Placeholder = "Closing Date" })
-
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
@@ -57,7 +56,7 @@
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>TPP Level Income</th>
+                                        <th>TTP Level Income</th>
                                         <th>TPS Level Income</th>
                                         <th>Gross Amount</th>
                                         <th>TDS Amount</th>
@@ -77,11 +76,8 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.TPSLevelIncome</td>
-
-                                                    <td><a href="#" class="btn btn-dark btn-sm" onclick="openDeletePopup('@Item.Pk_UserId');">Show</a></td>
-
                                                     <td>@Item.TPPLevelIncome</td>
+                                                    <td>@Item.TPSLevelIncome</td>
                                                     <td>@Item.GrossAmount</td>
                                                     <td>@Item.ProcessingFee</td>
                                                     <td>@Item.TDSAmount</td>
@@ -112,38 +108,6 @@
             </div>
         </div>
     </div>
-
-    ////modal
-
-    @Html.HiddenFor(m => m.Pk_UserId)
-    <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" style="color: red">REASON</h6>
-                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
-
-                </div>
-                <div class="modal-body" style="color: black">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @*<div class="form-group">
-                                <label>Delete Remark</label>
-                                @Html.TextAreaFor(m => m.DeleteRemarks, new { @class = "form-control", @placeholder = "Remark for delete" })
-                            </div>*@
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="button" class="btn btn-sm btn-danger pull-right" onclick="return DeleteReceipt()" value="Delete Reciept" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 }
 
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
@@ -166,17 +130,6 @@
             return false;
         }
     }
-
-    function openDeletePopup(ReceiptID) {
-        debugger;
-        $("#Pk_UserId").val(ReceiptID);
-        $("#myModal").modal('show');
-    }
-
-    function closeModal() {
-        $("#myModal").hide();
-    }
-
     </script>
 
 

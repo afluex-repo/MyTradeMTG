@@ -1079,5 +1079,106 @@ namespace MyTrade.Controllers
         //    return RedirectToAction("DistributePaymentTPS", "Admin");
         //}
 
+
+        public ActionResult BusinessReports()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetBusinessReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.Date = r["Date"].ToString();
+                    obj.PackageType = r["PackageType"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBReports = lst;
+            }
+
+            #region ddlPlotSize
+            int count = 0;
+            List<SelectListItem> ddlProductName = new List<SelectListItem>();
+            DataSet dss = model.GetProductName();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProductName.Add(new SelectListItem { Text = "-Select-", Value = "" });
+                    }
+                    ddlProductName.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["PK_ProductID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlProductName = ddlProductName;
+            #endregion
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("BusinessReports")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult BusinessReports(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            if (model.IsDownline == "on")
+            {
+                model.IsDownline = "1";
+            }
+            else
+            {
+                model.IsDownline = "0";
+            }
+            model.PK_ProductID = model.PK_ProductID == "0" ? null : model.PK_ProductID;
+            model.Level = model.Level == "0" ? null : model.Level;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetBusinessReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.Date = r["Date"].ToString();
+                    obj.PackageType = r["PackageType"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBReports = lst;
+            }
+
+            #region ddlPlotSize
+            int count = 0;
+            List<SelectListItem> ddlProductName = new List<SelectListItem>();
+            DataSet dss = model.GetProductName();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProductName.Add(new SelectListItem { Text = "-Select-", Value = "" });
+                    }
+                    ddlProductName.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["PK_ProductID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlProductName = ddlProductName;
+            #endregion
+            return View(model);
+        }
     }
 }
