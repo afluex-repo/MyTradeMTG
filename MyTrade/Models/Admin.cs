@@ -79,6 +79,14 @@ namespace MyTrade.Models
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
         public string Remark { get; set; }
+        public List<Admin> lstDistributePayment { get; set; }
+        public List<Admin> lstDistributePaymentTPP { get; set; }
+        public string DirectIncome { get; set; }
+        public string LastClosingDate { get; set; }
+        public string TPSLevelIncome { get; set; }
+        public string TPPLevelIncome { get; set; }
+        public string TPS { get; set; }
+        public string Pk_UserId { get; set; }
         
 
         #endregion
@@ -271,5 +279,42 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
             return ds;
         }
+
+
+        public DataSet DistributePayment()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+                
+            };
+            DataSet ds = DBHelper.ExecuteQuery("MakePaymentList", para);
+            return ds;
+        }
+        public DataSet SaveDistributePayment()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate", ClosingDate)
+            };
+           DataSet ds = DBHelper.ExecuteQuery("AutoDistributePayment", para);
+            return ds;
+        }
+        public DataSet DistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("MakePaymentListTPS", para);
+            return ds;
+        }
+        public DataSet SaveDistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate", ClosingDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
+            return ds;
+        }
+
     }
 }
