@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label>Login Id</label>
+                                    <label>Login Id <span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
                                 </div>
                             </div>
@@ -48,7 +48,8 @@
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
                                     <label>Is Downline</label>
-                                    <input type="checkbox" id="IsDownline" name="IsDownline" />
+                                    <input type="checkbox" id="IsDownline" name="IsDownline"/>
+                                    @*<input type="radio" id="IsDownline" name="IsDownline" />*@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
@@ -87,7 +88,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" />
+                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails"  onclick="return Validate()"  />
                                 </div>
                             </div>
                         </div>
@@ -159,6 +160,55 @@
         return true;
     }
 
+    function Validate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+        $('#IsDownline').click(function () {
+            if ($(this).attr('checked') == true) {
+                $('#IsDownline').attr("checked", "true");
+            }
+            //else
+            //{
+            //    $('#GetDetails').removeAttr('disabled');
+            //}
+        });
+
+    }
+
+
+    $('#IsDownline').click(function () {
+        if ($(this).attr('checked') == false) {
+            $('#IsDownline').attr("disabled", "disabled");
+        } else {
+            $('#GetDetails').removeAttr('disabled');
+        }
+    });
+
+
+
+
+
+    //$('#IsDownline').click(function () {
+    //    if ($(this).is(':checked')) {
+    //        $('#IsDownline').attr("disabled", "false");
+    //    } else {
+    //        $('#IsDownline').removeAttr("disabled");
+    //    }
+    //});
+
+
+    //$("input[type=checkbox]").change(function () {
+    //    if ($(this).prop("checked")) {
+    //        $(this).val(true);
+    //    } else {
+    //        $(this).val(false);
+    //    }
+    //});
+
     //function validate() {
     //    debugger;
     //    $(".errortext").removeClass("errortext");
@@ -184,10 +234,6 @@
         //    return false;
         //}
     //}
-
-
-
-
 
 </script>
 

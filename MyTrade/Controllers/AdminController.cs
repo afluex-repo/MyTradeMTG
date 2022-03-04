@@ -1151,6 +1151,7 @@ namespace MyTrade.Controllers
             }
             model.PK_ProductID = model.PK_ProductID == "0" ? null : model.PK_ProductID;
             model.Level = model.Level == "0" ? null : model.Level;
+            model.IsDownline = model.IsDownline == "0" ? null : model.IsDownline;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetBusinessReports();
