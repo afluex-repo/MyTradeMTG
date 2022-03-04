@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" onclick="return validate()" />
+                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" />
                                 </div>
                             </div>
                         </div>
@@ -100,6 +100,7 @@
                                         <th>Name</th>
                                         <th>Amount</th>
                                         <th>BV</th>
+                                        <th>Level</th>
                                         <th>Date</th>
                                         <th>Package Type</th>
                                     </tr>
@@ -118,6 +119,7 @@
                                                     <td>@Item.Name</td>
                                                     <td>@Item.Amount</td>
                                                     <td>@Item.BV</td>
+                                                    <td>@Item.Level</td>
                                                     <td>@Item.Date</td>
                                                     <td>@Item.PackageType</td>
                                                 </tr>
@@ -157,17 +159,17 @@
         return true;
     }
 
-    function validate() {
-        debugger;
-        $(".errortext").removeClass("errortext");
-        if ($('#IsDownline').is(':checked') ) {
-            if ($('#PK_ProductID').val() == '')
-            {
-                $("#PK_ProductID").addClass('errortext');
-                $('#PK_ProductID').focus();
-                return false;
-            }
-        }
+    //function validate() {
+    //    debugger;
+    //    $(".errortext").removeClass("errortext");
+    //    if ($('#IsDownline').is(':checked') ) {
+    //        if ($('#PK_ProductID').val() == '')
+    //        {
+    //            $("#PK_ProductID").addClass('errortext');
+    //            $('#PK_ProductID').focus();
+    //            return false;
+    //        }
+    //    }
         //if ($('#PK_ProductID').val() != '')
         //{
         //    if ($('#IsDownline').is(':checked')) {
@@ -181,7 +183,7 @@
         //    $("#PK_ProductID").removeClass('errortext');
         //    return false;
         //}
-    }
+    //}
 
 
 

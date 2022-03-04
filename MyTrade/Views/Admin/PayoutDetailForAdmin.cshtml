@@ -75,7 +75,7 @@
                                                     <td>@Item.PayoutNo</td>
                                                     <td>@Item.LevelIncomeTR1</td>
                                                     <td>@Item.LevelIncomeTR2</td>
-                                                    <td>@Item.GrossAmount</td>
+                                                    <td><a href="#" class="td-content product-brand text-danger" onclick="Open('@Item.Fk_UserId');">@Item.GrossAmount</a></td>
                                                     <td>@Item.TDSAmount</td>
                                                     <td>@Item.ProcessingFee</td>
                                                     <td>@Item.NetAmount</td>
@@ -92,6 +92,48 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog"  data-backdrop="static" style="display: none;padding-top:55px;">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Payout Details</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-body table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="tblData">
+                                    <thead>
+                                        <tr>
+                                            <th>Payout No</th>
+                                            <th>Closing Date</th>
+                                            <th>Net Payable Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal();">Close</button>
+                    </div>*@
+            </div>
+
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Fk_UserId)
 }
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
@@ -102,6 +144,37 @@
     var f4 = flatpickr(document.getElementById('ToDate'), {
         mode: "range"
     });
+    function closeModal() {
+        $("#myModal").hide();
+        location.reload();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+    function Open(Fk_UserId) {
+        $("#Fk_UserId").val(Fk_UserId);
+        $(".errortext").removeClass("errortext");
+        //$("#divload").css({ 'display': '' });
+        $.ajax({
+            url: "/Admin/GetPayoutReportforAmount",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_UserId: $("#Fk_UserId").val() },
+            success: function (data) {
+                console.log(data)
+                $('#tblData').find("tr:not(:first)").remove();
+                if (data.lsttopupreport.length > 0) {
+                    for (var i = 0; i < data.lsttopupreport.length; i++) {
+                        $("#tblData").append('<tr><td id="PayoutNo' + i + ' " >' + data.lsttopupreport[i].PayoutNo +
+                            '</td><td id="ClosingDate' + i + ' " >' + data.lsttopupreport[i].ClosingDate +
+                             '</td><td id="NetAmount' + i + ' " >' + data.lsttopupreport[i].NetAmount +
+                            '</td></tr>')
+                    }
+                    //$.noConflict();
+                    $("#myModal").modal('show');
+                }
+            }
+        });
+
+    }
 </script>
 
 
