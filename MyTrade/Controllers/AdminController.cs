@@ -887,33 +887,33 @@ namespace MyTrade.Controllers
         {
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
-            DataSet ds = model.DistributePayment();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    Admin obj = new Admin();
-                    obj.Pk_UserId = r["Pk_UserId"].ToString();
-                    obj.LoginId = r["LoginId"].ToString();
-                    obj.Name = r["FirstName"].ToString();
-                    obj.TPSLevelIncome = r["TPSLevelIncome"].ToString();
-                    obj.TPPLevelIncome = r["TPPLevelIncome"].ToString();
-                    obj.GrossAmount = r["GrossIncome"].ToString();
-                    obj.ProcessingFee = r["Processing"].ToString();
-                    obj.TDSAmount = r["TDS"].ToString();
-                    obj.NetAmount = r["NetIncome"].ToString();
-                    lst.Add(obj);
-                }
-                model.lstDistributePayment = lst;
-                ViewBag.TPSLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPSLevelIncome)", "").ToString()).ToString("n2");
-                ViewBag.TPPLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPPLevelIncome)", "").ToString()).ToString("n2");
-                ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
-                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
-                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
-                ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
-            }
-            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
-            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
+            //DataSet ds = model.DistributePayment();
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds.Tables[0].Rows)
+            //    {
+            //        Admin obj = new Admin();
+            //        obj.Pk_UserId = r["Pk_UserId"].ToString();
+            //        obj.LoginId = r["LoginId"].ToString();
+            //        obj.Name = r["FirstName"].ToString();
+            //        obj.TPSLevelIncome = r["TPSLevelIncome"].ToString();
+            //        obj.TPPLevelIncome = r["TPPLevelIncome"].ToString();
+            //        obj.GrossAmount = r["GrossIncome"].ToString();
+            //        obj.ProcessingFee = r["Processing"].ToString();
+            //        obj.TDSAmount = r["TDS"].ToString();
+            //        obj.NetAmount = r["NetIncome"].ToString();
+            //        lst.Add(obj);
+            //    }
+            //    model.lstDistributePayment = lst;
+            //    ViewBag.TPSLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPSLevelIncome)", "").ToString()).ToString("n2");
+            //    ViewBag.TPPLevelIncome = double.Parse(ds.Tables[0].Compute("sum(TPPLevelIncome)", "").ToString()).ToString("n2");
+            //    ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
+            //    ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+            //    ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+            //    ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
+            //}
+            //model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            //model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
 
@@ -1255,16 +1255,17 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetPayoutReportforAmount(string Fk_UserId)
+        public ActionResult GetPayoutReportforAmount(string Fk_UserId,string PayoutNo)
         {
             Reports model = new Reports();
             List<Reports> lst = new List<Reports>();
             model.Fk_UserId = Fk_UserId;
+            model.PayoutNo = PayoutNo;
             DataSet dspayout = model.GetPaidPayoutDetailsByAmount();
             if (dspayout != null && dspayout.Tables[0].Rows.Count > 0)
             {
-                if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
-                {
+                //if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                //{
                     model.Result = "yes";
                     if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
                     {
@@ -1272,13 +1273,16 @@ namespace MyTrade.Controllers
                         {
                             Reports obj = new Reports();
                             obj.PayoutNo = r["PayoutNo"].ToString();
-                            obj.ClosingDate = r["ClosingDate"].ToString();
-                            obj.NetAmount = r["NetAmount"].ToString();
-
+                            obj.CurrentDate = r["CurrentDate"].ToString();
+                            obj.LoginId = r["FromId"].ToString();
+                            obj.Name = r["FromName"].ToString();
+                            obj.Amount = r["Income"].ToString();
+                            obj.Level = r["Lvl"].ToString();
+                            obj.Fk_Paymentid = r["Paymenttype"].ToString();
                             lst.Add(obj);
                         }
                         model.lsttopupreport = lst;
-                    }
+                    //}
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);

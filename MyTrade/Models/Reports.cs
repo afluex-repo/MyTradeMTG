@@ -778,9 +778,10 @@ namespace MyTrade.Models
         }
         public DataSet GetPaidPayoutDetailsByAmount()
         {
-            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId)
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
+                            new SqlParameter("@PayoutNo", PayoutNo)
             };
-            DataSet ds = DBHelper.ExecuteQuery("PayoutReportForAmount", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutReportByID", para);
             return ds;
         }
     }
