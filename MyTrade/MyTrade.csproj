@@ -765,6 +765,7 @@
     <Content Include="Views\Admin\PayoutDetailForAdmin.cshtml" />
     <Content Include="Views\Admin\DistributePayment.cshtml" />
     <Content Include="Views\Admin\DistributePaymentTPS.cshtml" />
+    <Content Include="Views\Admin\BusinessReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

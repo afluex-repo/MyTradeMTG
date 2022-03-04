@@ -49,24 +49,23 @@
                                 <div class="form-group">
                                     <label> Closing Date</label>
                                     @Html.TextBoxFor(m => m.ClosingDate, new { @class = "form-control", @Placeholder = "Closing Date" })
-
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" onclick="return Validate()" />
+                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" />
                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="row"> 
-                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                        <div class="widget-content widget-content-area br-12"> 
+                            <table  class="table table-hover non-hover" >
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>TPP Level Income</th>
+                                        <th>TTP Level Income</th>
                                         <th>TPS Level Income</th>
                                         <th>Gross Amount</th>
                                         <th>TDS Amount</th>
@@ -79,11 +78,11 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th>@ViewBag.TPSLevelIncome </th>
                                         <th>@ViewBag.TPPLevelIncome</th>
+                                        <th>@ViewBag.TPSLevelIncome </th>
                                         <th>@ViewBag.GrossIncome</th>
-                                        <th>@ViewBag.Processing</th>
                                         <th>@ViewBag.TDS</th>
+                                        <th>@ViewBag.Processing</th>
                                         <th>@ViewBag.NetIncome</th>
                                     </tr>
                                 </tfoot>
@@ -213,17 +212,15 @@
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
-<script src="~/WebsiteCss/js/jquery.js"></script>
+@*<script src="~/WebsiteCss/js/jquery.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">*@
+
 <script>
-    //$(document).ready(function () {
-      
-    //})
-    //var f3 = flatpickr(document.getElementById('ClosingDate'),
-    //{
-    //     //mode: "range"
-    //});
+    var f3 = flatpickr(document.getElementById('ClosingDate'), {
+        //mode: "range"
+    });
+
     function OpenTPP(LoginId) {
         $("#LoginId").val(LoginId);
         $(".errortext").removeClass("errortext");
@@ -250,11 +247,11 @@
                             '</td><td id="Name' + i + ' " >' + data.lsttopupreport[i].Name +
                              '</td><td id="Amount' + i + ' " >' + data.lsttopupreport[i].Amount +
                               '</td><td id="Level' + i + ' " >' + data.lsttopupreport[i].Level +
-                               
+
                                 //'</td><td id="UsedFor' + i + ' " >' + data.lsttopupreport[i].UsedFor +
                             '</td></tr>')
                     }
-                    $.noConflict();
+                    //$.noConflict(); 
                     $("#myModal").modal('show');
                     keyboard: false;
                     backdrop: 'static';
@@ -295,11 +292,11 @@
                             '</td><td id="Name' + i + ' " >' + data.lsttopupreporttps[i].Name +
                              '</td><td id="Amount' + i + ' " >' + data.lsttopupreporttps[i].Amount +
                               '</td><td id="Level' + i + ' " >' + data.lsttopupreporttps[i].Level +
-                               
+
                                 //'</td><td id="UsedFor' + i + ' " >' + data.lsttopupreporttps[i].UsedFor +
                             '</td></tr>')
                     }
-                    $.noConflict();
+                    //$.noConflict();
                     $("#myModalTPS").modal('show');
                 }
             }

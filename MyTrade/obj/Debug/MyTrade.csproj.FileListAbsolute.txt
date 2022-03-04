@@ -211,4 +211,3 @@ D:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.xml
 D:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
 D:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 D:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
-D:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
