@@ -539,6 +539,7 @@ namespace MyTrade.Controllers
                     ViewBag.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     ViewBag.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                     ViewBag.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                    ViewBag.PanImage = "/PanUpload/" + ds.Tables[0].Rows[0]["PanImage"].ToString();
                 }
             }
             return View(model);
