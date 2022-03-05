@@ -12,7 +12,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Direct List</h4>
+                                <h4>DownTeam Tree</h4>
                                 <span class="text-danger">
                                     @TempData["pin"]
                                 </span>
@@ -53,7 +53,18 @@
                                         @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Self/Team</label>
+                                        <input type="hidden" id="hdf" value="@Model.DirectStatus">
+                                        <select id="DirectStatus" name="DirectStatus" class = "form-control">
+                                            <option value="0">-select-</option>
+                                            <option value="Self">Self</option>
+                                            <option value="Team">Team</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" style="margin-top:15px;">
                                     <div class="form-group">
                                         <br />
                                         <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
@@ -145,6 +156,7 @@
 </script>
 <script>
     $(document).ready(function () {
+        $("#DirectStatus").val($("#hdf").val()).attr("selected", "selected");
         $('#dataTables-example').DataTable({
             responsive: true
         });

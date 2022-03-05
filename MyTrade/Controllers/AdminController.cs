@@ -848,9 +848,17 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayout = lst;
+                ViewBag.LevelIncomeTR1 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR1)", "").ToString()).ToString("n2");
+                ViewBag.LevelIncomeTR2 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR2)", "").ToString()).ToString("n2");
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.AdminFee = double.Parse(ds.Tables[0].Compute("sum(AdminFee)", "").ToString()).ToString("n2");
+                ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -861,7 +869,13 @@ namespace MyTrade.Controllers
         public ActionResult PayoutDetailForAdmin(Admin model)
         {
             List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
             DataSet ds = model.PayoutDetail();
+
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -876,9 +890,17 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayout = lst;
+                ViewBag.LevelIncomeTR1 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR1)", "").ToString()).ToString("n2");
+                ViewBag.LevelIncomeTR2 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR2)", "").ToString()).ToString("n2");
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.AdminFee = double.Parse(ds.Tables[0].Compute("sum(AdminFee)", "").ToString()).ToString("n2");
+                ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
