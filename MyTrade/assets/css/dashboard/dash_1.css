@@ -948,7 +948,7 @@
 .widget-account-invoice-three .widget-heading .wallet-balance {
     display: flex;
     justify-content: space-between;
-    margin-top: 24px;
+    margin-top: 20px;
 }
 
 .widget-account-invoice-three .widget-heading .wallet-balance p {

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MyTrade.Models
 {
@@ -36,10 +37,27 @@ namespace MyTrade.Models
         public string ProductName { get; set; }
         public string IsVerified { get; set; }
         public string Image { get; set; }
-        
         public List<User> lstEpinRequest { get; set; }
 
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string IsDownline { get; set; }
+        public string PK_ProductID { get; set; }
+        public string Level { get; set; }
+        public string BV { get; set; }
+        public string Date { get; set; }
+        public string PackageType { get; set; }
+        public string PayoutBalance { get; set; }
 
+        public string Status { get; set; }
+        public string ROIPercentage { get; set; }
+        
+
+        public List<User> lstBReports { get; set; }
+        public List<SelectListItem> ddlProductName { get; set; }
+        public List<User> lstPayoutRequest { get; set; }
+
+        
 
 
         #endregion
@@ -140,9 +158,59 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetBusinessReports()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                 new SqlParameter("@IsDownline", IsDownline),
+                    new SqlParameter("@PackageType", PK_ProductID),
+                       new SqlParameter("@Lvl", Level)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
+            return ds;
+        }
+        public DataSet GetProductName()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductName");
+            return ds;
+        }
 
 
+        public DataSet PayoutRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@LoginId",LoginId),
+                                   new SqlParameter("@Amount",Amount),
+                                    new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutRequest", para);
+            return ds;
+        }
 
+
+        public DataSet GetPayoutBalance()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@Fk_UserId",Fk_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutBalance", para);
+            return ds;
+        }
+
+
+        public DataSet GetPayoutRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@LoginId",LoginId),
+                                   new SqlParameter("@FromDate",FromDate),
+                                    new SqlParameter("@ToDate",ToDate),
+                                     new SqlParameter("@Status",State)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest", para);
+            return ds;
+        }
     }
 
 
@@ -226,8 +294,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
             return ds;
         }
-
-
-
+        
     }
 }

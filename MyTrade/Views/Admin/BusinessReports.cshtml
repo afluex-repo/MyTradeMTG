@@ -48,8 +48,14 @@
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
                                     <label>Is Downline</label>
-                                    <input type="checkbox" id="IsDownline" name="IsDownline"/>
-                                    @*<input type="radio" id="IsDownline" name="IsDownline" />*@
+                                    @if (Model.IsDownline == "1")
+                                    {
+                                        <input type="checkbox" id="IsDownline" name="IsDownline" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="IsDownline" name="IsDownline" />
+                                    }
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">

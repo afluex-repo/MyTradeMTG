@@ -90,7 +90,7 @@ namespace MyTrade.Controllers
                             {
                                 BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", Email);
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
 
                             }
@@ -268,7 +268,7 @@ namespace MyTrade.Controllers
         {
             Pin model = new Pin();
             List<Pin> lst = new List<Pin>();
-          model.PinStatus = (model.PinStatus="T");
+            model.PinStatus = (model.PinStatus = "T");
             model.FK_UserId = Session["Pk_userId"].ToString();
             DataSet ds = model.GetPinList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -664,7 +664,7 @@ namespace MyTrade.Controllers
                     model.Image = "../PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
                     Image.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                 }
-                
+
                 model.Fk_UserId = Session["Pk_userId"].ToString();
                 DataSet ds = model.BankDetailsUpdate();
                 if (ds != null && ds.Tables.Count > 0)
@@ -855,7 +855,7 @@ namespace MyTrade.Controllers
             {
                 model.AddedBy = Session["Pk_userId"].ToString();
                 model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/mm/yyyy");
-                if(model.Fk_Paymentid=="12")
+                if (model.Fk_Paymentid == "12")
                 {
                     model.BankName = null;
                     model.BranchName = null;
@@ -1015,7 +1015,7 @@ namespace MyTrade.Controllers
             Account model = new Account();
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
-           model.LoginId = Session["LoginId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
@@ -1077,5 +1077,201 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
+
+        public ActionResult BusinessReportsForUser()
+        {
+            User model = new User();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            if (model.IsDownline == "on")
+            {
+                model.IsDownline = "1";
+            }
+            else
+            {
+                model.IsDownline = "0";
+            }
+            List<User> lst = new List<User>();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.GetBusinessReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.Amount = Convert.ToDecimal(r["Amount"].ToString());
+                    obj.BV = r["BV"].ToString();
+                    obj.Date = r["Date"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.PackageType = r["PackageType"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBReports = lst;
+
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
+            }
+
+            #region ddlPlotSize
+            int count = 0;
+            List<SelectListItem> ddlProductName = new List<SelectListItem>();
+            DataSet dss = model.GetProductName();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProductName.Add(new SelectListItem { Text = "-Select-", Value = "" });
+                    }
+                    ddlProductName.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["PK_ProductID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlProductName = ddlProductName;
+            #endregion
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("BusinessReportsForUser")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult BusinessReportsForUser(User model)
+        {
+            List<User> lst = new List<User>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            if (model.IsDownline == "on")
+            {
+                model.IsDownline = "1";
+            }
+            else
+            {
+                model.IsDownline = "0";
+            }
+            model.PK_ProductID = model.PK_ProductID == "0" ? null : model.PK_ProductID;
+            model.Level = model.Level == "0" ? null : model.Level;
+            model.IsDownline = model.IsDownline == "0" ? null : model.IsDownline;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.GetBusinessReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.Amount = Convert.ToDecimal(r["Amount"].ToString());
+                    obj.BV = r["BV"].ToString();
+                    obj.Date = r["Date"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.PackageType = r["PackageType"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBReports = lst;
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
+            }
+
+            #region ddlPlotSize
+            int count = 0;
+            List<SelectListItem> ddlProductName = new List<SelectListItem>();
+            DataSet dss = model.GetProductName();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProductName.Add(new SelectListItem { Text = "-Select-", Value = "" });
+                    }
+                    ddlProductName.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["PK_ProductID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlProductName = ddlProductName;
+            #endregion
+            return View(model);
+        }
+
+
+        public ActionResult PayoutRequest()
+        {
+            User model = new User();
+            model.LoginId = Session["LoginId"].ToString();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            //DataSet ds = model.GetPayoutBalance();
+            //model.PayoutBalance = ds.Tables[0].Rows[0]["Balance"].ToString();
+
+            List<User> lst = new List<User>();
+            model.State = model.State == "0" ? null : model.State;
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds1 = model.GetPayoutRequest();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                    obj.Amount =Convert.ToDecimal(r["AMount"].ToString());
+                    obj.Date = r["RequestedDate"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.AccountNo = r["MemberAccNo"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.ROIPercentage = r["BackColor"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayoutRequest = lst;
+            }
+
+
+            #region Check Balance
+            DataSet ds11 = model.GetWalletBalance();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                model.PayoutBalance = ds11.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("PayoutRequest")]
+        [OnAction(ButtonName = "PayoutRequest")]
+        public ActionResult PayoutRequest(User model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_userId"].ToString();
+                DataSet ds = model.PayoutRequest();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transfer To Account Initiated Successfully.";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("PayoutRequest", "User");
+        }
     }
 }
