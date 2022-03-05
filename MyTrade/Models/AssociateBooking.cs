@@ -80,6 +80,7 @@ namespace MyTrade.Models
         public string PK_VisitorId { get; set; }
         public string FK_RootId { get; set; }
         public string ActivationDate { get; set; }
+        public string Lvl { get; set; }
         #endregion
         public DataSet List()
         {
