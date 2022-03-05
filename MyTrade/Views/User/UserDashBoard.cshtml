@@ -148,8 +148,6 @@
     .img-height {
         height: 300px;
     }
-
-
 </style>
 
 <div class="layout-px-spacing" style="margin-bottom: 70px;">
@@ -191,9 +189,9 @@
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TotalInActive</h5>
                         </div>
                         @*<div class="seconddiv">
-                            <p>TPS Id </p>
-                            <h5 class=""><span class="w-currency"></span> @ViewBag.TPSId</h5>
-                        </div>*@
+                                <p>TPS Id </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.TPSId</h5>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -215,9 +213,9 @@
                             <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamInActive</h5>
                         </div>
                         @*<div class="seconddiv">
-                            <p>TPS Id </p>
-                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamTPSId</h5>
-                        </div>*@
+                                <p>TPS Id </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamTPSId</h5>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -264,10 +262,10 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-account-invoice-three six">
                 <div class="widget-heading">
-                    <div class="wallet-balance">
-                        <p>Wallet</p>
-                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalWalletAmount</h5>
-                    </div>
+                    @*<div class="wallet-balance">
+                            <p>Wallet</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalWalletAmount</h5>
+                        </div>*@
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Payout</p>
@@ -306,12 +304,15 @@
             <div class="widget widget-account-invoice-three eight">
                 <div class="widget-heading">
                     <div class="wallet-balance">
-                        <a href="~/Coming.html" class="btn btn-danger mb-2 mr-2"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>&nbsp;  Recharge</a>
+                        <a href="/Wallet/WalletLedgerList" class="btn btn-info mr-2"><i class="fa fa-folder-open" aria-hidden="true"></i>Wallet</a>
+                    </div>
+                    <div class="wallet-balance">
+                        <a href="~/Coming.html" class="btn btn-danger mr-2"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Recharge</a>
                         @*<p><a href="~/MyTradeWebsite/Coming.html"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  Recharge</a></p>*@
                     </div>
-                    <div class="particular-balance d-flex mt-5">
+                    <div class="wallet-balance">
                         <div class="fisrtdiv">
-                            <a href="~/Coming.html" class="btn btn-secondary mb-2 mr-2"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;  Bill Payment</a>
+                            <a href="~/Coming.html" class="btn btn-secondary mr-2"><i class="fa fa-file-text" aria-hidden="true"></i>Bill Payment</a>
                             @*<p><a href="~/MyTradeWebsite/Coming.html"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  Bill Payment</a></p>*@
                         </div>
                     </div>
@@ -352,12 +353,12 @@
                         <h5 class="">Business Details</h5>
                     </div>
                     <div class="widget-content1">
-                     No Business
+                        No Business
                     </div>
                 </div>
             </div>
         }
-        
+
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-chart-two ">
                 <div class="widget-heading">
@@ -453,7 +454,7 @@
 
                                     <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://mytrade.co.in//Home/Registration?Pid=@link. Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
                                     <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
-                                                    <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                                    <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
                                                     <span class="s-icon"><a href="https://www.instagram.com/?url=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
                                                     <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://mytrade.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
                                 }

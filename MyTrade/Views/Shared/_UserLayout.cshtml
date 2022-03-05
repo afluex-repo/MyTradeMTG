@@ -269,7 +269,9 @@
                                     <li>
                                         <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
                                     </li>
-
+                                    <li>
+                                        <a href="/User/PayoutRequest">Transfer to Account</a>
+                                    </li>
                                 }
                                 else
                                 {
@@ -342,6 +344,40 @@
                     </li>
 
                     <li class="menu">
+                        <a href="#Business" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <i class="fa fa-users"></i>
+                                <span>Business Reports</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Business" data-parent="#accordionExample">
+                            <li>
+                                    <a href="/user/BusinessReportsForUser">Business Report</a>
+                                </li>
+                            @*<li>
+                                    <a href="/Downline/DownLineList">Downline</a>
+                                </li>*@
+                            @*<li>
+                                    <a href="/Downline/DirectList">DownTeam Tree</a>
+                                </li>
+                                <li>
+                                    <a href="/user/TreeTTP">Level Tree TTP</a>
+                                </li>
+                                <li>
+                                    <a href="/user/Tree">Level Tree TPS</a>
+                                </li>
+
+                                <li>
+                                    <a href="/Downline/AssociateTree">Direct List</a>
+                                </li>*@
+                        </ul>
+                    </li>
+
+
+                    <li class="menu">
                         <a href="#Pin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <i class="fa fa-thumb-tack"></i>
@@ -373,7 +409,7 @@
                         <a href="#ROI" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <i class="fa fa-money"></i>
-                                <span>TPS</span>
+                                <span>TPS Reports</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
