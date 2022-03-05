@@ -94,8 +94,10 @@ namespace MyTrade.Models
         public string PK_ProductID { get; set; }
         public string BV { get; set; }
         public string PackageType { get; set; }
+        public string IFSCCode { get;  set; }
+        public string MemberAccNo { get;  set; }
 
-        
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -278,10 +280,12 @@ namespace MyTrade.Models
 
         public DataSet PayoutDetail()
         {
-            SqlParameter[] para = { new SqlParameter("@Fk_Userid", Fk_UserId),
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_Userid", Fk_UserId),
                 new SqlParameter("@PayoutNo", PayoutNo),
-                  new SqlParameter("@FromDate", FromDate),
-                new SqlParameter("@ToDate", ToDate),
+                new SqlParameter("@FromDate", FromDate),
+                    new SqlParameter("@ToDate", ToDate),
+                new SqlParameter("@LoginId", LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
             return ds;
@@ -292,7 +296,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                 new SqlParameter("@ClosingDate",ClosingDate)
-                
+
             };
             DataSet ds = DBHelper.ExecuteQuery("MakePaymentList", para);
             return ds;
@@ -302,7 +306,7 @@ namespace MyTrade.Models
             SqlParameter[] para = {
                 new SqlParameter("@ClosingDate", ClosingDate)
             };
-           DataSet ds = DBHelper.ExecuteQuery("AutoDistributePayment", para);
+            DataSet ds = DBHelper.ExecuteQuery("AutoDistributePayment", para);
             return ds;
         }
         public DataSet DistributePaymentTPS()
@@ -322,7 +326,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
             return ds;
         }
-        
+
         public DataSet GetBusinessReports()
         {
             SqlParameter[] para = {
@@ -333,7 +337,7 @@ namespace MyTrade.Models
                     new SqlParameter("@PackageType", PK_ProductID),
                        new SqlParameter("@Lvl", Level)
             };
-           DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
             return ds;
         }
 
@@ -343,8 +347,27 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductName");
             return ds;
         }
-        
-
+        public DataSet GetPayoutRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                 new SqlParameter("@Status", Status)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest",para);
+            return ds;
+        }
+        public DataSet ApprovePayoutRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",PK_RequestID),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@ApprovedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApprovePayoutRequest", para);
+            return ds;
+        }
 
     }
 }

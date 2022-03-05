@@ -848,9 +848,17 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayout = lst;
+                ViewBag.LevelIncomeTR1 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR1)", "").ToString()).ToString("n2");
+                ViewBag.LevelIncomeTR2 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR2)", "").ToString()).ToString("n2");
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.AdminFee = double.Parse(ds.Tables[0].Compute("sum(AdminFee)", "").ToString()).ToString("n2");
+                ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -861,7 +869,13 @@ namespace MyTrade.Controllers
         public ActionResult PayoutDetailForAdmin(Admin model)
         {
             List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.PayoutNo = model.PayoutNo == "" ? null : model.PayoutNo;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
             DataSet ds = model.PayoutDetail();
+
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -876,9 +890,17 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayout = lst;
+                ViewBag.LevelIncomeTR1 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR1)", "").ToString()).ToString("n2");
+                ViewBag.LevelIncomeTR2 = double.Parse(ds.Tables[0].Compute("sum(LevelIncomeTR2)", "").ToString()).ToString("n2");
+                ViewBag.GrossAmount = double.Parse(ds.Tables[0].Compute("sum(GrossAmount)", "").ToString()).ToString("n2");
+                ViewBag.AdminFee = double.Parse(ds.Tables[0].Compute("sum(AdminFee)", "").ToString()).ToString("n2");
+                ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
+                ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -1110,6 +1132,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
             }
 
             #region ddlPlotSize
@@ -1170,6 +1194,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
             }
 
             #region ddlPlotSize
@@ -1286,6 +1312,113 @@ namespace MyTrade.Controllers
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PayoutRequestList()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetPayoutRequest();
+            if(ds!=null && ds.Tables.Count >0 && ds.Tables[0].Rows.Count>0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                    obj.Amount = r["AMount"].ToString();
+                    obj.Date = r["RequestedDate"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("PayoutRequestList")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult PayoutRequestListBy(Admin model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetPayoutRequest();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                    obj.Amount = r["AMount"].ToString();
+                    obj.Date = r["RequestedDate"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        public ActionResult ApprovePayout(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.PK_RequestID = id;
+                model.Status = (model.Status = "Approved");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApprovePayoutRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transfer to account approved Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("PayoutRequestList", "Admin");
+        }
+
+        public ActionResult DeclinePayout(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.PK_RequestID = id;
+                model.Status = (model.Status = "Declined");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApprovePayoutRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transfer to account Declined Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("PayoutRequestList", "Admin");
         }
     }
 }

@@ -147,8 +147,8 @@ namespace MyTrade.Models
         public string BusinessType { get; set; }
         public bool IsInclude { get; set; }
         public string Reward { get; set; }
-
-
+        public string DirectStatus { get; set; }
+        public string Lvl { get; set; }
 
 
         public List<Reports> lstDefaultAssociateList { get; set; }
@@ -269,6 +269,7 @@ namespace MyTrade.Models
                                     new SqlParameter("@ToActivationDate", ToActivationDate),
                                     new SqlParameter("@Leg", Leg),
                                     new SqlParameter("@Status", Status),
+                                       new SqlParameter("@DirectStatus", DirectStatus),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetDirectList", para);
             return ds;
