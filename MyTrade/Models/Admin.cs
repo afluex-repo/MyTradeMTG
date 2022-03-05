@@ -94,6 +94,8 @@ namespace MyTrade.Models
         public string PK_ProductID { get; set; }
         public string BV { get; set; }
         public string PackageType { get; set; }
+        public string IFSCCode { get;  set; }
+        public string MemberAccNo { get;  set; }
 
 
         #endregion
@@ -345,8 +347,27 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductName");
             return ds;
         }
-
-
+        public DataSet GetPayoutRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                 new SqlParameter("@Status", Status)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest",para);
+            return ds;
+        }
+        public DataSet ApprovePayoutRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",PK_RequestID),
+                 new SqlParameter("@Status",Status),
+                new SqlParameter("@ApprovedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApprovePayoutRequest", para);
+            return ds;
+        }
 
     }
 }

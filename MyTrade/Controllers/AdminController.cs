@@ -1313,5 +1313,112 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult PayoutRequestList()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetPayoutRequest();
+            if(ds!=null && ds.Tables.Count >0 && ds.Tables[0].Rows.Count>0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                    obj.Amount = r["AMount"].ToString();
+                    obj.Date = r["RequestedDate"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("PayoutRequestList")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult PayoutRequestListBy(Admin model)
+        {
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetPayoutRequest();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                    obj.Amount = r["AMount"].ToString();
+                    obj.Date = r["RequestedDate"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        public ActionResult ApprovePayout(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.PK_RequestID = id;
+                model.Status = (model.Status = "Approved");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApprovePayoutRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transfer to account approved Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("PayoutRequestList", "Admin");
+        }
+
+        public ActionResult DeclinePayout(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.PK_RequestID = id;
+                model.Status = (model.Status = "Declined");
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApprovePayoutRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transfer to account Declined Successfully";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("PayoutRequestList", "Admin");
+        }
     }
 }
