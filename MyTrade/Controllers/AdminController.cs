@@ -870,7 +870,7 @@ namespace MyTrade.Controllers
         {
             List<Admin> lst = new List<Admin>();
             model.LoginId = model.LoginId == "" ? null : model.LoginId;
-            model.Name = model.Name == "" ? null : model.Name;
+            model.PayoutNo = model.PayoutNo == "" ? null : model.PayoutNo;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
 
@@ -1132,6 +1132,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
             }
 
             #region ddlPlotSize
@@ -1192,6 +1194,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
             }
 
             #region ddlPlotSize

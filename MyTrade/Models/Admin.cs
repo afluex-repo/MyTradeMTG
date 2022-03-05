@@ -283,8 +283,7 @@ namespace MyTrade.Models
                 new SqlParameter("@PayoutNo", PayoutNo),
                 new SqlParameter("@FromDate", FromDate),
                     new SqlParameter("@ToDate", ToDate),
-                new SqlParameter("@LoginId", LoginId),
-                new SqlParameter("@Name", Name)
+                new SqlParameter("@LoginId", LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
             return ds;
