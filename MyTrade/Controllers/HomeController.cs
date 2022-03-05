@@ -124,9 +124,6 @@ namespace MyTrade.Controllers
             }
 
             return RedirectToAction(FormName, Controller);
-
-
-
         }
         public ActionResult Registration(string PId)
         {

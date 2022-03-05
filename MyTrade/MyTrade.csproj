@@ -763,6 +763,9 @@
     <Content Include="Views\Home\emailtemplate.cshtml" />
     <Content Include="Views\Admin\LevelIncomeTr2ForAdmin.cshtml" />
     <Content Include="Views\Admin\PayoutDetailForAdmin.cshtml" />
+    <Content Include="Views\Admin\DistributePayment.cshtml" />
+    <Content Include="Views\Admin\DistributePaymentTPS.cshtml" />
+    <Content Include="Views\Admin\BusinessReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -772,6 +775,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="PanUpload\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
@@ -791,7 +795,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53405/</IISUrl>
+          <IISUrl>http://localhost:53403/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

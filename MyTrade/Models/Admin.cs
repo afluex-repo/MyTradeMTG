@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MyTrade.Models
 {
@@ -79,8 +80,22 @@ namespace MyTrade.Models
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
         public string Remark { get; set; }
-        
+        public List<Admin> lstDistributePayment { get; set; }
+        public List<Admin> lstDistributePaymentTPP { get; set; }
+        public string DirectIncome { get; set; }
+        public string LastClosingDate { get; set; }
+        public string TPSLevelIncome { get; set; }
+        public string TPPLevelIncome { get; set; }
+        public string TPS { get; set; }
+        public string Pk_UserId { get; set; }
+        public List<Admin> lstBReports { get; set; }
+        public string IsDownline { get; set; }
+        public List<SelectListItem> ddlProductName { get; set; }
+        public string PK_ProductID { get; set; }
+        public string BV { get; set; }
+        public string PackageType { get; set; }
 
+        
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -271,5 +286,65 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
             return ds;
         }
+
+
+        public DataSet DistributePayment()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+                
+            };
+            DataSet ds = DBHelper.ExecuteQuery("MakePaymentList", para);
+            return ds;
+        }
+        public DataSet SaveDistributePayment()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate", ClosingDate)
+            };
+           DataSet ds = DBHelper.ExecuteQuery("AutoDistributePayment", para);
+            return ds;
+        }
+        public DataSet DistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("MakePaymentListTPS", para);
+            return ds;
+        }
+        public DataSet SaveDistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate", ClosingDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
+            return ds;
+        }
+        
+        public DataSet GetBusinessReports()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                 new SqlParameter("@IsDownline", IsDownline),
+                    new SqlParameter("@PackageType", PK_ProductID),
+                       new SqlParameter("@Lvl", Level)
+            };
+           DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
+            return ds;
+        }
+
+
+        public DataSet GetProductName()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductName");
+            return ds;
+        }
+        
+
+
     }
 }

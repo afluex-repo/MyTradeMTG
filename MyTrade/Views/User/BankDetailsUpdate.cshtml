@@ -32,7 +32,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Pan Number</label><span style="color: red">*</span>
-                                    @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @placeholder = "Pan Number", @maxlength = "10", @onkeypress = "return validatePan(event);" })
+                                    @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @placeholder = "Pan Number", @maxlength = "10", @onchange = "return validatePan(event);" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Pan Image</label><span style="color: red">*</span><br />
+                                    <input type="file" name="Image" id="Image" onchange="loadFile_adhar(event)" />
+                                    <img src="@Model.Image" height="50" width="100" id="PanImage" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -86,7 +93,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="margin-top:30px">
                                 <div class="form-group">
                                     <input type="hidden" name="IsVerified" value="@Model.IsVerified" />
                                     @if (Model.IsVerified == "True")
@@ -159,15 +166,16 @@
     }
 
     function validatePan() {
-        var panVal = $('#PanNo').val();
+        debugger;
+        var panVal = $('#PanNumber').val();
         var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
 
         if (regpan.test(panVal)) {
-            $("#PanNo").removeClass('errortext');
+            $("#PanNumber").removeClass('errortext');
         } else {
             alert("Invalid PAN Number");
-            $("#PanNo").val('');
-            $("#PanNo").addClass('errortext');
+            $("#PanNumber").val('');
+            $("#PanNumber").addClass('errortext');
         }
     }
 
@@ -189,8 +197,10 @@
             alert(err.Description);
         }
     }
-
-
+    var loadFile_adhar = function (event) {
+        var image = document.getElementById('PanImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
 </script>
 
 @if (TempData["msg"] != null)

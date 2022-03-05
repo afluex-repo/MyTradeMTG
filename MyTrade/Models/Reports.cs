@@ -116,6 +116,7 @@ namespace MyTrade.Models
         public string DocumentImage { get; set; }
 
         public List<Reports> lsttopupreport { get; set; }
+        public List<Reports> lsttopupreporttps { get; set; }
         public List<Reports> lstRewardList { get; set; }
         public List<Reports> lstAdvancePaymentReport { get; set; }
 
@@ -126,6 +127,9 @@ namespace MyTrade.Models
         public string PaymentMode { get; set; }
         public string Quantity { get; set; }
         public string Amount { get; set; }
+        public string Level { get; set; }
+        public string CurrentDate { get; set; }
+        public string UsedFor { get; set; }
         public decimal Amount1 { get; set; }
         public decimal TDSAmount1 { get; set; }
         public decimal GrossAmount1 { get; set; }
@@ -752,6 +756,32 @@ namespace MyTrade.Models
                                     new SqlParameter("@ToDate", ToDate)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetRewardIncludedDetails", para);
+            return ds;
+        }
+        public DataSet GetTPPAmountById()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginID", LoginId),
+                new SqlParameter("@ClosingDate",ClosingDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTTPIncomeForDistributePaymentById", para);
+            return ds;
+        }
+        public DataSet GetTPSAmountById()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginID", LoginId),
+                new SqlParameter("@ClosingDate",ClosingDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTPSIncomeForDistributePaymentById", para);
+            return ds;
+        }
+        public DataSet GetPaidPayoutDetailsByAmount()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", Fk_UserId),
+                            new SqlParameter("@PayoutNo", PayoutNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutReportByID", para);
             return ds;
         }
     }
