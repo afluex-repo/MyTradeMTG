@@ -95,22 +95,24 @@
                                                 
                                                 </td>
                                                         }
-                                                        else if (Item.Status == "Approved")
+                                                        @*else if (Item.Status == "Approved")
                                                         {
-                                                            <td>@*<a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>*@
+                                                            <td>*@
+    @*<a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>*@
                                                 
                                                 @*<span>Approved</span>*@
                                                 
                                                 
-                                                </td>
-                                                        }
-                                                        else if (Item.Status == "Declined")
+                                                @*</td>
+                                                        }*@
+                                                        @*else if (Item.Status == "Declined")
                                                         {
-                                                            <td>@*<a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a>*@
+                                                            <td>*@
+    @*<a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a>*@
                                                 
                                                                 @*<span>Declined</span>*@
-                                                </td>
-                                                        }
+                                                @*</td>
+                                                        }*@
                                                         else
                                                         {
                                                         }

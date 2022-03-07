@@ -17,7 +17,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Transfer to acoount list</h4>
+                                <h4>Transfer To Bank Account list</h4>
                                 <span class="text-danger">
                                     @TempData["msg"]
                                 </span>
@@ -55,6 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>Transaction No</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
                                         <th>Amount</th>
@@ -75,6 +76,7 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
+                                                    <td>@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td>@Item.Amount</td>

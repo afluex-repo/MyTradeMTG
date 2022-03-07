@@ -203,5 +203,18 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
         }
+
+        public DataSet CalculateLevelIncomeTr2()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("CalculateLevelIncomeTR2");
+            return ds;
+        }
+
+        public DataSet CalculateROI()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("CalculateROI");
+            return ds;
+        }
+
     }
 }

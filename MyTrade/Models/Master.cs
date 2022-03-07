@@ -7,24 +7,30 @@ using System.Web;
 
 namespace MyTrade.Models
 {
-    public class Master:Common
+    public class Master : Common
     {
         public List<Master> lstpackage { get; set; }
 
-        public string BinaryPercent { get;  set; }
-        public string BV { get;  set; }
-        public string CGST { get;  set; }
-        public string DirectPercent { get;  set; }
-        public string IGST { get;  set; }
-        public string Packageid { get;  set; }
-        public string ProductName { get;  set; }
-        public string ProductPrice { get;  set; }
-        public string ROIPercent { get;  set; }
-        public string SGST { get;  set; }
+        public string BinaryPercent { get; set; }
+        public string BV { get; set; }
+        public string CGST { get; set; }
+        public string DirectPercent { get; set; }
+        public string IGST { get; set; }
+        public string Packageid { get; set; }
+        public string ProductName { get; set; }
+        public string ProductPrice { get; set; }
+        public string ROIPercent { get; set; }
+        public string SGST { get; set; }
         public string PackageTypeId { get; set; }
         public string ToAmount { get; set; }
         public string FromAmount { get; set; }
         public string PackageTypeName { get; set; }
+        public string Title { get; set; }
+        public string Image { get; set; }
+        public List<Master> lstReward { get; set; }
+        public string PK_RewardId { get; set; }
+
+
         #region ProductMaster
 
         public DataSet SaveProduct()
@@ -44,7 +50,7 @@ namespace MyTrade.Models
                                     new SqlParameter("@ToAmount", ToAmount)
             };
 
-        DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
+            DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
             return ds;
         }
         public DataSet ProductList()
@@ -83,6 +89,28 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateProduct", para);
             return ds;
         }
+
+
+        public DataSet Upload()
+        {
+            SqlParameter[] para = { new SqlParameter("@Title", Title),
+                                  new SqlParameter("@postedFile", Image),
+                                  new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("Upload", para);
+            return ds;
+        }
+
+        public DataSet GetRewarDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Title",Title)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRewarDetails", para);
+            return ds;
+        }
+
+
 
         #endregion
     }

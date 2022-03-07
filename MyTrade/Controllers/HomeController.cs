@@ -332,5 +332,19 @@ namespace MyTrade.Controllers
         {
             return View();
         }
+
+        public ActionResult CalculateLevelIncomeTr2()
+        {
+            Home model = new Home();
+            DataSet ds = model.CalculateLevelIncomeTr2();
+            return View();
+        }
+
+        public ActionResult CalculateROI()
+        {
+            Home model = new Home();
+           DataSet ds = model.CalculateROI();
+            return View();
+        }
     }
 }

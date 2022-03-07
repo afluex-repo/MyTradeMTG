@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,7 +34,7 @@ namespace MyTrade.Controllers
                     obj.ROIPercent = (r["ROIPercent"].ToString());
                     obj.BV = (r["BV"].ToString());
                     obj.PackageTypeId = (r["PackageTypeId"].ToString());
-                    obj.PackageTypeName= (r["PackageTypeName"].ToString());
+                    obj.PackageTypeName = (r["PackageTypeName"].ToString());
                     obj.FromAmount = (r["FromAmount"].ToString());
                     obj.ToAmount = (r["ToAmount"].ToString());
                     lst.Add(obj);
@@ -105,7 +106,7 @@ namespace MyTrade.Controllers
             #endregion
             if (PackageID != null)
             {
-              
+
                 try
                 {
                     obj.Packageid = PackageID;
@@ -113,7 +114,7 @@ namespace MyTrade.Controllers
                     DataSet ds = obj.ProductList();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
-                        
+
                         obj.PackageTypeId = ds.Tables[0].Rows[0]["PackageTypeId"].ToString();
                         obj.Packageid = ds.Tables[0].Rows[0]["Pk_ProductId"].ToString();
                         obj.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
@@ -130,7 +131,7 @@ namespace MyTrade.Controllers
                         obj.FromAmount = (ds.Tables[0].Rows[0]["FromAmount"].ToString());
                         obj.ToAmount = (ds.Tables[0].Rows[0]["ToAmount"].ToString());
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -145,7 +146,7 @@ namespace MyTrade.Controllers
 
         }
 
-        public ActionResult SaveProduct(string PackageType,string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV,string FromAmount,string ToAmount)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount)
         {
             Master obj = new Master();
             try
@@ -184,7 +185,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType ,string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount)
         {
             Master obj = new Master();
             try
@@ -224,5 +225,94 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Upload")]
+        public ActionResult Upload(Master model, HttpPostedFileBase postedFile)
+        {
+            try
+            {
+                if (postedFile != null)
+                {
+                    model.Image = "../UploadReward/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    postedFile.SaveAs(Path.Combine(Server.MapPath(model.Image)));
+                }
+                model.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = model.Upload();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Upload"] = "File upload successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["Upload"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Upload"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Upload"] = ex.Message;
+            }
+            return RedirectToAction("Upload", "Master");
+
+        }
+
+    
+        public ActionResult UploadList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetRewarDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.Image = "/UploadReward/" + r["postedFile"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstReward = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("UploadList")]
+        public ActionResult UploadList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetRewarDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.Image = "/UploadReward/" + r["postedFile"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstReward = lst;
+            }
+            return View(model);
+        }
+
+
     }
 }

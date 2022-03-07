@@ -1332,6 +1332,7 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1360,6 +1361,7 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1421,5 +1423,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList", "Admin");
         }
+        
     }
 }

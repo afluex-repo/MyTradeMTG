@@ -57,7 +57,11 @@ namespace MyTrade.Models
         public List<SelectListItem> ddlProductName { get; set; }
         public List<User> lstPayoutRequest { get; set; }
 
-        
+
+        public string Title { get; set; }
+        public List<User> lstReward { get; set; }
+        public string PK_RewardId { get; set; }
+
 
 
         #endregion
@@ -211,6 +215,21 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest", para);
             return ds;
         }
+
+
+
+        public DataSet GetRewarDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Title",Title)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRewarDetails", para);
+            return ds;
+        }
+
+
+
+
     }
 
 
