@@ -25,11 +25,10 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Pin Status</label>
-                                    <select id="PinStatus" name="PinStatus" class="form-control">
+                                    <select id="PinStatus" name="PinStatus" class="form-control" onload = "getpaymentTypedetails();">
                                         @*<option value="">-Select-</option>*@
                                         <option value="T">Available</option>
                                         <option value="P">Used</option>
-
                                     </select>
                                 </div>
                             </div>
@@ -113,7 +112,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <td></td>
+                                                        <td><span>Activate</span></td>
                                                     }
                                                 </tr>
                                                 i++;
@@ -343,6 +342,18 @@
             });
         }
     }
+
+    //function getpaymentTypedetails() {
+    //    debugger;
+    //    if ($('#PinStatus').val() == 'T') {
+
+    //        $("#PinStatus").val(T);
+    //    }
+    //    else if ($('#PinStatus').val() == 'P') {
+    //        $("#PinStatus").val(P);
+     
+    //    }
+    //}
 
 
 </script>

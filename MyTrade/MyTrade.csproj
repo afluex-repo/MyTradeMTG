@@ -768,6 +768,11 @@
     <Content Include="Views\Admin\BusinessReports.cshtml" />
     <Content Include="Views\User\BusinessReportsForUser.cshtml" />
     <Content Include="Views\User\PayoutRequest.cshtml" />
+    <Content Include="Views\Home\CalculateLevelIncomeTr2.cshtml" />
+    <Content Include="Views\Home\CalculateROI.cshtml" />
+    <Content Include="Views\Master\Upload.cshtml" />
+    <Content Include="Views\Master\UploadList.cshtml" />
+    <Content Include="Views\User\Download.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -779,6 +784,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="PanUpload\" />
     <Folder Include="ProfilePicture\" />
+    <Folder Include="UploadReward\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
