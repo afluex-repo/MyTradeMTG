@@ -38,7 +38,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
                 ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
-                ViewBag.TotalIncome = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
+                ViewBag.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"])+ Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
                 ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
                 ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 ViewBag.LevelIncomeTR1ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR1ForPayout"].ToString();
@@ -685,7 +685,7 @@ namespace MyTrade.Controllers
 
                 if (Image != null)
                 {
-                    model.Image = "../PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    model.Image = "/PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
                     Image.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                 }
 
@@ -769,7 +769,7 @@ namespace MyTrade.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return View(model);
+            return RedirectToAction("ViewProfile");
         }
         public ActionResult GetMemberDetails(string LoginId)
         {

@@ -126,7 +126,6 @@ namespace MyTrade.Models
                                       new SqlParameter("@FK_UserId", Fk_UserId),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
-
             return ds;
         }
 
