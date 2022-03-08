@@ -54,9 +54,9 @@ namespace MyTrade.Controllers
                         obj.Status = (r["Status"].ToString());
                         obj.LoginId = (r["LoginId"].ToString());
                         obj.Name = (r["Name"].ToString());
+                        obj.Level = (r["Lvl"].ToString());
                         obj.Package = (r["ProductName"].ToString());
                         Ids = Ids + r["PK_UserId"].ToString() + ",";
-                        
                         lst.Add(obj);
                     }
                     model.lstassociate = lst;
@@ -100,6 +100,7 @@ namespace MyTrade.Controllers
                     obj.Status = (r["Status"].ToString());
                     obj.LoginId = (r["LoginId"].ToString());
                     obj.Name = (r["Name"].ToString());
+                    obj.Level = (r["Lvl"].ToString());
                     obj.Package = (r["ProductName"].ToString());
                     Ids = Ids + r["PK_UserId"].ToString() + ",";
                     lst.Add(obj);

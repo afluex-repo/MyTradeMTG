@@ -1132,6 +1132,7 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
+
                 ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
                 ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
             }
