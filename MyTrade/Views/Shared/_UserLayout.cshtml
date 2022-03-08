@@ -269,9 +269,9 @@
                                     <li>
                                         <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
                                     </li>
-                                    <li>
+                                    @*<li>
                                         <a href="/User/PayoutRequest">Transfer to Account</a>
-                                    </li>
+                                    </li>*@
                                 }
                                 else
                                 {
@@ -301,6 +301,9 @@
                                     </li>
                                     <li>
                                         <a href="/user/TopUpList">Topup List</a>
+                                    </li>
+                                    <li>
+                                        <a href="/User/PayoutRequest">Transfer To Bank</a>
                                     </li>
                                 }
                                 else
@@ -444,6 +447,29 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="menu">
+                        <a href="#LevelBonus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <i class="fa fa-cubes"></i>
+                                <span>Level Bonus</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="LevelBonus" data-parent="#accordionExample">
+                            <li>
+                                <a href="/Report/LevelIncomeTr1">Level Income TTP</a>
+                            </li>
+                            <li>
+                                <a href="/Report/LevelIncomeTr2">Level Income TPS</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
                     <li class="menu">
                         <a href="#Payout" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -457,12 +483,6 @@
                         <ul class="collapse submenu list-unstyled" id="Payout" data-parent="#accordionExample">
                             <li>
                                 <a href="/Report/PayoutWalletLedger">Payout Wallet</a>
-                            </li>
-                            <li>
-                                <a href="/Report/LevelIncomeTr1">Level Income TTP</a>
-                            </li>
-                            <li>
-                                <a href="/Report/LevelIncomeTr2">Level Income TPS</a>
                             </li>
                             <li>
                                 <a href="/Report/PayoutDetail">Payout Detail</a>
@@ -492,6 +512,30 @@
                             </li>
                         </ul>
                     </li>
+
+
+                    <li class="menu">
+                        <a href="#Download" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <i class="fa fa-bar-chart"></i>
+                                <span>Download</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="Download" data-parent="#accordionExample">
+                            <li>
+                                <a href="/User/Download">Download</a>
+                            </li>
+                         
+                        </ul>
+                    </li>
+
+
+
+
+
                     @*<li class="menu">
                             <a href="#Setting" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                                 <div class="">

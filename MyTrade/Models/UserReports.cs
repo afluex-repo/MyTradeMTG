@@ -48,6 +48,7 @@ namespace MyTrade.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
+                  new SqlParameter("@Status", Status)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr1", para);
             return ds;
@@ -57,6 +58,7 @@ namespace MyTrade.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
+                   new SqlParameter("@Status", Status)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr2", para);
             return ds;

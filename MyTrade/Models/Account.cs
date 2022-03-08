@@ -39,7 +39,10 @@ namespace MyTrade.Models
         public string ProductName { get; set; }
         public string Remark { get; set; }
         public string PackageDays { get; set; }
+
+        public string ROI { get; set; }
         
+
 
 
         public DataSet TopUp()

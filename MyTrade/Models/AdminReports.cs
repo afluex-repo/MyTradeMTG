@@ -62,6 +62,8 @@ namespace MyTrade.Models
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
+        public string Image { get; set; }
+
         //public string SponserName { get; set; }
 
         #region associatelist
@@ -148,6 +150,7 @@ namespace MyTrade.Models
                                     new SqlParameter("@State",State),
                                      new SqlParameter("@City",City),
                                    new SqlParameter("@PanNo",PanNo),
+                                    new SqlParameter("@PanImage",Image),
                                     new SqlParameter("@Address",Address),
                                    new SqlParameter("@AadharNo",AdharNo),
                                    new SqlParameter("@BankName",BankName),

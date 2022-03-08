@@ -70,6 +70,7 @@ namespace MyTrade.Controllers
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
+            model.Status ="0";
             DataSet ds = model.LevelIncomeTr1();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -124,6 +125,7 @@ namespace MyTrade.Controllers
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
+            model.Status = "0";
             DataSet ds = model.LevelIncomeTr2();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

@@ -38,7 +38,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
                 ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
-                ViewBag.TotalIncome = ds.Tables[0].Rows[0]["TotalIncome"].ToString();
+                ViewBag.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"])+ Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
                 ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
                 ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 ViewBag.LevelIncomeTR1ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR1ForPayout"].ToString();
@@ -62,6 +62,29 @@ namespace MyTrade.Controllers
                 }
                 ViewBag.Tr2Business = ds.Tables[1].Rows[0]["Tr2Business"].ToString();
             }
+
+            
+         
+            List<Dashboard> lst = new List<Dashboard>();
+            obj.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds1 = obj.GetRewarDetails();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    Dashboard obj1 = new Dashboard();
+                    obj1.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj1.Title = r["Title"].ToString();
+                    obj1.Image = "/UploadReward/" + r["postedFile"].ToString();
+                    lst.Add(obj1);
+                }
+                obj.lstReward = lst;
+            }
+
+
+
+
+
             return View(obj);
         }
         public ActionResult ActivateByPin(User model)
@@ -152,6 +175,7 @@ namespace MyTrade.Controllers
                 ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)
@@ -661,7 +685,7 @@ namespace MyTrade.Controllers
 
                 if (Image != null)
                 {
-                    model.Image = "../PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    model.Image = "/PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
                     Image.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                 }
 
@@ -745,7 +769,7 @@ namespace MyTrade.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return View(model);
+            return RedirectToAction("ViewProfile");
         }
         public ActionResult GetMemberDetails(string LoginId)
         {
@@ -1108,7 +1132,6 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
-
                 ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
                 ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
             }
@@ -1172,8 +1195,10 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstBReports = lst;
+
                 ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
                 ViewBag.BV = double.Parse(ds.Tables[0].Compute("sum(BV)", "").ToString()).ToString("n2");
+
             }
 
             #region ddlPlotSize
@@ -1201,6 +1226,9 @@ namespace MyTrade.Controllers
 
         public ActionResult PayoutRequest()
         {
+            string FormName = "";
+            string Controller = "";
+
             User model = new User();
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
@@ -1227,6 +1255,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.ROIPercentage = r["BackColor"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayoutRequest = lst;
@@ -1273,5 +1302,52 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequest", "User");
         }
+
+
+        public ActionResult Download()
+        {
+            User model = new User();
+            List<User> lst = new List<User>();
+            model.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds = model.GetRewarDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.Image = "/UploadReward/" + r["postedFile"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstReward = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("Download")]
+        public ActionResult Download(User model)
+        {
+            List<User> lst = new List<User>();
+             model.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds = model.GetRewarDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.Image = "/UploadReward/" + r["postedFile"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstReward = lst;
+            }
+            return View(model);
+        }
+
+
     }
 }
