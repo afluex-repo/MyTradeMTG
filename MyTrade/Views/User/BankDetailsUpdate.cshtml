@@ -16,8 +16,8 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Update KYC </h4>
                                 @*<span class="text-danger">
-                                    @TempData["msg"]
-                                </span>*@
+                                        @TempData["msg"]
+                                    </span>*@
                             </div>
                         </div>
                     </div>
@@ -43,14 +43,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group ">
-                                    <label>
-                                        Bank Name
-                                    </label><span style="color: red">*</span>
-                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
-                                </div>
-                            </div>
-                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>
                                         Account Number
@@ -60,16 +52,25 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Branch Name</label><span style="color: red">*</span>
-                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label>
                                         IFSC Code
                                     </label><span style="color: red">*</span>
                                     @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group ">
+                                    <label>
+                                        Bank Name
+                                    </label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Branch Name</label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -91,14 +92,14 @@
                                     <label>Nominee Relation</label><span style="color: red">*</span>
                                     @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @onkeypress = "return onlyAlphabets();" })
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-4" style="margin-top:30px">
                                 <div class="form-group">
                                     <input type="hidden" name="IsVerified" value="@Model.IsVerified" />
                                     @if (Model.IsVerified == "True")
                                     {
-                                <button id="my-button" disabled class="btn btn-success pull-left">Update</button>
+                                        <button id="my-button" disabled class="btn btn-success pull-left">Update</button>
                                     }
                                     else
                                     {
@@ -135,19 +136,9 @@
             $('#PanNumber').focus();
             return false;
         }
-        if ($('#BankName').val() == '') {
-            $("#BankName").addClass('errortext');
-            $('#BankName').focus();
-            return false;
-        }
         if ($('#AccountNo').val() == '') {
             $("#AccountNo").addClass('errortext');
             $('#AccountNo').focus();
-            return false;
-        }
-        if ($('#BranchName').val() == '') {
-            $("#BranchName").addClass('errortext');
-            $('#BranchName').focus();
             return false;
         }
         if ($('#IFSCCode').val() == '') {
@@ -155,6 +146,17 @@
             $('#IFSCCode').focus();
             return false;
         }
+        if ($('#BankName').val() == '') {
+            $("#BankName").addClass('errortext');
+            $('#BankName').focus();
+            return false;
+        }
+        if ($('#BranchName').val() == '') {
+            $("#BranchName").addClass('errortext');
+            $('#BranchName').focus();
+            return false;
+        }
+      
     }
 
     function isNumberKey(evt) {
