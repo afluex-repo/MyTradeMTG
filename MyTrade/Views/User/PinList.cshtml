@@ -47,7 +47,7 @@
                                         <th>Sr No.</th>
                                         <th>E-Pin No</th>
                                         <th>Package Name</th>
-                                       
+
                                         <th>Pin Amount</th>
                                         <th>BV</th>
                                         <th>GST (18 %)</th>
@@ -58,7 +58,7 @@
                                         {
                                             <th>Registered To</th>
                                         }
-                                        
+
                                         <th>Pin Generation Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -108,7 +108,7 @@
                                                     <td>@Item.PinGenerationDate</td>
                                                     @if (Item.PinStatus == "Available")
                                                     {
-                                                        <td style="width:200px;"><a    style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
+                                                        <td style="width:200px;"><a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
                                                     }
                                                     else
                                                     {

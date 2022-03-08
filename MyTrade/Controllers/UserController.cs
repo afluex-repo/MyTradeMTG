@@ -175,6 +175,7 @@ namespace MyTrade.Controllers
                 ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)
@@ -1225,6 +1226,9 @@ namespace MyTrade.Controllers
 
         public ActionResult PayoutRequest()
         {
+            string FormName = "";
+            string Controller = "";
+
             User model = new User();
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
