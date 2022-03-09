@@ -100,7 +100,15 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("Upload", para);
             return ds;
         }
-
+        public DataSet UploadFile()
+        {
+            SqlParameter[] para = { new SqlParameter("@Title", Title),
+                                  new SqlParameter("@postedFile", Image),
+                                  new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UploadFile", para);
+            return ds;
+        }
         public DataSet GetRewarDetails()
         {
             SqlParameter[] para = {
@@ -109,9 +117,32 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRewarDetails", para);
             return ds;
         }
-
-
-
+        public DataSet GetFilesDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Title",Title)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetFilesDetails", para);
+            return ds;
+        }
+        public DataSet DeleteReward()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_RewardId",PK_RewardId),
+                new SqlParameter("@DeletedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteReward", para);
+            return ds;
+        }
+        public DataSet DeleteFile()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_RewardId",PK_RewardId),
+                new SqlParameter("@DeletedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteFile", para);
+            return ds;
+        }
         #endregion
     }
 }

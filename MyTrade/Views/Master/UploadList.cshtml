@@ -15,13 +15,11 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Upload List</h4>
                                 <span class="text-danger">
-                                    @TempData["Upload"]
+                                    @TempData["Reward"]
                                 </span>
                             </div>
                         </div>
                     </div>
-
-
                     <div class="widget-content widget-content-area">
                         <div class="row">
                             <div class="col-md-4">
@@ -39,7 +37,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="widget-content widget-content-area">
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
@@ -62,6 +59,7 @@
                                                     <td>@i</td>
                                                     <td>@Item.Title</td>
                                                     <td><img src="@Item.Image" height="100" /> </td>
+                                                    <td><a href="/Master/DeleteRewards?Id=@Item.PK_RewardId" class="btn btn-danger btn small" onclick="return confirm('Are you sure you want to delete this reward?')">Delete</a></td>
                                                 </tr>
                                                 i++;
                                             }

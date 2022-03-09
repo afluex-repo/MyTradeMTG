@@ -48,6 +48,7 @@ namespace MyTrade.Controllers
                 ViewBag.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
+                ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"])+ 0;
                 if (ViewBag.Status == "InActive")
                 {
                     return RedirectToAction("ActivateByPin", "User");
@@ -446,6 +447,11 @@ namespace MyTrade.Controllers
                 model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
                 model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
                 model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+                model.SelfBV = ds.Tables[1].Rows[0]["SelfBV"].ToString();
+                model.TeamBV = ds.Tables[1].Rows[0]["TeamBV"].ToString();
+                model.SelfBVDollar = (Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805).ToString();
+                model.TeamBVDollar = (Convert.ToDouble(ds.Tables[1].Rows[0]["TeamBV"]) / 76.805).ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
             }
             model.Level = "1";
             DataSet ds1 = model.GetLevelMembers();
@@ -462,6 +468,8 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.SelfBV = r["SelfBV"].ToString();
                     obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
+                    obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
                     obj.SponsorName = r["SponsorName"].ToString();
                     obj.Color = r["Color"].ToString();
                     lstMember.Add(obj);
@@ -961,6 +969,8 @@ namespace MyTrade.Controllers
                     obj.ProfilePic = r["ProfilePic"].ToString();
                     obj.SelfBV = r["SelfBV"].ToString();
                     obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
+                    obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
                     obj.SponsorName = r["SponsorName"].ToString();
                     obj.Color = r["Color"].ToString();
                     lst.Add(obj);
@@ -1267,10 +1277,7 @@ namespace MyTrade.Controllers
             }
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
             {
-                if (ds1.Tables[1].Rows[0]["PanStatus"].ToString() != "Approved")
-                {
-                    return RedirectToAction("BankDetailsUpdate", "User");
-                }
+                    model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
             }
             #region Check Balance
             DataSet ds11 = model.GetWalletBalance();
@@ -1317,7 +1324,7 @@ namespace MyTrade.Controllers
             User model = new User();
             List<User> lst = new List<User>();
             model.AddedBy = Session["Pk_userId"].ToString();
-            DataSet ds = model.GetRewarDetails();
+            DataSet ds = model.GetFileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)

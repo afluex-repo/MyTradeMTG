@@ -1075,7 +1075,7 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-       
+
         [HttpPost]
         public ActionResult DistributePaymentTPSSave(Admin model)
         {
@@ -1282,7 +1282,7 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetPayoutReportforAmount(string Fk_UserId,string PayoutNo)
+        public ActionResult GetPayoutReportforAmount(string Fk_UserId, string PayoutNo)
         {
             Reports model = new Reports();
             List<Reports> lst = new List<Reports>();
@@ -1293,22 +1293,22 @@ namespace MyTrade.Controllers
             {
                 //if (dspayout.Tables[0].Rows[0]["MSG"].ToString() == "1")
                 //{
-                    model.Result = "yes";
-                    if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                model.Result = "yes";
+                if (dspayout != null && dspayout.Tables.Count > 0 && dspayout.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dspayout.Tables[0].Rows)
                     {
-                        foreach (DataRow r in dspayout.Tables[0].Rows)
-                        {
-                            Reports obj = new Reports();
-                            obj.PayoutNo = r["PayoutNo"].ToString();
-                            obj.CurrentDate = r["CurrentDate"].ToString();
-                            obj.LoginId = r["FromId"].ToString();
-                            obj.Name = r["FromName"].ToString();
-                            obj.Amount = r["Income"].ToString();
-                            obj.Level = r["Lvl"].ToString();
-                            obj.Fk_Paymentid = r["Paymenttype"].ToString();
-                            lst.Add(obj);
-                        }
-                        model.lsttopupreport = lst;
+                        Reports obj = new Reports();
+                        obj.PayoutNo = r["PayoutNo"].ToString();
+                        obj.CurrentDate = r["CurrentDate"].ToString();
+                        obj.LoginId = r["FromId"].ToString();
+                        obj.Name = r["FromName"].ToString();
+                        obj.Amount = r["Income"].ToString();
+                        obj.Level = r["Lvl"].ToString();
+                        obj.Fk_Paymentid = r["Paymenttype"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lsttopupreport = lst;
                     //}
                 }
             }
@@ -1319,7 +1319,7 @@ namespace MyTrade.Controllers
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
             DataSet ds = model.GetPayoutRequest();
-            if(ds!=null && ds.Tables.Count >0 && ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
@@ -1423,6 +1423,41 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList", "Admin");
         }
-        
+
+
+
+
+
+
+
+
+        public ActionResult GetNameDetails( string LoginId)
+        {
+            Admin model = new Admin();
+            model.LoginId = LoginId;
+            DataSet ds = model.GetNameDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Result= "yes";
+                model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+            }
+            else
+            {
+                model.Result = "no";
+            }
+            return View(model);
+        }
+
+
+
+
+
+        public ActionResult TransferWallet()
+        {
+            return View();
+        }
+
+
     }
 }

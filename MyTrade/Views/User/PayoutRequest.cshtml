@@ -7,7 +7,8 @@
 
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-
+<link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
 @using (Html.BeginForm("PayoutRequest", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -48,13 +49,15 @@
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
                                     <input class="btn btn-success pull-left" type="submit" value="Transfer To Account" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
+                                    <input type="hidden" id="hdf" value="@Model.Status" />
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top:28px">
                                 <div class="form-group">
                                     <h6 style="color:red">Transfer Charges:  <label id="lbld" style="color:red;">0</label></h6><br />
                                     <h6 style="color:green">
-                                        Final Amount to be transferred into account:  <span id="lblf" style="color:green;">0</span></h6>
+                                        Final Amount to be transferred into account:  <span id="lblf" style="color:green;">0</span>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -111,6 +114,9 @@
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
     var f3 = flatpickr(document.getElementById('FromDate'),
         {
@@ -145,18 +151,43 @@
     }
 
     function GetFinalAmount() {
-        debugger;   
+        debugger;
         var deductionAmount = parseFloat($("#Amount").val()) * 0.02;
-        if (parseFloat($("#Amount").val()) < 500)
-        {
-            deductionAmount=10;
+        if (parseFloat($("#Amount").val()) < 500) {
+            deductionAmount = 10;
         }
         $("#lbld").text(parseFloat(deductionAmount));
         var finalAmount = parseFloat($("#Amount").val()) - parseFloat(deductionAmount);
         $("#lblf").text(parseFloat(finalAmount));
     }
 </script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#hdf").val() != "Approved") {
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: 'Your KYC is not updated. Please update your KYC first',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/BankDetailsUpdate';
+                }
+            })
 
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
+            die();
+        }
+    })
+</script>
 
 
 
