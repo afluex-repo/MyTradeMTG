@@ -269,7 +269,7 @@ namespace MyTrade.Controllers
 
         }
 
-    
+
         public ActionResult UploadList()
         {
             Master model = new Master();
@@ -312,7 +312,38 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        
+        public ActionResult DeleteRewards(string Id)
+        {
+            try
+            {
+                Master model = new Master();
+                model.PK_RewardId = Id;
+                model.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = model.DeleteReward();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Reward"] = "Reward deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Reward"] = ex.Message;
+            }
+            return RedirectToAction("UploadList", "Master");
 
+        }
 
     }
 }

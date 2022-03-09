@@ -24,6 +24,7 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
+                                    <input type="hidden" value="@Model.PinStatus" id="pstatus" />
                                     <label>Pin Status</label>
                                     <select id="PinStatus" name="PinStatus" class="form-control" onload = "getpaymentTypedetails();">
                                         @*<option value="">-Select-</option>*@
@@ -256,6 +257,7 @@
     }
     $(document).ready(function () {
         debugger;
+        $.noConflict();
         $('#ckbCheckAll').on('click', function () {
             debugger;
             if (this.checked) {
@@ -335,7 +337,6 @@
                             alert(data.Message);
                         }
                     }
-
                     $("#myModal").modal('hide');
                 }
             });
@@ -354,6 +355,7 @@
     //    }
     //}
 
+   $("#PinStatus").val($("#pstatus").val()).attr("Selected","Selected");
 
 </script>
 @if (TempData["msg"] != null)
