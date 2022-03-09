@@ -155,10 +155,12 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-account-invoice-three one">
                 <div class="widget-heading">
-                    <div class="wallet-balance">
-                        <a href="/User/BusinessReportsForUser"><p>TPS Business</p></a>
-                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalBusiness</h5>
-                    </div>
+                    <a href="/User/BusinessReportsForUser">
+                        <div class="wallet-balance">
+                            <p>TPS Business</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalBusiness</h5>
+                        </div>
+                    </a>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Self <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
@@ -175,12 +177,12 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-account-invoice-three second">
                 <div class="widget-heading">
-                    <div class="wallet-balance">
-                        <a href="/Downline/AssociateTree">
+                    <a href="/Downline/AssociateTree">
+                        <div class="wallet-balance">
                             <p>TTP Direct</p>
-                        </a>
-                        <h5 class=""><span class="w-currency"></span> @ViewBag.TotalDirect</h5>
-                    </div>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalDirect</h5>
+                        </div>
+                    </a>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Active </p>
@@ -201,12 +203,12 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-account-invoice-three four">
                 <div class="widget-heading">
-                    <div class="wallet-balance">
-                        <a href="/Downline/DirectList">
+                    <a href="/Downline/DirectList">
+                        <div class="wallet-balance">
                             <p>Team</p>
-                        </a>
-                        <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeam</h5>
-                    </div>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeam</h5>
+                        </div>
+                    </a>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Active </p>
@@ -232,16 +234,18 @@
                         <h5 class=""><span class="w-currency"></span> @ViewBag.TotalIncome</h5>
                     </div>
                     <div class="particular-balance d-flex mt-5">
-                        <div class="fisrtdiv">
-                            <a href="/Report/LevelIncomeTr1"><p> TTP </p></a>
-                            <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr1</</h5>
-                        </div>
-                        <div class="seconddiv">
-                            <a href="/Report/LevelIncomeTr2">
+                        <a href="/Report/LevelIncomeTr1">
+                            <div class="fisrtdiv">
+                                <p> TTP </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr1</</h5>
+                            </div>
+                        </a>
+                        <a href="/Report/LevelIncomeTr2">
+                            <div class="seconddiv">
                                 <p> TPS </p>
-                            </a>
-                            <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr2</h5>
-                        </div>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr2</h5>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -249,10 +253,12 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-account-invoice-three third">
                 <div class="widget-heading">
-                    <div class="wallet-balance">
-                        <a href="/Wallet/ROIWallet"><p>TPS Wallet</p></a>
-                        <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</h5>
-                    </div>
+                    <a href="/Wallet/ROIWallet">
+                        <div class="wallet-balance">
+                            <p>TPS Wallet</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalROI</h5>
+                        </div>
+                    </a>
                     <div class="particular-balance d-flex mt-5">
                         <div class="seconddiv">
                             <p>TPS</p>
@@ -273,12 +279,12 @@
                             <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalWalletAmount</h5>
                         </div>*@
                     <div class="particular-balance d-flex mt-5">
-                        <div class="fisrtdiv">
-                            <a href="/Report/PayoutWalletLedger">
+                        <a href="/Report/PayoutWalletLedger">
+                            <div class="fisrtdiv">
                                 <p>Payout</p>
-                            </a>
-                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalPayoutWallet</</h5>
-                        </div>
+                                <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalPayoutWallet</</h5>
+                            </div>
+                        </a>
                         <div class="seconddiv">
                             <p>Reward</p>
                             <h5 class=""><span class="w-currency"></span> Rs. 0.00</h5>
@@ -291,10 +297,12 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-account-invoice-three seven">
                 <div class="widget-heading">
-                    <div class="wallet-balance">
-                        <a href="/User/PinList"><p>E-Pin</p></a>
-                        <h5 class=""><span class="w-currency"></span> @ViewBag.TotalPins</h5>
-                    </div>
+                    <a href="/User/PinList">
+                        <div class="wallet-balance">
+                            <p>E-Pin</p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalPins</h5>
+                        </div>
+                    </a>
                     <div class="particular-balance d-flex mt-5">
                         <div class="fisrtdiv">
                             <p>Used</p>
