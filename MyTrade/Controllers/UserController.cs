@@ -1228,7 +1228,6 @@ namespace MyTrade.Controllers
         {
             string FormName = "";
             string Controller = "";
-
             User model = new User();
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
@@ -1260,8 +1259,13 @@ namespace MyTrade.Controllers
                 }
                 model.lstPayoutRequest = lst;
             }
-
-
+            if(ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
+            {
+                if(ds1.Tables[1].Rows[0]["PanStatus"].ToString()!="Approved")
+                {
+                    return RedirectToAction("BankDetailsUpdate", "User");
+                }
+            }
             #region Check Balance
             DataSet ds11 = model.GetWalletBalance();
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -1269,8 +1273,6 @@ namespace MyTrade.Controllers
                 model.PayoutBalance = ds11.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
-
-
             return View(model);
         }
 
