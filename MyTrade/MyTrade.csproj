@@ -774,6 +774,7 @@
     <Content Include="Views\Master\UploadList.cshtml" />
     <Content Include="Views\User\Download.cshtml" />
     <Content Include="Views\Admin\TransferWallet.cshtml" />
+    <Content Include="Views\Admin\AdvanceDeduction.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

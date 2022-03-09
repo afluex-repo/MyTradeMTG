@@ -1424,40 +1424,89 @@ namespace MyTrade.Controllers
             return RedirectToAction("PayoutRequestList", "Admin");
         }
 
-
-
-
-
-
-
-
-        public ActionResult GetNameDetails( string LoginId)
+        [HttpPost]
+        public ActionResult GetNameDetails(string LoginId)
         {
             Admin model = new Admin();
             model.LoginId = LoginId;
             DataSet ds = model.GetNameDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                model.Result= "yes";
-                model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                model.Result = "yes";
+                model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
                 model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
             }
             else
             {
                 model.Result = "no";
             }
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
         public ActionResult TransferWallet()
         {
             return View();
         }
 
+        [HttpPost]
+        [ActionName("TransferWallet")]
+        [OnAction(ButtonName = "Transfer")]
+        public ActionResult TransferWallet(Admin model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveTransferWallet();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["TransferWallet"] = "Transferred  successfully";
+                    }
+                    else
+                    {
+                        TempData["TransferWallet"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["TransferWallet"] = ex.Message;
+            }
+            return RedirectToAction("TransferWallet", "Admin");
+        }
 
+        public ActionResult AdvanceDeduction()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("AdvanceDeduction")]
+        [OnAction(ButtonName = "Advance")]
+        public ActionResult AdvanceDeduction(Admin model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveDeduction();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["deduction"] = "Advance/Deduction done successfully";
+                    }
+                    else
+                    {
+                        TempData["deduction"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["deduction"] = ex.Message;
+            }
+            return RedirectToAction("AdvanceDeduction", "Admin");
+        }
     }
 }
