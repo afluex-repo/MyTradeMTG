@@ -110,8 +110,16 @@ namespace MyTrade.Models
             return ds;
         }
 
-
-
+        public DataSet DeleteReward()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_RewardId",PK_RewardId),
+                new SqlParameter("@DeletedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteReward", para);
+            return ds;
+        }
+        
         #endregion
     }
 }
