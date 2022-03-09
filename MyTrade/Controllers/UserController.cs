@@ -449,8 +449,8 @@ namespace MyTrade.Controllers
                 model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
                 model.SelfBV = ds.Tables[1].Rows[0]["SelfBV"].ToString();
                 model.TeamBV = ds.Tables[1].Rows[0]["TeamBV"].ToString();
-                model.SelfBVDollar = (Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805).ToString();
-                model.TeamBVDollar = (Convert.ToDouble(ds.Tables[1].Rows[0]["TeamBV"]) / 76.805).ToString();
+                model.SelfBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805),2).ToString();
+                model.TeamBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["TeamBV"]) / 76.805), 2).ToString();
                 model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
             }
             model.Level = "1";
@@ -468,8 +468,8 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.SelfBV = r["SelfBV"].ToString();
                     obj.TeamBV = r["TeamBV"].ToString();
-                    obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
-                    obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
+                    //obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
+                    //obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
                     obj.SponsorName = r["SponsorName"].ToString();
                     obj.Color = r["Color"].ToString();
                     lstMember.Add(obj);

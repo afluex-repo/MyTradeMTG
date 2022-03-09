@@ -94,10 +94,10 @@ namespace MyTrade.Models
         public string PK_ProductID { get; set; }
         public string BV { get; set; }
         public string PackageType { get; set; }
-        public string IFSCCode { get;  set; }
-        public string MemberAccNo { get;  set; }
-
-
+        public string IFSCCode { get; set; }
+        public string MemberAccNo { get; set; }
+        public string Deduction { get; set; }
+      
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -355,7 +355,7 @@ namespace MyTrade.Models
                 new SqlParameter("@ToDate", ToDate),
                  new SqlParameter("@Status", Status)
             };
-            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest", para);
             return ds;
         }
         public DataSet ApprovePayoutRequest()
@@ -378,6 +378,28 @@ namespace MyTrade.Models
             return ds;
         }
 
-        
+        public DataSet SaveTransferWallet()
+        {
+            SqlParameter[] para = {
+                 new SqlParameter("@Fk_UserId",Fk_UserId),
+                new SqlParameter("@Amount",CrAmount),
+                 new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveTransferWallet", para);
+            return ds;
+        }
+
+        public DataSet SaveDeduction()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@Fk_UserId",Fk_UserId),
+               new SqlParameter("@Amount",CrAmount),
+              new SqlParameter("@Narration",Narration),
+                new SqlParameter("@Remarks",Remark),
+                 new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveDeduction", para);
+            return ds;
+        }
     }
 }
