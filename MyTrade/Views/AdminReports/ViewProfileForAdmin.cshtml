@@ -104,6 +104,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label>Pan Image</label>
+                                    <input type="file" name="Image" id="Image" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="Address">Address </label>
                                     @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
                                 </div>
@@ -158,6 +164,7 @@
                                     @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @onkeypress = "return onlyAlphabets();" })
                                 </div>
                             </div>
+                          
                         </div>
                         <div class="row">
                             <div class="col-md-4">
