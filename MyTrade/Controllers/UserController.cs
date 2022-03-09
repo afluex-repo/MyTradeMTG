@@ -38,7 +38,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
                 ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
-                ViewBag.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"])+ Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
+                ViewBag.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
                 ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
                 ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 ViewBag.LevelIncomeTR1ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR1ForPayout"].ToString();
@@ -48,6 +48,7 @@ namespace MyTrade.Controllers
                 ViewBag.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
+                ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"])+ 0;
                 if (ViewBag.Status == "InActive")
                 {
                     return RedirectToAction("ActivateByPin", "User");
@@ -63,8 +64,8 @@ namespace MyTrade.Controllers
                 ViewBag.Tr2Business = ds.Tables[1].Rows[0]["Tr2Business"].ToString();
             }
 
-            
-         
+
+
             List<Dashboard> lst = new List<Dashboard>();
             obj.AddedBy = Session["Pk_userId"].ToString();
             DataSet ds1 = obj.GetRewarDetails();
@@ -80,10 +81,16 @@ namespace MyTrade.Controllers
                 }
                 obj.lstReward = lst;
             }
-
-
-
-
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
+            {
+                ViewBag.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
+            {
+                ViewBag.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
+                ViewBag.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
+            }
+            
 
             return View(obj);
         }
@@ -440,6 +447,11 @@ namespace MyTrade.Controllers
                 model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
                 model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
                 model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+                model.SelfBV = ds.Tables[1].Rows[0]["SelfBV"].ToString();
+                model.TeamBV = ds.Tables[1].Rows[0]["TeamBV"].ToString();
+                model.SelfBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805),2).ToString();
+                model.TeamBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["TeamBV"]) / 76.805), 2).ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
             }
             model.Level = "1";
             DataSet ds1 = model.GetLevelMembers();
@@ -456,6 +468,8 @@ namespace MyTrade.Controllers
                     obj.Status = r["Status"].ToString();
                     obj.SelfBV = r["SelfBV"].ToString();
                     obj.TeamBV = r["TeamBV"].ToString();
+                    //obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
+                    //obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
                     obj.SponsorName = r["SponsorName"].ToString();
                     obj.Color = r["Color"].ToString();
                     lstMember.Add(obj);
@@ -955,6 +969,8 @@ namespace MyTrade.Controllers
                     obj.ProfilePic = r["ProfilePic"].ToString();
                     obj.SelfBV = r["SelfBV"].ToString();
                     obj.TeamBV = r["TeamBV"].ToString();
+                    obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
+                    obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
                     obj.SponsorName = r["SponsorName"].ToString();
                     obj.Color = r["Color"].ToString();
                     lst.Add(obj);
@@ -1246,7 +1262,7 @@ namespace MyTrade.Controllers
                 {
                     User obj = new User();
                     obj.PK_RequestID = r["Pk_RequestId"].ToString();
-                    obj.Amount =Convert.ToDecimal(r["AMount"].ToString());
+                    obj.Amount = Convert.ToDecimal(r["AMount"].ToString());
                     obj.Date = r["RequestedDate"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.AccountNo = r["MemberAccNo"].ToString();
@@ -1259,12 +1275,9 @@ namespace MyTrade.Controllers
                 }
                 model.lstPayoutRequest = lst;
             }
-            if(ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
             {
-                if(ds1.Tables[1].Rows[0]["PanStatus"].ToString()!="Approved")
-                {
-                    return RedirectToAction("BankDetailsUpdate", "User");
-                }
+                    model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
             }
             #region Check Balance
             DataSet ds11 = model.GetWalletBalance();
@@ -1311,7 +1324,7 @@ namespace MyTrade.Controllers
             User model = new User();
             List<User> lst = new List<User>();
             model.AddedBy = Session["Pk_userId"].ToString();
-            DataSet ds = model.GetRewarDetails();
+            DataSet ds = model.GetFileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -1333,7 +1346,7 @@ namespace MyTrade.Controllers
         public ActionResult Download(User model)
         {
             List<User> lst = new List<User>();
-             model.AddedBy = Session["Pk_userId"].ToString();
+            model.AddedBy = Session["Pk_userId"].ToString();
             DataSet ds = model.GetRewarDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

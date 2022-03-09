@@ -28,12 +28,16 @@ namespace MyTrade.Controllers
             if (Ids == null || Ids == "")
             {
                 model.Ids = Session["Pk_UserId"].ToString();
+               
             }
             else
             {
                 model.Ids = Ids;
+              
             }
             model.DirectStatus = "Self";
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
+           
             DataSet ds = model.GetDirectList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -77,10 +81,12 @@ namespace MyTrade.Controllers
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             List<Reports> lst = new List<Reports>();
 
-            if (model.Ids == null)
+            if (model.Ids == null || model.Ids == "")
             {
                 model.Ids = Session["Pk_UserId"].ToString();
+
             }
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.GetDirectList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -195,7 +201,7 @@ namespace MyTrade.Controllers
             {
                 model.Fk_UserId = Session["Pk_UserId"].ToString();
             }
-            model.FK_RootId = "1";
+            model.FK_RootId = Session["Pk_UserId"].ToString();
             List<AssociateBooking> lst = new List<AssociateBooking>();
             DataSet ds = model.GetDownlineTree();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

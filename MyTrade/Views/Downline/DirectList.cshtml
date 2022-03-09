@@ -75,7 +75,7 @@
                                 <div>
                                     @if (Model != null)
                                     {
-                                        if (Model.Fk_UserId != Session["Pk_UserId"].ToString() && Model.lstassociate != null)
+                                        if ( Model.lstassociate != null)
                                         {
                                             <a href="/Downline/DirectList?Ids=@Model.Ids" id="btnDown" class="btn btn-info btn-sm">Next</a>
                                         }

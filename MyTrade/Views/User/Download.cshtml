@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @using (Html.BeginForm("Download", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -49,6 +49,7 @@
                                         <th>S No.</th>
                                         <th>Title</th>
                                         <th>Reward</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,8 +65,19 @@
                                                     <td>@Item.Title</td>
                                                     <td>
                                                         <a href="@Item.Image" download>
-                                                            <i class="fa fa-file-pdf-o" style="font-size:25px;color:red">
-                                                                <i class="mdi mdi-download" style="font-size:25px;color:red"></i>
+                                                            @if (Item.Image.ToLower().Contains("jpg") || Item.Image.ToLower().Contains("jpeg") || Item.Image.ToLower().Contains("png") || Item.Image.ToLower().Contains("gif"))
+                                                            {
+                                                                <img src="@Item.Image" height="100" width="100" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <iframe src="@Item.Image" height="100" width="100"></iframe>
+                                                            }
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Item.Image" download>
+                                                            <i class="fa fa-download" style="font-size:25px;color:#354a76">
                                                             </i>
                                                         </a>
                                                     </td>

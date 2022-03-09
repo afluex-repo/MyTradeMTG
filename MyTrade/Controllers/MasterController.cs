@@ -345,5 +345,115 @@ namespace MyTrade.Controllers
 
         }
 
+
+        public ActionResult UploadFile()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ActionName("UploadFile")]
+        public ActionResult UploadFile(Master model, HttpPostedFileBase postedFile)
+        {
+            try
+            {
+                if (postedFile != null)
+                {
+                    model.Image = "../UploadFile/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    postedFile.SaveAs(Path.Combine(Server.MapPath(model.Image)));
+                }
+                model.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = model.UploadFile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Upload"] = "File upload successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["Upload"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Upload"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Upload"] = ex.Message;
+            }
+            return RedirectToAction("UploadFile", "Master");
+        }
+        public ActionResult UploadFileList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetFilesDetails();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.Image = "/UploadFile/" + r["postedFile"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstReward = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("UploadFileList")]
+        public ActionResult UploadFileList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetFilesDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_RewardId = r["PK_RewardId"].ToString();
+                    obj.Title = r["Title"].ToString();
+                    obj.Image = "/UploadFile/" + r["postedFile"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstReward = lst;
+            }
+            return View(model);
+        }
+        public ActionResult DeleteUploadFile(string Id)
+        {
+            try
+            {
+                Master model = new Master();
+                model.PK_RewardId = Id;
+                model.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = model.DeleteFile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Reward"] = "File deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Reward"] = ex.Message;
+            }
+            return RedirectToAction("UploadFileList", "Master");
+        }
     }
 }

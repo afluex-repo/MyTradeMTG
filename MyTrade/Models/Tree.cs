@@ -24,6 +24,10 @@ namespace MyTrade.Models
         public string TotalInActiveTeam { get; set; }
         public string SponsorName { get; set; }
         public string Color { get; set; }
+        public string SelfBV { get; set; }
+        public string TeamBV { get; set; }
+        public string SelfBVDollar { get; set; }
+        public string TeamBVDollar { get; set; }
         public DataSet GetLevelTreeData()
         {
             SqlParameter[] para = {
@@ -82,6 +86,8 @@ namespace MyTrade.Models
         public string ProfilePic { get; set; }
         public string SelfBV { get; set; }
         public string TeamBV { get; set; }
+        public string SelfBVDollar { get; set; }
+        public string TeamBVDollar { get; set; }
         public string Status { get; set; }
         public string SponsorName { get; set; }
         public string Color { get; set; }
