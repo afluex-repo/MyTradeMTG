@@ -686,6 +686,7 @@ namespace MyTrade.Controllers
                     model.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
                     model.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
                     model.Image = ds.Tables[0].Rows[0]["PanImage"].ToString();
+                    model.UPIID = ds.Tables[0].Rows[0]["UPIID"].ToString();
                 }
             }
             return View(model);

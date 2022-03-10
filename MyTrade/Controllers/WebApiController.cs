@@ -277,78 +277,78 @@ namespace MyTrade.Controllers
         }
         #endregion
         #region Dashboard
-        public ActionResult GetDashboard(AssociateDashBoard associate)
-        {
-            DashboardResponse obj = new DashboardResponse();
-            DataSet ds = associate.GetAssociateDashboard();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                obj.TotalDownline = ds.Tables[0].Rows[0]["TotalDownline"].ToString();
-                obj.TotalBusiness = ds.Tables[0].Rows[0]["TotalBusiness"].ToString();
-                obj.TeamBusiness = ds.Tables[0].Rows[0]["TeamBusiness"].ToString();
-                obj.SelfBusiness = ds.Tables[0].Rows[0]["SelfBusiness"].ToString();
-                obj.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
-                obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
-                obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
-                obj.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
-                obj.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
-                obj.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
-                obj.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
-                obj.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
-                obj.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
-                obj.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
-                obj.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
-                obj.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
-                obj.Status = ds.Tables[2].Rows[0]["Status"].ToString();
-                obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
-                obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
-                if (obj.ActiveStatus == "Active")
-                {
-                    obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
-                }
-                else
-                {
-                    obj.ReferralLink = "";
-                }
-                obj.Status = "0";
-                obj.Message = "Data Fetched";
+        //public ActionResult GetDashboard(AssociateDashBoard associate)
+        //{
+        //    DashboardResponse obj = new DashboardResponse();
+        //    DataSet ds = associate.GetAssociateDashboard();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        obj.TotalDownline = ds.Tables[0].Rows[0]["TotalDownline"].ToString();
+        //        obj.TotalBusiness = ds.Tables[0].Rows[0]["TotalBusiness"].ToString();
+        //        obj.TeamBusiness = ds.Tables[0].Rows[0]["TeamBusiness"].ToString();
+        //        obj.SelfBusiness = ds.Tables[0].Rows[0]["SelfBusiness"].ToString();
+        //        obj.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
+        //        obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
+        //        obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+        //        obj.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
+        //        obj.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
+        //        obj.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
+        //        obj.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
+        //        obj.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
+        //        obj.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
+        //        obj.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
+        //        obj.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
+        //        obj.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
+        //        obj.Status = ds.Tables[2].Rows[0]["Status"].ToString();
+        //        obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
+        //        obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
+        //        if (obj.ActiveStatus == "Active")
+        //        {
+        //            obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
+        //        }
+        //        else
+        //        {
+        //            obj.ReferralLink = "";
+        //        }
+        //        obj.Status = "0";
+        //        obj.Message = "Data Fetched";
 
-                return Json(obj, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                obj.Status = "1";
-                return Json(obj, JsonRequestBehavior.AllowGet);
-            }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-            {
-                obj.Tr1Business = ds.Tables[1].Rows[0]["Tr1Business"].ToString();
-                obj.Tr2Business = ds.Tables[1].Rows[0]["Tr2Business"].ToString();
-            }
-            List<Dashboard> lst = new List<Dashboard>();
-            DataSet ds1 = obj.GetRewardDetails();
-            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds1.Tables[0].Rows)
-                {
-                    Dashboard obj1 = new Dashboard();
-                    obj1.PK_RewardId = r["PK_RewardId"].ToString();
-                    obj1.Title = r["Title"].ToString();
-                    obj1.Image = "/UploadReward/" + r["postedFile"].ToString();
-                    lst.Add(obj1);
-                }
-                obj.lstReward = lst;
-            }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
-            {
-                obj.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
-            }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
-            {
-                obj.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
-                obj.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
-            }
-        }
+        //        return Json(obj, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        obj.Status = "1";
+        //        return Json(obj, JsonRequestBehavior.AllowGet);
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+        //    {
+        //        obj.Tr1Business = ds.Tables[1].Rows[0]["Tr1Business"].ToString();
+        //        obj.Tr2Business = ds.Tables[1].Rows[0]["Tr2Business"].ToString();
+        //    }
+        //    List<Dashboard> lst = new List<Dashboard>();
+        //    DataSet ds1 = obj.GetRewardDetails();
+        //    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow r in ds1.Tables[0].Rows)
+        //        {
+        //            Dashboard obj1 = new Dashboard();
+        //            obj1.PK_RewardId = r["PK_RewardId"].ToString();
+        //            obj1.Title = r["Title"].ToString();
+        //            obj1.Image = "/UploadReward/" + r["postedFile"].ToString();
+        //            lst.Add(obj1);
+        //        }
+        //        obj.lstReward = lst;
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
+        //    {
+        //        obj.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
+        //    {
+        //        obj.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
+        //        obj.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
+        //    }
+        //}
         #endregion
         #region Tree
         public ActionResult Tree(TreeAPI model)
