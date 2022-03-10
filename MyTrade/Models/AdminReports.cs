@@ -63,6 +63,7 @@ namespace MyTrade.Models
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
         public string Image { get; set; }
+        public string MemberStatus { get; set; }
 
         //public string SponserName { get; set; }
 
@@ -77,7 +78,8 @@ namespace MyTrade.Models
                                     new SqlParameter("@SponsorName", SponsorName),
                                     new SqlParameter("@Status", Status),
                                     new SqlParameter("@IsDownline", IsDownline),
-                                    new SqlParameter("@Leg", Leg)
+                                    new SqlParameter("@Leg", Leg),
+                                     new SqlParameter("@MemberStatus",MemberStatus)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
