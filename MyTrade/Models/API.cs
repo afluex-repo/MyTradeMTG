@@ -60,7 +60,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string sponsorId { get; set; }
-  
+
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
@@ -175,6 +175,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
             return ds;
         }
+        
 
     }
     public class DashboardResponse
@@ -187,6 +188,26 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string ReferralLink { get; set; }
+        public string TotalBusiness { get; set; }
+        public string TeamBusiness { get; internal set; }
+        public string SelfBusiness { get; set; }
+        public string TotalTeam { get; set; }
+        public string TotalTeamActive { get; set; }
+        public string TotalTeamInActive { get; set; }
+        public decimal TotalIncome { get; set; }
+        public string LevelIncomeTr1 { get; set; }
+        public string LevelIncomeTr2 { get; set; }
+        public string UsedPins { get; set; }
+        public string AvailablePins { get; set; }
+        public string TotalPins { get; set; }
+        public string TotalPayoutWallet { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Tr1Business { get; set; }
+        public string Tr2Business { get; set; }
+        public string TotalTPSAmountTobeReceived { get; set; }
+        public string TotalTPSAmountReceived { get; set; }
+        public dynamic TotalTPSBalanceAmount { get; set; }
+        public List<Reward> lstReward { get; set; }
     }
     public class UpdateProfile
     {
@@ -497,12 +518,12 @@ namespace MyTrade.Models
     }
     public class PinDetails
     {
-        public string ePinNo { get;  set; }
-        public string FromId { get;  set; }
-        public string FromName { get;  set; }
-        public string ToId { get;  set; }
-        public string ToName { get;  set; }
-        public string TransferDate { get;  set; }
+        public string ePinNo { get; set; }
+        public string FromId { get; set; }
+        public string FromName { get; set; }
+        public string ToId { get; set; }
+        public string ToName { get; set; }
+        public string TransferDate { get; set; }
     }
     public class Request
     {
@@ -521,7 +542,7 @@ namespace MyTrade.Models
     public class ProfileAPI
     {
         public string Status { get; set; }
-        public string Message { get;  set; }
+        public string Message { get; set; }
         public string FK_UserId { get; set; }
         public string LoginId { get; set; }
         public string SponsorId { get; set; }
@@ -572,7 +593,7 @@ namespace MyTrade.Models
 
     public class BankDetailsUpdateAPIResponse
     {
-        
+
         public string Status { get; set; }
         public string Message { get; set; }
         public string Fk_UserId { get; set; }
@@ -619,6 +640,7 @@ namespace MyTrade.Models
         public string BankBranch { get; set; }
         public string BankName { get; set; }
         public string AddedBy { get; set; }
+        public string Remark { get; set; }
         public DataSet AddWallet()
         {
             SqlParameter[] para = {
@@ -629,13 +651,14 @@ namespace MyTrade.Models
                                       new SqlParameter("@DDChequeDate", DDChequeDate) ,
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                           new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@Remarks", Remark),
                                             new SqlParameter("@AddedBy", AddedBy)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
             return ds;
         }
     }
-    
+
 
 
     public class Password
@@ -646,7 +669,7 @@ namespace MyTrade.Models
         public DataSet ChangePassword()
         {
             SqlParameter[] para = {
-                                     
+
                                       new SqlParameter("@OldPassword", OldPassword),
                                       new SqlParameter("@NewPassword", NewPassword),
                                        new SqlParameter("@UpdatedBy", FK_UserId)
@@ -673,6 +696,84 @@ namespace MyTrade.Models
         }
     }
 
+    public class Reward
+    {
+        public string PK_RewardId { get; set; }
+        public string Title { get; set; }
+        public string Image { get; set; }
+    }
+    public class WalletRequestList
+    {
+        public string FK_UserId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public DataSet GetEwalletRequestDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",FK_UserId),
+                                   new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetails", para);
 
-    
+            return ds;
+        }
+        public DataSet GetEWalletDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetEWalletDetails", para);
+            return ds;
+        }
+    }
+    public class WalletResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<WalletDetails> lst { get; set; }
+    }
+    public class WalletDetails
+    {
+        public string RequestCode { get; set; }
+        public string RequestID { get; set; }
+        public string Amount { get; set; }
+        public string BankBranch { get; set; }
+        public string BankName { get; set; }
+        public string ChequeDDDate { get; set; }
+        public string ChequeDDNo { get; set; }
+        public string DisplayName { get; set; }
+        public string Fk_UserId { get; set; }
+        public string FromDate { get; set; }
+        public string LoginId { get; set; }
+        public string PaymentMode { get; set; }
+        public string Remark { get; set; }
+
+        public string Status { get; set; }
+        public string ToDate { get; set; }
+        public string TransactionDate { get; set; }
+        public string UserId { get; set; }
+        public string WalletId { get; set; }
+    }
+    public class UserWalletAPI
+    {
+        public string Pk_EwalletId { get; set; }
+        public string CrAmount { get;  set; }
+        public string DrAmount { get;  set; }
+        public string Balance { get; set; }
+        public string Narration { get;  set; }
+        public string TransactionDate { get;  set; }
+    }
+    public class UserWalletAPIResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string TotalCr { get; set; }
+        public string TotalDr { get; set; }
+        public string AvailableBalance { get; set; }
+        public List<UserWalletAPI> lst { get; set; }
+    }
 }
