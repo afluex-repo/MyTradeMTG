@@ -83,13 +83,11 @@
 
                                 <form action="/Home/RegistrationAction" method="post">
                                     <div class="row" id="formdiv">
-                                        <div>
-                                            <div class="form-group" style="display:none"></div>
-                                        </div>
+
                                         @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
                                         {
                                             <h5 style="color: black; font-size: 14px;">Congratulations! For joining us under sponsor code: @ViewBag.SponsorId</h5>
-                                            <input type="hidden" value="@ViewBag.SponsorId" i acceptd="SponsorId" name="SponsorId" />
+                                                <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
                                         }
                                         else
                                         {
@@ -105,7 +103,6 @@
                                                 </div>
                                             </div>
                                         }
-
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true" })
@@ -136,19 +133,17 @@
                                                 @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <div class="col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 15px;">
                                             <div class="form-group">
                                                 <select name="Gender" id="Gender" class="form-select" required>
-                                                    <option value="0">-Select-</option>
+                                                    <option value="0">-Select Gender-</option>
                                                     <option value="M">Male</option>
                                                     <option value="F">Female</option>
                                                     <option value="O">Other</option>
                                                 </select>
                                                 <div class="help-block with-errors"></div>
                                             </div>
-                                            @*<div class="form-group">
-                                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control" })
-                                                </div>*@
+
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
@@ -163,6 +158,12 @@
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.State, new { @class = "form-control", @placeholder = "State", @Disabled = "true" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group" style="text-align: start;">
+                                                <input type="checkbox" value="yes" name="wp-comment-cookies-consent" id="wp-comment-cookies-consent">
+                                                <label for="wp-comment-cookies-consent">I accept all <a href="javascript:void(0)">Terms & Conditions. </a></label>
                                             </div>
                                         </div>
                                     </div>
