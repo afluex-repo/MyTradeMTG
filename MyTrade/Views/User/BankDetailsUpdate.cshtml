@@ -100,7 +100,7 @@
                                     </label><span style="color: red">*</span>
                                     @if (Model.IFSCCode == null || Model.IFSCCode == "" || Model.IsVerified == "False")
                                     {
-                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
+                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code", @onchange = "return GetBankDetails();" })
                                     }
                                     else
                                     {
@@ -221,8 +221,6 @@
         $('#my-button').prop('disabled', true);
     });
 
-
-
     function validate() {
         if ($('#AdharNo').val() == '') {
             $("#AdharNo").addClass('errortext');
@@ -285,7 +283,28 @@
             return false;
         }
     }
-
+    function GetBankDetails() {
+        debugger;
+        $.ajax({
+            url: 'https://ifsc.razorpay.com/' + $('#IFSCCode').val(),
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                $("#BankName").val(data.BANK);
+                $("#BranchName").val(data.BRANCH);
+            },
+            error: function () {
+                Snackbar.show({
+                    text: 'IFSC Code not found',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+                $("#BankName").val('');
+                $("#BranchName").val('');
+            }
+        });
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
