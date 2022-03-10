@@ -1,0 +1,217 @@
+﻿@model MyTrade.Models.Admin
+
+@{
+    ViewBag.Title = "PayoutRequestList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+
+@using (Html.BeginForm("PayoutRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Transfer To Bank Account list</h4>
+                                <span class="text-danger">
+                                    @TempData["msg"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>Login Id </label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label> From Date</label>
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label> To Date</label>
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                                <div class="form-group">
+                                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table id="html5-extension" class="table table-hover non-hover" ,data-page-length='25'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Transaction No</th>
+                                        <th>Login Id</th>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                        <th>IFSC Code</th>
+                                        <th>Account No.</th>
+                                        <th>Status</th>
+                                        <th>Requested Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lst != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lst)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.TransactionNo</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.IFSCCode</td>
+                                                    <td>@Item.MemberAccNo</td>
+                                                    <td>@Item.Status</td>
+                                                    <td>@Item.Date</td>
+                                                    @if (Item.Status == "Pending")
+                                                    {
+                                                        <td>
+                                                            <a href="/Admin/ApprovePayout?id=@Item.PK_RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>
+                                                            <a href="/Admin/DeclinePayout?id=@Item.PK_RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>
+
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script>
+    var f3 = flatpickr(document.getElementById('FromDate'),
+        {
+            // mode: "range"
+        });
+    var f3 = flatpickr(document.getElementById('ToDate'),
+        {
+            // mode: "range"
+        });
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function Validate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+        $('#IsDownline').click(function () {
+            if ($(this).attr('checked') == true) {
+                $('#IsDownline').attr("checked", "true");
+            }
+            //else
+            //{
+            //    $('#GetDetails').removeAttr('disabled');
+            //}
+        });
+
+    }
+
+
+    $('#IsDownline').click(function () {
+        if ($(this).attr('checked') == false) {
+            $('#IsDownline').attr("disabled", "disabled");
+        } else {
+            $('#GetDetails').removeAttr('disabled');
+        }
+    });
+
+
+
+
+
+    //$('#IsDownline').click(function () {
+    //    if ($(this).is(':checked')) {
+    //        $('#IsDownline').attr("disabled", "false");
+    //    } else {
+    //        $('#IsDownline').removeAttr("disabled");
+    //    }
+    //});
+
+
+    //$("input[type=checkbox]").change(function () {
+    //    if ($(this).prop("checked")) {
+    //        $(this).val(true);
+    //    } else {
+    //        $(this).val(false);
+    //    }
+    //});
+
+    //function validate() {
+    //    debugger;
+    //    $(".errortext").removeClass("errortext");
+    //    if ($('#IsDownline').is(':checked') ) {
+    //        if ($('#PK_ProductID').val() == '')
+    //        {
+    //            $("#PK_ProductID").addClass('errortext');
+    //            $('#PK_ProductID').focus();
+    //            return false;
+    //        }
+    //    }
+        //if ($('#PK_ProductID').val() != '')
+        //{
+        //    if ($('#IsDownline').is(':checked')) {
+        //    }
+        //    else {
+        //        alert('Please check on Is Downline');
+        //       return false;
+        //    }
+        //}
+        //else {
+        //    $("#PK_ProductID").removeClass('errortext');
+        //    return false;
+        //}
+    //}
+
+</script>
+
+
+
+
+
+

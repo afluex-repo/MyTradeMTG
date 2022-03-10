@@ -3,6 +3,7 @@ using MyTrade.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -451,13 +452,18 @@ namespace MyTrade.Controllers
         [HttpPost]
         [ActionName("ViewProfileForAdmin")]
         [OnAction(ButtonName = "Update")]
-        public ActionResult ViewProfileForAdmin(AdminReports model)
+        public ActionResult ViewProfileForAdmin(AdminReports model, HttpPostedFileBase Image)
         {
             try
             {
                 List<SelectListItem> Gender = Common.BindGender();
                 ViewBag.Gender = Gender;
                 model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                if (Image != null)
+                {
+                    model.Image = "/PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    Image.SaveAs(Path.Combine(Server.MapPath(model.Image)));
+                }
                 DataSet ds = model.UpdateAdminProfile();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -475,7 +481,7 @@ namespace MyTrade.Controllers
             {
                 TempData["AdminProfile"] = ex.Message;
             }
-            return View(model);
+            return RedirectToAction("ViewProfileForAdmin", "AdminReports", new { Id = model.Fk_UserId });
         }
 
 
@@ -536,9 +542,11 @@ namespace MyTrade.Controllers
                     ViewBag.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
                     ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                     ViewBag.BankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                    ViewBag.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
                     ViewBag.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     ViewBag.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
-                    ViewBag.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                    ViewBag.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 }
             }
             return View(model);

@@ -828,16 +828,7 @@
   .login-content .login-form form {
     margin-top: 25px;
   }
-  .signup-area .col-lg-6:first-child {
-    -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-  }
-  .signup-area .col-lg-6:last-child {
-    -webkit-box-ordinal-group: 2;
-        -ms-flex-order: 1;
-            order: 1;
-  }
+  
   .signup-image {
     background-image: unset;
     height: auto;
@@ -1561,16 +1552,7 @@
   .login-image img {
     display: block;
   }
-  .signup-area .col-lg-6:first-child {
-    -webkit-box-ordinal-group: 3;
-        -ms-flex-order: 2;
-            order: 2;
-  }
-  .signup-area .col-lg-6:last-child {
-    -webkit-box-ordinal-group: 2;
-        -ms-flex-order: 1;
-            order: 1;
-  }
+
   .signup-content {
     height: 100%;
     padding-top: 70px;

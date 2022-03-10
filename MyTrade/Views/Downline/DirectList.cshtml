@@ -12,7 +12,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Direct List</h4>
+                                <h4>DownTeam Tree</h4>
                                 <span class="text-danger">
                                     @TempData["pin"]
                                 </span>
@@ -23,22 +23,22 @@
                         <div class="widget-content widget-content-area br-6">
 
                             <div class="row">
-                                <div class="col-lg-3">
+                                @*<div class="col-lg-3">
                                     <div class="form-group">
                                         <label>  Name </label>
                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>From Date  </label>
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control",@readonly=true })
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>To Date  </label>
-                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = true })
                                     </div>
                                 </div>
                                 @*<div class="col-md-3">
@@ -53,7 +53,18 @@
                                         @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
                                     </div>
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Self/Team</label>
+                                        <input type="hidden" id="hdf" value="@Model.DirectStatus">
+                                        <select id="DirectStatus" name="DirectStatus" class = "form-control">
+                                            <option value="0">-select-</option>
+                                            <option value="Self">Self</option>
+                                            <option value="Team">Team</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3" style="margin-top:15px;">
                                     <div class="form-group">
                                         <br />
                                         <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
@@ -64,7 +75,7 @@
                                 <div>
                                     @if (Model != null)
                                     {
-                                        if (Model.Fk_UserId != Session["Pk_UserId"].ToString() && Model.lstassociate != null)
+                                        if ( Model.lstassociate != null)
                                         {
                                             <a href="/Downline/DirectList?Ids=@Model.Ids" id="btnDown" class="btn btn-info btn-sm">Next</a>
                                         }
@@ -90,6 +101,7 @@
                                             @*<th>Joining Date</th>*@
                                             <th>Package</th>
                                             <th>Activation Date</th>
+                                            <th>Level</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -114,6 +126,7 @@
                                                         @*<td>@Item.JoiningDate</td>*@
                                                         <td>@Item.Package</td>
                                                         <td>@Item.PermanentDate</td>
+                                                        <td>@Item.Level</td>
                                                         <td>@Item.Status</td>
 
                                                     </tr>
@@ -132,9 +145,11 @@
         </div>
     </div>
 }
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+
 <script>
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -145,6 +160,7 @@
 </script>
 <script>
     $(document).ready(function () {
+        $("#DirectStatus").val($("#hdf").val()).attr("selected", "selected");
         $('#dataTables-example').DataTable({
             responsive: true
         });

@@ -54,13 +54,15 @@
                                 <div class="d-table-cell">
                                     <div class="login-form">
                                         <div class="logo">
-                                            <a href="index.html"><img src="~/MytradeWebsite/assets/img/logo.png" alt="image" width="200px"></a>
+                                            <a href="/Home/Index"><img src="~/MytradeWebsite/assets/img/logo.png" alt="image" width="200px"></a>
                                             <h6 class="logo-tagline">One Step Towards Success</h6>
                                         </div>
 
                                         <h3>Welcome back</h3>
                                         <p>New to My Trade? <a href="/Home/Registration">Sign up</a></p>
 
+
+                                        <p style="color:red;float:right">@TempData["Login"]</p>
                                         <form action="/Home/LoginAction" method="post">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })

@@ -43,8 +43,7 @@ namespace MyTrade.Models
         public string BranchName { get; set; }
         public string PK_RequestID { get; set; }
         public string Balance { get; set; }
-        
-
+        public string Pk_InvestmentId { get; set; }
 
         public DataSet GetMemberDetails()
         {
@@ -101,13 +100,19 @@ namespace MyTrade.Models
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate)
                                      };
-            DataSet ds = DBHelper.ExecuteQuery("GetROIIncomeReportsDetails",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetROIIncomeReportsDetails", para);
             return ds;
         }
 
         public DataSet GetROIDetails()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails");
+            SqlParameter[] para = {
+                  new SqlParameter("@Fk_UserId", FK_UserId),
+                   new SqlParameter("@Pk_InvestmentId", Pk_InvestmentId)
+                                     };
+
+
+            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails", para);
             return ds;
         }
 
@@ -149,7 +154,7 @@ namespace MyTrade.Models
 
         }
 
-        
+
 
 
 

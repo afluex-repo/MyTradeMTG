@@ -24,12 +24,12 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
+                                    <input type="hidden" value="@Model.PinStatus" id="pstatus" />
                                     <label>Pin Status</label>
-                                    <select id="PinStatus" name="PinStatus" class="form-control">
+                                    <select id="PinStatus" name="PinStatus" class="form-control" onload = "getpaymentTypedetails();">
                                         @*<option value="">-Select-</option>*@
                                         <option value="T">Available</option>
                                         <option value="P">Used</option>
-
                                     </select>
                                 </div>
                             </div>
@@ -48,7 +48,6 @@
                                         <th>Sr No.</th>
                                         <th>E-Pin No</th>
                                         <th>Package Name</th>
-                                       
                                         <th>Pin Amount</th>
                                         <th>BV</th>
                                         <th>GST (18 %)</th>
@@ -59,7 +58,7 @@
                                         {
                                             <th>Registered To</th>
                                         }
-                                        
+
                                         <th>Pin Generation Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -109,11 +108,11 @@
                                                     <td>@Item.PinGenerationDate</td>
                                                     @if (Item.PinStatus == "Available")
                                                     {
-                                                        <td style="width:200px;"><a    style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
+                                                        <td style="width:200px;"><a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.ePinNo');">Activate User</a></td>
                                                     }
                                                     else
                                                     {
-                                                        <td></td>
+                                                        <td><span>Activated</span></td>
                                                     }
                                                 </tr>
                                                 i++;
@@ -258,6 +257,7 @@
     }
     $(document).ready(function () {
         debugger;
+        $.noConflict();
         $('#ckbCheckAll').on('click', function () {
             debugger;
             if (this.checked) {
@@ -337,13 +337,25 @@
                             alert(data.Message);
                         }
                     }
-
                     $("#myModal").modal('hide');
                 }
             });
         }
     }
 
+    //function getpaymentTypedetails() {
+    //    debugger;
+    //    if ($('#PinStatus').val() == 'T') {
+
+    //        $("#PinStatus").val(T);
+    //    }
+    //    else if ($('#PinStatus').val() == 'P') {
+    //        $("#PinStatus").val(P);
+     
+    //    }
+    //}
+
+   $("#PinStatus").val($("#pstatus").val()).attr("Selected","Selected");
 
 </script>
 @if (TempData["msg"] != null)

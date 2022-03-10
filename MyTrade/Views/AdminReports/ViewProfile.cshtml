@@ -9,7 +9,8 @@
     max-width: 260px !important;
 }
         .user-profile .widget-content-area .user-info-list ul.contacts-block li {
-            margin-bottom: 22px !important;
+            /*margin-bottom: 22px !important;*/
+             margin-bottom: 39px !important;
         }
 </style>
 
@@ -148,7 +149,17 @@
                             <div class="t-dot">
                             </div>
                             <div class="t-text">
-                                <p>@ViewBag.State, @ViewBag.City</p>
+                                <p>@ViewBag.State</p>
+                            </div>
+                        </div>
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">City</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@ViewBag.City</p>
                             </div>
                         </div>
                         <div class="item-timeline">
@@ -159,6 +170,16 @@
                             </div>
                             <div class="t-text">
                                 <p>@ViewBag.PinCode</p>
+                            </div>
+                        </div>
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Address</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <p>@ViewBag.Address</p>
                             </div>
                         </div>
                         <div class="item-timeline">
@@ -182,6 +203,17 @@
                                 <p>@ViewBag.PanNo</p>
                             </div>
                         </div>
+
+                        <div class="item-timeline">
+                            <div class="t-meta-date">
+                                <p class="">Pan Image</p>
+                            </div>
+                            <div class="t-dot">
+                            </div>
+                            <div class="t-text">
+                                <img id="PanImage" src="@ViewBag.PanImage" height="50" width="120"  onchange="loadFile_adhar(event)"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -199,3 +231,10 @@
     </div>
     </div>
 }
+
+@*<script>
+    var loadFile_adhar = function (event) {
+        var image = document.getElementById('PanImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>*@

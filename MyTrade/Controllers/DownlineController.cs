@@ -23,40 +23,50 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
 
             Reports model = new Reports();
+           
             List<Reports> lst = new List<Reports>();
             if (Ids == null || Ids == "")
             {
                 model.Ids = Session["Pk_UserId"].ToString();
+               
             }
             else
             {
                 model.Ids = Ids;
+              
             }
-
+            model.DirectStatus = "Self";
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
+           
             DataSet ds = model.GetDirectList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                Ids = "";
-                foreach (DataRow r in ds.Tables[0].Rows)
+                if(ds.Tables[0].Rows[0][0].ToString()!="0")
                 {
-                    Reports obj = new Reports();
-                    obj.Mobile = r["Mobile"].ToString();
-                    obj.Email = r["Email"].ToString();
-                    obj.SponsorId = r["SponsorId"].ToString();
-                    obj.SponsorName = r["SponsorName"].ToString();
-                    obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Leg = r["Leg"].ToString();
-                    obj.PermanentDate = (r["PermanentDate"].ToString());
-                    obj.Status = (r["Status"].ToString());
-                    obj.LoginId = (r["LoginId"].ToString());
-                    obj.Name = (r["Name"].ToString());
-                    obj.Package = (r["ProductName"].ToString());
-                    Ids = Ids + r["PK_UserId"].ToString() + ",";
-                    lst.Add(obj);
+                    Ids = "";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Mobile = r["Mobile"].ToString();
+                        obj.Email = r["Email"].ToString();
+                        obj.SponsorId = r["SponsorId"].ToString();
+                        obj.SponsorName = r["SponsorName"].ToString();
+                        obj.JoiningDate = r["JoiningDate"].ToString();
+                        obj.Leg = r["Leg"].ToString();
+                        obj.PermanentDate = (r["PermanentDate"].ToString());
+                        obj.Status = (r["Status"].ToString());
+                        obj.LoginId = (r["LoginId"].ToString());
+                        obj.Name = (r["Name"].ToString());
+                        obj.Level = (r["Lvl"].ToString());
+                        obj.Package = (r["ProductName"].ToString());
+                        Ids = Ids + r["PK_UserId"].ToString() + ",";
+                        lst.Add(obj);
+                    }
+                    model.lstassociate = lst;
+                    model.Ids = Ids;
                 }
-                model.lstassociate = lst;
-                model.Ids = Ids;
+                
             }
             return View(model);
         }
@@ -71,10 +81,12 @@ namespace MyTrade.Controllers
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             List<Reports> lst = new List<Reports>();
 
-            if (model.Ids == null)
+            if (model.Ids == null || model.Ids == "")
             {
                 model.Ids = Session["Pk_UserId"].ToString();
+
             }
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.GetDirectList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -94,6 +106,7 @@ namespace MyTrade.Controllers
                     obj.Status = (r["Status"].ToString());
                     obj.LoginId = (r["LoginId"].ToString());
                     obj.Name = (r["Name"].ToString());
+                    obj.Level = (r["Lvl"].ToString());
                     obj.Package = (r["ProductName"].ToString());
                     Ids = Ids + r["PK_UserId"].ToString() + ",";
                     lst.Add(obj);
@@ -188,7 +201,7 @@ namespace MyTrade.Controllers
             {
                 model.Fk_UserId = Session["Pk_UserId"].ToString();
             }
-            model.FK_RootId = "1";
+            model.FK_RootId = Session["Pk_UserId"].ToString();
             List<AssociateBooking> lst = new List<AssociateBooking>();
             DataSet ds = model.GetDownlineTree();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -207,6 +220,7 @@ namespace MyTrade.Controllers
                     obj.SponsorID = r["SponsorId"].ToString();
                     obj.SponsorName = r["SponsorName"].ToString();
                     obj.ActivationDate = r["PermanentDate"].ToString();
+                    obj.Lvl = r["Level"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
