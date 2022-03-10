@@ -58,12 +58,12 @@
                                     @if (Model.Image == null || Model.Image == "" || Model.IsVerified == "False")
                                     {
                                         <input type="file" name="Image" id="Image" onchange="loadFile_adhar(event)" />
-
+                                        <img src="@Model.Image" height="50" width="100" id="PanImage" />
                                     }
                                     else
                                     {
                                         <input type="file" name="Image" id="Image" disabled />
-
+                                        <img src="@Model.Image" height="50" width="100" id="PanImage" />
                                     }
                                     @if (Model.Image == null || Model.Image == "")
                                     {
@@ -73,7 +73,7 @@
                                     {
                                         <input type="hidden" id="img" value="1" />
                                     }
-                                    <img src="@Model.Image" height="50" width="100" id="PanImage" />
+                                   
 
                                 </div>
                             </div>

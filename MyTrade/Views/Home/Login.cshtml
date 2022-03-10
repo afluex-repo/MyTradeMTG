@@ -61,6 +61,8 @@
                                         <h3>Welcome back</h3>
                                         <p>New to My Trade? <a href="/Home/Registration">Sign up</a></p>
 
+
+                                        <p style="color:red;float:right">@TempData["Login"]</p>
                                         <form action="/Home/LoginAction" method="post">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })

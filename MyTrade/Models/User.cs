@@ -225,8 +225,15 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRewarDetails", para);
             return ds;
         }
-
-
+        public DataSet GetFileDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Title",Title)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetFilesDetails", para);
+            return ds;
+        }
+        
 
 
     }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Upload", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadFile", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -14,7 +14,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Upload Reward</h4>
+                                <h4>Upload File</h4>
                                 <span class="text-danger">
                                     @TempData["Upload"]
                                 </span>
@@ -43,7 +43,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input class="btn btn-success pull-left" type="submit" value="Upload" id="btnsave" name="btnsave" onclick="return validateform();" />
-                                    <a href="/Master/UploadList" class="btn btn-info">Back To List</a>
+                                    <a href="/Master/UploadFileList" class="btn btn-info">Back To List</a>
 
                                 </div>
                             </div>
