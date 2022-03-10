@@ -129,7 +129,7 @@
     }
 
     .carousel-caption {
-        bottom: -16px;
+        /*bottom: -16px;*/
         background-color: #282828ba;
     }
 
@@ -400,9 +400,9 @@
                                     for (int i = 0; i < 1; i++)
                                     {
 
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide">
-                                            <div class="carousel-caption d-none d-sm-block">
+                                        <div class="carousel-item active" style="padding: 10px;">
+                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
+                                            <div class="carousel-caption">
                                                 <h5>@Model.lstReward[i].Title</h5>
                                             </div>
                                         </div>
