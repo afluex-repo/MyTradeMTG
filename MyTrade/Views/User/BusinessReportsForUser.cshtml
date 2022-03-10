@@ -45,6 +45,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
+                                <input type="hidden" id="lvl" name="lvl" value="@Model.Level" />
                                 <div class="form-group">
                                     <label>Level</label>
                                     <select id="Level" name="Level" class="form-control">
@@ -144,7 +145,7 @@
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
-
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
 
     var f3 = flatpickr(document.getElementById('FromDate'),
@@ -182,7 +183,6 @@
             //    $('#GetDetails').removeAttr('disabled');
             //}
         });
-
     }
     $('#IsDownline').click(function () {
         if ($(this).attr('checked') == false) {
@@ -191,8 +191,15 @@
             $('#GetDetails').removeAttr('disabled');
         }
     });
-
+    debugger;
+    if ($("#lvl").val()>0)
+    {
+        $("#Level").val($("#lvl").val()).attr("Selected", "Selected")
+    }
 </script>
+
+
+
 
 
 

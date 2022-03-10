@@ -73,7 +73,7 @@
                                     {
                                         <input type="hidden" id="img" value="1" />
                                     }
-                                   
+
 
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                     </label><span style="color: red">*</span>
                                     @if (Model.IFSCCode == null || Model.IFSCCode == "" || Model.IsVerified == "False")
                                     {
-                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
+                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code", @onchange = "return GetBankDetails();" })
                                     }
                                     else
                                     {
@@ -156,7 +156,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nominee Age</label><span style="color: red">*</span>
-                                    @if (Model.NomineeName == null || Model.NomineeName == "" || Model.IsVerified == "False")
+                                    @if (Model.NomineeAge == null || Model.NomineeAge == "" || Model.IsVerified == "False")
                                     {
                                         @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @placeholder = "Nominee Age", @onkeypress = "return isNumberKey(event);" })
                                     }
@@ -177,9 +177,20 @@
                                     {
                                         @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @readonly = "true" })
                                     }
-
                                 </div>
-
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>UPI ID</label><span style="color: red">*</span>
+                                    @if (Model.UPIID == null || Model.UPIID == "" || Model.IsVerified == "False")
+                                    {
+                                        @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPI ID" })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPI ID", @readonly = "true" })
+                                    }
+                                </div>
                             </div>
                             <div class="col-md-4" style="margin-top:30px">
                                 <div class="form-group">
@@ -210,8 +221,6 @@
         $('#my-button').prop('disabled', true);
     });
 
-
-
     function validate() {
         if ($('#AdharNo').val() == '') {
             $("#AdharNo").addClass('errortext');
@@ -221,6 +230,11 @@
         if ($('#PanNumber').val() == '') {
             $("#PanNumber").addClass('errortext');
             $('#PanNumber').focus();
+            return false;
+        }
+        if ($('#Image').val() == '') {
+            $("#Image").addClass('errortext');
+            $('#Image').focus();
             return false;
         }
         if ($('#AccountNo').val() == '') {
@@ -243,13 +257,54 @@
             $('#BranchName').focus();
             return false;
         }
+        if ($('#NomineeName').val() == '') {
+            $("#NomineeName").addClass('errortext');
+            $('#NomineeName').focus();
+            return false;
+        }
+        if ($('#NomineeAge').val() == '') {
+            $("#NomineeAge").addClass('errortext');
+            $('#NomineeAge').focus();
+            return false;
+        }
+        if ($('#NomineeRelation').val() == '') {
+            $("#NomineeRelation").addClass('errortext');
+            $('#NomineeRelation').focus();
+            return false;
+        }
+        if ($('#UPIID').val() == '') {
+            $("#UPIID").addClass('errortext');
+            $('#UPIID').focus();
+            return false;
+        }
         if ($('#img').val() != '1') {
             $("#Image").addClass('errortext');
             $('#Image').focus();
             return false;
         }
     }
-
+    function GetBankDetails() {
+        debugger;
+        $.ajax({
+            url: 'https://ifsc.razorpay.com/' + $('#IFSCCode').val(),
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                $("#BankName").val(data.BANK);
+                $("#BranchName").val(data.BRANCH);
+            },
+            error: function () {
+                Snackbar.show({
+                    text: 'IFSC Code not found',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+                $("#BankName").val('');
+                $("#BranchName").val('');
+            }
+        });
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
