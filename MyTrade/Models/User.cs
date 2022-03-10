@@ -61,6 +61,8 @@ namespace MyTrade.Models
         public string Title { get; set; }
         public List<User> lstReward { get; set; }
         public string PK_RewardId { get; set; }
+        public string UPIID { get; set; }
+        
 
 
 
@@ -113,7 +115,8 @@ namespace MyTrade.Models
                                     new SqlParameter("@NomineeRelation",NomineeRelation),
                                      new SqlParameter("@NomineeAge",NomineeAge),
                                          new SqlParameter("@PanImage",Image),
-                                     
+                                           new SqlParameter("@UPIID",UPIID),
+
                                       new SqlParameter("@UpdatedBy",Fk_UserId)
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
@@ -233,6 +236,9 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetFilesDetails", para);
             return ds;
         }
+
+
+
         
 
 
