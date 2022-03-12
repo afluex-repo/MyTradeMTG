@@ -67,6 +67,17 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
+                                <input type="hidden" id="MStatus" value="@Model.MemberStatus" />
+                                <div class="form-group">
+                                    <label>Member Status</label>
+                              <select id="MemberStatus" name="MemberStatus" class="form-control">
+                                  <option value="0">-Select-</option>
+                                  <option value="P">Active</option>
+                                  <option value="T">In Active</option>
+                              </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
                                 Downline
                                 @Html.CheckBoxFor(m => m.IsDownline)
                             </div>
@@ -94,6 +105,7 @@
                                         <th>Joining Date</th>
                                         <th>Mobile No</th>
                                         <th>Email Id</th>
+                                        <th>Member Status</th>
                                         <th>Action</th>
                                         <th></th>
                                         <th></th>
@@ -117,6 +129,7 @@
                                                     <td>@Item.JoiningDate</td>
                                                     <td>@Item.Mobile</td>
                                                     <td>@Item.Email</td>
+                                                    <td>@Item.MemberStatus</td>
                                                     <td><a href="/AdminReports/ViewProfile?Id=@Item.Fk_UserId" class="btn btn-info btn-sm">View</a>
                                                         <a href="/AdminReports/DeleteUerDetails?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user ?');">Delete</a>
                                                         
@@ -176,3 +189,13 @@
         </div>
     </div>
 }
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    debugger;
+    if ($("#MStatus").val()!=0)
+    {
+        $("#MemberStatus").val($("#MStatus").val()).attr("selected", "selected")
+    }
+</script>

@@ -34,11 +34,6 @@ namespace MyTrade.Controllers
 
         public ActionResult AddWallet()
         {
-            #region ddlpaymentmode
-            //List<SelectListItem> ddlpaymentmode = Common.BindPaymentMode();
-            //ViewBag.ddlpaymentmode = ddlpaymentmode;
-            #endregion
-
             #region ddlpaymentType
             List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
             ViewBag.ddlpaymentType = ddlpaymentType;

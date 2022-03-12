@@ -175,7 +175,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
             return ds;
         }
-        
+
 
     }
     public class DashboardResponse
@@ -184,12 +184,13 @@ namespace MyTrade.Models
         public string TotalDirect { get; set; }
         public string TotalActive { get; set; }
         public string TotalInActive { get; set; }
-        public string ActiveStatus { get; set; }
+        public string WalletBalance { get; set; }
         public string Status { get; set; }
+        public string ActiveStatus { get; set; }
         public string Message { get; set; }
         public string ReferralLink { get; set; }
         public string TotalBusiness { get; set; }
-        public string TeamBusiness { get; internal set; }
+        public string TeamBusiness { get; set; }
         public string SelfBusiness { get; set; }
         public string TotalTeam { get; set; }
         public string TotalTeamActive { get; set; }
@@ -285,6 +286,8 @@ namespace MyTrade.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
+        public string UPIId { get; set; }
+        public string UPIImage { get; set; }
         public List<PaymentMode> lst { get; set; }
         public DataSet PaymentList()
         {
@@ -296,8 +299,10 @@ namespace MyTrade.Models
     {
         public string PK_PackageId { get; set; }
         public string PackageName { get; set; }
+        public string PackagePrice { get; set; }
         public decimal MinimumAmount { get; set; }
         public decimal MaximumAmount { get; set; }
+        public decimal AmountWithGST { get; set; }
         public string InMultipleOf { get; set; }
     }
     public class PackageResponse
@@ -310,9 +315,16 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
             return ds;
         }
+        public DataSet BindProductForJoining()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoining");
+            return ds;
+        }
     }
     public class DirectRequest
     {
+        public string Ids { get; set; }
+        public string Fk_UserId { get; set; }
         public string LoginId { get; set; }
         public string Name { get; set; }
         public string FromDate { get; set; }
@@ -320,33 +332,38 @@ namespace MyTrade.Models
         public string FromActivationDate { get; set; }
         public string ToActivationDate { get; set; }
         public string Leg { get; set; }
-        public string ActivationStatus { get; set; }
+        public string Status { get; set; }
+        public string DirectStatus { get; set; }
         public DataSet GetDirectList()
         {
 
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+            SqlParameter[] para = {
+                                    new SqlParameter("@PK_UserIds", Ids),
+                                    new SqlParameter("@FK_UserId", Fk_UserId),
+                                    new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@Name", Name),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate),
                                     new SqlParameter("@FromActivationDate", FromActivationDate),
                                     new SqlParameter("@ToActivationDate", ToActivationDate),
                                     new SqlParameter("@Leg", Leg),
-                                    new SqlParameter("@Status", ActivationStatus),
+                                    new SqlParameter("@Status", Status),
+                                       new SqlParameter("@DirectStatus", DirectStatus),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetDirectList", para);
             return ds;
         }
-        public DataSet GetDownlineList()
-        {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@Name", Name),
-                                    new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate),
-                                    new SqlParameter("@Leg", Leg),
-                                    new SqlParameter("@Status", ActivationStatus), };
-            DataSet ds = DBHelper.ExecuteQuery("DownlineList", para);
-            return ds;
-        }
+        //public DataSet GetDownlineList()
+        //{
+        //    SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+        //                            new SqlParameter("@Name", Name),
+        //                            new SqlParameter("@FromDate", FromDate),
+        //                            new SqlParameter("@ToDate", ToDate),
+        //                            new SqlParameter("@Leg", Leg),
+        //                            new SqlParameter("@Status", ActivationStatus), };
+        //    DataSet ds = DBHelper.ExecuteQuery("DownlineList", para);
+        //    return ds;
+        //}
     }
     public class DirectReponse
     {
@@ -392,6 +409,9 @@ namespace MyTrade.Models
         public string PinStatus { get; set; }
         public string RegisteredTo { get; set; }
         public string ProductName { get; set; }
+        public string Amount { get; set; }
+        public string PinGenerationDate { get; set; }
+        public string GST { get; set; }
     }
     public class LevelTreeReq
     {
@@ -445,6 +465,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public List<AssciateBookingResponse> lst { get; set; }
+
     }
     public class AssciateBookingResponse
     {
@@ -521,6 +542,9 @@ namespace MyTrade.Models
         public string ePinNo { get; set; }
         public string FromId { get; set; }
         public string FromName { get; set; }
+        public string PinAmount { get; set; }
+        public string ProductName { get; set; }
+        public string BV { get; set; }
         public string ToId { get; set; }
         public string ToName { get; set; }
         public string TransferDate { get; set; }
@@ -729,6 +753,16 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetEWalletDetails", para);
             return ds;
         }
+        public DataSet GetTopUpDetails()
+        {
+            SqlParameter[] para = {
+                                       new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetTopUpDetails", para);
+            return ds;
+        }
     }
     public class WalletResponse
     {
@@ -761,11 +795,11 @@ namespace MyTrade.Models
     public class UserWalletAPI
     {
         public string Pk_EwalletId { get; set; }
-        public string CrAmount { get;  set; }
-        public string DrAmount { get;  set; }
+        public string CrAmount { get; set; }
+        public string DrAmount { get; set; }
         public string Balance { get; set; }
-        public string Narration { get;  set; }
-        public string TransactionDate { get;  set; }
+        public string Narration { get; set; }
+        public string TransactionDate { get; set; }
     }
     public class UserWalletAPIResponse
     {
@@ -775,5 +809,97 @@ namespace MyTrade.Models
         public string TotalDr { get; set; }
         public string AvailableBalance { get; set; }
         public List<UserWalletAPI> lst { get; set; }
+    }
+    public class PinAPIRequest
+    {
+        public string FK_PackageId { get; set; }
+        public string NoofPins { get; set; }
+        public string FK_UserId { get; set; }
+        public string FinalAmount { get; set; }
+        public DataSet SaveEpinRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@FK_PackageId",FK_PackageId),
+                                   new SqlParameter("@NoofPins",NoofPins),
+                                   new SqlParameter("@FK_UserId",FK_UserId),
+                                    new SqlParameter("@Amount",FinalAmount),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GenerateEPinByUser", para);
+            return ds;
+        }
+    }
+    public class TopUpModel
+    {
+        public string LoginId { get; set; }
+        public string FK_UserId { get; set; }
+        public string PackageId { get; set; }
+        public string Amount { get; set; }
+        public DataSet TopUp()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@AddedBy", FK_UserId),
+                                        new SqlParameter("@Fk_ProductId",PackageId),
+                                        new SqlParameter("@Amount", Amount)
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
+            return ds;
+        }
+    }
+    public class TopUpListRes
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<TopUpListModel> lst { get; set; }
+    }
+    public class TopUpListModel
+    {
+        public string InvestmentId { get; set; }
+        public string Name { get; set; }
+        public string PinAmount { get; set; }
+        public string UsedFor { get; set; }
+        public string BV { get; set; }
+        public string IsCalculated { get; set; }
+        public string TransactionBy { get; set; }
+        public string Status { get; set; }
+        public string ROIPercentage { get; set; }
+        public string TopUpDate { get; set; }
+        public string ProductName { get; set; }
+        public string PackageDays { get; set; }
+    }
+    public class DirectListAPI
+    {
+        public string Fk_UserId { get; set; }
+        public string Fk_SponsorId { get; set; }
+        public string LoginId { get; set; }
+        public string FirstName { get; set; }
+        public string ActiveStatus { get; set; }
+        public string SponsorID { get; set; }
+        public string Status { get; set; }
+        public string SponsorName { get; set; }
+        public string ActivationDate { get; set; }
+        public string Lvl { get; set; }
+    }
+    public class DirectListAPIRes
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string LoginId { get; set; }
+        public string FK_SponsorId { get; set; }
+        public List<DirectListAPI> lst { get; set; }
+    }
+    public class RequestForDirect
+    {
+        public string Fk_UserId { get; set; }
+        public string FK_RootId { get; set; }
+        public DataSet GetDownlineTree()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@Pk_UserId", Fk_UserId),
+                                            new SqlParameter("@Fk_RootId", FK_RootId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetAssociateDownlineTree", para);
+            return ds;
+        }
     }
 }

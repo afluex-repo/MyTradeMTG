@@ -235,7 +235,7 @@ namespace MyTrade.Controllers
         {
             try
             {
-                obj.LoginId = Session["LoginId"].ToString();
+                //obj.LoginId = Session["LoginId"].ToString();
                 obj.AddedBy = Session["Pk_userId"].ToString();
                 //  obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
                 //obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/mm/yyyy");

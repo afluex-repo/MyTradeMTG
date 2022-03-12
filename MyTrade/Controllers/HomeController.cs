@@ -260,9 +260,16 @@ namespace MyTrade.Controllers
             }
             else
             {
+                if (Session["Pk_AdminId"] == null)
+                {
+                    return RedirectToAction("Login", "Home");
+                }
+                else
+                {
+                    Menu = Home.GetMenus(Session["Pk_AdminId"].ToString(), Session["UserTypeName"].ToString()); // pass employee id here
+                    Session["_Menu"] = Menu;
+                }
 
-                Menu = Home.GetMenus(Session["Pk_AdminId"].ToString(), Session["UserTypeName"].ToString()); // pass employee id here
-                Session["_Menu"] = Menu;
             }
             return PartialView("_Menu", Menu);
         }

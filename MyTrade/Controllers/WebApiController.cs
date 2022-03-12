@@ -302,10 +302,11 @@ namespace MyTrade.Controllers
                 obj.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
                 obj.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 obj.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
-                obj.Status = ds.Tables[2].Rows[0]["Status"].ToString();
+                obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
                 obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
                 obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
-                if (obj.Status == "Active")
+                obj.WalletBalance = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
+                if (obj.ActiveStatus == "Active")
                 {
                     obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
                 }
@@ -325,7 +326,7 @@ namespace MyTrade.Controllers
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
                 {
                     obj.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
-                    obj.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
+                    obj.TotalTPSBalanceAmount = Convert.ToDecimal(obj.TotalTPSAmountTobeReceived) - Convert.ToDecimal(obj.TotalTPSAmountReceived);
                 }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -334,7 +335,7 @@ namespace MyTrade.Controllers
                         Reward obj1 = new Reward();
                         obj1.PK_RewardId = r["PK_RewardId"].ToString();
                         obj1.Title = r["Title"].ToString();
-                        obj1.Image = "/UploadReward/" + r["postedFile"].ToString();
+                        obj1.Image = r["postedFile"].ToString();
                         lst.Add(obj1);
                     }
                     obj.lstReward = lst;
@@ -495,6 +496,11 @@ namespace MyTrade.Controllers
                     lst.Add(model);
                 }
                 obj.lst = lst;
+                if(ds.Tables[1].Rows.Count > 0)
+                {
+                    obj.UPIId = ds.Tables[1].Rows[0]["UPIId"].ToString();
+                    obj.UPIImage = ds.Tables[1].Rows[0]["Image"].ToString();
+                }
             }
             else
             {
@@ -533,7 +539,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult DirectList(DirectRequest req)
+        public ActionResult DownteamTree(DirectRequest req)
         {
             DirectReponse model = new DirectReponse();
             List<DirectList> lst = new List<DirectList>();
@@ -565,39 +571,39 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public ActionResult DownlineList(DirectRequest req)
-        {
-            DirectReponse model = new DirectReponse();
-            List<DirectList> lst = new List<DirectList>();
-            DataSet ds = req.GetDownlineList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                model.Status = "0";
-                model.Message = "Record Found";
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    DirectList obj = new DirectList();
-                    obj.Mobile = r["Mobile"].ToString();
-                    //obj.Email = r["Email"].ToString();
-                    obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Leg = r["Leg"].ToString();
-                    obj.PermanentDate = (r["PermanentDate"].ToString());
-                    obj.Status = (r["Status"].ToString());
-                    obj.LoginId = (r["LoginId"].ToString());
-                    obj.Name = (r["Name"].ToString());
-                    obj.Package = (r["ProductName"].ToString());
-                    lst.Add(obj);
-                }
-                model.lst = lst;
-            }
-            else
-            {
-                model.Status = "1";
-                model.Message = "No Record Found";
-            }
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public ActionResult DownlineList(DirectRequest req)
+        //{
+        //    DirectReponse model = new DirectReponse();
+        //    List<DirectList> lst = new List<DirectList>();
+        //    DataSet ds = req.GetDownlineList();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        model.Status = "0";
+        //        model.Message = "Record Found";
+        //        foreach (DataRow r in ds.Tables[0].Rows)
+        //        {
+        //            DirectList obj = new DirectList();
+        //            obj.Mobile = r["Mobile"].ToString();
+        //            //obj.Email = r["Email"].ToString();
+        //            obj.JoiningDate = r["JoiningDate"].ToString();
+        //            obj.Leg = r["Leg"].ToString();
+        //            obj.PermanentDate = (r["PermanentDate"].ToString());
+        //            obj.Status = (r["Status"].ToString());
+        //            obj.LoginId = (r["LoginId"].ToString());
+        //            obj.Name = (r["Name"].ToString());
+        //            obj.Package = (r["ProductName"].ToString());
+        //            lst.Add(obj);
+        //        }
+        //        model.lst = lst;
+        //    }
+        //    else
+        //    {
+        //        model.Status = "1";
+        //        model.Message = "No Record Found";
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
         [HttpPost]
         public ActionResult PinList(PinRequest req)
         {
@@ -616,6 +622,11 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.Amount = r["TotalAmount"].ToString();
+                    obj.PinGenerationDate = r["PinGenerationDate"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.GST = r["IGST"].ToString();
+
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     lst.Add(obj);
                 }
@@ -753,6 +764,9 @@ namespace MyTrade.Controllers
                     obj.ToId = r["ToId"].ToString();
                     obj.ToName = r["ToName"].ToString();
                     obj.TransferDate = r["TransferDate"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    obj.BV = r["BV"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -886,8 +900,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
         [HttpPost]
         public ActionResult GetBankDetails(BankDetailsUpdateRequest model)
         {
@@ -914,8 +926,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
         [HttpPost]
         public ActionResult UpdateBankDetails(BankDetailsUpdateAPIResponse model)
         {
@@ -944,9 +954,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
-
         [HttpPost]
         public ActionResult AddWallet(AddWalletRequest model)
         {
@@ -985,6 +992,8 @@ namespace MyTrade.Controllers
                 DataSet ds = model.GetEwalletRequestDetails();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
+                    res.Status = "0";
+                    res.Message = "Record Found";
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         WalletDetails obj = new WalletDetails();
@@ -1006,38 +1015,10 @@ namespace MyTrade.Controllers
                     }
                     res.lst = lst;
                 }
-            }
-            catch (Exception ex)
-            {
-                res.Status = "1";
-                res.Message = ex.Message;
-            }
-            return Json(res, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult WalletLedger(WalletRequestList req)
-        {
-            UserWalletAPIResponse res = new UserWalletAPIResponse();
-            try
-            {
-                List<UserWalletAPI> lst = new List<UserWalletAPI>();
-                DataSet ds = req.GetEWalletDetails();
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                else
                 {
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
-                        UserWalletAPI obj = new UserWalletAPI();
-                        obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
-                        obj.CrAmount = r["CrAmount"].ToString();
-                        obj.DrAmount = r["DrAmount"].ToString();
-                        obj.Narration = r["Narration"].ToString();
-                        obj.TransactionDate = r["TransactionDate"].ToString();
-                        obj.Balance = r["Balance"].ToString();
-                        lst.Add(obj);
-                    }
-                    res.lst = lst;
-                    res.TotalCr = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
-                    res.TotalDr = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
-                    res.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(CrAmount)-sum(DrAmount)", "").ToString()).ToString("n2");
+                    res.Status = "1";
+                    res.Message = "No Record Found";
                 }
             }
             catch (Exception ex)
@@ -1047,33 +1028,260 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        //public ActionResult GenerateEPin(Pin)
-        //{
-        //    try
-        //    {
-        //        model.AddedBy = Session["Pk_userId"].ToString();
-        //        DataSet ds = model.SaveEpinRequest();
-        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-        //        {
-        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
-        //            {
-        //                TempData["msg"] = "E_pin generated successfully";
-        //            }
-        //            else if (ds.Tables[0].Rows[0][0].ToString() == "0")
-        //            {
-        //                TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["error"] = ex.Message;
-        //    }
-        //    return RedirectToAction("EPinRequest", "User");
-        //}
+        [HttpPost]
+        public ActionResult WalletLedger(WalletRequestList req)
+        {
+            UserWalletAPIResponse res = new UserWalletAPIResponse();
+            try
+            {
+                List<UserWalletAPI> lst = new List<UserWalletAPI>();
+                DataSet ds = req.GetEWalletDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        UserWalletAPI obj = new UserWalletAPI();
+                        obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                        obj.CrAmount = r["CrAmount"].ToString();
+                        obj.DrAmount = r["DrAmount"].ToString();
+                        obj.Narration = r["Narration"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.Balance = "0";
+                        lst.Add(obj);
+                    }
+                    res.lst = lst;
+                    res.TotalCr = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                    res.TotalDr = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                    res.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(CrAmount)-sum(DrAmount)", "").ToString()).ToString("n2");
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult GenerateEPin(PinAPIRequest model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.SaveEpinRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "E_pin generated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TopUp(TopUpModel model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.TopUp();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Top-Up Done successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = "Some Error Occurred";
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TopUpList(WalletRequestList model)
+        {
+            TopUpListRes res = new TopUpListRes();
+            try
+            {
+                List<TopUpListModel> lst = new List<TopUpListModel>();
+                DataSet ds1 = model.GetTopUpDetails();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        TopUpListModel obj = new TopUpListModel();
+                        obj.InvestmentId = r["Pk_InvestmentId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.PinAmount = r["PinAmount"].ToString();
+                        obj.UsedFor = r["UsedFor"].ToString();
+                        obj.BV = r["BV"].ToString();
+                        obj.IsCalculated = r["IsCalculated"].ToString();
+                        obj.TransactionBy = r["TransactionBy"].ToString();
+                        obj.Status = r["Status"].ToString();
+                        obj.ROIPercentage = r["ROIPercentage"].ToString();
+                        obj.TopUpDate = r["TopUpDate"].ToString();
+                        obj.ProductName = r["ProductName"].ToString();
+                        obj.PackageDays = r["PackageDays"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTTPPackage()
+        {
+            List<Package> lst = new List<Package>();
+            PackageResponse obj = new PackageResponse();
+            DataSet ds = obj.BindProductForJoining();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Package model = new Package();
+                    model.PK_PackageId = r["Pk_ProductId"].ToString();
+                    model.PackageName = r["ProductName"].ToString();
+                    model.PackagePrice = r["ProductPrice"].ToString();
+                    model.MinimumAmount = Convert.ToDecimal(r["FromAmount"]); 
+                    model.MaximumAmount = Convert.ToDecimal(r["ToAmount"]);
+                    model.InMultipleOf = Convert.ToString(r["InMultipleOf"]);
+                    model.AmountWithGST = Convert.ToDecimal(r["AmountWithGST"]);
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetTPSPackage()
+        {
+            List<Package> lst = new List<Package>();
+            PackageResponse obj = new PackageResponse();
+            DataSet ds = obj.PackageList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Package model = new Package();
+                    model.PK_PackageId = r["Pk_ProductId"].ToString();
+                    model.PackageName = r["ProductName"].ToString();
+                    model.PackagePrice = r["ProductPrice"].ToString();
+                    model.MinimumAmount = Convert.ToDecimal(r["FromAmount"]);
+                    model.MaximumAmount = Convert.ToDecimal(r["ToAmount"]);
+                    model.InMultipleOf = Convert.ToString(r["InMultipleOf"]);
+                    model.AmountWithGST = Convert.ToDecimal(r["AmountWithGST"]);
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult DirectList(RequestForDirect model)
+        {
+            DirectListAPIRes res = new DirectListAPIRes();
+            try
+            {
+                List<DirectListAPI> lst = new List<DirectListAPI>();
+                DataSet ds = model.GetDownlineTree();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    res.FK_SponsorId = ds.Tables[0].Rows[0]["Fk_SponsorId"].ToString();
+                    res.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        DirectListAPI obj = new DirectListAPI();
+                        obj.Fk_UserId = r["Pk_UserId"].ToString();
+                        obj.Fk_SponsorId = r["Fk_SponsorId"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.FirstName = r["FirstName"].ToString();
+                        obj.Status = r["Status"].ToString();
+                        obj.ActiveStatus = r["ActiveStatus"].ToString();
+                        obj.SponsorID = r["SponsorId"].ToString();
+                        obj.SponsorName = r["SponsorName"].ToString();
+                        obj.ActivationDate = r["PermanentDate"].ToString();
+                        obj.Lvl = r["Level"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch(Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res,JsonRequestBehavior.AllowGet);
+        }
     }
 }

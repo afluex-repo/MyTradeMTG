@@ -158,4 +158,5 @@ D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\System.Web.Http.xml
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
-D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
+D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache

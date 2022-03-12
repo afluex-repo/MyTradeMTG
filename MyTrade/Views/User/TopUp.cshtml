@@ -34,7 +34,7 @@
                         <div class="row mb-4">
                             <div class="col-md-4">
                                 <label for="LoginId">LoginId</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @disabled = "disabled" })
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id"})
                                 <p class="text-success" id="spName"></p>
                             </div>
                             <div class="col-md-4">
@@ -129,7 +129,7 @@
                         {
                             <span>@Session["FullName"]</span>
                         }
-                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated with ROI @ViewBag.ROIPercent % per day
+                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI @ViewBag.ROIPercent % per day
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -252,6 +252,7 @@
         jQuery.noConflict();    
         $('#exampleModal').modal('show');
         $("#lblAmount").text($("#Amount").val());
+        $("#lblLoginId").text($("#LoginId").val());
         $("#lblTPS").text($("#PackageId :selected").text());
     }
     //function CheckPayMode() {
