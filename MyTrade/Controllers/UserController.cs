@@ -1365,5 +1365,27 @@ namespace MyTrade.Controllers
         }
 
 
+
+        [HttpPost]
+        public ActionResult GetNameDetails(string LoginId)
+        {
+            User model = new User();
+            model.LoginId = LoginId;
+            DataSet ds = model.GetNameDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Result = "yes";
+                model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+               
+            }
+            else
+            {
+                model.Result = "no";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
