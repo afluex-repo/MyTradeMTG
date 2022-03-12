@@ -71,8 +71,8 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            model.LoginId = model.ToLoginID;
-            model.MemberStatus = model.MemberStatus == "" ? null : model.MemberStatus;
+           // model.LoginId = model.ToLoginID;
+            model.MemberStatus = model.MemberStatus == "0" ? null : model.MemberStatus;
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

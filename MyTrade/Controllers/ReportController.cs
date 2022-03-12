@@ -65,12 +65,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public ActionResult LevelIncomeTr1()
+        public ActionResult LevelIncomeTr1Total()
+        {
+            List<UserReports> lst = new List<UserReports>();
+            UserReports model = new UserReports();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.LevelIncomeTr1Total();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        public ActionResult LevelIncomeTr1(string Lvl)
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
             model.Status ="0";
+            model.Level = Lvl;
             DataSet ds = model.LevelIncomeTr1();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -120,12 +142,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public ActionResult LevelIncomeTr2()
+        public ActionResult LevelIncomeTr2Total()
+        {
+            List<UserReports> lst = new List<UserReports>();
+            UserReports model = new UserReports();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.LevelIncomeTr2Total();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        public ActionResult LevelIncomeTr2(string Lvl)
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
             model.Status = "0";
+            model.Level = Lvl;
             DataSet ds = model.LevelIncomeTr2();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
