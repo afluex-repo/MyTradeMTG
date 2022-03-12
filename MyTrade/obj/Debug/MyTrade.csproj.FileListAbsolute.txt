@@ -160,3 +160,4 @@ D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
+D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
