@@ -97,7 +97,11 @@ namespace MyTrade.Models
         public string IFSCCode { get; set; }
         public string MemberAccNo { get; set; }
         public string Deduction { get; set; }
-      
+        public string Pk_AdvanceId { get; set; }
+        public List<Admin> lstdeduction { get; set; }
+
+
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -399,6 +403,16 @@ namespace MyTrade.Models
                  new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveDeduction", para);
+            return ds;
+        }
+
+
+        public DataSet GetAdvanceDeductionReports()
+        {
+            SqlParameter[] para = {
+               new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdvanceDeductionReports", para);
             return ds;
         }
     }

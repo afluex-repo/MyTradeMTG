@@ -14,8 +14,13 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <div class="col-lg-5 col-md-5">
                                 <h4>Level Bonus TTP</h4>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <a href="/Report/LevelIncomeTr1Total" class="btn btn-info btn-sm">Back</a>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
                             </div>
                         </div>
                     </div>
@@ -59,7 +64,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>Payout No</th>
+                                        @*<th>Payout No</th>*@
                                         <th>From Member</th>
                                         <th>Business Amount</th>
                                         <th>Percentage</th>
@@ -79,7 +84,7 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.PayoutNo</td>
+                                                    @*<td>@Item.PayoutNo</td>*@
                                                     <td>@Item.FromName (@Item.FromLoginId)</td>
                                                     <td>@Item.BusinessAmount</td>
                                                     <td>@Item.Percentage %</td>
