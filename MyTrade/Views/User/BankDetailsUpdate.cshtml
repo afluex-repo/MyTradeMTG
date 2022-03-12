@@ -181,7 +181,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>UPI ID</label><span style="color: red">*</span>
+                                    <label>UPI ID</label>
                                     @if (Model.UPIID == null || Model.UPIID == "" || Model.IsVerified == "False")
                                     {
                                         @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPI ID" })
@@ -272,11 +272,11 @@
             $('#NomineeRelation').focus();
             return false;
         }
-        if ($('#UPIID').val() == '') {
-            $("#UPIID").addClass('errortext');
-            $('#UPIID').focus();
-            return false;
-        }
+        //if ($('#UPIID').val() == '') {
+        //    $("#UPIID").addClass('errortext');
+        //    $('#UPIID').focus();
+        //    return false;
+        //}
         if ($('#img').val() != '1') {
             $("#Image").addClass('errortext');
             $('#Image').focus();

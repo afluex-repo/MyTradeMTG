@@ -1508,5 +1508,55 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AdvanceDeduction", "Admin");
         }
+
+
+
+        public ActionResult AdvanceDeductionList()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetAdvanceDeductionReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_AdvanceId = r["Pk_AdvanceId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdeduction = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("AdvanceDeductionList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult AdvanceDeductionList(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetAdvanceDeductionReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_AdvanceId = r["Pk_AdvanceId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdeduction = lst;
+            }
+            return View(model);
+        }
+
+
     }
 }
