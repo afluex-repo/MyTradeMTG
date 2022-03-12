@@ -237,9 +237,18 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetNameDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetNameDetails", para);
+            return ds;
+        }
 
 
-        
+
+
 
 
     }
