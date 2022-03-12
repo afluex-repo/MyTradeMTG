@@ -1508,5 +1508,136 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AdvanceDeduction", "Admin");
         }
+
+
+
+        public ActionResult AdvanceDeductionList()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetAdvanceDeductionReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_AdvanceId = r["Pk_AdvanceId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdeduction = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("AdvanceDeductionList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult AdvanceDeductionList(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetAdvanceDeductionReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_AdvanceId = r["Pk_AdvanceId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdeduction = lst;
+            }
+            return View(model);
+        }
+        public ActionResult TopUp()
+        {
+            Account model = new Account();
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProductForTopUp();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
+                ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
+                ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlProduct = ddlProduct;
+            #endregion
+           
+            #region ddlpaymentType
+            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            ViewBag.ddlpaymentType = ddlpaymentType;
+            #endregion
+            #region ddlpaymentmode
+            UserWallet obj = new UserWallet();
+            int count1 = 0;
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet ds2 = obj.GetPaymentMode();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+
+            #endregion
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult TopUp(Account obj)
+        {
+            try
+            {
+                obj.AddedBy = Session["Pk_AdminId"].ToString();
+                obj.FK_UserId = Session["Pk_AdminId"].ToString();
+                DataSet ds = obj.TopUpByAdmin();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Top-Up Done successfully";
+                    }
+                    else
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return RedirectToAction("Topup", "Admin");
+        }
     }
 }

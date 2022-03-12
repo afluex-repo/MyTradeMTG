@@ -56,7 +56,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
             return ds;
         }
-
+        public DataSet TopUpByAdmin()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@LoginId", LoginId),
+                                        new SqlParameter("@AddedBy", FK_UserId),
+                                        new SqlParameter("@Fk_ProductId",PackageId),
+                                        new SqlParameter("@Amount", Amount)
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("TopUpByAdmin", para);
+            return ds;
+        }
         public DataSet GetTopUpDetails()
         {
             SqlParameter[] para = {

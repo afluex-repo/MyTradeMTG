@@ -34,6 +34,7 @@ namespace MyTrade.Models
         public string NetAmount { get; set; }
         public string Percentage { get; set; }
         public string Status { get; set; }
+        public string BV { get; set; }
         public DataSet PayoutWalletLedger()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),

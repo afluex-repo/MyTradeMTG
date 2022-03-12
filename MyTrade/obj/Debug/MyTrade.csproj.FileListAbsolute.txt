@@ -105,6 +105,8 @@ E:\Repository\MyTrade\MyTrade\bin\System.Web.Http.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
 E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
+E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
+E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\ApplicationInsights.config
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\roslyn\csc.exe
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -156,8 +158,7 @@ D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\System.Web.Http.xml
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
-D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.dll
-D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
-D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.dll
+D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
