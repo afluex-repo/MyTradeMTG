@@ -395,6 +395,20 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPin", para);
             return ds;
         }
+        public DataSet LevelIncomeTr2Total()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTotalIncomeTr2LevelWise", para);
+            return ds;
+        }
+        public DataSet LevelIncomeTr1Total()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTotalIncomeTr1LevelWise", para);
+            return ds;
+        }
     }
     public class PinAPI
     {
@@ -417,8 +431,7 @@ namespace MyTrade.Models
     {
         public string LoginId { get; set; }
         public string RootAgentCode { get; set; }
-
-        public DataSet GetLevelTreeData()
+        public DataSet GetLevelMembersCountTR1()
         {
             SqlParameter[] para = {
                                       new SqlParameter("@AgentCode", LoginId),
@@ -426,7 +439,28 @@ namespace MyTrade.Models
 
             };
 
-            DataSet ds = DBHelper.ExecuteQuery("LevelTree", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelMembersCountTR1", para);
+            return ds;
+        }
+        public DataSet GetLevelMembersCount()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@AgentCode", LoginId),
+                                      new SqlParameter("@RootAgentCode", RootAgentCode),
+
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelMembersCount", para);
+            return ds;
+        }
+        public DataSet GetLevelMembers(string Level, string PK_UserId)
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@MemId", PK_UserId),
+                                      new SqlParameter("@Level", Level),
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelMembers", para);
             return ds;
         }
     }
@@ -434,17 +468,46 @@ namespace MyTrade.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
-        public List<LevelTreeResponse> lst { get; set; }
-    }
-    public class LevelTreeResponse
-    {
-        public string FK_ParentId { get; set; }
+        public string DisplayName { get; set; }
         public string PK_UserId { get; set; }
-        public string FK_SponsorId { get; set; }
+        public string Level { get; set; }
+        public string Color { get; set; }
+        public string ActiveStatus { get; set; }
+        public string ProfilePic { get; set; }
+        public string TotalDirect { get; set; }
+        public string TotalActive { get; set; }
+        public string TotalInactive { get; set; }
+        public string TotalTeam { get; set; }
+        public string TotalActiveTeam { get; set; }
+        public string TotalInActiveTeam { get; set; }
+        public string SponsorName { get; set; }
+        public List<LevelTreeMembers> lst { get; set; }
+        public List<LevelTreeMemberDetails> lstDetails { get; set; }
+
+    }
+    public class LevelTreeMembers
+    {
+        public string Level { get; set; }
+        public string NumberOfMembers { get; set; }
+    }
+    public class LevelMembers
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<LevelTreeMemberDetails> lst { get; set; }
+    }
+    public class LevelTreeMemberDetails
+    {
+        public string PK_UserId { get; set; }
         public string LoginId { get; set; }
         public string MemberName { get; set; }
-        public string AssociateMemberName { get; set; }
+        public string SponsorName { get; set; }
         public string ProfilePic { get; set; }
+        public string Level { get; set; }
+        public string Status { get; set; }
+        public string SelfBV { get; set; }
+        public string TeamBV { get; set; }
+        public string Color { get; set; }
     }
     public class AssociateBookingRequest
     {
@@ -763,6 +826,28 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTopUpDetails", para);
             return ds;
         }
+        public DataSet GetROIWalletDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", FK_UserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetROIWalletDetails", para);
+            return ds;
+        }
+        public DataSet GetROIIncomeReportsDetails()
+        {
+
+            SqlParameter[] para = {
+                  new SqlParameter("@Fk_UserId", FK_UserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("GetROIIncomeReportsDetails", para);
+            return ds;
+        }
     }
     public class WalletResponse
     {
@@ -901,5 +986,212 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateDownlineTree", para);
             return ds;
         }
+    }
+    public class PaymentTypeRes
+    {
+        public string Value { get; set; }
+        public string Text { get; set; }
+    }
+    public class WalletRequest
+    {
+        public string PK_RequestId { get; set; }
+        public string FK_UserId { get; set; }
+        public DataSet DeleteWallet()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_RequestID", PK_RequestId),
+                  new SqlParameter("@DeletedBy", FK_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteWalletRequest", para);
+
+            return ds;
+
+        }
+    }
+    public class BusinessRequest
+    {
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string IsDownline { get; set; }
+        public string PK_ProductId { get; set; }
+        public string Level { get; set; }
+        public DataSet GetBusinessReports()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+                 new SqlParameter("@IsDownline", IsDownline),
+                    new SqlParameter("@PackageType", PK_ProductId),
+                       new SqlParameter("@Lvl", Level)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
+            return ds;
+        }
+    }
+    public class BusinessResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string TotalAmount { get; set; }
+        public string TotalBV { get; set; }
+        public List<BusinessDetails> lst { get; set; }
+    }
+    public class BusinessDetails
+    {
+        public decimal Amount { get; set; }
+        public string BV { get; set; }
+        public string Date { get; set; }
+        public string Level { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string PackageType { get; set; }
+    }
+    public class ROIWalletAPIResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<ROIWalletAPI> lst { get; set; }
+    }
+    public class ROIWalletAPI
+    {
+        public string RoiWalletId { get; set; }
+        public string CrAmount { get; set; }
+        public string DrAmount { get; set; }
+        public string Narration { get; set; }
+        public string TransactionDate { get; set; }
+    }
+    public class ROIIncomeResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string TotalTopUpAmount { get; set; }
+        public List<ROIIncome> lst { get; set; }
+    }
+    public class ROIIncome
+    {
+        public string Pk_InvestmentId { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string ROIId { get; set; }
+        public string TopUpAmount { get; set; }
+        public string Date { get; set; }
+    }
+    public class LevelIncomeRequest
+    {
+        public string LoginId { get; set; }
+        public string Level { get; set; }
+        public DataSet LevelIncomeTr1()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                   new SqlParameter("@Lvl", Level)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr1", para);
+            return ds;
+        }
+        public DataSet LevelIncomeTr2()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                   new SqlParameter("@Lvl",Level)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr2", para);
+            return ds;
+        }
+    }
+    public class LevelIncomeSumResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<LevelIncomeSum> lst { get; set; }
+    }
+    public class LevelIncomeSum
+    {
+        public string BusinessAmount { get; set; }
+        public string Status { get; set; }
+        public string Amount { get; set; }
+        public string Level { get; set; }
+    }
+    public class LevelIncomeResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<LevelIncome> lst { get; set; }
+    }
+    public class LevelIncome
+    {
+        public string Amount { get; set; }
+        public string BusinessAmount { get; set; }
+        public string FromLoginId { get; set; }
+        public string FromName { get; set; }
+        public string Level { get; set; }
+        public string Percentage { get; set; }
+        public string Status { get; set; }
+        public string TransactionDate { get; set; }
+    }
+    public class PayoutWalletReq
+    {
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public DataSet PayoutWalletLedger()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutWalletLedger", para);
+            return ds;
+        }
+    }
+    public class PayoutWalletRes
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PayoutWallet> lst { get; set; }
+    }
+    public class PayoutWallet
+    {
+        public string PK_PayoutWalletId { get; set; }
+        public string FK_UserId { get; set; }
+        public string CrAmount { get; set; }
+        public string DrAmount { get; set; }
+        public string Narration { get; set; }
+        public string TransactionDate { get; set; }
+    }
+    public class PayoutDetailRequest
+    {
+        public string FK_UserId { get; set; }
+        public string PayoutNo { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public DataSet PayoutDetail()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_Userid", FK_UserId),
+                new SqlParameter("@PayoutNo", PayoutNo),
+                  new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
+            return ds;
+        }
+    }
+    public class PayoutDetailResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PayoutDetail> lst { get; set; }
+    }
+    public class PayoutDetail
+    {
+        public string FK_UserId { get; set; }
+        public string LevelIncomeTR1 { get; set; }
+        public string LevelIncomeTR2 { get; set; }
+        public string PayoutNo { get; set; }
+        public string ClosingDate { get; set; }
+        public string GrossAmount { get; set; }
+        public string ProcessingFee { get; set; }
+        public string TDSAmount { get; set; }
+        public string NetAmount { get; set; }
     }
 }
