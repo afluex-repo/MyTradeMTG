@@ -48,8 +48,4 @@ namespace MyTrade.Models
             return ds;
         }
     }
-    public class Reward
-    {
-
-    }
 }
