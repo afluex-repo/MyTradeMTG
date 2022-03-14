@@ -1,10 +1,10 @@
 ﻿@model MyTrade.Models.Account
 @{
     ViewBag.Title = "TopUp";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+<link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm("TopUp", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -22,22 +22,10 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row mb-4">
-                            <div class="col-md-12">
-                                <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
-
-                                @if (ViewBag.WalletBalance == "0")
-                                {
-                                    <a class="btn btn-primary" style="float: right;" href="/Wallet/AddWallet">Add Fund</a>
-                                }
-                            </div>
-                        </div>
-                        <div class="row mb-4">
                             <div class="col-md-4">
                                 <label for="LoginId">LoginId</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
                                 <p class="text-success" id="spName"></p>
-                                @Html.HiddenFor(m => m.Name)
-                                <label style="color:red;" id="lblName"></label>
                             </div>
                             <div class="col-md-4">
                                 <input type="hidden" id="amt" />
@@ -115,22 +103,7 @@
                 <div class="modal-body">
                     <p class="modal-text">
                         Hello
-                        @if (Session["Gender"] != null)
-                        {
-                            if (Session["Gender"].ToString() == "F")
-                            {
-
-                                <span>Ms. @Session["FullName"]</span>
-                            }
-                            else
-                            {
-                                <span>Mr.@Session["FullName"]</span>
-                            }
-                        }
-                        else
-                        {
-                            <span>@Session["FullName"]</span>
-                        }
+                       Admin
                         , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI @ViewBag.ROIPercent % per day
                     </p>
                 </div>
@@ -145,6 +118,10 @@
 
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+<script src="~/assets/js/components/notification/custom-snackbar.js"></script>
 <script>
     //$(document).ready(function () {
     //    $("#PaymentType").val('Online');
@@ -185,7 +162,19 @@
         var WalletBalance = $("#WalletAmount").val();
         if (Amount != null && Amount != "" && Amount != "0") {
             if (parseInt(Amount) % 1000 == 0) {
-                 if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
+                if (parseInt(Amount) > parseInt(WalletBalance)) {
+                    Snackbar.show({
+                        text: "Insufficient Amount",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    $("#Amount").val('');
+                    return false;
+                }
+                else if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
                     Snackbar.show({
                         text: "Amount should not be greater than max smount",
                         actionTextColor: '#fff',
@@ -239,7 +228,7 @@
     }
     function SetAmountandPackage() {
         debugger;
-        jQuery.noConflict();    
+        jQuery.noConflict();
         $('#exampleModal').modal('show');
         $("#lblAmount").text($("#Amount").val());
         $("#lblLoginId").text($("#LoginId").val());
@@ -287,47 +276,6 @@
     //    }
 
     //}
-
-    function GetNameDetails() {
-        debugger;
-        var LoginId = $('#LoginId').val();
-        $.ajax({
-            url: '/User/GetNameDetails', type: 'post', dataType: 'json',
-            data: { 'LoginId': LoginId },
-            success: function (data) {
-                if (data.Result == "yes") {
-                    $("#Fk_UserId").val(data.Fk_UserId);
-                    $("#Name").val(data.Name);
-                    $("#lblName").text($("#Name").val());
-                    $("#LoginId").removeClass('errortext');
-                    $("#Name").removeClass('errortext');
-                }
-                else if (data.Result == "no") {
-                    alert('Invailid LoginId');
-                    $("#LoginId").val('');
-                    $("#Name").val('');
-                    $("#LoginId").addClass('errortext');
-                    $("#Name").addClass('errortext');
-                    $('#LoginId').focus();
-                }
-            }
-
-        });
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 @if (TempData["msg"] != null)

@@ -103,6 +103,7 @@ namespace MyTrade.Controllers
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -130,6 +131,7 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -179,6 +181,7 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -206,6 +209,7 @@ namespace MyTrade.Controllers
                     UserReports obj = new UserReports();
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
