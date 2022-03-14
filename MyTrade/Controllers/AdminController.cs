@@ -1447,7 +1447,6 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("TransferWallet")]
         [OnAction(ButtonName = "Transfer")]
@@ -1480,7 +1479,6 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("AdvanceDeduction")]
         [OnAction(ButtonName = "Advance")]
@@ -1508,9 +1506,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AdvanceDeduction", "Admin");
         }
-
-
-
         public ActionResult AdvanceDeductionList()
         {
             Admin model = new Admin();
@@ -1532,7 +1527,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("AdvanceDeductionList")]
         [OnAction(ButtonName = "Search")]
@@ -1557,6 +1551,35 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-
+        public ActionResult KYCUpdateDeatilsOfUser(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetKYCUpdateDetailsOfUser();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.AdharNo = r["AdharNumber"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
+                    obj.PanImage = r["PanImage"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
+                    obj.BankBranch = r["MemberBranch"].ToString();
+                    obj.NomineeName = r["NomineeName"].ToString();
+                    obj.NomineeRelation = r["NomineeRelation"].ToString();
+                    obj.NomineeAge = r["NomineeAge"].ToString();
+                    obj.UPIID = r["UPIID"].ToString();
+                    obj.IsVerified = r["IsVerified"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstKycUpdate = lst;
+            }
+            return View(model);
+        }
+        
     }
 }
