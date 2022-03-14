@@ -580,7 +580,7 @@ namespace MyTrade.Controllers
             {
                 TempData["verify"] = ex.Message;
             }
-            return RedirectToAction("ViewProfile","AdminReports",new { Id = Id });
+            return RedirectToAction("KYCUpdateDeatilsOfUser","Admin");
         }
 
 

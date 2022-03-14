@@ -1447,7 +1447,6 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("TransferWallet")]
         [OnAction(ButtonName = "Transfer")]
@@ -1480,7 +1479,6 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("AdvanceDeduction")]
         [OnAction(ButtonName = "Advance")]
@@ -1508,9 +1506,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AdvanceDeduction", "Admin");
         }
-
-
-
         public ActionResult AdvanceDeductionList()
         {
             Admin model = new Admin();
@@ -1533,7 +1528,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("AdvanceDeductionList")]
         [OnAction(ButtonName = "Search")]

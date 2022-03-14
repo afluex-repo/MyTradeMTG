@@ -99,7 +99,18 @@ namespace MyTrade.Models
         public string Deduction { get; set; }
         public string Pk_AdvanceId { get; set; }
         public List<Admin> lstdeduction { get; set; }
+        public List<Admin> lstKycUpdate { get; set; }
 
+        public string NomineeName { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+        public string UPIID { get; set; }
+        public string AdharNo { get; set; }
+        public string PanNo { get; set; }
+        public string PanImage { get; set; }
+        public string IsVerified { get; set; }
+        public string Response { get; set; }
+        public string Message { get; set; }
 
 
         #endregion
@@ -406,7 +417,6 @@ namespace MyTrade.Models
             return ds;
         }
 
-
         public DataSet GetAdvanceDeductionReports()
         {
             SqlParameter[] para = {
@@ -415,5 +425,23 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetAdvanceDeductionReports", para);
             return ds;
         }
+        
+        public DataSet GetKYCUpdateDetailsOfUser()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetKYCUpdateDetailsOfUser");
+            return ds;
+        }
+        
+
+        public DataSet Approve()
+        {
+            SqlParameter[] para = {new SqlParameter("@PK_RequestID",PK_RequestID),
+                                   new SqlParameter("@TransactionNo",TransactionNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("Approve", para);
+            return ds;
+        }
+
+
     }
 }
