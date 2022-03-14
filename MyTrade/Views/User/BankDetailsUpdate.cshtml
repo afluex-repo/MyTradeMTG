@@ -195,14 +195,14 @@
                             <div class="col-md-4" style="margin-top:30px">
                                 <div class="form-group">
                                     <input type="hidden" name="IsVerified" value="@Model.IsVerified" />
-                                    @if (Model.IsVerified == "True")
-                                    {
-                                        <button id="my-button" disabled class="btn btn-success pull-left">Updated</button>
-                                    }
-                                    else
-                                    {
-                                        <input class="btn btn-success pull-left" type="submit" value="Update" id="Update" name="Update" onclick="return validate();" />
-                                    }
+                                   @if (Model.UPIID == null || Model.UPIID == "" || Model.IsVerified == "False")
+                                   {
+                                    <input class="btn btn-success pull-left" type="submit" value="Update" id="Update" name="Update" onclick="return validate();" />
+                                   }
+                                   else
+                                   {
+                                    <button id="my-button" disabled class="btn btn-success pull-left">Updated</button>
+                                   }
 
                                 </div>
                             </div>

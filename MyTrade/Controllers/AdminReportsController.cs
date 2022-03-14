@@ -487,9 +487,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("ViewProfileForAdmin", "AdminReports", new { Id = model.Fk_UserId });
         }
-
-
-
         public ActionResult DeleteUerDetails(string Id)
         {
             try
@@ -557,7 +554,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
         public ActionResult ViewProfileVeriFy(string Id)
         {
             AdminReports model = new AdminReports();
@@ -582,10 +578,7 @@ namespace MyTrade.Controllers
             {
                 TempData["verify"] = ex.Message;
             }
-            return RedirectToAction("ViewProfile","AdminReports",new { Id = Id });
+            return RedirectToAction("KYCUpdateDeatilsOfUser","Admin");
         }
-
-
-
     }
 }
