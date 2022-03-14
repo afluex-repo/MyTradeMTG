@@ -1432,9 +1432,16 @@ namespace MyTrade.Controllers
             DataSet ds = model.GetNameDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                model.Result = "yes";
-                model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
-                model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                    model.Result = "yes";
+                    model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                }
             }
             else
             {

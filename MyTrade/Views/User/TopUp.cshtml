@@ -35,16 +35,14 @@
                             <div class="col-md-4">
                                 <label for="LoginId">LoginId</label>
                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
-                                <p class="text-success" id="spName"></p>
                                 @Html.HiddenFor(m => m.Name)
-                                <label style="color:red;" id="lblName"></label>
+                                <label style="color:blue;" id="lblName">@Session["FullName"]</label>
                             </div>
                             <div class="col-md-4">
                                 <input type="hidden" id="amt" />
                                 <input type="hidden" id="pkg" />
                                 <label for="Package">Package <span style="color:red">*</span></label>
                                 @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
-                                <p class="text-success" id="spName"></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
@@ -287,10 +285,6 @@
     //    }
 
     //}
-
-
-
-
     function GetNameDetails() {
         debugger;
         var LoginId = $('#LoginId').val();
@@ -314,23 +308,8 @@
                     $('#LoginId').focus();
                 }
             }
-
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 @if (TempData["msg"] != null)

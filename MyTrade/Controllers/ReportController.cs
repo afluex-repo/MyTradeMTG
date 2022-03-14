@@ -277,5 +277,31 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public ActionResult PaidIncome(UserReports model)
+        {
+            List<UserReports> lst = new List<UserReports>();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.PaidIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.FK_UserId = r["Fk_Userid"].ToString();
+                    obj.LevelIncomeTR1 = r["LevelIncomeTR1"].ToString();
+                    obj.LevelIncomeTR2 = r["LevelIncomeTR2"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["AdminFee"].ToString();
+                    obj.TDSAmount = r["TDSAmount"].ToString();
+                    obj.NetAmount = r["NetAmount"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
     }
 }

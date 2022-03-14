@@ -24,8 +24,9 @@
                         <div class="row mb-4">
                             <div class="col-md-4">
                                 <label for="LoginId">LoginId</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
-                                <p class="text-success" id="spName"></p>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                                @Html.HiddenFor(m => m.Name)
+                                <label style="color:blue;" id="lblName"></label>
                             </div>
                             <div class="col-md-4">
                                 <input type="hidden" id="amt" />
@@ -276,6 +277,32 @@
     //    }
 
     //}
+    function GetNameDetails() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/Admin/GetNameDetails', type: 'post', dataType: 'json',
+            data: { 'LoginId': LoginId },
+            success: function (data) {
+                debugger;
+                if (data.Result == "yes") {
+                    $("#Name").val(data.Name);
+                    $("#lblName").text($("#Name").val());
+                    $("#LoginId").removeClass('errortext');
+                    $("#Name").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    alert('Invailid LoginId');
+
+                    $("#LoginId").val('');
+                    $("#Name").val('');
+                    $("#LoginId").addClass('errortext');
+                    $("#Name").addClass('errortext');
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
 </script>
 
 @if (TempData["msg"] != null)
