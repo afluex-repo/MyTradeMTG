@@ -35,6 +35,13 @@ namespace MyTrade.Models
         public string Percentage { get; set; }
         public string Status { get; set; }
         public string BV { get; set; }
+        public string ToName { get; set; }
+        public string CommissionPercentage { get; set; }
+      
+
+
+
+        
         public DataSet PayoutWalletLedger()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
