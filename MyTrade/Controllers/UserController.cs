@@ -48,7 +48,7 @@ namespace MyTrade.Controllers
                 ViewBag.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
-                ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"])+ 0;
+                ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 if (ViewBag.Status == "InActive")
                 {
                     return RedirectToAction("ActivateByPin", "User");
@@ -90,7 +90,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
                 ViewBag.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
             }
-            
+
 
             return View(obj);
         }
@@ -449,7 +449,7 @@ namespace MyTrade.Controllers
                 model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
                 model.SelfBV = ds.Tables[1].Rows[0]["SelfBV"].ToString();
                 model.TeamBV = ds.Tables[1].Rows[0]["TeamBV"].ToString();
-                model.SelfBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805),2).ToString();
+                model.SelfBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805), 2).ToString();
                 model.TeamBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["TeamBV"]) / 76.805), 2).ToString();
                 model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
             }
@@ -697,13 +697,19 @@ namespace MyTrade.Controllers
         {
             try
             {
-
+                Random rnd = new Random();
                 if (Image != null)
                 {
-                    model.Image = "/PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    if(model.PanNumber!=null && model.PanNumber != "")
+                    {
+                        model.Image = "/PanUpload/" + model.PanNumber+ rnd.Next(1,10)+ Path.GetExtension(Image.FileName);
+                    }
+                    else
+                    {
+                        model.Image = "/PanUpload/" + Guid.NewGuid() + Path.GetExtension(Image.FileName);
+                    }
                     Image.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                 }
-
                 model.Fk_UserId = Session["Pk_userId"].ToString();
                 DataSet ds = model.BankDetailsUpdate();
                 if (ds != null && ds.Tables.Count > 0)
@@ -1001,56 +1007,61 @@ namespace MyTrade.Controllers
             DataSet ds = model.GetLevelMembersCountTR1();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in ds.Tables[0].Rows)
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
                 {
-                    TreeMembers obj = new TreeMembers();
-                    obj.LevelName = r["LevelNo"].ToString();
-                    obj.NumberOfMembers = r["TotalAssociate"].ToString();
-                    lst.Add(obj);
+                   
                 }
-                model.lst = lst;
-            }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-            {
-                ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
-                ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
-                model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
-                model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
-                model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
-                model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
-                model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
-                model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
-                model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
-                model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
-                model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
-                model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
-                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
-            }
-            model.Level = "1";
-            DataSet ds1 = model.GetLevelMembers();
-            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds1.Tables[0].Rows)
+                else
                 {
-                    MemberDetails obj = new MemberDetails();
-                    obj.PK_UserId = r["PK_UserId"].ToString();
-                    obj.MemberName = r["MemberName"].ToString();
-                    obj.LoginId = r["LoginId"].ToString();
-                    obj.Level = r["Lvl"].ToString();
-                    obj.ProfilePic = r["ProfilePic"].ToString();
-                    obj.Status = r["Status"].ToString();
-                    obj.SelfBV = r["SelfBV"].ToString();
-                    obj.TeamBV = r["TeamBV"].ToString();
-                    obj.SponsorName = r["SponsorName"].ToString();
-                    obj.Color = r["Color"].ToString();
-                    lstMember.Add(obj);
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        TreeMembers obj = new TreeMembers();
+                        obj.LevelName = r["LevelNo"].ToString();
+                        obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                    {
+                        ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                        ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
+                        model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
+                        model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                        model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                        model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                        model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                        model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                        model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                        model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                        model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                        model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                        model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+                    }
+                    model.Level = "1";
+                    DataSet ds1 = model.GetLevelMembers();
+                    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds1.Tables[0].Rows)
+                        {
+                            MemberDetails obj = new MemberDetails();
+                            obj.PK_UserId = r["PK_UserId"].ToString();
+                            obj.MemberName = r["MemberName"].ToString();
+                            obj.LoginId = r["LoginId"].ToString();
+                            obj.Level = r["Lvl"].ToString();
+                            obj.ProfilePic = r["ProfilePic"].ToString();
+                            obj.Status = r["Status"].ToString();
+                            obj.SelfBV = r["SelfBV"].ToString();
+                            obj.TeamBV = r["TeamBV"].ToString();
+                            obj.SponsorName = r["SponsorName"].ToString();
+                            obj.Color = r["Color"].ToString();
+                            lstMember.Add(obj);
+                        }
+                        model.lstMember = lstMember;
+                    }
                 }
-                model.lstMember = lstMember;
             }
             return View(model);
         }
-
-
         public ActionResult TopUpList()
         {
             Account model = new Account();
@@ -1278,7 +1289,7 @@ namespace MyTrade.Controllers
             }
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
             {
-                    model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
+                model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
             }
             #region Check Balance
             DataSet ds11 = model.GetWalletBalance();
@@ -1363,21 +1374,24 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
-
         [HttpPost]
         public ActionResult GetNameDetails(string LoginId)
         {
-            User model = new User();
+            Admin model = new Admin();
             model.LoginId = LoginId;
             DataSet ds = model.GetNameDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                model.Result = "yes";
-                model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
-                model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
-               
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                    model.Result = "yes";
+                    model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                }
             }
             else
             {
@@ -1385,7 +1399,5 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

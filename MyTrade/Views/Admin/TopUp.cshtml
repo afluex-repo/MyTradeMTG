@@ -6,114 +6,115 @@
 <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
 @using (Html.BeginForm("TopUp", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
-            <div class="col-lg-12 col-12 layout-spacing">
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Top-Up</h4>
-                                @*<span class="text-danger">
-                                        @TempData["TopUp"]
-                                    </span>*@
-                            </div>
+<div class="container">
+    <div class="row layout-top-spacing">
+        <div class="col-lg-12 col-12 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <h4>Top-Up</h4>
+                            @*<span class="text-danger">
+                                @TempData["TopUp"]
+                            </span>*@
                         </div>
                     </div>
-                    <div class="widget-content widget-content-area">
-                        <div class="row mb-4">
-                            <div class="col-md-4">
-                                <label for="LoginId">LoginId</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
-                                <p class="text-success" id="spName"></p>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="hidden" id="amt" />
-                                <input type="hidden" id="pkg" />
-                                <label for="Package">Package <span style="color:red">*</span></label>
-                                @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
-                                <p class="text-success" id="spName"></p>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                <label for="Amount">Amount <span style="color:red">*</span></label>
-                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
-                                <span style="color:red">Min  : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> Max : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
-                                <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
-                            </div>
-                        </div>
-                        @*<div class="row mb-4">
-                                <div class="col-md-4">
-                                    <label for="Amount">
-                                        Payment Type
-                                    </label><span style="color: red">*</span>
-                                    @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
-                                </div>
-                                <div class="col-md-4" id="paymentmode" style="display: none">
-                                    <label for="Mode">Mode<span style="color:red">*</span></label>
-                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
-                                </div>
-                            </div>
-                            <div class="row mb-4" style="display:none" id="divPaymentMode">
-                                <div class="col-md-3" id="divQr" style="display: none">
-                                    <label id="lblQr"> Scan QR </label>
-                                    <img src="~/assets/img/QR.jpeg" height="200" width="200" />
-                                </div>
-                                <div class="col-md-3" id="divbankname">
-                                    <label for="BankName" id="lblbank">Bank Name</label>
-                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
-                                </div>
-                                <div class="col-md-3" id="divbankbranch">
-                                    <label for="BranchName" id="lbltbranch">Branch Name</label>
-                                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Branch Name" })
-                                </div>
-                                <div class="col-md-3" id="divtransactiono">
-                                    <label for="TransactionNo" id="lbltno">Transaction No</label>
-                                    @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
-                                </div>
-                                <div class="col-md-3" id="divtrdate">
-                                    <label for="TransactionDate" id="lbltdate">TransactionDate</label>
-                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
-                                </div>
-                            </div>*@
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div class="row mb-4">
                         <div class="col-md-4">
-                            <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="button" value="Submit" onclick="return ValidateForm();" data-toggle="modal" />
+                            <label for="LoginId">LoginId</label>
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                            @Html.HiddenFor(m => m.Name)
+                            <label style="color:blue;" id="lblName"></label>
                         </div>
-                        @*<div class="row mb-4">
-                                <div class="col-md-12">
-                                    <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
-                                </div>
-                            </div>*@
-
+                        <div class="col-md-4">
+                            <input type="hidden" id="amt" />
+                            <input type="hidden" id="pkg" />
+                            <label for="Package">Package <span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
+                            <p class="text-success" id="spName"></p>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
+                            <label for="Amount">Amount <span style="color:red">*</span></label>
+                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
+                            <span style="color:red">Min  : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> Max : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
+                            <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
+                        </div>
                     </div>
+                    @*<div class="row mb-4">
+                        <div class="col-md-4">
+                            <label for="Amount">
+                                Payment Type
+                            </label><span style="color: red">*</span>
+                            @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                        </div>
+                        <div class="col-md-4" id="paymentmode" style="display: none">
+                            <label for="Mode">Mode<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
+                        </div>
+                    </div>
+                    <div class="row mb-4" style="display:none" id="divPaymentMode">
+                        <div class="col-md-3" id="divQr" style="display: none">
+                            <label id="lblQr"> Scan QR </label>
+                            <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                        </div>
+                        <div class="col-md-3" id="divbankname">
+                            <label for="BankName" id="lblbank">Bank Name</label>
+                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
+                        </div>
+                        <div class="col-md-3" id="divbankbranch">
+                            <label for="BranchName" id="lbltbranch">Branch Name</label>
+                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Branch Name" })
+                        </div>
+                        <div class="col-md-3" id="divtransactiono">
+                            <label for="TransactionNo" id="lbltno">Transaction No</label>
+                            @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
+                        </div>
+                        <div class="col-md-3" id="divtrdate">
+                            <label for="TransactionDate" id="lbltdate">TransactionDate</label>
+                            @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
+                        </div>
+                    </div>*@
+                    <div class="col-md-4">
+                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="button" value="Submit" onclick="return ValidateForm();" data-toggle="modal" />
+                    </div>
+                    @*<div class="row mb-4">
+                        <div class="col-md-12">
+                            <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
+                        </div>
+                    </div>*@
+
                 </div>
             </div>
         </div>
     </div>
-                   <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="modal-text">
-                        Hello
-                       Admin
-                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI @ViewBag.ROIPercent % per day
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-text">
+                    Hello
+                    Admin
+                    , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI @ViewBag.ROIPercent % per day
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
+</div>
 }
 
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
@@ -276,31 +277,58 @@
     //    }
 
     //}
+    function GetNameDetails() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/Admin/GetNameDetails', type: 'post', dataType: 'json',
+            data: { 'LoginId': LoginId },
+            success: function (data) {
+                debugger;
+                if (data.Result == "yes") {
+                    $("#Name").val(data.Name);
+                    $("#lblName").text($("#Name").val()+'(Wallet Balance : '+data.Amount+')');
+                    $("#LoginId").removeClass('errortext');
+                    $("#Name").removeClass('errortext');
+
+                }
+                else if (data.Result == "no") {
+                    alert('Invailid LoginId');
+
+                    $("#LoginId").val('');
+                    $("#Name").val('');
+                    $("#LoginId").addClass('errortext');
+                    $("#Name").addClass('errortext');
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
 </script>
 
 @if (TempData["msg"] != null)
 {
-    <script>
-        $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["msg"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#1abc9c',
-                pos: 'top-right'
-            });
+<script>
+    $(document).ready(function () {
+        Snackbar.show({
+            text: '@TempData["msg"]',
+            actionTextColor: '#fff',
+            backgroundColor: '#1abc9c',
+            pos: 'top-right'
         });
-    </script>
+    });
+</script>
 }
 @if (TempData["error"] != null)
 {
-    <script>
-        $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["error"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#e7515a',
-                pos: 'top-right'
-            });
+<script>
+    $(document).ready(function () {
+        Snackbar.show({
+            text: '@TempData["error"]',
+            actionTextColor: '#fff',
+            backgroundColor: '#e7515a',
+            pos: 'top-right'
         });
-    </script>
+    });
+</script>
 }

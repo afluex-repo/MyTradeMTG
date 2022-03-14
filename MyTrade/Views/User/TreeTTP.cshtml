@@ -225,6 +225,7 @@
 
 <script>
     function GetTreeMembers(Level) {
+        debugger;
         var cl = "";
         $.ajax({
             url: "/User/GetTreeMembers",
@@ -232,12 +233,18 @@
             DataType: 'JSON',
             data: { Level: Level, PK_UserId: $("#PK_UserId").val() },
             success: function (data) {
+                debugger;
                 if (data != null) {
                     $("#divMember").html('');
                     if (data.lstMember != null) {
                         for (var i = 0; i < data.lstMember.length; i++) {
-
-                            $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="/User/TreeTTP?LoginId=' + data.lstMember[i].LoginId + '&Id=' + data.lstMember[i].PK_UserId + '"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p></div></div></div>')
+                            if (data.lstMember[i].Level == "10")
+                            {
+                                $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="javascript:void(0)"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p></div></div></div>')
+                            }
+                            else {
+                                $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="/User/TreeTTP?LoginId=' + data.lstMember[i].LoginId + '&Id=' + data.lstMember[i].PK_UserId + '"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p></div></div></div>')
+                            }
                         }
                     }
                 }

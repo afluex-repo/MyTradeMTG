@@ -1303,53 +1303,66 @@ namespace MyTrade.Controllers
                 DataSet ds = req.GetLevelMembersCountTR1();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    res.Status = "0";
-                    res.Message = "Record Found";
-                    foreach (DataRow r in ds.Tables[0].Rows)
+                    if (ds.Tables[0].Rows[0][0].ToString()=="0")
                     {
-                        LevelTreeMembers obj = new LevelTreeMembers();
-                        obj.Level = r["LevelNo"].ToString();
-                        obj.NumberOfMembers = r["TotalAssociate"].ToString();
-                        lst.Add(obj);
+                        res.Status = "1";
+                        res.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
-                    res.lst = lst;
-                }
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-                {
-                    res.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
-                    res.ActiveStatus = ds.Tables[1].Rows[0]["Status"].ToString();
-                    res.Color = ds.Tables[1].Rows[0]["Color"].ToString();
-                    res.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
-                    res.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
-                    res.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
-                    res.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
-                    res.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
-                    res.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
-                    res.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
-                    res.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
-                    res.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
-                    res.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
-                }
-                DataSet ds1 = req.GetLevelMembers("1", res.PK_UserId);
-                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    else
                     {
-                        LevelTreeMemberDetails obj = new LevelTreeMemberDetails();
-                        obj.PK_UserId = r["PK_UserId"].ToString();
-                        obj.MemberName = r["MemberName"].ToString();
-                        obj.LoginId = r["LoginId"].ToString();
-                        obj.Level = r["Lvl"].ToString();
-                        obj.ProfilePic = r["ProfilePic"].ToString();
-                        obj.Status = r["Status"].ToString();
-                        obj.SelfBV = r["SelfBV"].ToString();
-                        obj.TeamBV = r["TeamBV"].ToString();
-                        obj.SponsorName = r["SponsorName"].ToString();
-                        obj.Color = r["Color"].ToString();
-                        lstMember.Add(obj);
+                        res.Status = "0";
+                        res.Message = "Record Found";
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            LevelTreeMembers obj = new LevelTreeMembers();
+                            obj.Level = r["LevelNo"].ToString();
+                            obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                            lst.Add(obj);
+                        }
+                        res.lst = lst;
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                        {
+                            if (ds.Tables[1].Rows[0]["Lvl"].ToString() == "10")
+                            {
+
+                            }
+                            res.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                            res.ActiveStatus = ds.Tables[1].Rows[0]["Status"].ToString();
+                            res.Color = ds.Tables[1].Rows[0]["Color"].ToString();
+                            res.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                            res.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                            res.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                            res.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                            res.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                            res.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                            res.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                            res.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                            res.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                            res.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+                        }
+                        DataSet ds1 = req.GetLevelMembers("1", res.PK_UserId);
+                        if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow r in ds1.Tables[0].Rows)
+                            {
+                                LevelTreeMemberDetails obj = new LevelTreeMemberDetails();
+                                obj.PK_UserId = r["PK_UserId"].ToString();
+                                obj.MemberName = r["MemberName"].ToString();
+                                obj.LoginId = r["LoginId"].ToString();
+                                obj.Level = r["Lvl"].ToString();
+                                obj.ProfilePic = r["ProfilePic"].ToString();
+                                obj.Status = r["Status"].ToString();
+                                obj.SelfBV = r["SelfBV"].ToString();
+                                obj.TeamBV = r["TeamBV"].ToString();
+                                obj.SponsorName = r["SponsorName"].ToString();
+                                obj.Color = r["Color"].ToString();
+                                lstMember.Add(obj);
+                            }
+                            res.lstDetails = lstMember;
+                        }
                     }
-                    res.lstDetails = lstMember;
                 }
+                
             }
             catch (Exception ex)
             {
@@ -1457,6 +1470,48 @@ namespace MyTrade.Controllers
                         lstMember.Add(obj);
                     }
                     res.lstDetails = lstMember;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult GetTreeMembersTPS(string Level, string PK_UserId)
+        {
+            LevelMembers res = new LevelMembers();
+            try
+            {
+                LevelTreeReq req = new LevelTreeReq();
+                List<LevelTreeMemberDetails> lst = new List<LevelTreeMemberDetails>();
+                DataSet ds = req.GetLevelMembers(Level, PK_UserId);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        LevelTreeMemberDetails obj = new LevelTreeMemberDetails();
+                        obj.PK_UserId = r["PK_UserId"].ToString();
+                        obj.MemberName = r["MemberName"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Level = r["Lvl"].ToString();
+                        obj.ProfilePic = r["ProfilePic"].ToString();
+                        obj.SelfBV = r["SelfBV"].ToString();
+                        obj.TeamBV = r["TeamBV"].ToString();
+                        obj.SponsorName = r["SponsorName"].ToString();
+                        obj.Color = r["Color"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
                 }
             }
             catch (Exception ex)
@@ -1646,7 +1701,7 @@ namespace MyTrade.Controllers
                 res.Status = "1";
                 res.Message = "No Record Found";
             }
-            return Json(res,JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult LevelIncomeTr1(LevelIncomeRequest model)
@@ -1679,12 +1734,12 @@ namespace MyTrade.Controllers
                     res.Message = "No Record Found";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 res.Status = "1";
                 res.Message = "No Record Found";
             }
-            return Json(res,JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult LevelIncomeTr2Total(PinRequest model)
@@ -1791,12 +1846,12 @@ namespace MyTrade.Controllers
                     res.Message = "No Record Found";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 res.Status = "1";
                 res.Message = ex.Message;
             }
-            return Json(res,JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult PayoutDetail(PayoutDetailRequest model)
@@ -1834,12 +1889,12 @@ namespace MyTrade.Controllers
                     res.Message = "No Record Found";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 res.Status = "1";
                 res.Message = ex.Message;
             }
-            return Json(res,JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
     }
 }
