@@ -487,9 +487,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("ViewProfileForAdmin", "AdminReports", new { Id = model.Fk_UserId });
         }
-
-
-
         public ActionResult DeleteUerDetails(string Id)
         {
             try
@@ -550,12 +547,13 @@ namespace MyTrade.Controllers
                     ViewBag.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     ViewBag.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                     ViewBag.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
+                    ViewBag.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                    ViewBag.UPI = ds.Tables[0].Rows[0]["UPIID"].ToString();
                     ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 }
             }
             return View(model);
         }
-        
         public ActionResult ViewProfileVeriFy(string Id)
         {
             AdminReports model = new AdminReports();
@@ -582,8 +580,5 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("KYCUpdateDeatilsOfUser","Admin");
         }
-
-
-
     }
 }

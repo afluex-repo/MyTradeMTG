@@ -10,129 +10,124 @@
 
 @using (Html.BeginForm("PayoutRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-<div class="container">
-    <div class="row layout-top-spacing">
-        <div class="col-lg-12 col-12 layout-spacing">
-            <div class="statbox widget box box-shadow">
-                <div class="widget-header">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                            <h4>Transfer To Bank Account list</h4>
-                            <span class="text-danger">
-                                @TempData["msg"]
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="widget-content widget-content-area">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <label>Login Id </label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <label> From Date</label>
-                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <label> To Date</label>
-                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3" style="margin-top:28px">
-                            <div class="form-group">
-                                <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Transfer To Bank Account list</h4>
+                                <span class="text-danger">
+                                    @TempData["msg"]
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <table id="html5-extension" class="table table-hover non-hover" ,data-page-length='25'>
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="ckbCheckAll" /></th>
-                                    <th>Sr No.</th>
-                                    <th>Transaction No</th>
-                                    <th>Login Id</th>
-                                    <th>Name</th>
-                                    <th>Amount</th>
-                                    <th>IFSC Code</th>
-                                    <th>Account No.</th>
-                                    <th>Status</th>
-                                    <th>Requested Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
-                                {
-                                if (Model.lst != null)
-                                {
-                                int i = 1;
-                                foreach (var Item in Model.lst)
-                                {
-                                <tr class="text-left">
-
-                                    @*@if (Item.Status == "Pending")
-                                    {*@
-                                    <td>
-
-                                        <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
-                                        <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
-                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                    </td>
-                                    @*}
-                                    else
-                                    {*@
-                                    @*<td>
-                                        <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
-                                    </td>*@
-
-                                    @*}*@
-
-
-
-
-                                    <td>@i</td>
-                                    <td>@Item.TransactionNo</td>
-                                    <td>@Item.LoginId</td>
-                                    <td>@Item.Name</td>
-                                    <td>@Item.Amount</td>
-                                    <td>@Item.IFSCCode</td>
-                                    <td>@Item.MemberAccNo</td>
-                                    <td>@Item.Status</td>
-                                    <td>@Item.Date</td>
-                                    @*@if (Item.Status == "Pending")
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>Login Id </label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label> From Date</label>
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label> To Date</label>
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                                <div class="form-group">
+                                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table id="html5-extension" class="table table-hover non-hover" ,data-page-length='25'>
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="ckbCheckAll" /></th>
+                                        <th>Sr No.</th>
+                                        <th>Transaction No</th>
+                                        <th>Login Id</th>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                        <th>IFSC Code</th>
+                                        <th>Account No.</th>
+                                        <th>Status</th>
+                                        <th>Requested Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                     {
-                                    <td>
-                                        <a href="/Admin/ApprovePayout?id=@Item.PK_RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>
-                                        <a href="/Admin/DeclineKYCUpdateDeatilsOfUser?id=@Item.PK_RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>
+                                        if (Model.lst != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lst)
+                                            {
+                                                <tr class="text-left">
 
-                                    </td>
+                                                    @if (Item.Status == "Pending")
+                                                    {
+                                                        <td>
+
+                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                            <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
+                                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <input class="checkBoxClass1" type="checkbox"  disabled="disabled" />
+                                                        </td>
+                                                    }
+                                                    <td>@i</td>
+                                                    <td>@Item.TransactionNo</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.IFSCCode</td>
+                                                    <td>@Item.MemberAccNo</td>
+                                                    <td>@Item.Status</td>
+                                                    <td>@Item.Date</td>
+                                                    @*@if (Item.Status == "Pending")
+                                                        {
+                                                        <td>
+                                                            <a href="/Admin/ApprovePayout?id=@Item.PK_RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>
+                                                            <a href="/Admin/DeclineKYCUpdateDeatilsOfUser?id=@Item.PK_RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>
+
+                                                        </td>
+                                                        }
+                                                        else
+                                                        {
+                                                        <td></td>
+                                                        }*@
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
                                     }
-                                    else
-                                    {
-                                    <td></td>
-                                    }*@
-                                </tr>
-                                i++;
-                                }
-                                }
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
 
-                        <div class="col-lg-3 col-md-3" style="margin-top:28px">
-                            <div class="form-group">
-                                @*<a href="/Admin/ApprovePayout" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>*@
+                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                                <div class="form-group">
+                                    @*<a href="/Admin/ApprovePayout" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>*@
 
-                            <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Approve</a>
+                                    <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Approve</a>
 
-                                @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
+                                    @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,37 +135,36 @@
             </div>
         </div>
     </div>
-</div>
 
 
 
     @Html.HiddenFor(m => m.PK_RequestID)
-<div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" style="color: red">Approve</h6>
-                <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
-            </div>
-            <div class="modal-body" style="color: black">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label>Transaction Number</label>
-                            @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo"})
+    <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" style="color: red">Approve</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Transaction Number</label>
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4" style="margin-top:30px;">
-                        <div class="form-group">
-                            <input type="button" class="btn btn-sm btn-success pull-right" onclick="return Approve()" value="Submit" />
+                        <div class="col-md-4" style="margin-top:30px;">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-sm btn-success pull-right" name="btnApprove" onclick="return Approve()" value="Approve" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
@@ -213,8 +207,6 @@
         });
 
     }
-
-
     $('#IsDownline').click(function () {
         if ($(this).attr('checked') == false) {
             $('#IsDownline').attr("disabled", "disabled");
@@ -222,55 +214,16 @@
             $('#GetDetails').removeAttr('disabled');
         }
     });
-
-
     function openPopup(PK_RequestID) {
         jQuery.noConflict();
         $("#PK_RequestID").val(PK_RequestID);
         $("#myModal").modal('show');
     }
-
     function closeModal() {
         jQuery.noConflict();
         $("#myModal").hide();
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
-
-
-
-    function Approve() {
-        debugger;
-        jQuery.noConflict();
-        $(".errortext").removeClass("errortext");
-
-        if ($('#TransactionNo').val() == '') {
-            $("#TransactionNo").addClass('errortext');
-            $('#TransactionNo').focus();
-            return false;
-        }
-        var r = confirm('Are you sure you want to approve?');
-        if (r == true) {
-            $.ajax({
-                url: "/Admin/Approve",
-                Type: "Get",
-                DataType: "JSON",
-                data: { TransactionNo: $("#TransactionNo").val(), PK_RequestID: $("#PK_RequestID").val() },
-                success: function (data) {
-                    if (data != null) {
-                        if (data.Response == "1") {
-                            alert("Approved successfully");
-                        }
-                        else {
-                            alert(data.Message);
-                        }
-                    }
-                    $("#myModal").modal('hide');
-                }
-            });
-        }
-    }
-
-
     $(document).ready(function () {
         debugger;
         $.noConflict();
@@ -285,7 +238,7 @@
                     this.checked = false;
                 });
             }
-            $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
+            //$("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
         });
 
 
@@ -298,7 +251,7 @@
         } else {
             $('#ckbCheckAll').prop('checked', false);
         }
-        $("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
+        //$("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
     });
 
 

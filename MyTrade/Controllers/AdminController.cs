@@ -1329,6 +1329,7 @@ namespace MyTrade.Controllers
                     obj.Date = r["RequestedDate"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
@@ -1357,6 +1358,7 @@ namespace MyTrade.Controllers
                     obj.Amount = r["AMount"].ToString();
                     obj.Date = r["RequestedDate"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
@@ -1432,9 +1434,17 @@ namespace MyTrade.Controllers
             DataSet ds = model.GetNameDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                model.Result = "yes";
-                model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
-                model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    model.Result = "no";
+                }
+                else
+                {
+                    model.Result = "yes";
+                    model.Fk_UserId = ds.Tables[0].Rows[0]["PK_UserId"].ToString();
+                    model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                    model.Amount = ds.Tables[1].Rows[0]["Balance"].ToString();
+                }
             }
             else
             {
@@ -1578,7 +1588,7 @@ namespace MyTrade.Controllers
             }
             ViewBag.ddlProduct = ddlProduct;
             #endregion
-           
+
             #region ddlpaymentType
             List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
             ViewBag.ddlpaymentType = ddlpaymentType;
@@ -1632,6 +1642,85 @@ namespace MyTrade.Controllers
                 TempData["error"] = ex.Message;
             }
             return RedirectToAction("Topup", "Admin");
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnApprove")]
+        [ActionName("PayoutRequestList")]
+        public ActionResult ApprovePayoutRequest(Admin model)
+        {
+            try
+            {
+                string hdrows = Request["hdRows"].ToString();
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                string chkselect = "";
+                for (int i = 1; i <= int.Parse(hdrows); i++)
+                {
+                    try
+                    {
+                        chkselect = Request["chkSelect_ " + i];
+                        if (chkselect == "on")
+                        {
+                            model.PK_RequestID = Request["PK_RequestID_ " + i].ToString();
+                            model.Status = "Approved";
+                            DataSet ds = model.ApprovePayoutRequest();
+                            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                                {
+                                    TempData["msg"] = "Approved Successfully";
+                                }
+                                else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                                {
+                                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                                }
+                            }
+                        }
+                    }
+                    catch { chkselect = "0"; }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+
+            }
+            return RedirectToAction("PayoutRequestList");
+        }
+        public ActionResult KYCUpdateDeatilsOfUser()
+        {
+            Admin model = new Admin();
+            try
+            {
+                List<Admin> lst = new List<Admin>();
+                DataSet ds = model.GetKYCUpdateDetailsOfUser();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Admin obj = new Admin();
+                        obj.Fk_UserId = r["PK_UserId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.AdharNo = r["AdharNumber"].ToString();
+                        obj.PanNo = r["PanNumber"].ToString();
+                        obj.MemberAccNo = r["MemberAccNo"].ToString();
+                        obj.IFSCCode = r["IFSCCode"].ToString();
+                        obj.BankName = r["MemberBankName"].ToString();
+                        obj.BankBranch = r["MemberBranch"].ToString();
+                        obj.NomineeName = r["NomineeName"].ToString();
+                        obj.NomineeAge = r["NomineeAge"].ToString();
+                        obj.NomineeRelation = r["NomineeRelation"].ToString();
+                        obj.UPIID = r["UPIID"].ToString();
+                        obj.PanImage = r["PanImage"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstKycUpdate = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return View(model);
         }
     }
 }
