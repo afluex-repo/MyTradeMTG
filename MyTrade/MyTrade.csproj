@@ -799,6 +799,7 @@
     <Content Include="Views\Admin\KYCUpdateDeatilsOfUser.cshtml" />
     <Content Include="Views\Admin\PayoutRequestList.cshtml" />
     <Content Include="Views\Admin\TopUp.cshtml" />
+    <Content Include="Views\Admin\TPSListForDistributePayment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

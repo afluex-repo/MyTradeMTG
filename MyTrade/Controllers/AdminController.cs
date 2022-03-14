@@ -1075,8 +1075,10 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-
+        
         [HttpPost]
+        [ActionName("DistributePaymentTPS")]
+        [OnAction(ButtonName = "btnSearch")]
         public ActionResult DistributePaymentTPSSave(Admin model)
         {
             try
@@ -1720,6 +1722,36 @@ namespace MyTrade.Controllers
             {
                 TempData["error"] = ex.Message;
             }
+            return View(model);
+        }
+        public ActionResult TPSListForDistributePayment()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.DistributePaymentTPS();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["FirstName"].ToString();
+                    obj.TPS = r["TPS"].ToString();
+                    obj.GrossAmount = r["GrossIncome"].ToString();
+                    obj.ProcessingFee = r["Processing"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.NetAmount = r["NetIncome"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstDistributePaymentTPP = lst;
+                ViewBag.TPS = double.Parse(ds.Tables[0].Compute("sum(TPS)", "").ToString()).ToString("n2");
+                ViewBag.GrossIncome = double.Parse(ds.Tables[0].Compute("sum(GrossIncome)", "").ToString()).ToString("n2");
+                ViewBag.Processing = double.Parse(ds.Tables[0].Compute("sum(Processing)", "").ToString()).ToString("n2");
+                ViewBag.TDS = double.Parse(ds.Tables[0].Compute("sum(TDS)", "").ToString()).ToString("n2");
+                ViewBag.NetIncome = double.Parse(ds.Tables[0].Compute("sum(NetIncome)", "").ToString()).ToString("n2");
+            }
+            model.LastClosingDate = ds.Tables[1].Rows[0]["ClosingDate"].ToString();
+            model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
     }
