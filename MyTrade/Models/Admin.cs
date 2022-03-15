@@ -327,6 +327,15 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("MakePaymentListTPS", para);
             return ds;
         }
+        public DataSet ListForDistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ListForDistributePaymentTPSNew", para);
+            return ds;
+        }
         public DataSet SaveDistributePaymentTPS()
         {
             SqlParameter[] para = {
