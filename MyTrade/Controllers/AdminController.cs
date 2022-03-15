@@ -1510,6 +1510,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Remark = r["Remark"].ToString();
+                    obj.DeductionType = r["Type"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
@@ -1534,6 +1535,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Remark = r["Remark"].ToString();
+                    obj.DeductionType = r["Type"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
