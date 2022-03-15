@@ -111,7 +111,7 @@ namespace MyTrade.Models
         public string IsVerified { get; set; }
         public string Response { get; set; }
         public string Message { get; set; }
-
+        public string DeductionType { get; set; }
 
         #endregion
         #region PinGenerated
@@ -408,6 +408,7 @@ namespace MyTrade.Models
                    new SqlParameter("@Fk_UserId",Fk_UserId),
                new SqlParameter("@Amount",CrAmount),
               new SqlParameter("@Narration",Narration),
+               new SqlParameter("@Type",DeductionType),
                 new SqlParameter("@Remarks",Remark),
                  new SqlParameter("@AddedBy",AddedBy)
             };
