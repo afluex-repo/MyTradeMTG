@@ -591,6 +591,8 @@ namespace MyTrade.Controllers
                 {
                     Admin obj = new Admin();
                     obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
@@ -619,6 +621,8 @@ namespace MyTrade.Controllers
                 {
                     Admin obj = new Admin();
                     obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();

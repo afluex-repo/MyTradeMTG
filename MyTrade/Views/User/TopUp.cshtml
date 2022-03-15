@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
+
+<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -143,6 +149,9 @@
 
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
     //$(document).ready(function () {
     //    $("#PaymentType").val('Online');
@@ -183,9 +192,21 @@
         var WalletBalance = $("#WalletAmount").val();
         if (Amount != null && Amount != "" && Amount != "0") {
             if (parseInt(Amount) % 1000 == 0) {
-                 if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
+                if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
                     Snackbar.show({
-                        text: "Amount should not be greater than max smount",
+                        text: "Amount should not be greater than max amount",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    $("#Amount").val('');
+                    return false;
+                }
+                else if (parseInt(Amount) > parseInt(WalletBalance)) {
+                    Snackbar.show({
+                        text: "Insufficient Balance",
                         actionTextColor: '#fff',
                         backgroundColor: '#e7515a',
                         pos: 'top-right'
@@ -196,7 +217,6 @@
                     return false;
                 }
                 else {
-
                 }
             }
             else {
@@ -237,7 +257,7 @@
     }
     function SetAmountandPackage() {
         debugger;
-        jQuery.noConflict();    
+        jQuery.noConflict();
         $('#exampleModal').modal('show');
         $("#lblAmount").text($("#Amount").val());
         $("#lblLoginId").text($("#LoginId").val());
@@ -317,12 +337,12 @@
 {
     <script>
         $(document).ready(function () {
-            Snackbar.show({
+            swal({
                 text: '@TempData["msg"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#1abc9c',
-                pos: 'top-right'
-            });
+                title: 'Success',
+                type: 'success',
+                padding: '2em'
+            })
         });
     </script>
 }
@@ -339,3 +359,4 @@
         });
     </script>
 }
+

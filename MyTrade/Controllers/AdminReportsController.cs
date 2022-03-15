@@ -448,6 +448,7 @@ namespace MyTrade.Controllers
                     model.AccountNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
                     model.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                     model.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                    model.UPIID = ds.Tables[0].Rows[0]["UPIID"].ToString();
                 }
             }
             return View(model);

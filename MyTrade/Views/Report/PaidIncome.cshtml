@@ -16,7 +16,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-lg-5 col-md-5">
-                                <h4>Paid Income</h4>
+                                <h4>Paid Bonus</h4>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <a href="/Report/PayoutDetail" class="btn btn-info btn-sm">Back</a>
@@ -31,16 +31,17 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>From Name</th>
                                         <th>Login Id</th>
-                                        <th>To Name</th>
-                                        <th>Payout No</th>
-                                        <th>Business Amount</th>
-                                        <th>Amount</th>
-                                        <th>BV</th>
+                                        <th>From Name</th>
                                         <th>Level</th>
+                                        <th>Business Amount</th>
+                                        <th>BV</th>
+                                        <th>Package</th>
+                                        <th>Commision Amount</th>
+                                        <th>Percentage (%)</th>
                                         <th>Transaction Date</th>
-                                        <th>Commission Percentage</th>
+                                        @*<th>To Name</th>*@
+                                        <th>Payout No</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -54,16 +55,17 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.FromName</td>
                                                     <td>@Item.LoginId</td>
-                                                    <td>@Item.ToName</td>
-                                                    <td>@Item.PayoutNo</td>
-                                                    <td>@Item.BusinessAmount</td>
-                                                    <td>@Item.Amount</td>
-                                                    <td>@Item.BV</td>
+                                                    <td>@Item.FromName</td>
                                                     <td>@Item.Level</td>
+                                                    <td>@Item.BusinessAmount</td>
+                                                    <td>@Item.BV</td>
+                                                    <td>@Item.ProductName</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.CommissionPercentage %</td>
                                                     <td>@Item.TransactionDate</td>
-                                                    <td>@Item.CommissionPercentage</td>
+                                                    @*<td>@Item.ToName</td>*@
+                                                    <td>@Item.PayoutNo</td>
                                                     <td>@Item.Status</td>
                                                 </tr>
                                                 i++;

@@ -302,6 +302,7 @@ namespace MyTrade.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.CommissionPercentage = r["CommissionPercentage"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
