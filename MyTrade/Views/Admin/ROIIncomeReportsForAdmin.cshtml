@@ -69,7 +69,7 @@
                                                     <td>@Item.Name</td>
                                                     <td>@Item.Date</td>
                                                     <td>@Item.TopUpAmount</td>
-                                                    <td><a href="/Admin/ViewROIForAdmin?Id=@Item.ROIId" cl class="btn btn-info btn-sm">View TPS</a></td>
+                                                    <td><a href="/Admin/ViewROIForAdmin?Id=@Item.ROIId&UserId=@Item.Fk_UserId" cl class="btn btn-info btn-sm">View TPS</a></td>
                                                 </tr>
                                                 i++;
                                             }
