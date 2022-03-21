@@ -381,9 +381,9 @@
 
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
             <div class="widget widget-chart-two ">
-                <div class="widget-heading">
+                @*<div class="widget-heading">
                     <h5 class="">Rewards</h5>
-                </div>
+                </div>*@
                 <div class="widget-content1">
                     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
@@ -401,10 +401,13 @@
                                     {
 
                                         <div class="carousel-item active" style="padding: 0px 10px;">
-                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
-                                            <div class="carousel-caption">
-                                                <h5>@Model.lstReward[i].Title</h5>
+                                            <div class="widget-heading">
+                                                <h5 class="">@Model.lstReward[i].Title</h5>
                                             </div>
+                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
+                                            @*<div class="carousel-caption">
+                                                <h5>@Model.lstReward[i].Title</h5>
+                                            </div>*@
                                         </div>
                                     }
                                 }
@@ -417,10 +420,13 @@
                                     {
 
                                         <div class="carousel-item" style="padding:0px 10px">
-                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
-                                            <div class="carousel-caption d-none d-sm-block">
+                                            <div class="widget-heading">
                                                 <h5>@Model.lstReward[i].Title</h5>
                                             </div>
+                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
+                                            @*<div class="carousel-caption">
+                                                <h5>@Model.lstReward[i].Title</h5>
+                                            </div>*@
                                         </div>
                                     }
                                 }
