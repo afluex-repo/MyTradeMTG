@@ -1593,7 +1593,7 @@ namespace MyTrade.Controllers
                 res.Status = "1";
                 res.Message = ex.Message;
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult TPSWallet(WalletRequestList model)
@@ -1713,6 +1713,8 @@ namespace MyTrade.Controllers
                 DataSet ds = model.LevelIncomeTr1();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
+                    res.Status = "0";
+                    res.Message = "Record Found";
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         LevelIncome obj = new LevelIncome();
@@ -1787,6 +1789,8 @@ namespace MyTrade.Controllers
                 DataSet ds = model.LevelIncomeTr2();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
+                    res.Status = "0";
+                    res.Message = "Record Found";
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         LevelIncome obj = new LevelIncome();

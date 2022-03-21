@@ -152,12 +152,12 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label>Transaction Number</label>
-                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo" })
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo" ,@required="required"})
                             </div>
                         </div>
                         <div class="col-md-4" style="margin-top:30px;">
                             <div class="form-group">
-                                <input type="submit" class="btn btn-sm btn-success pull-right" name="btnApprove" onclick="return Approve()" value="Approve" />
+                                <input type="submit" class="btn btn-sm btn-success pull-right" name="btnApprove" value="Approve" />
                             </div>
                         </div>
                     </div>
@@ -169,6 +169,7 @@
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
     var f3 = flatpickr(document.getElementById('FromDate'),
         {

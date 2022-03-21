@@ -220,4 +220,12 @@ namespace MyTrade.Models
 
         }
     }
+    public class PaymentGateWayDetails
+    {
+        public static string CreateOrder = "https://api.razorpay.com/v1/orders";
+        public static string CapturePayment = "https://api.razorpay.com/v1/payments/";
+        public static string FetchPaymentByOrderURL = "https://api.razorpay.com/v1/orders/";
+        public static string KeyName = "rzp_test_p7xC4ZuTyASYAM";
+        public static string SecretKey = "w0Qt1mhyIkMzM9pHLpDEluK0";
+    }
 }
