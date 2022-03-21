@@ -129,7 +129,7 @@ namespace MyTrade.Models
         {
             List<SelectListItem> PaymentType = new List<SelectListItem>();
             PaymentType.Add(new SelectListItem { Text = "Offline", Value = "Offline" });
-            //PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
+            PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
             return PaymentType;
         }
 

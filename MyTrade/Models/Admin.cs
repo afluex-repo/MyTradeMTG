@@ -97,7 +97,22 @@ namespace MyTrade.Models
         public string IFSCCode { get; set; }
         public string MemberAccNo { get; set; }
         public string Deduction { get; set; }
-      
+        public string Pk_AdvanceId { get; set; }
+        public List<Admin> lstdeduction { get; set; }
+        public List<Admin> lstKycUpdate { get; set; }
+
+        public string NomineeName { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+        public string UPIID { get; set; }
+        public string AdharNo { get; set; }
+        public string PanNo { get; set; }
+        public string PanImage { get; set; }
+        public string IsVerified { get; set; }
+        public string Response { get; set; }
+        public string Message { get; set; }
+        public string DeductionType { get; set; }
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -256,7 +271,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutWalletLedger", para);
             return ds;
         }
-
         public DataSet LevelIncomeTr1()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
@@ -266,7 +280,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr1", para);
             return ds;
         }
-
         public DataSet LevelIncomeTr2()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
@@ -276,8 +289,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr2", para);
             return ds;
         }
-
-
         public DataSet PayoutDetail()
         {
             SqlParameter[] para = {
@@ -290,8 +301,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
             return ds;
         }
-
-
         public DataSet DistributePayment()
         {
             SqlParameter[] para = {
@@ -318,6 +327,15 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("MakePaymentListTPS", para);
             return ds;
         }
+        public DataSet ListForDistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ListForDistributePaymentTPSNew", para);
+            return ds;
+        }
         public DataSet SaveDistributePaymentTPS()
         {
             SqlParameter[] para = {
@@ -326,7 +344,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
             return ds;
         }
-
         public DataSet GetBusinessReports()
         {
             SqlParameter[] para = {
@@ -340,8 +357,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetBusiness", para);
             return ds;
         }
-
-
         public DataSet GetProductName()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetProductName");
@@ -363,12 +378,12 @@ namespace MyTrade.Models
             SqlParameter[] para = {
                 new SqlParameter("@Pk_RequestId",PK_RequestID),
                  new SqlParameter("@Status",Status),
+                  new SqlParameter("@TransactionNo",TransactionNo),
                 new SqlParameter("@ApprovedBy",UpdatedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("ApprovePayoutRequest", para);
             return ds;
         }
-
         public DataSet GetNameDetails()
         {
             SqlParameter[] para = {
@@ -377,7 +392,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetNameDetails", para);
             return ds;
         }
-
         public DataSet SaveTransferWallet()
         {
             SqlParameter[] para = {
@@ -388,17 +402,30 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveTransferWallet", para);
             return ds;
         }
-
         public DataSet SaveDeduction()
         {
             SqlParameter[] para = {
                    new SqlParameter("@Fk_UserId",Fk_UserId),
                new SqlParameter("@Amount",CrAmount),
               new SqlParameter("@Narration",Narration),
+               new SqlParameter("@Type",DeductionType),
                 new SqlParameter("@Remarks",Remark),
                  new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveDeduction", para);
+            return ds;
+        }
+        public DataSet GetAdvanceDeductionReports()
+        {
+            SqlParameter[] para = {
+               new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdvanceDeductionReports", para);
+            return ds;
+        }
+        public DataSet GetKYCUpdateDetailsOfUser()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetKYCUpdateDetailsOfUser");
             return ds;
         }
     }

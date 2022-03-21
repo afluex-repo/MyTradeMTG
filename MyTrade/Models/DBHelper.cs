@@ -16,8 +16,8 @@ namespace MyTrade.Models
         {
             try
             {
-               connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=mytradedb;User Id=mytradeuser; Password=trade@9819#; Integrated Security=false;";
-               //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=mytradedbtest;User Id=mytradetestuser; Password=mytrade@123; Integrated Security=false;";
+               connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
+               //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradetestuser; password=mytrade@123; integrated security=false;";
             }
             catch (Exception)
             {

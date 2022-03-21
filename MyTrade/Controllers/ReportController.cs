@@ -65,12 +65,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public ActionResult LevelIncomeTr1()
+        public ActionResult LevelIncomeTr1Total()
+        {
+            List<UserReports> lst = new List<UserReports>();
+            UserReports model = new UserReports();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.LevelIncomeTr1Total();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        public ActionResult LevelIncomeTr1(string Lvl)
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
             model.Status ="0";
+            model.Level = Lvl;
             DataSet ds = model.LevelIncomeTr1();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -81,6 +103,7 @@ namespace MyTrade.Controllers
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.Amount = r["Amount"].ToString();
@@ -108,6 +131,7 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -120,12 +144,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        public ActionResult LevelIncomeTr2()
+        public ActionResult LevelIncomeTr2Total()
+        {
+            List<UserReports> lst = new List<UserReports>();
+            UserReports model = new UserReports();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.LevelIncomeTr2Total();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+        public ActionResult LevelIncomeTr2(string Lvl)
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
             model.Status = "0";
+            model.Level = Lvl;
             DataSet ds = model.LevelIncomeTr2();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -135,6 +181,7 @@ namespace MyTrade.Controllers
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -162,6 +209,7 @@ namespace MyTrade.Controllers
                     UserReports obj = new UserReports();
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BV = r["BV"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.PayoutNo = r["PayoutNo"].ToString();
@@ -223,6 +271,38 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+     
+
+        public ActionResult PaidIncome(string GrossAmount)
+        {
+            UserReports model = new UserReports();
+            List<UserReports> lst = new List<UserReports>();
+            model.LoginId = Session["LoginId"].ToString();
+            model.GrossAmount = GrossAmount;
+            DataSet ds = model.PaidIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;

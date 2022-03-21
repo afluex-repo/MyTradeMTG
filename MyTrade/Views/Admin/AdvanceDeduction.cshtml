@@ -45,7 +45,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     Advance/Deduction<span style="color: red">*</span>
-                                    <select id="Narration" name="Narration" class="form-control">
+                                    <select id="DeductionType" name="DeductionType" class="form-control">
                                         <option value="0">-Select-</option>
                                         <option value="Advance">Advance</option>
                                         <option value="Deduction">Deduction</option>
@@ -54,8 +54,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    Remark
-                                    @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @placeholder = "Remark" })
+                                    Narration
+                                    @Html.TextAreaFor(m => m.Narration, new { @class = "form-control", @placeholder = "Narration" })
                                 </div>
                             </div>
                         </div>

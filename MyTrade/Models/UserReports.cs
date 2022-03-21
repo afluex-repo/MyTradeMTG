@@ -34,6 +34,12 @@ namespace MyTrade.Models
         public string NetAmount { get; set; }
         public string Percentage { get; set; }
         public string Status { get; set; }
+        public string BV { get; set; }
+        public string ToName { get; set; }
+        public string CommissionPercentage { get; set; }
+        public string ProductName { get; set; }
+        
+
         public DataSet PayoutWalletLedger()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
@@ -48,7 +54,8 @@ namespace MyTrade.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
-                  new SqlParameter("@Status", Status)
+                  new SqlParameter("@Status", Status),
+                   new SqlParameter("@Lvl", Level)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr1", para);
             return ds;
@@ -58,9 +65,24 @@ namespace MyTrade.Models
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
-                   new SqlParameter("@Status", Status)
+                   new SqlParameter("@Status", Status),
+                   new SqlParameter("@Lvl",Level)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetLevelIncomeTr2", para);
+            return ds;
+        }
+        public DataSet LevelIncomeTr2Total()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTotalIncomeTr2LevelWise", para);
+            return ds;
+        }
+        public DataSet LevelIncomeTr1Total()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTotalIncomeTr1LevelWise", para);
             return ds;
         }
         public DataSet PayoutDetail()
@@ -71,6 +93,13 @@ namespace MyTrade.Models
                 new SqlParameter("@ToDate", ToDate),
             };
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
+            return ds;
+        }
+        public DataSet PaidIncome()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomes", para);
             return ds;
         }
     }

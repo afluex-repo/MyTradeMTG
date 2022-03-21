@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
+
+<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -34,15 +40,15 @@
                         <div class="row mb-4">
                             <div class="col-md-4">
                                 <label for="LoginId">LoginId</label>
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @disabled = "disabled" })
-                                <p class="text-success" id="spName"></p>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                                @Html.HiddenFor(m => m.Name)
+                                <label style="color:blue;" id="lblName">@Session["FullName"]</label>
                             </div>
                             <div class="col-md-4">
                                 <input type="hidden" id="amt" />
                                 <input type="hidden" id="pkg" />
                                 <label for="Package">Package <span style="color:red">*</span></label>
                                 @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
-                                <p class="text-success" id="spName"></p>
                             </div>
                             <div class="col-md-4">
                                 <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
@@ -129,7 +135,7 @@
                         {
                             <span>@Session["FullName"]</span>
                         }
-                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated with ROI @ViewBag.ROIPercent % per day
+                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI @ViewBag.ROIPercent % per day
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -143,6 +149,9 @@
 
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
     //$(document).ready(function () {
     //    $("#PaymentType").val('Online');
@@ -183,9 +192,9 @@
         var WalletBalance = $("#WalletAmount").val();
         if (Amount != null && Amount != "" && Amount != "0") {
             if (parseInt(Amount) % 1000 == 0) {
-                if (parseInt(Amount) > parseInt(WalletBalance)) {
+                if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
                     Snackbar.show({
-                        text: "Insufficient Amount",
+                        text: "Amount should not be greater than max amount",
                         actionTextColor: '#fff',
                         backgroundColor: '#e7515a',
                         pos: 'top-right'
@@ -195,9 +204,9 @@
                     $("#Amount").val('');
                     return false;
                 }
-                else if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
+                else if (parseInt(Amount) > parseInt(WalletBalance)) {
                     Snackbar.show({
-                        text: "Amount should not be greater than max smount",
+                        text: "Insufficient Balance",
                         actionTextColor: '#fff',
                         backgroundColor: '#e7515a',
                         pos: 'top-right'
@@ -208,7 +217,6 @@
                     return false;
                 }
                 else {
-
                 }
             }
             else {
@@ -249,9 +257,10 @@
     }
     function SetAmountandPackage() {
         debugger;
-        jQuery.noConflict();    
+        jQuery.noConflict();
         $('#exampleModal').modal('show');
         $("#lblAmount").text($("#Amount").val());
+        $("#lblLoginId").text($("#LoginId").val());
         $("#lblTPS").text($("#PackageId :selected").text());
     }
     //function CheckPayMode() {
@@ -297,31 +306,43 @@
 
     //}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    function GetNameDetails() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/User/GetNameDetails', type: 'post', dataType: 'json',
+            data: { 'LoginId': LoginId },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#Fk_UserId").val(data.Fk_UserId);
+                    $("#Name").val(data.Name);
+                    $("#lblName").text($("#Name").val());
+                    $("#LoginId").removeClass('errortext');
+                    $("#Name").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    alert('Invailid LoginId');
+                    $("#LoginId").val('');
+                    $("#Name").val('');
+                    $("#LoginId").addClass('errortext');
+                    $("#Name").addClass('errortext');
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
 </script>
 
 @if (TempData["msg"] != null)
 {
     <script>
         $(document).ready(function () {
-            Snackbar.show({
+            swal({
                 text: '@TempData["msg"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#1abc9c',
-                pos: 'top-right'
-            });
+                title: 'Success',
+                type: 'success',
+                padding: '2em'
+            })
         });
     </script>
 }
@@ -338,3 +359,4 @@
         });
     </script>
 }
+
