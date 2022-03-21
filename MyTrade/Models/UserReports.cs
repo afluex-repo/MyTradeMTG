@@ -97,7 +97,8 @@ namespace MyTrade.Models
         }
         public DataSet PaidIncome()
         {
-            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId)
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomes", para);
             return ds;

@@ -112,7 +112,7 @@ namespace MyTrade.Models
         public string Response { get; set; }
         public string Message { get; set; }
         public string DeductionType { get; set; }
-
+        public string Pk_investmentId { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -259,7 +259,11 @@ namespace MyTrade.Models
         }
         public DataSet GetROIDetails()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails");
+            SqlParameter[] para = {
+                    new SqlParameter("@Fk_UserId", Fk_UserId),
+                  new SqlParameter("@Pk_InvestmentId", Pk_investmentId),
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails",para);
             return ds;
         }
         public DataSet PayoutWalletLedger()
