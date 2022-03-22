@@ -59,7 +59,9 @@
                                         <th>Transaction No</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Amount</th>
+                                        <th>Gross Amount</th>
+                                        <th>Procesing Charges</th>
+                                        <th>Net Amount</th>
                                         <th>IFSC Code</th>
                                         <th>Account No.</th>
                                         <th>Status</th>
@@ -88,14 +90,16 @@
                                                     else
                                                     {
                                                         <td>
-                                                            <input class="checkBoxClass1" type="checkbox"  disabled="disabled" />
+                                                            <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
                                                         </td>
                                                     }
                                                     <td>@i</td>
                                                     <td>@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.GrossAmount</td>
+                                                    <td>@Item.ProcessingFee</td>
+                                                    <td id="Amount">@Item.Amount</td>
                                                     <td>@Item.IFSCCode</td>
                                                     <td>@Item.MemberAccNo</td>
                                                     <td>@Item.Status</td>
@@ -124,7 +128,7 @@
                                 <div class="form-group">
                                     @*<a href="/Admin/ApprovePayout" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>*@
 
-                                    <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Approve</a>
+                                    <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Submit</a>
 
                                     @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
                                 </div>
@@ -136,28 +140,29 @@
         </div>
     </div>
 
-
-
     @Html.HiddenFor(m => m.PK_RequestID)
     <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" style="color: red">Approve</h6>
+                    @*<h6 class="modal-title" style="color: red">Approve</h6>*@
                     <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
                 </div>
                 <div class="modal-body" style="color: black">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label>Transaction Number</label>
-                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo" })
+                                <label>Narration</label>
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "Narration" })
                             </div>
                         </div>
-                        <div class="col-md-4" style="margin-top:30px;">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top:30px;">
                             <div class="form-group">
                                 <input type="submit" class="btn btn-sm btn-success pull-right" name="btnApprove" onclick="return Approve()" value="Approve" />
+                                <input type="submit" class="btn btn-sm btn-danger pull-right" name="btnDecline" onclick="return Decline()" value="Decline" />
                             </div>
                         </div>
                     </div>
@@ -165,10 +170,12 @@
             </div>
         </div>
     </div>
+
 }
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
     var f3 = flatpickr(document.getElementById('FromDate'),
         {
@@ -207,13 +214,13 @@
         });
 
     }
-    $('#IsDownline').click(function () {
-        if ($(this).attr('checked') == false) {
-            $('#IsDownline').attr("disabled", "disabled");
-        } else {
-            $('#GetDetails').removeAttr('disabled');
-        }
-    });
+    //$('#IsDownline').click(function () {
+    //    if ($(this).attr('checked') == false) {
+    //        $('#IsDownline').attr("disabled", "disabled");
+    //    } else {
+    //        $('#GetDetails').removeAttr('disabled');
+    //    }
+    //});
     function openPopup(PK_RequestID) {
         jQuery.noConflict();
         $("#PK_RequestID").val(PK_RequestID);
@@ -252,7 +259,7 @@
             $('#ckbCheckAll').prop('checked', false);
         }
         //$("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
-    });
+        });
 
 
     //$('#IsDownline').click(function () {
@@ -262,7 +269,6 @@
     //        $('#IsDownline').removeAttr("disabled");
     //    }
     //});
-
 
     //$("input[type=checkbox]").change(function () {
     //    if ($(this).prop("checked")) {
@@ -297,11 +303,7 @@
     //    return false;
     //}
     //}
-
-
-
 </script>
-
 
 
 

@@ -62,7 +62,12 @@ namespace MyTrade.Models
         public List<User> lstReward { get; set; }
         public string PK_RewardId { get; set; }
         public string UPIID { get; set; }
+
+        public string GrossAmount { get; set; }
+        public string ProcessingFee { get; set; }
+
         
+
 
 
 

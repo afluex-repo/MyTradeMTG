@@ -236,6 +236,7 @@ namespace MyTrade.Controllers
                     obj.ROI = r["Pk_ROIId"].ToString();
                     obj.ROI = r["ROI"].ToString();
                     obj.Date = r["ROIDate"].ToString();
+                    obj.Status = r["Status"].ToString();
                     lst.Add(obj);
                 }
                 model.lstROI = lst;

@@ -674,6 +674,7 @@ namespace MyTrade.Controllers
                     obj.ROI = r["Pk_ROIId"].ToString();
                     obj.ROI = r["ROI"].ToString();
                     obj.Date = r["ROIDate"].ToString();
+                    obj.Status = r["Status"].ToString();
                     lst.Add(obj);
                 }
                 model.lstROI = lst;
@@ -1318,6 +1319,8 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["DeductionCharges"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1348,6 +1351,8 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["DeductionCharges"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1675,6 +1680,55 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList");
         }
+
+
+        [HttpPost]
+        [OnAction(ButtonName = "btnDecline")]
+        [ActionName("PayoutRequestList")]
+        public ActionResult DeclinePayoutRequest(Admin model)
+        {
+            try
+            {
+                string hdrows = Request["hdRows"].ToString();
+                string[] result = Request["hdRows"].ToString().Split(',');
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                string chkselect = "";
+                int i = 0;
+                foreach (String str in result)
+                {
+                    try
+                    {
+                        chkselect = Request["chkSelect_ " + str];
+                        if (chkselect == "on")
+                        {
+                            model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
+                            model.Status = "Declined";
+                            DataSet ds = model.DeclinePayoutRequest();
+                            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                            {
+                                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                                {
+                                    TempData["msg"] = "Declined Successfully";
+                                }
+                                else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                                {
+                                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                                }
+                            }
+                        }
+                    }
+                    catch { chkselect = "0"; }
+                    i++;
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+
+            }
+            return RedirectToAction("PayoutRequestList");
+        }
+        
         public ActionResult KYCUpdateDeatilsOfUser()
         {
             Admin model = new Admin();
@@ -1802,5 +1856,39 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("TPSListForDistributePaymentNew", "Admin");
         }
+
+
+        public ActionResult PaidIncomeForAdmin(string PayoutNo,string LoginId)
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            model.LoginId = LoginId;
+            model.PayoutNo = PayoutNo;
+            DataSet ds = model.PaidIncome();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            return View(model);
+        }
+
+
     }
 }
