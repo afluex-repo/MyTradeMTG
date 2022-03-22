@@ -71,13 +71,29 @@ namespace MyTrade.Models
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                           new SqlParameter("@BankName", BankName),
                                             new SqlParameter("@Remarks", Remark),
+                                            new SqlParameter("@AddedBy", AddedBy)
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
+            return ds;
+        }
+        public DataSet SaveEwalletRequestNew()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Amount", Amount),
+                                       new SqlParameter("@PaymentType", PaymentType) ,
+                                      new SqlParameter("@PaymentMode", PaymentMode) ,
+                                      new SqlParameter("@DDChequeNo", DDChequeNo) ,
+                                      new SqlParameter("@DDChequeDate", DDChequeDate) ,
+                                      new SqlParameter("@BankBranch", BankBranch) ,
+                                          new SqlParameter("@BankName", BankName),
+                                            new SqlParameter("@Remarks", Remark),
                                             new SqlParameter("@AddedBy", AddedBy),
                                              new SqlParameter("@OrderId", OrderId),
                                      };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequestNew", para);
             return ds;
         }
-
         public DataSet GetPaymentMode()
         {
 

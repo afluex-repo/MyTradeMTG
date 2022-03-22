@@ -129,10 +129,16 @@ namespace MyTrade.Models
         {
             List<SelectListItem> PaymentType = new List<SelectListItem>();
             PaymentType.Add(new SelectListItem { Text = "Offline", Value = "Offline" });
-            PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
+            //PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
             return PaymentType;
         }
 
+        public static List<SelectListItem> BindPaymentTypeOnline()
+        {
+            List<SelectListItem> PaymentType = new List<SelectListItem>();
+            PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
+            return PaymentType;
+        }
 
         public DataSet GetMemberDetails()
         {
@@ -225,7 +231,7 @@ namespace MyTrade.Models
         public static string CreateOrder = "https://api.razorpay.com/v1/orders";
         public static string CapturePayment = "https://api.razorpay.com/v1/payments/";
         public static string FetchPaymentByOrderURL = "https://api.razorpay.com/v1/orders/";
-        public static string KeyName = "rzp_test_p7xC4ZuTyASYAM";
-        public static string SecretKey = "w0Qt1mhyIkMzM9pHLpDEluK0";
+        public static string KeyName = "rzp_live_k8z9ufVw0R0MLV";
+        public static string SecretKey = "BxiVGly6SUkZkI6aJ5vjbSU6";
     }
 }

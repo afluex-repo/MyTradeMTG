@@ -64,6 +64,8 @@ namespace MyTrade.Models
         public string NomineeRelation { get; set; }
         public string Image { get; set; }
         public string MemberStatus { get; set; }
+        public string UPIID { get; set; }
+        
 
         //public string SponserName { get; set; }
 
@@ -162,6 +164,7 @@ namespace MyTrade.Models
                                      new SqlParameter("@NomineeName",NomineeName),
                                     new SqlParameter("@NomineeRelation",NomineeRelation),
                                      new SqlParameter("@NomineeAge",NomineeAge),
+                                      new SqlParameter("@UPIID",UPIID),
                                       new SqlParameter("@UpdatedBy",UpdatedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateAdminProfile", para);

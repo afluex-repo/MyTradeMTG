@@ -279,12 +279,12 @@ namespace MyTrade.Controllers
         }
      
 
-        public ActionResult PaidIncome(string GrossAmount)
+        public ActionResult PaidIncome(string PayoutNo)
         {
             UserReports model = new UserReports();
             List<UserReports> lst = new List<UserReports>();
             model.LoginId = Session["LoginId"].ToString();
-            model.GrossAmount = GrossAmount;
+            model.PayoutNo = PayoutNo;
             DataSet ds = model.PaidIncome();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -302,6 +302,7 @@ namespace MyTrade.Controllers
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     obj.CommissionPercentage = r["CommissionPercentage"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;

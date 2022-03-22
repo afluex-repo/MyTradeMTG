@@ -606,6 +606,24 @@
     <Content Include="TreeIcon\men-block.png" />
     <Content Include="TreeIcon\men-block1.png" />
     <Content Include="TreeIcon\men-inactive.png" />
+    <Content Include="UploadReward\08b30345-a1f0-4810-ad7d-319145faecfa.JPG" />
+    <Content Include="UploadReward\20951d5b-47bb-4d37-9128-9868763dfe78.jpg" />
+    <Content Include="UploadReward\22df0343-8cc8-4281-9e78-005c16f9f8c3.jpg" />
+    <Content Include="UploadReward\2311ddfd-6ab5-41dc-b366-1e714f3803c8.JPG" />
+    <Content Include="UploadReward\4aaee9be-2180-4fea-a6be-455e0ad7df8a.jpeg" />
+    <Content Include="UploadReward\4ac9b043-667f-4eb7-90fe-884e23ba1bec.jpg" />
+    <Content Include="UploadReward\5ae8631e-6a05-44b7-8834-92b559cace20.jpg" />
+    <Content Include="UploadReward\72e9bdc9-9840-4408-9c98-690de8e4a105.JPG" />
+    <Content Include="UploadReward\769578e7-9051-4b1c-8cbb-ee1726adc954.jpg" />
+    <Content Include="UploadReward\8562e19d-5c9f-4754-b0b5-e7dedee7d4da.jpeg" />
+    <Content Include="UploadReward\8d783a48-0bdc-424a-b915-cce37744729e.jpeg" />
+    <Content Include="UploadReward\9cdef9d5-90f2-4858-b76a-9a8b57f8b7ea.jpg" />
+    <Content Include="UploadReward\9ef37ea8-5cb7-4254-ad0d-e43759dce713.jpeg" />
+    <Content Include="UploadReward\a9dc03e6-e0ab-47ae-b900-4f59163a5f1b.jpg" />
+    <Content Include="UploadReward\beef6211-8965-41ea-8a7d-4f2f8320addc.jpg" />
+    <Content Include="UploadReward\c0659906-862e-42b5-9528-5ae46407cba8.jpg" />
+    <Content Include="UploadReward\c80a6e85-c6bd-4e04-b32d-f352cf697a28.jpeg" />
+    <Content Include="UploadReward\efac9723-517d-4a1f-9561-6cca06b02dfe.jpeg" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
@@ -828,7 +846,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="PanUpload\" />
     <Folder Include="ProfilePicture\" />
-    <Folder Include="UploadReward\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>

@@ -1424,14 +1424,23 @@ namespace MyTrade.Controllers
                     count = count + 1;
                 }
             }
-
+            obj.LoginId = Session["LoginId"].ToString();
             ViewBag.ddlpaymentmode = ddlpaymentmode;
             #endregion
             #region ddlpaymentType
-            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            List<SelectListItem> ddlpaymentType = Common.BindPaymentTypeOnline();
             ViewBag.ddlpaymentType = ddlpaymentType;
+            
             #endregion
-            return View();
+            #region Check Balance
+            obj.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = obj.GetWalletBalance();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
+            return View(obj);
         }
         //[HttpPost]
         //public ActionResult WalletRequest(UserWallet obj)
@@ -1478,7 +1487,7 @@ namespace MyTrade.Controllers
             try
             {
                 Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", 100); // amount in the smallest currency unit
+                options.Add("amount", Convert.ToInt32(obj.Amount) * 100); // amount in the smallest currency unit
                 options.Add("receipt", random);
                 options.Add("currency", "INR");
                 options.Add("payment_capture", "1");
@@ -1491,13 +1500,14 @@ namespace MyTrade.Controllers
                 obj.OrderId = order["id"].ToString();
                 obj.LoginId = Session["LoginId"].ToString();
                 obj.AddedBy = Session["Pk_UserId"].ToString();
-                obj.PaymentMode = "Wallet";
+                obj.Amount = (Convert.ToInt32(obj.Amount) * 100).ToString();
+                obj.PaymentMode = "12";
                 orderModel.orderId = order.Attributes["id"];
-                orderModel.razorpayKey = "rzp_test_p7xC4ZuTyASYAM";
-                orderModel.amount = 100;
+                orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
+                orderModel.amount = Convert.ToInt32(obj.Amount)*100;
                 orderModel.currency = "INR";
                 orderModel.description = "Testing description";
-                DataSet ds = obj.SaveEwalletRequest();
+                DataSet ds = obj.SaveEwalletRequestNew();
                 // Return on PaymentPage with Order data
             }
             catch (Exception ex)
@@ -1516,14 +1526,15 @@ namespace MyTrade.Controllers
             webRequest.Method = "POST";
             return webRequest;
         }
-        public ActionResult FetchPaymentByOrder()
+        public ActionResult FetchPaymentByOrder(OrderModel model)
         {
             FetchPaymentByOrder obj = new FetchPaymentByOrder();
             FetchPaymentByOrderResponse obj1 = new FetchPaymentByOrderResponse();
             string random = Common.GenerateRandom();
             try
             {
-                obj.OrderId = "order_J9jRDEzmOZDc5K";
+                obj.OrderId = model.orderId;
+                obj1.Pk_UserId = Session["Pk_UserId"].ToString();
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
                 List<Razorpay.Api.Payment> orderdetails = client.Order.Payments(obj.OrderId);
@@ -1559,11 +1570,23 @@ namespace MyTrade.Controllers
                         obj1.error_step = rr["error_step"];
                         obj1.error_reason = rr["error_reason"];
                         obj1.created_at = rr["created_at"];
-                        obj1.Pk_UserId = "1";
+                        
                         DataSet ds = obj1.SaveFetchPaymentResponse();
                         if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
                         {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                            {
+                                if(obj1.captured== "captured")
+                                {
+                                    TempData["Msg"] = "Amount credited successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
+                                }
+                                else
+                                {
+                                    TempData["error"] = "Payment Failed";
+                                }
 
+                                return RedirectToAction("WalletRequest", "User");
+                            }
                         }
                     }
                 }

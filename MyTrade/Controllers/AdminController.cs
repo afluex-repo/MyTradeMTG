@@ -591,6 +591,8 @@ namespace MyTrade.Controllers
                 {
                     Admin obj = new Admin();
                     obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
@@ -619,6 +621,9 @@ namespace MyTrade.Controllers
                 {
                     Admin obj = new Admin();
                     obj.RoiWalletId = r["Pk_ROIWalletId"].ToString();
+
+                    obj.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
@@ -641,6 +646,7 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.Fk_UserId = r["Fk_UserId"].ToString();
                     obj.ROIId = r["Pk_ROIId"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
@@ -653,9 +659,11 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-        public ActionResult ViewROIForAdmin(string Id)
+        public ActionResult ViewROIForAdmin(string Id,string UserId)
         {
             Admin model = new Admin();
+            model.Pk_investmentId = Id;
+            model.Fk_UserId = UserId;
             List<Admin> lst = new List<Admin>();
             DataSet ds = model.GetROIDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1629,16 +1637,18 @@ namespace MyTrade.Controllers
             try
             {
                 string hdrows = Request["hdRows"].ToString();
+                string[] result = Request["hdRows"].ToString().Split(',');
                 model.UpdatedBy = Session["Pk_AdminId"].ToString();
                 string chkselect = "";
-                for (int i = 1; i <= int.Parse(hdrows); i++)
+                int i = 0;
+                foreach (String str in result)
                 {
                     try
                     {
-                        chkselect = Request["chkSelect_ " + i];
+                        chkselect = Request["chkSelect_ " + str];
                         if (chkselect == "on")
                         {
-                            model.PK_RequestID = Request["PK_RequestID_ " + i].ToString();
+                            model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Approved";
                             DataSet ds = model.ApprovePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1649,17 +1659,18 @@ namespace MyTrade.Controllers
                                 }
                                 else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                                 {
-                                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                                 }
                             }
                         }
                     }
                     catch { chkselect = "0"; }
+                    i++;
                 }
             }
             catch (Exception ex)
             {
-                TempData["error"] = ex.Message;
+                TempData["msg"] = ex.Message;
 
             }
             return RedirectToAction("PayoutRequestList");

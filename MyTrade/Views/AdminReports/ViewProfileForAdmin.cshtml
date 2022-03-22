@@ -164,7 +164,12 @@
                                     @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "Nominee Relation", @onkeypress = "return onlyAlphabets();" })
                                 </div>
                             </div>
-                          
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>UPI ID</label>
+                                    @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPI ID" })
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
