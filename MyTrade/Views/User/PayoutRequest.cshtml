@@ -66,10 +66,12 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        <th>Transaction No</th>
+                                        <th>Narration</th>
                                         @*<th>Login Id</th>
                                         <th>Name</th>*@
-                                        <th>Amount</th>
+                                        <th>Gross Amount</th>
+                                        <th>Procesing Charges</th>
+                                        <th>Net Amount</th>
                                         <th>Date</th>
                                         <th>IFSC Code</th>
                                         <th>Account No</th>
@@ -91,6 +93,8 @@
                                                     <td>@Item.TransactionNo</td>
                                                     @*<td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>*@
+                                                    <td>@Item.GrossAmount</td>
+                                                    <td>@Item.ProcessingFee</td>
                                                     <td>@Item.Amount</td>
                                                     <td>@Item.Date</td>
                                                     <td>@Item.IFSCCode</td>

@@ -1283,6 +1283,8 @@ namespace MyTrade.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.ROIPercentage = r["BackColor"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["DeductionCharges"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayoutRequest = lst;

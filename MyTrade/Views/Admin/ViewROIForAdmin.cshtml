@@ -14,11 +14,18 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            @*<div class="col-xl-12 col-md-12 col-sm-12 col-12">*@
+                            <div class="col-sm-4">
                                 <h4>View TPS</h4>
                                 <span class="text-danger">
                                     @TempData["ROIIncome"]
                                 </span>
+                            </div>
+                            <div class="col-sm-4">
+                                <span>
+                                    <a href="/Admin/ROIIncomeReportsForAdmin" class="btn btn-info">Back</a>
+                                </span>
+                                @*</div>*@
                             </div>
                         </div>
                     </div>
@@ -30,6 +37,7 @@
                                         <th>S No.</th>
                                         <th>TPS</th>
                                         <th>TPS Date</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,6 +52,7 @@
                                                     <td>@i</td>
                                                     <td>@Item.ROI</td>
                                                     <td>@Item.Date</td>
+                                                    <td>@Item.Status</td>
                                                 </tr>
                                                 i++;
                                             }

@@ -44,7 +44,7 @@ namespace MyTrade.Models
         public string PK_RequestID { get; set; }
         public string Balance { get; set; }
         public string Pk_InvestmentId { get; set; }
-
+        public string Status { get; set; }
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
