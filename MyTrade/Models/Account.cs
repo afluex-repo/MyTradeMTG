@@ -79,7 +79,13 @@ namespace MyTrade.Models
             return ds;
         }
 
-        
+        public DataSet GetAssociateDashboard()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_UserId", FK_UserId), };
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
+            return ds;
+        }
+
 
 
     }
