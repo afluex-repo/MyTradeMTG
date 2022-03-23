@@ -115,8 +115,9 @@ namespace MyTrade.Models
         public string Pk_investmentId { get; set; }
         public string CommissionPercentage { get; set; }
         public string ToName { get; set; }
+        public string ToLoginID { get; set; }
         
-
+        
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -265,7 +266,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                     new SqlParameter("@Fk_UserId", Fk_UserId),
-                  new SqlParameter("@Pk_InvestmentId", Pk_investmentId),
+                  new SqlParameter("@Pk_InvestmentId", Pk_investmentId)
                                      };
             DataSet ds = DBHelper.ExecuteQuery("GetROIDetails",para);
             return ds;

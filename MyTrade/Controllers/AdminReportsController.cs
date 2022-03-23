@@ -233,7 +233,9 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds11.Tables[0].Rows)
                 {
                     AdminReports Obj = new AdminReports();
-                    Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    //Obj.ToLoginID = r["Pk_InvestmentId"].ToString();
+                    Obj.Fk_UserId = r["PK_UserId"].ToString();
+                    Obj.Pk_investmentId = r["Pk_InvestmentId"].ToString();
                     Obj.LoginId = r["LoginId"].ToString();
                     Obj.DisplayName = r["Name"].ToString();
                     Obj.UpgradtionDate = r["UpgradtionDate"].ToString();
@@ -244,6 +246,15 @@ namespace MyTrade.Controllers
                     Obj.PrintingDate = r["PrintingDate"].ToString();
                     Obj.Description = r["Description"].ToString();
                     Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.PackageDays = r["PackageDays"].ToString();
+                    Obj.PinAmount = r["PinAmount"].ToString();
+                    Obj.BV = r["BV"].ToString();
+                    Obj.IsCalculated = r["IsCalculated"].ToString();
+                    Obj.ROIPercentage = r["ROIPercentage"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.TransactionBy = r["TransactionBy"].ToString();
+                    Obj.Status = r["Statuss"].ToString();
+                    Obj.TopUpDate = r["TopUpDate"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -309,8 +320,16 @@ namespace MyTrade.Controllers
                     Obj.Status = r["Status"].ToString();
                     Obj.PrintingDate = r["PrintingDate"].ToString();
                     Obj.Description = r["Description"].ToString();
-                    //Obj.ReceiptNo = r["ReceiptNo"].ToString();
-                    //Obj.BusinessType = r["Business"].ToString();
+                    Obj.PaymentMode = r["PaymentMode"].ToString();
+                    Obj.PackageDays = r["PackageDays"].ToString();
+                    Obj.PinAmount = r["PinAmount"].ToString();
+                    Obj.BV = r["BV"].ToString();
+                    Obj.IsCalculated = r["IsCalculated"].ToString();
+                    Obj.ROIPercentage = r["ROIPercentage"].ToString();
+                    Obj.Package = r["Package"].ToString();
+                    Obj.TransactionBy = r["TransactionBy"].ToString();
+                    Obj.Status = r["Statuss"].ToString();
+                    Obj.TopUpDate = r["TopUpDate"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }

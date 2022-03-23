@@ -65,6 +65,15 @@ namespace MyTrade.Models
         public string Image { get; set; }
         public string MemberStatus { get; set; }
         public string UPIID { get; set; }
+        public string PackageDays { get; set; }
+
+        public string PinAmount { get; set; }
+        public string BV { get; set; }
+        public string TransactionBy { get; set; }
+        public string ROIPercentage { get; set; }
+        public string IsCalculated { get; set; }
+        public string TopUpDate { get; set; }
+        public string Pk_investmentId { get; set; }
         
 
         //public string SponserName { get; set; }

@@ -27,6 +27,14 @@
                             <div class="col-md-4">
                                 <div class="form-group row">
                                     <div class="col-sm-9">
+                                       Login Id
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
                                         From Date
                                         @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = true })
                                     </div>
