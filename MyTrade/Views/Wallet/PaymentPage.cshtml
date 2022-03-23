@@ -12,7 +12,7 @@
         "currency": "@Html.DisplayFor(model => model.currency)",
         "name": "@Html.DisplayFor(model => model.name)",
         "description": "@Html.DisplayFor(model => model.description)",
-        "image": "https://dotnettec.com/wp-content/uploads/2019/10/cropped-dotnettec_header_logo.png", // You can give your logo url
+        "image": "https://cdn.razorpay.com/logos/IyCyRSESnl0ULx_medium.jpeg", // You can give your logo url
         "order_id": "@Html.DisplayFor(model => model.orderId)",
         "handler": function (response) {
             debugger;
@@ -20,9 +20,9 @@
             // Set the data in hidden form
 
             if (typeof response.razorpay_payment_id == 'undefined' || response.razorpay_payment_id < 1) {
-                redirect_url = '/User/FetchPaymentByOrder';
+                redirect_url = '/Wallet/FetchPaymentByOrder';
             } else {
-                redirect_url = '/User/FetchPaymentByOrder';
+                redirect_url = '/Wallet/FetchPaymentByOrder';
             }
             location.href = redirect_url;
 
@@ -64,7 +64,7 @@
 </script>
 
 <!-- This form is hidden, and submit when payment successfully made -->
-@using (Html.BeginForm("FetchPaymentByOrder", "User"))
+@using (Html.BeginForm("FetchPaymentByOrder", "Wallet"))
 {
     @Html.AntiForgeryToken()
 

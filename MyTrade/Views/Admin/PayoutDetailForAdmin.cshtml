@@ -110,7 +110,9 @@
                                                     <td>@Item.PayoutNo</td>
                                                     <td>@Item.LevelIncomeTR1</td>
                                                     <td>@Item.LevelIncomeTR2</td>
-                                                    <td><a href="#" class="td-content product-brand text-danger" id="btnpayout_@Item.Fk_UserId" onclick="Open('@Item.Fk_UserId');" data-payoutno='@Item.PayoutNo'>@Item.GrossAmount</a></td>
+                                                    @*<td><a href="#" class="td-content product-brand text-danger" id="btnpayout_@Item.Fk_UserId" onclick="Open('@Item.Fk_UserId');" data-payoutno='@Item.PayoutNo'>@Item.GrossAmount</a></td>*@
+
+                 <td><a href="/Admin/PaidIncomeForAdmin?PayoutNo=@Item.PayoutNo&&LoginId=@Item.LoginId" class="btn btn-info">@Item.GrossAmount</a></td>
                                                     <td>@Item.TDSAmount</td>
                                                     <td>@Item.ProcessingFee</td>
                                                     <td>@Item.NetAmount</td>

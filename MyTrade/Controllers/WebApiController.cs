@@ -524,9 +524,6 @@ namespace MyTrade.Controllers
                     Package model = new Package();
                     model.PK_PackageId = r["Pk_ProductId"].ToString();
                     model.PackageName = r["ProductName"].ToString();
-                    model.MinimumAmount = 1000;
-                    model.MaximumAmount = 5000;
-                    model.InMultipleOf = "1000";
                     lst.Add(model);
                 }
                 obj.lst = lst;
@@ -1285,12 +1282,28 @@ namespace MyTrade.Controllers
         }
         public ActionResult PaymentType()
         {
-            PaymentTypeRes obj = new PaymentTypeRes();
-            List<PaymentTypeRes> lst = new List<PaymentTypeRes>();
-            obj.Value = "Offline";
-            obj.Text = "Offline";
-            lst.Add(obj);
-            return Json(lst, JsonRequestBehavior.AllowGet);
+            List<PaymentTypeAPI> lst = new List<PaymentTypeAPI>();
+            PaymentTypeAPIResponse obj = new PaymentTypeAPIResponse();
+            DataSet ds = obj.PaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    PaymentTypeAPI model = new PaymentTypeAPI();
+                    model.PK_PaymentTypeId = r["PK_PaymentTypeId"].ToString();
+                    model.PaymentType = r["PaymentType"].ToString();
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult GetTTPMembersCountLevelWise(LevelTreeReq req)

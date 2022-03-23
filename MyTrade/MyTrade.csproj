@@ -833,7 +833,7 @@
     <Content Include="Views\Admin\TPSListForDistributePaymentNew.cshtml" />
     <Content Include="Views\User\Return.cshtml" />
     <Content Include="Views\User\Demo.cshtml" />
-    <Content Include="Views\User\PaymentPage.cshtml" />
+    <Content Include="Views\Wallet\PaymentPage.cshtml" />
     <Content Include="Views\User\WalletRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

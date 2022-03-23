@@ -48,7 +48,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Payment Type<span style="color: red">*</span>
-                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onload = "getpaymentTypedetails();" })
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
                                     </div>
                                 </div>
                             </div>
@@ -130,53 +130,56 @@
             $('#PaymentType').focus();
             return false;
         }
-        if ($('#PaymentMode').val() == '') {
-            $("#PaymentMode").addClass('errortext');
-            $('#PaymentMode').focus();
-            return false;
-        }
-        if (($("#PaymentMode option:selected").text()) != 'Cash' && ($("#PaymentMode option:selected").text()) != "UPI") {
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
+        if ($('#PaymentType').val() == "Offline") {
+            if ($('#PaymentMode').val() == '') {
+                $("#PaymentMode").addClass('errortext');
+                $('#PaymentMode').focus();
                 return false;
             }
-            if ($('#DDChequeNo').val() == '') {
-                $("#DDChequeNo").addClass('errortext');
-                $('#DDChequeNo').focus();
-                return false;
+            if (($("#PaymentMode option:selected").text()) != 'Cash' && ($("#PaymentMode option:selected").text()) != "UPI") {
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    return false;
+                }
+                if ($('#DDChequeNo').val() == '') {
+                    $("#DDChequeNo").addClass('errortext');
+                    $('#DDChequeNo').focus();
+                    return false;
+                }
+                if ($('#DDChequeDate').val() == '') {
+                    $("#DDChequeDate").addClass('errortext');
+                    $('#DDChequeDate').focus();
+                    return false;
+                }
+                if ($('#BankBranch').val() == '') {
+                    $("#BankBranch").addClass('errortext');
+                    $('#BankBranch').focus();
+                    return false;
+                }
             }
-            if ($('#DDChequeDate').val() == '') {
-                $("#DDChequeDate").addClass('errortext');
-                $('#DDChequeDate').focus();
-                return false;
+            else if ($("#PaymentMode option:selected").text() == "UPI") {
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    return false;
+                }
+                if ($('#DDChequeNo').val() == '') {
+                    $("#DDChequeNo").addClass('errortext');
+                    $('#DDChequeNo').focus();
+                    return false;
+                }
+                if ($('#DDChequeDate').val() == '') {
+                    $("#DDChequeDate").addClass('errortext');
+                    $('#DDChequeDate').focus();
+                    return false;
+                }
             }
-            if ($('#BankBranch').val() == '') {
-                $("#BankBranch").addClass('errortext');
-                $('#BankBranch').focus();
-                return false;
-            }
-        }
-        else if ($("#PaymentMode option:selected").text() == "UPI") {
-            if ($('#BankName').val() == '') {
-                $("#BankName").addClass('errortext');
-                $('#BankName').focus();
-                return false;
-            }
-            if ($('#DDChequeNo').val() == '') {
-                $("#DDChequeNo").addClass('errortext');
-                $('#DDChequeNo').focus();
-                return false;
-            }
-            if ($('#DDChequeDate').val() == '') {
-                $("#DDChequeDate").addClass('errortext');
-                $('#DDChequeDate').focus();
-                return false;
-            }
-        }
-        else {
+            else {
 
+            }
         }
+
         return true;
 
     }
@@ -244,7 +247,7 @@
     function getpaymentTypedetails() {
         debugger;
         if ($('#PaymentType').val() == 'Offline') {
-        
+
             $("#PaymentMode").val(10);
             $("#paymentmode").show();
             $("#divQr").show();
@@ -271,7 +274,7 @@
             $("#lblbank").hide();
             $("#Remarks").hide();
             $("#divbankbranch").hide();
-            
+
 
         }
     }
@@ -289,7 +292,7 @@
             $("#divQr").hide();
         }
         else if ($('#PaymentMode').val() == '2') {
-    
+
             $("#divPaymentMode").show();
             $("#divtransactiono").show();
             $("#divbankname").show();
@@ -316,7 +319,7 @@
             $("#lblbank").attr("placeholder", "Bank Name");
             $("#DDChequeNo").attr("placeholder", "Transaction No.");
             $("#DDChequeDate").attr("placeholder", "Transaction Date");
-      
+
         }
         else if ($('#PaymentMode').val() == '4') {
             $("#divPaymentMode").show();
@@ -400,7 +403,7 @@
 
     }
 
-//////////////////////////////////
+    //////////////////////////////////
 
 
     //function getpaymentdetails_s() {

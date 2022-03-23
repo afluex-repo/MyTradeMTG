@@ -37,7 +37,10 @@ namespace MyTrade.Models
         public HttpPostedFileBase postedFile { get; set; }
         public string Name { get; set; }
         public string ePinNo { get; set; }
-        
+        public string Amount { get;  set; }
+        public dynamic OrderId { get;  set; }
+        public string PaymentMode { get;  set; }
+
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()

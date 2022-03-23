@@ -68,9 +68,6 @@ namespace MyTrade.Controllers
                 }
                 ViewBag.Tr2Business = ds.Tables[1].Rows[0]["Tr2Business"].ToString();
             }
-
-
-
             List<Dashboard> lst = new List<Dashboard>();
             obj.AddedBy = Session["Pk_userId"].ToString();
             DataSet ds1 = obj.GetRewarDetails();
@@ -95,8 +92,6 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
                 ViewBag.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
             }
-
-
             return View(obj);
         }
         public ActionResult ActivateByPin(User model)
@@ -1288,6 +1283,8 @@ namespace MyTrade.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.ROIPercentage = r["BackColor"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["DeductionCharges"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayoutRequest = lst;
@@ -1506,16 +1503,21 @@ namespace MyTrade.Controllers
                 orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
                 orderModel.amount = Convert.ToInt32(obj.Amount)*100;
                 orderModel.currency = "INR";
-                orderModel.description = "Testing description";
+                orderModel.description = "Recharge Wallet";
+                orderModel.name = Session["FullName"].ToString();
+                orderModel.contactNumber = Session["Contact"].ToString();
+                orderModel.email = Session["Email"].ToString();
+                orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
                 DataSet ds = obj.SaveEwalletRequestNew();
+                return View("PaymentPage", orderModel);
                 // Return on PaymentPage with Order data
             }
             catch (Exception ex)
             {
                 obj1.Status = "1";
-                obj1.ErrorMessage = ex.Message;
+                TempData["error"] = ex.Message;
+                return RedirectToAction("WalletRequest", "User");
             }
-            return View("PaymentPage", orderModel);
         }
         public HttpWebRequest GetCreateOrderURL()
         {

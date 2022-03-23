@@ -113,6 +113,10 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string DeductionType { get; set; }
         public string Pk_investmentId { get; set; }
+        public string CommissionPercentage { get; set; }
+        public string ToName { get; set; }
+        
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -388,6 +392,19 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("ApprovePayoutRequest", para);
             return ds;
         }
+
+        public DataSet DeclinePayoutRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",PK_RequestID),
+                 new SqlParameter("@Status",Status),
+                  new SqlParameter("@TransactionNo",TransactionNo),
+                new SqlParameter("@DeclinedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeclinePayoutRequest", para);
+            return ds;
+        }
+
         public DataSet GetNameDetails()
         {
             SqlParameter[] para = {
@@ -432,5 +449,15 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetKYCUpdateDetailsOfUser");
             return ds;
         }
+        public DataSet PaidIncome()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomes", para);
+            return ds;
+        }
+
+
     }
 }

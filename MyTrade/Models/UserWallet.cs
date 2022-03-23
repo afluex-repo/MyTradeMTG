@@ -49,6 +49,7 @@ namespace MyTrade.Models
         public string Type { get; set; }
         public string TransactionType { get; set; }
 
+        public string Status { get; set; }
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
@@ -213,6 +214,7 @@ namespace MyTrade.Models
         public string contactNumber { get; set; }
         public string address { get; set; }
         public string description { get; set; }
+        public string image { get; set; }
     }
     public class FetchPaymentByOrderResponse
     {
@@ -291,7 +293,7 @@ namespace MyTrade.Models
             return ds;
         }
 
-        public DataSet UpdateRazorayStatus()
+        public DataSet UpdateRazorpayStatus()
         {
             SqlParameter[] para = {
 
@@ -325,7 +327,7 @@ namespace MyTrade.Models
                                       new SqlParameter("@Pk_UserId", Pk_UserId),
 
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("UpdateRazorayStatus", para);
+            DataSet ds = DBHelper.ExecuteQuery("SavePaymentResponse", para);
             return ds;
         }
        

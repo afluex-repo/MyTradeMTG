@@ -1,5 +1,6 @@
 ﻿using MyTrade.Filter;
 using MyTrade.Models;
+using Razorpay.Api;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -48,6 +49,8 @@ namespace MyTrade.Controllers
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
                                 Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
                                 Session["Branch"] = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                                Session["Email"] = ds.Tables[0].Rows[0]["Email"].ToString();
+                                Session["Contact"] = ds.Tables[0].Rows[0]["Mobile"].ToString();
                                 Session["Bank"] = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
@@ -206,6 +209,49 @@ namespace MyTrade.Controllers
         public ActionResult CompleteRegistration()
         {
             return View();
+        }
+        public ActionResult ActivateByPayment(Home model)
+        {
+            OrderModel orderModel = new OrderModel();
+            string random = Common.GenerateRandom();
+            CreateOrderResponse obj1 = new CreateOrderResponse();
+            try
+            {
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add("amount", Convert.ToInt32(model.Amount) * 100); // amount in the smallest currency unit
+                options.Add("receipt", random);
+                options.Add("currency", "INR");
+                options.Add("payment_capture", "1");
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+                Razorpay.Api.Order order = client.Order.Create(options);
+                obj1.OrderId = order["id"].ToString();
+                obj1.Status = "0";
+                model.OrderId = order["id"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.AddedBy = Session["Pk_UserId"].ToString();
+                model.Amount = "50000";
+                model.PaymentMode = "12";
+                orderModel.orderId = order.Attributes["id"];
+                orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
+                orderModel.amount = 50000;
+                orderModel.currency = "INR";
+                orderModel.description = "Activate Account";
+                orderModel.name = Session["FullName"].ToString();
+                orderModel.contactNumber = Session["Contact"].ToString();
+                orderModel.email = Session["Email"].ToString();
+                orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
+                //DataSet ds = model.ActivateByPayment();
+                return View("PaymentPage", orderModel);
+                // Return on PaymentPage with Order data
+            }
+            catch (Exception ex)
+            {
+                obj1.Status = "1";
+                TempData["error"] = ex.Message;
+                return RedirectToAction("AddWallet", "Wallet");
+            }
         }
         public ActionResult emailtemplate()
         {
