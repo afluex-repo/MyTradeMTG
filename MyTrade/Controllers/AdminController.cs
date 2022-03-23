@@ -1585,6 +1585,7 @@ namespace MyTrade.Controllers
                     count++;
                 }
             }
+      
             ViewBag.ddlProduct = ddlProduct;
             #endregion
 
