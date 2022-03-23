@@ -29,7 +29,7 @@
                                 Name
                                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                             </div>
-                            
+
                             <div class="col-md-3">
                                 Status
                                 @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlstatus, "Value", "Text"), new { @class = "form-control" })
@@ -65,11 +65,19 @@
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Upgradation Date</th>
+                                        <th>Product Name</th>
+                                        <th>Topup Amount</th>
+                                        <th>BV</th>
+                                        <th>Transaction By</th>
+                                        <th>Status</th>
+                                        <th>TPS Percentage</th>
+                                        <th>Days</th>
+                                        <th>Date</th>
+                                        @*<th>Upgradation Date</th>
                                         <th>Payment Mode</th>
-                                        <th>Description</th>
+                                            <th>Description</th>
                                         <th>Price</th>
-                                        <th>Calculation Status</th>
+                                        <th>Calculation Status</th>*@
                                         @*<th>Print</th>*@
                                     </tr>
                                 </thead>
@@ -85,15 +93,23 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.DisplayName</td>
-                                                    <td>@Item.UpgradtionDate</td>
-                                                    <td>@Item.PaymentMode</td>
-                                                    <td>@Item.Description</td>
-                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.Package</td>
+                                                    <td>@Item.PinAmount</td>
+                                                    <td>@Item.BV</td>
+                                                    <td>@Item.TransactionBy</td>
                                                     <td>@Item.Status</td>
+                                                    <td>@Item.ROIPercentage %</td>
+                                                    <td><a class="btn btn-info btn-sm" href="/Admin/ViewROIForAdmin?Id=@Item.Pk_investmentId&UserId=@Item.Fk_UserId">@Item.PackageDays</a></td>
+                                                    <td>@Item.TopUpDate</td>
+                                                    @*<td>@Item.UpgradtionDate</td>
+                                                    <td>@Item.PaymentMode</td>
+                                                        <td>@Item.Description</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.Status</td>*@
                                                     @*<td>*@
-                                                        @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
-                                                 @*<a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class=       "btn btn-sm btn-primary" target="_blank">Print </a>*@
-                                                        @*  <button onclick="changeprintdate('@Item.PrintingDate','@Item.LoginId')">Print</button>*@
+                                                    @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
+                                                    @*<a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class=       "btn btn-sm btn-primary" target="_blank">Print </a>*@
+                                                    @*  <button onclick="changeprintdate('@Item.PrintingDate','@Item.LoginId')">Print</button>*@
                                                     @*</td>*@
                                                 </tr>
                                                 i++;
@@ -106,20 +122,14 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
-                                        <th></th>
-                                     
+                                        @*<th></th>
+                                            <th></th>*@
+
                                         <th style="text-align:right">Total Amount</th>
                                         <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
                                         <th></th>
                                     </tr>
                                 </tfoot>
-
-
-
-
-
-
                             </table>
                         </div>
 
