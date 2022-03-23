@@ -7,7 +7,7 @@ using System.Web;
 using MyTrade.Models;
 namespace MyTrade.Models
 {
-    public class Home:Common
+    public class Home : Common
     {
         public List<Home> lstMenu { get; set; }
         public List<Home> lstsubmenu { get; set; }
@@ -21,22 +21,25 @@ namespace MyTrade.Models
         public string PanNo { get; set; }
         public string MobileNo { get; set; }
         public string Email { get; set; }
-        public string RegistrationBy { get;  set; }
-        public string Password { get;  set; }
-        public string Pk_AdminId { get;  set; }
-        public string MenuId { get;  set; }
-        public string MenuName { get;  set; }
-        public string Icon { get;  set; }
-        public string Url { get;  set; }
-        public string SubMenuId { get;  set; }
-        public string SubMenuName { get;  set; }
-        public string UserType { get;  set; }
+        public string RegistrationBy { get; set; }
+        public string Password { get; set; }
+        public string Pk_AdminId { get; set; }
+        public string MenuId { get; set; }
+        public string MenuName { get; set; }
+        public string Icon { get; set; }
+        public string Url { get; set; }
+        public string SubMenuId { get; set; }
+        public string SubMenuName { get; set; }
+        public string UserType { get; set; }
         public string ConfirmPassword { get; set; }
         public string Gender { get; set; }
         public string ProfilePic { get; set; }
         public HttpPostedFileBase postedFile { get; set; }
         public string Name { get; set; }
         public string ePinNo { get; set; }
+        public string ClosingDate { get; set; }
+
+
         public string Amount { get;  set; }
         public dynamic OrderId { get;  set; }
         public string PaymentMode { get;  set; }
@@ -216,6 +219,16 @@ namespace MyTrade.Models
         public DataSet CalculateROI()
         {
             DataSet ds = DBHelper.ExecuteQuery("CalculateROI");
+            return ds;
+        }
+
+        public DataSet CalculateDistributePaymentTPS()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@ClosingDate",ClosingDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
             return ds;
         }
 

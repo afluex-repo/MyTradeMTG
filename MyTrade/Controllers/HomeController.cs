@@ -399,5 +399,16 @@ namespace MyTrade.Controllers
            DataSet ds = model.CalculateROI();
             return View();
         }
+
+        public ActionResult CalculateDistributePaymentTPS()
+        {
+            Home model = new Home();
+            DataSet ds = model.CalculateDistributePaymentTPS();
+            return View();
+        }
+
+
+
+        
     }
 }

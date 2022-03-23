@@ -611,7 +611,7 @@ namespace MyTrade.Controllers
         public ActionResult ROIWalletForAdmin(Admin model)
         {
             List<Admin> lst = new List<Admin>();
-            model.LoginId = model.LoginId == "0" ? null : model.LoginId;
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.GetROIWalletDetails();
@@ -671,7 +671,7 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
-                    obj.ROI = r["Pk_ROIId"].ToString();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
                     obj.ROI = r["ROI"].ToString();
                     obj.Date = r["ROIDate"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -679,6 +679,14 @@ namespace MyTrade.Controllers
                 }
                 model.lstROI = lst;
             }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                ViewBag.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                ViewBag.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+            }
+
+
             return View(model);
         }
 
