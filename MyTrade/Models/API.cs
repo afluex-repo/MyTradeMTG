@@ -398,7 +398,7 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
-        public string Leg { get; set; }
+        public string Level { get; set; }
         public string Package { get; set; }
         public string JoiningDate { get; set; }
         public string PermanentDate { get; set; }

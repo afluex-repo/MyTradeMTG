@@ -140,8 +140,6 @@
                                 <div class="form-group">
                                     @*<a href="/Admin/ApprovePayout" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>*@
 
-                                    @*<label id="lblAmount">Amount : </label>*@
-
                                     <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Submit</a>
 
                                     @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
@@ -278,7 +276,7 @@
             $('#ckbCheckAll').prop('checked', false);
         }
         //$("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
-    });
+        });
 
 
     //$('#IsDownline').click(function () {

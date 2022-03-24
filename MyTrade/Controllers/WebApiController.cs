@@ -551,7 +551,7 @@ namespace MyTrade.Controllers
                     obj.Mobile = r["Mobile"].ToString();
                     obj.Email = r["Email"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Leg = r["Leg"].ToString();
+                    obj.Level = r["Level"].ToString();
                     obj.PermanentDate = (r["PermanentDate"].ToString());
                     obj.Status = (r["Status"].ToString());
                     obj.LoginId = (r["LoginId"].ToString());

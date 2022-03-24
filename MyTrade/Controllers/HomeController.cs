@@ -65,14 +65,12 @@ namespace MyTrade.Controllers
                                     FormName = "CompleteRegistration";
                                     Controller = "Home";
                                 }
-
                             }
                             else
                             {
                                 TempData["Login"] = "Incorrect Password";
                                 FormName = "Login";
                                 Controller = "Home";
-
                             }
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
@@ -106,17 +104,13 @@ namespace MyTrade.Controllers
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         FormName = "Login";
                         Controller = "Home";
-
                     }
-
                 }
-
                 else
                 {
                     TempData["Login"] = "Incorrect LoginId Or Password";
                     FormName = "Login";
                     Controller = "Home";
-
                 }
             }
             catch (Exception ex)
@@ -125,7 +119,6 @@ namespace MyTrade.Controllers
                 FormName = "Login";
                 Controller = "Home";
             }
-
             return RedirectToAction(FormName, Controller);
         }
         public ActionResult Registration(string PId)
@@ -176,6 +169,7 @@ namespace MyTrade.Controllers
                         Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["Transpassword"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+                        Session["Email"] = ds.Tables[0].Rows[0]["Email"].ToString();
                         Session["Profile"] = "";
                         obj.Result = "1";
                         if (obj.Email != "" && obj.Email != null)
@@ -208,8 +202,34 @@ namespace MyTrade.Controllers
         }
         public ActionResult CompleteRegistration()
         {
+            if(Session["LoginId"]==null)
+            {
+                return RedirectToAction("Login","Home");
+            }
+            #region Product Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProductForJoining();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlProduct = ddlProduct;
+            #endregion
             return View();
         }
+        [HttpPost]
+        [ActionName("CompleteRegistration")]
+        [OnAction(ButtonName = "btnActivate")]
         public ActionResult ActivateByPayment(Home model)
         {
             OrderModel orderModel = new OrderModel();
@@ -231,27 +251,124 @@ namespace MyTrade.Controllers
                 model.OrderId = order["id"].ToString();
                 model.LoginId = Session["LoginId"].ToString();
                 model.AddedBy = Session["Pk_UserId"].ToString();
-                model.Amount = "50000";
+                model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
                 model.PaymentMode = "12";
                 orderModel.orderId = order.Attributes["id"];
                 orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                orderModel.amount = 50000;
+                orderModel.amount = Convert.ToInt32(model.Amount) * 100;
                 orderModel.currency = "INR";
                 orderModel.description = "Activate Account";
                 orderModel.name = Session["FullName"].ToString();
                 orderModel.contactNumber = Session["Contact"].ToString();
                 orderModel.email = Session["Email"].ToString();
-                orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
+                //orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
                 //DataSet ds = model.ActivateByPayment();
-                return View("PaymentPage", orderModel);
+                return View("ActivationPayment", orderModel);
                 // Return on PaymentPage with Order data
             }
             catch (Exception ex)
             {
                 obj1.Status = "1";
                 TempData["error"] = ex.Message;
-                return RedirectToAction("AddWallet", "Wallet");
+                return RedirectToAction("CompleteRegistration", "Home");
             }
+        }
+        public ActionResult FillAmount(string ProductId)
+        {
+            Admin obj = new Admin();
+            obj.Package = ProductId;
+            DataSet ds = obj.BindPriceByProduct();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Amount = Convert.ToInt32(ds.Tables[0].Rows[0]["FinalAmount"]).ToString();
+            }
+            else { }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult FetchActivationPaymentByOrder(OrderModel model)
+        {
+            FetchPaymentByOrder obj = new FetchPaymentByOrder();
+            FetchPaymentByOrderResponse obj1 = new FetchPaymentByOrderResponse();
+            string random = Common.GenerateRandom();
+            try
+            {
+                obj.OrderId = model.orderId;
+                obj1.Pk_UserId = Session["Pk_UserId"].ToString();
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+                List<Razorpay.Api.Payment> orderdetails = client.Order.Payments(obj.OrderId);
+                if (orderdetails.Count > 0)
+                {
+                    for (int i = 0; i <= orderdetails.Count - 1; i++)
+                    {
+                        dynamic rr = orderdetails[i].Attributes;
+                        obj1.PaymentId = rr["id"];
+                        obj1.entity = rr["entity"];
+                        obj1.amount = rr["amount"];
+                        obj1.currency = rr["currency"];
+                        obj1.status = rr["status"];
+                        obj1.OrderId = rr["order_id"];
+                        obj1.invoice_id = rr["invoice_id"];
+                        obj1.international = rr["international"];
+                        obj1.method = rr["method"];
+                        obj1.amount_refunded = rr["amount_refunded"];
+                        obj1.refund_status = rr["refund_status"];
+                        obj1.captured = rr["captured"];
+                        obj1.description = rr["description"];
+                        obj1.card_id = rr["card_id"];
+                        obj1.bank = rr["bank"];
+                        obj1.wallet = rr["wallet"];
+                        obj1.vpa = rr["vpa"];
+                        obj1.email = rr["email"];
+                        obj1.contact = rr["contact"];
+                        obj1.fee = rr["fee"];
+                        obj1.tax = rr["tax"];
+                        obj1.error_code = rr["error_code"];
+                        obj1.error_description = rr["error_description"];
+                        obj1.error_source = rr["error_source"];
+                        obj1.error_step = rr["error_step"];
+                        obj1.error_reason = rr["error_reason"];
+                        obj1.created_at = rr["created_at"];
+
+                        DataSet ds = obj1.UpdateRazorpayStatus();
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                            {
+                                if (obj1.captured == "captured")
+                                {
+                                    TempData["Msg"] = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
+                                }
+                                else
+                                {
+                                    TempData["error"] = "Payment Failed";
+                                }
+
+                                return RedirectToAction("CompleteRegistration", "Home");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    obj1.OrderId = obj.OrderId;
+                    obj1.captured = "Failed";
+                    TempData["error"] = "Payment Failed";
+                    obj1.Pk_UserId = obj.Pk_UserId;
+                    DataSet ds = obj1.SaveFetchPaymentResponse();
+                    return RedirectToAction("CompleteRegistration", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                obj1.OrderId = obj.OrderId;
+                obj1.captured = ex.Message;
+                TempData["error"] = ex.Message;
+                obj1.Pk_UserId = obj.Pk_UserId;
+                DataSet ds = obj1.SaveFetchPaymentResponse();
+                return RedirectToAction("CompleteRegistration", "Home");
+            }
+            return Json(obj1, JsonRequestBehavior.AllowGet);
         }
         public ActionResult emailtemplate()
         {
@@ -396,7 +513,7 @@ namespace MyTrade.Controllers
         public ActionResult CalculateROI()
         {
             Home model = new Home();
-           DataSet ds = model.CalculateROI();
+            DataSet ds = model.CalculateROI();
             return View();
         }
 
@@ -409,6 +526,6 @@ namespace MyTrade.Controllers
 
 
 
-        
+
     }
 }

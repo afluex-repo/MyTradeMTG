@@ -1311,6 +1311,7 @@ namespace MyTrade.Controllers
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
+            model.Status = "Pending";
             DataSet ds = model.GetPayoutRequest();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -1585,6 +1586,7 @@ namespace MyTrade.Controllers
                     count++;
                 }
             }
+      
             ViewBag.ddlProduct = ddlProduct;
             #endregion
 
