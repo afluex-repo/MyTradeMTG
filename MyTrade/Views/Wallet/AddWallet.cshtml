@@ -48,7 +48,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         Payment Type<span style="color: red">*</span>
-                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onload = "getpaymentTypedetails();" })
+                                        @*@Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onload = "getpaymentTypedetails();"})*@
+
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +112,8 @@
 
 <script>
     $(document).ready(function () {
-        $("#PaymentType").val("Offline");
+        //$("#PaymentType").val("Offline");
+        $("#PaymentType").val("Online");
         getpaymentTypedetails();
     });
     function validateform() {
@@ -175,20 +178,15 @@
             }
         }
         else {
-
         }
         return true;
-
     }
-
     $('#DDChequeDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
 
     function preview_image(event, mode) {
         debugger;
-
-
         if (mode == 'Q') {
             var reader = new FileReader();
             reader.onload = function () {
@@ -198,8 +196,6 @@
             }
             reader.readAsDataURL(event.target.files[0]);
         }
-
-
     }
     function getmembername() {
         debugger;
@@ -280,7 +276,15 @@
 
     function getpaymentdetails() {
         debugger;
-        if ($('#PaymentMode').val() == '1') {
+        if ($('#PaymentMode').val() == "") {
+            $("#divPaymentMode").hide();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#Remarks").hide();
+            $("#divQr").hide();
+        }
+       else if ($('#PaymentMode').val() == '1') {
             $("#divPaymentMode").hide();
             $("#divtransactiono").hide();
             $("#divbankname").hide();

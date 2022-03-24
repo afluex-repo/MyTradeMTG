@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace MyTrade.Controllers
 {
-    public class AdminReportsController : Controller
+    public class AdminReportsController : AdminBaseController
     {
         // GET: AdminReports
         #region AssociateList
@@ -600,5 +600,128 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("KYCUpdateDeatilsOfUser","Admin");
         }
+
+
+        public ActionResult WalletLedger()
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.GetWalletLedgerDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    lst.Add(obj);
+                }
+                //ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                //ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                model.lstWalletLedger = lst;
+             
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("WalletLedger")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult WalletLedger(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
+            DataSet ds = model.GetWalletLedgerDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWalletLedger = lst;
+                //ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                //ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+            }
+            return View(model);
+        }
+
+
+        public ActionResult ActivateByPaymentList()
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
+            DataSet ds = model.GetActivateByPaymentDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_EwalletId = r["Pk_InvestmentId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.IsCalculated = r["IsCalculated"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstActivateByPayment = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ActivateByPaymentList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ActivateByPaymentList(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
+            model.UsedFor = model.UsedFor == "" ? null : model.UsedFor;
+            DataSet ds = model.GetActivateByPaymentDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_EwalletId = r["Pk_InvestmentId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.PinAmount = r["PinAmount"].ToString();
+                    obj.UsedFor = r["UsedFor"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.IsCalculated = r["IsCalculated"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstActivateByPayment = lst;
+            }
+            return View(model);
+        }
+
     }
 }
