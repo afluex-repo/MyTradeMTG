@@ -1585,9 +1585,14 @@ namespace MyTrade.Controllers
                     count++;
                 }
             }
-      
             ViewBag.ddlProduct = ddlProduct;
             #endregion
+
+            DataSet ds = model.GetTotalWalletAmount();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.TotalWalletAmount = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
+            }
 
             #region ddlpaymentType
             List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
@@ -1898,6 +1903,6 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-
+        
     }
 }
