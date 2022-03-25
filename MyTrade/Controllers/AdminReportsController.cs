@@ -685,6 +685,7 @@ namespace MyTrade.Controllers
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.TransactionDate = r["ActivatationDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstActivateByPayment = lst;
@@ -716,6 +717,7 @@ namespace MyTrade.Controllers
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.TransactionDate = r["ActivatationDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstActivateByPayment = lst;

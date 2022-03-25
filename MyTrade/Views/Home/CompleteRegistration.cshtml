@@ -1,4 +1,4 @@
-﻿
+﻿@model MyTrade.Models.Home
 @{
     Layout = null;
 }
@@ -79,11 +79,40 @@
                     </div>
 
                     <div class="field-wrapper">
-                        <a href="#" target="_blank" class="btn btn-info foractivation-btn py-2">
+                        <a href="/Home/ActivateByPayment" target="_blank" class="btn btn-info foractivation-btn py-2" data-toggle="modal" data-target="#myModal">
                             <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
                             <span style="white-space: nowrap">Activate By Payment</span>
                         </a>
                     </div>
+                    @using (Html.BeginForm("CompleteRegistration", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                    {
+                        <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" style="color: red">Select Package</h6>
+                                        <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+                                    </div>
+                                    <div class="modal-body" style="color: black">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "return FillAmount();" })
+                                                    @Html.HiddenFor(m => m.Amount)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="submit" class="btn btn-sm btn-success pull-right" name="btnActivate" value="Activate" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     @*<a href="">Skip</a>*@
                     @*<button class="btn btn-outline-primary mb-2 " href="/Home/Login" target="_blank">Activate By Pin</button>
                         <button class="btn btn-outline-primary mb-2" href="/Home/Registration" target="_blank">Activate By Payment</button>*@
@@ -96,6 +125,21 @@
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/bootstrap/js/popper.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function FillAmount() {
+            debugger;
+            $.ajax({
+                url: "/Home/FillAmount",
+                Type: "Get",
+                DataType: "JSON",
+                data: { Productid: $('#Package').val() },
+                success: function (data) {
+                    debugger;
+                    $('#Amount').val(data.Amount);
+                }
+            });
+        }
+    </script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 </body>
 
