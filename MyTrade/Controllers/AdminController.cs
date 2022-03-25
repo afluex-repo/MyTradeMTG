@@ -1311,6 +1311,7 @@ namespace MyTrade.Controllers
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
+            model.Status = "Pending";
             DataSet ds = model.GetPayoutRequest();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -1329,6 +1330,7 @@ namespace MyTrade.Controllers
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.TransactionDate = r["ApprovalDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1361,6 +1363,7 @@ namespace MyTrade.Controllers
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.TransactionDate = r["ApprovalDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1761,6 +1764,7 @@ namespace MyTrade.Controllers
                         obj.Mobile = r["Mobile"].ToString();
                         obj.Email = r["Email"].ToString();
                         obj.AdharNo = r["AdharNumber"].ToString();
+                        obj.IsVerified = Convert.ToBoolean(r["IsVerified"]).ToString();
                         obj.PanNo = r["PanNumber"].ToString();
                         obj.MemberAccNo = r["MemberAccNo"].ToString();
                         obj.IFSCCode = r["IFSCCode"].ToString();

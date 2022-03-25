@@ -524,9 +524,6 @@ namespace MyTrade.Controllers
                     Package model = new Package();
                     model.PK_PackageId = r["Pk_ProductId"].ToString();
                     model.PackageName = r["ProductName"].ToString();
-                    model.MinimumAmount = 1000;
-                    model.MaximumAmount = 5000;
-                    model.InMultipleOf = "1000";
                     lst.Add(model);
                 }
                 obj.lst = lst;
@@ -554,12 +551,16 @@ namespace MyTrade.Controllers
                     obj.Mobile = r["Mobile"].ToString();
                     obj.Email = r["Email"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Leg = r["Leg"].ToString();
+                    obj.Level = r["Lvl"].ToString();
                     obj.PermanentDate = (r["PermanentDate"].ToString());
                     obj.Status = (r["Status"].ToString());
                     obj.LoginId = (r["LoginId"].ToString());
                     obj.Name = (r["Name"].ToString());
                     obj.Package = (r["ProductName"].ToString());
+                    
+                    obj.FK_UserId = (r["PK_UserId"].ToString());
+                    obj.SponsorId = (r["SponsorId"].ToString());
+                    obj.SponsorName = (r["SponsorName"].ToString());
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1285,12 +1286,28 @@ namespace MyTrade.Controllers
         }
         public ActionResult PaymentType()
         {
-            PaymentTypeRes obj = new PaymentTypeRes();
-            List<PaymentTypeRes> lst = new List<PaymentTypeRes>();
-            obj.Value = "Offline";
-            obj.Text = "Offline";
-            lst.Add(obj);
-            return Json(lst, JsonRequestBehavior.AllowGet);
+            List<PaymentTypeAPI> lst = new List<PaymentTypeAPI>();
+            PaymentTypeAPIResponse obj = new PaymentTypeAPIResponse();
+            DataSet ds = obj.PaymentList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    PaymentTypeAPI model = new PaymentTypeAPI();
+                    model.PK_PaymentTypeId = r["PK_PaymentTypeId"].ToString();
+                    model.PaymentType = r["PaymentType"].ToString();
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult GetTTPMembersCountLevelWise(LevelTreeReq req)
@@ -1593,7 +1610,7 @@ namespace MyTrade.Controllers
                 res.Status = "1";
                 res.Message = ex.Message;
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult TPSWallet(WalletRequestList model)
@@ -1713,6 +1730,8 @@ namespace MyTrade.Controllers
                 DataSet ds = model.LevelIncomeTr1();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
+                    res.Status = "0";
+                    res.Message = "Record Found";
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         LevelIncome obj = new LevelIncome();
@@ -1787,6 +1806,8 @@ namespace MyTrade.Controllers
                 DataSet ds = model.LevelIncomeTr2();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
+                    res.Status = "0";
+                    res.Message = "Record Found";
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         LevelIncome obj = new LevelIncome();

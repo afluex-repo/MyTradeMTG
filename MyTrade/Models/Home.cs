@@ -40,6 +40,10 @@ namespace MyTrade.Models
         public string ClosingDate { get; set; }
 
 
+        public string Amount { get;  set; }
+        public dynamic OrderId { get;  set; }
+        public string PaymentMode { get;  set; }
+
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -224,7 +228,7 @@ namespace MyTrade.Models
                 new SqlParameter("@ClosingDate",ClosingDate)
 
             };
-            DataSet ds = DBHelper.ExecuteQuery("ListForDistributePaymentTPSNew", para);
+            DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
             return ds;
         }
 

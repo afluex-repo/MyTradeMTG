@@ -68,7 +68,7 @@
                                     <tr>
                                         <th><input type="checkbox" id="ckbCheckAll" /></th>
                                         <th>Sr No.</th>
-                                        <th>Transaction No</th>
+                                        <th>Narration</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
                                         <th>Gross Amount</th>
@@ -78,6 +78,7 @@
                                         <th>Account No.</th>
                                         <th>Status</th>
                                         <th>Requested Date</th>
+                                        <th>Approved/Declined Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -116,6 +117,7 @@
                                                     <td>@Item.MemberAccNo</td>
                                                     <td>@Item.Status</td>
                                                     <td>@Item.Date</td>
+                                                    <td>@Item.TransactionDate</td>
                                                     @*@if (Item.Status == "Pending")
                                                         {
                                                         <td>
@@ -189,8 +191,7 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
 
-    if ($("#st").val() != 0)
-    {
+    if ($("#st").val() != 0) {
         $("#Status").val($("#st").val()).attr("selected", "selected");
     }
 

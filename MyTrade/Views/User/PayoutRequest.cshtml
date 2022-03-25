@@ -161,7 +161,7 @@
             deductionAmount = 10;
         }
         $("#lbld").text(parseFloat(deductionAmount));
-        var finalAmount = parseFloat($("#Amount").val()) - parseFloat(deductionAmount);
+        var finalAmount = parseFloat($("#Amount").val()) + parseFloat(deductionAmount);
         $("#lblf").text(parseFloat(finalAmount));
     }
 </script>

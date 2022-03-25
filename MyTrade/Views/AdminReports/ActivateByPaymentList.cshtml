@@ -44,9 +44,10 @@
                                         <th>Pin Amount</th>
                                         <th>Used For</th>
                                         <th>BV</th>
-                                        <th>IsCalculated</th>
-                                        <th>TransactionBy</th>
-                                        <th>Status</th>
+                                        @*<th>IsCalculated</th>*@
+                                        @*<th>TransactionBy</th>*@
+                                        <th>Activation Date</th>
+                                        @*<th>Status</th>*@
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,9 +65,10 @@
                                                     <td>@Item.PinAmount</td>
                                                     <td>@Item.UsedFor</td>
                                                     <td>@Item.BV</td>
-                                                    <td>@Item.IsCalculated</td>
-                                                    <td>@Item.TransactionBy</td>
-                                                    <td>@Item.Status</td>
+                                                    <th>@Item.TransactionDate</th>
+                                                    @*<td>@Item.IsCalculated</td>*@
+                                                    @*<td>@Item.TransactionBy</td>*@
+                                                    @*<td>@Item.Status</td>*@
                                                 </tr>
                                                 i++;
                                             }

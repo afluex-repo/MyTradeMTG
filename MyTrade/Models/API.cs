@@ -282,6 +282,22 @@ namespace MyTrade.Models
         public string PK_PaymentModeId { get; set; }
         public string PaymentModeName { get; set; }
     }
+    public class PaymentTypeAPI
+    {
+        public string PK_PaymentTypeId { get; set; }
+        public string PaymentType { get; set; }
+    }
+    public class PaymentTypeAPIResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PaymentTypeAPI> lst { get; set; }
+        public DataSet PaymentList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
+            return ds;
+        }
+    }
     public class PaymentModeResponse
     {
         public string Status { get; set; }
@@ -294,6 +310,11 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentModeList");
             return ds;
         }
+    }
+    public class PackageAPI
+    {
+        public string PK_PackageId { get; set; }
+        public string PackageName { get; set; }
     }
     public class Package
     {
@@ -377,11 +398,14 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
-        public string Leg { get; set; }
+        public string Level { get; set; }
         public string Package { get; set; }
         public string JoiningDate { get; set; }
         public string PermanentDate { get; set; }
         public string Status { get; set; }
+        public string FK_UserId { get;  set; }
+        public string SponsorId { get;  set; }
+        public string SponsorName { get;  set; }
     }
     public class PinRequest
     {
