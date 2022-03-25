@@ -1569,7 +1569,7 @@ namespace MyTrade.Controllers
                 res.Status = "1";
                 res.Message = ex.Message;
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult BusinessReportsForUser(BusinessRequest model)
