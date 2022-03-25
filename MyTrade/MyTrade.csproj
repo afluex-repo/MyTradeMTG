@@ -839,6 +839,7 @@
     <Content Include="Views\Home\ActivationPayment.cshtml" />
     <Content Include="Views\AdminReports\WalletLedger.cshtml" />
     <Content Include="Views\AdminReports\ActivateByPaymentList.cshtml" />
+    <Content Include="Views\Admin\ViewLedger.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

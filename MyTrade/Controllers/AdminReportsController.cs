@@ -613,6 +613,7 @@ namespace MyTrade.Controllers
                 {
                     AdminReports obj = new AdminReports();
                     obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Narration = r["Narration"].ToString();
@@ -623,8 +624,8 @@ namespace MyTrade.Controllers
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     lst.Add(obj);
                 }
-                //ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
-                //ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
                 model.lstWalletLedger = lst;
              
             }
@@ -657,8 +658,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;
-                //ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
-                //ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -724,6 +725,26 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+        public ActionResult GetStateCity(string PinCode)
+        {
+            Common obj = new Common();
+            obj.PinCode = PinCode;
+            DataSet ds = obj.GetStateCity();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.State = ds.Tables[0].Rows[0]["State"].ToString();
+                obj.City = ds.Tables[0].Rows[0]["City"].ToString();
+                obj.Result = "1";
+            }
+            else
+            {
+                obj.Result = "Invalid PinCode";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
 
     }
 }

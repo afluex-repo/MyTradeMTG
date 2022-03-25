@@ -199,10 +199,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateAdminProfile", para);
             return ds;
         }
-
-
         
-
         public DataSet DeleteUerDetails()
         {
             SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId),
@@ -230,7 +227,6 @@ namespace MyTrade.Models
             return ds;
         }
 
-
         public DataSet GetActivateByPaymentDetails()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
@@ -239,6 +235,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetActivateByPaymentDetails", para);
             return ds;
         }
+
         
     }
 }
