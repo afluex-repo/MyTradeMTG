@@ -75,6 +75,26 @@ namespace MyTrade.Models
         public string TopUpDate { get; set; }
         public string Pk_investmentId { get; set; }
         
+        public string Pk_EwalletId { get; set; }
+        public string Narration { get; set; }
+        public string DrAmount { get; set; }
+        public string CrAmount { get; set; }
+        public string LastChanged { get; set; }
+        public List<AdminReports> lstWalletLedger { get; set; }
+        public List<AdminReports> lstActivateByPayment { get; set; }
+        public List<AdminReports> lstWallet { get; set; }
+
+        public string Remark { get; set; }
+        public string BankBranch { get; set; }
+        public string ChequeDDNo { get; set; }
+        public string ChequeDDDate { get; set; }
+        public string RequestID { get; set; }
+
+        public string UserId { get; set; }
+        public string RequestCode { get; set; }
+        public string WalletId { get; set; }
+        public string UsedFor { get; set; }
+        
 
         //public string SponserName { get; set; }
 
@@ -201,7 +221,24 @@ namespace MyTrade.Models
             return ds;
         }
 
-   
+        public DataSet GetWalletLedgerDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name",Name)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletLedgerDetails", para);
+            return ds;
+        }
 
+
+        public DataSet GetActivateByPaymentDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name",Name)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetActivateByPaymentDetails", para);
+            return ds;
+        }
+        
     }
 }

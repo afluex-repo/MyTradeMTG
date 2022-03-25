@@ -403,6 +403,9 @@ namespace MyTrade.Models
         public string JoiningDate { get; set; }
         public string PermanentDate { get; set; }
         public string Status { get; set; }
+        public string FK_UserId { get;  set; }
+        public string SponsorId { get;  set; }
+        public string SponsorName { get;  set; }
     }
     public class PinRequest
     {

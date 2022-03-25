@@ -551,12 +551,16 @@ namespace MyTrade.Controllers
                     obj.Mobile = r["Mobile"].ToString();
                     obj.Email = r["Email"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Level = r["Level"].ToString();
+                    obj.Level = r["Lvl"].ToString();
                     obj.PermanentDate = (r["PermanentDate"].ToString());
                     obj.Status = (r["Status"].ToString());
                     obj.LoginId = (r["LoginId"].ToString());
                     obj.Name = (r["Name"].ToString());
                     obj.Package = (r["ProductName"].ToString());
+                    
+                    obj.FK_UserId = (r["PK_UserId"].ToString());
+                    obj.SponsorId = (r["SponsorId"].ToString());
+                    obj.SponsorName = (r["SponsorName"].ToString());
                     lst.Add(obj);
                 }
                 model.lst = lst;

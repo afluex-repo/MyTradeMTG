@@ -86,6 +86,13 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetTotalWalletAmount()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetTotalWalletAmountOfMyTrade");
+            return ds;
+        }
+        
+
 
 
     }

@@ -368,7 +368,7 @@ namespace MyTrade.Controllers
                 DataSet ds = obj1.SaveFetchPaymentResponse();
                 return RedirectToAction("CompleteRegistration", "Home");
             }
-            return Json(obj1, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("CompleteRegistration", "Home");
         }
         public ActionResult emailtemplate()
         {

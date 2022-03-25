@@ -68,7 +68,7 @@
                                     <tr>
                                         <th><input type="checkbox" id="ckbCheckAll" /></th>
                                         <th>Sr No.</th>
-                                        <th>Transaction No</th>
+                                        <th>Narration</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
                                         <th>Gross Amount</th>
@@ -78,6 +78,7 @@
                                         <th>Account No.</th>
                                         <th>Status</th>
                                         <th>Requested Date</th>
+                                        <th>Approved/Declined Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,11 +112,12 @@
                                                     <td>@Item.Name</td>
                                                     <td>@Item.GrossAmount</td>
                                                     <td>@Item.ProcessingFee</td>
-                                                    <td id="Amount">@Item.Amount</td>
+                                                    <td>@Item.Amount</td>
                                                     <td>@Item.IFSCCode</td>
                                                     <td>@Item.MemberAccNo</td>
                                                     <td>@Item.Status</td>
                                                     <td>@Item.Date</td>
+                                                    <td>@Item.TransactionDate</td>
                                                     @*@if (Item.Status == "Pending")
                                                         {
                                                         <td>
@@ -141,7 +143,6 @@
                                     @*<a href="/Admin/ApprovePayout" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>*@
 
                                     <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Submit</a>
-
                                     @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
                                 </div>
                             </div>
@@ -320,18 +321,6 @@
     //    return false;
     //}
     //}
-
-    //$('.checkBoxClass').on('click', function () {
-    //    debugger;
-    //    if ($('.checkBoxClass:checked').length == $('.checkBoxClass').length) {
-    //        $('#ckbCheckAll').prop('checked', true);
-    //        $('#lblAmount').text('#Amount').val(Amount);
-    //    }
-    //    else {
-    //        $('#ckbCheckAll').prop('checked', false);
-    //    }
-    //    $("#lblAmount").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
-    //});
 
 </script>
 

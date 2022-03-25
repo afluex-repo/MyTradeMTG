@@ -56,7 +56,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 if (ViewBag.Status == "InActive")
                 {
-                    return RedirectToAction("ActivateByPin", "User");
+                    return RedirectToAction("CompleteRegistration", "Home");
                 }
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
@@ -1608,7 +1608,7 @@ namespace MyTrade.Controllers
                 obj1.Pk_UserId = obj.Pk_UserId;
                 DataSet ds = obj1.SaveFetchPaymentResponse();
             }
-            return Json(obj1, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("AddWallet", "Wallet");
         }
     }
 }
