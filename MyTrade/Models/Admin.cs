@@ -116,7 +116,8 @@ namespace MyTrade.Models
         public string CommissionPercentage { get; set; }
         public string ToName { get; set; }
         public string ToLoginID { get; set; }
-      
+        public string Mobile { get; set; }
+        public string Email { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()

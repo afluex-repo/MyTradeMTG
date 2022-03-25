@@ -1757,6 +1757,9 @@ namespace MyTrade.Controllers
                         Admin obj = new Admin();
                         obj.Fk_UserId = r["PK_UserId"].ToString();
                         obj.Name = r["Name"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Mobile = r["Mobile"].ToString();
+                        obj.Email = r["Email"].ToString();
                         obj.AdharNo = r["AdharNumber"].ToString();
                         obj.PanNo = r["PanNumber"].ToString();
                         obj.MemberAccNo = r["MemberAccNo"].ToString();
