@@ -15,7 +15,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Wallet Ledger</h4>
+                                <h4>Member Wallet Reports</h4>
                             </div>
                         </div>
                     </div>
@@ -67,13 +67,25 @@
                                                     @*<td>@Item.Status</td>*@
                                                     <td>@Item.TransactionBy</td>
                                                     <td>@Item.TransactionNo</td>
-                                                    
+                                                    @*<td><a class="btn btn-info btn-sm" href="/Admin/ViewLedger?Fk_UserId=@Item.UserId">View Ledger</a></td>*@
                                                 </tr>
                                                 i++;
                                             }
                                         }
                                     }
                                 </tbody>
+                                @*<tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th> </th>
+                                        <th></th>
+                                        <th>Total </th>
+                                        <th>@ViewBag.DrAmount</th>
+                                        <th>@ViewBag.CrAmount</th>
+                                        <th></th>
+                                        <th> </th>
+                                    </tr>
+                                </tfoot>*@
                             </table>
                         </div>
                     </div>
@@ -102,6 +114,7 @@
 
     });
 </script>
+
 
 
 
