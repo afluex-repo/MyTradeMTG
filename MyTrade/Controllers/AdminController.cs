@@ -265,7 +265,6 @@ namespace MyTrade.Controllers
 
 
         public ActionResult WalletList()
-
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
@@ -279,7 +278,7 @@ namespace MyTrade.Controllers
                     obj.UserId = r["FK_UserId"].ToString();
                     obj.RequestCode = r["RequestCode"].ToString();
                     obj.Amount = r["Amount"].ToString();
-                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString()+"- "+ r["BankName"].ToString()+","+ r["BankBranch"].ToString()+",Txn No. -"+ r["ChequeDDNo"].ToString()+",Txn Date- "+ r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
                     obj.TransactionDate = r["RequestedDate"].ToString();
@@ -316,9 +315,10 @@ namespace MyTrade.Controllers
                     obj.UserId = r["FK_UserId"].ToString();
                     obj.RequestCode = r["RequestCode"].ToString();
                     obj.Amount = r["Amount"].ToString();
-                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString() + "- " + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
+                    obj.TransactionDate = r["RequestedDate"].ToString();
                     obj.BankBranch = r["BankBranch"].ToString();
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
@@ -662,7 +662,7 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-        public ActionResult ViewROIForAdmin(string Id,string UserId)
+        public ActionResult ViewROIForAdmin(string Id, string UserId)
         {
             Admin model = new Admin();
             model.Pk_investmentId = Id;
@@ -1095,8 +1095,8 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-        
-      
+
+
 
 
         public ActionResult BusinessReports()
@@ -1748,7 +1748,7 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList");
         }
-        
+
         public ActionResult KYCUpdateDeatilsOfUser()
         {
             Admin model = new Admin();
@@ -1924,9 +1924,37 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("TPSListForDistributePaymentNew", "Admin");
         }
+        public ActionResult ViewLedger(string Fk_UserId)
+        {
+            Admin model = new Admin();
+            model.Fk_UserId = Fk_UserId;
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetWalletLedgerDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    lst.Add(obj);
+                }
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                model.lstViewLedger = lst;
+            }
+            return View(model);
+        }
 
-
-        public ActionResult PaidIncomeForAdmin(string PayoutNo,string LoginId)
+        public ActionResult PaidIncomeForAdmin(string PayoutNo, string LoginId)
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
@@ -1956,26 +1984,30 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-        public ActionResult ViewLedger( string Fk_UserId)
+        public ActionResult UnUsedPinList(Admin obj)
         {
-            Admin model = new Admin();
-            model.Fk_UserId = Fk_UserId;
             List<Admin> lst = new List<Admin>();
-            DataSet ds = model.GetTotalCrDrAmount();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            obj.LoginId = obj.LoginId == "0" ? null : obj.LoginId;
+            obj.Name = obj.Name == "0" ? null : obj.Name;
+            DataSet ds = obj.GetUnusedUsedPinsForAdmin();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    Admin obj = new Admin();
-                    obj.TotalAmount = r["TotalAmount"].ToString();
-                    lst.Add(obj);
+                    Admin Objload = new Admin();
+                    Objload.Fk_UserId = dr["FK_UserId"].ToString();
+                    Objload.LoginId = dr["LoginId"].ToString();
+                    Objload.Name = dr["Name"].ToString();
+                    Objload.Package = dr["ProductName"].ToString();
+                    //Objload.AvailablePin = dr["AvailablePin"].ToString();
+                    //Objload.UsedPin = dr["UsedPin"].ToString();
+                    //Objload.TransferPin = dr["TransferPin"].ToString();
+                    //Objload.TotalPin = dr["TotalPin"].ToString();
+                    lst.Add(Objload);
                 }
-                model.lstViewLedger = lst;
+                obj.lstView = lst;
             }
-            return View(model);
+            return View(obj);
         }
-        
-
     }
 }

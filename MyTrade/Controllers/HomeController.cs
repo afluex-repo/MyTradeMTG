@@ -338,13 +338,13 @@ namespace MyTrade.Controllers
                                 if (obj1.captured == "captured")
                                 {
                                     TempData["Msg"] = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
+                                    return RedirectToAction("UserDashBoard", "User");
                                 }
                                 else
                                 {
                                     TempData["error"] = "Payment Failed";
+                                    return RedirectToAction("CompleteRegistration", "Home");
                                 }
-
-                                return RedirectToAction("CompleteRegistration", "Home");
                             }
                         }
                     }

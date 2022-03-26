@@ -81,13 +81,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">State</label>
-                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", placeholder = "State" })
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", placeholder = "State",@readonly=true })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="location">City</label>
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "City" })
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "City", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -135,13 +135,13 @@
                                     <label>
                                         Bank Name
                                     </label>
-                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Branch Name</label>
-                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
+                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-4">

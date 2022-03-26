@@ -16,6 +16,7 @@ namespace MyTrade.Models
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
         public List<Admin> lstunusedpins { get; set; }
+        public List<Admin> lstView { get; set; }
 
         public string ePinNo { get; set; }
 
@@ -101,8 +102,8 @@ namespace MyTrade.Models
         public List<Admin> lstdeduction { get; set; }
         public List<Admin> lstKycUpdate { get; set; }
         public List<Admin> lstViewLedger { get; set; }
+        public List<Admin> lstPaymentMode { get; set; }
         
-
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
@@ -121,7 +122,13 @@ namespace MyTrade.Models
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string TotalAmount { get; set; }
-        
+        public string Pk_EwalletId { get; set; }
+        public string TransactionBy { get; set; }
+
+        public string AvailablePin { get; set; }
+        public string UsedPin { get; set; }
+        public string TransferPin { get; set; }
+        public string TotalPin { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -158,7 +165,7 @@ namespace MyTrade.Models
                                         new SqlParameter("@Package", Package),
                                         new SqlParameter("@OwnerID", OwnerID ),
                                         new SqlParameter("@RegToId", RegisteredTo )
-
+                                        /// new SqlParameter("@Fk_UserId", Fk_UserId )
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPins", para);
             return ds;
@@ -476,5 +483,22 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetWalletLedgerDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletLedgerDetails", para);
+            return ds;
+        }
+
+        public DataSet GetUnusedUsedPinsForAdmin()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@Name", Name)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPinsForAdmin", para);
+            return ds;
+        }
     }
 }

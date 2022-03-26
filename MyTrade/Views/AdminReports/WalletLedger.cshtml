@@ -41,12 +41,10 @@
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Narration</th>
-                                        <th>Dr Amount</th>
                                         <th>Cr Amount</th>
-                                        @*<th>Status</th>*@
-                                        <th>TransactionBy</th>
-                                        <th>Transaction No</th>
+                                        <th>Dr Amount</th>
+                                        <th>Available Balance</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,31 +59,27 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.Narration</td>
-                                                    <td>@Item.DrAmount</td>
                                                     <td>@Item.CrAmount</td>
-                                                    @*<td>@Item.Status</td>*@
-                                                    <td>@Item.TransactionBy</td>
-                                                    <td>@Item.TransactionNo</td>
-                                                    @*<td><a class="btn btn-info btn-sm" href="/Admin/ViewLedger?Fk_UserId=@Item.UserId">View Ledger</a></td>*@
+                                                    <td>@Item.DrAmount</td>
+                                                    <td>@Item.AvailableBalance</td>
+                                                    <td><a target="_blank" class="btn btn-info btn-sm" href="/Admin/ViewLedger?Fk_UserId=@Item.UserId">View Ledger</a></td>
                                                 </tr>
                                                 i++;
                                             }
                                         }
                                     }
                                 </tbody>
-                                @*<tfoot>
+                                <tfoot>
                                     <tr>
                                         <th></th>
-                                        <th> </th>
                                         <th></th>
                                         <th>Total </th>
-                                        <th>@ViewBag.DrAmount</th>
                                         <th>@ViewBag.CrAmount</th>
+                                        <th>@ViewBag.DrAmount</th>
+                                        <th>@ViewBag.AvailableBalance</th>
                                         <th></th>
-                                        <th> </th>
                                     </tr>
-                                </tfoot>*@
+                                </tfoot>
                             </table>
                         </div>
                     </div>

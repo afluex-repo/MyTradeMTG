@@ -13,37 +13,27 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <div class="col-sm-4">
                                 <h4>View Ledger</h4>
+                            </div>
+                            <div class="col-sm-4">
+                              <a href="/AdminReports/WalletLedger" class="btn btn-info btn-sm">Back</a>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        @*<div class="row">
-                                <div class="col-lg-3">
-                                    Login Id
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
-                                </div>
-                                <div class="col-lg-3">
-                                    Name
-                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
-                                </div>
-                                <div class="col-lg-3">
-                                    <br />
-                                    <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
-                                </div>
-                            </div>*@
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        @*<th>Login Id</th>
+                                        <th>Login Id</th>
                                         <th>Name</th>
+                                        <th>Narration</th>
+                                        <th>Cr Amount</th>
                                         <th>Dr Amount</th>
-                                        <th>Cr Amount</th>*@
-                                        <th>Total Amount</th>
-                                        
+                                        <th>TransactionBy</th>
+                                        <th>Transaction No</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,18 +46,31 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    @*<td>@Item.LoginId</td>
+                                                    <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
+                                                    <td>@Item.Narration</td>
+                                                    <td>@Item.CrAmount</td>
                                                     <td>@Item.DrAmount</td>
-                                                    <td>@Item.CrAmount</td>*@
-                                                    <td>@Item.TotalAmount</td>
-                                                    
+                                                    <td>@Item.TransactionBy</td>
+                                                    <td>@Item.TransactionNo</td>
                                                 </tr>
                                                 i++;
                                             }
                                         }
                                     }
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Total </th>
+                                        <th>@ViewBag.CrAmount</th>
+                                        <th>@ViewBag.DrAmount</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -94,7 +94,7 @@ namespace MyTrade.Models
         public string RequestCode { get; set; }
         public string WalletId { get; set; }
         public string UsedFor { get; set; }
-        
+        public string AvailableBalance { get; set; }
 
         //public string SponserName { get; set; }
 
@@ -218,15 +218,14 @@ namespace MyTrade.Models
             return ds;
         }
 
-        public DataSet GetWalletLedgerDetails()
+        public DataSet WalletLedger()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
                                     new SqlParameter("@Name",Name)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetWalletLedgerDetails", para);
+            DataSet ds = DBHelper.ExecuteQuery("WalletLedgerForAdmin", para);
             return ds;
         }
-
         public DataSet GetActivateByPaymentDetails()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
