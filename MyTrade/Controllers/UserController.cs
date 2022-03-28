@@ -1332,8 +1332,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequest", "User");
         }
-
-
         public ActionResult Download()
         {
             User model = new User();

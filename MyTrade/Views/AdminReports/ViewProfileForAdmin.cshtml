@@ -75,19 +75,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">Pin Code</label>
-                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", placeholder = "Pin Code" })
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", placeholder = "Pin Code",@onchange = "return getstatecity()" })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="address">State</label>
-                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", placeholder = "State" })
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", placeholder = "State",@readonly=true })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="location">City</label>
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "City" })
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "City", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -115,14 +115,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group ">
-                                    <label>
-                                        Bank Name
-                                    </label>
-                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
-                                </div>
-                            </div>
-                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>
                                         Account Number
@@ -132,16 +124,24 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Branch Name</label>
-                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
+                                    <label>
+                                        IFSC Code
+                                    </label>
+                                    @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code", @onchange = "return GetBankDetails();" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group ">
+                                    <label>
+                                        Bank Name
+                                    </label>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>
-                                        IFSC Code
-                                    </label>
-                                    @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code" })
+                                    <label>Branch Name</label>
+                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -245,5 +245,56 @@
  $(document).ready(function () {
      $("#Gender").val($("#hdf").val()).attr("selected", "selected");
  })
+
+
+ function getstatecity() {
+     $(".errortext").removeClass("errortext");
+     $.ajax({
+         url: "/AdminReports/GetStateCity",
+         Type: "Get",
+         DataType: "JSON",
+         data: { PinCode: $("#PinCode").val() },
+         success: function (data) {
+             if (data.Result == "1") {
+                 $("#State").val(data.State);
+                 $("#City").val(data.City);
+             }
+             else {
+                 $("#State").val('');
+                 $("#City").val('');
+                 $("#PinCode").val('');
+                 $("#PinCode").addClass('errortext');
+                 $('#PinCode').focus();
+                 alert(data.Result);
+             }
+         }
+     });
+ }
+
+ function GetBankDetails() {
+     debugger;
+     $.ajax({
+         url: 'https://ifsc.razorpay.com/' + $('#IFSCCode').val(),
+         Type: "Get",
+         DataType: "JSON",
+         success: function (data) {
+             $("#BankName").val(data.BANK);
+             $("#BranchName").val(data.BRANCH);
+         },
+         error: function () {
+             Snackbar.show({
+                 text: 'IFSC Code not found',
+                 actionTextColor: '#fff',
+                 backgroundColor: '#e7515a',
+                 pos: 'top-right'
+             });
+             $("#BankName").val('');
+             $("#BranchName").val('');
+         }
+     });
+ }
+
+
+
 
 </script>

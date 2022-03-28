@@ -4,7 +4,12 @@
     ViewBag.Title = "WalletList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    td#txtPayment {
+    white-space: break-spaces;
+    /* word-break: break-all; */
+}
+</style>
 
 @using (Html.BeginForm("WalletList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -24,33 +29,50 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-
                             <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        From Date
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
-                                    </div>
+                                <div class="form-group">
+                                    <label>From Date</label>
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        To Date
-                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
-                                    </div>
+                                <div class="form-group">
+                                    <label>To Date</label>
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
                                 </div>
                             </div>
-
-
-                            <div class="col-md-3" style="margin-top:25px;">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Payment Mode</label>
+                                    <input type="hidden" id="PMode" value="@Model.PaymentMode" />
+                                    <select id="PaymentMode" name="PaymentMode" class="form-control">
+                                        <option value="0">-Select-</option>
+                                        <option value="Online">Online</option>
+                                        <option value="Offline">Offline</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <input type="hidden" id="st" value="@Model.Status" />
+                                    <select id="Status" name="Status" class="form-control">
+                                        <option value="0">-Select-</option>
+                                        <option value="Approved">Approve</option>
+                                        <option value="Declined">Decline</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                         <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" />
-                                    </div>
+                                   
                                 </div>
                             </div>
-                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
+                        </div>
+                        <div class="widget-content widget-content-area br-6">
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
@@ -66,64 +88,94 @@
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
+                                    {
+                                        if (Model.lstWallet != null)
                                         {
-                                            if (Model.lstWallet != null)
+                                            int i = 1;
+                                            foreach (var Item in Model.lstWallet)
                                             {
-                                                int i = 1;
-                                                foreach (var Item in Model.lstWallet)
-                                                {
-                                            <tr class="text-left">
-                                                <td>@i</td>
-                                                @*<td>@Item.RequestCode</td>*@
-                                                <td>@Item.LoginId</td>
-                                                <td>@Item.DisplayName</td>
-                                                <td>@Item.Amount</td>
-                                                @if(@Item.PaymentMode=="Cash")
-                                                            {
-                                                            <td>@Item.PaymentMode</td>
-                                                            }
-                                                            else
-                                                            {
-                                                            <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
-                                                            }
-                                                <td>@Item.TransactionDate</td>
-                                                <td>@Item.Status</td>
-                                                @if (Item.Status == "Pending")
-                                                        {
-                                                            <td><a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a>
-                                                                <a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>
-                                                
-                                                </td>
-                                                        }
-                                                        @*else if (Item.Status == "Approved")
-                                                        {
-                                                            <td>*@
-    @*<a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>*@
-                                                
-                                                @*<span>Approved</span>*@
-                                                
-                                                
-                                                @*</td>
-                                                        }*@
-                                                        @*else if (Item.Status == "Declined")
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    @*<td>@Item.RequestCode</td>*@
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.DisplayName</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.PaymentMode');">View</a>
+                                                    </td>
+                                                    @*@if (@Item.PaymentMode == "Cash")
+                                                    {
+                                                    <td>@Item.PaymentMode</td>
+                                                    }
+                                                    else
+                                                    {
+                                                    <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
+                                                    }*@
+                                                    <td>@Item.TransactionDate</td>
+                                                    <td>@Item.Status</td>
+                                                    @if (Item.Status == "Pending")
+                                                    {
+                                                        <td>
+                                                            <a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a>
+                                                            <a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>
+
+                                                        </td>
+                                                    }
+                                                    @*else if (Item.Status == "Approved")
                                                         {
                                                             <td>*@
-    @*<a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a>*@
-                                                
-                                                                @*<span>Declined</span>*@
-                                                @*</td>
+                                                    @*<a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>*@
+
+                                                    @*<span>Approved</span>*@
+
+
+                                                    @*</td>
                                                         }*@
-                                                        else
+                                                    @*else if (Item.Status == "Declined")
                                                         {
-                                                        }
-                                            </tr>
-                                                    i++;
-                                                }
+                                                            <td>*@
+                                                    @*<a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request  ?') ">Approve</a>*@
+
+                                                    @*<span>Declined</span>*@
+                                                    @*</td>
+                                                        }*@
+
+                                                    else
+                                                    {
+                                                    }
+                                                </tr>
+                                                i++;
                                             }
                                         }
+                                    }
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.RequestID)
+    <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                            <thead>
+                                <tr>
+                                    <th>Payment Mode</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td id="txtPayment"></td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -141,6 +193,24 @@
         dateFormat: 'dd/mm/yy',
     });
 
+    function openPopup(PaymentMode) {
+        jQuery.noConflict();
+        $("#myModal").modal('show');
+        $("#txtPayment").text(PaymentMode);
+    }
+    function closeModal() {
+        jQuery.noConflict();
+        $("#myModal").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
+    if ($("#st").val() != 0) {
+        $("#Status").val($("#st").val()).attr("selected", "selected");
+    }
+
+    if ($("#PMode").val() != 0) {
+        $("#PaymentMode").val($("#PMode").val()).attr("selected", "selected");
+    }
 </script>
 
 

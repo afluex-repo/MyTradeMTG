@@ -16,6 +16,7 @@ namespace MyTrade.Models
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }
         public List<Admin> lstunusedpins { get; set; }
+        public List<Admin> lstView { get; set; }
 
         public string ePinNo { get; set; }
 
@@ -100,7 +101,9 @@ namespace MyTrade.Models
         public string Pk_AdvanceId { get; set; }
         public List<Admin> lstdeduction { get; set; }
         public List<Admin> lstKycUpdate { get; set; }
-
+        public List<Admin> lstViewLedger { get; set; }
+        public List<Admin> lstPaymentMode { get; set; }
+        
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
@@ -116,7 +119,16 @@ namespace MyTrade.Models
         public string CommissionPercentage { get; set; }
         public string ToName { get; set; }
         public string ToLoginID { get; set; }
-      
+        public string Mobile { get; set; }
+        public string Email { get; set; }
+        public string TotalAmount { get; set; }
+        public string Pk_EwalletId { get; set; }
+        public string TransactionBy { get; set; }
+
+        public string AvailablePin { get; set; }
+        public string UsedPin { get; set; }
+        public string TransferPin { get; set; }
+        public string TotalPin { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -152,8 +164,8 @@ namespace MyTrade.Models
                                         new SqlParameter("@EPinNo", ePinNo),
                                         new SqlParameter("@Package", Package),
                                         new SqlParameter("@OwnerID", OwnerID ),
-                                        new SqlParameter("@RegToId", RegisteredTo )
-
+                                        new SqlParameter("@RegToId", RegisteredTo ),
+                                        new SqlParameter("@Fk_UserId", Fk_UserId )
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPins", para);
             return ds;
@@ -173,12 +185,25 @@ namespace MyTrade.Models
 
         }
 
+        public DataSet GetEwalletRequestDetailsForAdmin()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",Fk_UserId),
+                                   new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate),
+                                    new SqlParameter("@Status",Status),
+                                     new SqlParameter("@PaymentMode",PaymentMode)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetailsForAdmin", para);
+
+            return ds;
+        }
         public DataSet GetEwalletRequestDetails()
         {
             SqlParameter[] para = {
                 new SqlParameter("@Fk_UserId",Fk_UserId),
                                    new SqlParameter("@FromDate",FromDate),
-                                   new SqlParameter("@ToDate",ToDate)
+                                   new SqlParameter("@ToDate",ToDate)    
             };
             DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetails", para);
 
@@ -267,7 +292,7 @@ namespace MyTrade.Models
                     new SqlParameter("@Fk_UserId", Fk_UserId),
                   new SqlParameter("@Pk_InvestmentId", Pk_investmentId)
                                      };
-            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetROIDetails", para);
             return ds;
         }
         public DataSet PayoutWalletLedger()
@@ -446,7 +471,10 @@ namespace MyTrade.Models
         }
         public DataSet GetKYCUpdateDetailsOfUser()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetKYCUpdateDetailsOfUser");
+            SqlParameter[] para = {
+               new SqlParameter("@IsVerified",IsVerified)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetKYCUpdateDetailsOfUser", para);
             return ds;
         }
         public DataSet PaidIncome()
@@ -458,6 +486,30 @@ namespace MyTrade.Models
             return ds;
         }
 
-      
+        public DataSet GetTotalCrDrAmount()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetTotalCrDrAmount", para);
+            return ds;
+        }
+
+        public DataSet GetWalletLedgerDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", Fk_UserId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletLedgerDetails", para);
+            return ds;
+        }
+
+        public DataSet GetUnusedUsedPinsForAdmin()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@Name", Name)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPinsForAdmin", para);
+            return ds;
+        }
     }
 }

@@ -23,19 +23,23 @@
                     <div class="widget-content widget-content-area">
                         <div class="row">
                             <input type="hidden" id="Fk_UserId" name="Fk_UserId" value="@Model.Fk_UserId" />
-                            @*<div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Login Id  </label>
-                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
-                                    </div>
-                                </div>*@
-
-                            @*<div class="col-lg-3">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <input type="hidden" id="IsVeri" value="@Model.IsVerified" />
+                                    <select id="IsVerified" name="IsVerified" class="form-control">
+                                        <option value="">-Select-</option>
+                                        <option value="1">Verified</option>
+                                        <option value="0">Pending</option>
+                                    </select>
+                                </div>
+                                </div>
+                            <div class="col-lg-3">
                                     <div class="form-group">
                                         <br />
                                         <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" style="margin-top:15px;" />
                                     </div>
-                                </div>*@
+                                </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
 
@@ -43,7 +47,10 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>Login Id</th>
                                         <th>Name</th>
+                                        <th>Mobile No</th>
+                                        <th>Email</th>
                                         <th>Acc No</th>
                                         <th>IFSC Code</th>
                                         <th>Bank Name</th>
@@ -55,6 +62,7 @@
                                         <th>Adhar Number</th>
                                         <th>Pan Number</th>
                                         <th>Pan Image</th>
+                                        <th>View</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -68,7 +76,10 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
+                                                    <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
+                                                    <td>@Item.Mobile</td>
+                                                    <td>@Item.Email</td>
                                                     <td>@Item.MemberAccNo</td>
                                                     <td>@Item.IFSCCode</td>
                                                     <td>@Item.BankName</td>
@@ -80,7 +91,9 @@
                                                     <td>@Item.AdharNo</td>
                                                     <td>@Item.PanNo</td>
                                                     <td><img src="@Item.PanImage" height="100" width="100" /></td>
-
+                                                    <td>
+                                                        <a href="/AdminReports/ViewProfile?Id=@Item.Fk_UserId" class="btn btn-info btn-sm">View</a>
+                                                    </td>
                                                     @if (Item.IsVerified == "False")
                                                     {
                                                         <td>
@@ -89,9 +102,10 @@
                                                     }
                                                     else
                                                     {
-                                      <td><span>Verified</span></td>
+                                                        <td>
+                                                            <span>Verified</span>
+                                                        </td>
                                                     }
-                                          
                                                 </tr>
                                                 i++;
                                             }
@@ -106,6 +120,16 @@
         </div>
     </div>
 }
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    if ($("#IsVeri").val() !="") {
+        $("#IsVerified").val($("#IsVeri").val()).attr("selected", "selected");
+    }
+</script>
+
+
 
 
 

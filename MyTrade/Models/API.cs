@@ -403,9 +403,9 @@ namespace MyTrade.Models
         public string JoiningDate { get; set; }
         public string PermanentDate { get; set; }
         public string Status { get; set; }
-        public string FK_UserId { get;  set; }
-        public string SponsorId { get;  set; }
-        public string SponsorName { get;  set; }
+        public string FK_UserId { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
     }
     public class PinRequest
     {
@@ -580,6 +580,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string Balance { get; set; }
+        public string KYCStatus { get; set; }
     }
     public class TransferPin
     {
@@ -1233,5 +1234,50 @@ namespace MyTrade.Models
         public string ROI { get; set; }
         public string Date { get; set; }
         public string ROIStatus { get; set; }
+    }
+    public class PayoutRequest
+    {
+        public string LoginId { get; set; }
+        public string Amount { get; set; }
+        public string AddedBy { get; set; }
+        public DataSet GetPayoutRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest", para);
+            return ds;
+        }
+        public DataSet SavePayoutRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@LoginId",LoginId),
+                                   new SqlParameter("@Amount",Amount),
+                                    new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutRequest", para);
+            return ds;
+        }
+    }
+    public class PayoutDetailsForAPI
+    {
+        public string AccountNo { get; set; }
+        public decimal Amount { get; set; }
+        public string Date { get; set; }
+        public string GrossAmount { get; set; }
+        public string IFSCCode { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string PK_RequestID { get; set; }
+        public string ProcessingFee { get; set; }
+        public string ROIPercentage { get; set; }
+        public string Status { get; set; }
+        public string TransactionNo { get; set; }
+    }
+    public class PayoutRequestResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PayoutDetailsForAPI> lst { get; set; }
     }
 }

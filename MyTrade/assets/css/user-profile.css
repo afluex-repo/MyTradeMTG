@@ -29,7 +29,8 @@
     align-self: center;
 }
 .user-profile .widget-content-area h3 {
-    position: relative;
+    /*position: relative;*/
+    position: inherit;
     font-size: 21px;
     font-weight: 600;
     color: #3b3f5c;

@@ -557,7 +557,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = (r["LoginId"].ToString());
                     obj.Name = (r["Name"].ToString());
                     obj.Package = (r["ProductName"].ToString());
-                    
+
                     obj.FK_UserId = (r["PK_UserId"].ToString());
                     obj.SponsorId = (r["SponsorId"].ToString());
                     obj.SponsorName = (r["SponsorName"].ToString());
@@ -711,6 +711,10 @@ namespace MyTrade.Controllers
                 obj.Status = "0";
                 obj.Message = "Record Found";
                 obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
+            }
+            if(ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                obj.KYCStatus = ds.Tables[0].Rows[0]["TeamPermanent"].ToString();
             }
             else
             {
@@ -1320,7 +1324,7 @@ namespace MyTrade.Controllers
                 DataSet ds = req.GetLevelMembersCountTR1();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if (ds.Tables[0].Rows[0][0].ToString()=="0")
+                    if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
                         res.Status = "1";
                         res.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -1379,7 +1383,7 @@ namespace MyTrade.Controllers
                         }
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1918,34 +1922,112 @@ namespace MyTrade.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult GetROIDetails(string InvId,string FK_UserId)
+        public ActionResult GetROIDetails(string InvId, string FK_UserId)
         {
             UserWallet req = new UserWallet();
             ROIResponse model = new ROIResponse();
-            req.Pk_InvestmentId = InvId;
-            List<ROIDetails> lst = new List<ROIDetails>();
-            req.FK_UserId = FK_UserId;
-            DataSet ds = req.GetROIDetails();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            try
             {
-                foreach (DataRow r in ds.Tables[0].Rows)
+                req.Pk_InvestmentId = InvId;
+                List<ROIDetails> lst = new List<ROIDetails>();
+                req.FK_UserId = FK_UserId;
+                DataSet ds = req.GetROIDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    ROIDetails obj = new ROIDetails();
-                    obj.Pk_ROIId = r["Pk_ROIId"].ToString();
-                    obj.ROI = r["ROI"].ToString();
-                    obj.Date = r["ROIDate"].ToString();
-                    obj.ROIStatus = r["Status"].ToString();
-                    lst.Add(obj);
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ROIDetails obj = new ROIDetails();
+                        obj.Pk_ROIId = r["Pk_ROIId"].ToString();
+                        obj.ROI = r["ROI"].ToString();
+                        obj.Date = r["ROIDate"].ToString();
+                        obj.ROIStatus = r["Status"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
                 }
-                model.lst = lst;
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    model.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                    model.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                    model.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+                }
             }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            catch (Exception ex)
             {
-                model.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
-                model.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
-                model.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+                model.Status = "1";
+                model.Message = ex.Message;
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TransferToAccountList(PayoutRequest req)
+        {
+            PayoutRequestResponse model = new PayoutRequestResponse();
+            try
+            {
+                List<PayoutDetailsForAPI> lst = new List<PayoutDetailsForAPI>();
+                DataSet ds = req.GetPayoutRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        PayoutDetailsForAPI obj = new PayoutDetailsForAPI();
+                        obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                        obj.Amount = Convert.ToDecimal(r["AMount"].ToString());
+                        obj.Date = r["RequestedDate"].ToString();
+                        obj.IFSCCode = r["IFSCCode"].ToString();
+                        obj.AccountNo = r["MemberAccNo"].ToString();
+                        obj.Status = r["Status"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.ROIPercentage = r["BackColor"].ToString();
+                        obj.TransactionNo = r["TransactionNo"].ToString();
+                        obj.GrossAmount = r["GrossAmount"].ToString();
+                        obj.ProcessingFee = r["DeductionCharges"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TransferToAccount(PayoutRequest req)
+        {
+            Reponse model = new Reponse();
+            try
+            {
+                DataSet ds = req.SavePayoutRequest();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        model.Status = "0";
+                        model.Message = "Transfer To Account Initiated Successfully.";
+                    }
+                    else
+                    {
+                        model.Status = "1";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

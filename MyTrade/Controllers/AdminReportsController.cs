@@ -606,25 +606,23 @@ namespace MyTrade.Controllers
         {
             AdminReports model = new AdminReports();
             List<AdminReports> lst = new List<AdminReports>();
-            DataSet ds = model.GetWalletLedgerDetails();
+            DataSet ds = model.WalletLedger();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     AdminReports obj = new AdminReports();
-                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
-                    obj.Narration = r["Narration"].ToString();
-                    obj.DrAmount = r["DrAmount"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
-                    obj.Status = r["Status"].ToString();
-                    obj.TransactionBy = r["TransactionBy"].ToString();
-                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.AvailableBalance = r["AvailableBalance"].ToString();
                     lst.Add(obj);
                 }
-                //ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
-                //ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(AvailableBalance)", "").ToString()).ToString("n2");
                 model.lstWalletLedger = lst;
              
             }
@@ -637,28 +635,24 @@ namespace MyTrade.Controllers
         public ActionResult WalletLedger(AdminReports model)
         {
             List<AdminReports> lst = new List<AdminReports>();
-            model.LoginId = model.LoginId == "" ? null : model.LoginId;
-            model.Name = model.Name == "" ? null : model.Name;
-            DataSet ds = model.GetWalletLedgerDetails();
+            DataSet ds = model.WalletLedger();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     AdminReports obj = new AdminReports();
-                    obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
-                    obj.Narration = r["Narration"].ToString();
-                    obj.DrAmount = r["DrAmount"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
-                    obj.Status = r["Status"].ToString();
-                    obj.TransactionBy = r["TransactionBy"].ToString();
-                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.AvailableBalance = r["AvailableBalance"].ToString();
                     lst.Add(obj);
                 }
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(AvailableBalance)", "").ToString()).ToString("n2");
                 model.lstWalletLedger = lst;
-                //ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
-                //ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -724,6 +718,26 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+        public ActionResult GetStateCity(string PinCode)
+        {
+            Common obj = new Common();
+            obj.PinCode = PinCode;
+            DataSet ds = obj.GetStateCity();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.State = ds.Tables[0].Rows[0]["State"].ToString();
+                obj.City = ds.Tables[0].Rows[0]["City"].ToString();
+                obj.Result = "1";
+            }
+            else
+            {
+                obj.Result = "Invalid PinCode";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
 
     }
 }

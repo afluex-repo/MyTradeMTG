@@ -235,10 +235,11 @@ namespace MyTrade.Controllers
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
             CreateOrderResponse obj1 = new CreateOrderResponse();
+            model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
             try
             {
                 Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", Convert.ToInt32(model.Amount) * 100); // amount in the smallest currency unit
+                options.Add("amount", Convert.ToInt32(model.Amount)); // amount in the smallest currency unit
                 options.Add("receipt", random);
                 options.Add("currency", "INR");
                 options.Add("payment_capture", "1");
@@ -249,13 +250,12 @@ namespace MyTrade.Controllers
                 obj1.OrderId = order["id"].ToString();
                 obj1.Status = "0";
                 model.OrderId = order["id"].ToString();
-                model.LoginId = Session["LoginId"].ToString();
+                model.Fk_UserId = Session["Pk_UserId"].ToString();
                 model.AddedBy = Session["Pk_UserId"].ToString();
-                model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
                 model.PaymentMode = "12";
                 orderModel.orderId = order.Attributes["id"];
                 orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                orderModel.amount = Convert.ToInt32(model.Amount) * 100;
+                orderModel.amount = Convert.ToInt32(model.Amount);
                 orderModel.currency = "INR";
                 orderModel.description = "Activate Account";
                 orderModel.name = Session["FullName"].ToString();
@@ -338,13 +338,14 @@ namespace MyTrade.Controllers
                                 if (obj1.captured == "captured")
                                 {
                                     TempData["Msg"] = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
+                                    BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", model.email);
+                                    return RedirectToAction("UserDashBoard", "User");
                                 }
                                 else
                                 {
                                     TempData["error"] = "Payment Failed";
+                                    return RedirectToAction("CompleteRegistration", "Home");
                                 }
-
-                                return RedirectToAction("CompleteRegistration", "Home");
                             }
                         }
                     }
@@ -448,10 +449,8 @@ namespace MyTrade.Controllers
         [OnAction(ButtonName = "forgetpassword")]
         public ActionResult ForgetPassword(Home model)
         {
-
             SmtpClient smtpClient = new SmtpClient();
             MailMessage message = new MailMessage();
-
             try
             {
                 DataSet ds = model.ForgetPassword();
@@ -523,9 +522,5 @@ namespace MyTrade.Controllers
             DataSet ds = model.CalculateDistributePaymentTPS();
             return View();
         }
-
-
-
-
     }
 }

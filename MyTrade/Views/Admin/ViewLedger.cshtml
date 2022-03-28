@@ -1,12 +1,11 @@
-﻿@model MyTrade.Models.AdminReports
+﻿@model MyTrade.Models.Admin
 
 @{
-    ViewBag.Title = "WalletLedger";
+    ViewBag.Title = "ViewLedger";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@using (Html.BeginForm("WalletLedger", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("ViewLedger", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
         <div class="row layout-top-spacing">
@@ -14,26 +13,15 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Member Wallet Reports</h4>
+                            <div class="col-sm-4">
+                                <h4>View Ledger</h4>
+                            </div>
+                            <div class="col-sm-4">
+                              <a href="/AdminReports/WalletLedger" class="btn btn-info btn-sm">Back</a>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                Login Id
-                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
-                            </div>
-                            <div class="col-lg-3">
-                                Name
-                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
-                            </div>
-                            <div class="col-lg-3">
-                                <br />
-                                <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
-                            </div>
-                        </div>
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
@@ -41,28 +29,30 @@
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
+                                        <th>Narration</th>
                                         <th>Cr Amount</th>
                                         <th>Dr Amount</th>
-                                        <th>Available Balance</th>
-                                        <th>Action</th>
+                                        <th>TransactionBy</th>
+                                        <th>Transaction No</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lstWalletLedger != null)
+                                        if (Model.lstViewLedger != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lstWalletLedger)
+                                            foreach (var Item in Model.lstViewLedger)
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
+                                                    <td>@Item.Narration</td>
                                                     <td>@Item.CrAmount</td>
                                                     <td>@Item.DrAmount</td>
-                                                    <td>@Item.AvailableBalance</td>
-                                                    <td><a target="_blank" class="btn btn-info btn-sm" href="/Admin/ViewLedger?Fk_UserId=@Item.UserId">View Ledger</a></td>
+                                                    <td>@Item.TransactionBy</td>
+                                                    <td>@Item.TransactionNo</td>
                                                 </tr>
                                                 i++;
                                             }
@@ -73,10 +63,11 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                         <th>Total </th>
                                         <th>@ViewBag.CrAmount</th>
                                         <th>@ViewBag.DrAmount</th>
-                                        <th>@ViewBag.AvailableBalance</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </tfoot>
@@ -108,6 +99,7 @@
 
     });
 </script>
+
 
 
 
