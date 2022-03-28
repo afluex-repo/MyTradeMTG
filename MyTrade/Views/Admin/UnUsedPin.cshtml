@@ -16,7 +16,7 @@
                                 <h4>E-Pin List</h4>
                             </div>
                             <div class="col-sm-4">
-                                <a href="/Admin/View" class="btn btn-info btn-sm">Back</a>
+                                <a href="/Admin/UnUsedPinList" class="btn btn-info btn-sm">Back</a>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
 
                         </div>
                         <div class="row">
-                           
+
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <br />
@@ -63,6 +63,8 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>Login Id</th>
+                                        <th>Name</th>
                                         <th>E-Pin No</th>
                                         <th>Package</th>
                                         <th>Owner</th>
@@ -81,6 +83,8 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
                                                     <td>@Item.ePinNo</td>
                                                     <td>@Item.Package</td>
                                                     <td> @Item.DisplayName</td>

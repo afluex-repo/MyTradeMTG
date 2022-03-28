@@ -164,8 +164,8 @@ namespace MyTrade.Models
                                         new SqlParameter("@EPinNo", ePinNo),
                                         new SqlParameter("@Package", Package),
                                         new SqlParameter("@OwnerID", OwnerID ),
-                                        new SqlParameter("@RegToId", RegisteredTo )
-                                        /// new SqlParameter("@Fk_UserId", Fk_UserId )
+                                        new SqlParameter("@RegToId", RegisteredTo ),
+                                        new SqlParameter("@Fk_UserId", Fk_UserId )
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPins", para);
             return ds;
@@ -185,7 +185,7 @@ namespace MyTrade.Models
 
         }
 
-        public DataSet GetEwalletRequestDetails()
+        public DataSet GetEwalletRequestDetailsForAdmin()
         {
             SqlParameter[] para = {
                 new SqlParameter("@Fk_UserId",Fk_UserId),
@@ -195,6 +195,17 @@ namespace MyTrade.Models
                                      new SqlParameter("@PaymentMode",PaymentMode)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetailsForAdmin", para);
+
+            return ds;
+        }
+        public DataSet GetEwalletRequestDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",Fk_UserId),
+                                   new SqlParameter("@FromDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate)    
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetails", para);
 
             return ds;
         }

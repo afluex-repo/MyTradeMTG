@@ -106,10 +106,10 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Generate_EPin", "Admin");
         }
-        public ActionResult UnUsedPin(Admin obj)
+        public ActionResult UnUsedPin(Admin obj, string Fk_UserId)
         {
-
             List<Admin> lst = new List<Admin>();
+            obj.Fk_UserId = Fk_UserId;
             obj.Package = obj.Package == "0" ? null : obj.Package;
             DataSet ds = obj.GetUsedUnUsedPins();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -118,6 +118,8 @@ namespace MyTrade.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Admin Objload = new Admin();
+                    Objload.LoginId = dr["LoginId"].ToString();
+                    Objload.Name = dr["Name"].ToString();
                     Objload.ePinNo = dr["ePinNo"].ToString();
                     Objload.Package = dr["Package"].ToString();
                     Objload.DisplayName = dr["PinUser"].ToString();
@@ -268,7 +270,7 @@ namespace MyTrade.Controllers
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
-            DataSet ds = model.GetEwalletRequestDetails();
+            DataSet ds = model.GetEwalletRequestDetailsForAdmin();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -1984,6 +1986,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
         public ActionResult UnUsedPinList(Admin obj)
         {
             List<Admin> lst = new List<Admin>();
@@ -1999,10 +2002,10 @@ namespace MyTrade.Controllers
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
                     Objload.Package = dr["ProductName"].ToString();
-                    //Objload.AvailablePin = dr["AvailablePin"].ToString();
-                    //Objload.UsedPin = dr["UsedPin"].ToString();
-                    //Objload.TransferPin = dr["TransferPin"].ToString();
-                    //Objload.TotalPin = dr["TotalPin"].ToString();
+                    Objload.TotalPin = dr["TotalPins"].ToString();
+                    Objload.UsedPin = dr["UsedPins"].ToString();
+                    Objload.AvailablePin = dr["AvaliablePins"].ToString();
+                    Objload.TransferPin = dr["TransferPins"].ToString();
                     lst.Add(Objload);
                 }
                 obj.lstView = lst;
