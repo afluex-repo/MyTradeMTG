@@ -231,6 +231,18 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentTPS", para);
             return ds;
         }
-
+        public DataSet SaveOrderDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_UserId", Fk_UserId),
+                                      new SqlParameter("@amount", Amount),
+                                       new SqlParameter("@Type", "Activation") ,
+                                      new SqlParameter("@TransactionType", "Activation") ,
+                                      new SqlParameter("@OrderId", OrderId) ,
+                                      new SqlParameter("@FK_RequestId", "0") ,
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("SaveOrderDetails", para);
+            return ds;
+        }
     }
 }

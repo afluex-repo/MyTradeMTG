@@ -1218,4 +1218,20 @@ namespace MyTrade.Models
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
     }
+    public class ROIResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string ReceivedAmount { get; set; }
+        public string TotalAmount { get; set; }
+        public string BalanceAmount { get; set; }
+        public List<ROIDetails> lst { get; set; }
+    }
+    public class ROIDetails
+    {
+        public string Pk_ROIId { get; set; }
+        public string ROI { get; set; }
+        public string Date { get; set; }
+        public string ROIStatus { get; set; }
+    }
 }

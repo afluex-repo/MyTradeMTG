@@ -262,7 +262,7 @@ namespace MyTrade.Controllers
                 orderModel.contactNumber = Session["Contact"].ToString();
                 orderModel.email = Session["Email"].ToString();
                 //orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
-                //DataSet ds = model.ActivateByPayment();
+                DataSet ds = model.SaveOrderDetails();
                 return View("ActivationPayment", orderModel);
                 // Return on PaymentPage with Order data
             }
@@ -355,7 +355,7 @@ namespace MyTrade.Controllers
                     obj1.captured = "Failed";
                     TempData["error"] = "Payment Failed";
                     obj1.Pk_UserId = obj.Pk_UserId;
-                    DataSet ds = obj1.SaveFetchPaymentResponse();
+                    DataSet ds = obj1.UpdateRazorpayStatus();
                     return RedirectToAction("CompleteRegistration", "Home");
                 }
             }
@@ -365,7 +365,7 @@ namespace MyTrade.Controllers
                 obj1.captured = ex.Message;
                 TempData["error"] = ex.Message;
                 obj1.Pk_UserId = obj.Pk_UserId;
-                DataSet ds = obj1.SaveFetchPaymentResponse();
+                DataSet ds = obj1.UpdateRazorpayStatus();
                 return RedirectToAction("CompleteRegistration", "Home");
             }
             return RedirectToAction("CompleteRegistration", "Home");
