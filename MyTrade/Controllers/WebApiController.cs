@@ -514,12 +514,12 @@ namespace MyTrade.Controllers
         {
             List<Package> lst = new List<Package>();
             PackageResponse obj = new PackageResponse();
-            DataSet ds = obj.PackageList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            DataSet ds = obj.PackageListAll();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
                 obj.Status = "0";
                 obj.Message = "Record Found";
-                foreach (DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[1].Rows)
                 {
                     Package model = new Package();
                     model.PK_PackageId = r["Pk_ProductId"].ToString();
@@ -712,9 +712,9 @@ namespace MyTrade.Controllers
                 obj.Message = "Record Found";
                 obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
             }
-            if(ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
-                obj.KYCStatus = ds.Tables[0].Rows[0]["TeamPermanent"].ToString();
+                obj.KYCStatus = ds.Tables[1].Rows[0]["PanStatus"].ToString();
             }
             else
             {
@@ -1187,6 +1187,7 @@ namespace MyTrade.Controllers
         public ActionResult GetTTPPackage()
         {
             List<Package> lst = new List<Package>();
+            List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.BindProductForJoining();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1206,6 +1207,14 @@ namespace MyTrade.Controllers
                     lst.Add(model);
                 }
                 obj.lst = lst;
+                for (int i = 1; i <= 10; i++)
+                {
+                    Level lev = new Level();
+                    lev.Value = i.ToString();
+                    lev.Text = "Level-" + i.ToString();
+                    lstLevel.Add(lev);
+                }
+                obj.lstLevel = lstLevel;
             }
             else
             {
@@ -1217,6 +1226,7 @@ namespace MyTrade.Controllers
         public ActionResult GetTPSPackage()
         {
             List<Package> lst = new List<Package>();
+            List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.PackageList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1236,6 +1246,14 @@ namespace MyTrade.Controllers
                     lst.Add(model);
                 }
                 obj.lst = lst;
+                for (int i = 1; i <= 12; i++)
+                {
+                    Level lev = new Level();
+                    lev.Value = i.ToString();
+                    lev.Text = "Level-" + i.ToString();
+                    lstLevel.Add(lev);
+                }
+                obj.lstLevel = lstLevel;
             }
             else
             {
@@ -2028,6 +2046,51 @@ namespace MyTrade.Controllers
                 model.Message = ex.Message;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult PaidIncome(PayoutDetailRequest model)
+        {
+            PaidIncomeResponse res = new PaidIncomeResponse();
+            try
+            {
+                List<PaidIncomeDetails> lst = new List<PaidIncomeDetails>();
+
+                DataSet ds = model.PaidIncome();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        PaidIncomeDetails obj = new PaidIncomeDetails();
+                        obj.FromName = r["FromName"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.ToName = r["ToName"].ToString();
+                        obj.PayoutNo = r["PayoutNo"].ToString();
+                        obj.BusinessAmount = r["BusinessAmount"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.BV = r["BV"].ToString();
+                        obj.Level = r["Lvl"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                        obj.Status = r["Status"].ToString();
+                        obj.ProductName = r["ProductName"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
     }
 }

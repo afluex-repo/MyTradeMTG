@@ -41,7 +41,7 @@ namespace MyTrade.Controllers
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
                                 Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                                Session["Pk_userId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
+                                Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                                 Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
                                 Session["FullName"] = ds.Tables[0].Rows[0]["FullName"].ToString();
                                 Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
@@ -163,7 +163,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        Session["Pk_userId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
+                        Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["DisplayName"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
@@ -228,14 +228,19 @@ namespace MyTrade.Controllers
             return View();
         }
         [HttpPost]
-        [ActionName("CompleteRegistration")]
-        [OnAction(ButtonName = "btnActivate")]
-        public ActionResult ActivateByPayment(Home model)
+        public ActionResult CompleteRegistration(Home model)
         {
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
             CreateOrderResponse obj1 = new CreateOrderResponse();
-            model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
+            if(Session["Pk_UserId"].ToString()=="209")
+            {
+                model.Amount = "100";
+            }
+            else
+            {
+                model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
+            }
             try
             {
                 Dictionary<string, object> options = new Dictionary<string, object>();
@@ -335,10 +340,10 @@ namespace MyTrade.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
-                                if (obj1.captured == "captured")
+                                if (obj1.status == "captured")
                                 {
                                     TempData["Msg"] = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
-                                    BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", model.email);
+                                    BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", ds.Tables[0].Rows[0]["Email"].ToString());
                                     return RedirectToAction("UserDashBoard", "User");
                                 }
                                 else

@@ -58,6 +58,10 @@ namespace MyTrade.Controllers
                 {
                     return RedirectToAction("CompleteRegistration", "Home");
                 }
+                else
+                {
+                    Session["IdActivated"] = true;
+                }
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
