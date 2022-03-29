@@ -235,6 +235,13 @@ namespace MyTrade.Models
             return ds;
         }
 
-        
+        public DataSet DeclinedKyc()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId),
+                                    new SqlParameter("@UpdatedBy",UpdatedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeclinedKyc", para);
+            return ds;
+        }
     }
 }

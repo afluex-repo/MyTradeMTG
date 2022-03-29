@@ -33,13 +33,13 @@
                                         <option value="0">Pending</option>
                                     </select>
                                 </div>
-                                </div>
+                            </div>
                             <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <br />
-                                        <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" style="margin-top:15px;" />
-                                    </div>
+                                <div class="form-group">
+                                    <br />
+                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" style="margin-top:15px;" />
                                 </div>
+                            </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
 
@@ -51,19 +51,20 @@
                                         <th>Name</th>
                                         <th>Mobile No</th>
                                         <th>Email</th>
-                                        <th>Acc No</th>
-                                        <th>IFSC Code</th>
-                                        <th>Bank Name</th>
-                                        <th>Branch Name</th>
-                                        <th>Nominee Name</th>
-                                        <th>Nominee Age</th>
-                                        <th>Nominee Relation</th>
-                                        <th>UPIID</th>
-                                        <th>Adhar Number</th>
-                                        <th>Pan Number</th>
-                                        <th>Pan Image</th>
+                                        @*<th>Acc No</th>
+                                            <th>IFSC Code</th>
+                                            <th>Bank Name</th>
+                                            <th>Branch Name</th>
+                                            <th>Nominee Name</th>
+                                            <th>Nominee Age</th>
+                                            <th>Nominee Relation</th>
+                                            <th>UPIID</th>
+                                            <th>Adhar Number</th>
+                                            <th>Pan Number</th>
+                                            <th>Pan Image</th>*@
                                         <th>View</th>
                                         <th>Action</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,17 +81,17 @@
                                                     <td>@Item.Name</td>
                                                     <td>@Item.Mobile</td>
                                                     <td>@Item.Email</td>
-                                                    <td>@Item.MemberAccNo</td>
-                                                    <td>@Item.IFSCCode</td>
-                                                    <td>@Item.BankName</td>
-                                                    <td>@Item.BankBranch</td>
-                                                    <td>@Item.NomineeName</td>
-                                                    <td>@Item.NomineeAge</td>
-                                                    <td>@Item.NomineeRelation</td>
-                                                    <td>@Item.UPIID</td>
-                                                    <td>@Item.AdharNo</td>
-                                                    <td>@Item.PanNo</td>
-                                                    <td><img src="@Item.PanImage" height="100" width="100" /></td>
+                                                    @*<td>@Item.MemberAccNo</td>
+                                                        <td>@Item.IFSCCode</td>
+                                                        <td>@Item.BankName</td>
+                                                        <td>@Item.BankBranch</td>
+                                                        <td>@Item.NomineeName</td>
+                                                        <td>@Item.NomineeAge</td>
+                                                        <td>@Item.NomineeRelation</td>
+                                                        <td>@Item.UPIID</td>
+                                                        <td>@Item.AdharNo</td>
+                                                        <td>@Item.PanNo</td>
+                                                        <td><img src="@Item.PanImage" height="100" width="100" /></td>*@
                                                     <td>
                                                         <a href="/AdminReports/ViewProfile?Id=@Item.Fk_UserId" class="btn btn-info btn-sm">View</a>
                                                     </td>
@@ -104,6 +105,18 @@
                                                     {
                                                         <td>
                                                             <span>Verified</span>
+                                                        </td>
+                                                    }
+                                                    @if (Item.IsVerified == "True")
+                                                    {
+                                                        <td>
+                                                            <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span>Declined</span>
                                                         </td>
                                                     }
                                                 </tr>
@@ -124,7 +137,7 @@
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
-    if ($("#IsVeri").val() !="") {
+    if ($("#IsVeri").val() != "") {
         $("#IsVerified").val($("#IsVeri").val()).attr("selected", "selected");
     }
 </script>
