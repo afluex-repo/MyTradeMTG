@@ -129,6 +129,7 @@ namespace MyTrade.Models
         public string UsedPin { get; set; }
         public string TransferPin { get; set; }
         public string TotalPin { get; set; }
+        
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -456,6 +457,7 @@ namespace MyTrade.Models
               new SqlParameter("@Narration",Narration),
                new SqlParameter("@Type",DeductionType),
                 new SqlParameter("@Remarks",Remark),
+                  new SqlParameter("@TransactionDate",TransactionDate),
                  new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveDeduction", para);
@@ -464,7 +466,8 @@ namespace MyTrade.Models
         public DataSet GetAdvanceDeductionReports()
         {
             SqlParameter[] para = {
-               new SqlParameter("@LoginId",LoginId)
+               new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@Type",DeductionType)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAdvanceDeductionReports", para);
             return ds;
@@ -506,7 +509,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                 new SqlParameter("@LoginId", LoginId),
-                 new SqlParameter("@Name", Name)
+                 new SqlParameter("@ProductName", Package)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPinsForAdmin", para);
             return ds;
