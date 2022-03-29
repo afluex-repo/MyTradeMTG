@@ -269,31 +269,32 @@ namespace MyTrade.Controllers
         public ActionResult WalletList()
         {
             Admin model = new Admin();
-            //List<Admin> lst = new List<Admin>();
-            //DataSet ds = model.GetEwalletRequestDetailsForAdmin();
-            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            //{
-            //    foreach (DataRow r in ds.Tables[0].Rows)
-            //    {
-            //        Admin obj = new Admin();
-            //        obj.RequestID = r["PK_RequestID"].ToString();
-            //        obj.UserId = r["FK_UserId"].ToString();
-            //        obj.RequestCode = r["RequestCode"].ToString();
-            //        obj.Amount = r["Amount"].ToString();
-            //        obj.PaymentMode = r["PaymentMode"].ToString() + "- " + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
-            //        obj.Status = r["Status"].ToString();
-            //        obj.BankName = r["BankName"].ToString();
-            //        obj.TransactionDate = r["RequestedDate"].ToString();
-            //        obj.BankBranch = r["BankBranch"].ToString();
-            //        obj.ChequeDDNo = r["ChequeDDNo"].ToString();
-            //        obj.ChequeDDDate = r["ChequeDDDate"].ToString();
-            //        obj.WalletId = r["WalletId"].ToString();
-            //        obj.LoginId = r["LoginId"].ToString();
-            //        obj.DisplayName = r["Name"].ToString();
-            //        lst.Add(obj);
-            //    }
-            //    model.lstWallet = lst;
-            //}
+            List<Admin> lst = new List<Admin>();
+            model.Status = "Pending";
+            DataSet ds = model.GetEwalletRequestDetailsForAdmin();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.RequestID = r["PK_RequestID"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.RequestCode = r["RequestCode"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString() + "- " + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.TransactionDate = r["RequestedDate"].ToString();
+                    obj.BankBranch = r["BankBranch"].ToString();
+                    obj.ChequeDDNo = r["ChequeDDNo"].ToString();
+                    obj.ChequeDDDate = r["ChequeDDDate"].ToString();
+                    obj.WalletId = r["WalletId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.DisplayName = r["Name"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstWallet = lst;
+            }
             return View(model);
         }
 
