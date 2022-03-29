@@ -14,47 +14,36 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Un Used Pin List</h4>
+                                <h4>User Pin List</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        @*<div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Owner ID </label>
-                                        @Html.TextBoxFor(m => m.OwnerID, new { @class = "form-control" })
-                                    </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Login Id </label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@Placeholder="Login Id" })
                                 </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Registered To ID </label>
-                                        @Html.TextBoxFor(m => m.RegisteredTo, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>ePinNo </label>
-                                        @Html.TextBoxFor(m => m.ePinNo, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Package  </label>
-                                        @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="row">
-
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <br />
-                                        <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
-                                    </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Package  </label>
+                                    <input type="hidden" id="Pack" value="@Model.Package" />
+                                    <select id="Package" name="Package" class="form-control">
+                                        <option value="">-Select-</option>
+                                        <option value="TTP">TTP</option>
+                                        <option value="TPS">TPS</option>
+                                    </select>
                                 </div>
-                            </div>*@
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <br />
+                                    <input type="submit" id="Search" class="btn btn-success pull-left" name="Search" value="Search" />
+                                </div>
+                            </div>
+                        </div>
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
@@ -103,4 +92,11 @@
     </div>
 }
 
-
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    if ($("#Pack").val() != "") {
+        $("#Package").val($("#Pack").val()).attr("selected", "selected");
+    }
+</script>

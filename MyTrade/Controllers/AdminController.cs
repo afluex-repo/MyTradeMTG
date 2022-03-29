@@ -1326,9 +1326,13 @@ namespace MyTrade.Controllers
                     obj.PK_RequestID = r["Pk_RequestId"].ToString();
                     obj.Amount = r["AMount"].ToString();
                     obj.Date = r["RequestedDate"].ToString();
-                    obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.MemberAccNo = r["MemberAccNo"].ToString();
-                    obj.UPIID = r["UPIId"].ToString();
+                    //obj.IFSCCode = r["IFSCCode"].ToString();
+                    //obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    //obj.BankBranch = r["MemberBranch"].ToString();
+                    //obj.BankName = r["MemberBankName"].ToString();
+                    //obj.UPIID = r["UPIId"].ToString();
+                    obj.PaymentMode = "IFSC Code - " +r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
+                    
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
@@ -1359,9 +1363,11 @@ namespace MyTrade.Controllers
                     obj.PK_RequestID = r["Pk_RequestId"].ToString();
                     obj.Amount = r["AMount"].ToString();
                     obj.Date = r["RequestedDate"].ToString();
-                    obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.UPIID = r["UPIId"].ToString();
-                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    //obj.IFSCCode = r["IFSCCode"].ToString();
+                    //obj.UPIID = r["UPIId"].ToString();
+                    //obj.MemberAccNo = r["MemberAccNo"].ToString();
+
+                    obj.PaymentMode = "IFSC Code - " + r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
@@ -1492,7 +1498,26 @@ namespace MyTrade.Controllers
 
         public ActionResult AdvanceDeduction()
         {
-            return View();
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetAdvanceDeductionReports();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_AdvanceId = r["Pk_AdvanceId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.DeductionType = r["Type"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.Narration = r["Narration"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstdeduction = lst;
+            }
+            return View(model);
         }
         [HttpPost]
         [ActionName("AdvanceDeduction")]
@@ -1502,6 +1527,7 @@ namespace MyTrade.Controllers
             try
             {
                 model.AddedBy = Session["Pk_AdminId"].ToString();
+                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                 DataSet ds = model.SaveDeduction();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -1550,6 +1576,8 @@ namespace MyTrade.Controllers
         public ActionResult AdvanceDeductionList(Admin model)
         {
             List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.DeductionType = model.DeductionType == "" ? null : model.DeductionType;
             DataSet ds = model.GetAdvanceDeductionReports();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -1987,11 +2015,39 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
+        public ActionResult UnUsedPinList()
+        {
+            Admin obj = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = obj.GetUnusedUsedPinsForAdmin();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Admin Objload = new Admin();
+                    Objload.Fk_UserId = dr["FK_UserId"].ToString();
+                    Objload.LoginId = dr["LoginId"].ToString();
+                    Objload.Name = dr["Name"].ToString();
+                    Objload.Package = dr["ProductName"].ToString();
+                    Objload.TotalPin = dr["TotalPins"].ToString();
+                    Objload.UsedPin = dr["UsedPins"].ToString();
+                    Objload.AvailablePin = dr["AvaliablePins"].ToString();
+                    Objload.TransferPin = dr["TransferPins"].ToString();
+                    lst.Add(Objload);
+                }
+                obj.lstView = lst;
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ActionName("UnUsedPinList")]
+        [OnAction(ButtonName = "Search")]
         public ActionResult UnUsedPinList(Admin obj)
         {
             List<Admin> lst = new List<Admin>();
-            obj.LoginId = obj.LoginId == "0" ? null : obj.LoginId;
-            obj.Name = obj.Name == "0" ? null : obj.Name;
+            obj.LoginId = obj.LoginId == "" ? null : obj.LoginId;
+            obj.Package = obj.Package == "" ? null : obj.Package;
             DataSet ds = obj.GetUnusedUsedPinsForAdmin();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {

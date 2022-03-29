@@ -7,7 +7,12 @@
 
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-
+<style>
+    td#txtPayment {
+        white-space: break-spaces;
+        /* word-break: break-all; */
+    }
+</style>
 @using (Html.BeginForm("PayoutRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -71,11 +76,12 @@
                                         <th>Narration</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Gross Amount</th>
-                                        <th>Procesing Charges</th>
                                         <th>Net Amount</th>
-                                        <th>IFSC Code</th>
-                                        <th>Account No.</th>
+                                        <th>Procesing Charges</th>
+                                        <th>Gross Amount</th>
+                                        <th>Bank Details</th>
+                                        @*<th>IFSC Code</th>
+                                        <th>Account No.</th>*@
                                         <th>Status</th>
                                         <th>Requested Date</th>
                                         <th>Approved/Declined Date</th>
@@ -110,11 +116,14 @@
                                                     <td>@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.GrossAmount</td>
-                                                    <td>@Item.ProcessingFee</td>
                                                     <td>@Item.Amount</td>
-                                                    <td>@Item.IFSCCode</td>
-                                                    <td>@Item.MemberAccNo</td>
+                                                    <td>@Item.ProcessingFee</td>
+                                                    <td>@Item.GrossAmount</td>
+                                                    @*<td>@Item.IFSCCode</td>
+                                                    <td>@Item.MemberAccNo</td>*@
+                                                    <td>
+                                                        <a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup1('@Item.PaymentMode');">View</a>
+                                                    </td>
                                                     <td>@Item.Status</td>
                                                     <td>@Item.Date</td>
                                                     <td>@Item.TransactionDate</td>
@@ -184,6 +193,32 @@
         </div>
     </div>
 
+    
+    @Html.HiddenFor(m => m.RequestID)
+    <div class="modal fade md" id="myModal1" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                            <thead>
+                                <tr>
+                                    <th>Bank Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td id="txtPayment"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
@@ -321,6 +356,22 @@
     //    return false;
     //}
     //}
+
+    function openPopup1(PaymentMode) {
+        debugger;
+        jQuery.noConflict();
+        $("#myModal1").modal('show');
+        $("#txtPayment").text(PaymentMode);
+    }
+    function closeModal() {
+        jQuery.noConflict();
+        $("#myModal1").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
+
+
+
 
 </script>
 

@@ -29,7 +29,18 @@
                                     @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <input type="hidden" id="DType" value="@Model.DeductionType" />
 
+                                    <select id="DeductionType" name="DeductionType" class="form-control">
+                                        <option value="">-Select-</option>
+                                        <option value="Advance">Advance</option>
+                                        <option value="Deduction">Deduction</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <br />
@@ -38,7 +49,6 @@
                             </div>
                         </div>
                         <div class="widget-content widget-content-area br-6">
-
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
                                     <tr>
@@ -82,6 +92,13 @@
         </div>
     </div>
 }
-
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    if ($("#DType").val() != "") {
+        $("#DeductionType").val($("#DType").val()).attr("selected", "selected");
+    }
+</script>
 
 

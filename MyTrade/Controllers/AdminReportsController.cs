@@ -468,6 +468,8 @@ namespace MyTrade.Controllers
                     model.IFSCCode = ds.Tables[0].Rows[0]["IFSCCode"].ToString();
                     model.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
                     model.UPIID = ds.Tables[0].Rows[0]["UPIID"].ToString();
+                    model.Image = ds.Tables[0].Rows[0]["PanImage"].ToString();
+                    
                 }
             }
             return View(model);
@@ -586,7 +588,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["verify"] = "Profile verify successfully";
+                        TempData["verify"] = "Profile verified successfully";
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -736,8 +738,33 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
-
+        
+        public ActionResult DeclineKyc(string Id)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Fk_UserId = Id;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.DeclinedKyc();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["verify"] = "Kyc declined successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["verify"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["verify"] = ex.Message;
+            }
+            return RedirectToAction("KYCUpdateDeatilsOfUser", "Admin");
+        }
+        
     }
 }
