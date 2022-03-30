@@ -29,12 +29,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Package  </label>
-                                    <input type="hidden" id="Pack" value="@Model.Package" />
-                                    <select id="Package" name="Package" class="form-control">
-                                        <option value="">-Select-</option>
-                                        <option value="TTP">TTP</option>
-                                        <option value="TPS">TPS</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -71,7 +66,7 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td> @Item.Package</td>
+                                                    <td> @Item.PackageName</td>
                                                     <td>@Item.TotalPin</td>
                                                     <td> @Item.UsedPin </td>
                                                     <td>@Item.AvailablePin</td>
@@ -96,7 +91,7 @@
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
-    if ($("#Pack").val() != "") {
-        $("#Package").val($("#Pack").val()).attr("selected", "selected");
-    }
+    //if ($("#Pack").val() != "") {
+    //    $("#Package").val($("#Pack").val()).attr("selected", "selected");
+    //}
 </script>
