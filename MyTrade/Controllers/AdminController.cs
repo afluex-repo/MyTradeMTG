@@ -304,6 +304,7 @@ namespace MyTrade.Controllers
         public ActionResult WalletList(Admin model)
         {
             List<Admin> lst = new List<Admin>();
+            //model.Status = "Pending";
             model.Status = model.Status == "0" ? null : model.Status;
             model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
