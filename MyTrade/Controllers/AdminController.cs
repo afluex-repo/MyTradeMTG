@@ -130,26 +130,6 @@ namespace MyTrade.Controllers
                 }
                 obj.lstunusedpins = lst;
             }
-            #region Product Bind
-
-            Common objcomm = new Common();
-            List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
-            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
-            {
-                int count = 0;
-                foreach (DataRow r in ds1.Tables[0].Rows)
-                {
-                    if (count == 0)
-                    {
-                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    }
-                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
-                    count++;
-                }
-            }
-            ViewBag.ddlProduct = ddlProduct;
-            #endregion
             return View(obj);
         }
         public ActionResult FillAmount(string ProductId)
@@ -270,6 +250,7 @@ namespace MyTrade.Controllers
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
+            model.PaymentMode = "Offline";
             model.Status = "Pending";
             DataSet ds = model.GetEwalletRequestDetailsForAdmin();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -304,7 +285,6 @@ namespace MyTrade.Controllers
         public ActionResult WalletList(Admin model)
         {
             List<Admin> lst = new List<Admin>();
-            //model.Status = "Pending";
             model.Status = model.Status == "0" ? null : model.Status;
             model.PaymentMode = model.PaymentMode == "0" ? null : model.PaymentMode;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
@@ -1515,6 +1495,7 @@ namespace MyTrade.Controllers
                     obj.DeductionType = r["Type"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Narration = r["Narration"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstdeduction = lst;
@@ -2030,7 +2011,8 @@ namespace MyTrade.Controllers
                     Objload.Fk_UserId = dr["FK_UserId"].ToString();
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
-                    Objload.Package = dr["ProductName"].ToString();
+                    Objload.PackageName = dr["ProductName"].ToString();
+                    Objload.Package = dr["FK_ProductId"].ToString();
                     Objload.TotalPin = dr["TotalPins"].ToString();
                     Objload.UsedPin = dr["UsedPins"].ToString();
                     Objload.AvailablePin = dr["AvaliablePins"].ToString();
@@ -2039,6 +2021,27 @@ namespace MyTrade.Controllers
                 }
                 obj.lstView = lst;
             }
+            #region Product Bind
+
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlProduct = ddlProduct;
+            #endregion
+
             return View(obj);
         }
 
@@ -2059,7 +2062,8 @@ namespace MyTrade.Controllers
                     Objload.Fk_UserId = dr["FK_UserId"].ToString();
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
-                    Objload.Package = dr["ProductName"].ToString();
+                    Objload.PackageName = dr["ProductName"].ToString();
+                    Objload.Package = dr["FK_ProductId"].ToString();
                     Objload.TotalPin = dr["TotalPins"].ToString();
                     Objload.UsedPin = dr["UsedPins"].ToString();
                     Objload.AvailablePin = dr["AvaliablePins"].ToString();
@@ -2068,6 +2072,26 @@ namespace MyTrade.Controllers
                 }
                 obj.lstView = lst;
             }
+            #region Product Bind
+
+            Common objcomm = new Common();
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindProduct();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "" });
+                    }
+                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlProduct = ddlProduct;
+            #endregion
             return View(obj);
         }
     }

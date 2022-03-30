@@ -45,9 +45,9 @@
                                 <div class="form-group">
                                     <label>Payment Mode</label>
                                     <input type="hidden" id="PMode" value="@Model.PaymentMode" />
-                                    <select id="PaymentMode" name="PaymentMode" class="form-control">
-                                        <option value="0">-Select-</option>
-                                        <option value="Online">Online</option>
+                                    <select id="PaymentMode" name="PaymentMode" class="form-control" onchange="return setstatus();">
+                                        @*<option value="0">-Select-</option>
+                                        <option value="Online">Online</option>*@
                                         <option value="Offline">Offline</option>
                                     </select>
                                 </div>
@@ -212,6 +212,16 @@
     if ($("#PMode").val() != 0) {
         $("#PaymentMode").val($("#PMode").val()).attr("selected", "selected");
     }
+
+    //function setstatus() {
+    //    debugger;
+    //    if ($("#PaymentMode").val()=="Online") {
+    //        $("#Status").val("Approved");
+    //    }
+    //    else if ($("#PaymentMode").val() == "Offline") {
+    //        $("#Status").val("Pending");
+    //    }
+    //}
 </script>
 
 
