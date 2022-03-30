@@ -1320,4 +1320,29 @@ namespace MyTrade.Models
         public string ToName { get; internal set; }
         public string TransactionDate { get; internal set; }
     }
+    public class JoiningPayment
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Amount { get; set; }
+        public string FK_UserId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string MobileNo { get; set; }
+        public string OrderId { get; set; }
+        public string PaymentMode { get; set; }
+        public DataSet SaveOrderDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_UserId", FK_UserId),
+                                      new SqlParameter("@amount", Amount),
+                                       new SqlParameter("@Type", "Activation") ,
+                                      new SqlParameter("@TransactionType", "Activation") ,
+                                      new SqlParameter("@OrderId", OrderId) ,
+                                      new SqlParameter("@FK_RequestId", "0") ,
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("SaveOrderDetails", para);
+            return ds;
+        }
+    }
 }

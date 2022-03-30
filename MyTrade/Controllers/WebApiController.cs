@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using MyTrade.Models;
 using System.Data;
 using System.IO;
+using System.Net;
+using Razorpay.Api;
+
 namespace MyTrade.Controllers
 {
     public class WebApiController : Controller
@@ -2091,6 +2094,132 @@ namespace MyTrade.Controllers
                 res.Message = ex.Message;
             }
             return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult ActiavationByPayment(JoiningPayment model)
+        {
+            OrderModel orderModel = new OrderModel();
+            string random = Common.GenerateRandom();
+            model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
+            try
+            {
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add("amount", Convert.ToInt32(model.Amount)); // amount in the smallest currency unit
+                options.Add("receipt", random);
+                options.Add("currency", "INR");
+                options.Add("payment_capture", "1");
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+                Razorpay.Api.Order order = client.Order.Create(options);
+                model.OrderId = order["id"].ToString();
+                model.PaymentMode = "12";
+                orderModel.orderId = order.Attributes["id"];
+                orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
+                orderModel.amount = Convert.ToInt32(model.Amount);
+                orderModel.currency = "INR";
+                orderModel.description = "Activate Account";
+                orderModel.name = model.Name;
+                orderModel.contactNumber = model.MobileNo;
+                orderModel.email = model.Email;
+                DataSet ds = model.SaveOrderDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        model.Status = "0";
+                        model.Message = "Order created successfully";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult FetchPaymentResposne(JoiningPayment model)
+        {
+            FetchPaymentByOrderResponse obj1 = new FetchPaymentByOrderResponse();
+            string random = Common.GenerateRandom();
+            try
+            {
+                obj1.Pk_UserId = model.FK_UserId;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+                List<Razorpay.Api.Payment> orderdetails = client.Order.Payments(model.OrderId);
+                if (orderdetails.Count > 0)
+                {
+                    for (int i = 0; i <= orderdetails.Count - 1; i++)
+                    {
+                        dynamic rr = orderdetails[i].Attributes;
+                        obj1.PaymentId = rr["id"];
+                        obj1.entity = rr["entity"];
+                        obj1.amount = rr["amount"];
+                        obj1.currency = rr["currency"];
+                        obj1.status = rr["status"];
+                        obj1.OrderId = rr["order_id"];
+                        obj1.invoice_id = rr["invoice_id"];
+                        obj1.international = rr["international"];
+                        obj1.method = rr["method"];
+                        obj1.amount_refunded = rr["amount_refunded"];
+                        obj1.refund_status = rr["refund_status"];
+                        obj1.captured = rr["captured"];
+                        obj1.description = rr["description"];
+                        obj1.card_id = rr["card_id"];
+                        obj1.bank = rr["bank"];
+                        obj1.wallet = rr["wallet"];
+                        obj1.vpa = rr["vpa"];
+                        obj1.email = rr["email"];
+                        obj1.contact = rr["contact"];
+                        obj1.fee = rr["fee"];
+                        obj1.tax = rr["tax"];
+                        obj1.error_code = rr["error_code"];
+                        obj1.error_description = rr["error_description"];
+                        obj1.error_source = rr["error_source"];
+                        obj1.error_step = rr["error_step"];
+                        obj1.error_reason = rr["error_reason"];
+                        obj1.created_at = rr["created_at"];
+
+                        DataSet ds = obj1.UpdateRazorpayStatus();
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                            {
+                                if (obj1.status == "captured")
+                                {
+                                    model.Message = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
+                                    BLMail.SendActivationMail(model.Name, Session["LoginId"].ToString(), Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()), "Activation Successful", model.Email);
+                                }
+                                else
+                                {
+                                    model.Message = "Payment Failed";
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    obj1.OrderId = model.OrderId;
+                    obj1.captured = "Failed";
+                    model.Message = "Payment Failed";
+                    obj1.Pk_UserId = model.FK_UserId;
+                    DataSet ds = obj1.UpdateRazorpayStatus();
+                }
+            }
+            catch (Exception ex)
+            {
+                obj1.OrderId = model.OrderId;
+                obj1.captured = ex.Message;
+                model.Message = ex.Message;
+                obj1.Pk_UserId = model.FK_UserId;
+                DataSet ds = obj1.UpdateRazorpayStatus();
+            }
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -202,9 +202,9 @@ namespace MyTrade.Controllers
         }
         public ActionResult CompleteRegistration()
         {
-            if(Session["LoginId"]==null)
+            if (Session["LoginId"] == null)
             {
-                return RedirectToAction("Login","Home");
+                return RedirectToAction("Login", "Home");
             }
             #region Product Bind
             Common objcomm = new Common();
@@ -233,7 +233,7 @@ namespace MyTrade.Controllers
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
             CreateOrderResponse obj1 = new CreateOrderResponse();
-            if(Session["Pk_UserId"].ToString()=="209")
+            if (Session["Pk_UserId"].ToString() == "209")
             {
                 model.Amount = "100";
             }
@@ -268,7 +268,21 @@ namespace MyTrade.Controllers
                 orderModel.email = Session["Email"].ToString();
                 //orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
                 DataSet ds = model.SaveOrderDetails();
-                return View("ActivationPayment", orderModel);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        return View("ActivationPayment", orderModel);
+                    }
+                    else
+                    {
+                        return RedirectToAction("CompleteRegistration", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("CompleteRegistration", "Home");
+                }
                 // Return on PaymentPage with Order data
             }
             catch (Exception ex)
