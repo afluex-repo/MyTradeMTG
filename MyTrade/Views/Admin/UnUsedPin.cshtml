@@ -13,7 +13,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h4>E-Pin List</h4>
+                                @*<h4>E-Pin List</h4>*@
                             </div>
                             <div class="col-sm-4">
                                 <a href="/Admin/UnUsedPinList" class="btn btn-info btn-sm">Back</a>
@@ -46,10 +46,9 @@
                                     <input type="hidden" id="stt" value="@Model.Status" />
                                     <select id="Status" name="Status" class="form-control">
                                         <option value="">-Select-</option>
-                                        <option value="Used">Used</option>
-                                        <option value="Transfer">Transfer</option>
-                                        <option value="Available">Available</option>
-                                      
+                                        <option value="P">Used</option>
+                                        <option value="TR">Transfer</option>
+                                        <option value="T">Available</option>
                                     </select>
                                 </div>
                             </div>
