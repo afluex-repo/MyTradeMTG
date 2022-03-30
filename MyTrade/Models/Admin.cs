@@ -129,7 +129,9 @@ namespace MyTrade.Models
         public string UsedPin { get; set; }
         public string TransferPin { get; set; }
         public string TotalPin { get; set; }
+        public string PackageName { get; set; }
         
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()

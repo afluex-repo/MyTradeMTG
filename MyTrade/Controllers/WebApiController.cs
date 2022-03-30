@@ -2096,7 +2096,7 @@ namespace MyTrade.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult ActiavationByPayment(JoiningPayment model)
+        public ActionResult ActivationByPayment(JoiningPayment model)
         {
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
@@ -2191,11 +2191,13 @@ namespace MyTrade.Controllers
                             {
                                 if (obj1.status == "captured")
                                 {
+                                    model.Status = "0";
                                     model.Message = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
                                     BLMail.SendActivationMail(model.Name, Session["LoginId"].ToString(), Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()), "Activation Successful", model.Email);
                                 }
                                 else
                                 {
+                                    model.Status = "1";
                                     model.Message = "Payment Failed";
                                 }
                             }
@@ -2206,6 +2208,7 @@ namespace MyTrade.Controllers
                 {
                     obj1.OrderId = model.OrderId;
                     obj1.captured = "Failed";
+                    model.Status = "1";
                     model.Message = "Payment Failed";
                     obj1.Pk_UserId = model.FK_UserId;
                     DataSet ds = obj1.UpdateRazorpayStatus();
@@ -2214,6 +2217,7 @@ namespace MyTrade.Controllers
             catch (Exception ex)
             {
                 obj1.OrderId = model.OrderId;
+                model.Status = "1";
                 obj1.captured = ex.Message;
                 model.Message = ex.Message;
                 obj1.Pk_UserId = model.FK_UserId;
