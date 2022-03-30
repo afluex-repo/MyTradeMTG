@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using MyTrade.Models;
 using System.Data;
 using System.IO;
+using System.Net;
+using Razorpay.Api;
+
 namespace MyTrade.Controllers
 {
     public class WebApiController : Controller
@@ -514,12 +517,12 @@ namespace MyTrade.Controllers
         {
             List<Package> lst = new List<Package>();
             PackageResponse obj = new PackageResponse();
-            DataSet ds = obj.PackageList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            DataSet ds = obj.PackageListAll();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
                 obj.Status = "0";
                 obj.Message = "Record Found";
-                foreach (DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[1].Rows)
                 {
                     Package model = new Package();
                     model.PK_PackageId = r["Pk_ProductId"].ToString();
@@ -557,7 +560,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = (r["LoginId"].ToString());
                     obj.Name = (r["Name"].ToString());
                     obj.Package = (r["ProductName"].ToString());
-                    
+
                     obj.FK_UserId = (r["PK_UserId"].ToString());
                     obj.SponsorId = (r["SponsorId"].ToString());
                     obj.SponsorName = (r["SponsorName"].ToString());
@@ -711,6 +714,10 @@ namespace MyTrade.Controllers
                 obj.Status = "0";
                 obj.Message = "Record Found";
                 obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                obj.KYCStatus = ds.Tables[1].Rows[0]["PanStatus"].ToString();
             }
             else
             {
@@ -1183,6 +1190,7 @@ namespace MyTrade.Controllers
         public ActionResult GetTTPPackage()
         {
             List<Package> lst = new List<Package>();
+            List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.BindProductForJoining();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1202,6 +1210,14 @@ namespace MyTrade.Controllers
                     lst.Add(model);
                 }
                 obj.lst = lst;
+                for (int i = 1; i <= 10; i++)
+                {
+                    Level lev = new Level();
+                    lev.Value = i.ToString();
+                    lev.Text = "Level-" + i.ToString();
+                    lstLevel.Add(lev);
+                }
+                obj.lstLevel = lstLevel;
             }
             else
             {
@@ -1213,6 +1229,7 @@ namespace MyTrade.Controllers
         public ActionResult GetTPSPackage()
         {
             List<Package> lst = new List<Package>();
+            List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.PackageList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1232,6 +1249,14 @@ namespace MyTrade.Controllers
                     lst.Add(model);
                 }
                 obj.lst = lst;
+                for (int i = 1; i <= 12; i++)
+                {
+                    Level lev = new Level();
+                    lev.Value = i.ToString();
+                    lev.Text = "Level-" + i.ToString();
+                    lstLevel.Add(lev);
+                }
+                obj.lstLevel = lstLevel;
             }
             else
             {
@@ -1320,7 +1345,7 @@ namespace MyTrade.Controllers
                 DataSet ds = req.GetLevelMembersCountTR1();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if (ds.Tables[0].Rows[0][0].ToString()=="0")
+                    if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
                         res.Status = "1";
                         res.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -1379,7 +1404,7 @@ namespace MyTrade.Controllers
                         }
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1916,6 +1941,289 @@ namespace MyTrade.Controllers
                 res.Message = ex.Message;
             }
             return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult GetROIDetails(string InvId, string FK_UserId)
+        {
+            UserWallet req = new UserWallet();
+            ROIResponse model = new ROIResponse();
+            try
+            {
+                req.Pk_InvestmentId = InvId;
+                List<ROIDetails> lst = new List<ROIDetails>();
+                req.FK_UserId = FK_UserId;
+                DataSet ds = req.GetROIDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ROIDetails obj = new ROIDetails();
+                        obj.Pk_ROIId = r["Pk_ROIId"].ToString();
+                        obj.ROI = r["ROI"].ToString();
+                        obj.Date = r["ROIDate"].ToString();
+                        obj.ROIStatus = r["Status"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                }
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    model.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                    model.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                    model.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TransferToAccountList(PayoutRequest req)
+        {
+            PayoutRequestResponse model = new PayoutRequestResponse();
+            try
+            {
+                List<PayoutDetailsForAPI> lst = new List<PayoutDetailsForAPI>();
+                DataSet ds = req.GetPayoutRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        PayoutDetailsForAPI obj = new PayoutDetailsForAPI();
+                        obj.PK_RequestID = r["Pk_RequestId"].ToString();
+                        obj.Amount = Convert.ToDecimal(r["AMount"].ToString());
+                        obj.Date = r["RequestedDate"].ToString();
+                        obj.IFSCCode = r["IFSCCode"].ToString();
+                        obj.AccountNo = r["MemberAccNo"].ToString();
+                        obj.Status = r["Status"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.ROIPercentage = r["BackColor"].ToString();
+                        obj.TransactionNo = r["TransactionNo"].ToString();
+                        obj.GrossAmount = r["GrossAmount"].ToString();
+                        obj.ProcessingFee = r["DeductionCharges"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult TransferToAccount(PayoutRequest req)
+        {
+            Reponse model = new Reponse();
+            try
+            {
+                DataSet ds = req.SavePayoutRequest();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        model.Status = "0";
+                        model.Message = "Transfer To Account Initiated Successfully.";
+                    }
+                    else
+                    {
+                        model.Status = "1";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult PaidIncome(PayoutDetailRequest model)
+        {
+            PaidIncomeResponse res = new PaidIncomeResponse();
+            try
+            {
+                List<PaidIncomeDetails> lst = new List<PaidIncomeDetails>();
+
+                DataSet ds = model.PaidIncome();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        PaidIncomeDetails obj = new PaidIncomeDetails();
+                        obj.FromName = r["FromName"].ToString();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.ToName = r["ToName"].ToString();
+                        obj.PayoutNo = r["PayoutNo"].ToString();
+                        obj.BusinessAmount = r["BusinessAmount"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.BV = r["BV"].ToString();
+                        obj.Level = r["Lvl"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                        obj.Status = r["Status"].ToString();
+                        obj.ProductName = r["ProductName"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult ActivationByPayment(JoiningPayment model)
+        {
+            OrderModel orderModel = new OrderModel();
+            string random = Common.GenerateRandom();
+            model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
+            try
+            {
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add("amount", Convert.ToInt32(model.Amount)); // amount in the smallest currency unit
+                options.Add("receipt", random);
+                options.Add("currency", "INR");
+                options.Add("payment_capture", "1");
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+                Razorpay.Api.Order order = client.Order.Create(options);
+                model.OrderId = order["id"].ToString();
+                model.PaymentMode = "12";
+                orderModel.orderId = order.Attributes["id"];
+                orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
+                orderModel.amount = Convert.ToInt32(model.Amount);
+                orderModel.currency = "INR";
+                orderModel.description = "Activate Account";
+                orderModel.name = model.Name;
+                orderModel.contactNumber = model.MobileNo;
+                orderModel.email = model.Email;
+                DataSet ds = model.SaveOrderDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        model.Status = "0";
+                        model.Message = "Order created successfully";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult FetchPaymentResposne(JoiningPayment model)
+        {
+            FetchPaymentByOrderResponse obj1 = new FetchPaymentByOrderResponse();
+            string random = Common.GenerateRandom();
+            try
+            {
+                obj1.Pk_UserId = model.FK_UserId;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+                List<Razorpay.Api.Payment> orderdetails = client.Order.Payments(model.OrderId);
+                if (orderdetails.Count > 0)
+                {
+                    for (int i = 0; i <= orderdetails.Count - 1; i++)
+                    {
+                        dynamic rr = orderdetails[i].Attributes;
+                        obj1.PaymentId = rr["id"];
+                        obj1.entity = rr["entity"];
+                        obj1.amount = rr["amount"];
+                        obj1.currency = rr["currency"];
+                        obj1.status = rr["status"];
+                        obj1.OrderId = rr["order_id"];
+                        obj1.invoice_id = rr["invoice_id"];
+                        obj1.international = rr["international"];
+                        obj1.method = rr["method"];
+                        obj1.amount_refunded = rr["amount_refunded"];
+                        obj1.refund_status = rr["refund_status"];
+                        obj1.captured = rr["captured"];
+                        obj1.description = rr["description"];
+                        obj1.card_id = rr["card_id"];
+                        obj1.bank = rr["bank"];
+                        obj1.wallet = rr["wallet"];
+                        obj1.vpa = rr["vpa"];
+                        obj1.email = rr["email"];
+                        obj1.contact = rr["contact"];
+                        obj1.fee = rr["fee"];
+                        obj1.tax = rr["tax"];
+                        obj1.error_code = rr["error_code"];
+                        obj1.error_description = rr["error_description"];
+                        obj1.error_source = rr["error_source"];
+                        obj1.error_step = rr["error_step"];
+                        obj1.error_reason = rr["error_reason"];
+                        obj1.created_at = rr["created_at"];
+
+                        DataSet ds = obj1.UpdateRazorpayStatus();
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                            {
+                                if (obj1.status == "captured")
+                                {
+                                    model.Status = "0";
+                                    model.Message = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
+                                    BLMail.SendActivationMail(model.Name, Session["LoginId"].ToString(), Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()), "Activation Successful", model.Email);
+                                }
+                                else
+                                {
+                                    model.Status = "1";
+                                    model.Message = "Payment Failed";
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    obj1.OrderId = model.OrderId;
+                    obj1.captured = "Failed";
+                    model.Status = "1";
+                    model.Message = "Payment Failed";
+                    obj1.Pk_UserId = model.FK_UserId;
+                    DataSet ds = obj1.UpdateRazorpayStatus();
+                }
+            }
+            catch (Exception ex)
+            {
+                obj1.OrderId = model.OrderId;
+                model.Status = "1";
+                obj1.captured = ex.Message;
+                model.Message = ex.Message;
+                obj1.Pk_UserId = model.FK_UserId;
+                DataSet ds = obj1.UpdateRazorpayStatus();
+            }
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
     }
 }

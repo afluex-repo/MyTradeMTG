@@ -16,6 +16,7 @@
     <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/pages/error/style-maintanence.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <style>
         .card {
@@ -122,9 +123,14 @@
     </div>
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+  
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/bootstrap/js/popper.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
     <script>
         function FillAmount() {
             debugger;
@@ -140,6 +146,33 @@
             });
         }
     </script>
+
+    @if (TempData["msg"] != null)
+    {
+        <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["msg"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+        </script>
+    }
+    @if (TempData["error"] != null)
+    {
+        <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+        </script>
+    }
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 </body>
 

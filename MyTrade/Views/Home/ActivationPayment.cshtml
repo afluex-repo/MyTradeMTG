@@ -22,9 +22,9 @@
             // Set the data in hidden form
 
             if (typeof response.razorpay_payment_id == 'undefined' || response.razorpay_payment_id < 1) {
-                redirect_url = '/Wallet/FetchPaymentByOrder';
+                redirect_url = '/Home/FetchActivationPaymentByOrder';
             } else {
-                redirect_url = '/Wallet/FetchPaymentByOrder';
+                redirect_url = '/Home/FetchActivationPaymentByOrder';
             }
             location.href = redirect_url;
 
