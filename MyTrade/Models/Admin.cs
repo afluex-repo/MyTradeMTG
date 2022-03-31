@@ -17,6 +17,7 @@ namespace MyTrade.Models
         public string FinalAmount { get; set; }
         public List<Admin> lstunusedpins { get; set; }
         public List<Admin> lstView { get; set; }
+        public List<Admin> lstForUserPermission { get; set; }
 
         public string ePinNo { get; set; }
 
@@ -130,8 +131,11 @@ namespace MyTrade.Models
         public string TransferPin { get; set; }
         public string TotalPin { get; set; }
         public string PackageName { get; set; }
+        public string BannerImage { get; set; }
+        public string FormId { get; set; }
+        public string FormName { get; set; }
+        public string Permission { get; set; }
         
-
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -516,5 +520,43 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPinsForAdmin", para);
             return ds;
         }
+        public DataSet SaveBannerImage()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@BannerImage", BannerImage),
+                 new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SaveBannerImage", para);
+            return ds;
+        }
+
+
+        public DataSet GetFormMasterList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetFormMasterList");
+            return ds;
+        }
+
+
+        public DataSet ActiveUser()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_FormId", FormId),
+                 new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActiveUser", para);
+            return ds;
+        }
+
+        public DataSet InActiveUser()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_FormId", FormId),
+                 new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("InActiveUser", para);
+            return ds;
+        }
+
     }
 }
