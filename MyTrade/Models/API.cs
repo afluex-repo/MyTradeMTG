@@ -331,6 +331,12 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public List<Package> lst { get; set; }
+        public List<Level> lstLevel { get; set; }
+        public DataSet PackageListAll()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductList");
+            return ds;
+        }
         public DataSet PackageList()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
@@ -403,9 +409,9 @@ namespace MyTrade.Models
         public string JoiningDate { get; set; }
         public string PermanentDate { get; set; }
         public string Status { get; set; }
-        public string FK_UserId { get;  set; }
-        public string SponsorId { get;  set; }
-        public string SponsorName { get;  set; }
+        public string FK_UserId { get; set; }
+        public string SponsorId { get; set; }
+        public string SponsorName { get; set; }
     }
     public class PinRequest
     {
@@ -580,6 +586,7 @@ namespace MyTrade.Models
         public string Status { get; set; }
         public string Message { get; set; }
         public string Balance { get; set; }
+        public string KYCStatus { get; set; }
     }
     public class TransferPin
     {
@@ -1199,6 +1206,14 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutDetails", para);
             return ds;
         }
+        public DataSet PaidIncome()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+                new SqlParameter("@PayoutNo", PayoutNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForMobile", para);
+            return ds;
+        }
     }
     public class PayoutDetailResponse
     {
@@ -1217,5 +1232,117 @@ namespace MyTrade.Models
         public string ProcessingFee { get; set; }
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
+    }
+    public class ROIResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string ReceivedAmount { get; set; }
+        public string TotalAmount { get; set; }
+        public string BalanceAmount { get; set; }
+        public List<ROIDetails> lst { get; set; }
+    }
+    public class ROIDetails
+    {
+        public string Pk_ROIId { get; set; }
+        public string ROI { get; set; }
+        public string Date { get; set; }
+        public string ROIStatus { get; set; }
+    }
+    public class PayoutRequest
+    {
+        public string LoginId { get; set; }
+        public string Amount { get; set; }
+        public string AddedBy { get; set; }
+        public DataSet GetPayoutRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest", para);
+            return ds;
+        }
+        public DataSet SavePayoutRequest()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@LoginId",LoginId),
+                                   new SqlParameter("@Amount",Amount),
+                                    new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PayoutRequest", para);
+            return ds;
+        }
+    }
+    public class PayoutDetailsForAPI
+    {
+        public string AccountNo { get; set; }
+        public decimal Amount { get; set; }
+        public string Date { get; set; }
+        public string GrossAmount { get; set; }
+        public string IFSCCode { get; set; }
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string PK_RequestID { get; set; }
+        public string ProcessingFee { get; set; }
+        public string ROIPercentage { get; set; }
+        public string Status { get; set; }
+        public string TransactionNo { get; set; }
+    }
+    public class PayoutRequestResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PayoutDetailsForAPI> lst { get; set; }
+    }
+    public class Level
+    {
+        public string Value { get; set; }
+        public string Text { get; set; }
+    }
+    public class PaidIncomeResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<PaidIncomeDetails> lst { get; set; }
+    }
+    public class PaidIncomeDetails
+    {
+        public string Amount { get; internal set; }
+        public string BusinessAmount { get; internal set; }
+        public string BV { get; internal set; }
+        public string CommissionPercentage { get; internal set; }
+        public string FromName { get; internal set; }
+        public string Level { get; internal set; }
+        public string LoginId { get; internal set; }
+        public string PayoutNo { get; internal set; }
+        public string ProductName { get; internal set; }
+        public string Status { get; internal set; }
+        public string ToName { get; internal set; }
+        public string TransactionDate { get; internal set; }
+    }
+    public class JoiningPayment
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Amount { get; set; }
+        public string FK_UserId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string MobileNo { get; set; }
+        public string OrderId { get; set; }
+        public string PaymentMode { get; set; }
+        public DataSet SaveOrderDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_UserId", FK_UserId),
+                                      new SqlParameter("@amount", Amount),
+                                       new SqlParameter("@Type", "Activation") ,
+                                      new SqlParameter("@TransactionType", "Activation") ,
+                                      new SqlParameter("@OrderId", OrderId) ,
+                                      new SqlParameter("@FK_RequestId", "0") ,
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("SaveOrderDetails", para);
+            return ds;
+        }
     }
 }

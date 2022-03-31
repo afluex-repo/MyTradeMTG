@@ -12,6 +12,9 @@
         white-space: break-spaces;
         /* word-break: break-all; */
     }
+    td#txnNo{
+         white-space: break-spaces;
+    }
 </style>
 @using (Html.BeginForm("PayoutRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -84,7 +87,7 @@
                                         <th>Account No.</th>*@
                                         <th>Status</th>
                                         <th>Requested Date</th>
-                                        <th>Approved/Declined Date</th>
+                                        <th style="white-space: break-spaces;">Approved/ Declined Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,7 +116,7 @@
                                                         </td>
                                                     }
                                                     <td>@i</td>
-                                                    <td>@Item.TransactionNo</td>
+                                                    <td id="txnNo">@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td>@Item.Amount</td>
