@@ -169,6 +169,8 @@ namespace MyTrade.Controllers
                                 obj.Status = dsResult.Tables[0].Rows[0]["Status"].ToString();
                                 obj.TeamPermanent = dsResult.Tables[0].Rows[0]["TeamPermanent"].ToString();
                                 obj.Gender = dsResult.Tables[0].Rows[0]["Sex"].ToString();
+                                obj.Email = dsResult.Tables[0].Rows[0]["Email"].ToString();
+                                obj.Mobile = dsResult.Tables[0].Rows[0]["Mobile"].ToString();
                                 obj.Status = "0";
                                 obj.Message = "Successfully Logged in";
                                 return Json(obj, JsonRequestBehavior.AllowGet);
@@ -2193,13 +2195,22 @@ namespace MyTrade.Controllers
                                 {
                                     model.Status = "0";
                                     model.Message = "Id activated successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
-                                    BLMail.SendActivationMail(model.Name, Session["LoginId"].ToString(), Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()), "Activation Successful", model.Email);
+                                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                                    if (model.Email != "")
+                                    {
+                                        BLMail.SendActivationMail(model.Name, model.LoginId, model.Password, "Activation Successful", model.Email);
+                                    }
                                 }
                                 else
                                 {
                                     model.Status = "1";
                                     model.Message = "Payment Failed";
                                 }
+                            }
+                            else
+                            {
+                                model.Status = "1";
+                                model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                             }
                         }
                     }
@@ -2223,7 +2234,7 @@ namespace MyTrade.Controllers
                 obj1.Pk_UserId = model.FK_UserId;
                 DataSet ds = obj1.UpdateRazorpayStatus();
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

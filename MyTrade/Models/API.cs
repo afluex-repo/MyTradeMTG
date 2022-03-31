@@ -120,6 +120,8 @@ namespace MyTrade.Models
         public string FranchiseAdminID { get; set; }
         public string Profile { get; set; }
         public string Gender { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
         public DataSet Login()
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
@@ -1307,18 +1309,18 @@ namespace MyTrade.Models
     }
     public class PaidIncomeDetails
     {
-        public string Amount { get; internal set; }
-        public string BusinessAmount { get; internal set; }
-        public string BV { get; internal set; }
-        public string CommissionPercentage { get; internal set; }
-        public string FromName { get; internal set; }
-        public string Level { get; internal set; }
-        public string LoginId { get; internal set; }
-        public string PayoutNo { get; internal set; }
-        public string ProductName { get; internal set; }
-        public string Status { get; internal set; }
-        public string ToName { get; internal set; }
-        public string TransactionDate { get; internal set; }
+        public string Amount { get;  set; }
+        public string BusinessAmount { get;  set; }
+        public string BV { get;  set; }
+        public string CommissionPercentage { get;  set; }
+        public string FromName { get;  set; }
+        public string Level { get;  set; }
+        public string LoginId { get;  set; }
+        public string PayoutNo { get;  set; }
+        public string ProductName { get;  set; }
+        public string Status { get;  set; }
+        public string ToName { get;  set; }
+        public string TransactionDate { get;  set; }
     }
     public class JoiningPayment
     {
@@ -1331,6 +1333,8 @@ namespace MyTrade.Models
         public string MobileNo { get; set; }
         public string OrderId { get; set; }
         public string PaymentMode { get; set; }
+        public string LoginId { get; set; }
+        public string Password { get; set; }
         public DataSet SaveOrderDetails()
         {
             SqlParameter[] para = {
