@@ -10,6 +10,7 @@ namespace MyTrade.Models
     public class Home : Common
     {
         public List<Home> lstMenu { get; set; }
+        public List<Home> lstBannerImage { get; set; }
         public List<Home> lstsubmenu { get; set; }
         #region property
         public string SponsorId { get; set; }
@@ -43,7 +44,9 @@ namespace MyTrade.Models
         public string Amount { get;  set; }
         public dynamic OrderId { get;  set; }
         public string PaymentMode { get;  set; }
-
+        public string BannerId { get; set; }
+        public string BannerImage { get; set; }
+        
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -244,5 +247,14 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveOrderDetails", para);
             return ds;
         }
+
+
+        public DataSet GetBannerImageList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetBannerImageList");
+            return ds;
+        }
+
+        
     }
 }
