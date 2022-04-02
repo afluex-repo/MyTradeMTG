@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="widget-content widget-content-area">
+                    <div class="widget-content widget-content-area" id="divtop">
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
@@ -35,6 +35,7 @@
                                 {
                                     <a class="btn btn-primary" style="float: right;" href="/Wallet/AddWallet">Add Fund</a>
                                 }
+                                <input type="hidden" id="hdf" value="@ViewBag.Status" />
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -360,3 +361,32 @@
     </script>
 }
 
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#hdf").val() == "InActive") {
+            jQuery.noConflict();
+            $("#divtop").hide();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: 'This page is currently closed.',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/UserDashboard';
+                }
+            })
+
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
+            die();
+            $("#divtop").show();
+        }
+    })
+</script>

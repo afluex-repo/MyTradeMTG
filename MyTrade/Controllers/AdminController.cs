@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mytrade.Models;
+using System.IO;
+
 namespace MyTrade.Controllers
 {
     public class AdminController : AdminBaseController
@@ -106,10 +108,12 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Generate_EPin", "Admin");
         }
-        public ActionResult UnUsedPin(Admin obj, string Fk_UserId)
+        public ActionResult UnUsedPin(string Fk_UserId)
         {
+            Admin obj = new Admin();
             List<Admin> lst = new List<Admin>();
             obj.Fk_UserId = Fk_UserId;
+            obj.Status = "P";
             obj.Package = obj.Package == "0" ? null : obj.Package;
             DataSet ds = obj.GetUsedUnUsedPins();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -118,10 +122,50 @@ namespace MyTrade.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Admin Objload = new Admin();
-                    Objload.LoginId = dr["LoginId"].ToString();
-                    Objload.Name = dr["Name"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
                     Objload.ePinNo = dr["ePinNo"].ToString();
                     Objload.Package = dr["Package"].ToString();
+                    Objload.Amount = dr["PinAmount"].ToString();
+                    Objload.GST = dr["GST"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    Objload.AddedBy = dr["GenerateVia"].ToString();
+                    Objload.ToId = dr["ToId"].ToString();
+                    Objload.ToName = dr["ToName"].ToString();
+                    Objload.TransferDate = dr["TransferDate"].ToString();
+                    Objload.DisplayName = dr["PinUser"].ToString();
+                    Objload.AddedOn = dr["CreatedDate"].ToString();
+                    Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.Status = dr["PinStaus"].ToString();
+                    lst.Add(Objload);
+                }
+                obj.lstunusedpins = lst;
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult UnUsedPin(Admin obj)
+        {
+            List<Admin> lst = new List<Admin>();
+            obj.Package = obj.Package == "0" ? null : obj.Package;
+            DataSet ds = obj.GetUsedUnUsedPins();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Admin Objload = new Admin();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    Objload.ePinNo = dr["ePinNo"].ToString();
+                    Objload.Package = dr["Package"].ToString();
+                    Objload.Amount = dr["PinAmount"].ToString();
+                    Objload.GST = dr["GST"].ToString();
+                    Objload.ToId = dr["ToId"].ToString();
+                    Objload.AddedBy = dr["GenerateVia"].ToString();
+                    Objload.ToName = dr["ToName"].ToString();
+                    Objload.TransferDate = dr["TransferDate"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
                     Objload.DisplayName = dr["PinUser"].ToString();
                     Objload.AddedOn = dr["CreatedDate"].ToString();
                     Objload.RegisteredTo = dr["RegisteredTo"].ToString();
@@ -1313,8 +1357,8 @@ namespace MyTrade.Controllers
                     //obj.BankBranch = r["MemberBranch"].ToString();
                     //obj.BankName = r["MemberBankName"].ToString();
                     //obj.UPIID = r["UPIId"].ToString();
-                    obj.PaymentMode = "IFSC Code - " +r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
-                    
+                    obj.PaymentMode = "IFSC Code - " + r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
+
                     obj.Status = r["Status"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
@@ -2093,6 +2137,162 @@ namespace MyTrade.Controllers
             ViewBag.ddlProduct = ddlProduct;
             #endregion
             return View(obj);
+        }
+
+        public ActionResult BannerImageUpload()
+        {
+            return View();
+        }
+        [HttpPost]
+        [OnAction(ButtonName = "btnsave")]
+        [ActionName("BannerImageUpload")]
+        public ActionResult BannerImageUpload(Admin model,HttpPostedFileBase BannerImage)
+        {
+            try
+            {
+                if (BannerImage != null)
+                {
+
+                    model.BannerImage = "/BannerImage/" + Guid.NewGuid() + Path.GetExtension(BannerImage.FileName);
+                    BannerImage.SaveAs(Path.Combine(Server.MapPath(model.BannerImage)));
+                }
+                model.AddedBy= Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveBannerImage();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["BannerImage"] = "Banner image upload successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["BannerImage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["BannerImage"] = ex.Message;
+            }
+            return RedirectToAction("BannerImageUpload", "Admin");
+        }
+
+        public ActionResult SetMenuPermissionForUser()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetFormMasterList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FormId = r["PK_FormId"].ToString();
+                    obj.FormName = r["FormName"].ToString();
+                    obj.Permission = r["Permission"].ToString();
+                    
+                    lst.Add(obj);
+                }
+                model.lstForUserPermission = lst;
+            }
+            return View(model);
+        }
+
+       
+
+        public ActionResult InActiveUser(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.FormId = id;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.InActiveUser();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "User inactivated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("SetMenuPermissionForUser", "Admin");
+        }
+
+
+        public ActionResult ActiveUser(string id)
+        {
+            try
+            {
+                Admin model = new Admin();
+                model.FormId = id;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ActiveUser();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "User activated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("SetMenuPermissionForUser", "Admin");
+        }
+        public ActionResult CreateTransaction()
+        {
+            Admin model = new Admin();
+            List<SelectListItem> lst = new List<SelectListItem>();
+            ViewBag.Wallet = Common.BindAllWallet();
+            DataSet ds = model.GetAdvanceDeductionReports();
+           
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CreateTransaction(Admin model)
+        {
+            try
+            {
+                List<SelectListItem> lst = new List<SelectListItem>();
+                ViewBag.Wallet = Common.BindAllWallet();
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.CreateTransaction();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transaction created successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("CreateTransaction", "Admin");
         }
     }
 }

@@ -15,7 +15,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Activate By Payment List</h4>
+                                <h4>Online Payment List</h4>
                             </div>
                         </div>
                     </div>
@@ -30,6 +30,14 @@
                                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
                             </div>
                             <div class="col-lg-3">
+                                Type
+                               <select id="UsedFor" name="UsedFor" class="form-control">
+                                   <option value="0">Select</option>
+                                   <option value="Wallet">Wallet</option>
+                                   <option value="Activation">Activation</option>
+                               </select>
+                            </div>
+                            <div class="col-lg-3">
                                 <br />
                                 <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
                             </div>
@@ -41,12 +49,12 @@
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Pin Amount</th>
+                                        <th>Amount</th>
                                         <th>Used For</th>
-                                        <th>BV</th>
+                                        @*<th>BV</th>*@
                                         @*<th>IsCalculated</th>*@
                                         @*<th>TransactionBy</th>*@
-                                        <th>Activation Date</th>
+                                        <th>Date</th>
                                         @*<th>Status</th>*@
                                     </tr>
                                 </thead>
@@ -64,7 +72,7 @@
                                                     <td>@Item.Name</td>
                                                     <td>@Item.PinAmount</td>
                                                     <td>@Item.UsedFor</td>
-                                                    <td>@Item.BV</td>
+                                                    @*<td>@Item.BV</td>*@
                                                     <th>@Item.TransactionDate</th>
                                                     @*<td>@Item.IsCalculated</td>*@
                                                     @*<td>@Item.TransactionBy</td>*@

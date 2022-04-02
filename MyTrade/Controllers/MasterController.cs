@@ -32,6 +32,7 @@ namespace MyTrade.Controllers
                     obj.BinaryPercent = (r["BinaryPercent"].ToString());
                     obj.DirectPercent = (r["DirectPercent"].ToString());
                     obj.ROIPercent = (r["ROIPercent"].ToString());
+                    obj.Days = (r["PackageDays"].ToString());
                     obj.BV = (r["BV"].ToString());
                     obj.PackageTypeId = (r["PackageTypeId"].ToString());
                     obj.PackageTypeName = (r["PackageTypeName"].ToString());
@@ -124,6 +125,7 @@ namespace MyTrade.Controllers
                         obj.SGST = ds.Tables[0].Rows[0]["SGST"].ToString();
                         obj.BinaryPercent = ds.Tables[0].Rows[0]["BinaryPercent"].ToString();
                         obj.DirectPercent = ds.Tables[0].Rows[0]["DirectPercent"].ToString();
+                        obj.Days = ds.Tables[0].Rows[0]["PackageDays"].ToString();
                         obj.ROIPercent = ds.Tables[0].Rows[0]["ROIPercent"].ToString();
                         obj.BV = ds.Tables[0].Rows[0]["BV"].ToString();
                         obj.PackageTypeId = (ds.Tables[0].Rows[0]["PackageTypeId"].ToString());
@@ -146,7 +148,7 @@ namespace MyTrade.Controllers
 
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Days)
         {
             Master obj = new Master();
             try
@@ -157,6 +159,7 @@ namespace MyTrade.Controllers
                 obj.IGST = IGST;
                 obj.CGST = CGST;
                 obj.SGST = SGST;
+                obj.Days = Days;
                 obj.BinaryPercent = BinaryPercent;
                 obj.DirectPercent = DirectPercent;
                 obj.ROIPercent = ROIPercent;
@@ -185,7 +188,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Percentage, string Days)
         {
             Master obj = new Master();
             try
@@ -197,6 +200,8 @@ namespace MyTrade.Controllers
                 obj.IGST = IGST;
                 obj.CGST = CGST;
                 obj.SGST = SGST;
+                obj.Days = Days;
+                obj.ROIPercent = ROIPercent;
                 obj.BinaryPercent = BinaryPercent;
                 obj.DirectPercent = DirectPercent;
                 obj.ROIPercent = ROIPercent;

@@ -250,18 +250,18 @@
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                 {
-                            <li>
-                                <a href="/Wallet/AddWallet">Wallet Request</a>
-                            </li>
-                            <li>
-                                <a href="/Wallet/WalletList">Wallet Request List</a>
-                            </li>
-                            <li>
-                                <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
-                            </li>
-                            @*<li>
-                                    <a href="/User/PayoutRequest">Transfer to Account</a>
-                                </li>*@
+                                    <li>
+                                        <a href="/Wallet/AddWallet">Wallet Request</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Wallet/WalletList">Wallet Request List</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
+                                    </li>
+                                    @*<li>
+                                            <a href="/User/PayoutRequest">Transfer to Account</a>
+                                        </li>*@
                                 }
                                 else
                                 {
@@ -285,9 +285,9 @@
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                 {
-                            <li>
-                                <a href="/User/EPinRequest">Generate E-Pin</a>
-                            </li>
+                                    <li>
+                                        <a href="/User/EPinRequest">Generate E-Pin</a>
+                                    </li>
                                 }
                             }
                             <li>
@@ -314,15 +314,21 @@
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                 {
-                            <li>
-                                <a href="/user/Topup">Topup</a>
-                            </li>
-                            <li>
-                                <a href="/user/TopUpList">Topup List</a>
-                            </li>
-                            <li>
-                                <a href="/User/PayoutRequest">Transfer To Bank</a>
-                            </li>
+                                    //if (Session["TopUp"] != null)
+                                    //{
+                                    //    if (Session["TopUp"].ToString() == "False")
+                                    //    {
+                                    <li>
+                                        <a href="/user/Topup">Topup</a>
+                                    </li>
+                                    //    }
+                                    //}
+                                    <li>
+                                        <a href="/user/TopUpList">Topup List</a>
+                                    </li>
+                                    <li>
+                                        <a href="/User/PayoutRequest">Transfer To Bank</a>
+                                    </li>
                                 }
                                 else
                                 {

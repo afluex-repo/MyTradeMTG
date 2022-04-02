@@ -19,6 +19,21 @@ namespace MyTrade.Controllers
         {
             return Redirect("~/MyTradeWebsite/index.html");
         }
+        public ActionResult GetBanner()
+        {
+            Home model = new Home();
+            DataSet ds = model.GetBannerImageList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Result = "yes";
+                model.BannerImage = "http://mytrade.co.in/" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
+            }
+            else
+            {
+                model.Result = "no";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Login()
         {
             Session.Abandon();

@@ -636,6 +636,7 @@
     <Compile Include="Controllers\AdminReportsController.cs" />
     <Compile Include="Controllers\DownlineController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -841,6 +842,9 @@
     <Content Include="Views\AdminReports\ActivateByPaymentList.cshtml" />
     <Content Include="Views\Admin\ViewLedger.cshtml" />
     <Content Include="Views\Admin\UnUsedPinList.cshtml" />
+    <Content Include="Views\Admin\BannerImageUpload.cshtml" />
+    <Content Include="Views\Admin\SetMenuPermissionForUser.cshtml" />
+    <Content Include="Views\Admin\CreateTransaction.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -850,6 +854,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="BannerImage\" />
     <Folder Include="PanUpload\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />

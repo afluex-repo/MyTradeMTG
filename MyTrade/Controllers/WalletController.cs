@@ -212,7 +212,7 @@ namespace MyTrade.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
-                                if (obj1.captured == "captured")
+                                if (obj1.captured == "True")
                                 {
                                     TempData["Msg"] = "Amount credited successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
                                 }

@@ -513,6 +513,8 @@ namespace MyTrade.Models
         public string TotalActiveTeam { get; set; }
         public string TotalInActiveTeam { get; set; }
         public string SponsorName { get; set; }
+        public string SelfBV { get; set; }
+        public string TeamBV { get; set; }
         public List<LevelTreeMembers> lst { get; set; }
         public List<LevelTreeMemberDetails> lstDetails { get; set; }
 
@@ -692,9 +694,6 @@ namespace MyTrade.Models
             return ds;
         }
     }
-
-
-
     public class BankDetailsUpdateRequest
     {
         public string FK_UserId { get; set; }
@@ -707,13 +706,9 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
             return ds;
         }
-
     }
-
-
     public class BankDetailsUpdateAPIResponse
     {
-
         public string Status { get; set; }
         public string Message { get; set; }
         public string Fk_UserId { get; set; }
@@ -726,7 +721,8 @@ namespace MyTrade.Models
         public string NomineeName { get; set; }
         public string NomineeRelation { get; set; }
         public string NomineeAge { get; set; }
-
+        public string UPIId { get; set; }
+        public bool IsVerified { get; set; }
         public DataSet BankUpdate()
         {
             SqlParameter[] para = {
@@ -740,7 +736,8 @@ namespace MyTrade.Models
                                      new SqlParameter("@NomineeName", NomineeName),
                                     new SqlParameter("@NomineeRelation", NomineeRelation),
                                      new SqlParameter("@NomineeAge", NomineeAge),
-                                      new SqlParameter("@UpdatedBy", Fk_UserId)
+                                      new SqlParameter("@UpdatedBy", Fk_UserId),
+                                      new SqlParameter("@UPIID", UPIId),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
             return ds;
@@ -1346,6 +1343,49 @@ namespace MyTrade.Models
                                       new SqlParameter("@FK_RequestId", "0") ,
                                      };
             DataSet ds = DBHelper.ExecuteQuery("SaveOrderDetails", para);
+            return ds;
+        }
+        public DataSet SaveEwalletRequestNew()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Amount", Amount),
+                                       new SqlParameter("@PaymentType", "Online") ,
+                                      new SqlParameter("@PaymentMode", PaymentMode) ,
+                                      new SqlParameter("@DDChequeNo", "") ,
+                                      new SqlParameter("@DDChequeDate", "") ,
+                                      new SqlParameter("@BankBranch", "") ,
+                                          new SqlParameter("@BankName", ""),
+                                            new SqlParameter("@Remarks", ""),
+                                            new SqlParameter("@AddedBy", FK_UserId),
+                                             new SqlParameter("@OrderId", OrderId),
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("EwalletRequestNew", para);
+            return ds;
+        }
+    }
+    public class Photo
+    {
+        public string PK_UserId { get; set; }
+        public string Image { get; set; }
+        public DataSet UploadProfilePic()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_UserID",PK_UserId),
+                new SqlParameter("@ProfilePic",Image),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfilePic", para);
+            return ds;
+        }
+        public DataSet UploadPan()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_UserID",PK_UserId),
+                new SqlParameter("@PanImage",Image),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdatePan", para);
             return ds;
         }
     }

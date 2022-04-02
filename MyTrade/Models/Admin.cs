@@ -17,6 +17,7 @@ namespace MyTrade.Models
         public string FinalAmount { get; set; }
         public List<Admin> lstunusedpins { get; set; }
         public List<Admin> lstView { get; set; }
+        public List<Admin> lstForUserPermission { get; set; }
 
         public string ePinNo { get; set; }
 
@@ -50,6 +51,7 @@ namespace MyTrade.Models
         public string ProductName { get; set; }
         public List<Admin> lstTps { get; set; }
         public string CrAmount { get; set; }
+        public decimal CrDrAmount { get; set; }
         public string DrAmount { get; set; }
         public string Narration { get; set; }
         public string RoiWalletId { get; set; }
@@ -103,7 +105,7 @@ namespace MyTrade.Models
         public List<Admin> lstKycUpdate { get; set; }
         public List<Admin> lstViewLedger { get; set; }
         public List<Admin> lstPaymentMode { get; set; }
-        
+
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
@@ -130,8 +132,13 @@ namespace MyTrade.Models
         public string TransferPin { get; set; }
         public string TotalPin { get; set; }
         public string PackageName { get; set; }
-        
-
+        public string BannerImage { get; set; }
+        public string FormId { get; set; }
+        public string FormName { get; set; }
+        public string Permission { get; set; }
+        public string GST { get; set; }
+        public string ToId { get; set; }
+        public string TransferDate { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -206,7 +213,7 @@ namespace MyTrade.Models
             SqlParameter[] para = {
                 new SqlParameter("@Fk_UserId",Fk_UserId),
                                    new SqlParameter("@FromDate",FromDate),
-                                   new SqlParameter("@ToDate",ToDate)    
+                                   new SqlParameter("@ToDate",ToDate)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetails", para);
 
@@ -514,6 +521,58 @@ namespace MyTrade.Models
                  new SqlParameter("@ProductName", Package)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUnusedUsedPinsForAdmin", para);
+            return ds;
+        }
+        public DataSet SaveBannerImage()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@BannerImage", BannerImage),
+                 new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SaveBannerImage", para);
+            return ds;
+        }
+
+
+        public DataSet GetFormMasterList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetFormMasterList");
+            return ds;
+        }
+
+
+        public DataSet ActiveUser()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_FormId", FormId),
+                 new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActiveUser", para);
+            return ds;
+        }
+
+        public DataSet InActiveUser()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_FormId", FormId),
+                 new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("InActiveUser", para);
+            return ds;
+        }
+        public DataSet CreateTransaction()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@WalletId",WalletId),
+                   new SqlParameter("@Fk_UserId",Fk_UserId),
+                   new SqlParameter("@Amount",CrDrAmount),
+                   new SqlParameter("@Narration",Narration),
+                   new SqlParameter("@Type",DeductionType),
+                   new SqlParameter("@Remarks",Remark),
+                   new SqlParameter("@TransactionDate",TransactionDate),
+                   new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("CreateTransaction", para);
             return ds;
         }
     }
