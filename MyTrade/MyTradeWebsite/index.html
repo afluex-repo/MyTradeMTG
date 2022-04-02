@@ -739,13 +739,13 @@
                 debugger;
                 if (data.Result == "yes") {
                     document.getElementById('img').src = data.BannerImage;
+                    $("#myModal").modal('show');
                 }
                 else if (data.Result == "no") {
-                 
+                    $("#myModal").modal('hide');
                 }
             }
         });
-        $("#myModal").modal('show');
     })
     function closeModal() {
         jQuery.noConflict();

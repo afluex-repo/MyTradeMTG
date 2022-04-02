@@ -229,7 +229,8 @@ namespace MyTrade.Models
         public DataSet GetActivateByPaymentDetails()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@Name",Name)
+                                    new SqlParameter("@Name",Name),
+                                      new SqlParameter("@UsedFor",UsedFor)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetActivateByPaymentDetails", para);
             return ds;

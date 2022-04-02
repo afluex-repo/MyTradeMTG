@@ -96,6 +96,10 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
                 ViewBag.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
             }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[6].Rows.Count > 0)
+            {
+                Session["TopUp"]= ds.Tables[6].Rows[0]["IsActive"].ToString();
+            }
             return View(obj);
         }
         public ActionResult ActivateByPin(User model)
@@ -187,6 +191,7 @@ namespace MyTrade.Controllers
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
+                ViewBag.Status = ds1.Tables[1].Rows[0]["Status"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)

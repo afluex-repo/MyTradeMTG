@@ -18,7 +18,7 @@
             debugger;
             // After payment successfully made response will come here
             // Set the data in hidden form
-
+            document.getElementById('orderId').value = response.razorpay_order_id;
             if (typeof response.razorpay_payment_id == 'undefined' || response.razorpay_payment_id < 1) {
                 redirect_url = '/Wallet/FetchPaymentByOrder';
             } else {
@@ -34,7 +34,9 @@
         },
         "modal": {
             "ondismiss": function () {
+                document.getElementById('rzp-paymentresponse').click();
                 window.location.replace("/Wallet/AddWallet");
+                
             }
         },
         "prefill": {

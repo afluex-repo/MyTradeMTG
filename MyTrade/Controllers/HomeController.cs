@@ -26,7 +26,7 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 model.Result = "yes";
-                model.BannerImage = "http://localhost:53405" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
+                model.BannerImage = "http://mytrade.co.in/" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
             }
             else
             {

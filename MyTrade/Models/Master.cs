@@ -29,7 +29,7 @@ namespace MyTrade.Models
         public string Image { get; set; }
         public List<Master> lstReward { get; set; }
         public string PK_RewardId { get; set; }
-
+        public string Days { get; set; }
 
         #region ProductMaster
 
@@ -43,6 +43,7 @@ namespace MyTrade.Models
                                   new SqlParameter("@BinaryPercent", BinaryPercent),
                                   new SqlParameter("@DirectPercent", DirectPercent),
                                   new SqlParameter("@ROIPercent", ROIPercent),
+                                   new SqlParameter("@Days", Days),
                                   new SqlParameter("@BV",BV),
                                   new SqlParameter("@AddedBy", AddedBy),
                                   new SqlParameter("@PackageTypeId", PackageTypeId),
@@ -79,6 +80,7 @@ namespace MyTrade.Models
                                   new SqlParameter("@BinaryPercent", BinaryPercent),
                                   new SqlParameter("@DirectPercent", DirectPercent),
                                   new SqlParameter("@ROIPercent", ROIPercent),
+                                  new SqlParameter("@Days",Days),
                                   new SqlParameter("@BV", BV),
                                   new SqlParameter("@UpdatedBy", UpdatedBy),
                                      new SqlParameter("@PackageTypeId", PackageTypeId),

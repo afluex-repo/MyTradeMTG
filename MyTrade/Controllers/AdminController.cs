@@ -108,10 +108,12 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Generate_EPin", "Admin");
         }
-        public ActionResult UnUsedPin(Admin obj, string Fk_UserId)
+        public ActionResult UnUsedPin(string Fk_UserId)
         {
+            Admin obj = new Admin();
             List<Admin> lst = new List<Admin>();
             obj.Fk_UserId = Fk_UserId;
+            obj.Status = "P";
             obj.Package = obj.Package == "0" ? null : obj.Package;
             DataSet ds = obj.GetUsedUnUsedPins();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -120,10 +122,50 @@ namespace MyTrade.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Admin Objload = new Admin();
-                    Objload.LoginId = dr["LoginId"].ToString();
-                    Objload.Name = dr["Name"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
                     Objload.ePinNo = dr["ePinNo"].ToString();
                     Objload.Package = dr["Package"].ToString();
+                    Objload.Amount = dr["PinAmount"].ToString();
+                    Objload.GST = dr["GST"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    Objload.AddedBy = dr["GenerateVia"].ToString();
+                    Objload.ToId = dr["ToId"].ToString();
+                    Objload.ToName = dr["ToName"].ToString();
+                    Objload.TransferDate = dr["TransferDate"].ToString();
+                    Objload.DisplayName = dr["PinUser"].ToString();
+                    Objload.AddedOn = dr["CreatedDate"].ToString();
+                    Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.Status = dr["PinStaus"].ToString();
+                    lst.Add(Objload);
+                }
+                obj.lstunusedpins = lst;
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult UnUsedPin(Admin obj)
+        {
+            List<Admin> lst = new List<Admin>();
+            obj.Package = obj.Package == "0" ? null : obj.Package;
+            DataSet ds = obj.GetUsedUnUsedPins();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Admin Objload = new Admin();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    Objload.ePinNo = dr["ePinNo"].ToString();
+                    Objload.Package = dr["Package"].ToString();
+                    Objload.Amount = dr["PinAmount"].ToString();
+                    Objload.GST = dr["GST"].ToString();
+                    Objload.ToId = dr["ToId"].ToString();
+                    Objload.AddedBy = dr["GenerateVia"].ToString();
+                    Objload.ToName = dr["ToName"].ToString();
+                    Objload.TransferDate = dr["TransferDate"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
                     Objload.DisplayName = dr["PinUser"].ToString();
                     Objload.AddedOn = dr["CreatedDate"].ToString();
                     Objload.RegisteredTo = dr["RegisteredTo"].ToString();
@@ -2212,6 +2254,45 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("SetMenuPermissionForUser", "Admin");
         }
-        
+        public ActionResult CreateTransaction()
+        {
+            Admin model = new Admin();
+            List<SelectListItem> lst = new List<SelectListItem>();
+            ViewBag.Wallet = Common.BindAllWallet();
+            DataSet ds = model.GetAdvanceDeductionReports();
+           
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CreateTransaction(Admin model)
+        {
+            try
+            {
+                List<SelectListItem> lst = new List<SelectListItem>();
+                ViewBag.Wallet = Common.BindAllWallet();
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.CreateTransaction();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Transaction created successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("CreateTransaction", "Admin");
+        }
     }
 }
