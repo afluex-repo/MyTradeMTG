@@ -33,10 +33,12 @@ namespace MyTrade.Controllers
         #region GeneratePin
         public ActionResult Generate_EPin()
         {
+            Admin obj = new Admin();
+            List<Admin> lst = new List<Admin>();
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
+            DataSet ds1 = objcomm.BindProductForJoining();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
@@ -52,7 +54,27 @@ namespace MyTrade.Controllers
             }
 
             ViewBag.ddlProduct = ddlProduct;
+            DataSet dsp = obj.GetPinGeneratedByUser();
+            if (dsp.Tables != null && dsp.Tables[0].Rows.Count > 0)
+            {
 
+                foreach (DataRow dr in dsp.Tables[0].Rows)
+                {
+                    Admin Objload = new Admin();
+                    Objload.LoginId = dr["LoginId"].ToString();
+                    Objload.Name = dr["Name"].ToString();
+                    Objload.ePinNo = dr["ePinNo"].ToString();
+                    Objload.Package = dr["ProductName"].ToString();
+                    Objload.Amount = dr["PinAmount"].ToString();
+                    Objload.Status = dr["PinStatus"].ToString();
+                    Objload.ToId = dr["RegisteredTo"].ToString();
+                    Objload.TransactionDate = dr["PinGenerationDate"].ToString();
+                    Objload.GST = dr["IGST"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    lst.Add(Objload);
+                }
+                obj.lst = lst;
+            }
             #endregion
             #region PaymentMode
             Common com = new Common();
@@ -75,7 +97,8 @@ namespace MyTrade.Controllers
             ViewBag.ddlPayment = ddlPayment;
 
             #endregion
-            return View();
+
+            return View(obj);
         }
         [HttpPost]
         [ActionName("Generate_EPin")]
@@ -1811,6 +1834,7 @@ namespace MyTrade.Controllers
             Admin model = new Admin();
             try
             {
+                model.IsVerified = "0";
                 List<Admin> lst = new List<Admin>();
                 DataSet ds = model.GetKYCUpdateDetailsOfUser();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2000,6 +2024,7 @@ namespace MyTrade.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.Balance = r["Balance"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     lst.Add(obj);
@@ -2069,7 +2094,7 @@ namespace MyTrade.Controllers
 
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProduct();
+            DataSet ds1 = objcomm.BindProductForJoining();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;

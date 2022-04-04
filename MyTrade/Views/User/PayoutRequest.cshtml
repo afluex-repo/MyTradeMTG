@@ -148,11 +148,17 @@
             $('#Amount').focus();
             return false;
         }
-        if (parseFloat($("#Amount").val()) < 100) {
-            alert("Transfer amount should not be less than 100 Rs.");
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
             return false;
         }
-
+        if (parseFloat($("#Amount").val()) < 100) {
+            alert("Transfer amount should not be less than 100 Rs.");
+            $('#Amount').val('');
+            return false;
+        }
+        return true;
     }
 
     function GetFinalAmount() {
@@ -164,6 +170,7 @@
         if (parseInt($("#Amount").val()) % 100 != 0)
         {
             alert("Amount should be in multiple of 100 Rs.");
+            $('#Amount').val('');
             return false;
         }
         $("#lbld").text(parseFloat(deductionAmount));
@@ -194,7 +201,7 @@
             //window.location = '/User/BankDetailsUpdate';
         }
         else {
-            die();
+          
         }
     })
 </script>

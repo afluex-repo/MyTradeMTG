@@ -139,6 +139,7 @@ namespace MyTrade.Models
         public string GST { get; set; }
         public string ToId { get; set; }
         public string TransferDate { get; set; }
+        public string Balance { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -573,6 +574,13 @@ namespace MyTrade.Models
                    new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("CreateTransaction", para);
+            return ds;
+        }
+        public DataSet GetPinGeneratedByUser()
+        {
+            SqlParameter[] para = {
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPinGeneratedByAdmin");
             return ds;
         }
     }
