@@ -64,7 +64,6 @@
                                             <th>Pan Image</th>*@
                                         <th>View</th>
                                         <th>Action</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,6 +98,7 @@
                                                     {
                                                         <td>
                                                             <a href="/AdminReports/ViewProfileVeriFy?Id=@Item.Fk_UserId" name="Verify" id="Verify" class="btn btn-success">Verify</a>
+                                                            <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
                                                         </td>
                                                     }
                                                     else
@@ -107,7 +107,7 @@
                                                             <span>Verified</span>
                                                         </td>
                                                     }
-                                                    @if (Item.IsVerified == "True")
+                                                    @*@if (Item.IsVerified == "True")
                                                     {
                                                         <td>
                                                             <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
@@ -118,7 +118,7 @@
                                                         <td>
                                                             <span>Declined</span>
                                                         </td>
-                                                    }
+                                                    }*@
                                                 </tr>
                                                 i++;
                                             }

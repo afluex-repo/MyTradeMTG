@@ -110,7 +110,8 @@ namespace MyTrade.Models
                                     new SqlParameter("@Status", Status),
                                     new SqlParameter("@IsDownline", IsDownline),
                                     new SqlParameter("@Leg", Leg),
-                                     new SqlParameter("@MemberStatus",MemberStatus)
+                                     new SqlParameter("@MemberStatus",MemberStatus),
+                                           new SqlParameter("@Mobile",MobileNo),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;

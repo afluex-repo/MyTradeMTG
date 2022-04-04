@@ -4,7 +4,11 @@
     ViewBag.Title = "ActivateByPaymentList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+     td#used{
+         white-space: break-spaces;
+    }
+</style>
 
 @using (Html.BeginForm("ActivateByPaymentList", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -51,6 +55,7 @@
                                         <th>Name</th>
                                         <th>Amount</th>
                                         <th>Used For</th>
+                                        <th>Status</th>
                                         @*<th>BV</th>*@
                                         @*<th>IsCalculated</th>*@
                                         @*<th>TransactionBy</th>*@
@@ -71,7 +76,8 @@
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td>@Item.PinAmount</td>
-                                                    <td>@Item.UsedFor</td>
+                                                    <td id="used">@Item.UsedFor</td>
+                                                    <td>@Item.Status</td>
                                                     @*<td>@Item.BV</td>*@
                                                     <th>@Item.TransactionDate</th>
                                                     @*<td>@Item.IsCalculated</td>*@

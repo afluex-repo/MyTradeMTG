@@ -430,7 +430,7 @@ namespace MyTrade.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
-                    //obj.Balance = r["Balance"].ToString();
+                    obj.Balance = r["Balance"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;

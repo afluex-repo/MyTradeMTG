@@ -675,6 +675,7 @@ namespace MyTrade.Controllers
                     obj.Pk_EwalletId = r["Pk_InvestmentId"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
+                    obj.Status = r["Status"].ToString();
                     obj.PinAmount = r["PinAmount"].ToString();
                     obj.UsedFor = r["UsedFor"].ToString();
                     obj.BV = r["BV"].ToString();

@@ -199,6 +199,16 @@
             $('#ProductPrice').focus();
             return false;
         }
+        if ($('#ROIPercent').val() == '') {
+            $("#ROIPercent").addClass('errortext');
+            $('#ROIPercent').focus();
+            return false;
+        }
+        if ($('#Days').val() == '') {
+            $("#Days").addClass('errortext');
+            $('#Days').focus();
+            return false;
+        }
         debugger
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
