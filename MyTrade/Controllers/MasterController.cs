@@ -60,13 +60,13 @@ namespace MyTrade.Controllers
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
                         TempData["Package"] = "Product deleted successfully";
-                        FormName = "PackageList";
+                        FormName = "PackageMaster";
                         Controller = "Master";
                     }
                     else
                     {
                         TempData["Package"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "PackageList";
+                        FormName = "PackageMaster";
                         Controller = "Master";
                     }
                 }
@@ -74,13 +74,48 @@ namespace MyTrade.Controllers
             catch (Exception ex)
             {
                 TempData["Package"] = ex.Message;
-                FormName = "PackageList";
+                FormName = "PackageMaster";
                 Controller = "Master";
             }
 
             return RedirectToAction(FormName, Controller);
         }
+        public ActionResult ActivateDeactivatePackage(string id, string IsActive)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Master obj = new Master();
+                obj.Packageid = id;
+                obj.IsActive = Convert.ToBoolean(IsActive);
+                obj.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = obj.ActivateDeactivatePackage();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
+                    {
+                        TempData["Package"] = "Product status updated successfully";
+                        FormName = "PackageMaster";
+                        Controller = "Master";
+                    }
+                    else
+                    {
+                        TempData["Package"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "PackageMaster";
+                        Controller = "Master";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Package"] = ex.Message;
+                FormName = "PackageMaster";
+                Controller = "Master";
+            }
 
+            return RedirectToAction(FormName, Controller);
+        }
         public ActionResult PackageMaster(string PackageID)
         {
             Master obj = new Master();
@@ -101,17 +136,14 @@ namespace MyTrade.Controllers
                     count++;
                 }
             }
-
             ViewBag.ddlPackageType = ddlPackageType;
 
             #endregion
             if (PackageID != null)
             {
-
                 try
                 {
                     obj.Packageid = PackageID;
-
                     DataSet ds = obj.ProductList();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
@@ -132,23 +164,50 @@ namespace MyTrade.Controllers
                         obj.PackageTypeName = (ds.Tables[0].Rows[0]["PackageTypeName"].ToString());
                         obj.FromAmount = (ds.Tables[0].Rows[0]["FromAmount"].ToString());
                         obj.ToAmount = (ds.Tables[0].Rows[0]["ToAmount"].ToString());
+                        obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
                     }
-
                 }
                 catch (Exception ex)
                 {
                     TempData["Package"] = ex.Message;
                 }
-                return View(obj);
             }
             else
             {
-                return View(obj);
-            }
+                List<Master> lst = new List<Master>();
+                DataSet ds = obj.ProductList();
 
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Master model = new Master();
+                        model.Packageid = r["Pk_ProductId"].ToString();
+                        model.ProductName = r["ProductName"].ToString();
+                        model.ProductPrice = r["ProductPrice"].ToString();
+                        model.IGST = r["IGST"].ToString();
+                        model.CGST = r["CGST"].ToString();
+                        model.SGST = (r["SGST"].ToString());
+                        model.BinaryPercent = (r["BinaryPercent"].ToString());
+                        model.DirectPercent = (r["DirectPercent"].ToString());
+                        model.ROIPercent = (r["ROIPercent"].ToString());
+                        model.Days = (r["PackageDays"].ToString());
+                        model.BV = (r["BV"].ToString());
+                        model.PackageTypeId = (r["PackageTypeId"].ToString());
+                        model.PackageTypeName = (r["PackageTypeName"].ToString());
+                        model.FromAmount = (r["FromAmount"].ToString());
+                        model.ToAmount = (r["ToAmount"].ToString());
+                        model.Status = r["Status"].ToString();
+                        model.InMultipleOf = r["InMultipleOf"].ToString();
+                        lst.Add(model);
+                    }
+                    obj.lstpackage = lst;
+                }
+            }
+            return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Days)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Days,string InMultipleOf)
         {
             Master obj = new Master();
             try
@@ -167,7 +226,7 @@ namespace MyTrade.Controllers
                 obj.FromAmount = FromAmount == "" ? null : FromAmount;
                 obj.ToAmount = ToAmount == "" ? null : ToAmount;
                 obj.AddedBy = Session["PK_AdminId"].ToString();
-
+                obj.InMultipleOf = InMultipleOf;
                 DataSet ds = obj.SaveProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -188,7 +247,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Percentage, string Days)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Percentage, string Days,string InMultipleOf)
         {
             Master obj = new Master();
             try
@@ -209,6 +268,7 @@ namespace MyTrade.Controllers
                 obj.UpdatedBy = Session["PK_AdminId"].ToString();
                 obj.FromAmount = FromAmount == "" ? null : FromAmount;
                 obj.ToAmount = ToAmount == "" ? null : ToAmount;
+                obj.InMultipleOf = InMultipleOf;
                 DataSet ds = obj.UpdateProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

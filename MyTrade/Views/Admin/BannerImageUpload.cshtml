@@ -4,7 +4,13 @@
     ViewBag.Title = "BannerImageUpload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .zoom:hover {
+  -ms-transform: scale(3.0); /* IE 9 */
+  -webkit-transform: scale(3.0); /* Safari 3-8 */
+  transform: scale(3.0); 
+}
+</style>
 @using (Html.BeginForm("BannerImageUpload", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -16,7 +22,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Upload Banner Image</h4>
                                 <span class="text-danger">
-                                    @TempData["BannerImage"]
+                                    @TempData["msg"]
                                 </span>
                             </div>
                         </div>
@@ -35,6 +41,38 @@
                                     <input style="margin-top:25px;" class="btn btn-success pull-left" type="submit" value="Upload" id="btnsave" name="btnsave" onclick="return validate();" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="widget-content widget-content-area br-6">
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S No.</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lst != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lst)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td><a href="@Item.BannerImage" download><img src="@Item.BannerImage" height="100" width="100" class="zoom" /></a></td>
+                                                    <td>
+                                                        <a href="/Admin/DeleteBanner?id=@Item.PK_BannerId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Banner?');" name="btnDelete">Delete</a>
+                                                       
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

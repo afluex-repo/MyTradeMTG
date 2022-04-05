@@ -23,8 +23,17 @@ namespace MyTrade.Controllers
             ds1 = obj.BindFormTypeMaster();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
+                int count1 = 0;
                 foreach (DataRow r in ds1.Tables[0].Rows)
-                { ddlformtype.Add(new SelectListItem { Text = r["FormType"].ToString(), Value = r["PK_FormTypeId"].ToString() }); }
+                {
+                    if (count1 == 0)
+                    {
+                        ddlformtype.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlformtype.Add(new SelectListItem { Text = r["FormType"].ToString(), Value = r["PK_FormTypeId"].ToString()
+                    });
+                    count1++;
+                }
             }
 
             ViewBag.ddlformtype = ddlformtype;
@@ -122,6 +131,11 @@ namespace MyTrade.Controllers
         public ActionResult SavePermission(Permisssions obj)
         {
             string hdrows = Request["hdRows"].ToString();
+            int count = 0;
+            foreach (var item in hdrows.Split(','))
+            {
+                count++;
+            }
             string chkSave = "";
             string chkupdate = "";
             string chkdelete = "";
@@ -137,7 +151,7 @@ namespace MyTrade.Controllers
             dtpermission.Columns.Add("IsUpdate");
             dtpermission.Columns.Add("IsDelete");
             dtpermission.Columns.Add("IsSelect");
-            for (int i = 1; i < int.Parse(hdrows); i++)
+            for (int i = 1; i < count; i++)
             {
 
                 try

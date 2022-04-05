@@ -26,11 +26,11 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Package Type<span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control",@onchange="return ChangePackagetype();" })
+                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-3">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Product Name <span style="color: red">*</span></label>
@@ -44,7 +44,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Product Price <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Product Price", @class = "form-control", @onkeypress = "return isNumberKey(event)", onchange="return bindbvprice();" })
+                                        @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Product Price", @class = "form-control", @onkeypress = "return isNumberKey(event)", onchange = "return bindbvprice();" })
                                     </div>
                                 </div>
                             </div>
@@ -68,9 +68,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Basis on <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                       <select name="Basis" class="form-control">
-                                           <option value="Daily">Daily</option>
-                                       </select>
+                                        <select name="Basis" class="form-control">
+                                            <option value="Daily">Daily</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -83,21 +83,21 @@
                                 </div>
                             </div>
                             @*<div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
                                     </div>
-                                </div>
-                            </div>*@
-                            
+                                </div>*@
+
 
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-3" style="display:none" id="divfromamount">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">From Amount<span style="color: red">*</span></label>
-                                    <div class="col-sm-9" >
+                                    <div class="col-sm-9">
                                         @Html.TextBoxFor(m => m.FromAmount, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                     </div>
                                 </div>
@@ -106,43 +106,51 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">To Amount<span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.ToAmount, new { @class = "form-control", @onkeypress = "return isNumberKey(event)",@onchange="return checkAmount();" })
+                                        @Html.TextBoxFor(m => m.ToAmount, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @onchange = "return checkAmount();" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="display:none" id="divmultiple">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">In Multiple of<span style="color: red">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(m => m.InMultipleOf, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                     </div>
                                 </div>
                             </div>
                             @*<div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Binary Perc(%)<span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.BinaryPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Binary Perc(%)<span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.BinaryPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
                                     </div>
-                                </div>
-                            </div>*@
+                                </div>*@
                             @*<div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">CGST <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.CGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">CGST <span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.CGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">SGST <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.SGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">SGST <span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.SGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Binary Perc(%)<span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.BinaryPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Binary Perc(%)<span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.BinaryPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
                                     </div>
-                                </div>
-                            </div>*@
-                            
+                                </div>*@
+
                             <div class="col-md-6">
 
                                 @if (Model.Packageid == null)
@@ -152,13 +160,65 @@
                                 else
                                 {
                                     @*<input type="submit" id="btnUpdateProduct" class="btn btn-success pull-right" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" />*@
-                                    <a href="#" type="submit" id="btnUpdateProduct" class="btn btn-success" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" >Update</a>
+                                    <a href="#" type="submit" id="btnUpdateProduct" class="btn btn-success" name="btnUpdateProduct" value="Update" onclick="return updateProduct();">Update</a>
                                 }
 
-                                <a class="btn btn-primary" href="/Master/PackageList">Back To List</a>
+                                @*<a class="btn btn-primary" href="/Master/PackageList">Back To List</a>*@
 
 
                             </div>
+                        </div>
+                        <div class="widget-content widget-content-area br-6">
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S No.</th>
+                                        <th>Package Type</th>
+                                        <th>Product Name</th>
+                                        <th>Product Price</th>
+                                        <th>BV</th>
+                                        <th>Percentage</th>
+                                        <th>Days</th>
+                                        <th>From Amount</th>
+                                        <th>To Amount</th>
+                                        <th>In Multiple Of</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstpackage != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstpackage)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.PackageTypeName</td>
+                                                    <td>@Item.ProductName</td>
+                                                    <td>@Item.ProductPrice</td>
+                                                    <td>@Item.BV</td>
+                                                    <td>@Item.ROIPercent</td>
+                                                    <td>@Item.Days</td>
+                                                    <td>@Item.FromAmount</td>
+                                                    <td>@Item.ToAmount</td>
+                                                    <td>@Item.InMultipleOf</td>
+                                                    <td>@Item.Status</td>
+                                                    <td>
+                                                        <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-sm">Edit</a>
+                                                        <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=true" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to activate this Package?');" name="btnactive">Active</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=false" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure you want to de-activate this Package?');" name="btndeactive">De-Active</a>
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -175,20 +235,22 @@
         if (packagetype == 2) {
             $("#divfromamount").show();
             $("#divtoamount").show();
+            $("#divmultiple").show();
         }
         else {
             $("#divfromamount").hide();
             $("#divtoamount").hide();
+            $("#divmultiple").hide();
         }
     });
     function validate() {
-        $(".errortext").removeClass("errortext"); 
+        $(".errortext").removeClass("errortext");
         if ($('#PackageTypeId').val() == '0') {
             $("#PackageTypeId").addClass('errortext');
             $('#PackageTypeId').focus();
             return false;
         }
-    
+
         if ($('#ProductName').val() == '') {
             $("#ProductName").addClass('errortext');
             $('#ProductName').focus();
@@ -245,42 +307,38 @@
 
 
     }
-    function bindbvprice()
-    {
+    function bindbvprice() {
         var productprice = $('#ProductPrice').val();
         if ($('#ProductPrice').val() == '') {
             $('#BV').val('');
         }
-        else
-        {
+        else {
             $('#BV').val(productprice);
-            
+
         }
     }
     function checkAmount() {
         var fromamount = $("#FromAmount").val();
         var toamount = $("#ToAmount").val();
-        if(Number(fromamount)>Number(toamount))
-        {
+        if (Number(fromamount) > Number(toamount)) {
             alert('From Amount can not greater than To Amount')
             $("#ToAmount").val('');
             $("#ToAmount").addClass('errortext');
             $('#ToAmount').focus();
-          
+
         }
     }
-    function ChangePackagetype()
-    {
+    function ChangePackagetype() {
         var packagetype = $("#PackageTypeId").val();
-        if(packagetype==2)
-        {
+        if (packagetype == 2) {
             $("#divfromamount").show();
             $("#divtoamount").show();
-         
+            $("#divmultiple").show();
         }
         else {
             $("#divfromamount").hide();
             $("#divtoamount").hide();
+            $("#divmultiple").hide();
         }
     }
     function isNumberKey(evt) {
@@ -345,15 +403,20 @@
                 $('#ToAmount').focus();
                 return false;
             }
+            if ($('#InMultipleOf').val() == '') {
+                $("#InMultipleOf").addClass('errortext');
+                $('#InMultipleOf').focus();
+                return false;
+            }
         }
         $.ajax({
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), CGST: $("#CGST").val(), SGST: $("#SGST").val(), BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(),Days:$("#Days").val() },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), CGST: $("#CGST").val(), SGST: $("#SGST").val(), BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val() },
             success: function (data) {
                 alert(data.Result);
-                window.location.href = '@Url.Action("PackageList", "Master")';
+                window.location.href = '@Url.Action("PackageMaster", "Master")';
 
             }
 
@@ -423,15 +486,20 @@
                 $('#ToAmount').focus();
                 return false;
             }
+            if ($('#InMultipleOf').val() == '') {
+                $("#InMultipleOf").addClass('errortext');
+                $('#InMultipleOf').focus();
+                return false;
+            }
         }
         $.ajax({
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), CGST: $("#CGST").val(), SGST: $("#SGST").val(), BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val() },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), CGST: $("#CGST").val(), SGST: $("#SGST").val(), BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val() },
             success: function (data) {
                 alert(data.Result);
-                window.location.href = '@Url.Action("PackageList", "Master")';
+                window.location.href = '@Url.Action("PackageMaster", "Master")';
 
             }
 

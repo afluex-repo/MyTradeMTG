@@ -30,7 +30,9 @@ namespace MyTrade.Models
         public List<Master> lstReward { get; set; }
         public string PK_RewardId { get; set; }
         public string Days { get; set; }
-
+        public bool IsActive { get; set; }
+        public string Status { get; set; }
+        public string InMultipleOf { get; set; }
         #region ProductMaster
 
         public DataSet SaveProduct()
@@ -48,7 +50,8 @@ namespace MyTrade.Models
                                   new SqlParameter("@AddedBy", AddedBy),
                                   new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
-                                    new SqlParameter("@ToAmount", ToAmount)
+                                    new SqlParameter("@ToAmount", ToAmount),
+                                     new SqlParameter("@InMultipleOf", InMultipleOf)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
@@ -68,7 +71,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteProduct", para);
             return ds;
         }
+        public DataSet ActivateDeactivatePackage()
+        {
+            SqlParameter[] para = { new SqlParameter("@ProductID", Packageid),
+                new SqlParameter("@IsActive", IsActive),
+                                  new SqlParameter("@UpdatedBy", AddedBy),
 
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("ActivateDeactivateProduct", para);
+            return ds;
+        }
         public DataSet UpdateProduct()
         {
             SqlParameter[] para = { new SqlParameter("@ProductID", Packageid),
@@ -85,7 +98,8 @@ namespace MyTrade.Models
                                   new SqlParameter("@UpdatedBy", UpdatedBy),
                                      new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
-                                    new SqlParameter("@ToAmount", ToAmount)
+                                    new SqlParameter("@ToAmount", ToAmount),
+                                 new SqlParameter("@InMultipleOf", InMultipleOf)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("UpdateProduct", para);

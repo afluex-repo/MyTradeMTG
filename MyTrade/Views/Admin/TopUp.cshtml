@@ -38,14 +38,14 @@
                             <input type="hidden" id="amt" />
                             <input type="hidden" id="pkg" />
                             <label for="Package">Package <span style="color:red">*</span></label>
-                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange="return GetPackageDetails();" })
                             <p class="text-success" id="spName"></p>
                         </div>
                         <div class="col-md-4">
                             <input type="hidden" id="WalletAmount" value="@ViewBag.TotalWalletAmount" />
                             <label for="Amount">Amount <span style="color:red">*</span></label>
                             @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
-                            <span style="color:red">Min  : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> Max : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
+                            <span style="color:red">Min  : <span id="spfrom"></span> </span><span style="color:red;padding-left:50px"> Max : <span id="spto"></span> </span><span style="color:red;padding-left:50px"> In Multiple Of : <span id="spmul"></span></span>
                             <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                     $("#Amount").val('');
                     return false;
                 }
-                else if (parseInt(Amount) > parseInt(@ViewBag.ToAmount)) {
+                else if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
                     Snackbar.show({
                         text: "Amount should not be greater than max smount",
                         actionTextColor: '#fff',
@@ -283,6 +283,25 @@
     //    }
 
     //}
+    function GetPackageDetails()
+    {
+        $.ajax({
+            url: '/Admin/GetPackageDetails', type: 'post', dataType: 'json',
+            data: { 'PackageId': $("#PackageId").val() },
+            success: function (data) {
+                debugger;
+                if (data.Result == "yes") {
+                    $("#spfrom").text(data.FromAmount);
+                    $("#spto").text(data.ToAmount);
+                    $("#spmul").text(data.InMultipleOf);
+                    $("#hdfMax").val(data.ToAmount);
+                }
+                else  {
+                    $("#PackageId").val('0')
+                }
+            }
+        });
+    }
     function GetNameDetails() {
         debugger;
         var LoginId = $('#LoginId').val();

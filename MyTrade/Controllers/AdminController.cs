@@ -497,7 +497,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "Payment type update successfully";
+                        TempData["msg"] = "Payment type updated successfully";
                     }
                     else
                     {
@@ -1734,6 +1734,28 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Topup", "Admin");
         }
+        public ActionResult GetPackageDetails(string PackageId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.Packageid = PackageId;
+                DataSet ds = obj.ProductList();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    obj.Result = "yes";
+                    obj.FromAmount = ds.Tables[0].Rows[0]["FromAmount"].ToString();
+                    obj.ToAmount = ds.Tables[0].Rows[0]["ToAmount"].ToString();
+                    obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         [OnAction(ButtonName = "btnApprove")]
         [ActionName("PayoutRequestList")]
@@ -2166,12 +2188,26 @@ namespace MyTrade.Controllers
 
         public ActionResult BannerImageUpload()
         {
-            return View();
+            List<Admin> lst = new List<Admin>();
+            Admin obj = new Admin();
+            DataSet ds = obj.GetBannerImage();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach(DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin model = new Admin();
+                    model.PK_BannerId = r["PK_BannerId"].ToString();
+                    model.BannerImage = r["BannerImage"].ToString();
+                    lst.Add(model);
+                }
+                obj.lst = lst;
+            }
+            return View(obj);
         }
         [HttpPost]
         [OnAction(ButtonName = "btnsave")]
         [ActionName("BannerImageUpload")]
-        public ActionResult BannerImageUpload(Admin model,HttpPostedFileBase BannerImage)
+        public ActionResult BannerImageUpload(Admin model, HttpPostedFileBase BannerImage)
         {
             try
             {
@@ -2181,7 +2217,7 @@ namespace MyTrade.Controllers
                     model.BannerImage = "/BannerImage/" + Guid.NewGuid() + Path.GetExtension(BannerImage.FileName);
                     BannerImage.SaveAs(Path.Combine(Server.MapPath(model.BannerImage)));
                 }
-                model.AddedBy= Session["Pk_AdminId"].ToString();
+                model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.SaveBannerImage();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -2201,7 +2237,25 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("BannerImageUpload", "Admin");
         }
-
+        public ActionResult DeleteBanner(string id)
+        {
+            Admin obj = new Admin();
+            obj.PK_BannerId = id;
+            obj.AddedBy = Session["Pk_adminId"].ToString();
+            DataSet ds = obj.DeleteBanner();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if(ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                {
+                    TempData["msg"] = "Banner Deleted Successfully";
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            return RedirectToAction("BannerImageUpload", "Admin");
+        }
         public ActionResult SetMenuPermissionForUser()
         {
             Admin model = new Admin();
@@ -2215,7 +2269,7 @@ namespace MyTrade.Controllers
                     obj.FormId = r["PK_FormId"].ToString();
                     obj.FormName = r["FormName"].ToString();
                     obj.Permission = r["Permission"].ToString();
-                    
+
                     lst.Add(obj);
                 }
                 model.lstForUserPermission = lst;
@@ -2223,7 +2277,7 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-       
+
 
         public ActionResult InActiveUser(string id)
         {
@@ -2285,7 +2339,7 @@ namespace MyTrade.Controllers
             List<SelectListItem> lst = new List<SelectListItem>();
             ViewBag.Wallet = Common.BindAllWallet();
             DataSet ds = model.GetAdvanceDeductionReports();
-           
+
             return View(model);
         }
         [HttpPost]
@@ -2313,7 +2367,7 @@ namespace MyTrade.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
             }
