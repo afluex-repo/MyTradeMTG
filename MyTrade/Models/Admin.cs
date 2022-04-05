@@ -132,6 +132,7 @@ namespace MyTrade.Models
         public string TransferPin { get; set; }
         public string TotalPin { get; set; }
         public string PackageName { get; set; }
+        public string PK_BannerId { get; set; }
         public string BannerImage { get; set; }
         public string FormId { get; set; }
         public string FormName { get; set; }
@@ -236,7 +237,7 @@ namespace MyTrade.Models
             SqlParameter[] para = {
 
                   new SqlParameter("@PaymentTypeId",PaymentTypeId),
-                 new SqlParameter("@Status",Status),
+                 new SqlParameter("@IsActive",Status),
                 new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("SavePaymentType", para);
@@ -533,8 +534,20 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveBannerImage", para);
             return ds;
         }
-
-
+        public DataSet GetBannerImage()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetBanneImage");
+            return ds;
+        }
+        public DataSet DeleteBanner()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@PK_BannerId", PK_BannerId),
+                 new SqlParameter("@DeletedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteBanner", para);
+            return ds;
+        }
         public DataSet GetFormMasterList()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetFormMasterList");

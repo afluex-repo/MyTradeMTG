@@ -36,12 +36,25 @@ namespace MyTrade.Controllers
 
         public ActionResult AddWallet()
         {
+            UserWallet obj = new UserWallet();
             #region ddlpaymentType
-            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            List<SelectListItem> ddlpaymentType = new List<SelectListItem>();
+            DataSet dsp = obj.GetPaymentType();
+            int count1 = 0;
+            if (dsp != null && dsp.Tables.Count > 0 && dsp.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsp.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentType.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlpaymentType.Add(new SelectListItem { Text = r["PaymentType"].ToString(), Value = r["PK_PaymentTypeId"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
             ViewBag.ddlpaymentType = ddlpaymentType;
             #endregion
-
-            UserWallet obj = new UserWallet();
             obj.LoginId = Session["LoginId"].ToString();
             obj.BankBranch = Session["Branch"].ToString();
             obj.BankName = Session["Bank"].ToString();

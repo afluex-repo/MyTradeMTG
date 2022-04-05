@@ -111,8 +111,8 @@
 <script>
     $(document).ready(function () {
         //$("#PaymentType").val("Offline");
-        $("#PaymentType").val("Online");
-        getpaymentTypedetails();
+        //$("#PaymentType").val("");
+        //getpaymentTypedetails();
     });
     function validateform() {
         $(".errortext").removeClass("errortext");
@@ -131,7 +131,7 @@
             $('#PaymentType').focus();
             return false;
         }
-        if ($('#PaymentType').val() == "Offline") {
+        if ($('#PaymentType').val() == "2") {
             if ($('#PaymentMode').val() == '') {
                 $("#PaymentMode").addClass('errortext');
                 $('#PaymentMode').focus();
@@ -241,7 +241,7 @@
 
     function getpaymentTypedetails() {
         debugger;
-        if ($('#PaymentType').val() == 'Offline') {
+        if ($('#PaymentType').val() == '2') {
 
             $("#PaymentMode").val(10);
             $("#paymentmode").show();
@@ -259,7 +259,7 @@
             $("#DDChequeNo").attr("placeholder", "Transaction No");
             $("#DDChequeDate").attr("placeholder", "Transaction Date.");
         }
-        else if ($('#PaymentType').val() == 'Online') {
+        else if ($('#PaymentType').val() == '1') {
             $("#paymentmode").hide();
             $("#divPaymentModee").hide();
             $("#divQr").hide();
