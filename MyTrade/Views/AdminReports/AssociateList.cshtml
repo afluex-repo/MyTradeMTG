@@ -92,6 +92,10 @@
                                 @Html.DropDownListFor(m => m.Leg, new SelectList(ViewBag.ddlLeg, "Value", "Text"), new { @class = "form-control" })
                             </div>
                             <div class="col-lg-3">
+                                Mobile No.
+                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control"})
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <br />
                                     <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />

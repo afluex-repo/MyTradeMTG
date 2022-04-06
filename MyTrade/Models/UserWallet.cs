@@ -102,6 +102,11 @@ namespace MyTrade.Models
 
             return ds;
         }
+        public DataSet GetPaymentType()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentTypeForUser");
+            return ds;
+        }
         public DataSet GetROIWalletDetails()
         {
             SqlParameter[] para = {

@@ -110,7 +110,8 @@ namespace MyTrade.Models
                                     new SqlParameter("@Status", Status),
                                     new SqlParameter("@IsDownline", IsDownline),
                                     new SqlParameter("@Leg", Leg),
-                                     new SqlParameter("@MemberStatus",MemberStatus)
+                                     new SqlParameter("@MemberStatus",MemberStatus),
+                                           new SqlParameter("@Mobile",MobileNo),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
@@ -229,7 +230,8 @@ namespace MyTrade.Models
         public DataSet GetActivateByPaymentDetails()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                                    new SqlParameter("@Name",Name)
+                                    new SqlParameter("@Name",Name),
+                                      new SqlParameter("@UsedFor",UsedFor)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetActivateByPaymentDetails", para);
             return ds;

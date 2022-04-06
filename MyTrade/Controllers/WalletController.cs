@@ -36,12 +36,25 @@ namespace MyTrade.Controllers
 
         public ActionResult AddWallet()
         {
+            UserWallet obj = new UserWallet();
             #region ddlpaymentType
-            List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
+            List<SelectListItem> ddlpaymentType = new List<SelectListItem>();
+            DataSet dsp = obj.GetPaymentType();
+            int count1 = 0;
+            if (dsp != null && dsp.Tables.Count > 0 && dsp.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsp.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentType.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlpaymentType.Add(new SelectListItem { Text = r["PaymentType"].ToString(), Value = r["PK_PaymentTypeId"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
             ViewBag.ddlpaymentType = ddlpaymentType;
             #endregion
-
-            UserWallet obj = new UserWallet();
             obj.LoginId = Session["LoginId"].ToString();
             obj.BankBranch = Session["Branch"].ToString();
             obj.BankName = Session["Bank"].ToString();
@@ -212,7 +225,7 @@ namespace MyTrade.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
-                                if (obj1.captured == "captured")
+                                if (obj1.captured == "True")
                                 {
                                     TempData["Msg"] = "Amount credited successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
                                 }
@@ -430,7 +443,7 @@ namespace MyTrade.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
-                    //obj.Balance = r["Balance"].ToString();
+                    obj.Balance = r["Balance"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;

@@ -96,6 +96,10 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
                 ViewBag.TotalTPSBalanceAmount = Convert.ToDecimal(ViewBag.TotalTPSAmountTobeReceived) - Convert.ToDecimal(ViewBag.TotalTPSAmountReceived);
             }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[6].Rows.Count > 0)
+            {
+                Session["TopUp"]= ds.Tables[6].Rows[0]["IsActive"].ToString();
+            }
             return View(obj);
         }
         public ActionResult ActivateByPin(User model)
@@ -187,6 +191,7 @@ namespace MyTrade.Controllers
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
+                ViewBag.Status = ds1.Tables[1].Rows[0]["Status"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)
@@ -853,7 +858,7 @@ namespace MyTrade.Controllers
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProductForJoining();
+            DataSet ds1 = objcomm.BindProductForJoiningForUser();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
@@ -1611,6 +1616,28 @@ namespace MyTrade.Controllers
                 DataSet ds = obj1.SaveFetchPaymentResponse();
             }
             return RedirectToAction("AddWallet", "Wallet");
+        }
+        public ActionResult GetPackageDetails(string PackageId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.Packageid = PackageId;
+                DataSet ds = obj.ProductList();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    obj.Result = "yes";
+                    obj.FromAmount = ds.Tables[0].Rows[0]["FromAmount"].ToString();
+                    obj.ToAmount = ds.Tables[0].Rows[0]["ToAmount"].ToString();
+                    obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
     }
 }

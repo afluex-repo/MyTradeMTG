@@ -59,8 +59,8 @@
                                     <select id="Status" name="Status" class="form-control">
                                         @*<option value="0">-Select-</option>*@
                                         <option value="Pending">Pending</option>
-                                        <option value="Approved">Approve</option>
-                                        <option value="Declined">Decline</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Declined">Declined</option>
                                        
                                     </select>
                                 </div>
@@ -122,6 +122,7 @@
 
                                                         </td>
                                                     }
+                                                    
                                                     @*else if (Item.Status == "Approved")
                                                         {
                                                             <td>*@
@@ -143,6 +144,7 @@
 
                                                     else
                                                     {
+                                                        <td></td>
                                                     }
                                                 </tr>
                                                 i++;

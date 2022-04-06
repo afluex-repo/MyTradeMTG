@@ -139,7 +139,15 @@ namespace MyTrade.Models
             PaymentType.Add(new SelectListItem { Text = "Online", Value = "Online" });
             return PaymentType;
         }
-
+        public static List<SelectListItem> BindAllWallet()
+        {
+            List<SelectListItem> Wallet = new List<SelectListItem>();
+            Wallet.Add(new SelectListItem { Text = "-Select-", Value = "0" });
+            Wallet.Add(new SelectListItem { Text = "My Trade", Value = "1" });
+            Wallet.Add(new SelectListItem { Text = "TPS", Value = "2" });
+            Wallet.Add(new SelectListItem { Text = "Payout", Value = "3" });
+            return Wallet;
+        }
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
@@ -199,6 +207,11 @@ namespace MyTrade.Models
         public DataSet BindProductForJoining()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoining");
+            return ds;
+        }
+        public DataSet BindProductForJoiningForUser()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoiningUser");
             return ds;
         }
         public DataSet BindUserTypeForRegistration()
