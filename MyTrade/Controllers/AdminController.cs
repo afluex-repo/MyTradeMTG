@@ -803,6 +803,8 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
@@ -834,6 +836,8 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
@@ -860,9 +864,13 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -887,9 +895,13 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
                     obj.FromName = r["FromName"].ToString();
                     obj.FromLoginId = r["LoginId"].ToString();
                     obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
@@ -2278,20 +2290,20 @@ namespace MyTrade.Controllers
         }
 
 
-
-        public ActionResult InActiveUser(string id)
+        [HttpPost]
+        [ActionName("SetMenuPermissionForUser")]
+        [OnAction(ButtonName = "btnSubmit")]
+        public ActionResult InActiveUser(Admin model)
         {
             try
             {
-                Admin model = new Admin();
-                model.FormId = id;
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.InActiveUser();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["msg"] = "User inactivated successfully";
+                        TempData["msg"] = "User in-activate successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                     {

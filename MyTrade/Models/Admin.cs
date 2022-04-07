@@ -141,6 +141,7 @@ namespace MyTrade.Models
         public string ToId { get; set; }
         public string TransferDate { get; set; }
         public string Balance { get; set; }
+        public string Reason { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -319,6 +320,7 @@ namespace MyTrade.Models
         public DataSet LevelIncomeTr1()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                 new SqlParameter("@Name", Name),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
             };
@@ -328,6 +330,7 @@ namespace MyTrade.Models
         public DataSet LevelIncomeTr2()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                  new SqlParameter("@Name", Name),
                 new SqlParameter("@FromDate", FromDate),
                 new SqlParameter("@ToDate", ToDate),
             };
@@ -569,7 +572,8 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                 new SqlParameter("@PK_FormId", FormId),
-                 new SqlParameter("@AddedBy", AddedBy)
+                 new SqlParameter("@AddedBy", AddedBy),
+                 new SqlParameter("@Reason",Reason)
                                   };
             DataSet ds = DBHelper.ExecuteQuery("InActiveUser", para);
             return ds;

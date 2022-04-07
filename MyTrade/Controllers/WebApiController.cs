@@ -298,6 +298,7 @@ namespace MyTrade.Controllers
                 obj.TotalDirect = ds.Tables[0].Rows[0]["TotalDirect"].ToString();
                 obj.TotalActive = ds.Tables[0].Rows[0]["TotalActive"].ToString();
                 obj.TotalInActive = ds.Tables[0].Rows[0]["TotalInActive"].ToString();
+                obj.TPSId = ds.Tables[0].Rows[0]["TPSId"].ToString();
                 obj.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 obj.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 obj.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();

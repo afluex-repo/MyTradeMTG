@@ -192,6 +192,7 @@ namespace MyTrade.Controllers
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
                 ViewBag.Status = ds1.Tables[1].Rows[0]["Status"].ToString();
+                ViewBag.Reason = ds1.Tables[1].Rows[0]["Reason"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     if (count == 0)
@@ -1302,6 +1303,11 @@ namespace MyTrade.Controllers
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
             {
                 model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
+            }
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[2].Rows.Count > 0)
+            {
+                ViewBag.MenuStatus = ds1.Tables[2].Rows[0]["MenuStatus"].ToString();
+                ViewBag.Reason = ds1.Tables[2].Rows[0]["Reason"].ToString();
             }
             #region Check Balance
             DataSet ds11 = model.GetWalletBalance();
