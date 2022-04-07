@@ -427,7 +427,8 @@ namespace MyTrade.Models
                 new SqlParameter("@Pk_RequestId",PK_RequestID),
                  new SqlParameter("@Status",Status),
                   new SqlParameter("@TransactionNo",TransactionNo),
-                new SqlParameter("@ApprovedBy",UpdatedBy)
+                new SqlParameter("@ApprovedBy",UpdatedBy),
+                new SqlParameter("@TransactionDate",TransactionDate)
             };
             DataSet ds = DBHelper.ExecuteQuery("ApprovePayoutRequest", para);
             return ds;
@@ -439,7 +440,8 @@ namespace MyTrade.Models
                 new SqlParameter("@Pk_RequestId",PK_RequestID),
                  new SqlParameter("@Status",Status),
                   new SqlParameter("@TransactionNo",TransactionNo),
-                new SqlParameter("@DeclinedBy",UpdatedBy)
+                new SqlParameter("@DeclinedBy",UpdatedBy),
+                 new SqlParameter("@TransactionDate",TransactionDate)
             };
             DataSet ds = DBHelper.ExecuteQuery("DeclinePayoutRequest", para);
             return ds;

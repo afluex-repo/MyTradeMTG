@@ -943,6 +943,17 @@ namespace MyTrade.Controllers
                 ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
                 ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
             return View(model);
         }
 
@@ -1756,9 +1767,9 @@ namespace MyTrade.Controllers
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
                     obj.Result = "yes";
-                    obj.FromAmount = ds.Tables[0].Rows[0]["FromAmount"].ToString();
-                    obj.ToAmount = ds.Tables[0].Rows[0]["ToAmount"].ToString();
-                    obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                    obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
+                    obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
+                    obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
                 }
                 else { }
             }
@@ -2104,7 +2115,7 @@ namespace MyTrade.Controllers
         public ActionResult UnUsedPinList()
         {
             Admin obj = new Admin();
-          
+
             List<Admin> lst = new List<Admin>();
             DataSet ds = obj.GetUnusedUsedPinsForAdmin();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -2206,7 +2217,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetBannerImage();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                foreach(DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin model = new Admin();
                     model.PK_BannerId = r["PK_BannerId"].ToString();
@@ -2258,7 +2269,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.DeleteBanner();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                if(ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                 {
                     TempData["msg"] = "Banner Deleted Successfully";
                 }

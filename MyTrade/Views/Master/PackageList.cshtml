@@ -21,6 +21,29 @@
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Package Type<span style="color: red">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Package<span style="color: red">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(m => m.Packageid, new SelectList(ViewBag.ddlPackage, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <input type="submit" id="btnSearch" value="Search" name="btnSearch" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                 <thead>
@@ -29,15 +52,22 @@
                                         <th>Package Type</th>
                                         <th>Product Name</th>
                                         <th>Product Price</th>
-                                        @*<th>IGST</th>
-                                        <th>CGST</th>
-                                        <th>SGST</th>
-                                        <th>Binary Percent</th>*@
                                         <th>BV</th>
-                                        <th>Percentage</th>
-                                        <th>Days</th>
-                                        <th>From Amount</th>
-                                        <th>To Amount</th>
+                                        @if (Model.PackageTypeId == "2")
+                                        {
+                                            <th>Percentage</th>
+                                            <th>Days</th>
+                                            <th>From Amount</th>
+                                            <th>To Amount</th>
+                                            <th>In Multiple Of</th>
+                                        }
+                                        @if (Model.PackageTypeId == "1")
+                                        {
+                                            <th>IGST</th>
+                                            <th>HSN Code</th>
+                                            <th>Final Amount</th>
+                                        }
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -54,18 +84,27 @@
                                                     <td>@Item.PackageTypeName</td>
                                                     <td>@Item.ProductName</td>
                                                     <td>@Item.ProductPrice</td>
-                                                    @*<td>@Item.IGST</td>
-                                                    <td>@Item.CGST</td>
-                                                    <td>@Item.SGST</td>
-                                                    <td>@Item.BinaryPercent</td>*@
                                                     <td>@Item.BV</td>
-                                                    <td>@Item.ROIPercent</td>
-                                                    <td>@Item.Days</td>
-                                                    <td>@Item.FromAmount</td>
-                                                    <td>@Item.ToAmount</td>
+                                                    @if (Model.PackageTypeId == "2")
+                                                    {
+                                                        <td>@Item.ROIPercent</td>
+                                                        <td>@Item.Days</td>
+                                                        <td>@Item.FromAmount</td>
+                                                        <td>@Item.ToAmount</td>
+                                                        <td>@Item.InMultipleOf</td>
+                                                    }
+                                                    @if (Model.PackageTypeId == "1")
+                                                    {
+                                                        <td>@Item.IGST</td>
+                                                        <td>@Item.HSNCode</td>
+                                                        <td>@Item.FinalAmount</td>
+                                                    }
+                                                    <td>@Item.Status</td>
                                                     <td>
                                                         <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-sm">Edit</a>
                                                         <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=true" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to activate this Package?');" name="btnactive">Active</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=false" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure you want to de-activate this Package?');" name="btndeactive">De-Active</a>
                                                     </td>
 
                                                 </tr>

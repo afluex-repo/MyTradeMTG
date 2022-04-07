@@ -13,9 +13,60 @@ namespace MyTrade.Controllers
     {
 
         #region PackageMaster
+        public ActionResult PackageList()
+        {
+            Master model = new Master();
+            #region pacakgeTpe Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlPackageType = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindPackageType();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPackageType.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPackageType.Add(new SelectListItem { Text = r["PackageTypeName"].ToString(), Value = r["Pk_PackageTypeId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlPackageType = ddlPackageType;
+            #endregion
+            #region pacakge Bind
+            List<SelectListItem> ddlPackage = new List<SelectListItem>();
+            DataSet ds2 = objcomm.BindProduct();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPackage.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlPackage = ddlPackage;
+            #endregion
+            return View(model);
+        }
+        [HttpPost]
         public ActionResult PackageList(Master model)
         {
             List<Master> lst = new List<Master>();
+            if(model.Packageid=="0")
+            {
+                model.Packageid = null;
+            }
+            if(model.PackageTypeId=="0")
+            {
+                model.PackageTypeId = null;
+            }
             DataSet ds = model.ProductList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -25,26 +76,68 @@ namespace MyTrade.Controllers
                     Master obj = new Master();
                     obj.Packageid = r["Pk_ProductId"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
-                    obj.ProductPrice = r["ProductPrice"].ToString();
-                    obj.IGST = r["IGST"].ToString();
-                    obj.CGST = r["CGST"].ToString();
-                    obj.SGST = (r["SGST"].ToString());
-                    obj.BinaryPercent = (r["BinaryPercent"].ToString());
-                    obj.DirectPercent = (r["DirectPercent"].ToString());
-                    obj.ROIPercent = (r["ROIPercent"].ToString());
-                    obj.Days = (r["PackageDays"].ToString());
-                    obj.BV = (r["BV"].ToString());
-                    obj.PackageTypeId = (r["PackageTypeId"].ToString());
-                    obj.PackageTypeName = (r["PackageTypeName"].ToString());
-                    obj.FromAmount = (r["FromAmount"].ToString());
-                    obj.ToAmount = (r["ToAmount"].ToString());
+                    obj.ProductPrice = Convert.ToDecimal(r["ProductPrice"]);
+                    obj.IGST = Convert.ToDecimal(r["IGST"]);
+                    obj.CGST = Convert.ToDecimal(r["CGST"]);
+                    obj.SGST = Convert.ToDecimal(r["SGST"]);
+                    obj.BinaryPercent = Convert.ToDecimal(r["BinaryPercent"]);
+                    obj.DirectPercent = Convert.ToDecimal(r["DirectPercent"]);
+                    obj.ROIPercent = Convert.ToDecimal(r["ROIPercent"]);
+                    obj.Days = r["PackageDays"].ToString();
+                    obj.BV = Convert.ToDecimal(r["BV"]);
+                    obj.PackageTypeId = r["PackageTypeId"].ToString();
+                    model.PackageTypeId = obj.PackageTypeId;
+                    obj.PackageTypeName = r["PackageTypeName"].ToString();
+                    obj.FromAmount = Convert.ToDecimal(r["FromAmount"]);
+                    obj.ToAmount = Convert.ToDecimal(r["ToAmount"]);
+                    obj.Status = r["Status"].ToString();
+                    obj.InMultipleOf = Convert.ToDecimal(r["InMultipleOf"]);
+                    obj.IGST = Convert.ToDecimal(r["IGST"]);
+                    obj.HSNCode = r["HSNCode"].ToString();
+                    obj.FinalAmount = Convert.ToDecimal(r["FinalAmount"]);
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
             }
+            #region pacakgeTpe Bind
+            Common objcomm = new Common();
+            List<SelectListItem> ddlPackageType = new List<SelectListItem>();
+            DataSet ds1 = objcomm.BindPackageType();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPackageType.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPackageType.Add(new SelectListItem { Text = r["PackageTypeName"].ToString(), Value = r["Pk_PackageTypeId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlPackageType = ddlPackageType;
+            #endregion
+            #region pacakge Bind
+            List<SelectListItem> ddlPackage = new List<SelectListItem>();
+            DataSet ds2 = objcomm.BindProduct();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPackage.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlPackage = ddlPackage;
+            #endregion
             return View(model);
         }
-
         public ActionResult DeletePackage(string id)
         {
             string FormName = "";
@@ -151,20 +244,23 @@ namespace MyTrade.Controllers
                         obj.PackageTypeId = ds.Tables[0].Rows[0]["PackageTypeId"].ToString();
                         obj.Packageid = ds.Tables[0].Rows[0]["Pk_ProductId"].ToString();
                         obj.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
-                        obj.ProductPrice = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
-                        obj.IGST = ds.Tables[0].Rows[0]["IGST"].ToString();
-                        obj.CGST = ds.Tables[0].Rows[0]["CGST"].ToString();
-                        obj.SGST = ds.Tables[0].Rows[0]["SGST"].ToString();
-                        obj.BinaryPercent = ds.Tables[0].Rows[0]["BinaryPercent"].ToString();
-                        obj.DirectPercent = ds.Tables[0].Rows[0]["DirectPercent"].ToString();
+                        obj.ProductPrice = Convert.ToDecimal(ds.Tables[0].Rows[0]["ProductPrice"]);
+                        obj.IGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["IGST"]);
+                        obj.CGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["CGST"]);
+                        obj.SGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["SGST"]);
+                        obj.BinaryPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["BinaryPercent"]);
+                        obj.DirectPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["DirectPercent"]);
                         obj.Days = ds.Tables[0].Rows[0]["PackageDays"].ToString();
-                        obj.ROIPercent = ds.Tables[0].Rows[0]["ROIPercent"].ToString();
-                        obj.BV = ds.Tables[0].Rows[0]["BV"].ToString();
+                        obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);
+                        obj.BV = Convert.ToDecimal(ds.Tables[0].Rows[0]["BV"]);
                         obj.PackageTypeId = (ds.Tables[0].Rows[0]["PackageTypeId"].ToString());
                         obj.PackageTypeName = (ds.Tables[0].Rows[0]["PackageTypeName"].ToString());
-                        obj.FromAmount = (ds.Tables[0].Rows[0]["FromAmount"].ToString());
-                        obj.ToAmount = (ds.Tables[0].Rows[0]["ToAmount"].ToString());
-                        obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                        obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
+                        obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
+                        obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
+                        obj.IGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["IGST"]);
+                        obj.HSNCode = ds.Tables[0].Rows[0]["HSNCode"].ToString();
+                        obj.FinalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FinalAmount"]);
                     }
                 }
                 catch (Exception ex)
@@ -172,61 +268,30 @@ namespace MyTrade.Controllers
                     TempData["Package"] = ex.Message;
                 }
             }
-            else
-            {
-                List<Master> lst = new List<Master>();
-                DataSet ds = obj.ProductList();
-
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
-                        Master model = new Master();
-                        model.Packageid = r["Pk_ProductId"].ToString();
-                        model.ProductName = r["ProductName"].ToString();
-                        model.ProductPrice = r["ProductPrice"].ToString();
-                        model.IGST = r["IGST"].ToString();
-                        model.CGST = r["CGST"].ToString();
-                        model.SGST = (r["SGST"].ToString());
-                        model.BinaryPercent = (r["BinaryPercent"].ToString());
-                        model.DirectPercent = (r["DirectPercent"].ToString());
-                        model.ROIPercent = (r["ROIPercent"].ToString());
-                        model.Days = (r["PackageDays"].ToString());
-                        model.BV = (r["BV"].ToString());
-                        model.PackageTypeId = (r["PackageTypeId"].ToString());
-                        model.PackageTypeName = (r["PackageTypeName"].ToString());
-                        model.FromAmount = (r["FromAmount"].ToString());
-                        model.ToAmount = (r["ToAmount"].ToString());
-                        model.Status = r["Status"].ToString();
-                        model.InMultipleOf = r["InMultipleOf"].ToString();
-                        lst.Add(model);
-                    }
-                    obj.lstpackage = lst;
-                }
+            else { 
+            
             }
             return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Days,string InMultipleOf)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount)
         {
             Master obj = new Master();
             try
             {
                 obj.PackageTypeId = PackageType;
                 obj.ProductName = ProductName;
-                obj.ProductPrice = ProductPrice;
-                obj.IGST = IGST;
-                obj.CGST = CGST;
-                obj.SGST = SGST;
+                obj.ProductPrice = Convert.ToDecimal(ProductPrice);
+                obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
-                obj.BinaryPercent = BinaryPercent;
-                obj.DirectPercent = DirectPercent;
-                obj.ROIPercent = ROIPercent;
-                obj.BV = BV;
-                obj.FromAmount = FromAmount == "" ? null : FromAmount;
-                obj.ToAmount = ToAmount == "" ? null : ToAmount;
+                obj.ROIPercent = Convert.ToDecimal(ROIPercent);
+                obj.HSNCode = HSNCode == null ? "" : HSNCode;
+                obj.FinalAmount = Convert.ToDecimal(FinalAmount);
+                obj.BV = Convert.ToDecimal(BV);
                 obj.AddedBy = Session["PK_AdminId"].ToString();
-                obj.InMultipleOf = InMultipleOf;
+                obj.FromAmount = Convert.ToDecimal(FromAmount);
+                obj.ToAmount = Convert.ToDecimal(ToAmount);
+                obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 DataSet ds = obj.SaveProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -247,7 +312,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string CGST, string SGST, string BinaryPercent, string DirectPercent, string ROIPercent, string BV, string FromAmount, string ToAmount,string Percentage, string Days,string InMultipleOf)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Percentage, string Days, string InMultipleOf, string HSNCode, string FinalAmount)
         {
             Master obj = new Master();
             try
@@ -255,20 +320,21 @@ namespace MyTrade.Controllers
                 obj.PackageTypeId = PackageType;
                 obj.Packageid = Packageid;
                 obj.ProductName = ProductName;
-                obj.ProductPrice = ProductPrice;
-                obj.IGST = IGST;
-                obj.CGST = CGST;
-                obj.SGST = SGST;
+                obj.ProductPrice = Convert.ToDecimal(ProductPrice);
+                obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
-                obj.ROIPercent = ROIPercent;
-                obj.BinaryPercent = BinaryPercent;
-                obj.DirectPercent = DirectPercent;
-                obj.ROIPercent = ROIPercent;
-                obj.BV = BV;
+                obj.ROIPercent = Convert.ToDecimal(ROIPercent);
+                obj.HSNCode = HSNCode == null ? "" : HSNCode;
+                if (obj.IGST != 0)
+                {
+                    obj.FinalAmount = (obj.ProductPrice * (obj.IGST / 100)) + obj.ProductPrice;
+                }
+               
+                obj.BV = Convert.ToDecimal(BV);
                 obj.UpdatedBy = Session["PK_AdminId"].ToString();
-                obj.FromAmount = FromAmount == "" ? null : FromAmount;
-                obj.ToAmount = ToAmount == "" ? null : ToAmount;
-                obj.InMultipleOf = InMultipleOf;
+                obj.FromAmount = Convert.ToDecimal(FromAmount);
+                obj.ToAmount = Convert.ToDecimal(ToAmount);
+                obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 DataSet ds = obj.UpdateProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -377,7 +443,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
+
         public ActionResult DeleteRewards(string Id)
         {
             try

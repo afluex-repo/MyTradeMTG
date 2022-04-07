@@ -243,7 +243,7 @@ namespace MyTrade.Controllers
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
-            DataSet ds1 = objcomm.BindProductForJoining();
+            DataSet ds1 = objcomm.BindProductForJoiningForUser();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
                 int count = 0;
