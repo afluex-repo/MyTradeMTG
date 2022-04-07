@@ -48,7 +48,7 @@ namespace MyTrade.Controllers
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
-                    
+
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -71,7 +71,7 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-           // model.LoginId = model.ToLoginID;
+            // model.LoginId = model.ToLoginID;
             model.MemberStatus = model.MemberStatus == "0" ? null : model.MemberStatus;
             DataSet ds = model.GetAssociateList();
 
@@ -366,6 +366,7 @@ namespace MyTrade.Controllers
         #endregion
 
 
+
         public ActionResult DirectListForAdmin()
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
@@ -373,59 +374,54 @@ namespace MyTrade.Controllers
             List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
 
-            AdminReports model = new AdminReports();
-            List<AdminReports> lst = new List<AdminReports>();
-            DataSet ds = model.GetDirectList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    AdminReports obj = new AdminReports();
-                    obj.Mobile = r["Mobile"].ToString();
-                    obj.Email = r["Email"].ToString();
-                    obj.JoiningDate = r["JoiningDate"].ToString();
-                    obj.Leg = r["Leg"].ToString();
-                    obj.PermanentDate = (r["PermanentDate"].ToString());
-                    obj.Status = (r["Status"].ToString());
-                    obj.SponsorId = (r["LoginId"].ToString());
-                    obj.SponsorName = (r["Name"].ToString());
-                    obj.Package = (r["ProductName"].ToString());
-                    lst.Add(obj);
-                }
-                model.lstDirect = lst;
-            }
+            Reports model = new Reports();
+
             return View(model);
         }
+
+
 
         [HttpPost]
         [ActionName("DirectListForAdmin")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult DirectListForAdmin(AdminReports model)
+        public ActionResult DirectListForAdmin(Reports model)
         {
 
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            List<AdminReports> lst = new List<AdminReports>();
-            //model.LoginId = Session["LoginId"].ToString();
+            List<Reports> lst = new List<Reports>();
+
+            if (model.Ids == null || model.Ids == "")
+            {
+                model.Ids = "1";
+
+            }
+            model.Fk_UserId = Session["Pk_AdminId"].ToString();
             DataSet ds = model.GetDirectList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
+                string Ids = "";
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    AdminReports obj = new AdminReports();
+                    Reports obj = new Reports();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.Email = r["Email"].ToString();
-                    obj.Leg = r["Leg"].ToString();
+                    obj.SponsorId = r["SponsorId"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
                     obj.JoiningDate = r["JoiningDate"].ToString();
+                    obj.Leg = r["Leg"].ToString();
                     obj.PermanentDate = (r["PermanentDate"].ToString());
                     obj.Status = (r["Status"].ToString());
-                    obj.SponsorId = (r["LoginId"].ToString());
-                    obj.SponsorName = (r["Name"].ToString());
+                    obj.LoginId = (r["LoginId"].ToString());
+                    obj.Name = (r["Name"].ToString());
+                    obj.Level = (r["Lvl"].ToString());
                     obj.Package = (r["ProductName"].ToString());
+                    Ids = Ids + r["PK_UserId"].ToString() + ",";
                     lst.Add(obj);
                 }
-                model.lstDirect = lst;
+                model.lstassociate = lst;
+                model.Ids = Ids;
             }
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
@@ -433,6 +429,45 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
             return View(model);
         }
+
+
+
+        //[HttpPost]
+        //[ActionName("DirectListForAdmin")]
+        //[OnAction(ButtonName = "Search")]
+        //public ActionResult DirectListForAdmin(AdminReports model)
+        //{
+
+        //    model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+        //    model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+        //    List<AdminReports> lst = new List<AdminReports>();
+        //    //model.LoginId = Session["LoginId"].ToString();
+        //    DataSet ds = model.GetDirectList();
+
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow r in ds.Tables[0].Rows)
+        //        {
+        //            AdminReports obj = new AdminReports();
+        //            obj.Mobile = r["Mobile"].ToString();
+        //            obj.Email = r["Email"].ToString();
+        //            obj.Leg = r["Leg"].ToString();
+        //            obj.JoiningDate = r["JoiningDate"].ToString();
+        //            obj.PermanentDate = (r["PermanentDate"].ToString());
+        //            obj.Status = (r["Status"].ToString());
+        //            obj.SponsorId = (r["LoginId"].ToString());
+        //            obj.SponsorName = (r["Name"].ToString());
+        //            obj.Package = (r["ProductName"].ToString());
+        //            lst.Add(obj);
+        //        }
+        //        model.lstDirect = lst;
+        //    }
+        //    List<SelectListItem> AssociateStatus = Common.AssociateStatus();
+        //    ViewBag.ddlStatus = AssociateStatus;
+        //    List<SelectListItem> Leg = Common.LegType();
+        //    ViewBag.ddlleg = Leg;
+        //    return View(model);
+        //}
 
 
         public ActionResult ViewProfileForAdmin(string Id)
@@ -469,7 +504,7 @@ namespace MyTrade.Controllers
                     model.BranchName = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
                     model.UPIID = ds.Tables[0].Rows[0]["UPIID"].ToString();
                     model.Image = ds.Tables[0].Rows[0]["PanImage"].ToString();
-                    
+
                 }
             }
             return View(model);
@@ -600,7 +635,7 @@ namespace MyTrade.Controllers
             {
                 TempData["verify"] = ex.Message;
             }
-            return RedirectToAction("KYCUpdateDeatilsOfUser","Admin");
+            return RedirectToAction("KYCUpdateDeatilsOfUser", "Admin");
         }
 
 
@@ -626,7 +661,7 @@ namespace MyTrade.Controllers
                 ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
                 ViewBag.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(AvailableBalance)", "").ToString()).ToString("n2");
                 model.lstWalletLedger = lst;
-             
+
             }
             return View(model);
         }
@@ -739,7 +774,7 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult DeclineKyc(string Id)
         {
             AdminReports model = new AdminReports();
@@ -792,5 +827,175 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("TopUpReport", "AdminReports");
         }
+
+
+
+        public ActionResult ContactList()
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            model.Name = model.Name == "" ? null : model.Name;
+            DataSet ds = model.ContactList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Name = r["Name"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.Subject = r["Subject"].ToString();
+                    obj.Message = r["Message"].ToString();
+                    obj.Date = r["Date"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstcontact = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("ContactList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ContactList(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            model.Name = model.Name == "" ? null : model.Name;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.ContactList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Name = r["Name"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.Subject = r["Subject"].ToString();
+                    obj.Message = r["Message"].ToString();
+                    obj.Date = r["Date"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstcontact = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult AssociateTreeForAdmin(AssociateBooking model, string AssociateID)
+        {
+            if (AssociateID != null && AssociateID != "")
+            {
+                model.Fk_UserId = AssociateID;
+            }
+            else
+            {
+                model.Fk_UserId = Session["Pk_AdminId"].ToString();
+            }
+            model.FK_RootId = Session["Pk_AdminId"].ToString();
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+            DataSet ds = model.GetDownlineTree();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.Fk_SponsorId = ds.Tables[0].Rows[0]["Fk_SponsorId"].ToString();
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+                    obj.Fk_UserId = r["Pk_UserId"].ToString();
+                    obj.Fk_SponsorId = r["Fk_SponsorId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.FirstName = r["FirstName"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ActiveStatus = r["ActiveStatus"].ToString();
+                    obj.SponsorID = r["SponsorId"].ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.ActivationDate = r["PermanentDate"].ToString();
+                    obj.Lvl = r["Level"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult TreeTTPForAdmin(string LoginId, string Id)
+        {
+            Tree model = new Tree();
+            if (LoginId != "" && LoginId != null)
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.LoginId = LoginId;
+                model.PK_UserId = Id;
+            }
+            else
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.PK_UserId = Session["Pk_AdminId"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.DisplayName = Session["Name"].ToString();
+            }
+            List<TreeMembers> lst = new List<TreeMembers>();
+            List<MemberDetails> lstMember = new List<MemberDetails>();
+            DataSet ds = model.GetLevelMembersCountTR1();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+
+                }
+                else
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        TreeMembers obj = new TreeMembers();
+                        obj.LevelName = r["LevelNo"].ToString();
+                        obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                    {
+                        ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                        ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
+                        model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
+                        model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                        model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                        model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                        model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                        model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                        model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                        model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                        model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                        model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                        model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+                    }
+                    model.Level = "1";
+                    DataSet ds1 = model.GetLevelMembers();
+                    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds1.Tables[0].Rows)
+                        {
+                            MemberDetails obj = new MemberDetails();
+                            obj.PK_UserId = r["PK_UserId"].ToString();
+                            obj.MemberName = r["MemberName"].ToString();
+                            obj.LoginId = r["LoginId"].ToString();
+                            obj.Level = r["Lvl"].ToString();
+                            obj.ProfilePic = r["ProfilePic"].ToString();
+                            obj.Status = r["Status"].ToString();
+                            obj.SelfBV = r["SelfBV"].ToString();
+                            obj.TeamBV = r["TeamBV"].ToString();
+                            obj.SponsorName = r["SponsorName"].ToString();
+                            obj.Color = r["Color"].ToString();
+                            lstMember.Add(obj);
+                        }
+                        model.lstMember = lstMember;
+                    }
+                }
+            }
+            return View(model);
+        }
+
+
     }
 }

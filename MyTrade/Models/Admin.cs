@@ -105,7 +105,7 @@ namespace MyTrade.Models
         public List<Admin> lstKycUpdate { get; set; }
         public List<Admin> lstViewLedger { get; set; }
         public List<Admin> lstPaymentMode { get; set; }
-
+        
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
@@ -142,6 +142,7 @@ namespace MyTrade.Models
         public string TransferDate { get; set; }
         public string Balance { get; set; }
         public string Reason { get; set; }
+        
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -600,5 +601,16 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPinGeneratedByAdmin");
             return ds;
         }
+        
+        public DataSet GetDistributedTPSList()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForTPS", para);
+            return ds;
+        }
+        
     }
 }
