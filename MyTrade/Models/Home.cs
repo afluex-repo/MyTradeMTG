@@ -41,12 +41,16 @@ namespace MyTrade.Models
         public string ClosingDate { get; set; }
 
 
-        public string Amount { get;  set; }
-        public dynamic OrderId { get;  set; }
-        public string PaymentMode { get;  set; }
+        public string Amount { get; set; }
+        public dynamic OrderId { get; set; }
+        public string PaymentMode { get; set; }
         public string BannerId { get; set; }
         public string BannerImage { get; set; }
-        
+
+        public string Subject { get; set; }
+        public string Message { get; set; }
+
+
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -255,6 +259,22 @@ namespace MyTrade.Models
             return ds;
         }
 
-        
+        public DataSet SaveContact()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Name", Name),
+                                      new SqlParameter("@Email", Email),
+                                       new SqlParameter("@Mobile",MobileNo) ,
+                                      new SqlParameter("@Subject", Subject) ,
+                                      new SqlParameter("@Message", Message),
+                                        new SqlParameter("@AddedBy", AddedBy)
+
+                                     };
+            DataSet ds = DBHelper.ExecuteQuery("SaveContact", para);
+            return ds;
+        }
+
+
+
     }
 }
