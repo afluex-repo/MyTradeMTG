@@ -49,7 +49,31 @@
                                     <label>
                                         Payout No.
                                     </label>
-                                    @Html.TextBoxFor(m => m.PayoutNo, new { @class = "form-control", @Placeholder = "Payout No" })
+                                    <select class="form-control" id="PayoutNo" name="PayoutNo">
+                                        <option value="">-Select-</option>
+                                        <option value="1">Payout-1</option>
+                                        <option value="2">Payout-2</option>
+                                        <option value="3">Payout-3</option>
+                                        <option value="4">Payout-4</option>
+                                        <option value="5">Payout-5</option>
+                                        <option value="6">Payout-6</option>
+                                        <option value="7">Payout-7</option>
+                                        <option value="8">Payout-8</option>
+                                        <option value="9">Payout-9</option>
+                                        <option value="10">Payout-10</option>
+                                        <option value="11">Payout-11</option>
+                                        <option value="12">Payout-12</option>
+                                        <option value="13">Payout-13</option>
+                                        <option value="14">Payout-14</option>
+                                        <option value="15">Payout-15</option>
+                                        <option value="16">Payout-16</option>
+                                        <option value="17">Payout-17</option>
+                                        <option value="18">Payout-18</option>
+                                        <option value="19">Payout-19</option>
+                                        <option value="20">Payout-20</option>
+                                    </select>
+                                    <input type="hidden" id="hdf" value="@Model.PayoutNo" />
+                                    @*@Html.TextBoxFor(m => m.PayoutNo, new { @class = "form-control", @Placeholder = "Payout No" })*@
                                 </div>
                             </div>
                             @*<div class="col-lg-3 col-md-3">*@
@@ -187,7 +211,11 @@
 }
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#PayoutNo").val($("#hdf").val()).attr("selected", "selected");
+    });
     var f3 = flatpickr(document.getElementById('FromDate'), {
         //mode: "range"
     });

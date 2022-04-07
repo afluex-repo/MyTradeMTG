@@ -22,7 +22,25 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>
+                                        Login Id
+                                    </label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>
+                                        Name
+                                    </label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>
                                         From Date
@@ -49,6 +67,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>To Member</th>
                                         <th>Payout No</th>
                                         <th>From Member</th>
                                         <th>Business Amount</th>
@@ -68,10 +87,11 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
+                                                    <td>@Item.ToName (@Item.ToLoginID)</td>
                                                     <td>@Item.PayoutNo</td>
                                                     <td>@Item.FromName (@Item.FromLoginId)</td>
                                                     <td>@Item.BusinessAmount</td>
-                                                    <td>@Item.Percentage</td>
+                                                    <td>@Item.Percentage %</td>
                                                     <td>@Item.Amount</td>
                                                     <td>@Item.Level</td>
                                                     <td>@Item.TransactionDate</td>

@@ -50,6 +50,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>To Name</th>
                                         <th>Payout No</th>
                                         <th>From Member</th>
                                         <th>Business Amount</th>
@@ -69,10 +70,12 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.FromName</td>
+                                                    <td>@Item.ToName (@Item.ToLoginID)</td>
+                                                    <td>@Item.PayoutNo</td>
+                                                    <td>@Item.FromName (@Item.FromLoginId)</td>
                                                     <td>@Item.BusinessAmount</td>
                                                     <td>@Item.Amount</td>
-                                                    <th>@Item.Percentage</th>
+                                                    <td>@Item.Percentage %</td>
                                                     <td>@Item.Level</td>
                                                     <td>@Item.TransactionDate</td>
                                                 </tr>

@@ -245,5 +245,13 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("DeclinedKyc", para);
             return ds;
         }
+        public DataSet DeleteTopUp()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_InvestmentId", Pk_investmentId),
+                                    new SqlParameter("@UpdatedBy",UpdatedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteTopUp", para);
+            return ds;
+        }
     }
 }
