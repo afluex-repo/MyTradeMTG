@@ -186,6 +186,7 @@ namespace MyTrade.Models
         public string TotalDirect { get; set; }
         public string TotalActive { get; set; }
         public string TotalInActive { get; set; }
+        public string TPSId { get; set; }
         public string WalletBalance { get; set; }
         public string Status { get; set; }
         public string ActiveStatus { get; set; }

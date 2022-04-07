@@ -104,7 +104,7 @@
                                                     {
                                                         <td>
 
-                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" value="@Item.Amount"/>
                                                             <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
                                                             <input type="hidden" id="hdRows" name="hdRows" value="@i" />
                                                         </td>
@@ -119,7 +119,7 @@
                                                     <td id="txnNo">@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td>@Item.Amount</td>
+                                                    <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
                                                     <td>@Item.ProcessingFee</td>
                                                     <td>@Item.GrossAmount</td>
                                                     @*<td>@Item.IFSCCode</td>
@@ -288,6 +288,7 @@
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
     $(document).ready(function () {
+        var Amount = 0;
         debugger;
         $.noConflict();
         $('#ckbCheckAll').on('click', function () {
@@ -295,12 +296,14 @@
             if (this.checked) {
                 $('.checkBoxClass').each(function () {
                     this.checked = true;
+                    Amount = parseInt(Amount) + parseInt($(".checkBoxClass:checked").val());
                 });
             } else {
                 $('.checkBoxClass').each(function () {
                     this.checked = false;
                 });
             }
+           
             //$("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
         });
 
@@ -368,7 +371,7 @@
     }
     function closeModal() {
         jQuery.noConflict();
-        $("#myModal1").hide();
+        $("#myModal1").modal('hide');
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 

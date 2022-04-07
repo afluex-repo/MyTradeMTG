@@ -107,6 +107,25 @@ namespace MyTrade.Controllers
                                 Controller = "Admin";
                             }
                         }
+                        else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
+                        {
+                            Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                            Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
+                            Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
+
+                            if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
+                            {
+                                Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
+                                FormName = "Registration";
+                                Controller = "FranchiseAdmin";
+                            }
+                            else
+                            {
+                                FormName = "AdminDashBoard";
+                                Controller = "Admin";
+                            }
+                        }
                         else
                         {
                             TempData["Login"] = "Incorrect LoginId Or Password";

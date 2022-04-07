@@ -766,6 +766,31 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("KYCUpdateDeatilsOfUser", "Admin");
         }
-        
+        public ActionResult DeleteTopUp(string Id)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Pk_investmentId = Id;
+                model.UpdatedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.DeleteTopUp();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Top-Up deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("TopUpReport", "AdminReports");
+        }
     }
 }

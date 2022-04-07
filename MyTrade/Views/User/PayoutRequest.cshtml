@@ -50,6 +50,7 @@
                                 <div class="form-group">
                                     <input class="btn btn-success pull-left" type="submit" value="Transfer To Account" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
                                     <input type="hidden" id="hdf" value="@Model.Status" />
+                                    <input type="hidden" id="hdf1" value="@ViewBag.MenuStatus" />
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6" style="margin-top:28px">
@@ -202,6 +203,28 @@
         }
         else {
           
+        }
+        if ($("#hdf1").val() == "InActive") {
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: '@ViewBag.Reason',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/BankDetailsUpdate';
+                }
+            })
+
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
+
         }
     })
 </script>
