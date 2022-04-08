@@ -48,12 +48,10 @@ namespace MyTrade.Controllers
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
-
+                    obj.ActivationMode = r["ActivationMode"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
-
-
             }
             return View(model);
         }
@@ -92,6 +90,7 @@ namespace MyTrade.Controllers
                     obj.isBlocked = (r["isBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
+                    obj.ActivationMode = r["ActivationMode"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -255,6 +254,7 @@ namespace MyTrade.Controllers
                     Obj.TransactionBy = r["TransactionBy"].ToString();
                     Obj.Status = r["Statuss"].ToString();
                     Obj.TopUpDate = r["TopUpDate"].ToString();
+                    Obj.TopupVia = r["TopupVia"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -330,6 +330,7 @@ namespace MyTrade.Controllers
                     Obj.TransactionBy = r["TransactionBy"].ToString();
                     Obj.Status = r["Statuss"].ToString();
                     Obj.TopUpDate = r["TopUpDate"].ToString();
+                    Obj.TopupVia = r["TopupVia"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
                     lst1.Add(Obj);
                 }
@@ -992,6 +993,83 @@ namespace MyTrade.Controllers
                         model.lstMember = lstMember;
                     }
                 }
+            }
+            return View(model);
+        }
+
+        public ActionResult TreeForAdmin(string LoginId, string Id)
+        {
+            Tree model = new Tree();
+            if (LoginId != "" && LoginId != null)
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.LoginId = LoginId;
+                model.PK_UserId = Id;
+            }
+            else
+            {
+                model.RootAgentCode = Session["LoginId"].ToString();
+                model.PK_UserId = Session["Pk_AdminId"].ToString();
+                model.LoginId = Session["LoginId"].ToString();
+                model.DisplayName = Session["Name"].ToString();
+            }
+            List<TreeMembers> lst = new List<TreeMembers>();
+            List<MemberDetails> lstMember = new List<MemberDetails>();
+            DataSet ds = model.GetLevelMembersCount();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    TreeMembers obj = new TreeMembers();
+                    obj.LevelName = r["LevelNo"].ToString();
+                    obj.NumberOfMembers = r["TotalAssociate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lst = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
+                ViewBag.Status = ds.Tables[1].Rows[0]["Status"].ToString();
+                model.Color = ds.Tables[1].Rows[0]["Color"].ToString();
+                model.DisplayName = ds.Tables[1].Rows[0]["Name"].ToString();
+                model.PK_UserId = ds.Tables[1].Rows[0]["PK_UserId"].ToString();
+                model.ProfilePic = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                model.TotalDirect = ds.Tables[1].Rows[0]["TotalDirect"].ToString();
+                model.TotalActive = ds.Tables[1].Rows[0]["TotalActive"].ToString();
+                model.TotalInactive = ds.Tables[1].Rows[0]["TotalInActive"].ToString();
+                model.TotalTeam = ds.Tables[1].Rows[0]["TotalTeam"].ToString();
+                model.TotalActiveTeam = ds.Tables[1].Rows[0]["TotalActiveTeam"].ToString();
+                model.TotalInActiveTeam = ds.Tables[1].Rows[0]["TotalInActiveTeam"].ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+                model.SelfBV = ds.Tables[1].Rows[0]["SelfBV"].ToString();
+                model.TeamBV = ds.Tables[1].Rows[0]["TeamBV"].ToString();
+                model.SelfBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["SelfBV"]) / 76.805), 2).ToString();
+                model.TeamBVDollar = Math.Round((Convert.ToDouble(ds.Tables[1].Rows[0]["TeamBV"]) / 76.805), 2).ToString();
+                model.SponsorName = ds.Tables[1].Rows[0]["SponsorName"].ToString();
+            }
+            model.Level = "1";
+            DataSet ds1 = model.GetLevelMembers();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    MemberDetails obj = new MemberDetails();
+                    obj.PK_UserId = r["PK_UserId"].ToString();
+                    obj.MemberName = r["MemberName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.ProfilePic = r["ProfilePic"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.SelfBV = r["SelfBV"].ToString();
+                    obj.TeamBV = r["TeamBV"].ToString();
+                    //obj.SelfBVDollar = (Convert.ToDouble(r["SelfBV"]) / 76.805).ToString();
+                    //obj.TeamBVDollar = (Convert.ToDouble(r["TeamBV"]) / 76.805).ToString();
+                    obj.SponsorName = r["SponsorName"].ToString();
+                    obj.Color = r["Color"].ToString();
+                    lstMember.Add(obj);
+                }
+                model.lstMember = lstMember;
             }
             return View(model);
         }

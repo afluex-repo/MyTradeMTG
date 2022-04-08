@@ -43,10 +43,8 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@AgentCode", LoginId),
-                                      new SqlParameter("@RootAgentCode", RootAgentCode),
-
+                                      new SqlParameter("@RootAgentCode", RootAgentCode)
             };
-
             DataSet ds = DBHelper.ExecuteQuery("GetLevelMembersCount", para);
             return ds;
         }

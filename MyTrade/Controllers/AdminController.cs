@@ -887,6 +887,8 @@ namespace MyTrade.Controllers
         public ActionResult LevelIncomeTr2ForAdmin(Admin model)
         {
             List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet ds = model.LevelIncomeTr2();
@@ -2047,13 +2049,15 @@ namespace MyTrade.Controllers
             DataSet ds = model.GetWalletLedgerDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
                     obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
                     obj.UserId = r["FK_UserId"].ToString();
-                    obj.LoginId = r["LoginId"].ToString();
-                    obj.Name = r["Name"].ToString();
+                    //ViewBag.LoginId = r["LoginId"].ToString();
+                    //ViewBag.Name = r["Name"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
@@ -2061,6 +2065,7 @@ namespace MyTrade.Controllers
                     obj.Balance = r["Balance"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");

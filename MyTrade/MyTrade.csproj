@@ -850,6 +850,7 @@
     <Content Include="Views\Admin\PaidIncomeForAdmin.cshtml" />
     <Content Include="Views\AdminReports\AssociateTreeForAdmin.cshtml" />
     <Content Include="Views\AdminReports\TreeTTPForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\TreeForAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
