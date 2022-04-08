@@ -130,11 +130,12 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Generate_EPin", "Admin");
         }
-        public ActionResult UnUsedPin(string Fk_UserId)
+        public ActionResult UnUsedPin(string Fk_UserId,string Fk_ProductId)
         {
             Admin obj = new Admin();
             List<Admin> lst = new List<Admin>();
             obj.Fk_UserId = Fk_UserId;
+            obj.Fk_ProductId = Fk_ProductId;
             obj.Status = "P";
             obj.Package = obj.Package == "0" ? null : obj.Package;
             DataSet ds = obj.GetUsedUnUsedPins();
@@ -2143,7 +2144,7 @@ namespace MyTrade.Controllers
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
                     Objload.PackageName = dr["ProductName"].ToString();
-                    Objload.Package = dr["FK_ProductId"].ToString();
+                    Objload.Fk_ProductId = dr["FK_ProductId"].ToString();
                     Objload.TotalPin = dr["TotalPins"].ToString();
                     Objload.UsedPin = dr["UsedPins"].ToString();
                     Objload.AvailablePin = dr["AvaliablePins"].ToString();
@@ -2485,7 +2486,7 @@ namespace MyTrade.Controllers
             obj.Fk_UserId = Fk_UserId;
             obj.Fk_ProductId = Fk_ProductId;
             obj.ePinNo = obj.ePinNo == "" ? null : obj.ePinNo;
-            obj.Status = obj.Status == "" ? null : obj.Status;
+            obj.Status = "P";
             DataSet ds = obj.GetGeneratedEpinDetails();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -2526,11 +2527,9 @@ namespace MyTrade.Controllers
         [HttpPost]
         [ActionName("ViewGenerateEpinDetails")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult ViewGenerateEpinDetails(Admin obj,string Fk_UserId,string Fk_ProductId)
+        public ActionResult ViewGenerateEpinDetails(Admin obj)
         {
             List<Admin> lst = new List<Admin>();
-            obj.Fk_UserId = Fk_UserId;
-            obj.Fk_ProductId = Fk_ProductId;
             obj.ePinNo = obj.ePinNo == "" ? null : obj.ePinNo;
             obj.Status = obj.Status == "" ? null : obj.Status;
             DataSet ds = obj.GetGeneratedEpinDetails();
