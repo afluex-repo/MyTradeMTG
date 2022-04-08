@@ -1,0 +1,138 @@
+﻿@model MyTrade.Models.Admin
+
+@{
+    ViewBag.Title = "ViewGenerateEpinDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ViewGenerateEpinDetails", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4>Generate Epin Details</h4>
+                            </div>
+                            <div class="col-sm-3">
+                             <a href="/Admin/Generate_Epin" class="btn btn-sm btn-info">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                EPin No
+                                @Html.TextBoxFor(m => m.ePinNo, new { @class = "form-control", @Placeholder = "ePin No" })
+                            </div>
+                            <div class="col-lg-3">
+                                Status
+                                @Html.TextBoxFor(m => m.Status, new { @class = "form-control", @Placeholder = "Status" })
+                            </div>
+                            <div class="col-lg-3">
+                                <br />
+                                <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
+                            </div>
+                        </div>
+                        <div class="widget-content widget-content-area br-6">
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Login Id</th>
+                                        <th>Name</th>
+                                        <th>Pin Amount</th>
+                                        <th>GST</th>
+                                        <th>Total Amount</th>
+                                        <th>Package</th>
+                                        <th>Generate Via</th>
+                                        <th>ePin No</th>
+                                        <th>Registered To</th>
+                                        <th>Pin User</th>
+                                        <th>Used For</th>
+                                        <th>Used Date</th>
+                                        <th>Added On</th>
+                                        <th>Added By</th>
+                                        <th>Transaction No</th>
+                                        <th>Transaction Date</th>
+                                        <th>Bank Name</th>
+                                        <th>Bank Branch</th>
+                                        <th>Pin Staus</th>
+                                        <th>ToName</th>
+                                        <th>ToId</th>
+                                        <th>TransferDate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstgeneratepin != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstgeneratepin)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.PinAmount</td>
+                                                    <td>@Item.GST</td>
+                                                    <td>@Item.TotalAmount</td>
+                                                    <td>@Item.Package</td>
+                                                    <td>@Item.GenerateVia</td>
+                                                    <td>@Item.ePinNo</td>
+                                                    <td>@Item.RegisteredTo</td>
+                                                    <td>@Item.PinUser</td>
+                                                    <td>@Item.UsedFor</td>
+                                                    <td>@Item.UsedDate</td>
+                                                    <td>@Item.AddedOn</td>
+                                                    <td>@Item.AddedBy</td>
+                                                    <td>@Item.TransactionNo</td>
+                                                    <td>@Item.TransactionDate</td>
+                                                    <td>@Item.BankName</td>
+                                                    <td>@Item.BankBranch</td>
+                                                    <td>@Item.PinStaus</td>
+                                                    <td>@Item.ToName</td>
+                                                    <td>@Item.ToId</td>
+                                                    <td>@Item.TransferDate</td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+
+    });
+</script>
+
+
+
+
+

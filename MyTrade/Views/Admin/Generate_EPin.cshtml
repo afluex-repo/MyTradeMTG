@@ -85,13 +85,12 @@
                                     <th>Sr No.</th>
                                     <th>Login Id</th>
                                     <th>Name</th>
-                                    <th>E-Pin No</th>
+                                    <th>Total Pin</th>
                                     <th>Package</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Registerd To</th>
-                                    <th>Total Amount</th>
-
+                                    <th>Used Pin</th>
+                                    <th>Available Pin</th>
+                                    <th>Transfer Pin</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,19 +105,16 @@
                                                 <td>@i</td>
                                                 <td>@Item.LoginId</td>
                                                 <td>@Item.Name</td>
-                                                <td>@Item.ePinNo</td>
+                                                <td>@Item.TotalPin</td>
                                                 <td>@Item.Package</td>
-                                                <td>@Item.Amount</td>
-                                                <td>@Item.Status</td>
-                                                <td>@Item.ToId</td>
-                                                <td>@Item.TotalAmount</td>
-
-
-                                                @*<td>
-                                                        <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
-                                                            Edit
+                                                <td>@Item.UsedPin</td>
+                                                <td>@Item.AvailablePin</td>
+                                                <td>@Item.TransferPin</td>
+                                                <td>
+                                                        <a href="/Admin/ViewGenerateEpinDetails?Fk_UserId=@Item.Fk_UserId&&Fk_ProductId=@Item.PK_ProductID" class="btn btn-info btn-sm">
+                                                            View
                                                         </a>
-                                                    </td>*@
+                                                    </td>
 
                                             </tr>
                                             i++;

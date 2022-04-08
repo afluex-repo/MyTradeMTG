@@ -18,7 +18,8 @@ namespace MyTrade.Models
         public List<Admin> lstunusedpins { get; set; }
         public List<Admin> lstView { get; set; }
         public List<Admin> lstForUserPermission { get; set; }
-
+        public List<Admin> lstgeneratepin { get; set; }
+        
         public string ePinNo { get; set; }
 
         public string RegisteredTo { get; set; }
@@ -142,6 +143,19 @@ namespace MyTrade.Models
         public string TransferDate { get; set; }
         public string Balance { get; set; }
         public string Reason { get; set; }
+        public string PK_ePinDetailsId { get; set; }
+        public string PinGenerationDate { get; set; }
+        public string IGST { get; set; }
+        public string Pk_PinId { get; set; }
+
+        public string PinUser { get; set; }
+        public string UsedFor { get; set; }
+        public string UsedDate { get; set; }
+        public string ProductPrice { get; set; }
+        public string GenerateVia { get; set; }
+        public string PinAmount { get; set; }
+        public string PinStaus { get; set; }
+        public string Fk_ProductId { get; set; }
         
         #endregion
         #region PinGenerated
@@ -600,7 +614,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
             };
-            DataSet ds = DBHelper.ExecuteQuery("GetPinGeneratedByAdmin");
+            DataSet ds = DBHelper.ExecuteQuery("GetPinsGeneratedByAdmin"); 
             return ds;
         }
         
@@ -613,6 +627,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForTPS", para);
             return ds;
         }
-        
+
+        public DataSet GetGeneratedEpinDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId", Fk_UserId),
+                new SqlParameter("@EPinNo", ePinNo),
+                    new SqlParameter("@Status", Status),
+                new SqlParameter("@FK_ProductId", Fk_ProductId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPinDetailsGeneratedByAdmin", para);
+            return ds;
+        }
     }
 }
