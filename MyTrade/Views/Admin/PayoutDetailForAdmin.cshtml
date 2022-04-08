@@ -9,15 +9,15 @@
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
 @*<style>
-    .table-responsive {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        max-height: 350px !important;
-        overflow-y: scroll;
-    }
-</style>*@
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            max-height: 350px !important;
+            overflow-y: scroll;
+        }
+    </style>*@
 @using (Html.BeginForm("PayoutDetailForAdmin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -49,29 +49,7 @@
                                     <label>
                                         Payout No.
                                     </label>
-                                    <select class="form-control" id="PayoutNo" name="PayoutNo">
-                                        <option value="">-Select-</option>
-                                        <option value="1">Payout-1</option>
-                                        <option value="2">Payout-2</option>
-                                        <option value="3">Payout-3</option>
-                                        <option value="4">Payout-4</option>
-                                        <option value="5">Payout-5</option>
-                                        <option value="6">Payout-6</option>
-                                        <option value="7">Payout-7</option>
-                                        <option value="8">Payout-8</option>
-                                        <option value="9">Payout-9</option>
-                                        <option value="10">Payout-10</option>
-                                        <option value="11">Payout-11</option>
-                                        <option value="12">Payout-12</option>
-                                        <option value="13">Payout-13</option>
-                                        <option value="14">Payout-14</option>
-                                        <option value="15">Payout-15</option>
-                                        <option value="16">Payout-16</option>
-                                        <option value="17">Payout-17</option>
-                                        <option value="18">Payout-18</option>
-                                        <option value="19">Payout-19</option>
-                                        <option value="20">Payout-20</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"),"-Select-", new { @class = "form-control" })
                                     <input type="hidden" id="hdf" value="@Model.PayoutNo" />
                                     @*@Html.TextBoxFor(m => m.PayoutNo, new { @class = "form-control", @Placeholder = "Payout No" })*@
                                 </div>
@@ -136,7 +114,7 @@
                                                     <td>@Item.LevelIncomeTR2</td>
                                                     @*<td><a href="#" class="td-content product-brand text-danger" id="btnpayout_@Item.Fk_UserId" onclick="Open('@Item.Fk_UserId');" data-payoutno='@Item.PayoutNo'>@Item.GrossAmount</a></td>*@
 
-                 <td><a href="/Admin/PaidIncomeForAdmin?PayoutNo=@Item.PayoutNo&&LoginId=@Item.LoginId" class="btn btn-info">@Item.GrossAmount</a></td>
+                                                    <td><a href="/Admin/PaidIncomeForAdmin?PayoutNo=@Item.PayoutNo&&LoginId=@Item.LoginId" class="btn btn-info">@Item.GrossAmount</a></td>
                                                     <td>@Item.TDSAmount</td>
                                                     <td>@Item.ProcessingFee</td>
                                                     <td>@Item.NetAmount</td>
@@ -170,44 +148,44 @@
         </div>
     </div>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalTPS" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalTPS" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title">Payout Details</h6>
-                        <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Payout Details</h6>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
 
-                    </div>
-                    <div class="modal-body" style="color: black">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel-body table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="tblData">
-                                        <thead>
-                                            <tr>
-                                                <th>CurrentDate</th>
-                                                <th>From LoginId</th>
-                                                <th>From Name</th>
-                                                <th>Amount</th>
-                                                <th>Level</th>
-                                                <th>Payment Type</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-body table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="tblData">
+                                    <thead>
+                                        <tr>
+                                            <th>CurrentDate</th>
+                                            <th>From LoginId</th>
+                                            <th>From Name</th>
+                                            <th>Amount</th>
+                                            <th>Level</th>
+                                            <th>Payment Type</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    @*<div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal();">Close</button>
-                        </div>*@
                 </div>
-
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal();">Close</button>
+                    </div>*@
             </div>
+
         </div>
-        @Html.HiddenFor(m => m.Fk_UserId)
+    </div>
+    @Html.HiddenFor(m => m.Fk_UserId)
 }
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>

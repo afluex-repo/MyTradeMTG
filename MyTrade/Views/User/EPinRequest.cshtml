@@ -41,6 +41,7 @@
                                 <label for="Package">Package</label>
                                 @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
                                 <p class="text-success" id="spName"></p>
+                               <input type="hidden" id="hdfFinal"/>
                             </div>
                             <div class="col-md-4">
                                 <label for="Amount">Amount</label>
@@ -116,10 +117,9 @@
     }
 
     function getfinalamount() {
-        var Amount = $('#Amount').val();
+        var Amount = $('#hdfFinal').val();
         var NoofPins = $('#NoofPins').val();
-        var GST = NoofPins * (parseInt(Amount) * 18 / 100);
-        var finalamt = parseInt(Amount) * parseInt(NoofPins) +GST;
+        var finalamt = parseInt(Amount) * parseInt(NoofPins);
         var WalletAmount = $("#WalletAmount").val();
         $('#FinalAmount').val(finalamt);
         if (finalamt > WalletAmount) {
@@ -328,10 +328,12 @@
             success: function (data) {
                 debugger;
                 $('#Amount').val(data.Amount);
+                $('#hdfFinal').val(data.FinalAmount);
                 var Amount = $('#Amount').val();
+                var Final = $('#hdfFinal').val();
                 var NoofPins = $('#NoofPins').val();
                 if (NoofPins != '') {
-                    var finalamt = parseInt(Amount) * parseInt(NoofPins);
+                    var finalamt = parseInt(Final) * parseInt(NoofPins);
                     $('#FinalAmount').val(finalamt);
                 }
             }

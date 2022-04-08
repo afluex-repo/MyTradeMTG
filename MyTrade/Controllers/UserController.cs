@@ -278,6 +278,7 @@ namespace MyTrade.Controllers
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
+                obj.FinalAmount = ds.Tables[0].Rows[0]["FinalAmount"].ToString();
             }
             else { }
             return Json(obj, JsonRequestBehavior.AllowGet);
@@ -1633,9 +1634,9 @@ namespace MyTrade.Controllers
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
                     obj.Result = "yes";
-                    obj.FromAmount = ds.Tables[0].Rows[0]["FromAmount"].ToString();
-                    obj.ToAmount = ds.Tables[0].Rows[0]["ToAmount"].ToString();
-                    obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                    obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
+                    obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
+                    obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
                 }
                 else { }
             }

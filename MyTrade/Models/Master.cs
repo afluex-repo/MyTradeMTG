@@ -11,19 +11,19 @@ namespace MyTrade.Models
     {
         public List<Master> lstpackage { get; set; }
 
-        public string BinaryPercent { get; set; }
-        public string BV { get; set; }
-        public string CGST { get; set; }
-        public string DirectPercent { get; set; }
-        public string IGST { get; set; }
+        public decimal BinaryPercent { get; set; }
+        public decimal BV { get; set; }
+        public decimal CGST { get; set; }
+        public decimal DirectPercent { get; set; }
+        public decimal IGST { get; set; }
         public string Packageid { get; set; }
         public string ProductName { get; set; }
-        public string ProductPrice { get; set; }
-        public string ROIPercent { get; set; }
-        public string SGST { get; set; }
+        public decimal ProductPrice { get; set; }
+        public decimal ROIPercent { get; set; }
+        public decimal SGST { get; set; }
         public string PackageTypeId { get; set; }
-        public string ToAmount { get; set; }
-        public string FromAmount { get; set; }
+        public decimal ToAmount { get; set; }
+        public decimal FromAmount { get; set; }
         public string PackageTypeName { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }
@@ -32,7 +32,9 @@ namespace MyTrade.Models
         public string Days { get; set; }
         public bool IsActive { get; set; }
         public string Status { get; set; }
-        public string InMultipleOf { get; set; }
+        public decimal InMultipleOf { get; set; }
+        public string HSNCode { get; set; }
+        public decimal FinalAmount { get; set; }
         #region ProductMaster
 
         public DataSet SaveProduct()
@@ -40,10 +42,10 @@ namespace MyTrade.Models
             SqlParameter[] para = { new SqlParameter("@ProductName", ProductName),
                                   new SqlParameter("@ProductPrice", ProductPrice),
                                   new SqlParameter("@IGST", IGST),
-                                  new SqlParameter("@CGST", CGST),
-                                  new SqlParameter("@SGST", SGST),
-                                  new SqlParameter("@BinaryPercent", BinaryPercent),
-                                  new SqlParameter("@DirectPercent", DirectPercent),
+                                  //new SqlParameter("@CGST", CGST),
+                                  //new SqlParameter("@SGST", SGST),
+                                  //new SqlParameter("@BinaryPercent", BinaryPercent),
+                                  //new SqlParameter("@DirectPercent", DirectPercent),
                                   new SqlParameter("@ROIPercent", ROIPercent),
                                    new SqlParameter("@Days", Days),
                                   new SqlParameter("@BV",BV),
@@ -51,7 +53,9 @@ namespace MyTrade.Models
                                   new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
                                     new SqlParameter("@ToAmount", ToAmount),
-                                     new SqlParameter("@InMultipleOf", InMultipleOf)
+                                     new SqlParameter("@InMultipleOf", InMultipleOf),
+                                      new SqlParameter("@HSNCode", HSNCode),
+                                 new SqlParameter("@FinalAmount",FinalAmount)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
@@ -59,7 +63,9 @@ namespace MyTrade.Models
         }
         public DataSet ProductList()
         {
-            SqlParameter[] para = { new SqlParameter("@ProductID", Packageid) };
+            SqlParameter[] para = { new SqlParameter("@ProductID", Packageid),
+                 new SqlParameter("@PackageTypeId", PackageTypeId)
+            };
             DataSet ds = DBHelper.ExecuteQuery("ProductList", para);
             return ds;
         }
@@ -88,10 +94,10 @@ namespace MyTrade.Models
                                   new SqlParameter("@ProductName", ProductName),
                                   new SqlParameter("@ProductPrice", ProductPrice),
                                   new SqlParameter("@IGST", IGST),
-                                  new SqlParameter("@CGST", CGST),
-                                  new SqlParameter("@SGST", SGST),
-                                  new SqlParameter("@BinaryPercent", BinaryPercent),
-                                  new SqlParameter("@DirectPercent", DirectPercent),
+                                  //new SqlParameter("@CGST", CGST),
+                                  //new SqlParameter("@SGST", SGST),
+                                  //new SqlParameter("@BinaryPercent", BinaryPercent),
+                                  //new SqlParameter("@DirectPercent", DirectPercent),
                                   new SqlParameter("@ROIPercent", ROIPercent),
                                   new SqlParameter("@Days",Days),
                                   new SqlParameter("@BV", BV),
@@ -99,7 +105,9 @@ namespace MyTrade.Models
                                      new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
                                     new SqlParameter("@ToAmount", ToAmount),
-                                 new SqlParameter("@InMultipleOf", InMultipleOf)
+                                 new SqlParameter("@InMultipleOf", InMultipleOf),
+                                 new SqlParameter("@HSNCode", HSNCode),
+                                 new SqlParameter("@FinalAmount",FinalAmount)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("UpdateProduct", para);
