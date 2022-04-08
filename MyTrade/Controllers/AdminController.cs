@@ -61,26 +61,15 @@ namespace MyTrade.Controllers
                 foreach (DataRow dr in dsp.Tables[0].Rows)
                 {
                     Admin Objload = new Admin();
-
                     Objload.Fk_UserId = dr["FK_UserId"].ToString();
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
-                    Objload.PackageName = dr["ProductName"].ToString();
-                    Objload.Package = dr["FK_ProductId"].ToString();
+                    Objload.PK_ProductID = dr["FK_ProductId"].ToString();
                     Objload.TotalPin = dr["TotalPins"].ToString();
+                    Objload.Package = dr["ProductName"].ToString();
                     Objload.UsedPin = dr["UsedPins"].ToString();
                     Objload.AvailablePin = dr["AvaliablePins"].ToString();
                     Objload.TransferPin = dr["TransferPins"].ToString();
-                    //Objload.LoginId = dr["LoginId"].ToString();
-                    //Objload.Name = dr["Name"].ToString();
-                    //Objload.ePinNo = dr["ePinNo"].ToString();
-                    //Objload.Package = dr["ProductName"].ToString();
-                    //Objload.Amount = dr["PinAmount"].ToString();
-                    //Objload.Status = dr["PinStatus"].ToString();
-                    //Objload.ToId = dr["RegisteredTo"].ToString();
-                    //Objload.TransactionDate = dr["PinGenerationDate"].ToString();
-                    //Objload.GST = dr["IGST"].ToString();
-                    //Objload.TotalAmount = dr["TotalAmount"].ToString();
                     lst.Add(Objload);
                 }
                 obj.lst = lst;
@@ -2089,8 +2078,8 @@ namespace MyTrade.Controllers
                     Admin obj = new Admin();
                     obj.Pk_EwalletId = r["Pk_EwalletId"].ToString();
                     obj.UserId = r["FK_UserId"].ToString();
-                    //ViewBag.LoginId = r["LoginId"].ToString();
-                    //ViewBag.Name = r["Name"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
@@ -2489,7 +2478,97 @@ namespace MyTrade.Controllers
         }
 
 
+        public ActionResult ViewGenerateEpinDetails(string Fk_UserId,string Fk_ProductId)
+        {
+            Admin obj = new Admin();
+            List<Admin> lst = new List<Admin>();
+            obj.Fk_UserId = Fk_UserId;
+            obj.Fk_ProductId = Fk_ProductId;
+            obj.ePinNo = obj.ePinNo == "" ? null : obj.ePinNo;
+            obj.Status = obj.Status == "" ? null : obj.Status;
+            DataSet ds = obj.GetGeneratedEpinDetails();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Admin Objload = new Admin();
+                    obj.Fk_UserId = dr["Fk_UserId"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    Objload.PinAmount = dr["PinAmount"].ToString();
+                    Objload.GST = dr["GST"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    Objload.Package = dr["Package"].ToString();
+                    Objload.ProductPrice = dr["ProductPrice"].ToString();
+                    Objload.GenerateVia = dr["GenerateVia"].ToString();
+                    Objload.ePinNo = dr["ePinNo"].ToString();
+                    Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.PinUser = dr["PinUser"].ToString();
+                    Objload.UsedFor = dr["UsedFor"].ToString();
+                    Objload.UsedDate = dr["UsedDate"].ToString();
+                    Objload.AddedOn = dr["CreatedDate"].ToString();
+                    Objload.AddedBy = dr["CreatedBy"].ToString();
+                    Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    Objload.TransactionDate = dr["TransactionDate"].ToString();
+                    Objload.BankName = dr["BankName"].ToString();
+                    Objload.BankBranch = dr["BranchName"].ToString();
+                    Objload.PinStaus = dr["PinStaus"].ToString();
+                    Objload.ToName = dr["ToName"].ToString();
+                    Objload.ToId = dr["ToId"].ToString();
+                    Objload.TransferDate = dr["TransferDate"].ToString();
+                    lst.Add(Objload);
+                }
+                obj.lstgeneratepin = lst;
+            }
+            return View(obj);
+        }
 
+        [HttpPost]
+        [ActionName("ViewGenerateEpinDetails")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ViewGenerateEpinDetails(Admin obj,string Fk_UserId,string Fk_ProductId)
+        {
+            List<Admin> lst = new List<Admin>();
+            obj.Fk_UserId = Fk_UserId;
+            obj.Fk_ProductId = Fk_ProductId;
+            obj.ePinNo = obj.ePinNo == "" ? null : obj.ePinNo;
+            obj.Status = obj.Status == "" ? null : obj.Status;
+            DataSet ds = obj.GetGeneratedEpinDetails();
+            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Admin Objload = new Admin();
+                    obj.Fk_UserId = dr["Fk_UserId"].ToString();
+                    obj.LoginId = dr["LoginId"].ToString();
+                    obj.Name = dr["Name"].ToString();
+                    Objload.PinAmount = dr["PinAmount"].ToString();
+                    Objload.GST = dr["GST"].ToString();
+                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    Objload.Package = dr["Package"].ToString();
+                    Objload.ProductPrice = dr["ProductPrice"].ToString();
+                    Objload.GenerateVia = dr["GenerateVia"].ToString();
+                    Objload.ePinNo = dr["ePinNo"].ToString();
+                    Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.PinUser = dr["PinUser"].ToString();
+                    Objload.UsedFor = dr["UsedFor"].ToString();
+                    Objload.UsedDate = dr["UsedDate"].ToString();
+                    Objload.AddedOn = dr["CreatedDate"].ToString();
+                    Objload.AddedBy = dr["CreatedBy"].ToString();
+                    Objload.TransactionNo = dr["TransactionNo"].ToString();
+                    Objload.TransactionDate = dr["TransactionDate"].ToString();
+                    Objload.BankName = dr["BankName"].ToString();
+                    Objload.BankBranch = dr["BranchName"].ToString();
+                    Objload.PinStaus = dr["PinStaus"].ToString();
+                    Objload.ToName = dr["ToName"].ToString();
+                    Objload.ToId = dr["ToId"].ToString();
+                    Objload.TransferDate = dr["TransferDate"].ToString();
+                    lst.Add(Objload);
+                }
+                obj.lstgeneratepin = lst;
+            }
+            return View(obj);
+        }
 
     }
 }
