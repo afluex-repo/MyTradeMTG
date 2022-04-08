@@ -8,6 +8,7 @@ using System.Data;
 using System.IO;
 using System.Net;
 using Razorpay.Api;
+using System.Net.Http;
 
 namespace MyTrade.Controllers
 {
@@ -2377,5 +2378,42 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        
+        [HttpPost]
+        public ActionResult ForgetPassword(ForgetPassword model)
+        {
+            ForgetPasswordList res = new ForgetPasswordList();
+            List<ForgetPasswordResponse> lst = new List<ForgetPasswordResponse>();
+            try
+            {
+                DataSet ds = model.ForgetPasword();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ForgetPasswordResponse obj = new ForgetPasswordResponse();
+                        obj.Email = r["Email"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Password = r["Password"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lsForgetPassword = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }

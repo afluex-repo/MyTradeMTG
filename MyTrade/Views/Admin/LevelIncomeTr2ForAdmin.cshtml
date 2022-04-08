@@ -23,13 +23,31 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                            @*<div class="col-lg-3 col-md-3" style="margin-left:10px">*@
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>
+                                        Login Id
+                                    </label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+                                </div>
+                            </div>
+                            @*<div class="col-lg-3 col-md-3" style="margin-left:10px">*@
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>
+                                        Name
+                                    </label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
+                                </div>
+                            </div>
+                            @*<div class="col-lg-3 col-md-3" style="margin-left:10px">*@
+                            <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>
                                         From Date
                                     </label>
                                     @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date" })
-
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
@@ -39,7 +57,8 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                            @*<div class="col-lg-3 col-md-3" style="margin-top:28px">*@
+                            <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-success" value="Search" name="btnSearch" />
                                 </div>

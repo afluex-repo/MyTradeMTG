@@ -1,8 +1,8 @@
 ﻿@model MyTrade.Models.Tree
 
 @{
-    ViewBag.Title = "Tree";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewBag.Title = "TreeForAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
@@ -34,25 +34,26 @@
 
     .user-profile .widget-content-area .user-info img {
         border-radius: 9px;
-        box-shadow:none !important;
-    }
-    .user-profile .widget-content-area .user-info-list ul.contacts-block li {
-    color: #484040 !important;
-}
-    .table > tbody > tr > td {
-   
-    color: #484040 !important;
-}
-    p {
-    color:#484040 !important;
-}
-    @@media(max-width: 991px) {
-         #divMember .layout-spacing{
-             width:50% !important;
-         }
+        box-shadow: none !important;
     }
 
-   
+    .user-profile .widget-content-area .user-info-list ul.contacts-block li {
+        color: #484040 !important;
+    }
+
+    .table > tbody > tr > td {
+        color: #484040 !important;
+    }
+
+    p {
+        color: #484040 !important;
+    }
+
+    @@media(max-width: 991px) {
+        #divMember .layout-spacing {
+            width: 50% !important;
+        }
+    }
 </style>
 <link href="~/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
 <link href="~/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />

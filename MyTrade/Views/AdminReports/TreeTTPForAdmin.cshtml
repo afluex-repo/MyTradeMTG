@@ -61,10 +61,24 @@
 <div class="container-fluid">
     <div class="row layout-top-spacing" style="justify-content:center">
         <div class="col-xl-12 col-lg-12 col-md-5 col-sm-12 layout-top-spacing">
-            <a class="btn btn-primary" href="/User/TreeTTP">Refresh</a>
+            <a class="btn btn-primary" href="/adminreports/TreeTTPForAdmin">Refresh</a>
             <br /><br />
-            <div class="user-profile layout-spacing">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>  LoginId </label>
+                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                    </div>
+                </div>
+                @*<div class="col-lg-3" style="margin-top:15px;">
+                    <div class="form-group">
+                        <br />
+                        <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
+                    </div>
+                </div>*@
+            </div>
 
+            <div class="user-profile layout-spacing">
                 <div class="widget-content widget-content-area widget-orange">
                     <div class="row">
                         <div class="col-lg-3">

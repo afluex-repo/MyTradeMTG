@@ -1390,4 +1390,41 @@ namespace MyTrade.Models
             return ds;
         }
     }
+
+
+    public class ForgetPassword
+    {
+        public string Email { get; set; }
+
+        public DataSet ForgetPasword()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Email",Email)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
+            return ds;
+        }
+    }
+
+    public class ForgetPasswordList
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<ForgetPasswordResponse> lsForgetPassword { get; set; }
+    }
+    public class ForgetPasswordResponse
+    {
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+    }
+
+    
+   
+
+
+
+
+
 }
