@@ -105,9 +105,9 @@ namespace MyTrade.Models
         public string DirectStatus { get; set; }
         public string Ids { get; set; }
         public string Level { get; set; }
-
-
-
+        public string ActivationMode { get; set; }
+        public string TopupVia { get; set; }
+        
         //public string SponserName { get; set; }
 
         #region associatelist
