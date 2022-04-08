@@ -79,20 +79,20 @@
 
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Please enter your subject" placeholder="Subject">
+                                            <input type="text" name="msg_subject" id="msg_subject" class="form-control" placeholder="Subject">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <textarea name="message" class="form-control" id="message" cols="30" rows="6" required data-error="Write your message" placeholder="Your Message"></textarea>
+                                            <textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Your Message"></textarea>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
-                                        <button type="submit" class="btn btn-primary">Send Message</button>
+                     <button type="submit" class="btn btn-primary" onclick="return SaveContact();">Send Message</button>
                                         <div id="msgSubmit" class="h3 text-center hidden"></div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -120,3 +120,62 @@
         <!-- End Account Create Area -->
         
         <script src="assets/js/footer.js"></script>
+
+<script>
+    function SaveContact() {
+        debugger;
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var phone = $("#phone_number").val();
+        var subject = $("#msg_subject").val();
+        var message = $("#message").val();
+        if ($("#name").val() == "") {
+            $("#name").addClass('errortext');
+            $("#name").focus();
+            return false;
+        }
+        if ($("#email").val() == "") {
+            $("#email").addClass('errortext');
+            $("#email").focus();
+            return false;
+        }
+        if ($("#phone_number").val() == "") {
+            $("#phone_number").addClass('errortext');
+            $("#phone_number").focus();
+            return false;
+        }
+        //if ($("#msg_subject").val() == "") {
+        //    $("#msg_subject").addClass('errortext');
+        //    $("#msg_subject").focus();
+        //    return false;
+        //}
+        //if ($("#message").val() == "") {
+        //    $("#message").addClass('errortext');
+        //    $("#message").focus();
+        //    return false;
+        //}
+        else {
+            $.ajax({
+                url: "/Home/SaveContact",
+                Type: "Get",
+                DataType: "JSON",
+                data: { 'name': name, 'email': email, 'phone': phone, 'subject': subject, 'message': message },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        alert('Contact save successfully');
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert(data.Result);
+                    }
+                }
+            });
+        }
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

@@ -54,23 +54,33 @@ namespace MyTrade.Controllers
             }
 
             ViewBag.ddlProduct = ddlProduct;
-            DataSet dsp = obj.GetPinGeneratedByUser();
+            DataSet dsp = obj.GetPinGeneratedByAdmin();
             if (dsp.Tables != null && dsp.Tables[0].Rows.Count > 0)
             {
 
                 foreach (DataRow dr in dsp.Tables[0].Rows)
                 {
                     Admin Objload = new Admin();
+
+                    Objload.Fk_UserId = dr["FK_UserId"].ToString();
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
-                    Objload.ePinNo = dr["ePinNo"].ToString();
-                    Objload.Package = dr["ProductName"].ToString();
-                    Objload.Amount = dr["PinAmount"].ToString();
-                    Objload.Status = dr["PinStatus"].ToString();
-                    Objload.ToId = dr["RegisteredTo"].ToString();
-                    Objload.TransactionDate = dr["PinGenerationDate"].ToString();
-                    Objload.GST = dr["IGST"].ToString();
-                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    Objload.PackageName = dr["ProductName"].ToString();
+                    Objload.Package = dr["FK_ProductId"].ToString();
+                    Objload.TotalPin = dr["TotalPins"].ToString();
+                    Objload.UsedPin = dr["UsedPins"].ToString();
+                    Objload.AvailablePin = dr["AvaliablePins"].ToString();
+                    Objload.TransferPin = dr["TransferPins"].ToString();
+                    //Objload.LoginId = dr["LoginId"].ToString();
+                    //Objload.Name = dr["Name"].ToString();
+                    //Objload.ePinNo = dr["ePinNo"].ToString();
+                    //Objload.Package = dr["ProductName"].ToString();
+                    //Objload.Amount = dr["PinAmount"].ToString();
+                    //Objload.Status = dr["PinStatus"].ToString();
+                    //Objload.ToId = dr["RegisteredTo"].ToString();
+                    //Objload.TransactionDate = dr["PinGenerationDate"].ToString();
+                    //Objload.GST = dr["IGST"].ToString();
+                    //Objload.TotalAmount = dr["TotalAmount"].ToString();
                     lst.Add(Objload);
                 }
                 obj.lst = lst;
@@ -207,6 +217,7 @@ namespace MyTrade.Controllers
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
+                obj.FinalAmount = ds.Tables[0].Rows[0]["FinalAmount"].ToString();
             }
             else { }
             return Json(obj, JsonRequestBehavior.AllowGet);
@@ -995,6 +1006,17 @@ namespace MyTrade.Controllers
                 ViewBag.AdminFee = double.Parse(ds.Tables[0].Compute("sum(AdminFee)", "").ToString()).ToString("n2");
                 ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
                 ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
             }
             return View(model);
         }
@@ -2397,5 +2419,72 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("CreateTransaction", "Admin");
         }
+
+
+
+        public ActionResult DistributedTPSList()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.GetDistributedTPSList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTps = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("DistributedTPSList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult DistributedTPSList(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetDistributedTPSList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.BV = r["BV"].ToString();
+                    obj.Level = r["Lvl"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ProductName = r["ProductName"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstTps = lst;
+            }
+            return View(model);
+        }
+
+
+
+
     }
 }

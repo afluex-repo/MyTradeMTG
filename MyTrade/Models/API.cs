@@ -347,7 +347,7 @@ namespace MyTrade.Models
         }
         public DataSet BindProductForJoining()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoining");
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForJoiningUser");
             return ds;
         }
     }

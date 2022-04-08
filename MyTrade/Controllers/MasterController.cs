@@ -312,7 +312,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Percentage, string Days, string InMultipleOf, string HSNCode, string FinalAmount)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount)
         {
             Master obj = new Master();
             try
@@ -324,7 +324,7 @@ namespace MyTrade.Controllers
                 obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
                 obj.ROIPercent = Convert.ToDecimal(ROIPercent);
-                obj.HSNCode = HSNCode == null ? "" : HSNCode;
+                obj.HSNCode = HSNCode;
                 if (obj.IGST != 0)
                 {
                     obj.FinalAmount = (obj.ProductPrice * (obj.IGST / 100)) + obj.ProductPrice;

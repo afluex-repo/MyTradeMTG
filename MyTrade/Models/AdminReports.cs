@@ -83,7 +83,8 @@ namespace MyTrade.Models
         public List<AdminReports> lstWalletLedger { get; set; }
         public List<AdminReports> lstActivateByPayment { get; set; }
         public List<AdminReports> lstWallet { get; set; }
-
+        public List<AdminReports> lstcontact { get; set; }
+        
         public string Remark { get; set; }
         public string BankBranch { get; set; }
         public string ChequeDDNo { get; set; }
@@ -95,6 +96,17 @@ namespace MyTrade.Models
         public string WalletId { get; set; }
         public string UsedFor { get; set; }
         public string AvailableBalance { get; set; }
+
+        public string Subject { get; set; }
+        public string Message { get; set; }
+        public string Date { get; set; }
+
+
+        public string DirectStatus { get; set; }
+        public string Ids { get; set; }
+        public string Level { get; set; }
+
+
 
         //public string SponserName { get; set; }
 
@@ -253,5 +265,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteTopUp", para);
             return ds;
         }
+
+        public DataSet ContactList()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Name", Name),
+                 new SqlParameter("@FromDate", FromDate),
+                  new SqlParameter("@ToDate", ToDate)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetContactList", para);
+            return ds;
+        }
+        
     }
 }

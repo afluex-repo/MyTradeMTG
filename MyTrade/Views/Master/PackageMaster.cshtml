@@ -601,7 +601,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), CGST: $("#CGST").val(), SGST: $("#SGST").val(), BinaryPercent: $("#BinaryPercent").val(), DirectPercent: $("#DirectPercent").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val() },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val() },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';

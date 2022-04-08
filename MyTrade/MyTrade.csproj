@@ -845,6 +845,11 @@
     <Content Include="Views\Admin\BannerImageUpload.cshtml" />
     <Content Include="Views\Admin\SetMenuPermissionForUser.cshtml" />
     <Content Include="Views\Admin\CreateTransaction.cshtml" />
+    <Content Include="Views\AdminReports\ContactList.cshtml" />
+    <Content Include="Views\Admin\DistributedTPSList.cshtml" />
+    <Content Include="Views\Admin\PaidIncomeForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\AssociateTreeForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\TreeTTPForAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

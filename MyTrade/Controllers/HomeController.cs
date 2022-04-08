@@ -575,5 +575,40 @@ namespace MyTrade.Controllers
             DataSet ds = model.CalculateDistributePaymentTPS();
             return View();
         }
+
+        public ActionResult SaveContact(string name, string email, string phone, string subject, string message)
+        {
+            Home model = new Home();
+            try
+            {
+                model.Name = name;
+                model.Email = email;
+                model.MobileNo = phone;
+                model.Subject = subject;
+                model.Message = message;
+                model.AddedBy = "1";
+                DataSet ds = model.SaveContact();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "1";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+                else
+                {
+                    model.Result = ds.Tables[0].Rows[0][0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

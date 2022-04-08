@@ -278,6 +278,7 @@ namespace MyTrade.Controllers
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
+                obj.FinalAmount = ds.Tables[0].Rows[0]["FinalAmount"].ToString();
             }
             else { }
             return Json(obj, JsonRequestBehavior.AllowGet);

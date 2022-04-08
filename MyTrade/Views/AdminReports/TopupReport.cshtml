@@ -15,6 +15,9 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Top Up Report</h4>
+                                <span class="text-danger">
+                                    @TempData["msg"]
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -73,6 +76,7 @@
                                         <th>TPS Percentage</th>
                                         <th>Days</th>
                                         <th>Date</th>
+                                        <th>Delete</th>
                                         @*<th>Action</th>*@
                                         @*<th>Upgradation Date</th>
                                         <th>Payment Mode</th>
@@ -102,7 +106,7 @@
                                                     <td>@Item.ROIPercentage %</td>
                                                     <td><a class="btn btn-info btn-sm" href="/Admin/ViewROIForAdmin?Id=@Item.Pk_investmentId&UserId=@Item.Fk_UserId">@Item.PackageDays</a></td>
                                                     <td>@Item.TopUpDate</td>
-                                                    @*<td><a class="btn btn-info btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>*@
+                                                    <td><a class="btn btn-danger btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>
                                                     @*<td>@Item.UpgradtionDate</td>
                                                     <td>@Item.PaymentMode</td>
                                                         <td>@Item.Description</td>

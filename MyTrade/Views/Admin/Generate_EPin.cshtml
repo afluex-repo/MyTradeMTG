@@ -24,21 +24,22 @@
                     <div class="widget-content widget-content-area">
                         <div class="row mb-4">
                             <div class="col-md-4">
-                                    <label for="LoginId">LoginId</label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "getname();" })
-                                    <p class="text-success" id="spName"></p>
-                                </div>
+                                <label for="LoginId">LoginId</label>
+                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "getname();" })
+                                <p class="text-success" id="spName"></p>
+                            </div>
                             <div class="col-md-4">
                                 <label for="Package">Package</label>
                                 @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
                                 <p class="text-success" id="spName"></p>
                             </div>
-                           
+
                             <div class="col-md-4">
                                 <label for="Amount">Amount</label>
                                 @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @disabled = "disabled" })
+                                <input type="hidden" id="hdfFinal" />
                             </div>
-                            
+
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-4">
@@ -52,14 +53,14 @@
                             <div class="col-md-4">
                                 <label for="Fk_Paymentid">Payment Mode</label>
                                 @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
-                                
+
                             </div>
-                       
+
                         </div>
                         <div class="row mb-4" style="display:none" id="divPaymentMode">
                             <div class="col-md-3" id="divtransactiono">
                                 <label for="TransactionNo" id="lbltno">Transaction No</label>
-                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo",})
+                                @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
                             </div>
                             <div class="col-md-3" id="divtrdate">
                                 <label for="TransactionDate" id="lbltdate">TransactionDate</label>
@@ -75,7 +76,7 @@
                             </div>
                         </div>
                         <input class="btn btn-success" name="btn_Pin" id="btn_Pin" onclick="return validateform()" type="submit" value="Create Pin" />
-                     
+
                     </div>
                     <div class="widget-content widget-content-area br-6">
                         <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
@@ -90,7 +91,7 @@
                                     <th>Status</th>
                                     <th>Registerd To</th>
                                     <th>Total Amount</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -111,14 +112,14 @@
                                                 <td>@Item.Status</td>
                                                 <td>@Item.ToId</td>
                                                 <td>@Item.TotalAmount</td>
-                                               
+
 
                                                 @*<td>
-                                        <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
-                                            Edit
-                                        </a>
-                                    </td>*@
-                                               
+                                                        <a href="/AdminProfile/UpdateAssociateProfile?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
+                                                            Edit
+                                                        </a>
+                                                    </td>*@
+
                                             </tr>
                                             i++;
                                         }
@@ -145,8 +146,9 @@
 
     function getfinalamount() {
         var Amount = $('#Amount').val();
+        var FinalAmount = $('#hdfFinal').val();
         var NoofPins = $('#NoofPins').val();
-        var finalamt = parseInt(Amount) * parseInt(NoofPins);
+        var finalamt = parseInt(FinalAmount) * parseInt(NoofPins);
         $('#FinalAmount').val(finalamt);
     }
 
@@ -172,8 +174,7 @@
             $('#NoofPins').focus();
             return false;
         }
-        if ($('#Fk_Paymentid').val() == '0')
-        {
+        if ($('#Fk_Paymentid').val() == '0') {
             $('#Fk_Paymentid').addClass('errrortext');
             $('#Fk_Paymentid').focus();
             return false;
@@ -349,12 +350,13 @@
             success: function (data) {
                 debugger;
                 $('#Amount').val(data.Amount);
+                $('#hdfFinal').val(data.FinalAmount);
                 var Amount = $('#Amount').val();
+                var FinalAmount = $('#hdfFinal').val();
                 var NoofPins = $('#NoofPins').val();
-                if (NoofPins !='')
-                {
-                var finalamt = parseInt(Amount) * parseInt(NoofPins);
-                $('#FinalAmount').val(finalamt);
+                if (NoofPins != '') {
+                    var finalamt = parseInt(FinalAmount) * parseInt(NoofPins);
+                    $('#FinalAmount').val(finalamt);
                 }
             }
 

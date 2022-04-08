@@ -1,0 +1,146 @@
+﻿@model MyTrade.Models.Admin
+
+@{
+    ViewBag.Title = "DistributedTPSList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+@using (Html.BeginForm("DistributedTPSList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5">
+                                <h4>Distributed TPS List</h4>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                @*<a href="/Admin/DistributedTPSList" class="btn btn-info btn-sm">Back</a>*@
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>LoginId</label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@placeholder="Login Id" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>
+                                        Payout No.
+                                    </label>
+                                    <select class="form-control" id="PayoutNo" name="PayoutNo">
+                                        <option value="">-Select-</option>
+                                        <option value="1">Payout-1</option>
+                                        <option value="2">Payout-2</option>
+                                        <option value="3">Payout-3</option>
+                                        <option value="4">Payout-4</option>
+                                        <option value="5">Payout-5</option>
+                                        <option value="6">Payout-6</option>
+                                        <option value="7">Payout-7</option>
+                                        <option value="8">Payout-8</option>
+                                        <option value="9">Payout-9</option>
+                                        <option value="10">Payout-10</option>
+                                        <option value="11">Payout-11</option>
+                                        <option value="12">Payout-12</option>
+                                        <option value="13">Payout-13</option>
+                                        <option value="14">Payout-14</option>
+                                        <option value="15">Payout-15</option>
+                                        <option value="16">Payout-16</option>
+                                        <option value="17">Payout-17</option>
+                                        <option value="18">Payout-18</option>
+                                        <option value="19">Payout-19</option>
+                                        <option value="20">Payout-20</option>
+                                    </select>
+                                    <input type="hidden" id="hdf" value="@Model.PayoutNo" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top:15px;">
+                                <div class="form-group">
+                                    <br />
+                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Login Id</th>
+                                        <th>From Name</th>
+                                        <th>Level</th>
+                                        <th>Business Amount</th>
+                                        <th>BV</th>
+                                        <th>Package</th>
+                                        <th>Commision Amount</th>
+                                        <th> (%)</th>
+                                        <th>Transaction Date</th>
+                                        <th>To Name</th>
+                                        <th>Payout No</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstTps != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstTps)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.FromName</td>
+                                                    <td>@Item.Level</td>
+                                                    <td>@Item.BusinessAmount</td>
+                                                    <td>@Item.BV</td>
+                                                    <td>@Item.ProductName</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.CommissionPercentage %</td>
+                                                    <td>@Item.TransactionDate</td>
+                                                    <td>@Item.ToName</td>
+                                                    <td>@Item.PayoutNo</td>
+                                                    <td>@Item.Status</td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@*<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>*@
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+ 
+    if ($("#hdf").val() != "") {
+        debugger;
+        $("#PayoutNo").val($("#hdf").val()).attr("selected", "selected");
+    }
+</script>
+
+
+
+
+
