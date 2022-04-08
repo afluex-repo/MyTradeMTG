@@ -54,23 +54,33 @@ namespace MyTrade.Controllers
             }
 
             ViewBag.ddlProduct = ddlProduct;
-            DataSet dsp = obj.GetPinGeneratedByUser();
+            DataSet dsp = obj.GetPinGeneratedByAdmin();
             if (dsp.Tables != null && dsp.Tables[0].Rows.Count > 0)
             {
 
                 foreach (DataRow dr in dsp.Tables[0].Rows)
                 {
                     Admin Objload = new Admin();
+
+                    Objload.Fk_UserId = dr["FK_UserId"].ToString();
                     Objload.LoginId = dr["LoginId"].ToString();
                     Objload.Name = dr["Name"].ToString();
-                    Objload.ePinNo = dr["ePinNo"].ToString();
-                    Objload.Package = dr["ProductName"].ToString();
-                    Objload.Amount = dr["PinAmount"].ToString();
-                    Objload.Status = dr["PinStatus"].ToString();
-                    Objload.ToId = dr["RegisteredTo"].ToString();
-                    Objload.TransactionDate = dr["PinGenerationDate"].ToString();
-                    Objload.GST = dr["IGST"].ToString();
-                    Objload.TotalAmount = dr["TotalAmount"].ToString();
+                    Objload.PackageName = dr["ProductName"].ToString();
+                    Objload.Package = dr["FK_ProductId"].ToString();
+                    Objload.TotalPin = dr["TotalPins"].ToString();
+                    Objload.UsedPin = dr["UsedPins"].ToString();
+                    Objload.AvailablePin = dr["AvaliablePins"].ToString();
+                    Objload.TransferPin = dr["TransferPins"].ToString();
+                    //Objload.LoginId = dr["LoginId"].ToString();
+                    //Objload.Name = dr["Name"].ToString();
+                    //Objload.ePinNo = dr["ePinNo"].ToString();
+                    //Objload.Package = dr["ProductName"].ToString();
+                    //Objload.Amount = dr["PinAmount"].ToString();
+                    //Objload.Status = dr["PinStatus"].ToString();
+                    //Objload.ToId = dr["RegisteredTo"].ToString();
+                    //Objload.TransactionDate = dr["PinGenerationDate"].ToString();
+                    //Objload.GST = dr["IGST"].ToString();
+                    //Objload.TotalAmount = dr["TotalAmount"].ToString();
                     lst.Add(Objload);
                 }
                 obj.lst = lst;
@@ -207,6 +217,7 @@ namespace MyTrade.Controllers
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
+                obj.FinalAmount = ds.Tables[0].Rows[0]["FinalAmount"].ToString();
             }
             else { }
             return Json(obj, JsonRequestBehavior.AllowGet);
@@ -945,6 +956,17 @@ namespace MyTrade.Controllers
                 ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
                 ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
             }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
             return View(model);
         }
 
@@ -986,6 +1008,17 @@ namespace MyTrade.Controllers
                 ViewBag.AdminFee = double.Parse(ds.Tables[0].Compute("sum(AdminFee)", "").ToString()).ToString("n2");
                 ViewBag.TDSAmount = double.Parse(ds.Tables[0].Compute("sum(TDSAmount)", "").ToString()).ToString("n2");
                 ViewBag.NetAmount = double.Parse(ds.Tables[0].Compute("sum(NetAmount)", "").ToString()).ToString("n2");
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
             }
             return View(model);
         }
@@ -1758,9 +1791,9 @@ namespace MyTrade.Controllers
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
                     obj.Result = "yes";
-                    obj.FromAmount = ds.Tables[0].Rows[0]["FromAmount"].ToString();
-                    obj.ToAmount = ds.Tables[0].Rows[0]["ToAmount"].ToString();
-                    obj.InMultipleOf = ds.Tables[0].Rows[0]["InMultipleOf"].ToString();
+                    obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
+                    obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
+                    obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
                 }
                 else { }
             }
@@ -2109,7 +2142,7 @@ namespace MyTrade.Controllers
         public ActionResult UnUsedPinList()
         {
             Admin obj = new Admin();
-          
+
             List<Admin> lst = new List<Admin>();
             DataSet ds = obj.GetUnusedUsedPinsForAdmin();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -2211,7 +2244,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.GetBannerImage();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                foreach(DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin model = new Admin();
                     model.PK_BannerId = r["PK_BannerId"].ToString();
@@ -2263,7 +2296,7 @@ namespace MyTrade.Controllers
             DataSet ds = obj.DeleteBanner();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                if(ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                 {
                     TempData["msg"] = "Banner Deleted Successfully";
                 }
