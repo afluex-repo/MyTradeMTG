@@ -293,16 +293,19 @@ namespace MyTrade.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult TopupReportBy(AdminReports newdata)
         {
-            if (newdata.LoginId == null)
-            {
-                newdata.ToLoginID = null;
-            }
+            //if (newdata.LoginId == null)
+            //{
+            //    newdata.ToLoginID = null;
+            //}
             List<AdminReports> lst1 = new List<AdminReports>();
 
             newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
-            newdata.LoginId = newdata.ToLoginID;
+            //newdata.LoginId = newdata.ToLoginID;
+
+            newdata.LoginId = newdata.LoginId == "" ? null : newdata.LoginId;
+
             DataSet ds11 = newdata.GetTopupReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)

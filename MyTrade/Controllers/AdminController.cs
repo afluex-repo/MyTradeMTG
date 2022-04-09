@@ -714,6 +714,33 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ActionName("ROIIncomeReportsForAdmin")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult ROIIncomeReportsForAdmin(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetROIIncomeReportsDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["Fk_UserId"].ToString();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.Date = r["TopUpDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROIIncome = lst;
+            }
+            return View(model);
+        }
+
         public ActionResult ViewROIForAdmin(string Id, string UserId)
         {
             Admin model = new Admin();

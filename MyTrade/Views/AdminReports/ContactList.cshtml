@@ -91,15 +91,32 @@
         </div>
     </div>
 }
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />*@
+
+
+
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+
+
+
 <script>
 
-    $('#FromDate').datepicker({
-        dateFormat: 'dd/mm/yy',
+    var f3 = flatpickr(document.getElementById('FromDate'), {
+        //mode: "range"
     });
-    $('#ToDate').datepicker({
-        dateFormat: 'dd/mm/yy',
+    var f3 = flatpickr(document.getElementById('ToDate'), {
+        //mode: "range"
     });
+
+    //$('#FromDate').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //});
+    //$('#ToDate').datepicker({
+    //    dateFormat: 'dd/mm/yy',
+    //});
 </script>
