@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using Razorpay.Api;
 using System.Net.Http;
+using System.Net.Mail;
 
 namespace MyTrade.Controllers
 {
@@ -1063,7 +1064,7 @@ namespace MyTrade.Controllers
                         obj.DrAmount = r["DrAmount"].ToString();
                         obj.Narration = r["Narration"].ToString();
                         obj.TransactionDate = r["TransactionDate"].ToString();
-                        obj.Balance = "0";
+                        obj.Balance = r["Balance"].ToString();
                         lst.Add(obj);
                     }
                     res.lst = lst;
@@ -2396,7 +2397,23 @@ namespace MyTrade.Controllers
                         ForgetPasswordResponse obj = new ForgetPasswordResponse();
                         obj.Email = r["Email"].ToString();
                         obj.Name = r["Name"].ToString();
-                        obj.Password = r["Password"].ToString();
+                        obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + obj.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + obj.Password;
+
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
                         lst.Add(obj);
                     }
                     res.lsForgetPassword = lst;
@@ -2414,6 +2431,32 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        
+        public ActionResult UpdateAddress(ProfileAPI model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -57,7 +57,6 @@
                                             <th>To Id</th>
                                             <th>To Name</th>
                                             <th>Transfer Date</th>
-                                            <th>Generate Via</th>
                                         </tr>
 
                                     </thead>
@@ -79,7 +78,6 @@
                                                         <td>@Item.ToId</td>
                                                         <td>@Item.ToName</td>
                                                         <td>@Item.TransferDate</td>
-                                                        <td>@Item.GenerateVia</td>
                                                     </tr>
                                                     i++;
                                                 }
@@ -105,7 +103,6 @@
                                             {
                                                 <th>Registered To</th>
                                             }
-                                            <th>Generate Via</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -128,7 +125,6 @@
                                                         {
                                                             <td> @Item.RegisteredTo </td>
                                                         }
-                                                        <td>@Item.GenerateVia</td>
                                                     </tr>
                                                     i++;
                                                 }
@@ -148,18 +144,7 @@
         </div>
     </div>
 }
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-<script>
-
-    $('#FromDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-    });
-    $('#ToDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-    });
-</script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         jQuery.noConflict();

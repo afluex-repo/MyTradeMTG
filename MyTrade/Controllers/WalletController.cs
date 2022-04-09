@@ -109,7 +109,7 @@ namespace MyTrade.Controllers
                     model.BankName = null;
                     model.BankBranch = null;
                 }
-                if(model.PaymentType == "Offline")
+                if(model.PaymentType == "2")
                 {
                     DataSet ds = model.SaveEwalletRequest();
                     if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -125,7 +125,7 @@ namespace MyTrade.Controllers
                     }
                     else { }
                 }
-                else if(model.PaymentType == "Online")
+                else if(model.PaymentType == "1")
                 {
                     OrderModel orderModel = new OrderModel();
                     string random = Common.GenerateRandom();
