@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using Razorpay.Api;
 using System.Net.Http;
+using System.Net.Mail;
 
 namespace MyTrade.Controllers
 {
@@ -2396,7 +2397,23 @@ namespace MyTrade.Controllers
                         ForgetPasswordResponse obj = new ForgetPasswordResponse();
                         obj.Email = r["Email"].ToString();
                         obj.Name = r["Name"].ToString();
-                        obj.Password = r["Password"].ToString();
+                        obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + obj.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + obj.Password;
+
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
                         lst.Add(obj);
                     }
                     res.lsForgetPassword = lst;
