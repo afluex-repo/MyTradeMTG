@@ -686,8 +686,6 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@FK_UserId", FK_UserId),
-                                      new SqlParameter("@AadharNo", AadharNo),
-                                      new SqlParameter("@PanNo", PanNo),
                                       new SqlParameter("@Address", Address),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);

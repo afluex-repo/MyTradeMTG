@@ -293,16 +293,19 @@ namespace MyTrade.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult TopupReportBy(AdminReports newdata)
         {
-            if (newdata.LoginId == null)
-            {
-                newdata.ToLoginID = null;
-            }
+            //if (newdata.LoginId == null)
+            //{
+            //    newdata.ToLoginID = null;
+            //}
             List<AdminReports> lst1 = new List<AdminReports>();
 
             newdata.BusinessType = newdata.BusinessType == "" ? null : newdata.BusinessType;
             newdata.FromDate = string.IsNullOrEmpty(newdata.FromDate) ? null : Common.ConvertToSystemDate(newdata.FromDate, "dd/MM/yyyy");
             newdata.ToDate = string.IsNullOrEmpty(newdata.ToDate) ? null : Common.ConvertToSystemDate(newdata.ToDate, "dd/MM/yyyy");
-            newdata.LoginId = newdata.ToLoginID;
+            //newdata.LoginId = newdata.ToLoginID;
+
+            newdata.LoginId = newdata.LoginId == "" ? null : newdata.LoginId;
+
             DataSet ds11 = newdata.GetTopupReport();
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
@@ -365,10 +368,8 @@ namespace MyTrade.Controllers
             return View(newdata);
         }
         #endregion
-
-
-
-        public ActionResult DirectListForAdmin()
+        
+        public ActionResult DirectListForAdmin(string Ids,string FK_UserId)
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
             ViewBag.ddlStatus = AssociateStatus;
@@ -377,11 +378,51 @@ namespace MyTrade.Controllers
 
             Reports model = new Reports();
 
+            List<Reports> lst = new List<Reports>();
+            if (Ids == null || Ids == "")
+            {
+                model.Ids = "1";
+            }
+            else
+            {
+                model.Ids = Ids;
+            }
+            if(FK_UserId != null || FK_UserId != "")
+            {
+                model.Fk_UserId = FK_UserId;
+            }
+            model.DirectStatus = "Self";
+            DataSet ds = model.GetDirectList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() != "0")
+                {
+                    Ids = "";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Reports obj = new Reports();
+                        obj.Mobile = r["Mobile"].ToString();
+                        obj.Email = r["Email"].ToString();
+                        obj.SponsorId = r["SponsorId"].ToString();
+                        obj.SponsorName = r["SponsorName"].ToString();
+                        obj.JoiningDate = r["JoiningDate"].ToString();
+                        obj.Leg = r["Leg"].ToString();
+                        obj.PermanentDate = (r["PermanentDate"].ToString());
+                        obj.Status = (r["Status"].ToString());
+                        obj.LoginId = (r["LoginId"].ToString());
+                        obj.Name = (r["Name"].ToString());
+                        obj.Level = (r["Lvl"].ToString());
+                        obj.Package = (r["ProductName"].ToString());
+                        Ids = Ids + r["PK_UserId"].ToString() + ",";
+                        lst.Add(obj);
+                    }
+                    model.lstassociate = lst;
+                    model.Ids = Ids;
+                }
+            }
             return View(model);
         }
-
-
-
         [HttpPost]
         [ActionName("DirectListForAdmin")]
         [OnAction(ButtonName = "Search")]
@@ -394,10 +435,9 @@ namespace MyTrade.Controllers
 
             if (model.Ids == null || model.Ids == "")
             {
-                model.Ids = "1";
-
+                model.Ids = model.Fk_UserId;
             }
-            model.Fk_UserId = Session["Pk_AdminId"].ToString();
+            model.DirectStatus = "Self";
             DataSet ds = model.GetDirectList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

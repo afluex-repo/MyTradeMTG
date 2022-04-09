@@ -1064,7 +1064,7 @@ namespace MyTrade.Controllers
                         obj.DrAmount = r["DrAmount"].ToString();
                         obj.Narration = r["Narration"].ToString();
                         obj.TransactionDate = r["TransactionDate"].ToString();
-                        obj.Balance = "0";
+                        obj.Balance = r["Balance"].ToString();
                         lst.Add(obj);
                     }
                     res.lst = lst;
@@ -2431,6 +2431,32 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        
+        public ActionResult UpdateAddress(ProfileAPI model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
     }
 }
