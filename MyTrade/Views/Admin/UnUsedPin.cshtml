@@ -44,6 +44,7 @@
                                 <div class="form-group">
                                     <label>Status  </label>
                                     @Html.HiddenFor(m => m.Fk_UserId)
+                                    @Html.HiddenFor(m => m.Fk_ProductId)
                                     <input type="hidden" id="stt" value="@Model.Status" />
                                     <select id="Status" name="Status" class="form-control">
                                         <option value="">-Select-</option>

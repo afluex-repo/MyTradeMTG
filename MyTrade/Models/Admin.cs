@@ -190,7 +190,7 @@ namespace MyTrade.Models
 
                                         new SqlParameter("@Status", Status),
                                         new SqlParameter("@EPinNo", ePinNo),
-                                        new SqlParameter("@Package", Package),
+                                        new SqlParameter("@Package", Fk_ProductId),
                                         new SqlParameter("@OwnerID", OwnerID ),
                                         new SqlParameter("@RegToId", RegisteredTo ),
                                         new SqlParameter("@Fk_UserId", Fk_UserId )
