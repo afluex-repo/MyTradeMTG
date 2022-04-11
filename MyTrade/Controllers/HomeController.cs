@@ -610,5 +610,11 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult AutoDistributeLevelIncome()
+        {
+            Home model = new Home();
+            DataSet ds = model.AutoDistributeLevelIncome();
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
     }
 }

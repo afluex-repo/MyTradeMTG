@@ -96,6 +96,10 @@
                                 @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
                             </div>
                             <div class="col-lg-3">
+                               PIN/PaymentId
+                                @Html.TextBoxFor(m => m.ActivationMode, new { @class = "form-control" })
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <br />
                                     <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />

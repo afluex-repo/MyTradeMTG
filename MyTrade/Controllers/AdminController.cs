@@ -2513,7 +2513,7 @@ namespace MyTrade.Controllers
             obj.Fk_UserId = Fk_UserId;
             obj.Fk_ProductId = Fk_ProductId;
             obj.ePinNo = obj.ePinNo == "" ? null : obj.ePinNo;
-            obj.Status = "P";
+            obj.Status = "T";
             DataSet ds = obj.GetGeneratedEpinDetails();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -2541,6 +2541,7 @@ namespace MyTrade.Controllers
                     Objload.BankName = dr["BankName"].ToString();
                     Objload.BankBranch = dr["BranchName"].ToString();
                     Objload.PinStaus = dr["PinStaus"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     Objload.ToName = dr["ToName"].ToString();
                     Objload.ToId = dr["ToId"].ToString();
                     Objload.TransferDate = dr["TransferDate"].ToString();
@@ -2586,6 +2587,7 @@ namespace MyTrade.Controllers
                     Objload.BankName = dr["BankName"].ToString();
                     Objload.BankBranch = dr["BranchName"].ToString();
                     Objload.PinStaus = dr["PinStaus"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     Objload.ToName = dr["ToName"].ToString();
                     Objload.ToId = dr["ToId"].ToString();
                     Objload.TransferDate = dr["TransferDate"].ToString();
