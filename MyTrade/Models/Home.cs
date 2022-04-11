@@ -251,14 +251,11 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveOrderDetails", para);
             return ds;
         }
-
-
         public DataSet GetBannerImageList()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetBannerImageList");
             return ds;
         }
-
         public DataSet SaveContact()
         {
             SqlParameter[] para = {
@@ -273,8 +270,10 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveContact", para);
             return ds;
         }
-
-
-
+        public DataSet AutoDistributeLevelIncome()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentForJob");
+            return ds;
+        }
     }
 }

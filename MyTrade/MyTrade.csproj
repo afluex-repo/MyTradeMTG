@@ -819,7 +819,7 @@
     <Content Include="Views\Admin\AdvanceDeduction.cshtml" />
     <Content Include="Views\Master\UploadFile.cshtml" />
     <Content Include="Views\Master\UploadFileList.cshtml" />
-    <Content Include="Views\AdminReports\DirectListForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\DownTeamTree.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr2Total.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
     <None Include="Properties\Settings.settings">
@@ -848,7 +848,7 @@
     <Content Include="Views\AdminReports\ContactList.cshtml" />
     <Content Include="Views\Admin\DistributedTPSList.cshtml" />
     <Content Include="Views\Admin\PaidIncomeForAdmin.cshtml" />
-    <Content Include="Views\AdminReports\AssociateTreeForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\DirectListForAdmin.cshtml" />
     <Content Include="Views\AdminReports\TreeTTPForAdmin.cshtml" />
     <Content Include="Views\AdminReports\TreeForAdmin.cshtml" />
     <Content Include="Views\Admin\ViewGenerateEpinDetails.cshtml" />

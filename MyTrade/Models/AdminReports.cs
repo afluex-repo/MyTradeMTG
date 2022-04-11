@@ -124,6 +124,7 @@ namespace MyTrade.Models
                                     new SqlParameter("@Leg", Leg),
                                      new SqlParameter("@MemberStatus",MemberStatus),
                                            new SqlParameter("@Mobile",MobileNo),
+                                             new SqlParameter("@ActivateBy",ActivationMode),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
