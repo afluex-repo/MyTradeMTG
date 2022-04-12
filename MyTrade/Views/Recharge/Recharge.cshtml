@@ -1,0 +1,250 @@
+﻿
+@{
+    ViewBag.Title = "Recharge";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@*<link href="~/MyTradeWebsite/assets/css/style.css" rel="stylesheet" />*@
+
+@*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>*@
+
+<script src="~/MyTradeWebsite/assets/js/bootstrap.bundle.min.js"></script>
+<style>
+    #content > .container {
+        max-width: 100% !important;
+    }
+
+    .tab-content.payment-form {
+        background-color: #ecf3f9;
+        padding: 20px 20px;
+    }
+
+    .contact-form form .form-control, .contact-form form .form-select {
+        background-color: #ffffff;
+        border: none;
+        -webkit-box-shadow: 0px 5px 28.5px 1.5px rgb(149 152 200 / 20%) !important;
+        box-shadow: 0px 5px 28.5px 1.5px rgb(149 152 200 / 20%) !important;
+        height: 50px;
+        font-family: "Raleway", sans-serif;
+        font-size: 14.5px;
+    }
+
+    .card-billrecharge .nav-tabs .nav-link.active {
+        background: #910f10;
+        color: #fff;
+    }
+
+    .card-billrecharge .nav-tabs .nav-link:hover {
+        border: none;
+        outline: none;
+        background: #fff;
+        color: #22396c;
+    }
+
+    .card-billrecharge .nav-tabs .nav-link {
+        text-align: center;
+        background: #22396c;
+        color: #fff;
+        height: 100%;
+        width: 129.6px;
+        padding: 15px 10px;
+        outline: none;
+        border: none;
+    }
+    .nav-tabs {
+    border-bottom: none;
+}
+    .tab-content .sub-title {
+    display: block;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    color: #22396c;
+    font-size: 16px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+}
+    .section-title p {
+    /* max-width: 500px; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+}
+    .section-title .bar {
+    height: 5px;
+    width: 90px;
+    background: #cdf1d8;
+    margin: 15px auto 20px;
+    position: relative;
+    border-radius: 30px;
+}
+</style>
+<div class="container">
+    <div class="row layout-top-spacing">
+        <div class="col-lg-12 col-12 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-content widget-content-area">
+                    <section class="how-it-works-area ptb-70" id="">
+                        <div class="section-title">
+                            <h2>Recharge and Bill</h2>
+                         <br />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-md-12">
+                                <div class="card-billrecharge mb-5">
+
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#mobile" type="button" role="tab" aria-controls="home" aria-selected="true">Mobile</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#dth" type="button" role="tab" aria-controls="profile" aria-selected="false">DTH</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#data-card" type="button" role="tab" aria-controls="contact" aria-selected="false">Data Card</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#broadband" type="button" role="tab" aria-controls="home" aria-selected="true">Broadband</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#landline" type="button" role="tab" aria-controls="profile" aria-selected="false">Landline</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#cabletv" type="button" role="tab" aria-controls="contact" aria-selected="false">CableTv</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="electricity" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Electricity</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#flight" type="button" role="tab" aria-controls="profile" aria-selected="false">Flight</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#gas" type="button" role="tab" aria-controls="contact" aria-selected="false">Gas</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#water" type="button" role="tab" aria-controls="contact" aria-selected="false">Water</button>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <center>
+                                <div class="col-lg-4 col-sm-12 col-md-12 tab-content payment-form" id="myTabContent">
+                                    <div class="contact-form tab-pane fade show" id="mobile" role="tabpanel" aria-labelledby="home-tab">
+                                        <span class="sub-title">Mobile Recharge or Bill Payment</span>
+                                        <form id="contactForm">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 d-flex my-3">
+                                                    <div class="form-check mx-1">
+                                                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Prepaid
+                                                        <label class="form-check-label" for="radio1"></label>
+                                                    </div>
+                                                    <div class="form-check mx-1">
+                                                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Postpaid
+                                                        <label class="form-check-label" for="radio2"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="text" name="mobile" id="mobile" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your Mobile Number" onchange="return AutoFillOperator();">
+                                                        <div class="help-block with-errors"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="operator" required>
+                                                            @*<option>1 Operator</option>
+                                                            <option>2 Operator</option>
+                                                            <option>3 Operator</option>
+                                                            <option>4 Operator</option>*@
+                                                        </select>
+                                                        <div class="help-block with-errors"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="email" name="email" id="email" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount">
+                                                        <div class="help-block with-errors"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <button type="submit" class="btn btn-primary">Continue To Recharge</button>
+                                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="dth" role="tabpanel" aria-labelledby="profile-tab">dth</div>
+
+                                    <div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>
+
+                                    <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">broadband</div>
+
+                                    <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">landline</div>
+
+                                    <div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>
+
+                                    <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>
+
+                                    <div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
+
+                                    <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
+
+                                    <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>
+
+                                </div>
+                            </center>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        GetOperator();
+    });
+    function GetOperator() {
+        debugger;
+        $.ajax({
+            url: '/Recharge/GetOperator',
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                var obj = JSON.parse(data);
+                for (var i = 0; i < obj.response.length; i++) {
+                    debugger;
+                    $("#operator").html(""); // clear before appending new list
+                    $("#operator").empty();
+                    $("#operator").append(
+                          $('<option></option>').val(0).html('Select Operator'));
+                    $.each(obj.response, function (index, count) {
+                        debugger;
+                        if (count.service_type == "Prepaid" && count.status=="1")
+                        {
+                            $("#operator").append(
+                             $('<option></option>').val(count.operator_id).html(count.operator_name));
+                        }
+                    });
+                    // APPEND OR INSERT DATA TO SELECT ELEMENT.
+                    //$('#Operator').append('<option value="' + obj.response[i].operator_id + '">' + obj.response[i].operator_name + '</option>');
+                }
+            },
+            error: function () {
+              
+            }
+        });
+    }
+    function AutoFillOperator()
+    {
+
+    }
+</script>

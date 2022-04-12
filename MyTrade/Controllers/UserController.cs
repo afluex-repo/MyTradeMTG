@@ -1646,5 +1646,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+      
     }
 }

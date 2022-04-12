@@ -395,6 +395,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        public ActionResult ViewTPS(string InvId)
+        {
+            UserWallet model = new UserWallet();
+            model.Pk_InvestmentId = InvId;
+            List<UserWallet> lst = new List<UserWallet>();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.GetROIDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.ROI = r["Pk_ROIId"].ToString();
+                    obj.ROI = r["ROI"].ToString();
+                    obj.Date = r["ROIDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROI = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                ViewBag.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                ViewBag.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+            }
+            return View(model);
+        }
         public ActionResult WalletList()
         {
             Admin model = new Admin();
