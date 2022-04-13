@@ -16,12 +16,20 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Payout Wallet</h4>
+                                <h4>View Ledger</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
+                            <div class="col-sm-3">
+                                <p style="color:#2196f3"><b>Login Id : @ViewBag.LoginId</b></p>
+                            </div>
+                            <div class="col-sm-3">
+                                <p style="color:#2196f3"><b>Name : @ViewBag.Name</b></p>
+                            </div>
+                        </div>
+                        @*<div class="row">
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
                                 <div class="form-group">
                                     <label>
@@ -43,7 +51,7 @@
                                     <input type="submit" class="btn btn-success" value="Search" name="btnSearch" />
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="row">
                             <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                 <thead>
@@ -52,6 +60,8 @@
                                         <th>Narration</th>
                                         <th>Cr. Amount</th>
                                         <th>Dr. Amount</th>
+                                        <th>Balance</th>
+                                        <th>Transaction By</th>
                                         <th>Transaction Date</th>
                                     </tr>
                                 </thead>
@@ -68,6 +78,8 @@
                                                     <td>@Item.Narration</td>
                                                     <td>@Item.CrAmount</td>
                                                     <td>@Item.DrAmount</td>
+                                                    <td>@Item.Balance</td>
+                                                    <td>@Item.TransactionBy</td>
                                                     <td>@Item.TransactionDate</td>
                                                 </tr>
                                                 i++;
