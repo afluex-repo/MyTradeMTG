@@ -852,6 +852,7 @@
     <Content Include="Views\AdminReports\TreeTTPForAdmin.cshtml" />
     <Content Include="Views\AdminReports\TreeForAdmin.cshtml" />
     <Content Include="Views\Admin\ViewGenerateEpinDetails.cshtml" />
+    <Content Include="Views\Admin\WalletLedger.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
