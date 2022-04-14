@@ -1882,6 +1882,8 @@ namespace MyTrade.Controllers
                         {
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Approved";
+
+                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                             DataSet ds = model.ApprovePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
@@ -2692,5 +2694,9 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
+
+        #region
+        
+        #endregion
     }
 }

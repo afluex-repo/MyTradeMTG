@@ -58,6 +58,8 @@
 <link href="~/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
 <link href="~/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
 <link href="~/assets/css/structure.css" rel="stylesheet" />
+@using (Html.BeginForm("TreeTTPForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1" }))
+{
 <div class="container-fluid">
     <div class="row layout-top-spacing" style="justify-content:center">
         <div class="col-xl-12 col-lg-12 col-md-5 col-sm-12 layout-top-spacing">
@@ -70,12 +72,12 @@
                         @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
                     </div>
                 </div>
-                @*<div class="col-lg-3" style="margin-top:15px;">
+                <div class="col-lg-3" style="margin-top:15px;">
                     <div class="form-group">
                         <br />
                         <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
                     </div>
-                </div>*@
+                </div>
             </div>
 
             <div class="user-profile layout-spacing">
@@ -222,7 +224,7 @@
                                 <div class="statbox widget box box-shadow">
                                     <div class="widget-content widget-content-area">
                                         <div class="icon-svg">
-                                            <center><a href="/User/TreeTTP?LoginId=@item.LoginId&Id=@item.PK_UserId"><img class="level-img" src="@item.ProfilePic" height="50" width="50" style="border:5px solid @item.Color" /></a></center>
+                                            <center><a href="/AdminReports/TreeTTPForAdmin?LoginId=@item.LoginId&Id=@item.PK_UserId"><img class="level-img" src="@item.ProfilePic" height="50" width="50" style="border:5px solid @item.Color" /></a></center>
                                         </div>
                                         <p class="text-center">@item.MemberName</p>
                                         <p class="text-center">@item.LoginId</p>
@@ -237,7 +239,7 @@
         </div>
     </div>
 </div>
-
+}
 <script>
     function GetTreeMembers(Level) {
         debugger;
@@ -258,7 +260,7 @@
                                 $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="javascript:void(0)"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p></div></div></div>')
                             }
                             else {
-                                $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="/User/TreeTTP?LoginId=' + data.lstMember[i].LoginId + '&Id=' + data.lstMember[i].PK_UserId + '"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p></div></div></div>')
+                                $("#divMember").append('<div id="card_1" class="col-lg-3 layout-spacing"><div class="statbox widget box box-shadow"><div class="widget-content widget-content-area"><div class="icon-svg"><center><a href="/AdminReports/TreeTTPForAdmin?LoginId=' + data.lstMember[i].LoginId + '&Id=' + data.lstMember[i].PK_UserId + '"><img class="level-img" src="' + data.lstMember[i].ProfilePic + '" height="50" width="50" style="border:5px solid ' + data.lstMember[i].Color + '"/></a></center></div><p class="text-center">' + data.lstMember[i].MemberName + '</p><p class="text-center">' + data.lstMember[i].LoginId + '</p><p class="text-center">Sponsor- ' + data.lstMember[i].SponsorName + ' at Level : ' + data.lstMember[i].Level + '</p></div></div></div>')
                             }
                         }
                     }
