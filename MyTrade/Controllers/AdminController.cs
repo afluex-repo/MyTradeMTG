@@ -2452,8 +2452,6 @@ namespace MyTrade.Controllers
             return RedirectToAction("CreateTransaction", "Admin");
         }
 
-
-
         public ActionResult DistributedTPSList()
         {
             List<Admin> lst = new List<Admin>();
@@ -2482,8 +2480,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("DistributedTPSList")]
         [OnAction(ButtonName = "Search")]
@@ -2662,5 +2658,9 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
+
+        #region
+        
+        #endregion
     }
 }

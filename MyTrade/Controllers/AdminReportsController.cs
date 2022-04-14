@@ -1012,22 +1012,22 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
+        #region TreeTTP ForAdmin
         public ActionResult TreeTTPForAdmin(string LoginId, string Id)
         {
             Tree model = new Tree();
             if (LoginId != "" && LoginId != null)
             {
-                model.RootAgentCode = Session["LoginId"].ToString();
+                model.RootAgentCode = LoginId;
                 model.LoginId = LoginId;
                 model.PK_UserId = Id;
             }
             else
             {
-                model.RootAgentCode = Session["LoginId"].ToString();
-                model.PK_UserId = Session["Pk_AdminId"].ToString();
-                model.LoginId = Session["LoginId"].ToString();
-                model.DisplayName = Session["Name"].ToString();
+                model.RootAgentCode = "MyTrade";
+                model.PK_UserId = "1";
+                model.LoginId = "MyTrade";
+                model.DisplayName = "MyTrade";
             }
             List<TreeMembers> lst = new List<TreeMembers>();
             List<MemberDetails> lstMember = new List<MemberDetails>();
@@ -1089,22 +1089,22 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
+         #endregion
         public ActionResult TreeForAdmin(string LoginId, string Id)
         {
             Tree model = new Tree();
             if (LoginId != "" && LoginId != null)
             {
-                model.RootAgentCode = Session["LoginId"].ToString();
+                model.RootAgentCode = LoginId;
                 model.LoginId = LoginId;
                 model.PK_UserId = Id;
             }
             else
             {
-                model.RootAgentCode = Session["LoginId"].ToString();
-                model.PK_UserId = Session["Pk_AdminId"].ToString();
-                model.LoginId = Session["LoginId"].ToString();
-                model.DisplayName = Session["Name"].ToString();
+                model.RootAgentCode = "MyTrade";
+                model.PK_UserId = "1";
+                model.LoginId = "MyTrade";
+                model.DisplayName = "MyTrade";
             }
             List<TreeMembers> lst = new List<TreeMembers>();
             List<MemberDetails> lstMember = new List<MemberDetails>();
