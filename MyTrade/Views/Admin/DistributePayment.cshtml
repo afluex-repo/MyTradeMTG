@@ -86,8 +86,8 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td><a href="#" class="td-content product-brand text-danger" onclick="OpenTPP('@Item.LoginId');">@Item.TPPLevelIncome</a></td>
-                                                    <td><a href="#" class="td-content product-brand text-danger" onclick="OpenTPS('@Item.LoginId');">@Item.TPSLevelIncome</a></td>
+                                                    <td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPP('@Item.LoginId');">@Item.TPPLevelIncome</a></td>
+                                                    <td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPS('@Item.LoginId');">@Item.TPSLevelIncome</a></td>
 
                                                     <td>@Item.GrossAmount</td>
                                                     <td>@Item.TDSAmount</td>
@@ -222,6 +222,7 @@
     });
 
     function OpenTPP(LoginId) {
+        debugger;
         $("#LoginId").val(LoginId);
         $(".errortext").removeClass("errortext");
         debugger
@@ -251,7 +252,7 @@
                                 //'</td><td id="UsedFor' + i + ' " >' + data.lsttopupreport[i].UsedFor +
                             '</td></tr>')
                     }
-                    //$.noConflict();
+                    $.noConflict();
                     $("#myModal").modal('show');
                     keyboard: false;
                     backdrop: 'static';
@@ -296,7 +297,7 @@
                                 //'</td><td id="UsedFor' + i + ' " >' + data.lsttopupreporttps[i].UsedFor +
                             '</td></tr>')
                     }
-                    //$.noConflict();
+                    $.noConflict();
                     $("#myModalTPS").modal('show');
                 }
             }

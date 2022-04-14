@@ -70,6 +70,10 @@ namespace MyTrade.Controllers
                     Objload.UsedPin = dr["UsedPins"].ToString();
                     Objload.AvailablePin = dr["AvaliablePins"].ToString();
                     Objload.TransferPin = dr["TransferPins"].ToString();
+                    Objload.PinAmount = dr["PinAmount"].ToString();
+                    Objload.FinalAmount = dr["FinalAmount"].ToString();
+                    Objload.AddedOn = dr["AddedOn"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     lst.Add(Objload);
                 }
                 obj.lst = lst;
@@ -772,7 +776,34 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-
+        public ActionResult ViewTPSForAdmin(string Id, string UserId)
+        {
+            Admin model = new Admin();
+            model.Pk_investmentId = Id;
+            model.Fk_UserId = UserId;
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetROIDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
+                    obj.ROI = r["ROI"].ToString();
+                    obj.Date = r["ROIDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROI = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                ViewBag.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                ViewBag.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+            }
+            return View(model);
+        }
         public ActionResult PayoutWalletLedgerForAdmin(string Fk_UserId)
         {
             List<Admin> lst = new List<Admin>();
@@ -1851,6 +1882,8 @@ namespace MyTrade.Controllers
                         {
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Approved";
+
+                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                             DataSet ds = model.ApprovePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
@@ -2354,8 +2387,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("SetMenuPermissionForUser")]
         [OnAction(ButtonName = "btnSubmit")]
@@ -2383,8 +2414,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("SetMenuPermissionForUser", "Admin");
         }
-
-
         public ActionResult ActiveUser(string id)
         {
             try
@@ -2451,7 +2480,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("CreateTransaction", "Admin");
         }
-
         public ActionResult DistributedTPSList()
         {
             List<Admin> lst = new List<Admin>();
@@ -2477,6 +2505,17 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstTps = lst;
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
             }
             return View(model);
         }
@@ -2510,8 +2549,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         public ActionResult ViewGenerateEpinDetails(string Fk_UserId,string Fk_ProductId)
         {
             Admin obj = new Admin();
@@ -2557,7 +2594,6 @@ namespace MyTrade.Controllers
             }
             return View(obj);
         }
-
         [HttpPost]
         [ActionName("ViewGenerateEpinDetails")]
         [OnAction(ButtonName = "Search")]
