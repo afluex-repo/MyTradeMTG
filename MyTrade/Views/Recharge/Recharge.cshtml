@@ -90,6 +90,91 @@
         outline: none;
         text-align: left;
     }
+
+    .table td, .table th {
+        border-top: none;
+    }
+
+    ._3H1N {
+        background-color: #f8f8f8;
+        font-size: 14px;
+        overflow-x: scroll;
+        display: -ms-flexbox;
+        display: flex;
+        color: #999;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+        ._3H1N ._3HKw {
+            padding: 12px 20px 12px 19px;
+            cursor: pointer;
+            color: black;
+        }
+
+        ._3H1N ._2Xj9 {
+            color: #222;
+            font-weight: 600;
+            border-bottom: 3px solid #00b9f5;
+            background: #f3f7f8;
+        }
+
+    ._262P {
+        display: -ms-flexbox;
+        display: flex;
+        font-size: 13px;
+        color: black;
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
+    }
+
+    .zUDk {
+        width: 12%;
+        padding: 7px 14px;
+    }
+
+    ._8nlz {
+        height: 210px;
+        overflow: scroll;
+    }
+
+    ._1aEZ:hover {
+        background-color: #f3f7f8;
+    }
+
+    ._1aEZ {
+        display: -ms-flexbox;
+        display: flex;
+        padding: 10px 0;
+    }
+
+    ._17KN {
+        width: 15%;
+    }
+
+    ._3WAG {
+        width: 37%;
+        word-wrap: break-word;
+    }
+
+    ._3vjB {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .LLvJ {
+        color: #00baf2;
+        border: 1px solid #00baf2;
+    }
+
+    ._11kC {
+        border-radius: 6px;
+        margin: 0;
+        text-align: center;
+        font-weight: 600;
+    }
 </style>
 <div class="container">
     <div class="row layout-top-spacing">
@@ -140,91 +225,102 @@
 
                                 </div>
                             </div>
-                            <center>
-                                <div class="col-lg-6 col-sm-12 col-md-12 tab-content payment-form" id="myTabContent">
-                                    <div class="contact-form tab-pane fade show" id="mobile" role="tabpanel" aria-labelledby="home-tab">
-                                        <span class="sub-title">Mobile Recharge or Bill Payment</span>
-                                        <form id="contactForm">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12 d-flex my-3">
-                                                    <div class="form-check mx-1">
-                                                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Prepaid
-                                                        <label class="form-check-label" for="radio1"></label>
-                                                    </div>
-                                                    <div class="form-check mx-1">
-                                                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Postpaid
-                                                        <label class="form-check-label" for="radio2"></label>
-                                                    </div>
+                            <div class="col-lg-4 col-sm-12 col-md-12 tab-content payment-form" id="myTabContent">
+                                <div class="contact-form tab-pane fade show" id="mobile" role="tabpanel" aria-labelledby="home-tab">
+                                    <span class="sub-title">Mobile Recharge or Bill Payment</span>
+                                    <form id="contactForm">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 d-flex my-3">
+                                                <div class="form-check mx-1">
+                                                    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Prepaid
+                                                    <label class="form-check-label" for="radio1"></label>
                                                 </div>
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your Mobile Number">
-                                                        <div class="help-block with-errors"></div>
-                                                    </div>
+                                                <div class="form-check mx-1">
+                                                    <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Postpaid
+                                                    <label class="form-check-label" for="radio2"></label>
                                                 </div>
-
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <select class="form-control" id="operator" required>
-                                                            <option value="0">-Select Operator-</option>
-                                                            @*<option>1 Operator</option>
-                                                                <option>2 Operator</option>
-                                                                <option>3 Operator</option>
-                                                                <option>4 Operator</option>*@
-                                                        </select>
-                                                        <div class="help-block with-errors"></div>
-                                                    </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your Mobile Number">
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
+                                            </div>
 
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <select class="form-control" id="circle" required onchange="return GetPlan();">
-                                                            <option value="0">-Select Circle-</option>
-                                                        </select>
-                                                        <div class="help-block with-errors"></div>
-                                                    </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="operator" required>
+                                                        <option value="0">-Select Operator-</option>
+                                                        @*<option>1 Operator</option>
+                                                            <option>2 Operator</option>
+                                                            <option>3 Operator</option>
+                                                            <option>4 Operator</option>*@
+                                                    </select>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
-                                                <div class="container">
-                                                    <div id="divPlan">
-
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="email" name="email" id="email" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <button type="submit" class="btn btn-primary">Continue To Recharge</button>
-                                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                                        <div class="clearfix"></div>
-                                                    </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="circle" required onchange="return GetPlan();">
+                                                        <option value="0">-Select Circle-</option>
+                                                    </select>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="dth" role="tabpanel" aria-labelledby="profile-tab">dth</div>
-
-                                    <div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>
-
-                                    <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">broadband</div>
-
-                                    <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">landline</div>
-
-                                    <div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>
-
-                                    <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>
-
-                                    <div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
-
-                                    <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
-
-                                    <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>
-
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="Amount" id="Amount" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <button type="submit" class="btn btn-primary">Continue To Recharge</button>
+                                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </center>
 
+                                <div class="tab-pane fade" id="dth" role="tabpanel" aria-labelledby="profile-tab">dth</div>
+
+                                <div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>
+
+                                <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">broadband</div>
+
+                                <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">landline</div>
+
+                                <div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>
+
+                                <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>
+
+                                <div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
+
+                                <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
+
+                                <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>
+
+                            </div>
+                            <div class="col-lg-8 col-sm-12 col-md-12 tab-content payment-form" id="myPlanTab" style="display:none">
+                                <div class="">
+                                    <div class="_3H1N" id="divplan">
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <div class="_262P">
+                                                <div class="zUDk">Circle</div>
+                                                <div class="zUDk">Plan Type</div>
+                                                <div class="zUDk">Validity</div>
+                                                <div class="zUDk _3WAG">Description</div>
+                                                <div class="zUDk _17KN">Price</div>
+                                            </div>
+                                            <div class="_8nlz" id="plan">
+
+                                            </div><div class="_3yZ3">Disclaimer : <span>While we support most recharges, we request you to verify with your operator once before proceeding.</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -271,7 +367,6 @@
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
-                debugger;
                 var obj = JSON.parse(data);
                 for (var i = 0; i < obj.response.length; i++) {
                     $("#circle").html(""); // clear before appending new list
@@ -319,10 +414,17 @@
                 debugger;
                 var obj = JSON.parse(data);
                 var names = Object.getOwnPropertyNames(obj.plans);
-                $("#divPlan").html('');
+                $("#myPlanTab").show();
+                $("#divplan").html('');
                 for (var i = 0; i < names.length; i++) {
                     debugger;
-                    $("#divPlan").append('<div id="accordion"><div id=' + names[i] + ' style="border-bottom:1px solid #E1E0D6;text-align:left"><a data-toggle="collapse" data-parent="#accordion" href="" class="plan" aria-expanded="true" onclick="return GetPlanDetails("'+names[i]+'")">' + names[i] + '</a></div></div>');
+                    //$("#tblplan").append('<div id="accordion"><div style="border-bottom:1px solid #E1E0D6;text-align:left"><a href="javascript:void(0)" class="plan" aria-expanded="true" onclick="return GetPlanDetails();">' + names[i] + '</a></div><div id="collaps' + names[i] + '" style="display:block"></div></div>');
+                    var str = JSON.stringify(names[i]);
+                    $("#divplan").append("<div class='_3HKw' onclick='return GetPlanDetails(" + str + ")'>" + names[i] + "</div>");
+                }
+                for (var i = 0; i < obj.plans.FULLTT.length; i++) {
+                    $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FULLTT[i].rs + ')">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
+                    //$("#tblplan").append('<div class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.FULLTT[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.FULLTT[i].rs + '</a></h5><p class="card-text">' + obj.plans.FULLTT[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.FULLTT[i].validity + '</h6></div></div></div></div></div>')
                 }
             },
             error: function () {
@@ -340,39 +442,46 @@
             success: function (data) {
                 debugger;
                 var obj = JSON.parse(data);
-                if (str == " fulltt") {
+                if (str == "FULLTT") {
+                    $("#plan").html('');
                     for (var i = 0; i < obj.plans.FULLTT.length; i++) {
-                        $("#FULLTT").append('<div id="collapseFULLTT" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.FULLTT[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.FULLTT[i].rs + '</a></h5><p class="card-text">' + obj.plans.FULLTT[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.FULLTT[i].validity + '</h6></div></div></div></div></div>')
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "TOPUP") {
+                    $("#plan").html('');
                     for (var i = 0; i < obj.plans.TOPUP.length; i++) {
-                        $("#TOPUP").append('<div id="collapseTOPUP" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.TOPUP[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.TOPUP[i].rs + '</a></h5><p class="card-text">' + obj.plans.TOPUP[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.TOPUP[i].validity + '</h6></div></div></div></div></div>')
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.TOPUP[i].Type + '</div><div class="zUDk">' + obj.plans.TOPUP[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.TOPUP[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.TOPUP[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "DATA") {
+                    $("#plan").html('');
                     for (var i = 0; i < obj.plans.DATA.length; i++) {
-                        $("#DATA").append('<div id="collapseDATA" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.DATA[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.DATA[i].rs + '</a></h5><p class="card-text">' + obj.plans.DATA[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.DATA[i].validity + '</h6></div></div></div></div></div>')
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.DATA[i].Type + '</div><div class="zUDk">' + obj.plans.DATA[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.DATA[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.DATA[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "SMS") {
+                    $("#plan").html('');
                     for (var i = 0; i < obj.plans.SMS.length; i++) {
-                        $("#SMS").append('<div id="collapseSMS" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.SMS[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.SMS[i].rs + '</a></h5><p class="card-text">' + obj.plans.SMS[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.SMS[i].validity + '</h6></div></div></div></div></div>')
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.SMS[i].Type + '</div><div class="zUDk">' + obj.plans.SMS[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.SMS[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.SMS[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "Romaing") {
+                    $("#plan").html('');
                     for (var i = 0; i < obj.plans.Romaing.length; i++) {
-                        $("#Romaing").append('<div id="collapseRomaing" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.Romaing[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.Romaing[i].rs + '</a></h5><p class="card-text">' + obj.plans.Romaing[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.Romaing[i].validity + '</h6></div></div></div></div></div>')
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.Romaing[i].Type + '</div><div class="zUDk">' + obj.plans.Romaing[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.Romaing[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.Romaing[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "FRC") {
+                    $("#plan").html('');
                     for (var i = 0; i < obj.plans.FRC.length; i++) {
-                        $("#FRC").append('<div id="collapseFRC" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.FRC[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.FRC[i].rs + '</a></h5><p class="card-text">' + obj.plans.FRC[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.FRC[i].validity + '</h6></div></div></div></div></div>')
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FRC[i].Type + '</div><div class="zUDk">' + obj.plans.FRC[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FRC[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FRC[i].rs + ')">Rs. ' + obj.plans.FRC[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "STV") {
-                    for (var i = 0; i < obj.plans.FULLTT.length; i++) {
-                        $("#STV").append('<div id="collapseSTV" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.STV[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.STV[i].rs + '</a></h5><p class="card-text">' + obj.plans.STV[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.STV[i].validity + '</h6></div></div></div></div></div>')
+                    $("#plan").html('');
+                    for (var i = 0; i < obj.plans.FRC.length; i++) {
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.STV[i].Type + '</div><div class="zUDk">' + obj.plans.STV[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.STV[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.STV[i].rs + '</button></div></div>');
                     }
                 }
             },
@@ -380,5 +489,8 @@
 
             }
         });
+    }
+    function SetAmount(price) {
+        $("#Amount")
     }
 </script>

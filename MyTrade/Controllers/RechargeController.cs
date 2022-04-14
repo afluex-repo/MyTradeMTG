@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using RestSharp;
 using MyTrade.Models;
+using Mytrade.Controllers;
 
 namespace MyTrade.Controllers
 {
-    public class RechargeController : Controller
+    public class RechargeController : UserBaseController
     {
         // GET: Recharge
         public ActionResult Recharge()

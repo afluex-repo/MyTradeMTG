@@ -156,7 +156,8 @@ namespace MyTrade.Models
         public string PinAmount { get; set; }
         public string PinStaus { get; set; }
         public string Fk_ProductId { get; set; }
-        
+        public string AvailableBalance { get; set; }
+        public List<Admin> lstWalletLedger { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -224,6 +225,14 @@ namespace MyTrade.Models
             };
             DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetailsForAdmin", para);
 
+            return ds;
+        }
+        public DataSet WalletLedger()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name",Name)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("[PayoutWalletLedgerForAdmin]", para);
             return ds;
         }
         public DataSet GetEwalletRequestDetails()
