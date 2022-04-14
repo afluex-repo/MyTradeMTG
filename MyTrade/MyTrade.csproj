@@ -692,6 +692,7 @@
     <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\RazorPayclient.cs" />
+    <Compile Include="Models\Recharge.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\RestClient.cs" />
     <Compile Include="Models\Tree.cs" />

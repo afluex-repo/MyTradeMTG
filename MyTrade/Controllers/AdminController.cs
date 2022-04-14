@@ -2496,6 +2496,17 @@ namespace MyTrade.Controllers
                 }
                 model.lstTps = lst;
             }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
             return View(model);
         }
         [HttpPost]

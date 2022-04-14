@@ -50,32 +50,46 @@
         outline: none;
         border: none;
     }
+
     .nav-tabs {
-    border-bottom: none;
-}
+        border-bottom: none;
+    }
+
     .tab-content .sub-title {
-    display: block;
-    margin-bottom: 10px;
-    text-transform: capitalize;
-    color: #22396c;
-    font-size: 16px;
-    font-family: "Raleway", sans-serif;
-    font-weight: 700;
-}
+        display: block;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        color: #22396c;
+        font-size: 16px;
+        font-family: "Raleway", sans-serif;
+        font-weight: 700;
+    }
+
     .section-title p {
-    /* max-width: 500px; */
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0;
-}
+        /* max-width: 500px; */
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0;
+    }
+
     .section-title .bar {
-    height: 5px;
-    width: 90px;
-    background: #cdf1d8;
-    margin: 15px auto 20px;
-    position: relative;
-    border-radius: 30px;
-}
+        height: 5px;
+        width: 90px;
+        background: #cdf1d8;
+        margin: 15px auto 20px;
+        position: relative;
+        border-radius: 30px;
+    }
+
+    a:hover, a:focus {
+        color: #f96332;
+    }
+
+    .plan {
+        color: #e95108;
+        outline: none;
+        text-align: left;
+    }
 </style>
 <div class="container">
     <div class="row layout-top-spacing">
@@ -85,7 +99,7 @@
                     <section class="how-it-works-area ptb-70" id="">
                         <div class="section-title">
                             <h2>Recharge and Bill</h2>
-                         <br />
+                            <br />
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-md-12">
@@ -127,7 +141,7 @@
                                 </div>
                             </div>
                             <center>
-                                <div class="col-lg-4 col-sm-12 col-md-12 tab-content payment-form" id="myTabContent">
+                                <div class="col-lg-6 col-sm-12 col-md-12 tab-content payment-form" id="myTabContent">
                                     <div class="contact-form tab-pane fade show" id="mobile" role="tabpanel" aria-labelledby="home-tab">
                                         <span class="sub-title">Mobile Recharge or Bill Payment</span>
                                         <form id="contactForm">
@@ -144,7 +158,7 @@
                                                 </div>
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" name="mobile" id="mobile" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your Mobile Number" onchange="return AutoFillOperator();">
+                                                        <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your Mobile Number">
                                                         <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
@@ -152,10 +166,11 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group">
                                                         <select class="form-control" id="operator" required>
+                                                            <option value="0">-Select Operator-</option>
                                                             @*<option>1 Operator</option>
-                                                            <option>2 Operator</option>
-                                                            <option>3 Operator</option>
-                                                            <option>4 Operator</option>*@
+                                                                <option>2 Operator</option>
+                                                                <option>3 Operator</option>
+                                                                <option>4 Operator</option>*@
                                                         </select>
                                                         <div class="help-block with-errors"></div>
                                                     </div>
@@ -163,17 +178,29 @@
 
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group">
-                                                        <input type="email" name="email" id="email" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount">
+                                                        <select class="form-control" id="circle" required onchange="return GetPlan();">
+                                                            <option value="0">-Select Circle-</option>
+                                                        </select>
                                                         <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>
+                                                <div class="container">
+                                                    <div id="divPlan">
 
-                                                <div class="col-lg-12 col-md-12">
-                                                    <button type="submit" class="btn btn-primary">Continue To Recharge</button>
-                                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                                    <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="email" name="email" id="email" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount">
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <button type="submit" class="btn btn-primary">Continue To Recharge</button>
+                                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </form>
                                     </div>
 
@@ -208,28 +235,23 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        debugger;
         GetOperator();
+        GetCircle();
     });
     function GetOperator() {
-        debugger;
         $.ajax({
             url: '/Recharge/GetOperator',
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
-                debugger;
                 var obj = JSON.parse(data);
                 for (var i = 0; i < obj.response.length; i++) {
-                    debugger;
                     $("#operator").html(""); // clear before appending new list
                     $("#operator").empty();
                     $("#operator").append(
                           $('<option></option>').val(0).html('Select Operator'));
                     $.each(obj.response, function (index, count) {
-                        debugger;
-                        if (count.service_type == "Prepaid" && count.status=="1")
-                        {
+                        if (count.service_type == "Prepaid" && count.status == "1") {
                             $("#operator").append(
                              $('<option></option>').val(count.operator_id).html(count.operator_name));
                         }
@@ -239,12 +261,124 @@
                 }
             },
             error: function () {
-              
+
             }
         });
     }
-    function AutoFillOperator()
-    {
+    function GetCircle() {
+        $.ajax({
+            url: '/Recharge/GetCircle',
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                var obj = JSON.parse(data);
+                for (var i = 0; i < obj.response.length; i++) {
+                    $("#circle").html(""); // clear before appending new list
+                    $("#circle").empty();
+                    $("#circle").append(
+                          $('<option></option>').val(0).html('Select Circle'));
+                    $.each(obj.response, function (index, count) {
+                        $("#circle").append(
+                         $('<option></option>').val(count.circle_code).html(count.circle_name));
+                    });
+                    // APPEND OR INSERT DATA TO SELECT ELEMENT.
+                    //$('#Operator').append('<option value="' + obj.response[i].operator_id + '">' + obj.response[i].operator_name + '</option>');
+                }
+            },
+            error: function () {
 
+            }
+        });
+    }
+    function AutoFillOperator() {
+        $.ajax({
+            url: '/Recharge/AutoFillOperator',
+            data: { MobileNo: $("#MobileNo").val() },
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#operator option[text=" + obj.details.operator + "]").attr("selected", "selected");
+                $("#circle option[text=" + obj.details.Circle + "]").attr("selected", "selected");
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function GetPlan() {
+        debugger;
+        $.ajax({
+            url: '/Recharge/GetPlan',
+            data: { state_code: $("#circle").val(), opid: $("#operator").val() },
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                var obj = JSON.parse(data);
+                var names = Object.getOwnPropertyNames(obj.plans);
+                $("#divPlan").html('');
+                for (var i = 0; i < names.length; i++) {
+                    debugger;
+                    $("#divPlan").append('<div id="accordion"><div id=' + names[i] + ' style="border-bottom:1px solid #E1E0D6;text-align:left"><a data-toggle="collapse" data-parent="#accordion" href="" class="plan" aria-expanded="true" onclick="return GetPlanDetails("'+names[i]+'")">' + names[i] + '</a></div></div>');
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function GetPlanDetails(str) {
+        debugger;
+        $.ajax({
+            url: '/Recharge/GetPlan',
+            data: { state_code: $("#circle").val(), opid: $("#operator").val() },
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                var obj = JSON.parse(data);
+                if (str == " fulltt") {
+                    for (var i = 0; i < obj.plans.FULLTT.length; i++) {
+                        $("#FULLTT").append('<div id="collapseFULLTT" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.FULLTT[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.FULLTT[i].rs + '</a></h5><p class="card-text">' + obj.plans.FULLTT[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.FULLTT[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+                if (str == "TOPUP") {
+                    for (var i = 0; i < obj.plans.TOPUP.length; i++) {
+                        $("#TOPUP").append('<div id="collapseTOPUP" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.TOPUP[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.TOPUP[i].rs + '</a></h5><p class="card-text">' + obj.plans.TOPUP[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.TOPUP[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+                if (str == "DATA") {
+                    for (var i = 0; i < obj.plans.DATA.length; i++) {
+                        $("#DATA").append('<div id="collapseDATA" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.DATA[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.DATA[i].rs + '</a></h5><p class="card-text">' + obj.plans.DATA[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.DATA[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+                if (str == "SMS") {
+                    for (var i = 0; i < obj.plans.SMS.length; i++) {
+                        $("#SMS").append('<div id="collapseSMS" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.SMS[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.SMS[i].rs + '</a></h5><p class="card-text">' + obj.plans.SMS[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.SMS[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+                if (str == "Romaing") {
+                    for (var i = 0; i < obj.plans.Romaing.length; i++) {
+                        $("#Romaing").append('<div id="collapseRomaing" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.Romaing[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.Romaing[i].rs + '</a></h5><p class="card-text">' + obj.plans.Romaing[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.Romaing[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+                if (str == "FRC") {
+                    for (var i = 0; i < obj.plans.FRC.length; i++) {
+                        $("#FRC").append('<div id="collapseFRC" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.FRC[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.FRC[i].rs + '</a></h5><p class="card-text">' + obj.plans.FRC[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.FRC[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+                if (str == "STV") {
+                    for (var i = 0; i < obj.plans.FULLTT.length; i++) {
+                        $("#STV").append('<div id="collapseSTV" class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.STV[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.STV[i].rs + '</a></h5><p class="card-text">' + obj.plans.STV[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.STV[i].validity + '</h6></div></div></div></div></div>')
+                    }
+                }
+            },
+            error: function () {
+
+            }
+        });
     }
 </script>

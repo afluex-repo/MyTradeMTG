@@ -164,6 +164,6 @@ E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
 E:\Divya\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
-D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\RestSharp.dll
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\bin\RestSharp.xml
+D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
