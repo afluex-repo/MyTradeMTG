@@ -252,7 +252,18 @@ namespace MyTrade.Models
         }
 
 
-
+        public DataSet CreateOrder()
+        {
+            SqlParameter[] para = {new SqlParameter("@Fk_UserId",Fk_UserId),
+                                   new SqlParameter("@Amount",Amount),
+                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+            return ds;
+        }
 
 
 
@@ -339,6 +350,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
             return ds;
         }
-        
+      
     }
 }

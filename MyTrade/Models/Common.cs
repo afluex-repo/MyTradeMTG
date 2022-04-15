@@ -29,6 +29,7 @@ namespace MyTrade.Models
         public string Package { get; set; }
         public string Leg { get; set; }
         public string ProfilePic { get; set; }
+        public string TransactionType { get; set; }
         public static string GenerateRandom()
         {
             Random r = new Random();
@@ -38,6 +39,20 @@ namespace MyTrade.Models
                 s = string.Concat(s, r.Next(10).ToString());
             }
             return s;
+        }
+        public static string GenerateAlphaNumericNumber()
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[8];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            var finalString = new String(stringChars);
+            return finalString;
         }
         public static string ConvertToSystemDate(string InputDate, string InputFormat)
         {
@@ -248,4 +263,5 @@ namespace MyTrade.Models
         public static string KeyName = "rzp_live_k8z9ufVw0R0MLV";
         public static string SecretKey = "BxiVGly6SUkZkI6aJ5vjbSU6";
     }
+  
 }
