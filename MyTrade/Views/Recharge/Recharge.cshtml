@@ -269,12 +269,12 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="Amount" id="Amount" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount">
+                                                    <input type="text" name="Amount" id="Amount" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount" onchange="return CheckWalletBalance();">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
-                                                <button type="submit" class="btn btn-primary">Continue To Recharge</button>
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
                                                 <div id="msgSubmit" class="h3 text-center hidden"></div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -445,31 +445,31 @@
                 if (str == "FULLTT") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.FULLTT.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FULLTT[i].rs + ')">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "TOPUP") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.TOPUP.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.TOPUP[i].Type + '</div><div class="zUDk">' + obj.plans.TOPUP[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.TOPUP[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.TOPUP[i].rs + '</button></div></div>');
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.TOPUP[i].Type + '</div><div class="zUDk">' + obj.plans.TOPUP[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.TOPUP[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.TOPUP[i].rs + ')">Rs. ' + obj.plans.TOPUP[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "DATA") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.DATA.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.DATA[i].Type + '</div><div class="zUDk">' + obj.plans.DATA[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.DATA[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.DATA[i].rs + '</button></div></div>');
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.DATA[i].Type + '</div><div class="zUDk">' + obj.plans.DATA[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.DATA[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.DATA[i].rs + ')">Rs. ' + obj.plans.DATA[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "SMS") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.SMS.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.SMS[i].Type + '</div><div class="zUDk">' + obj.plans.SMS[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.SMS[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.SMS[i].rs + '</button></div></div>');
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.SMS[i].Type + '</div><div class="zUDk">' + obj.plans.SMS[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.SMS[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.SMS[i].rs + ')">Rs. ' + obj.plans.SMS[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "Romaing") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.Romaing.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.Romaing[i].Type + '</div><div class="zUDk">' + obj.plans.Romaing[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.Romaing[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.Romaing[i].rs + '</button></div></div>');
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.Romaing[i].Type + '</div><div class="zUDk">' + obj.plans.Romaing[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.Romaing[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.Romaing[i].rs + ')">Rs. ' + obj.plans.Romaing[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "FRC") {
@@ -480,8 +480,8 @@
                 }
                 if (str == "STV") {
                     $("#plan").html('');
-                    for (var i = 0; i < obj.plans.FRC.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.STV[i].Type + '</div><div class="zUDk">' + obj.plans.STV[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.STV[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB">Rs. ' + obj.plans.STV[i].rs + '</button></div></div>');
+                    for (var i = 0; i < obj.plans.STV.length; i++) {
+                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.STV[i].Type + '</div><div class="zUDk">' + obj.plans.STV[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.STV[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.STV[i].rs + ')">Rs. ' + obj.plans.STV[i].rs + '</button></div></div>');
                     }
                 }
             },
@@ -490,7 +490,84 @@
             }
         });
     }
-    function SetAmount(price) {
-        $("#Amount")
+    function Setamount(price) {
+        $("#Amount").val(price);
+        CheckWalletBalance();
+    }
+    function CheckWalletBalance() {
+        debugger;
+        $.ajax({
+            url: '/Recharge/WalletBalance',
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                var obj = JSON.parse(data);
+                if (parseFloat(obj.response.balance) >= parseFloat($("#Amount").val())) {
+
+                }
+                else {
+                    alert("Recharge services are temporarily unavailable for this plan. Kindly choose another plan");
+                    $("#Amount").val('');
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    }
+    function CreateOrder() {
+        debugger;
+        $.ajax({
+            url: '/Recharge/CreateOrder',
+            data: { Amount: $("#Amount").val(), MobileNo: $("#MobileNo").val() },
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                if (data.Result == "Yes")
+                {
+                    if (confirm("Are you sure you want to continue for recharge?")) {
+                        PrepaidRecharge(data.OrderNo);
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else if(data.Result=="No"){
+                    alert(data.Message);
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    }
+    function PrepaidRecharge(OrderNo)
+    {
+        debugger;
+        $.ajax({
+            url: '/Recharge/PrepaidRecharge',
+            data: { Amount: $("#Amount").val(), OrderNo: OrderNo, MobileNo: $("#MobileNo").val(), state_code: $("#circle").val(), opid: $("#operator").val() },
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                debugger;
+                if (data.Result == "Yes") {
+                    if (confirm("Are you sure you want to continue for recharge?")) {
+
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else if (data.Result == "No") {
+                    alert(data.Message);
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
     }
 </script>
