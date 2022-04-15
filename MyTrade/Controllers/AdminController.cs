@@ -2660,7 +2660,10 @@ namespace MyTrade.Controllers
 
 
         #region
-        
+        public ActionResult DistributedTPSDetails()
+        {
+            return View();
+        }
         #endregion
     }
 }
