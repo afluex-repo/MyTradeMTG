@@ -34,7 +34,7 @@ namespace MyTrade.Models
         public string UserType { get; set; }
         public string ConfirmPassword { get; set; }
         public string Gender { get; set; }
-        public string ProfilePic { get; set; }
+        //public string ProfilePic { get; set; }
         public HttpPostedFileBase postedFile { get; set; }
         public string Name { get; set; }
         public string ePinNo { get; set; }
