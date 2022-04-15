@@ -27,28 +27,36 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>LoginId</label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@placeholder="Login Id" })
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>
-                                        Payout No.
-                                    </label>
-                                    @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "form-control" })
-                                    <input type="hidden" id="hdf" value="@Model.PayoutNo" />
-                                </div>
-                            </div>
                             <div class="col-lg-3" style="margin-top:15px;">
                                 <div class="form-group">
                                     <br />
-                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
+                                    <a href="/Admin/DistributedTPSDetails" class="btn btn-info">Back to List</a>
                                 </div>
                             </div>
                         </div>
+                                                @*<div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>LoginId</label>
+                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@placeholder="Login Id" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>
+                        Payout No.
+                    </label>
+                    @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "form-control" })
+                    <input type="hidden" id="hdf" value="@Model.PayoutNo" />
+                </div>
+            </div>
+            <div class="col-lg-3" style="margin-top:15px;">
+                <div class="form-group">
+                    <br />
+                   <a href="/Admin/DistributedTPSList?PayoutNo=@Item.PayoutNo&&LoginId=@Item.LoginId&&Fk_InvestmentId=@Item.Fk_InvestmentId" class="btn btn-info">@Item.Amount</a>
+                </div>
+            </div>
+        </div>*@
                         <div class="row">
                             <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                 <thead>

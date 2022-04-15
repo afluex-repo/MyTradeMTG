@@ -2480,10 +2480,13 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("CreateTransaction", "Admin");
         }
-        public ActionResult DistributedTPSList()
+        public ActionResult DistributedTPSList(string PayoutNo, string LoginId, string Fk_InvestmentId)
         {
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
+            model.PayoutNo = PayoutNo;
+            model.LoginId = LoginId;
+            model.Fk_InvestmentId = Fk_InvestmentId;
             DataSet ds = model.GetDistributedTPSList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2696,7 +2699,95 @@ namespace MyTrade.Controllers
 
 
         #region
+        public ActionResult DistributedTPSDetails()
+        {
+          
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
         
+            DataSet ds = model.TPSPayoutDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Fk_InvestmentId = r["Fk_InvestmentId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayout = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+               
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
+            return View(model);
+
+        }
+        [HttpPost]
+        [ActionName("DistributedTPSDetails")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DistributedTPSDetailList(Admin model)
+        {
+
+            List<Admin> lst = new List<Admin>();
+          
+            DataSet ds = model.TPSPayoutDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Fk_InvestmentId = r["Fk_InvestmentId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayout = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
+            return View(model);
+
+
+        }
         #endregion
     }
 }
