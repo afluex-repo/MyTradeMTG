@@ -35,20 +35,21 @@
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                         <br />
-                                                        <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return ValidateForm();" />
+                                                        <input type="submit" id="btnSearch" class="btn btn-success pull-left mt-3" name="Search" value="Search" onclick="return ValidateForm();" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
+
                                                 <div class="col-md-6">
-                                                </div>
-                                                <div>
-                                                    @if (ViewBag.Fk_SponsorId != "0")
-                                                    {
-                                                        <a href="/AdminReports/DirectListForAdmin?AssociateID=@ViewBag.Fk_SponsorId&FK_UserId=@Model.FK_RootId" id="btnDown" class="btn btn-info btn-sm">Back</a>
-                                                    }
-                                                </div>
+                                                    <div class="form-group" style="float: right">
+                                                        <br />
+                                                        @if (ViewBag.Fk_SponsorId != "0")
+                                                        {
+                                                            <a href="/AdminReports/DirectListForAdmin?AssociateID=@ViewBag.Fk_SponsorId&FK_UserId=@Model.FK_RootId" id="btnDown" class="btn btn-info mt-2">Back</a>
+                                                        }
+                                                    </div>
+                                                 </div>
                                             </div>
+                                         
                                             <div class="dt-responsive table-responsive">
                                                 <table class="table table-hover non-hover" data-page-length='20' id="html5-extension">
                                                     <thead>

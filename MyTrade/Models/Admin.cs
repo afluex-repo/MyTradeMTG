@@ -19,7 +19,8 @@ namespace MyTrade.Models
         public List<Admin> lstView { get; set; }
         public List<Admin> lstForUserPermission { get; set; }
         public List<Admin> lstgeneratepin { get; set; }
-        
+        public string Fk_InvestmentId { get; set; }
+      
         public string ePinNo { get; set; }
 
         public string RegisteredTo { get; set; }
@@ -630,8 +631,9 @@ namespace MyTrade.Models
         public DataSet GetDistributedTPSList()
         {
             SqlParameter[] para = {
-                new SqlParameter("@LoginId", LoginId),
-                new SqlParameter("@PayoutNo", PayoutNo)
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo),
+                new SqlParameter("@FK_InvestmentId", Fk_InvestmentId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForTPS", para);
             return ds;
@@ -648,5 +650,20 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPinDetailsGeneratedByAdmin", para);
             return ds;
         }
+
+        #region
+        public DataSet TPSPayoutDetail()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo),
+                //new SqlParameter("@FromDate", FromDate),
+                //    new SqlParameter("@ToDate", ToDate),
+               // new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("TPSPayoutDetails", para);
+            return ds;
+        }
+        #endregion
     }
 }

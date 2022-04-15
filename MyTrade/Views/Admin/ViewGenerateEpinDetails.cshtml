@@ -98,12 +98,12 @@
                                             <th>GST</th>
                                             <th>Final Amount</th>
                                             <th class="dt-no-sorting">Status</th>
-                                            <th>Payment Mode</th>
+                                            @*<th>Payment Mode</th>*@
                                             <th>Generated Date</th>
-                                            @*@if (Model.Status == "P")
+                                            @if (Model.Status == "P")
                                             {
                                                 <th>Registered To</th>
-                                            }*@
+                                            }
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,12 +121,12 @@
                                                         <td>@Item.GST</td>
                                                         <td>@Item.TotalAmount</td>
                                                         <td>@Item.PinStaus</td>
-                                                        <td>@Item.PaymentMode</td>
+                                                        @*<td>@Item.PaymentMode</td>*@
                                                         <td>@Item.AddedOn</td>
-                                                        @*@if (Item.PinStaus == "Used")
+                                                        @if (Item.PinStaus == "Used")
                                                         {
                                                             <td> @Item.RegisteredTo </td>
-                                                        }*@
+                                                        }
                                                     </tr>
                                                     i++;
                                                 }

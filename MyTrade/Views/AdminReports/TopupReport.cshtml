@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="widget-content widget-content-area">
+                    <div class="widget-content widget-content-area br-6">
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
@@ -66,96 +66,98 @@
                                     @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
                             </div>
-                          
+
                             <div class="col-lg-3">
                                 <br />
                                 <input class="btn btn-success" type="submit" value="Search" name="Search" id="btnSearch" />
                             </div>
                         </div>
 
-                        <div class="widget-content widget-content-area br-6">
 
-                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
-                                <thead>
-                                    <tr>
-                                        <th>Sr No.</th>
-                                        <th>Login Id</th>
-                                        <th>Name</th>
-                                        <th>Product Name</th>
-                                        <th>Topup Amount</th>
-                                        <th>BV</th>
-                                        <th>Transaction By</th>
-                                        <th>Status</th>
-                                        <th>TPS Percentage</th>
-                                        <th>Days</th>
-                                        <th>Date</th>
-                                        <th>Topup Via</th>
-                                        <th>Delete</th>
-                                        @*<th>Action</th>*@
-                                        @*<th>Upgradation Date</th>
-                                            <th>Payment Mode</th>
-                                                <th>Description</th>
-                                            <th>Price</th>
-                                            <th>Calculation Status</th>*@
-                                        @*<th>Print</th>*@
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
+
+                        <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Login Id</th>
+                                    <th>Name</th>
+                                    <th>Product Name</th>
+                                    <th>Topup Amount</th>
+                                    <th>BV</th>
+                                    <th>Transaction By</th>
+                                    <th>Status</th>
+                                    <th>TPS Percentage</th>
+                                    <th>Days</th>
+                                    <th>Date</th>
+                                    @*<th>Topup Via</th>*@
+                                    <th>Delete</th>
+                                    @*<th>Action</th>*@
+                                    @*<th>Upgradation Date</th>
+                        <th>Payment Mode</th>
+                            <th>Description</th>
+                        <th>Price</th>
+                        <th>Calculation Status</th>*@
+                                    @*<th>Print</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lsttopupreport != null)
                                     {
-                                        if (Model.lsttopupreport != null)
+                                        int i = 1;
+                                        foreach (var Item in Model.lsttopupreport)
                                         {
-                                            int i = 1;
-                                            foreach (var Item in Model.lsttopupreport)
-                                            {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td>@Item.LoginId</td>
-                                                    <td>@Item.DisplayName</td>
-                                                    <td>@Item.Package</td>
-                                                    <td>@Item.PinAmount</td>
-                                                    <td>@Item.BV</td>
-                                                    <td>@Item.TransactionBy</td>
-                                                    <td>@Item.Status</td>
-                                                    <td>@Item.ROIPercentage %</td>
-                                                    <td><a class="btn btn-info btn-sm" href="/Admin/ViewROIForAdmin?Id=@Item.Pk_investmentId&UserId=@Item.Fk_UserId">@Item.PackageDays</a></td>
-                                                    <td>@Item.TopUpDate</td>
-                                                    <td>@Item.TopupVia</td>
-                                                    @*<td><a class="btn btn-info btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>*@
-                                                    <td><a class="btn btn-danger btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>
-                                                    @*<td>@Item.UpgradtionDate</td>
-                                                        <td>@Item.PaymentMode</td>
-                                                            <td>@Item.Description</td>
-                                                        <td>@Item.Amount</td>
-                                                        <td>@Item.Status</td>*@
-                                                    @*<td>*@
-                                                    @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
-                                                    @*<a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class=       "btn btn-sm btn-primary" target="_blank">Print </a>*@
-                                                    @*  <button onclick="changeprintdate('@Item.PrintingDate','@Item.LoginId')">Print</button>*@
-                                                    @*</td>*@
-                                                </tr>
-                                                i++;
-                                            }
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.LoginId</td>
+                                                <td>@Item.DisplayName</td>
+                                                <td>@Item.Package</td>
+                                                <td>@Item.PinAmount</td>
+                                                <td>@Item.BV</td>
+                                                <td>@Item.TransactionBy</td>
+                                                <td>@Item.Status</td>
+                                                <td>@Item.ROIPercentage %</td>
+                                                <td><a class="btn btn-info btn-sm" href="/Admin/ViewTPSForAdmin?Id=@Item.Pk_investmentId&UserId=@Item.Fk_UserId">@Item.PackageDays</a></td>
+                                                <td>@Item.TopUpDate</td>
+                                                @*<td>@Item.TopupVia</td>*@
+                                                @*<td><a class="btn btn-info btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>*@
+                                                <td><a class="btn btn-danger btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>
+                                                @*<td>@Item.UpgradtionDate</td>
+                                    <td>@Item.PaymentMode</td>
+                                        <td>@Item.Description</td>
+                                    <td>@Item.Amount</td>
+                                    <td>@Item.Status</td>*@
+                                                @*<td>*@
+                                                @*<a href="/AdminReports/PrintReciept/@Item.LoginId">Print</a>*@
+                                                @*<a href="/AdminReports/PrintTopUp?ToLoginID=@Item.ToLoginID" class=       "btn btn-sm btn-primary" target="_blank">Print </a>*@
+                                                @*  <button onclick="changeprintdate('@Item.PrintingDate','@Item.LoginId')">Print</button>*@
+                                                @*</td>*@
+                                            </tr>
+                                            i++;
                                         }
                                     }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        @*<th></th>
-                                            <th></th>*@
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    @*<th></th>
+                        <th></th>*@
 
-                                        <th style="text-align:right">Total Amount</th>
-                                        <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-
+                                    <th style="text-align:right">Total Amount</th>
+                                    <th style="color:dodgerblue;font-weight:800">@ViewBag.Total</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
+
+
+
+                   
                 </div>
             </div>
         </div>

@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=103.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.103.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -240,6 +244,11 @@
     <Content Include="assets\js\scrollspyNav.js" />
     <Content Include="assets\js\users\account-settings.js" />
     <Content Include="assets\js\widgets\modules-widgets.js" />
+    <Content Include="BannerImage\3b617820-2891-47cc-8b84-f95510212e36.JPG" />
+    <Content Include="BannerImage\55496215-9bbf-42b3-963c-912f8ea225f6.jpg" />
+    <Content Include="BannerImage\8ceb2d38-aa60-47c7-8460-a4e3940be9e6.png" />
+    <Content Include="BannerImage\a33bea29-bd34-4248-ac35-65bb254aad75.jpg" />
+    <Content Include="BannerImage\dc524edd-47f0-4a14-af6c-54813d760bbc.JPG" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
@@ -639,6 +648,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
+    <Compile Include="Controllers\RechargeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
@@ -687,6 +697,7 @@
     <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\RazorPayclient.cs" />
+    <Compile Include="Models\Recharge.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\RestClient.cs" />
     <Compile Include="Models\Tree.cs" />
@@ -854,6 +865,9 @@
     <Content Include="Views\Admin\ViewGenerateEpinDetails.cshtml" />
     <Content Include="Views\Admin\WalletLedger.cshtml" />
     <Content Include="Views\Admin\DistributedTPSDetails.cshtml" />
+    <Content Include="Views\Admin\PaymentModeList.cshtml" />
+    <Content Include="Views\Admin\ViewTPSForAdmin.cshtml" />
+    <Content Include="Views\Wallet\ViewTPS.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -863,7 +877,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BannerImage\" />
     <Folder Include="PanUpload\" />
     <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
