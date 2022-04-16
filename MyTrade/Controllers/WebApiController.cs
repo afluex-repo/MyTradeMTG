@@ -250,12 +250,15 @@ namespace MyTrade.Controllers
                         if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
                             string Email = dsResult.Tables[0].Rows[0]["Email"].ToString();
+                            string Name = dsResult.Tables[0].Rows[0]["Name"].ToString();
+                            string LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
+                            string Password = dsResult.Tables[0].Rows[0]["Password"].ToString();
                             obj.Status = "0";
                             obj.Message = "User Activated Successfully";
                             if (Email != null && Email != "")
                             {
-                                string Body = "Dear User,</br> Your Account have been activated.";
-                                BLMail.SendMail(Email, "Activation Successful", Body, false);
+                                BLMail.SendActivationMail(Name, LoginId, Crypto.Decrypt(Password), "Activation Successful", Email);
+                            
                             }
                             return Json(obj, JsonRequestBehavior.AllowGet);
 
