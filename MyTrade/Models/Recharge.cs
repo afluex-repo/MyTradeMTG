@@ -58,4 +58,15 @@ namespace MyTrade.Models
             return ds;
         }
     }
+    public class BillPayment
+    {
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public List<BillPayment> lst { get; set; }
+        public DataSet GetBillPayment()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetBillPaymentMaster");
+            return ds;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model MyTrade.Models.BillPayment
 @{
     ViewBag.Title = "Recharge";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -191,42 +191,52 @@
                                 <div class="card-billrecharge mb-5">
 
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#mobile" type="button" role="tab" aria-controls="home" aria-selected="true">Mobile</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#dth" type="button" role="tab" aria-controls="profile" aria-selected="false">DTH</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#data-card" type="button" role="tab" aria-controls="contact" aria-selected="false">Data Card</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#broadband" type="button" role="tab" aria-controls="home" aria-selected="true">Broadband</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#landline" type="button" role="tab" aria-controls="profile" aria-selected="false">Landline</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#cabletv" type="button" role="tab" aria-controls="contact" aria-selected="false">CableTv</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="electricity" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Electricity</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#flight" type="button" role="tab" aria-controls="profile" aria-selected="false">Flight</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#gas" type="button" role="tab" aria-controls="contact" aria-selected="false">Gas</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#water" type="button" role="tab" aria-controls="contact" aria-selected="false">Water</button>
-                                        </li>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lst != null)
+                                            {
+                                                foreach (var item in Model.lst)
+                                                {
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="@item.Name.ToLower()-tab" data-bs-toggle="tab" data-bs-target="#@item.Name.ToLower()" type="button" role="tab" aria-controls="home" aria-selected="true">@item.Name</button>
+                                                    </li>
+                                                }
+                                            }
+                                        }
+
+                                        @*<li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#dth" type="button" role="tab" aria-controls="profile" aria-selected="false">@item.Name.ToLower()</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#data-card" type="button" role="tab" aria-controls="contact" aria-selected="false">Data Card</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#broadband" type="button" role="tab" aria-controls="home" aria-selected="true">Broadband</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#landline" type="button" role="tab" aria-controls="profile" aria-selected="false">Landline</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#cabletv" type="button" role="tab" aria-controls="contact" aria-selected="false">CableTv</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="electricity" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Electricity</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#flight" type="button" role="tab" aria-controls="profile" aria-selected="false">Flight</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#gas" type="button" role="tab" aria-controls="contact" aria-selected="false">Gas</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#water" type="button" role="tab" aria-controls="contact" aria-selected="false">Water</button>
+                                            </li>*@
                                     </ul>
 
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12 col-md-12 tab-content payment-form" id="myTabContent">
-                                <div class="contact-form tab-pane fade show" id="mobile" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="contact-form tab-pane fade show" id="mobile" role="tabpanel" aria-labelledby="mobile-tab">
                                     <span class="sub-title">Mobile Recharge or Bill Payment</span>
                                     <form id="contactForm">
                                         <div class="row">
@@ -282,13 +292,112 @@
                                     </form>
                                 </div>
 
-                                <div class="tab-pane fade" id="dth" role="tabpanel" aria-labelledby="profile-tab">dth</div>
+                                <div class="tab-pane fade" id="dth" role="tabpanel" aria-labelledby="dth-tab">
+                                    <span class="sub-title">DTH Recharge</span>
+                                    <form id="contactForm">
+                                        <div class="row">
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your DTH/D2H Number">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="operator" required>
+                                                        <option value="0">-Select Operator-</option>
+                                                    </select>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="Amount" id="Amount" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount" onchange="return CheckWalletBalance();">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
+                                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
 
                                 <div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>
 
-                                <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">broadband</div>
+                                <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">
+                                    <span class="sub-title">Broadband Recharge</span>
+                                    <form id="contactForm">
+                                        <div class="row">
 
-                                <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">landline</div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="operator" required>
+                                                        <option value="0">-Select Opearator-</option>
+                                                    </select>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="DirectoryNo" id="DirectoryNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Directory Number">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Customer Mobile No">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
+                                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">
+                                    <form id="contactForm">
+                                        <div class="row">
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="operator" required>
+                                                        <option value="0">-Select Opearator-</option>
+                                                    </select>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="DirectoryNo" id="DirectoryNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Directory Number">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Customer Mobile No">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
+                                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
 
                                 <div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>
 
@@ -301,6 +410,7 @@
                                 <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>
 
                             </div>
+
                             <div class="col-lg-8 col-sm-12 col-md-12 tab-content payment-form" id="myPlanTab" style="display:none">
                                 <div class="">
                                     <div class="_3H1N" id="divplan">
@@ -525,8 +635,7 @@
             DataType: "JSON",
             success: function (data) {
                 debugger;
-                if (data.Result == "Yes")
-                {
+                if (data.Result == "Yes") {
                     if (confirm("Are you sure you want to continue for recharge?")) {
                         PrepaidRecharge(data.OrderNo);
                     }
@@ -534,7 +643,7 @@
                         return false;
                     }
                 }
-                else if(data.Result=="No"){
+                else if (data.Result == "No") {
                     alert(data.Message);
                 }
             },
@@ -543,8 +652,7 @@
             }
         });
     }
-    function PrepaidRecharge(OrderNo)
-    {
+    function PrepaidRecharge(OrderNo) {
         debugger;
         $.ajax({
             url: '/Recharge/PrepaidRecharge',
