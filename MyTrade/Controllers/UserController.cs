@@ -1376,7 +1376,7 @@ namespace MyTrade.Controllers
         {
             List<User> lst = new List<User>();
             model.AddedBy = Session["Pk_userId"].ToString();
-            DataSet ds = model.GetRewarDetails();
+            DataSet ds = model.GetFileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)

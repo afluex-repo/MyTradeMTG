@@ -1417,12 +1417,25 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string Password { get; set; }
     }
-
-    
-   
-
-
-
-
+    public class DownloadResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<Download> lst { get; set; }
+    }
+    public class Download
+    {
+        public string PK_FileId { get; set; }
+        public string Title { get; set; }
+        public string File { get; set; }
+        public DataSet GetFileDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Title",Title)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetFilesDetails", para);
+            return ds;
+        }
+    }
 
 }
