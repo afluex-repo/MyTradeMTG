@@ -2461,5 +2461,40 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult DownloadFile()
+        {
+            Download obj1 = new Download();
+            DownloadResponse model = new DownloadResponse();
+            List<Download> lst = new List<Download>();
+            try
+            {
+                DataSet ds = obj1.GetFileDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Download obj = new Download();
+                        obj.PK_FileId = r["PK_RewardId"].ToString();
+                        obj.Title = r["Title"].ToString();
+                        obj.File = r["postedFile"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "No Record Found";
+                }
+            }
+            catch(Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
     }
 }
