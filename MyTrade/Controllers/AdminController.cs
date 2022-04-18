@@ -1932,6 +1932,7 @@ namespace MyTrade.Controllers
                         {
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Declined";
+                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                             DataSet ds = model.DeclinePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
@@ -1982,6 +1983,7 @@ namespace MyTrade.Controllers
                         obj.MemberAccNo = r["MemberAccNo"].ToString();
                         obj.IFSCCode = r["IFSCCode"].ToString();
                         obj.BankName = r["MemberBankName"].ToString();
+                        obj.Status = r["PanStatus"].ToString();
                         obj.BankBranch = r["MemberBranch"].ToString();
                         obj.NomineeName = r["NomineeName"].ToString();
                         obj.NomineeAge = r["NomineeAge"].ToString();
@@ -2024,6 +2026,7 @@ namespace MyTrade.Controllers
                         obj.IsVerified = r["IsVerified"].ToString();
                         obj.PanNo = r["PanNumber"].ToString();
                         obj.MemberAccNo = r["MemberAccNo"].ToString();
+                        obj.Status = r["PanStatus"].ToString();
                         obj.IFSCCode = r["IFSCCode"].ToString();
                         obj.BankName = r["MemberBankName"].ToString();
                         obj.BankBranch = r["MemberBranch"].ToString();
