@@ -63,6 +63,7 @@
                                             <th>Pan Number</th>
                                             <th>Pan Image</th>*@
                                         <th>View</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -94,6 +95,7 @@
                                                     <td>
                                                         <a href="/AdminReports/ViewProfile?Id=@Item.Fk_UserId" class="btn btn-info btn-sm">View</a>
                                                     </td>
+                                                    <td>@Item.Status</td>
                                                     @if (Item.IsVerified == "False" && Item.Status!="Declined")
                                                     {
                                                         <td>
@@ -104,13 +106,13 @@
                                                     else if (Item.Status == "Declined")
                                                     {
                                                         <td>
-                                                            <span>Declined</span>
+                                                            <a href="/AdminReports/ViewProfileVeriFy?Id=@Item.Fk_UserId" name="Verify" id="Verify" class="btn btn-success">Verify</a>
                                                         </td>
                                                     }
                                                     else
                                                     {
                                                         <td>
-                                                            <span>Verified</span>
+                                                            <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
                                                         </td>
                                                     }
                                                     @*@if (Item.IsVerified == "True")

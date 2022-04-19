@@ -166,5 +166,15 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetOperatorDetails(string opid)
+        {
+            var client = new RestClient("https://www.kwikapi.com/api/v2/operatorFetch.php");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key",RechargeModel.APIKey);
+            request.AddParameter("opid", opid);
+            IRestResponse response = client.Execute(request);
+            return Json(response.Content, JsonRequestBehavior.AllowGet);
+        }
     }
 }
