@@ -1612,6 +1612,7 @@ namespace MyTrade.Controllers
                     obj1.OrderId = obj.OrderId;
                     obj1.captured = "Failed";
                     obj1.Pk_UserId = obj.Pk_UserId;
+                    obj1.description = "Error";
                     DataSet ds = obj1.SaveFetchPaymentResponse();
                 }
             }
@@ -1620,6 +1621,7 @@ namespace MyTrade.Controllers
                 obj1.OrderId = obj.OrderId;
                 obj1.captured = ex.Message;
                 obj1.Pk_UserId = obj.Pk_UserId;
+                obj1.description = ex.Message;
                 DataSet ds = obj1.SaveFetchPaymentResponse();
             }
             return RedirectToAction("AddWallet", "Wallet");

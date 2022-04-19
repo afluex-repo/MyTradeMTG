@@ -175,6 +175,11 @@
         text-align: center;
         font-weight: 600;
     }
+
+    .contact-form form .help-block ul li {
+        color: red;
+        font-weight: 300;
+    }
 </style>
 <div class="container">
     <div class="row layout-top-spacing">
@@ -252,21 +257,19 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your Mobile Number">
-                                                    <div class="help-block with-errors"></div>
+                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required placeholder="Enter Your Mobile Number" onchange="return GetOperator('Prepaid');" />
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="operator" required>
+                                                    <select class="form-control" id="Prepaidoperator" required>
                                                         <option value="0">-Select Operator-</option>
                                                         @*<option>1 Operator</option>
                                                             <option>2 Operator</option>
                                                             <option>3 Operator</option>
                                                             <option>4 Operator</option>*@
                                                     </select>
-                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
@@ -274,18 +277,15 @@
                                                     <select class="form-control" id="circle" required onchange="return GetPlan();">
                                                         <option value="0">-Select Circle-</option>
                                                     </select>
-                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="Amount" id="Amount" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount" onchange="return CheckWalletBalance();">
-                                                    <div class="help-block with-errors"></div>
+                                                    <input type="text" name="MobileAmount" id="MobileAmount" class="form-control" required placeholder="Enter Amount" onchange="return CheckWalletBalance();">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
-                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
-                                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder('Prepaid');">Recharge</button>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
@@ -299,65 +299,61 @@
 
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Enter Your DTH/D2H Number">
-                                                    <div class="help-block with-errors"></div>
+                                                    <input type="text" name="DTHNo" id="DTHNo" class="form-control" required placeholder="Enter Your DTH/D2H Number" onchange="return GetOperator('DTH');">
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="operator" required>
+                                                    <select class="form-control" id="DTHoperator" required>
                                                         <option value="0">-Select Operator-</option>
                                                     </select>
-                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="Amount" id="Amount" class="form-control" required data-error="Please enter amount" placeholder="Enter Amount" onchange="return CheckWalletBalance();">
-                                                    <div class="help-block with-errors"></div>
+                                                    <input type="text" name="DTHAmount" id="DTHAmount" class="form-control" required placeholder="Enter Amount" onchange="return CheckWalletBalance();">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
-                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
-                                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder('DTH');">Recharge</button>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
 
-                                <div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>
+                                @*<div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>*@
 
                                 <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">
                                     <span class="sub-title">Broadband Recharge</span>
                                     <form id="contactForm">
                                         <div class="row">
-
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="operator" required>
+                                                    <input type="text" name="BroadbandNo" id="BroadbandNo" class="form-control" required placeholder="Customer Mobile No" onchange="return GetOperator('Broadband');">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="Broadbandoperator" onchange="return GetOperatorDetails('Broadband');" required>
                                                         <option value="0">-Select Opearator-</option>
                                                     </select>
-                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="DirectoryNo" id="DirectoryNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Directory Number">
-                                                    <div class="help-block with-errors"></div>
+                                                    <input type="text" name="BroadbandServiceId" id="BroadbandServiceId" class="form-control" required placeholder="Directory Number">
+                                                </div>
+                                                <div id="divBroadband" style="display:none">
+                                                    <span>Min Amount: </span><span id="spminBroadband"></span><br />
+                                                    <span>Max Amount: </span><span id="spmaxBroadband"></span><br />
+                                                    <span>BillFetch Enabled: </span><span id="billfetchedBroadband"></span><br />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Customer Mobile No">
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12 col-md-12">
-                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder('Broadband');">Recharge</button>
                                                 <div id="msgSubmit" class="h3 text-center hidden"></div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -365,33 +361,35 @@
                                     </form>
                                 </div>
 
-                                <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">
                                     <form id="contactForm">
                                         <div class="row">
-
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="operator" required>
+                                                    <input type="text" name="ELCNo" id="ELCNo" class="form-control" required placeholder="Customer Mobile No" onchange="return GetOperator('ELC');">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="ELCoperator" onchange="return GetOperatorDetails('ELC');" required>
                                                         <option value="0">-Select Opearator-</option>
                                                     </select>
-                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="DirectoryNo" id="DirectoryNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Directory Number">
-                                                    <div class="help-block with-errors"></div>
+                                                    <input type="text" name="ELCServiceId" id="ELCServiceId" class="form-control" required placeholder="Directory Number">
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="form-group">
-                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required data-error="Please enter your mobile number" placeholder="Customer Mobile No">
-                                                    <div class="help-block with-errors"></div>
+                                                <div id="divELC" style="display:none">
+                                                    <span>Min Amount: </span><span id="spminELC"></span><br />
+                                                    <span>Max Amount: </span><span id="spmaxELC"></span><br />
+                                                    <span>BillFetch Enabled: </span><span id="billfetchedELC"></span><br />
                                                 </div>
                                             </div>
 
+
                                             <div class="col-lg-12 col-md-12">
-                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder();">Recharge</button>
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder('Electricity');">Recharge</button>
                                                 <div id="msgSubmit" class="h3 text-center hidden"></div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -399,15 +397,15 @@
                                     </form>
                                 </div>
 
-                                <div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>
+                                @*<div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>*@
 
-                                <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>
+                                @*<div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>*@
 
-                                <div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
+                                @*<div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
 
-                                <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
+                                    <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
 
-                                <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>
+                                    <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>*@
 
                             </div>
 
@@ -441,30 +439,50 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        GetOperator();
+        //GetOperator();
         GetCircle();
     });
-    function GetOperator() {
+    function GetOperator(name) {
         $.ajax({
             url: '/Recharge/GetOperator',
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
+                debugger;
                 var obj = JSON.parse(data);
                 for (var i = 0; i < obj.response.length; i++) {
-                    $("#operator").html(""); // clear before appending new list
-                    $("#operator").empty();
-                    $("#operator").append(
+                    $("#" + name + "operator").html(""); // clear before appending new list
+                    $("#" + name + "operator").empty();
+                    $("#" + name + "operator").append(
                           $('<option></option>').val(0).html('Select Operator'));
                     $.each(obj.response, function (index, count) {
-                        if (count.service_type == "Prepaid" && count.status == "1") {
-                            $("#operator").append(
+                        if (count.service_type == name && count.status == "1") {
+                            $("#" + name + "operator").append(
                              $('<option></option>').val(count.operator_id).html(count.operator_name));
                         }
                     });
                     // APPEND OR INSERT DATA TO SELECT ELEMENT.
                     //$('#Operator').append('<option value="' + obj.response[i].operator_id + '">' + obj.response[i].operator_name + '</option>');
                 }
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function GetOperatorDetails(name) {
+        $.ajax({
+            url: '/Recharge/GetOperatorDetails',
+            data: { opid: $("#" + name + "operator").val() },
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#" + name + "ServiceId").attr("placeholder", obj.message);
+                $("#div" + name).show();
+                $("#spmin" + name).text(obj.amount_minimum);
+                $("#spmax" + name).text(obj.amount_maximum);
+                $("#billfetched" + name).text(obj.bill_fetch);
             },
             error: function () {
 
@@ -517,7 +535,7 @@
         debugger;
         $.ajax({
             url: '/Recharge/GetPlan',
-            data: { state_code: $("#circle").val(), opid: $("#operator").val() },
+            data: { state_code: $("#circle").val(), opid: $("#Prepaidoperator").val() },
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
@@ -626,11 +644,11 @@
             }
         });
     }
-    function CreateOrder() {
+    function CreateOrder(Type) {
         debugger;
         $.ajax({
             url: '/Recharge/CreateOrder',
-            data: { Amount: $("#Amount").val(), MobileNo: $("#MobileNo").val() },
+            data: { Amount: $("#Amount").val(), MobileNo: $("#MobileNo").val(), Type: Type },
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
