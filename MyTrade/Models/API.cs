@@ -328,6 +328,7 @@ namespace MyTrade.Models
         public decimal MaximumAmount { get; set; }
         public decimal AmountWithGST { get; set; }
         public string InMultipleOf { get; set; }
+        public decimal ROIPercent { get; set; }
     }
     public class PackageResponse
     {
