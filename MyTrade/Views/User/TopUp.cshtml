@@ -138,7 +138,7 @@
                         {
                             <span>@Session["FullName"]</span>
                         }
-                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI @ViewBag.ROIPercent % per day
+                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI <label id="lblROI"></label> % per day
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -358,6 +358,7 @@
                     $("#spmul").text(data.InMultipleOf);
                     $("#hdfMax").val(data.ToAmount);
                     $("#hdfMin").val(data.FromAmount);
+                    $("#lblROI").text(data.ROIPercent);
                 }
                 else {
                     $("#PackageId").val('0')

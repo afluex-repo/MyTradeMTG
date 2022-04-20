@@ -1257,6 +1257,7 @@ namespace MyTrade.Controllers
                     model.MaximumAmount = Convert.ToDecimal(r["ToAmount"]);
                     model.InMultipleOf = Convert.ToString(r["InMultipleOf"]);
                     model.AmountWithGST = Convert.ToDecimal(r["AmountWithGST"]);
+                    model.ROIPercent = Convert.ToDecimal(r["ROIPercent"]);
                     lst.Add(model);
                 }
                 obj.lst = lst;
