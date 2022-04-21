@@ -301,7 +301,7 @@ namespace MyTrade.Models
         public string FromLoginId { get; set; }
         public string GST { get; set; }
         public string BV { get; set; }
-        
+        public string ActivationDate { get; set; }
 
 
         public DataSet GetPinList()

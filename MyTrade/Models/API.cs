@@ -190,6 +190,7 @@ namespace MyTrade.Models
         public string WalletBalance { get; set; }
         public string Status { get; set; }
         public string ActiveStatus { get; set; }
+        public string ActivationDate { get; set; }
         public string Message { get; set; }
         public string ReferralLink { get; set; }
         public string TotalBusiness { get; set; }
@@ -338,7 +339,7 @@ namespace MyTrade.Models
         public List<Level> lstLevel { get; set; }
         public DataSet PackageListAll()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetProductList");
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForMobile");
             return ds;
         }
         public DataSet PackageList()

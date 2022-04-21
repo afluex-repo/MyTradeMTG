@@ -78,12 +78,12 @@ namespace MyTrade.Controllers
             IRestResponse response = client.Execute(request);
             return Json(response.Content, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult CreateOrder(string Amount, string MobileNo)
+        public ActionResult CreateOrder(string Amount, string MobileNo,string Type)
         {
             UserRecharge model = new UserRecharge();
             model.FK_UserId = Session["Pk_UserId"].ToString();
             model.Amount = Convert.ToDecimal(Amount);
-            model.TransactionFor = MobileNo;
+            model.TransactionFor = Type;
             DataSet dsss = model.GetWalletBalance();
             if (dsss != null && dsss.Tables.Count > 0 && dsss.Tables[0].Rows.Count > 0)
             {

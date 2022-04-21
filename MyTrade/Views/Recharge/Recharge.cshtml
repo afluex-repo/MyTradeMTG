@@ -257,7 +257,7 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="MobileNo" id="MobileNo" class="form-control" required placeholder="Enter Your Mobile Number" onchange="return GetOperator('Prepaid');" />
+                                                    <input type="text" name="PrepaidNo" id="PrepaidNo" class="form-control" required placeholder="Enter Your Mobile Number" onchange="return GetOperator('Prepaid');" />
                                                 </div>
                                             </div>
 
@@ -274,14 +274,14 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="circle" required onchange="return GetPlan();">
+                                                    <select class="form-control" id="circle" required onchange="return GetPlan('Prepaid');">
                                                         <option value="0">-Select Circle-</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="MobileAmount" id="MobileAmount" class="form-control" required placeholder="Enter Amount" onchange="return CheckWalletBalance();">
+                                                    <input type="text" name="PrepaidAmount" id="PrepaidAmount" class="form-control" required placeholder="Enter Amount" onchange="return CheckWalletBalance('Prepaid');">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
@@ -313,7 +313,7 @@
 
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="DTHAmount" id="DTHAmount" class="form-control" required placeholder="Enter Amount" onchange="return CheckWalletBalance();">
+                                                    <input type="text" name="DTHAmount" id="DTHAmount" class="form-control" required placeholder="Enter Amount" onchange="return CheckWalletBalance('DTH');">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
@@ -397,15 +397,15 @@
                                     </form>
                                 </div>
 
-                                @*<div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>*@
+                                <div class="tab-pane fade" id="cabletv" role="tabpanel" aria-labelledby="profile-tab">cable tv</div>
 
-                                @*<div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>*@
+                                <div class="tab-pane fade" id="electricity" role="tabpanel" aria-labelledby="contact-tab">Electricity</div>
 
-                                @*<div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
+                                <div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="profile-tab">flight</div>
 
-                                    <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
+                                <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">gas</div>
 
-                                    <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>*@
+                                <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">Water</div>
 
                             </div>
 
@@ -531,7 +531,7 @@
             }
         });
     }
-    function GetPlan() {
+    function GetPlan(name) {
         debugger;
         $.ajax({
             url: '/Recharge/GetPlan',
@@ -545,13 +545,13 @@
                 $("#myPlanTab").show();
                 $("#divplan").html('');
                 for (var i = 0; i < names.length; i++) {
-                    debugger;
                     //$("#tblplan").append('<div id="accordion"><div style="border-bottom:1px solid #E1E0D6;text-align:left"><a href="javascript:void(0)" class="plan" aria-expanded="true" onclick="return GetPlanDetails();">' + names[i] + '</a></div><div id="collaps' + names[i] + '" style="display:block"></div></div>');
                     var str = JSON.stringify(names[i]);
-                    $("#divplan").append("<div class='_3HKw' onclick='return GetPlanDetails(" + str + ")'>" + names[i] + "</div>");
+                    var n = JSON.stringify(name);
+                    $("#divplan").append("<div class='_3HKw' onclick='return GetPlanDetails(" + str + "," + n + ")'>" + names[i] + "</div>");
                 }
                 for (var i = 0; i < obj.plans.FULLTT.length; i++) {
-                    $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FULLTT[i].rs + ')">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
+                    $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FULLTT[i].rs + ',' + n + ')">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
                     //$("#tblplan").append('<div class="panel-collapse collapse show" style=""><div class="panel-body"><div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title"><a class="btn btn-sm btn-primary" onclick="setAmount(' + obj.plans.FULLTT[i].rs + ')"><i class="fa fa-rupee-sign"></i>' + obj.plans.FULLTT[i].rs + '</a></h5><p class="card-text">' + obj.plans.FULLTT[i].desc + '</p><h6 class="card-subtitle mb-2 text-muted">Validity ' + obj.plans.FULLTT[i].validity + '</h6></div></div></div></div></div>')
                 }
             },
@@ -560,56 +560,63 @@
             }
         });
     }
-    function GetPlanDetails(str) {
+    function GetPlanDetails(str,name) {
         debugger;
         $.ajax({
             url: '/Recharge/GetPlan',
-            data: { state_code: $("#circle").val(), opid: $("#operator").val() },
+            data: { state_code: $("#circle").val(), opid: $("#" + name + "operator").val() },
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
                 debugger;
                 var obj = JSON.parse(data);
+                var n = JSON.stringify(name);
                 if (str == "FULLTT") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.FULLTT.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FULLTT[i].Type + '</div><div class="zUDk">' + obj.plans.FULLTT[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FULLTT[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FULLTT[i].rs + ')">Rs. ' + obj.plans.FULLTT[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.FULLTT[i].Type + "</div><div class='zUDk'>" + obj.plans.FULLTT[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.FULLTT[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.FULLTT[i].rs + ","+n+")'>Rs. " + obj.plans.FULLTT[i].rs + "</button></div></div>");
                     }
                 }
                 if (str == "TOPUP") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.TOPUP.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.TOPUP[i].Type + '</div><div class="zUDk">' + obj.plans.TOPUP[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.TOPUP[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.TOPUP[i].rs + ')">Rs. ' + obj.plans.TOPUP[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.TOPUP[i].Type + "</div><div class='zUDk'>" + obj.plans.TOPUP[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.TOPUP[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.TOPUP[i].rs + "," + n + ")'>Rs. " + obj.plans.TOPUP[i].rs + "</button></div></div>");
+                        //$("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.TOPUP[i].Type + '</div><div class="zUDk">' + obj.plans.TOPUP[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.TOPUP[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.TOPUP[i].rs + ',"' + n + '")">Rs. ' + obj.plans.TOPUP[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "DATA") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.DATA.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.DATA[i].Type + '</div><div class="zUDk">' + obj.plans.DATA[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.DATA[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.DATA[i].rs + ')">Rs. ' + obj.plans.DATA[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.DATA[i].Type + "</div><div class='zUDk'>" + obj.plans.DATA[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.DATA[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.DATA[i].rs + "," + n + ")'>Rs. " + obj.plans.DATA[i].rs + "</button></div></div>");
+                        //$("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.DATA[i].Type + '</div><div class="zUDk">' + obj.plans.DATA[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.DATA[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.DATA[i].rs + ',' + n + ')">Rs. ' + obj.plans.DATA[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "SMS") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.SMS.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.SMS[i].Type + '</div><div class="zUDk">' + obj.plans.SMS[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.SMS[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.SMS[i].rs + ')">Rs. ' + obj.plans.SMS[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.SMS[i].Type + "</div><div class='zUDk'>" + obj.plans.SMS[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.SMS[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.SMS[i].rs + "," + n + ")'>Rs. " + obj.plans.SMS[i].rs + "</button></div></div>");
+                        //$("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.SMS[i].Type + '</div><div class="zUDk">' + obj.plans.SMS[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.SMS[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.SMS[i].rs + ',' + n + ')">Rs. ' + obj.plans.SMS[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "Romaing") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.Romaing.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.Romaing[i].Type + '</div><div class="zUDk">' + obj.plans.Romaing[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.Romaing[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.Romaing[i].rs + ')">Rs. ' + obj.plans.Romaing[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.Romaing[i].Type + "</div><div class='zUDk'>" + obj.plans.Romaing[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.Romaing[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.Romaing[i].rs + "," + n + ")'>Rs. " + obj.plans.Romaing[i].rs + "</button></div></div>");
+                        //$("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.Romaing[i].Type + '</div><div class="zUDk">' + obj.plans.Romaing[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.Romaing[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.Romaing[i].rs + ',' + n + ')">Rs. ' + obj.plans.Romaing[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "FRC") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.FRC.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FRC[i].Type + '</div><div class="zUDk">' + obj.plans.FRC[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FRC[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FRC[i].rs + ')">Rs. ' + obj.plans.FRC[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.FRC[i].Type + "</div><div class='zUDk'>" + obj.plans.FRC[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.FRC[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.FRC[i].rs + "," + n + ")'>Rs. " + obj.plans.FRC[i].rs + "</button></div></div>");
+                        //$("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.FRC[i].Type + '</div><div class="zUDk">' + obj.plans.FRC[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.FRC[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.FRC[i].rs + ',' + n + ')">Rs. ' + obj.plans.FRC[i].rs + '</button></div></div>');
                     }
                 }
                 if (str == "STV") {
                     $("#plan").html('');
                     for (var i = 0; i < obj.plans.STV.length; i++) {
-                        $("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.STV[i].Type + '</div><div class="zUDk">' + obj.plans.STV[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.STV[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.STV[i].rs + ')">Rs. ' + obj.plans.STV[i].rs + '</button></div></div>');
+                        $("#plan").append("<div class='_1aEZ'><div class='zUDk'>" + obj.circle + "</div><div class='zUDk'>" + obj.plans.STV[i].Type + "</div><div class='zUDk'>" + obj.plans.STV[i].validity + "</div><div class='zUDk _3WAG'>" + obj.plans.STV[i].desc + "</div><div class='zUDk _17KN'><button class='_11kC  LLvJ _3vjB' onclick='return Setamount(" + obj.plans.STV[i].rs + "," + n + ")'>Rs. " + obj.plans.STV[i].rs + "</button></div></div>");
+                        //$("#plan").append('<div class="_1aEZ"><div class="zUDk">' + obj.circle + '</div><div class="zUDk">' + obj.plans.STV[i].Type + '</div><div class="zUDk">' + obj.plans.STV[i].validity + '</div><div class="zUDk _3WAG">' + obj.plans.STV[i].desc + '</div><div class="zUDk _17KN"><button class="_11kC  LLvJ _3vjB" onclick="return Setamount(' + obj.plans.STV[i].rs + ',' + n + ')">Rs. ' + obj.plans.STV[i].rs + '</button></div></div>');
                     }
                 }
             },
@@ -618,11 +625,11 @@
             }
         });
     }
-    function Setamount(price) {
-        $("#Amount").val(price);
-        CheckWalletBalance();
+    function Setamount(price,name) {
+        $("#" + name + "Amount").val(price);
+        CheckWalletBalance(name);
     }
-    function CheckWalletBalance() {
+    function CheckWalletBalance(name) {
         debugger;
         $.ajax({
             url: '/Recharge/WalletBalance',
@@ -631,7 +638,7 @@
             success: function (data) {
                 debugger;
                 var obj = JSON.parse(data);
-                if (parseFloat(obj.response.balance) >= parseFloat($("#Amount").val())) {
+                if (parseFloat(obj.response.balance) >= parseFloat($("#" + name + "Amount").val())) {
 
                 }
                 else {
@@ -648,14 +655,14 @@
         debugger;
         $.ajax({
             url: '/Recharge/CreateOrder',
-            data: { Amount: $("#Amount").val(), MobileNo: $("#MobileNo").val(), Type: Type },
+            data: { Amount: $("#" + Type + "Amount").val(), MobileNo: $("#" + Type + "No").val(), Type: Type },
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
                 debugger;
                 if (data.Result == "Yes") {
                     if (confirm("Are you sure you want to continue for recharge?")) {
-                        PrepaidRecharge(data.OrderNo);
+                        PrepaidRecharge(data.OrderNo, Type);
                     }
                     else {
                         return false;
@@ -670,11 +677,11 @@
             }
         });
     }
-    function PrepaidRecharge(OrderNo) {
+    function PrepaidRecharge(OrderNo, Type) {
         debugger;
         $.ajax({
             url: '/Recharge/PrepaidRecharge',
-            data: { Amount: $("#Amount").val(), OrderNo: OrderNo, MobileNo: $("#MobileNo").val(), state_code: $("#circle").val(), opid: $("#operator").val() },
+            data: { Amount: $("#" + Type + "Amount").val(), OrderNo: OrderNo, MobileNo: $("#" + Type + "No").val(), state_code: $("#circle").val(), opid: $("#" + Type + "operator").val() },
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
