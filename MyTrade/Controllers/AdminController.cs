@@ -163,6 +163,7 @@ namespace MyTrade.Controllers
                     Objload.DisplayName = dr["PinUser"].ToString();
                     Objload.AddedOn = dr["CreatedDate"].ToString();
                     Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.ActivationDate = dr["UsedDate"].ToString();
                     Objload.Status = dr["PinStaus"].ToString();
                     lst.Add(Objload);
                 }
@@ -196,6 +197,7 @@ namespace MyTrade.Controllers
                     Objload.DisplayName = dr["PinUser"].ToString();
                     Objload.AddedOn = dr["CreatedDate"].ToString();
                     Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.ActivationDate = dr["UsedDate"].ToString();
                     Objload.Status = dr["PinStaus"].ToString();
                     lst.Add(Objload);
                 }

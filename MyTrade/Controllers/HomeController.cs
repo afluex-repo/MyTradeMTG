@@ -300,6 +300,7 @@ namespace MyTrade.Controllers
                 orderModel.name = Session["FullName"].ToString();
                 orderModel.contactNumber = Session["Contact"].ToString();
                 orderModel.email = Session["Email"].ToString();
+                orderModel.FK_ProductId = model.Package;
                 //orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
                 DataSet ds = model.SaveOrderDetails();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -382,7 +383,7 @@ namespace MyTrade.Controllers
                         obj1.error_step = rr["error_step"];
                         obj1.error_reason = rr["error_reason"];
                         obj1.created_at = rr["created_at"];
-
+                        obj1.FK_ProductId = model.FK_ProductId;
                         DataSet ds = obj1.UpdateRazorpayStatus();
                         if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                         {

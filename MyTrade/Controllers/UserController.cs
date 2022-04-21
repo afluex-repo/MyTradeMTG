@@ -323,6 +323,7 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.ActivationDate = r["ActivationDate"].ToString();
                     obj.Amount = r["TotalAmount"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
@@ -353,6 +354,7 @@ namespace MyTrade.Controllers
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     obj.Amount = r["TotalAmount"].ToString();
+                    obj.ActivationDate = r["ActivationDate"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();

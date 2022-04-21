@@ -110,7 +110,7 @@ namespace MyTrade.Controllers
                        {
                            StatusCode = HttpStatusCode.OK,
                            Message = "Pan Uploaded Successfully",
-                           PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString(),
+                           ProfilePic = ds.Tables[0].Rows[0]["PanImage"].ToString(),
                        });
                     }
                     else

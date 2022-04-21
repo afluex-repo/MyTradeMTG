@@ -314,6 +314,7 @@ namespace MyTrade.Controllers
                 obj.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 obj.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
+                obj.ActivationDate = ds.Tables[0].Rows[0]["ActivationDate"].ToString();
                 obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
                 obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 obj.WalletBalance = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();

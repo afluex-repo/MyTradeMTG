@@ -30,7 +30,7 @@ namespace MyTrade.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Status { get; set; }
-
+        public string ActivationDate { get; set; }
         public string Password { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmNewPassword { get; set; }
