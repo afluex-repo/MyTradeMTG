@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using Razorpay.Api;
 using System.Net.Http;
+using System.Net.Mail;
 
 namespace MyTrade.Controllers
 {
@@ -249,12 +250,15 @@ namespace MyTrade.Controllers
                         if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
                             string Email = dsResult.Tables[0].Rows[0]["Email"].ToString();
+                            string Name = dsResult.Tables[0].Rows[0]["Name"].ToString();
+                            string LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
+                            string Password = dsResult.Tables[0].Rows[0]["Password"].ToString();
                             obj.Status = "0";
                             obj.Message = "User Activated Successfully";
                             if (Email != null && Email != "")
                             {
-                                string Body = "Dear User,</br> Your Account have been activated.";
-                                BLMail.SendMail(Email, "Activation Successful", Body, false);
+                                BLMail.SendActivationMail(Name, LoginId, Crypto.Decrypt(Password), "Activation Successful", Email);
+                            
                             }
                             return Json(obj, JsonRequestBehavior.AllowGet);
 
@@ -310,6 +314,7 @@ namespace MyTrade.Controllers
                 obj.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 obj.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
+                obj.ActivationDate = ds.Tables[0].Rows[0]["ActivationDate"].ToString();
                 obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
                 obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 obj.WalletBalance = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
@@ -1063,7 +1068,7 @@ namespace MyTrade.Controllers
                         obj.DrAmount = r["DrAmount"].ToString();
                         obj.Narration = r["Narration"].ToString();
                         obj.TransactionDate = r["TransactionDate"].ToString();
-                        obj.Balance = "0";
+                        obj.Balance = r["Balance"].ToString();
                         lst.Add(obj);
                     }
                     res.lst = lst;
@@ -1253,6 +1258,7 @@ namespace MyTrade.Controllers
                     model.MaximumAmount = Convert.ToDecimal(r["ToAmount"]);
                     model.InMultipleOf = Convert.ToString(r["InMultipleOf"]);
                     model.AmountWithGST = Convert.ToDecimal(r["AmountWithGST"]);
+                    model.ROIPercent = Convert.ToDecimal(r["ROIPercent"]);
                     lst.Add(model);
                 }
                 obj.lst = lst;
@@ -2396,7 +2402,23 @@ namespace MyTrade.Controllers
                         ForgetPasswordResponse obj = new ForgetPasswordResponse();
                         obj.Email = r["Email"].ToString();
                         obj.Name = r["Name"].ToString();
-                        obj.Password = r["Password"].ToString();
+                        obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + obj.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + obj.Password;
+
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
                         lst.Add(obj);
                     }
                     res.lsForgetPassword = lst;
@@ -2414,6 +2436,67 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        
+        public ActionResult UpdateAddress(ProfileAPI model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DownloadFile()
+        {
+            Download obj1 = new Download();
+            DownloadResponse model = new DownloadResponse();
+            List<Download> lst = new List<Download>();
+            try
+            {
+                DataSet ds = obj1.GetFileDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Download obj = new Download();
+                        obj.PK_FileId = r["PK_RewardId"].ToString();
+                        obj.Title = r["Title"].ToString();
+                        obj.File = r["postedFile"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "No Record Found";
+                }
+            }
+            catch(Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
     }
 }

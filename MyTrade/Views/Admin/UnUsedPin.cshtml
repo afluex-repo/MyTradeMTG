@@ -125,6 +125,7 @@
                                             <th>Generated Date</th>
                                             @if (Model.Status == "P")
                                             {
+                                            <th>Activation Date</th>
                                                 <th>Registered To</th>
                                             }
                                             <th>Generate Via</th>
@@ -150,6 +151,7 @@
                                                         <td>@Item.AddedOn</td>
                                                         @if (Item.Status == "Used")
                                                         {
+                                                            <td> @Item.ActivationDate </td>
                                                             <td> @Item.RegisteredTo </td>
                                                         }
                                                         <td>@Item.AddedBy</td>

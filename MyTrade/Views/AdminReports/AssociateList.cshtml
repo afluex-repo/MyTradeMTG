@@ -96,13 +96,17 @@
                                 @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
                             </div>
                             <div class="col-lg-3">
+                               PIN/PaymentId
+                                @Html.TextBoxFor(m => m.ActivationMode, new { @class = "form-control" })
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <br />
                                     <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" onclick="return validateLogin();" />
                                 </div>
                             </div>
                         </div>
-                        <div class="widget-content widget-content-area br-6">
+                      
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
                                     <tr>
@@ -192,7 +196,7 @@
                                     }
                                 </tbody>
                             </table>
-                        </div>
+                      
                     </div>
                 </div>
             </div>

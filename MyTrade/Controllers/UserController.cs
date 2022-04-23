@@ -323,6 +323,7 @@ namespace MyTrade.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
+                    obj.ActivationDate = r["ActivationDate"].ToString();
                     obj.Amount = r["TotalAmount"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
@@ -353,6 +354,7 @@ namespace MyTrade.Controllers
                     obj.PinStatus = r["PinStatus"].ToString();
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     obj.Amount = r["TotalAmount"].ToString();
+                    obj.ActivationDate = r["ActivationDate"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
@@ -1376,7 +1378,7 @@ namespace MyTrade.Controllers
         {
             List<User> lst = new List<User>();
             model.AddedBy = Session["Pk_userId"].ToString();
-            DataSet ds = model.GetRewarDetails();
+            DataSet ds = model.GetFileDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
@@ -1612,6 +1614,7 @@ namespace MyTrade.Controllers
                     obj1.OrderId = obj.OrderId;
                     obj1.captured = "Failed";
                     obj1.Pk_UserId = obj.Pk_UserId;
+                    obj1.description = "Error";
                     DataSet ds = obj1.SaveFetchPaymentResponse();
                 }
             }
@@ -1620,6 +1623,7 @@ namespace MyTrade.Controllers
                 obj1.OrderId = obj.OrderId;
                 obj1.captured = ex.Message;
                 obj1.Pk_UserId = obj.Pk_UserId;
+                obj1.description = ex.Message;
                 DataSet ds = obj1.SaveFetchPaymentResponse();
             }
             return RedirectToAction("AddWallet", "Wallet");
@@ -1637,6 +1641,7 @@ namespace MyTrade.Controllers
                     obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
                     obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
                     obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
+                    obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);
                 }
                 else { }
             }
@@ -1646,5 +1651,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+      
     }
 }

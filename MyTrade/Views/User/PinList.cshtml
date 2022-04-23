@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <input type="hidden" value="@Model.PinStatus" id="pstatus" />
                                     <label>Pin Status</label>
-                                    <select id="PinStatus" name="PinStatus" class="form-control" onload = "getpaymentTypedetails();">
+                                    <select id="PinStatus" name="PinStatus" class="form-control" onload="getpaymentTypedetails();">
                                         @*<option value="">-Select-</option>*@
                                         <option value="T">Available</option>
                                         <option value="P">Used</option>
@@ -50,15 +50,15 @@
                                         <th>Package Name</th>
                                         <th>Pin Amount</th>
                                         <th>BV</th>
-                                        <th>GST (18 %)</th>
+                                        <th>GST</th>
                                         <th>Total amount</th>
                                         <th>Pin Status</th>
                                         @*<th>Is Registered</th>*@
                                         @if (Model.PinStatus == "P")
                                         {
+                                            <th>Activation Date</th>
                                             <th>Registered To</th>
                                         }
-
                                         <th>Pin Generation Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -98,11 +98,11 @@
                                                     <td>@Item.PinStatus</td>
                                                     @if (Item.PinStatus == "Used")
                                                     {
+                                                        <td>@Item.ActivationDate</td>
                                                         <td>@Item.RegisteredTo</td>
                                                     }
                                                     else
                                                     {
-
                                                     }
                                                     @*<td>@Item.RegisteredTo </td>*@
                                                     <td>@Item.PinGenerationDate</td>
@@ -125,7 +125,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3" style="margin-left:10px">
                                 <div class="form-group">
-                                        <h1 style="color:red">Transfer to Pin: </h1>
+                                    <h4 style="color:red">Transfer to Pin: </h4>
                                     <label>
                                         <b style="color:red">Selected Pins: <label id="lblPins">0</label></b>
                                     </label>
@@ -352,11 +352,11 @@
     //    }
     //    else if ($('#PinStatus').val() == 'P') {
     //        $("#PinStatus").val(P);
-     
+
     //    }
     //}
 
-   $("#PinStatus").val($("#pstatus").val()).attr("Selected","Selected");
+    $("#PinStatus").val($("#pstatus").val()).attr("Selected", "Selected");
 
 </script>
 @if (TempData["msg"] != null)

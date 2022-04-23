@@ -27,50 +27,36 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>LoginId</label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@placeholder="Login Id" })
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>
-                                        Payout No.
-                                    </label>
-                                    <select class="form-control" id="PayoutNo" name="PayoutNo">
-                                        <option value="">-Select-</option>
-                                        <option value="1">Payout-1</option>
-                                        <option value="2">Payout-2</option>
-                                        <option value="3">Payout-3</option>
-                                        <option value="4">Payout-4</option>
-                                        <option value="5">Payout-5</option>
-                                        <option value="6">Payout-6</option>
-                                        <option value="7">Payout-7</option>
-                                        <option value="8">Payout-8</option>
-                                        <option value="9">Payout-9</option>
-                                        <option value="10">Payout-10</option>
-                                        <option value="11">Payout-11</option>
-                                        <option value="12">Payout-12</option>
-                                        <option value="13">Payout-13</option>
-                                        <option value="14">Payout-14</option>
-                                        <option value="15">Payout-15</option>
-                                        <option value="16">Payout-16</option>
-                                        <option value="17">Payout-17</option>
-                                        <option value="18">Payout-18</option>
-                                        <option value="19">Payout-19</option>
-                                        <option value="20">Payout-20</option>
-                                    </select>
-                                    <input type="hidden" id="hdf" value="@Model.PayoutNo" />
-                                </div>
-                            </div>
                             <div class="col-lg-3" style="margin-top:15px;">
                                 <div class="form-group">
                                     <br />
-                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" />
+                                    <a href="/Admin/DistributedTPSDetails" class="btn btn-info">Back to List</a>
                                 </div>
                             </div>
                         </div>
+                                                @*<div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>LoginId</label>
+                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control",@placeholder="Login Id" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>
+                        Payout No.
+                    </label>
+                    @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "form-control" })
+                    <input type="hidden" id="hdf" value="@Model.PayoutNo" />
+                </div>
+            </div>
+            <div class="col-lg-3" style="margin-top:15px;">
+                <div class="form-group">
+                    <br />
+                   <a href="/Admin/DistributedTPSList?PayoutNo=@Item.PayoutNo&&LoginId=@Item.LoginId&&Fk_InvestmentId=@Item.Fk_InvestmentId" class="btn btn-info">@Item.Amount</a>
+                </div>
+            </div>
+        </div>*@
                         <div class="row">
                             <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                 <thead>
@@ -80,7 +66,7 @@
                                         <th>From Name</th>
                                         <th>Level</th>
                                         <th>Business Amount</th>
-                                        <th>BV</th>
+                                        <th>TopUp Amount</th>
                                         <th>Package</th>
                                         <th>Commision Amount</th>
                                         <th> (%)</th>

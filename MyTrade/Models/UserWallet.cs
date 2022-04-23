@@ -220,6 +220,7 @@ namespace MyTrade.Models
         public string address { get; set; }
         public string description { get; set; }
         public string image { get; set; }
+        public string FK_ProductId { get; set; }
     }
     public class FetchPaymentByOrderResponse
     {
@@ -254,6 +255,7 @@ namespace MyTrade.Models
         public string error_reason { get; set; }
         public string created_at { get; set; }
         public string Pk_UserId { get; set; }
+        public string FK_ProductId { get; set; }
         public DataSet GetDataForUpdateRazorPayStatus()
         {
 
@@ -330,7 +332,7 @@ namespace MyTrade.Models
                                       new SqlParameter("@error_reason", error_reason),
                                       new SqlParameter("@created_at", created_at),
                                       new SqlParameter("@Pk_UserId", Pk_UserId),
-
+                                        new SqlParameter("@FK_ProductId", FK_ProductId),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("SavePaymentResponse", para);
             return ds;

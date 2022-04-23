@@ -15,18 +15,18 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-lg-5 col-md-5">
-                                <h4>Paid Bonus</h4>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <h4>Paid Bonus</h4>
+                                </div>
                             </div>
-                            <div class="col-lg-4 col-md-4">
-                                <a href="/Report/PayoutDetail" class="btn btn-info btn-sm">Back</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-8">
+                                <div class="form-group" style="float:right">
+                                    <h4> <a href="/Report/PayoutDetail" class="btn btn-info btn-sm">Back</a></h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="widget-content widget-content-area">
-                        <div class="row">
+                        <div class="widget-content widget-content-area">
                             <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                 <thead>
                                     <tr>
@@ -53,21 +53,21 @@
                                             int i = 1;
                                             foreach (var Item in Model.lst)
                                             {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td>@Item.LoginId</td>
-                                                    <td>@Item.FromName</td>
-                                                    <td>@Item.Level</td>
-                                                    <td>@Item.BusinessAmount</td>
-                                                    <td>@Item.BV</td>
-                                                    <td>@Item.ProductName</td>
-                                                    <td>@Item.Amount</td>
-                                                    <td>@Item.CommissionPercentage %</td>
-                                                    <td>@Item.TransactionDate</td>
-                                                    @*<td>@Item.ToName</td>*@
-                                                    <td>@Item.PayoutNo</td>
-                                                    <td>@Item.Status</td>
-                                                </tr>
+                                    <tr class="text-left">
+                                        <td>@i</td>
+                                        <td>@Item.LoginId</td>
+                                        <td>@Item.FromName</td>
+                                        <td>@Item.Level</td>
+                                        <td>@Item.BusinessAmount</td>
+                                        <td>@Item.BV</td>
+                                        <td>@Item.ProductName</td>
+                                        <td>@Item.Amount</td>
+                                        <td>@Item.CommissionPercentage %</td>
+                                        <td>@Item.TransactionDate</td>
+                                        @*<td>@Item.ToName</td>*@
+                                        <td>@Item.PayoutNo</td>
+                                        <td>@Item.Status</td>
+                                    </tr>
                                                 i++;
                                             }
                                         }
@@ -80,6 +80,9 @@
             </div>
         </div>
     </div>
+
+
+
 }
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>

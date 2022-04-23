@@ -70,6 +70,10 @@ namespace MyTrade.Controllers
                     Objload.UsedPin = dr["UsedPins"].ToString();
                     Objload.AvailablePin = dr["AvaliablePins"].ToString();
                     Objload.TransferPin = dr["TransferPins"].ToString();
+                    Objload.PinAmount = dr["PinAmount"].ToString();
+                    Objload.FinalAmount = dr["FinalAmount"].ToString();
+                    Objload.AddedOn = dr["AddedOn"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     lst.Add(Objload);
                 }
                 obj.lst = lst;
@@ -159,6 +163,7 @@ namespace MyTrade.Controllers
                     Objload.DisplayName = dr["PinUser"].ToString();
                     Objload.AddedOn = dr["CreatedDate"].ToString();
                     Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.ActivationDate = dr["UsedDate"].ToString();
                     Objload.Status = dr["PinStaus"].ToString();
                     lst.Add(Objload);
                 }
@@ -192,6 +197,7 @@ namespace MyTrade.Controllers
                     Objload.DisplayName = dr["PinUser"].ToString();
                     Objload.AddedOn = dr["CreatedDate"].ToString();
                     Objload.RegisteredTo = dr["RegisteredTo"].ToString();
+                    Objload.ActivationDate = dr["UsedDate"].ToString();
                     Objload.Status = dr["PinStaus"].ToString();
                     lst.Add(Objload);
                 }
@@ -772,14 +778,47 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-
-        public ActionResult PayoutWalletLedgerForAdmin()
+        public ActionResult ViewTPSForAdmin(string Id, string UserId)
+        {
+            Admin model = new Admin();
+            model.Pk_investmentId = Id;
+            model.Fk_UserId = UserId;
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.GetROIDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.ROIId = r["Pk_ROIId"].ToString();
+                    obj.ROI = r["ROI"].ToString();
+                    obj.Date = r["ROIDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROI = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                ViewBag.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                ViewBag.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+            }
+            return View(model);
+        }
+        public ActionResult PayoutWalletLedgerForAdmin(string Fk_UserId)
         {
             List<Admin> lst = new List<Admin>();
+
             Admin model = new Admin();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.LoginId = Fk_UserId;
             DataSet ds = model.PayoutWalletLedger();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Admin obj = new Admin();
@@ -788,6 +827,8 @@ namespace MyTrade.Controllers
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
+                    obj.Balance = r["Balance"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
@@ -813,6 +854,8 @@ namespace MyTrade.Controllers
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
+                    obj.Balance = r["Balance"].ToString();
+                    obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
@@ -1841,6 +1884,8 @@ namespace MyTrade.Controllers
                         {
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Approved";
+
+                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                             DataSet ds = model.ApprovePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
@@ -1889,6 +1934,7 @@ namespace MyTrade.Controllers
                         {
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Declined";
+                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                             DataSet ds = model.DeclinePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
@@ -1939,6 +1985,7 @@ namespace MyTrade.Controllers
                         obj.MemberAccNo = r["MemberAccNo"].ToString();
                         obj.IFSCCode = r["IFSCCode"].ToString();
                         obj.BankName = r["MemberBankName"].ToString();
+                        obj.Status = r["PanStatus"].ToString();
                         obj.BankBranch = r["MemberBranch"].ToString();
                         obj.NomineeName = r["NomineeName"].ToString();
                         obj.NomineeAge = r["NomineeAge"].ToString();
@@ -1981,6 +2028,7 @@ namespace MyTrade.Controllers
                         obj.IsVerified = r["IsVerified"].ToString();
                         obj.PanNo = r["PanNumber"].ToString();
                         obj.MemberAccNo = r["MemberAccNo"].ToString();
+                        obj.Status = r["PanStatus"].ToString();
                         obj.IFSCCode = r["IFSCCode"].ToString();
                         obj.BankName = r["MemberBankName"].ToString();
                         obj.BankBranch = r["MemberBranch"].ToString();
@@ -2344,8 +2392,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("SetMenuPermissionForUser")]
         [OnAction(ButtonName = "btnSubmit")]
@@ -2373,8 +2419,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("SetMenuPermissionForUser", "Admin");
         }
-
-
         public ActionResult ActiveUser(string id)
         {
             try
@@ -2441,13 +2485,13 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("CreateTransaction", "Admin");
         }
-
-
-
-        public ActionResult DistributedTPSList()
+        public ActionResult DistributedTPSList(string PayoutNo, string LoginId, string Fk_InvestmentId)
         {
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
+            model.PayoutNo = PayoutNo;
+            model.LoginId = LoginId;
+            model.Fk_InvestmentId = Fk_InvestmentId;
             DataSet ds = model.GetDistributedTPSList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2470,10 +2514,19 @@ namespace MyTrade.Controllers
                 }
                 model.lstTps = lst;
             }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("DistributedTPSList")]
         [OnAction(ButtonName = "Search")]
@@ -2504,8 +2557,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         public ActionResult ViewGenerateEpinDetails(string Fk_UserId,string Fk_ProductId)
         {
             Admin obj = new Admin();
@@ -2513,7 +2564,7 @@ namespace MyTrade.Controllers
             obj.Fk_UserId = Fk_UserId;
             obj.Fk_ProductId = Fk_ProductId;
             obj.ePinNo = obj.ePinNo == "" ? null : obj.ePinNo;
-            obj.Status = "P";
+            obj.Status = "T";
             DataSet ds = obj.GetGeneratedEpinDetails();
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -2541,6 +2592,7 @@ namespace MyTrade.Controllers
                     Objload.BankName = dr["BankName"].ToString();
                     Objload.BankBranch = dr["BranchName"].ToString();
                     Objload.PinStaus = dr["PinStaus"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     Objload.ToName = dr["ToName"].ToString();
                     Objload.ToId = dr["ToId"].ToString();
                     Objload.TransferDate = dr["TransferDate"].ToString();
@@ -2550,7 +2602,6 @@ namespace MyTrade.Controllers
             }
             return View(obj);
         }
-
         [HttpPost]
         [ActionName("ViewGenerateEpinDetails")]
         [OnAction(ButtonName = "Search")]
@@ -2586,6 +2637,7 @@ namespace MyTrade.Controllers
                     Objload.BankName = dr["BankName"].ToString();
                     Objload.BankBranch = dr["BranchName"].ToString();
                     Objload.PinStaus = dr["PinStaus"].ToString();
+                    Objload.PaymentMode = dr["PaymentMode"].ToString();
                     Objload.ToName = dr["ToName"].ToString();
                     Objload.ToId = dr["ToId"].ToString();
                     Objload.TransferDate = dr["TransferDate"].ToString();
@@ -2596,5 +2648,151 @@ namespace MyTrade.Controllers
             return View(obj);
         }
 
+        public ActionResult WalletLedger()
+        {
+            Admin model = new Admin();
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.WalletLedger();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.AvailableBalance = r["AvailableBalance"].ToString();
+                    lst.Add(obj);
+                }
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(AvailableBalance)", "").ToString()).ToString("n2");
+                model.lstWalletLedger = lst;
+
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("WalletLedger")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult WalletLedger(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            DataSet ds = model.WalletLedger();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.AvailableBalance = r["AvailableBalance"].ToString();
+                    lst.Add(obj);
+                }
+                ViewBag.CrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                ViewBag.DrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                ViewBag.AvailableBalance = double.Parse(ds.Tables[0].Compute("sum(AvailableBalance)", "").ToString()).ToString("n2");
+                model.lstWalletLedger = lst;
+            }
+            return View(model);
+        }
+
+
+        #region
+        public ActionResult DistributedTPSDetails()
+        {
+          
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+        
+            DataSet ds = model.TPSPayoutDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Fk_InvestmentId = r["Fk_InvestmentId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayout = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+               
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
+            return View(model);
+
+        }
+        [HttpPost]
+        [ActionName("DistributedTPSDetails")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult DistributedTPSDetailList(Admin model)
+        {
+
+            List<Admin> lst = new List<Admin>();
+          
+            DataSet ds = model.TPSPayoutDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Fk_UserId = r["PK_UserId"].ToString();
+                    obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.TopUpAmount = r["TopUpAmount"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                    obj.Fk_InvestmentId = r["Fk_InvestmentId"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPayout = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+
+            }
+            int count = 0;
+            List<SelectListItem> ddlPayout = new List<SelectListItem>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                count = Convert.ToInt32(ds.Tables[1].Rows[0]["PayoutNo"]);
+                for (int i = 1; i <= count; i++)
+                {
+                    ddlPayout.Add(new SelectListItem { Text = "Payout-" + i, Value = i.ToString() });
+                }
+                ViewBag.Payout = ddlPayout;
+            }
+            return View(model);
+
+
+        }
+        #endregion
     }
 }
