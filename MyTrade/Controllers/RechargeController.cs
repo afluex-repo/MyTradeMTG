@@ -83,13 +83,13 @@ namespace MyTrade.Controllers
             UserRecharge model = new UserRecharge();
             model.FK_UserId = Session["Pk_UserId"].ToString();
             model.Amount = Convert.ToDecimal(Amount);
-            model.TransactionFor = Type;
+            model.TransactionFor = MobileNo;
             DataSet dsss = model.GetWalletBalance();
             if (dsss != null && dsss.Tables.Count > 0 && dsss.Tables[0].Rows.Count > 0)
             {
                 if (model.Amount <= Convert.ToDecimal(dsss.Tables[0].Rows[0]["amount"]))
                 {
-                    model.TransactionType = "Prepaid Recharge";
+                    model.TransactionType = Type;
                     DataSet ds = model.CreateOrder();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
@@ -119,16 +119,18 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult PrepaidRecharge(string Amount, string OrderNo, string MobileNo, string state_code, string opid)
+        public ActionResult PrepaidandDTHRecharge(string Amount, string OrderNo, string MobileNo, string state_code, string opid)
         {
             UserRecharge model = new UserRecharge();
-
             var client = new RestClient("https://www.kwikapi.com/api/v2/recharge.php?api_key=" + RechargeModel.APIKey + "&number=" + MobileNo + "&amount=" + Amount + "&opid=" + opid + "&state_code=" + state_code + "&order_id=" + OrderNo + "");
             client.Timeout = -1;
-            var request = new RestRequest(Method.GET);
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key", RechargeModel.APIKey);
+            request.AddParameter("number", MobileNo);
             IRestResponse response = client.Execute(request);
-            var userObj = JObject.Parse(response.Content);
-            if (userObj[0]["Message"].ToString() == "RECHARGE SUBMITTED SUCCESSFULLY")
+            JObject userObj = JObject.Parse(response.Content);
+           
+            if (userObj["status"].ToString() == "SUCCESS" || userObj["status"].ToString()== "PENDING" || userObj["status"].ToString() == "FAILED")
             {
                 model.Amount = Convert.ToDecimal(Amount);
                 model.OrderNo = OrderNo;
@@ -136,9 +138,71 @@ namespace MyTrade.Controllers
                 model.OperatorId = opid;
                 model.CircleId = state_code;
                 model.TransactionFor = MobileNo;
-                model.Provider = userObj[0]["Provider"].ToString();
-                model.ChargedAmount = Convert.ToDecimal(userObj[0]["Provider"]);
-                model.Status = userObj[0]["Status"].ToString();
+                model.Provider = userObj["provider"].ToString();
+                model.ChargedAmount = Convert.ToDecimal(userObj["charged_amount"]);
+                model.ServerOrderId = userObj["order_id"].ToString();
+                model.Opr_Id = userObj["opr_id"].ToString();
+                model.Status = userObj["status"].ToString();
+                model.Message = userObj["message"].ToString();
+                DataSet ds = model.SaveBillPaymentResponse();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        model.Message = "Recharge done successfully";
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Result = "No";
+                    }
+                }
+                else
+                {
+                    model.Message = "Some issues occurred";
+                    model.Result = "No";
+                }
+            }
+            else
+            {
+                model.Message = "Temporarily issues occurred. Please try after some times.";
+                model.Result = "No";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UtilityPayments(string Amount, string OrderNo, string number,  string opid,string MobileNo,string opt1,string opt2,string opt3,string opt4,string opt5, string opt6, string opt7, string opt8, string opt9, string opt10, string refrence_id )
+        {
+            UserRecharge model = new UserRecharge();
+            var client = new RestClient("https://www.kwikapi.com/api/v2/bills/payments.php?api_key="+RechargeModel.APIKey+"&number="+ number + "&amount="+ Amount + "&opid="+ opid + "&order_id="+ OrderNo + "&opt1="+ opt1 + "&opt2="+ opt2 + "&opt3="+ opt3 + "&opt4="+ opt4 + "&opt5="+ opt5 + "&opt6="+ opt6 + "&opt7="+ opt7 + "&opt8="+ opt8 + "&opt9="+ opt9 + "&opt10="+ opt10 + "&refrence_id="+ refrence_id + "");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            JObject userObj = JObject.Parse(response.Content);
+
+            if (userObj["status"].ToString() == "SUCCESS" || userObj["status"].ToString() == "PENDING" || userObj["status"].ToString() == "FAILED")
+            {
+                model.Amount = Convert.ToDecimal(Amount);
+                model.OrderNo = OrderNo;
+                model.FK_UserId = Session["Pk_UserId"].ToString();
+                model.OperatorId = opid;
+                model.TransactionFor = MobileNo;
+                model.Provider = userObj["provider"].ToString();
+                model.ChargedAmount = Convert.ToDecimal(userObj["charged_amount"]);
+                model.ServerOrderId = userObj["order_id"].ToString();
+                model.Opr_Id = userObj["opr_id"].ToString();
+                model.Status = userObj["status"].ToString();
+                model.Message = userObj["message"].ToString();
+                model.Opt1 = userObj["optional1"].ToString();
+                model.Opt2 = userObj["optional2"].ToString();
+                model.Opt3 = userObj["optional3"].ToString();
+                model.Opt4 = userObj["optional4"].ToString();
+                model.Opt5 = userObj["optional5"].ToString();
+                model.Opt6 = userObj["optional6"].ToString();
+                model.Opt7 = userObj["optional7"].ToString();
+                model.Opt8 = userObj["optional8"].ToString();
+                model.Opt9 = userObj["optional9"].ToString();
+                model.Opt10 = userObj["optional10"].ToString();
                 DataSet ds = model.SaveBillPaymentResponse();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -175,6 +239,58 @@ namespace MyTrade.Controllers
             request.AddParameter("opid", opid);
             IRestResponse response = client.Execute(request);
             return Json(response.Content, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult PostpaidRecharge(string Amount, string OrderNo, string MobileNo, string state_code, string opid)
+        {
+            UserRecharge model = new UserRecharge();
+            var client = new RestClient("https://www.kwikapi.com/api/v2/bills/recharge.php?api_key=" + RechargeModel.APIKey + "&number=" + MobileNo + "&amount=" + Amount + "&opid=" + opid + "&order_id=" + OrderNo + "");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key", RechargeModel.APIKey);
+            request.AddParameter("number", MobileNo);
+            IRestResponse response = client.Execute(request);
+            JObject userObj = JObject.Parse(response.Content);
+
+            if (userObj["status"].ToString() == "SUCCESS" || userObj["status"].ToString() == "PENDING" || userObj["status"].ToString() == "FAILED")
+            {
+                model.Amount = Convert.ToDecimal(Amount);
+                model.OrderNo = OrderNo;
+                model.FK_UserId = Session["Pk_UserId"].ToString();
+                model.OperatorId = opid;
+                model.CircleId = state_code;
+                model.TransactionFor = MobileNo;
+                model.Provider = userObj["provider"].ToString();
+                model.ChargedAmount = Convert.ToDecimal(userObj["charged_amount"]);
+                model.ServerOrderId = userObj["order_id"].ToString();
+                model.Opr_Id = userObj["opr_id"].ToString();
+                model.Status = userObj["status"].ToString();
+                model.Message = userObj["message"].ToString();
+                DataSet ds = model.SaveBillPaymentResponse();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        model.Message = "Recharge done successfully";
+                        model.Result = "Yes";
+                    }
+                    else
+                    {
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Result = "No";
+                    }
+                }
+                else
+                {
+                    model.Message = "Some issues occurred";
+                    model.Result = "No";
+                }
+            }
+            else
+            {
+                model.Message = "Temporarily issues occurred. Please try after some times.";
+                model.Result = "No";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }
