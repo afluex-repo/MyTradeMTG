@@ -937,6 +937,7 @@ namespace MyTrade.Controllers
                 obj.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
                 obj.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
                 obj.UPIId = ds.Tables[0].Rows[0]["UPIID"].ToString();
+                obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
                 obj.IsVerified = Convert.ToBoolean(ds.Tables[0].Rows[0]["ISVerified"]);
             }
             else
@@ -2256,11 +2257,11 @@ namespace MyTrade.Controllers
         {
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
-            model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
             try
             {
+                decimal amount = Convert.ToDecimal(model.Amount) * 100;
                 Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", Convert.ToInt32(model.Amount)); // amount in the smallest currency unit
+                options.Add("amount", Convert.ToInt32(amount)); // amount in the smallest currency unit
                 options.Add("receipt", random);
                 options.Add("currency", "INR");
                 options.Add("payment_capture", "1");
@@ -2270,9 +2271,10 @@ namespace MyTrade.Controllers
                 Razorpay.Api.Order order = client.Order.Create(options);
                 model.OrderId = order["id"].ToString();
                 model.PaymentMode = "12";
+                model.Amount = amount.ToString();
                 orderModel.orderId = order.Attributes["id"];
                 orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                orderModel.amount = Convert.ToInt32(model.Amount);
+                orderModel.amount = Convert.ToInt32(amount);
                 orderModel.currency = "INR";
                 orderModel.description = "Recharge Wallet";
                 orderModel.name = model.Name;
@@ -2497,6 +2499,75 @@ namespace MyTrade.Controllers
                 model.Message = ex.Message;
             }
             return Json(model,JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CreateOrder(string Amount, string MobileNo, string Type,string FK_UserId)
+        {
+            UserRecharge obj = new UserRecharge();
+            UserRechargeAPI model = new UserRechargeAPI();
+            obj.FK_UserId =FK_UserId;
+            obj.Amount = Convert.ToDecimal(Amount);
+            obj.TransactionFor = MobileNo;
+            DataSet dsss = obj.GetWalletBalance();
+            if (dsss != null && dsss.Tables.Count > 0 && dsss.Tables[0].Rows.Count > 0)
+            {
+                if (obj.Amount <= Convert.ToDecimal(dsss.Tables[0].Rows[0]["amount"]))
+                {
+                    obj.TransactionType = Type;
+                    DataSet ds = obj.CreateOrder();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Status = "0";
+                            model.OrderNo = ds.Tables[0].Rows[0]["OrderNo"].ToString();
+                            model.Message = "Order Created Successfully";
+                        }
+                        else
+                        {
+                            model.Status = "1";
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Status = "1";
+                        model.Message = "Temporarily issues occurred. Please Try after some time";
+                    }
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "You have insufficient balance in your wallet for this plan. Kindly choose another plan";
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SaveRechageOrBillPaymentResponse(UserRecharge model)
+        {
+            UserRechargeAPI obj = new UserRechargeAPI();
+            DataSet ds = model.SaveBillPaymentResponse();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    obj.Message = "Recharge done successfully";
+                    obj.Status = "0";
+                }
+                else
+                {
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    obj.Status = "1";
+                }
+            }
+            else
+            {
+                obj.Message = "Some issues occurred";
+                obj.Status = "1";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -475,15 +475,12 @@
     <Content Include="MyTradeWebsite\Coming.html" />
     <Content Include="MyTradeWebsite\contact.html" />
     <Content Include="MyTradeWebsite\error-404.html" />
-    <Content Include="MyTradeWebsite\extra.html" />
-    <Content Include="MyTradeWebsite\faq.html" />
     <Content Include="MyTradeWebsite\forex.html" />
     <Content Include="MyTradeWebsite\index.html" />
     <Content Include="MyTradeWebsite\login.html" />
     <Content Include="MyTradeWebsite\privacy.html" />
     <Content Include="MyTradeWebsite\services.html" />
     <Content Include="MyTradeWebsite\sign-up.html" />
-    <Content Include="MyTradeWebsite\team.html" />
     <Content Include="MyTradeWebsite\terms&amp;condition.html" />
     <Content Include="plugins\animate\animate.css" />
     <Content Include="plugins\apex\apexcharts.css" />
@@ -603,6 +600,7 @@
     <Content Include="plugins\tagInput\tags-input.css" />
     <Content Include="plugins\tagInput\tags-input.js" />
     <Content Include="plugins\treeview\custom-jstree.js" />
+    <Content Include="ProfilePicture\untitled-5.gif" />
     <Content Include="TreeIcon\default.png" />
     <Content Include="TreeIcon\girl-active.png" />
     <Content Include="TreeIcon\girl-active1.png" />
@@ -880,7 +878,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="PanUpload\" />
-    <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>

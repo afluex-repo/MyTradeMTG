@@ -714,6 +714,7 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string Fk_UserId { get; set; }
         public string PanNumber { get; set; }
+        public string PanImage { get; set; }
         public string AdharNo { get; set; }
         public string BankName { get; set; }
         public string BranchName { get; set; }
