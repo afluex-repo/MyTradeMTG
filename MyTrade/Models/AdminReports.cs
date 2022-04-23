@@ -10,9 +10,7 @@ namespace MyTrade.Models
     public class AdminReports : Common
     {
         public List<AdminReports> lsttopupreport { get; set; }
-
         public string isBlocked { get; set; }
-
         public string Email { get; set; }
         public string FromDate { get; set; }
         public bool IsDownline { get; set; }
@@ -37,7 +35,6 @@ namespace MyTrade.Models
         public string PaymentMode { get; set; }
         public string BusinessType { get; set; }
         public string ReceiptNo { get; set; }
-
         public string FromLoginID { get; set; }
         public string ePinNo { get; set; }
         public string FromId { get; set; }
@@ -52,11 +49,8 @@ namespace MyTrade.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MobileNo { get; set; }
-
         public string AdharNo { get; set; }
         public string PanNo { get; set; }
-
-
         public string AccountNo { get; set; }
         public string IFSCCode { get; set; }
         public string NomineeName { get; set; }
@@ -66,7 +60,6 @@ namespace MyTrade.Models
         public string MemberStatus { get; set; }
         public string UPIID { get; set; }
         public string PackageDays { get; set; }
-
         public string PinAmount { get; set; }
         public string BV { get; set; }
         public string TransactionBy { get; set; }
@@ -74,7 +67,6 @@ namespace MyTrade.Models
         public string IsCalculated { get; set; }
         public string TopUpDate { get; set; }
         public string Pk_investmentId { get; set; }
-        
         public string Pk_EwalletId { get; set; }
         public string Narration { get; set; }
         public string DrAmount { get; set; }
@@ -84,24 +76,19 @@ namespace MyTrade.Models
         public List<AdminReports> lstActivateByPayment { get; set; }
         public List<AdminReports> lstWallet { get; set; }
         public List<AdminReports> lstcontact { get; set; }
-        
         public string Remark { get; set; }
         public string BankBranch { get; set; }
         public string ChequeDDNo { get; set; }
         public string ChequeDDDate { get; set; }
         public string RequestID { get; set; }
-
         public string UserId { get; set; }
         public string RequestCode { get; set; }
         public string WalletId { get; set; }
         public string UsedFor { get; set; }
         public string AvailableBalance { get; set; }
-
         public string Subject { get; set; }
         public string Message { get; set; }
         public string Date { get; set; }
-
-
         public string DirectStatus { get; set; }
         public string Ids { get; set; }
         public string Level { get; set; }
