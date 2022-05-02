@@ -82,6 +82,26 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveBillPaymentResponse", para);
             return ds;
         }
+        public DataSet getPendingRechargeList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Fk_UserId",FK_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetPendingRechargelist", para);
+            return ds;
+        }
+        public DataSet UpdateFailedPayment()
+        {
+            SqlParameter[] para = { new SqlParameter("@OrderNo", OrderNo),
+                new SqlParameter("@Amount", Amount),
+                new SqlParameter("@Status", Status),
+                new SqlParameter("@FK_UserId",FK_UserId)
+               
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateFailedPaymentBill", para);
+            return ds;
+        }
     }
     public class BillPayment
     {
@@ -100,4 +120,5 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string OrderNo { get; set; }
     }
+
 }
