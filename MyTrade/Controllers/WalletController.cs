@@ -109,7 +109,7 @@ namespace MyTrade.Controllers
                     model.BankName = null;
                     model.BankBranch = null;
                 }
-                if(model.PaymentType == "2")
+                if (model.PaymentType == "2")
                 {
                     DataSet ds = model.SaveEwalletRequest();
                     if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -125,15 +125,16 @@ namespace MyTrade.Controllers
                     }
                     else { }
                 }
-                else if(model.PaymentType == "1")
+                else if (model.PaymentType == "1")
                 {
                     OrderModel orderModel = new OrderModel();
                     string random = Common.GenerateRandom();
                     CreateOrderResponse obj1 = new CreateOrderResponse();
                     try
                     {
+                        decimal amount = Convert.ToDecimal(model.Amount) * 100;
                         Dictionary<string, object> options = new Dictionary<string, object>();
-                        options.Add("amount", Convert.ToInt32(model.Amount) * 100); // amount in the smallest currency unit
+                        options.Add("amount", Convert.ToInt32(amount)); // amount in the smallest currency unit
                         options.Add("receipt", random);
                         options.Add("currency", "INR");
                         options.Add("payment_capture", "1");
@@ -146,11 +147,12 @@ namespace MyTrade.Controllers
                         model.OrderId = order["id"].ToString();
                         model.LoginId = Session["LoginId"].ToString();
                         model.AddedBy = Session["Pk_UserId"].ToString();
-                        model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
+                        model.PaymentType = "Online";
                         model.PaymentMode = "12";
+                        model.Amount = amount.ToString();
                         orderModel.orderId = order.Attributes["id"];
                         orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                        orderModel.amount = Convert.ToInt32(model.Amount) * 100;
+                        orderModel.amount = Convert.ToInt32(amount);
                         orderModel.currency = "INR";
                         orderModel.description = "Recharge Wallet";
                         orderModel.name = Session["FullName"].ToString();
