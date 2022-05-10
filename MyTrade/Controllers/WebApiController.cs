@@ -2031,7 +2031,14 @@ namespace MyTrade.Controllers
                     }
                     model.lst = lst;
                 }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "Record Not Found";
+                    model.lst = lst;
+                }
             }
+          
             catch (Exception ex)
             {
                 model.Status = "1";
