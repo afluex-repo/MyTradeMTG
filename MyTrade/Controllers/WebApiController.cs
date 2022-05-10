@@ -1418,7 +1418,18 @@ namespace MyTrade.Controllers
                             }
                             res.lstDetails = lstMember;
                         }
+                        else
+                        {
+                            res.Status = "1";
+                            res.Message = "No Record Found";
+                            res.lstDetails = lstMember;
+                        }
                     }
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
                 }
 
             }
@@ -1493,6 +1504,12 @@ namespace MyTrade.Controllers
                     }
                     res.lst = lst;
                 }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "Record NotFound";
+                    res.lst = lst;
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
                     res.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
@@ -1529,6 +1546,12 @@ namespace MyTrade.Controllers
                         obj.Color = r["Color"].ToString();
                         lstMember.Add(obj);
                     }
+                    res.lstDetails = lstMember;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "Record Not Found";
                     res.lstDetails = lstMember;
                 }
             }
@@ -1678,6 +1701,11 @@ namespace MyTrade.Controllers
                         lst.Add(obj);
                     }
                     res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "Record Not Found";
                 }
             }
             catch (Exception ex)
@@ -1986,12 +2014,19 @@ namespace MyTrade.Controllers
                     }
                     model.lst = lst;
                 }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "Record Not Found";
+                    model.lst = lst;
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
                     model.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
                     model.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
                     model.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
                 }
+               
             }
             catch (Exception ex)
             {
@@ -2031,7 +2066,14 @@ namespace MyTrade.Controllers
                     }
                     model.lst = lst;
                 }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "Record Not Found";
+                    model.lst = lst;
+                }
             }
+          
             catch (Exception ex)
             {
                 model.Status = "1";
