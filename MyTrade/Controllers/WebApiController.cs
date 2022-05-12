@@ -229,7 +229,6 @@ namespace MyTrade.Controllers
 
         #endregion
         #region ActivateUser
-
         public ActionResult ActivateUser(EpinDetails model)
         {
             EpinDetails obj = new EpinDetails();
@@ -335,10 +334,19 @@ namespace MyTrade.Controllers
                 {
                     obj.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
                 }
+                else
+                {
+                    obj.TotalTPSAmountTobeReceived = "0";
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
                 {
                     obj.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
                     obj.TotalTPSBalanceAmount = Convert.ToDecimal(obj.TotalTPSAmountTobeReceived) - Convert.ToDecimal(obj.TotalTPSAmountReceived);
+                }
+                else
+                {
+                    obj.TotalTPSAmountReceived = "0";
+                    obj.TotalTPSBalanceAmount = "0";
                 }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -828,9 +836,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
-
         [HttpPost]
         public ActionResult UpdateProfile(ProfileAPI model)
         {
@@ -2428,7 +2433,6 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
         [HttpPost]
         public ActionResult ForgetPassword(ForgetPassword model)
         {
@@ -2585,7 +2589,6 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         public ActionResult SaveRechageOrBillPaymentResponse(UserRecharge model)
         {

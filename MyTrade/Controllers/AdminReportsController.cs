@@ -368,7 +368,6 @@ namespace MyTrade.Controllers
             return View(newdata);
         }
         #endregion
-
         public ActionResult DownTeamTree(string Ids, string FK_UserId)
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();
@@ -470,9 +469,6 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
             return View(model);
         }
-
-
-
         //[HttpPost]
         //[ActionName("DirectListForAdmin")]
         //[OnAction(ButtonName = "Search")]
@@ -509,8 +505,6 @@ namespace MyTrade.Controllers
         //    ViewBag.ddlleg = Leg;
         //    return View(model);
         //}
-
-
         public ActionResult ViewProfileForAdmin(string Id)
         {
             AdminReports model = new AdminReports();
@@ -550,7 +544,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ViewProfileForAdmin")]
         [OnAction(ButtonName = "Update")]
@@ -611,7 +604,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AssociateList", "AdminReports");
         }
-
         public ActionResult ViewProfile(string Id)
         {
             AdminReports model = new AdminReports();
@@ -678,8 +670,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("KYCUpdateDeatilsOfUser", "Admin");
         }
-
-
         public ActionResult WalletLedger()
         {
             AdminReports model = new AdminReports();
@@ -706,7 +696,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("WalletLedger")]
         [OnAction(ButtonName = "Search")]
@@ -734,8 +723,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         public ActionResult ActivateByPaymentList()
         {
             AdminReports model = new AdminReports();
@@ -765,7 +752,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ActivateByPaymentList")]
         [OnAction(ButtonName = "Search")]
@@ -797,7 +783,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult GetStateCity(string PinCode)
         {
             Common obj = new Common();
@@ -815,7 +800,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult DeclineKyc(string Id)
         {
             AdminReports model = new AdminReports();
@@ -868,9 +852,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("TopUpReport", "AdminReports");
         }
-
-
-
         public ActionResult ContactList()
         {
             AdminReports model = new AdminReports();
@@ -894,7 +875,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ContactList")]
         [OnAction(ButtonName = "Search")]
@@ -1166,7 +1146,5 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
     }
 }

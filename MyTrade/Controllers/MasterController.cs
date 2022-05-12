@@ -356,13 +356,10 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
-
         public ActionResult Upload()
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("Upload")]
         public ActionResult Upload(Master model, HttpPostedFileBase postedFile)
@@ -399,8 +396,6 @@ namespace MyTrade.Controllers
             return RedirectToAction("Upload", "Master");
 
         }
-
-
         public ActionResult UploadList()
         {
             Master model = new Master();
@@ -421,7 +416,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("UploadList")]
         public ActionResult UploadList(Master model)
@@ -443,7 +437,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult DeleteRewards(string Id)
         {
             try
@@ -475,8 +468,6 @@ namespace MyTrade.Controllers
             return RedirectToAction("UploadList", "Master");
 
         }
-
-
         public ActionResult UploadFile()
         {
             return View();

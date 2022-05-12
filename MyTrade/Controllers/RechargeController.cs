@@ -19,6 +19,7 @@ namespace MyTrade.Controllers
             List<BillPayment> lst = new List<BillPayment>();
             BillPayment model = new BillPayment();
             DataSet ds = model.GetBillPayment();
+            GetPendingRechargeList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach(DataRow r in ds.Tables[0].Rows)
@@ -147,16 +148,25 @@ namespace MyTrade.Controllers
                 DataSet ds = model.SaveBillPaymentResponse();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    if (model.Status == "SUCCESS")
                     {
-                        model.Message = "Recharge done successfully";
-                        model.Result = "Yes";
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Message = "Recharge done successfully";
+                            model.Result = "Yes";
+                        }
+                        else
+                        {
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            model.Result = "No";
+                        }
                     }
                     else
                     {
-                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Message = model.Status;
                         model.Result = "No";
                     }
+                   
                 }
                 else
                 {
@@ -291,6 +301,69 @@ namespace MyTrade.Controllers
                 model.Result = "No";
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetPendingRechargeList()
+        {
+            UserRecharge model = new UserRecharge();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.getPendingRechargeList();
+            if(ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+            {
+               
+                foreach (DataRow r  in ds.Tables[0].Rows)
+                {
+                    var Amount = Convert.ToDecimal(r["Amount"].ToString());
+                    var MobileNo = r["TransactionFor"].ToString();
+                    var CircleId = r["CircleId"].ToString();
+                    var OperatorId = r["OperatorId"].ToString();
+                    var Status = r["Status"].ToString();
+                    var  OrderNo = r["OrderNo"].ToString();
+                    var Fk_UserId= r["FK_UserId"].ToString();
+                    var client = new RestClient("https://www.kwikapi.com/api/v2/status.php?api_key=" + RechargeModel.APIKey + "&order_id=" + OrderNo + "");
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.GET);
+                    IRestResponse response = client.Execute(request);
+                    string json= JObject.Parse(response.Content).ToString();
+                    JObject rss = JObject.Parse(json);
+                    string rssTitle = (string)rss["response"]["status"];
+                    if (rssTitle == "FAILED")
+                    {
+                        model.Amount = Convert.ToDecimal(Amount);
+                        model.OrderNo = OrderNo;
+                        model.FK_UserId = Fk_UserId;
+                        model.OperatorId = OperatorId;
+                        model.CircleId = CircleId;
+                        model.TransactionFor = MobileNo;
+                        model.Status = (string)rss["response"]["status"].ToString();
+                        //    //model.Message = (string)rss["response"]["message"].ToString();
+                        DataSet dsfailed = model.UpdateFailedPayment();
+                        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        //    {
+                        //        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        //        {
+                        //            model.Message = "Recharge done successfully";
+                        //            model.Result = "Yes";
+                        //        }
+                        //        else
+                        //        {
+                        //            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        //            model.Result = "No";
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        model.Message = "Some issues occurred";
+                        //        model.Result = "No";
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    model.Message = "Temporarily issues occurred. Please try after some times.";
+                        //    model.Result = "No";
+                    }
+                   }
+                }
+            return View();
         }
     }
 }

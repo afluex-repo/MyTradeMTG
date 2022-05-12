@@ -6,7 +6,6 @@ namespace Razorpay.Api.Errors
     {
         public string ErrorCode { get; private set; }
         public int HttpStatusCode { get; private set; }
-
         public BaseError(string message, string errorCode, int httpStatusCode)
             : base(message)
         {

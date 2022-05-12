@@ -325,6 +325,7 @@ namespace MyTrade.Controllers
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     obj.ActivationDate = r["ActivationDate"].ToString();
                     obj.Amount = r["TotalAmount"].ToString();
+                    obj.BV = r["BV"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
@@ -355,6 +356,7 @@ namespace MyTrade.Controllers
                     obj.RegisteredTo = r["RegisteredTo"].ToString();
                     obj.Amount = r["TotalAmount"].ToString();
                     obj.ActivationDate = r["ActivationDate"].ToString();
+                    obj.BV = r["BV"].ToString();
                     //obj.IsRegistered = r["IsRegistered"].ToString();
                     obj.PinGenerationDate = r["PinGenerationDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
@@ -1105,7 +1107,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("TopUpList")]
         [OnAction(ButtonName = "Search")]
@@ -1142,8 +1143,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         public ActionResult BusinessReportsForUser()
         {
             User model = new User();
@@ -1199,7 +1198,6 @@ namespace MyTrade.Controllers
             #endregion
             return View(model);
         }
-
         [HttpPost]
         [ActionName("BusinessReportsForUser")]
         [OnAction(ButtonName = "GetDetails")]
@@ -1264,8 +1262,6 @@ namespace MyTrade.Controllers
             #endregion
             return View(model);
         }
-
-
         public ActionResult PayoutRequest()
         {
             string FormName = "";
@@ -1321,7 +1317,6 @@ namespace MyTrade.Controllers
             #endregion
             return View(model);
         }
-
         [HttpPost]
         [ActionName("PayoutRequest")]
         [OnAction(ButtonName = "PayoutRequest")]
@@ -1370,8 +1365,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("Download")]
         public ActionResult Download(User model)
@@ -1651,6 +1644,5 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-      
     }
 }

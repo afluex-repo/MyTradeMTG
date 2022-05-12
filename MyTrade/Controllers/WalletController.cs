@@ -19,7 +19,6 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         public ActionResult GetMemberName(string LoginId)
         {
             Common obj = new Common();
@@ -33,7 +32,6 @@ namespace MyTrade.Controllers
             else { obj.Result = "No"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult AddWallet()
         {
             UserWallet obj = new UserWallet();
@@ -93,7 +91,6 @@ namespace MyTrade.Controllers
 
             return View(obj);
         }
-
         [HttpPost]
         [ActionName("AddWallet")]
         [OnAction(ButtonName = "Save")]
@@ -284,7 +281,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ROIWallet")]
         [OnAction(ButtonName = "Search")]
@@ -314,7 +310,6 @@ namespace MyTrade.Controllers
             return View(model);
 
         }
-
         public ActionResult ROIIncomeReports()
         {
             UserWallet model = new UserWallet();
@@ -339,7 +334,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ROIIncomeReports")]
         [OnAction(ButtonName = "Search")]
@@ -368,7 +362,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult ViewROI(string InvId)
         {
             UserWallet model = new UserWallet();
@@ -515,7 +508,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult DeleteWallet(string id)
         {
             try

@@ -124,7 +124,6 @@ namespace MyTrade.Controllers
             #endregion
             return View(model);
         }
-
         [HttpPost]
         [ActionName("SetPermission")]
         [OnAction(ButtonName = "Save")]
