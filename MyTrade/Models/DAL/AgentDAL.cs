@@ -10,7 +10,6 @@ namespace MyTrade.DAL
     public class AgentDAL
     {
         public string ProductCode { get; set; }
-
         public DataTable GetTreeMembers(AgentModel Obj)
         {
             SqlParameter[] para ={

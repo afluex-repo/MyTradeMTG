@@ -11,7 +11,6 @@ namespace Mytrade.Models.DAL
 {
     public class ReturnData
     {
-
         public DataTable GetQueryData(string query)
         {
             string constr = DBHelper.connectionString;
@@ -34,7 +33,6 @@ namespace Mytrade.Models.DAL
                 }
             }
         }
-
         public DataTable GetTreeMembers(string heads)
         {
 
@@ -61,7 +59,6 @@ namespace Mytrade.Models.DAL
             }
 
         }
-
         public DataTable CheckParentForTreeView(int Fk_MemID, int Session_Fk_MemID)
         {
 

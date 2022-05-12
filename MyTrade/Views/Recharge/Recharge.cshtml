@@ -315,7 +315,7 @@
                                             <div id="divPrepaid">
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" name="PrepaidNo" id="PrepaidNo" class="form-control" required placeholder="Enter Your Mobile Number" onchange="return GetOperator('Prepaid');" />
+                                                        <input type="text" name="PrepaidNo" maxlength="10" id="PrepaidNo" , onkeypress = "return isNumberKey(event);",  class="form-control" required placeholder="Enter Your Mobile Number" onchange="return AutoFillOperator();" />
                                                     </div>
                                                 </div>
 
@@ -354,7 +354,6 @@
                                                     <div class="form-group">
                                                         <select class="form-control" id="Postpaidoperator" required>
                                                             <option value="0">-Select Operator-</option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -653,11 +652,19 @@
 
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
-    //$(document).ready(function () {
-    //    debugger;
-    //    $("body").removeAttr("style");
-    //})
-
+    $(document).ready(function () {
+        debugger;
+        //$("body").removeAttr("style");
+        var name = "Prepaid"
+        GetOperator(name);
+    })
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
     $('input[type=radio][name=optradio]').change(function () {
         if (this.value == 'Prepaid') {
             $("#divPrepaid").show();
@@ -699,7 +706,7 @@
                         }
                     });
                     // APPEND OR INSERT DATA TO SELECT ELEMENT.
-                    //$('#Operator').append('<option value="' + obj.response[i].operator_id + '">' + obj.response[i].operator_name + '</option>');
+                    $('#Operator').append('<option value="' + obj.response[i].operator_id + '">' + obj.response[i].operator_name + '</option>');
                 }
             },
             error: function () {
@@ -778,13 +785,19 @@
     function AutoFillOperator() {
         $.ajax({
             url: '/Recharge/AutoFillOperator',
-            data: { MobileNo: $("#MobileNo").val() },
+            data: { MobileNo: $("#PrepaidNo").val() },
             Type: "Get",
             DataType: "JSON",
             success: function (data) {
                 var obj = JSON.parse(data);
-                $("#operator option[text=" + obj.details.operator + "]").attr("selected", "selected");
-                $("#circle option[text=" + obj.details.Circle + "]").attr("selected", "selected");
+                debugger
+                if (obj.success ==false)
+                {
+                    alert(obj.message);
+                    $('#PrepaidNo').val('');
+                }
+                //$("#operator option[text=" + obj.details.operator + "]").attr("selected", "selected");
+                //$("#circle option[text=" + obj.details.Circle + "]").attr("selected", "selected");
 
             },
             error: function () {
@@ -916,6 +929,11 @@
     }
     function CreateOrder(Type) {
         debugger;
+        if ($('#PackageId').val() == '0') {
+            $("#PackageId").addClass('errortext');
+            $('#PackageId').focus();
+            return false;
+        }
         $.ajax({
             url: '/Recharge/CreateOrder',
             data: { Amount: $("#" + Type + "Amount").val(), MobileNo: $("#" + Type + "No").val(), Type: Type },
@@ -941,6 +959,7 @@
                 }
                 else if (data.Result == "No") {
                     alert(data.Message);
+                
                 }
             },
             error: function () {
@@ -959,9 +978,11 @@
                 debugger;
                 if (data.Result == "Yes") {
                     alert(data.Message)
+                    location.reload();
                 }
                 else if (data.Result == "No") {
                     alert(data.Message);
+                    location.reload();
                 }
                 else {
                 }

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace MyTrade.Models
+
 {
     public class DBHelper
     {

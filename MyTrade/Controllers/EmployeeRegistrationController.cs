@@ -29,11 +29,8 @@ namespace MyTrade.Controllers
                     emp.Password = ds.Tables[0].Rows[0]["Password"].ToString();
                     emp.Status = ds.Tables[0].Rows[0]["Status"].ToString();
                     emp.EducationQualififcation = ds.Tables[0].Rows[0]["EducationQualifiacation"].ToString();
-
                 }
             }
-
-
 
             #region ddlUserType
             Common obj = new Common();
@@ -75,7 +72,6 @@ namespace MyTrade.Controllers
             }
             return View(emp);
         }
-
         public ActionResult ActivateEmployee(string LoginId)
         {
             EmployeeRegistrations model = new EmployeeRegistrations();
@@ -130,7 +126,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("EmployeeDetails", "EmployeeRegistration");
         }
-
         public ActionResult SaveEmployeeRegistration(string Name, string Mobile, string Email, string Qualification, string Fk_UserTypeId)
         {
 
