@@ -211,8 +211,10 @@ namespace MyTrade.Models
         {
             SqlParameter[] para =
             {
+                new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@Email",Email)
             };
+            
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
         }
