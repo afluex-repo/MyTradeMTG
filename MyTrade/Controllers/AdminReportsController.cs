@@ -55,6 +55,7 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        
         [HttpPost]
         [ActionName("AssociateList")]
         [OnAction(ButtonName = "Search")]
