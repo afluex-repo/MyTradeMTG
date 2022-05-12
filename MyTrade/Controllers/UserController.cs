@@ -9,6 +9,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -255,6 +256,36 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                        if (obj.Email != null)
+                        {
+                            string mailbody = "";
+                            try
+                            {
+                                mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
+                                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                                {
+                                    Host = "smtp.gmail.com",
+                                    Port = 587,
+                                    EnableSsl = true,
+                                    DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                                    UseDefaultCredentials = true,
+                                    Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022")
+                                };
+                                using (var message = new MailMessage("coustomer.mytrade@gmail.com", obj.Email)
+                                {
+                                    IsBodyHtml = true,
+                                    Subject = "TopUp",
+                                    Body = mailbody
+                                })
+                                    smtp.Send(message);
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
                         TempData["msg"] = "Top-Up Done successfully";
                     }
                     else
