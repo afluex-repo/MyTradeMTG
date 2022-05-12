@@ -277,8 +277,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-     
-
         public ActionResult PaidIncome(string PayoutNo)
         {
             UserReports model = new UserReports();

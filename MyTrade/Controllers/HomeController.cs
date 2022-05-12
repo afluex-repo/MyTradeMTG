@@ -174,7 +174,6 @@ namespace MyTrade.Controllers
             }
             return View();
         }
-
         public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City)
         {
             Home obj = new Home();
@@ -267,7 +266,7 @@ namespace MyTrade.Controllers
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
             CreateOrderResponse obj1 = new CreateOrderResponse();
-            if (Session["Pk_UserId"].ToString() == "209")
+            if (Session["Pk_UserId"].ToString() == "259")
             {
                 model.Amount = "100";
             }
@@ -492,12 +491,10 @@ namespace MyTrade.Controllers
             return PartialView("_Menu", Menu);
         }
         #endregion
-
         public ActionResult ForgetPassword()
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("ForgetPassword")]
         [OnAction(ButtonName = "forgetpassword")]
@@ -555,28 +552,24 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         public ActionResult CalculateLevelIncomeTr2()
         {
             Home model = new Home();
             DataSet ds = model.CalculateLevelIncomeTr2();
             return View();
         }
-
         public ActionResult CalculateROI()
         {
             Home model = new Home();
             DataSet ds = model.CalculateROI();
             return View();
         }
-
         public ActionResult CalculateDistributePaymentTPS()
         {
             Home model = new Home();
             DataSet ds = model.CalculateDistributePaymentTPS();
             return View();
         }
-
         public ActionResult SaveContact(string name, string email, string phone, string subject, string message)
         {
             Home model = new Home();

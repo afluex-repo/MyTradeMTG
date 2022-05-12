@@ -213,7 +213,9 @@ namespace MyTrade.Controllers
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
+                obj.BV= ds.Tables[0].Rows[0]["BV"].ToString();
                 obj.FinalAmount = ds.Tables[0].Rows[0]["FinalAmount"].ToString();
+
             }
             else { }
             return Json(obj, JsonRequestBehavior.AllowGet);
@@ -233,12 +235,10 @@ namespace MyTrade.Controllers
             else { obj.Result = "Invalid LoginId"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult ChangePassword()
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("ChangePassword")]
         public ActionResult ChangePassword(Admin model)
@@ -265,8 +265,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("ChangePassword", "Admin");
         }
-
-
         public ActionResult PinTransferReportForAdmin()
         {
             AdminReports model = new AdminReports();
@@ -289,7 +287,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [OnAction(ButtonName = "GetDetails")]
         [ActionName("PinTransferReportForAdmin")]
@@ -317,9 +314,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
-
         public ActionResult WalletList()
         {
             Admin model = new Admin();
@@ -352,7 +346,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [OnAction(ButtonName = "GetDetails")]
         [ActionName("WalletList")]
@@ -389,9 +382,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
-
         public ActionResult Approve(string id)
         {
             try
@@ -419,7 +409,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("WalletList", "Admin");
         }
-
         public ActionResult DeClined(string id)
         {
             try
@@ -447,7 +436,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("WalletList", "Admin");
         }
-
         public ActionResult PaymentTypeMaster()
         {
 
@@ -489,7 +477,6 @@ namespace MyTrade.Controllers
             obj.lstWallet = lst;
             return View(obj);
         }
-
         [HttpPost]
         [OnAction(ButtonName = "Update")]
         [ActionName("PaymentTypeMaster")]
@@ -518,7 +505,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PaymentTypeMaster", "Admin");
         }
-
         public ActionResult EPinRequestList()
         {
             Admin model = new Admin();
@@ -582,8 +568,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         public ActionResult AcceptedEPinRequest(string id)
         {
             try
@@ -611,7 +595,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("EPinRequestList", "Admin");
         }
-
         public ActionResult RejectedEPinRequest(string id)
         {
             try
@@ -639,8 +622,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("EPinRequestList", "Admin");
         }
-
-
         public ActionResult ROIWalletForAdmin()
         {
             Admin model = new Admin();
@@ -664,8 +645,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("ROIWalletForAdmin")]
         [OnAction(ButtonName = "Search")]
@@ -696,7 +675,6 @@ namespace MyTrade.Controllers
             return View(model);
 
         }
-
         public ActionResult ROIIncomeReportsForAdmin()
         {
             Admin model = new Admin();
@@ -719,7 +697,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ROIIncomeReportsForAdmin")]
         [OnAction(ButtonName = "Search")]
@@ -746,7 +723,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult ViewROIForAdmin(string Id, string UserId)
         {
             Admin model = new Admin();
@@ -777,7 +753,6 @@ namespace MyTrade.Controllers
 
             return View(model);
         }
-
         public ActionResult ViewTPSForAdmin(string Id, string UserId)
         {
             Admin model = new Admin();
@@ -836,7 +811,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         public ActionResult PayoutWalletLedgerForAdmin(Admin model)
         {
@@ -863,7 +837,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult LevelIncomeTr1ForAdmin()
         {
             List<Admin> lst = new List<Admin>();
@@ -890,7 +863,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("LevelIncomeTr1ForAdmin")]
         [OnAction(ButtonName = "btnSearch")]
@@ -923,8 +895,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         public ActionResult LevelIncomeTr2ForAdmin()
         {
             List<Admin> lst = new List<Admin>();
@@ -951,7 +921,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("LevelIncomeTr2ForAdmin")]
         [OnAction(ButtonName = "btnSearch")]
@@ -984,7 +953,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult PayoutDetailForAdmin()
         {
             List<Admin> lst = new List<Admin>();
@@ -1029,7 +997,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("PayoutDetailForAdmin")]
         [OnAction(ButtonName = "btnSearch")]
@@ -1082,7 +1049,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult DistributePayment()
         {
             List<Admin> lst = new List<Admin>();
@@ -1116,7 +1082,6 @@ namespace MyTrade.Controllers
             //model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-
         [HttpPost]
         [ActionName("DistributePayment")]
         [OnAction(ButtonName = "GetDetails")]
@@ -1153,11 +1118,6 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-
-
-
-
-
         [HttpPost]
         [ActionName("DistributePayment")]
         [OnAction(ButtonName = "btnSearch")]
@@ -1186,7 +1146,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("DistributePayment", "Admin");
         }
-
         public ActionResult DistributePaymentTPS()
         {
             Admin model = new Admin();
@@ -1217,8 +1176,6 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-
-
         [HttpPost]
         [ActionName("DistributePaymentTPS")]
         [OnAction(ButtonName = "GetDetails")]
@@ -1253,10 +1210,6 @@ namespace MyTrade.Controllers
             model.PayoutNo = ds.Tables[1].Rows[0]["PayoutNo"].ToString();
             return View(model);
         }
-
-
-
-
         public ActionResult BusinessReports()
         {
             Admin model = new Admin();
@@ -1312,7 +1265,6 @@ namespace MyTrade.Controllers
             #endregion
             return View(model);
         }
-
         [HttpPost]
         [ActionName("BusinessReports")]
         [OnAction(ButtonName = "GetDetails")]
@@ -1564,7 +1516,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList", "Admin");
         }
-
         public ActionResult DeclinePayout(string id)
         {
             try
@@ -1592,7 +1543,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList", "Admin");
         }
-
         [HttpPost]
         public ActionResult GetNameDetails(string LoginId)
         {
@@ -1619,7 +1569,6 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult TransferWallet()
         {
             return View();
@@ -1651,7 +1600,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("TransferWallet", "Admin");
         }
-
         public ActionResult AdvanceDeduction()
         {
             Admin model = new Admin();
@@ -1911,8 +1859,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList");
         }
-
-
         [HttpPost]
         [OnAction(ButtonName = "btnDecline")]
         [ActionName("PayoutRequestList")]
@@ -1960,7 +1906,6 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("PayoutRequestList");
         }
-
         public ActionResult KYCUpdateDeatilsOfUser()
         {
             Admin model = new Admin();
@@ -2003,7 +1948,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [OnAction(ButtonName = "Search")]
         [ActionName("KYCUpdateDeatilsOfUser")]
@@ -2172,7 +2116,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult PaidIncomeForAdmin(string PayoutNo, string LoginId)
         {
             Admin model = new Admin();
@@ -2203,7 +2146,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult UnUsedPinList()
         {
             Admin obj = new Admin();
@@ -2251,7 +2193,6 @@ namespace MyTrade.Controllers
 
             return View(obj);
         }
-
         [HttpPost]
         [ActionName("UnUsedPinList")]
         [OnAction(ButtonName = "Search")]
@@ -2301,7 +2242,6 @@ namespace MyTrade.Controllers
             #endregion
             return View(obj);
         }
-
         public ActionResult BannerImageUpload()
         {
             List<Admin> lst = new List<Admin>();
@@ -2647,7 +2587,6 @@ namespace MyTrade.Controllers
             }
             return View(obj);
         }
-
         public ActionResult WalletLedger()
         {
             Admin model = new Admin();
@@ -2701,8 +2640,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
         #region
         public ActionResult DistributedTPSDetails()
         {
