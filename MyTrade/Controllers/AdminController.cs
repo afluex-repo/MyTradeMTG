@@ -1434,11 +1434,11 @@ namespace MyTrade.Controllers
                     obj.PK_RequestID = r["Pk_RequestId"].ToString();
                     obj.Amount = r["AMount"].ToString();
                     obj.Date = r["RequestedDate"].ToString();
-                    //obj.IFSCCode = r["IFSCCode"].ToString();
-                    //obj.MemberAccNo = r["MemberAccNo"].ToString();
-                    //obj.BankBranch = r["MemberBranch"].ToString();
-                    //obj.BankName = r["MemberBankName"].ToString();
-                    //obj.UPIID = r["UPIId"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.BankBranch = r["MemberBranch"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     obj.PaymentMode = "IFSC Code - " + r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
 
                     obj.Status = r["Status"].ToString();

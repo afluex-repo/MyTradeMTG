@@ -70,9 +70,34 @@
                 <img alt="logo" src="~/assets/img/tradelogo.png">
             </div>
             <div class="card-body my-2">
-                <h5 class="card-title my-2">Please Select Any One Option To Activate Your Profile.</h5>
+                <h5 class="card-title my-2">Please Select For  Activate Your Profile.</h5>
                 <div class="d-flex justify-content-around mt-5">
-                    <div class="field-wrapper">
+
+                    @if (ViewBag.PaymentType == "Offline" && ViewBag.IsActive=="True")
+                    {
+                        <div class="field-wrapper">
+                            <a href="/User/ActivateByPin" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                <div class="img-design"><img src="~/assets/img/pin.png" style="width:50px" /></div> <br />
+                                <span style="white-space: nowrap">Activate By Pin</span>
+                            </a>
+                        </div>
+                    }
+                    else if(ViewBag.PaymentType == "Online" && ViewBag.IsActive == "True")
+                    {
+
+                        <div class="field-wrapper">
+                            <a href="/Home/ActivateByPayment" target="_blank" class="btn btn-info foractivation-btn py-2" data-toggle="modal" data-target="#myModal">
+                                <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
+                                <span style="white-space: nowrap">Activate By Payment</span>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+
+                    }
+
+                    @*<div class="field-wrapper">
                         <a href="/User/ActivateByPin" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
                             <div class="img-design"><img src="~/assets/img/pin.png" style="width:50px" /></div> <br />
                             <span style="white-space: nowrap">Activate By Pin</span>
@@ -84,7 +109,8 @@
                             <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
                             <span style="white-space: nowrap">Activate By Payment</span>
                         </a>
-                    </div>
+                    </div>*@
+
                     @using (Html.BeginForm("CompleteRegistration", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
                     {
                         <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
