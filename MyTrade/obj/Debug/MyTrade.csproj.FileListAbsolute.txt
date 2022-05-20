@@ -223,7 +223,6 @@ E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
 E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
 E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.xml
 E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
-E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
 E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
