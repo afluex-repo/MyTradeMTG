@@ -233,6 +233,7 @@ namespace MyTrade.Controllers
         {
             return View();
         }
+
         public ActionResult CompleteRegistration()
         {
             if (Session["LoginId"] == null)
@@ -257,8 +258,19 @@ namespace MyTrade.Controllers
                 }
             }
             ViewBag.ddlProduct = ddlProduct;
+
+
+            Home model = new Home();
+            DataSet ds = model.GetPaymentTypeList();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.PK_PaymentTypeId = ds.Tables[0].Rows[0]["PK_PaymentTypeId"].ToString();
+                ViewBag.PaymentType = ds.Tables[0].Rows[0]["PaymentType"].ToString();
+                ViewBag.IsActive = ds.Tables[0].Rows[0]["IsActive"].ToString();
+            }
             #endregion
-            return View();
+
+            return View(model);
         }
         [HttpPost]
         public ActionResult CompleteRegistration(Home model)

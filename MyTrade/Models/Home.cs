@@ -211,8 +211,10 @@ namespace MyTrade.Models
         {
             SqlParameter[] para =
             {
+                new SqlParameter("@LoginId",LoginId),
                 new SqlParameter("@Email",Email)
             };
+            
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
         }
@@ -275,5 +277,12 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentForJob");
             return ds;
         }
+        public DataSet GetPaymentTypeList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("[GetPaymentTypeForUser]");
+            return ds;
+        }
+
+
     }
 }

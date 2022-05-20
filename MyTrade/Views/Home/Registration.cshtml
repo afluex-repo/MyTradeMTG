@@ -49,6 +49,35 @@
                 border-radius: 8px;
             }
         }
+
+
+
+
+           #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #FFF; /* change if the mask should have another color then white */
+            z-index: 99999; /* makes sure it stays on top */
+        }
+
+
+          #status {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50%; /* centers the loading animation horizontally one the screen */
+            top: 50%; /* centers the loading animation vertically one the screen */
+            background-image: url("../imgs/loader.gif");
+            z-index: 9999; /* path to your loading animation */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            margin: -50px 0 0 -50px; /* is width and height divided by two */
+        }
+
     </style>
 </head>
 <body>
@@ -305,6 +334,31 @@
             $('#Confirm').attr("disabled", false);
             $('#divReg').hide();
         }
+        function saveregistration() {
+            $('#Register').attr("disabled", "disabled");
+
+            $("#divload").css({ 'display': '' });
+            var Leg = "";
+            if ($('#left').prop('checked')) {
+                Leg = "L";
+            }
+            else {
+                Leg = "R";
+            }
+            $.ajax({
+                url: "/Home/RegistrationAction",
+                Type: "Get",
+                DataType: "JSON",
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                    }
+                    else {
+                        $("#divload").css({ 'display': 'none' });
+                        alert(data.Result);
+                    }
+                }
 
         function getstatecity() {
             $(".errortext").removeClass("errortext");
