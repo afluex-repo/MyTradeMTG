@@ -280,7 +280,7 @@ namespace MyTrade.Controllers
             CreateOrderResponse obj1 = new CreateOrderResponse();
             if (Session["Pk_UserId"].ToString() == "259")
             {
-                model.Amount = "100";
+                model.Amount = "1";
             }
             else
             {

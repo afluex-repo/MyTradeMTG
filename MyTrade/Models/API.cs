@@ -298,7 +298,7 @@ namespace MyTrade.Models
         public List<PaymentTypeAPI> lst { get; set; }
         public DataSet PaymentList()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentTypeForUser");
             return ds;
         }
     }
