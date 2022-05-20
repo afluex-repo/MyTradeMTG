@@ -862,6 +862,11 @@ namespace MyTrade.Controllers
 
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
+                if(dss !=null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count>0)
+                {
+                    ViewBag.Status = dss.Tables[1].Rows[0]["Status"].ToString();
+                    ViewBag.Reason = dss.Tables[1].Rows[0]["Reason"].ToString();
+                }
                 foreach (DataRow r in dss.Tables[0].Rows)
                 {
                     User obj = new User();

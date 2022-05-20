@@ -277,5 +277,12 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("AutoDistributePaymentForJob");
             return ds;
         }
+        public DataSet GetPaymentTypeList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("[GetPaymentTypeForUser]");
+            return ds;
+        }
+
+
     }
 }
