@@ -305,33 +305,7 @@
             $('#Confirm').attr("disabled", false);
             $('#divReg').hide();
         }
-        function saveregistration() {
-            $('#Register').attr("disabled", "disabled");
-            $("#divload").css({ 'display': '' });
-            var Leg = "";
-            if ($('#left').prop('checked')) {
-                Leg = "L";
-            }
-            else {
-                Leg = "R";
-            }
-            $.ajax({
-                url: "/Home/RegistrationAction",
-                Type: "Get",
-                DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val() },
-                success: function (data) {
-                    if (data.Result == "1") {
-                        window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
-                    }
-                    else {
-                        $("#divload").css({ 'display': 'none' });
-                        alert(data.Result);
-                    }
-                }
 
-            });
-        }
         function getstatecity() {
             $(".errortext").removeClass("errortext");
             $.ajax({
@@ -393,6 +367,33 @@
             if (keychar == " ") {
                 return false;
             }
+        }
+        function saveregistration() {
+            $('#Register').attr("disabled", "disabled");
+            $("#divload").css({ 'display': '' });
+            var Leg = "";
+            if ($('#left').prop('checked')) {
+                Leg = "L";
+            }
+            else {
+                Leg = "R";
+            }
+            $.ajax({
+                url: "/Home/RegistrationAction",
+                Type: "Get",
+                DataType: "JSON",
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                    }
+                    else {
+                        $("#divload").css({ 'display': 'none' });
+                        alert(data.Result);
+                    }
+                }
+
+            });
         }
     </script>
 </body>
