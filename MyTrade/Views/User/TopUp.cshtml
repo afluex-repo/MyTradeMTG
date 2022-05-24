@@ -193,61 +193,76 @@
         debugger;
         var Amount = $("#Amount").val();
         var WalletBalance = $("#WalletAmount").val();
-        if (Amount != null && Amount != "" && Amount != "0") {
-            if (parseInt(Amount) % 1000 == 0) {
-                if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
-                    Snackbar.show({
-                        text: "Amount should not be greater than max amount",
-                        actionTextColor: '#fff',
-                        backgroundColor: '#e7515a',
-                        pos: 'top-right'
-                    });
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    $("#Amount").val('');
-                    return false;
-                }
-                else if (parseInt(Amount) > parseInt(WalletBalance)) {
-                    Snackbar.show({
-                        text: "Insufficient Balance",
-                        actionTextColor: '#fff',
-                        backgroundColor: '#e7515a',
-                        pos: 'top-right'
-                    });
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    $("#Amount").val('');
-                    return false;
-                }
-                else if (parseInt(Amount) < parseInt($("#hdfMin").val())) {
-                    Snackbar.show({
-                        text: "Amount should not be less than min amount",
-                        actionTextColor: '#fff',
-                        backgroundColor: '#e7515a',
-                        pos: 'top-right'
-                    });
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    $("#Amount").val('');
-                    return false;
+        //alert($("#hdfMax").val());
+        if (Amount == "0") {
+            Snackbar.show({
+                text: "Amount should not be zero !!",
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            $("#Amount").val('');
+            return false;
+        }
+        else {
+            if (Amount != null && Amount != "" && Amount != "0") {
+                if (parseInt(Amount) % 1000 == 0) {
+                    if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
+                        Snackbar.show({
+                            text: "Amount should not be greater than max amount",
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-right'
+                        });
+                        $("#Amount").addClass('errortext');
+                        $('#Amount').focus();
+                        $("#Amount").val('');
+                        return false;
+                    }
+                    else if (parseInt(Amount) > parseInt(WalletBalance)) {
+                        Snackbar.show({
+                            text: "Insufficient Balance",
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-right'
+                        });
+                        $("#Amount").addClass('errortext');
+                        $('#Amount').focus();
+                        $("#Amount").val('');
+                        return false;
+                    }
+                    else if (parseInt(Amount) < parseInt($("#hdfMin").val())) {
+                        Snackbar.show({
+                            text: "Amount should not be less than min amount",
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-right'
+                        });
+                        $("#Amount").addClass('errortext');
+                        $('#Amount').focus();
+                        $("#Amount").val('');
+                        return false;
+                    }
+                    else {
+                    }
                 }
                 else {
+                    Snackbar.show({
+                        text: "Invalid Amount",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    $("#Amount").val('');
+                    return false;
                 }
             }
-            else {
-                Snackbar.show({
-                    text: "Invalid Amount",
-                    actionTextColor: '#fff',
-                    backgroundColor: '#e7515a',
-                    pos: 'top-right'
-                });
-                $("#Amount").addClass('errortext');
-                $('#Amount').focus();
-                $("#Amount").val('');
-                return false;
-            }
+            return true;
         }
-        return true;
     }
     function ValidateForm() {
         debugger;
@@ -353,6 +368,7 @@
             success: function (data) {
                 debugger;
                 if (data.Result == "yes") {
+                    $("#Amount").val('');
                     $("#spfrom").text(data.FromAmount);
                     $("#spto").text(data.ToAmount);
                     $("#spmul").text(data.InMultipleOf);
