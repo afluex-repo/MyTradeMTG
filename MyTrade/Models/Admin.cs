@@ -159,6 +159,9 @@ namespace MyTrade.Models
         public string Fk_ProductId { get; set; }
         public string AvailableBalance { get; set; }
         public List<Admin> lstWalletLedger { get; set; }
+
+        public List<Admin> lstSponsor { get; set; }
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -665,5 +668,25 @@ namespace MyTrade.Models
             return ds;
         }
         #endregion
+
+
+
+
+
+        public DataSet GetSponsorIncomeReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                  new SqlParameter("@Name", Name),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
+            return ds;
+        }
+
+        
+
+
+
     }
 }
