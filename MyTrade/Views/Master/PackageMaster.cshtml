@@ -82,6 +82,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3" id="divpercent" style="display:none">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Sponsor Income  <span style="color: red">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(m => m.SponsorIncome, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @Maxlength = "3" })
+                                    </div>
+                                </div>
+                            </div>
                             @*<div class="col-md-3">
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
@@ -331,6 +339,11 @@
             $('#Days').focus();
             return false;
         }
+        if ($('#SponsorIncome').val() == '') {
+            $("#SponsorIncome").addClass('errortext');
+            $('#SponsorIncome').focus();
+            return false;
+        }
         debugger
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
@@ -521,7 +534,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(),  ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(),  HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val() },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val() },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -604,7 +617,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val() },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val() },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
