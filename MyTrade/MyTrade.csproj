@@ -869,6 +869,8 @@
     <Content Include="Views\Admin\ViewTPSForAdmin.cshtml" />
     <Content Include="Views\Wallet\ViewTPS.cshtml" />
     <Content Include="Views\Recharge\Recharge.cshtml" />
+    <Content Include="Views\Admin\SponsorIncome.cshtml" />
+    <Content Include="Views\User\SponsorIncomeForUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

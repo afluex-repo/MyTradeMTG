@@ -38,8 +38,13 @@ namespace MyTrade.Models
         public string ToName { get; set; }
         public string CommissionPercentage { get; set; }
         public string ProductName { get; set; }
+        public string Name { get; set; }
+        public string ToLoginID { get; set; }
+        public string Pk_UserId { get; set; }
         
 
+        public List<UserReports> lstSponsor { get; set; }
+        
         public DataSet PayoutWalletLedger()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
@@ -104,5 +109,20 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomes", para);
             return ds;
         }
+
+
+        public DataSet GetSponsorIncomeReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                  new SqlParameter("@Name", Name),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
+            return ds;
+        }
+
+
+
     }
 }
