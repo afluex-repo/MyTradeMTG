@@ -2751,7 +2751,7 @@ namespace MyTrade.Controllers
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     //obj.Level = r["Lvl"].ToString();
-                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
@@ -2783,7 +2783,7 @@ namespace MyTrade.Controllers
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     //obj.Level = r["Lvl"].ToString();
-                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
