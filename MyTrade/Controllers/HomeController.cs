@@ -53,6 +53,7 @@ namespace MyTrade.Controllers
                     {
                         if ((ds.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
                         {
+                            var pass = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
                                 Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
@@ -262,11 +263,18 @@ namespace MyTrade.Controllers
 
             Home model = new Home();
             DataSet ds = model.GetPaymentTypeList();
+            List<Home> lst = new List<Home>();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
-                ViewBag.PK_PaymentTypeId = ds.Tables[0].Rows[0]["PK_PaymentTypeId"].ToString();
-                ViewBag.PaymentType = ds.Tables[0].Rows[0]["PaymentType"].ToString();
-                ViewBag.IsActive = ds.Tables[0].Rows[0]["IsActive"].ToString();
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Home objList = new Home();
+                    objList.Fk_Paymentid = dr["PK_PaymentTypeId"].ToString();
+                    objList.PaymentType = dr["PaymentType"].ToString();
+                    objList.IsActive = dr["IsActive"].ToString();
+                    lst.Add(objList);
+                }
+                model.lstBannerImage = lst;
             }
             #endregion
 
@@ -280,7 +288,7 @@ namespace MyTrade.Controllers
             CreateOrderResponse obj1 = new CreateOrderResponse();
             if (Session["Pk_UserId"].ToString() == "259")
             {
-                model.Amount = "100";
+                model.Amount = "1";
             }
             else
             {

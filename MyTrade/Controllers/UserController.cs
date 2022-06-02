@@ -55,6 +55,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
+               
                 if (ViewBag.Status == "InActive")
                 {
                     return RedirectToAction("CompleteRegistration", "Home");
@@ -859,14 +860,13 @@ namespace MyTrade.Controllers
             model.BankName = Session["Bank"].ToString();
             model.BranchName = Session["Branch"].ToString();
             DataSet dss = model.GetEPinRequestDetails();
-
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Status = dss.Tables[1].Rows[0]["Status"].ToString();
+                ViewBag.Reason = dss.Tables[1].Rows[0]["Reason"].ToString();
+            }
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
-                if(dss !=null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count>0)
-                {
-                    ViewBag.Status = dss.Tables[1].Rows[0]["Status"].ToString();
-                    ViewBag.Reason = dss.Tables[1].Rows[0]["Reason"].ToString();
-                }
                 foreach (DataRow r in dss.Tables[0].Rows)
                 {
                     User obj = new User();
@@ -1680,5 +1680,69 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+        
+        public ActionResult SponsorIncomeForUser()
+        {
+            List<UserReports> lst = new List<UserReports>();
+            UserReports model = new UserReports();
+            DataSet ds = model.GetSponsorIncomeReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
+                    //obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    //obj.Level = r["Lvl"].ToString();
+                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSponsor = lst;
+            }
+            return View(model);
+        }
+
+        [ActionName("SponsorIncomeForUser")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SponsorIncomeForUser(UserReports model)
+        {
+            List<UserReports> lst = new List<UserReports>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetSponsorIncomeReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserReports obj = new UserReports();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
+                    //obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    //obj.Level = r["Lvl"].ToString();
+                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSponsor = lst;
+            }
+            return View(model);
+        }
+
+
+
+
+
     }
 }

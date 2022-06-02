@@ -112,3 +112,4 @@ E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Release\MyTrade.Properties
 E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Release\MyTrade.csproj.GenerateResource.Cache
 E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Release\MyTrade.dll
 E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Release\MyTrade.pdb
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Release\MyTrade.csprojResolveAssemblyReference.cache

@@ -1768,7 +1768,6 @@ namespace MyTrade.Controllers
             try
             {
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-                obj.FK_UserId = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.TopUpByAdmin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -2731,5 +2730,69 @@ namespace MyTrade.Controllers
 
         }
         #endregion
+
+        
+        public ActionResult SponsorIncome()
+        {
+            List<Admin> lst = new List<Admin>();
+            Admin model = new Admin();
+            DataSet ds = model.GetSponsorIncomeReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
+                    //obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    //obj.Level = r["Lvl"].ToString();
+                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSponsor = lst;
+            }
+            return View(model);
+        }
+
+        [ActionName("SponsorIncome")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SponsorIncome(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            model.LoginId = model.LoginId == "" ? null : model.LoginId;
+            model.Name = model.Name == "" ? null : model.Name;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetSponsorIncomeReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.ToName = r["ToName"].ToString();
+                    obj.ToLoginID = r["ToLoginId"].ToString();
+                    //obj.PayoutNo = r["PayoutNo"].ToString();
+                    obj.FromName = r["FromName"].ToString();
+                    obj.FromLoginId = r["LoginId"].ToString();
+                    obj.BusinessAmount = r["BusinessAmount"].ToString();
+                    obj.Percentage = r["CommissionPercentage"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    //obj.Level = r["Lvl"].ToString();
+                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSponsor = lst;
+            }
+            return View(model);
+        }
+
+
+
+
     }
 }

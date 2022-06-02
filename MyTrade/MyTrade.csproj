@@ -832,6 +832,7 @@
     <Content Include="Views\AdminReports\DownTeamTree.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr2Total.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
+    <None Include="Properties\PublishProfiles\mytradedemo.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -868,6 +869,8 @@
     <Content Include="Views\Admin\ViewTPSForAdmin.cshtml" />
     <Content Include="Views\Wallet\ViewTPS.cshtml" />
     <Content Include="Views\Recharge\Recharge.cshtml" />
+    <Content Include="Views\Admin\SponsorIncome.cshtml" />
+    <Content Include="Views\User\SponsorIncomeForUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -902,7 +905,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53405/</IISUrl>
+          <IISUrl>http://localhost:53400/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

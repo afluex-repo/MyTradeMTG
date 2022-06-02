@@ -170,3 +170,121 @@ E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 D:\Mona Afluex\Repositories\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\ApplicationInsights.config
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\csc.exe
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\System.Collections.Immutable.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\System.Reflection.Metadata.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\vbc.exe
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\VBCSCompiler.exe
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\roslyn\VBCSCompiler.exe.config
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\MyTrade.dll.config
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\MyTrade.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\MyTrade.pdb
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.Agent.Intercept.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.DependencyCollector.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.Web.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.WindowsServer.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.ApplicationInsights.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.Web.Infrastructure.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Newtonsoft.Json.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\RestSharp.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Helpers.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Mvc.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Razor.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Deployment.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Webpages.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Razor.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.DependencyCollector.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.Web.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.AI.WindowsServer.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.ApplicationInsights.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\RestSharp.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Razor.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Webpages.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Deployment.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Razor.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Helpers.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Mvc.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
+=======
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\ApplicationInsights.config
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\csc.exe
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\System.Collections.Immutable.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\System.Reflection.Metadata.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\vbc.exe
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\VBCSCompiler.exe
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\roslyn\VBCSCompiler.exe.config
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\MyTrade.dll.config
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\MyTrade.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\MyTrade.pdb
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.DependencyCollector.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.Web.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.WindowsServer.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.ApplicationInsights.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.Web.Infrastructure.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Newtonsoft.Json.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\RestSharp.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Helpers.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Http.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Mvc.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Razor.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Deployment.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Webpages.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Razor.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.DependencyCollector.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.Web.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.AI.WindowsServer.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.ApplicationInsights.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\RestSharp.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Razor.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Webpages.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Deployment.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Webpages.Razor.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Helpers.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Mvc.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Http.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
+>>>>>>> 59c1009bdfb047f325f146c00df08dcf8ccec8e0
