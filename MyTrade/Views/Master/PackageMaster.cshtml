@@ -52,7 +52,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">BV <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.BV, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        @Html.TextBoxFor(m => m.BV, new { @class = "form-control", @onkeypress = "return isNumberKey(event)",@onchange = "return CalculateFinalAmount();" })
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3" id="divpercent" style="display:none">
+                            <div class="col-md-3" id="divsponsorpercent" style="display:none">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Sponsor Income  <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
@@ -287,6 +287,7 @@
             $("#divgst").hide();
             $("#divhsn").hide();
             $("#divfinal").hide();
+            $("#divsponsorpercent").show();
         }
         else if (packagetype == 1) {
             $("#divfromamount").hide();
@@ -298,6 +299,7 @@
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
+            $("#divsponsorpercent").hide();
         }
         else {
             $("#divfromamount").hide();
@@ -309,6 +311,7 @@
             $("#divpercent").hide();
             $("#divbasis").hide();
             $("#divdays").hide();
+            $("#divsponsorpercent").hide();
         }
     });
     function validate() {
@@ -339,11 +342,7 @@
             $('#Days').focus();
             return false;
         }
-        if ($('#SponsorIncome').val() == '') {
-            $("#SponsorIncome").addClass('errortext');
-            $('#SponsorIncome').focus();
-            return false;
-        }
+       
         debugger
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
@@ -354,6 +353,11 @@
             if ($('#ToAmount').val() == '') {
                 $("#ToAmount").addClass('errortext');
                 $('#ToAmount').focus();
+                return false;
+            }
+            if ($('#SponsorIncome').val() == '') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
                 return false;
             }
         }
@@ -421,6 +425,7 @@
             $("#divgst").hide();
             $("#divhsn").hide();
             $("#divfinal").hide();
+            $("#divsponsorpercent").show();
         }
         else if (packagetype == 1) {
             $("#divfromamount").hide();
@@ -432,6 +437,7 @@
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
+            $("#divsponsorpercent").hide();
         }
         else {
             $("#divfromamount").hide();
@@ -443,6 +449,7 @@
             $("#divpercent").hide();
             $("#divbasis").hide();
             $("#divdays").hide();
+            $("#divsponsorpercent").hide();
         }
     }
     function isNumberKey(evt) {
@@ -466,7 +473,7 @@
             $('#ProductName').focus();
             return false;
         }
-        if ($('#ProductPrice').val() == '') {
+        if ($('#ProductPrice').val() == '' || $('#ProductPrice').val() == '0') {
             $("#ProductPrice").addClass('errortext');
             $('#ProductPrice').focus();
             return false;
@@ -512,6 +519,12 @@
                 $('#InMultipleOf').focus();
                 return false;
             }
+            if ($('#SponsorIncome').val() == '') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
+                return false;
+            }
+
         }
         if ($('#PackageTypeId').val() == '1') {
             if ($('#IGST').val() == '') {
