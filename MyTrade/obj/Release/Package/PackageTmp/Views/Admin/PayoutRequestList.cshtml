@@ -84,8 +84,11 @@
                                         <th>Procesing Charges</th>
                                         <th>Gross Amount</th>
                                         <th>Bank Details</th>
-                                        @*<th>IFSC Code</th>
-                                            <th>Account No.</th>*@
+                                        <th class="showallbankdetails" style="display:none">Bank Name</th>
+                                        <th class="showallbankdetails" style="display:none">Bank Branch</th>
+                                        <th class="showallbankdetails" style="display:none">Account No.</th>
+                                        <th class="showallbankdetails" style="display:none">IFSC Code</th>
+                                        <th class="showallbankdetails" style="display:none">UPIID</th>
                                         <th>Status</th>
                                         <th>Requested Date</th>
                                         <th style="white-space: break-spaces;">Approved/ Declined Date</th>
@@ -123,11 +126,17 @@
                                                     <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
                                                     <td>@Item.ProcessingFee</td>
                                                     <td>@Item.GrossAmount</td>
-                                                    @*<td>@Item.IFSCCode</td>
-                                                        <td>@Item.MemberAccNo</td>*@
+
+                                                    @*<td class="showifsccode">@Item.IFSCCode</td>*@
+                                               
                                                     <td>
                                                         <a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup1('@Item.PaymentMode');">View</a>
                                                     </td>
+                                                    <td class="showallbankdetails" style="display:none">@Item.BankName</td>
+                                                    <td class="showallbankdetails" style="display:none">@Item.BankBranch</td>
+                                                    <td class="showallbankdetails" style="display:none">@Item.MemberAccNo</td>
+                                                    <td class="showallbankdetails" style="display:none">@Item.IFSCCode</td>
+                                                    <td class="showallbankdetails" style="display:none">@Item.UPIID</td>
                                                     <td>@Item.Status</td>
                                                     <td>@Item.Date</td>
                                                     <td>@Item.TransactionDate</td>
@@ -151,12 +160,15 @@
                                 </tbody>
                             </table>
 
-                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                            <div class="col-lg-5 col-md-5" style="margin-top:28px">
                                 <div class="form-group">
                                     @*<a href="/Admin/ApprovePayout" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this request ?') ">Approve</a>*@
 
                                     <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Submit</a>
                                     @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
+
+
+                                    <a style="width:180px;" href="javascript:void(0)" id="showbankdetailshdf" class="btn btn-success btn-sm">Show / Hide  Bank Details</a>
                                 </div>
                             </div>
                         </div>
@@ -410,8 +422,12 @@
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 
-
-
+    $(document).ready(function () {
+        debugger;
+        $("#showbankdetailshdf").click(function () {
+            $(".showallbankdetails").toggle();
+        });
+    });
 
 
 </script>

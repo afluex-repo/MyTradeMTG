@@ -30,6 +30,7 @@ namespace MyTrade.Models
         public string Leg { get; set; }
         public string ProfilePic { get; set; }
         public string TransactionType { get; set; }
+       
         public static string GenerateRandom()
         {
             Random r = new Random();

@@ -55,6 +55,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
+               
                 if (ViewBag.Status == "InActive")
                 {
                     return RedirectToAction("CompleteRegistration", "Home");
@@ -859,14 +860,13 @@ namespace MyTrade.Controllers
             model.BankName = Session["Bank"].ToString();
             model.BranchName = Session["Branch"].ToString();
             DataSet dss = model.GetEPinRequestDetails();
-
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.Status = dss.Tables[1].Rows[0]["Status"].ToString();
+                ViewBag.Reason = dss.Tables[1].Rows[0]["Reason"].ToString();
+            }
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
             {
-                if(dss !=null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count>0)
-                {
-                    ViewBag.Status = dss.Tables[1].Rows[0]["Status"].ToString();
-                    ViewBag.Reason = dss.Tables[1].Rows[0]["Reason"].ToString();
-                }
                 foreach (DataRow r in dss.Tables[0].Rows)
                 {
                     User obj = new User();
