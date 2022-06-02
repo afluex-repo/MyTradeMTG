@@ -17,13 +17,10 @@ namespace MyTrade.Models
         {
             try
             {
-<<<<<<< HEAD
+
                 connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
                 //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
-=======
-                //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
-                connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradetestuser; password=mytrade@123; integrated security=false;";
->>>>>>> 59c1009bdfb047f325f146c00df08dcf8ccec8e0
+
             }
             catch (Exception)
             {
