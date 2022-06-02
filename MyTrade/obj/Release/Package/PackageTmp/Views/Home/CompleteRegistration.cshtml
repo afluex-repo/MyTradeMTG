@@ -70,21 +70,67 @@
                 <img alt="logo" src="~/assets/img/tradelogo.png">
             </div>
             <div class="card-body my-2">
-                <h5 class="card-title my-2">Please Select Any One Option To Activate Your Profile.</h5>
+                <h5 class="card-title my-2">Please Select For  Activate Your Profile.</h5>
                 <div class="d-flex justify-content-around mt-5">
-                    <div class="field-wrapper">
-                        <a href="/User/ActivateByPin" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
-                            <div class="img-design"><img src="~/assets/img/pin.png" style="width:50px" /></div> <br />
-                            <span style="white-space: nowrap">Activate By Pin</span>
-                        </a>
-                    </div>
+                    @if (Model != null)
+                    {
+                        if (Model.lstBannerImage != null)
+                        {
+                            int i = 1;
+                            foreach (var Item in Model.lstBannerImage)
+                            {
+                                if (Item.PaymentType == "Offline" && Item.IsActive == "True")
+                                {
+                                    <div class="field-wrapper">
+                                        <a href="/User/ActivateByPin" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                            <div class="img-design"><img src="~/assets/img/pin.png" style="width:50px" /></div> <br />
+                                            <span style="white-space: nowrap">Activate By Pin</span>
+                                        </a>
+                                    </div>
+                                }
+                                else if (Item.PaymentType == "Online" && Item.IsActive == "True")
+                                {
 
-                    <div class="field-wrapper">
-                        <a href="/Home/ActivateByPayment" target="_blank" class="btn btn-info foractivation-btn py-2" data-toggle="modal" data-target="#myModal">
-                            <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
-                            <span style="white-space: nowrap">Activate By Payment</span>
-                        </a>
-                    </div>
+                                    <div class="field-wrapper">
+                                        <a href="/Home/ActivateByPayment" target="_blank" class="btn btn-info foractivation-btn py-2" data-toggle="modal" data-target="#myModal">
+                                            <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
+                                            <span style="white-space: nowrap">Activate By Payment</span>
+                                        </a>
+                                    </div>
+                                }
+                                else if (Item.PaymentType == "Online" && Item.IsActive == "True" && Item.PaymentType == "Offline" && Item.IsActive == "True")
+                                {
+
+                                    <div class="field-wrapper">
+                                        <a href="/Home/ActivateByPayment" target="_blank" class="btn btn-info foractivation-btn py-2" data-toggle="modal" data-target="#myModal">
+                                            <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
+                                            <span style="white-space: nowrap">Activate By Payment</span>
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    @*<div class="field-wrapper">
+                            <a href="/User/ActivateByPin" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                <div class="img-design"><img src="~/assets/img/pin.png" style="width:50px" /></div> <br />
+                                <span style="white-space: nowrap">Activate By Pin</span>
+                            </a>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <a href="/Home/ActivateByPayment" target="_blank" class="btn btn-info foractivation-btn py-2" data-toggle="modal" data-target="#myModal">
+                                <div class="img-design"><img src="~/assets/img/payment.png" style="width:50px" /></div> <br />
+                                <span style="white-space: nowrap">Activate By Payment</span>
+                            </a>
+                        </div>*@
+
                     @using (Html.BeginForm("CompleteRegistration", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
                     {
                         <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
@@ -123,7 +169,7 @@
     </div>
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-  
+
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/bootstrap/js/popper.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
@@ -150,27 +196,27 @@
     @if (TempData["msg"] != null)
     {
         <script>
-        $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["msg"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#1abc9c',
-                pos: 'top-right'
+            $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["msg"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#1abc9c',
+                    pos: 'top-right'
+                });
             });
-        });
         </script>
     }
     @if (TempData["error"] != null)
     {
         <script>
-        $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["error"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#e7515a',
-                pos: 'top-right'
+            $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["error"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
             });
-        });
         </script>
     }
     <!-- END GLOBAL MANDATORY SCRIPTS -->

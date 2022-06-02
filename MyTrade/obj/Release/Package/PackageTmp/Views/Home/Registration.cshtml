@@ -125,12 +125,12 @@
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password", onkeypress = "return blockSpace(event);" })
+                                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password" })
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password", onkeypress = "return blockSpace(event);" })
+                                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 15px;">
@@ -180,6 +180,7 @@
                                             <button type="button" class="btn btn-primary" onclick="return editregistration();" id="Edit">Edit</button>
                                         </div>
                                     </div>
+
                                     @*<button type="submit" id="Confirm" onclick="return confirmregistration();" class="btn btn-primary" name="Confirm" value="Confirm" />
                                         <button type="button" id="Register" onclick="return saveregistration();" class="btn btn-primary" style="display:none" name="Register" value="Register" />
                                         <button type="button" id="Edit" onclick="editregistration();" style="display: none" class="btn btn-primary" name="Edit" value="Edit" />*@
@@ -351,6 +352,7 @@
                         $("#PinCode").addClass('errortext');
                         $('#PinCode').focus();
                         alert(data.Result);
+
                     }
                 }
             });
@@ -373,24 +375,6 @@
                 $('#Password').val('');
                 $('#ConfirmPassword').val('');
                 alert("Password and Confirm Password are different")
-                return false;
-            }
-        }
-
-        function blockSpace(e) {
-            var key;
-            var isCtrl = false;
-            var keychar;
-            if (window.event) {
-                key = e.keyCode;
-                isCtrl = window.event.ctrlKey
-            }
-            else if (e.which) {
-                key = e.which;
-                isCtrl = e.ctrlKey;
-            }
-            keychar = String.fromCharCode(key);
-            if (keychar == " ") {
                 return false;
             }
         }

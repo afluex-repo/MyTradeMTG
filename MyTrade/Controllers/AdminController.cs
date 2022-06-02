@@ -1768,7 +1768,6 @@ namespace MyTrade.Controllers
             try
             {
                 obj.AddedBy = Session["Pk_AdminId"].ToString();
-                obj.FK_UserId = Session["Pk_AdminId"].ToString();
                 DataSet ds = obj.TopUpByAdmin();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

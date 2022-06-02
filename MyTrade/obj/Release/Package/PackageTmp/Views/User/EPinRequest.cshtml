@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <div class="widget-content widget-content-area">
+                    <div class="widget-content widget-content-area" id="divtop">
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
@@ -29,6 +29,8 @@
                                 {
                                     <a class="btn btn-primary" style="float: right;" href="/Wallet/AddWallet">Add Fund</a>
                                 }
+                                <input type="hidden" id="hdf" value="@ViewBag.Status" />
+                                <input type="hidden" id="hdfReason" value="@ViewBag.Reason" />
                             </div>
                         </div>
                         <div class="row mb-4">
@@ -94,11 +96,16 @@
         </div>
     </div>
 }
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>*@
+@*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
 <script>
     $('#TransactionDate').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -557,7 +564,35 @@
         });
     </script>
 }
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#hdf").val() == "InActive") {
+            jQuery.noConflict();
+            $("#divtop").hide();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: '@ViewBag.Reason',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/UserDashboard';
+                }
+            })
 
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
+            //die();
+            $("#divtop").show();
+        }
+    })
+</script>
 <style>
     .errortext {
         border: 1px solid red !important;

@@ -49,7 +49,8 @@ namespace MyTrade.Models
 
         public string Subject { get; set; }
         public string Message { get; set; }
-
+        public string PaymentType { get; set; }
+        public string IsActive { get; set; }
 
         #endregion
         #region Sponsor
