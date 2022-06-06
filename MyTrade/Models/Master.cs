@@ -35,6 +35,8 @@ namespace MyTrade.Models
         public decimal InMultipleOf { get; set; }
         public string HSNCode { get; set; }
         public decimal FinalAmount { get; set; }
+        public decimal SponsorIncome { get; set; }
+
         #region ProductMaster
 
         public DataSet SaveProduct()
@@ -55,7 +57,8 @@ namespace MyTrade.Models
                                     new SqlParameter("@ToAmount", ToAmount),
                                      new SqlParameter("@InMultipleOf", InMultipleOf),
                                       new SqlParameter("@HSNCode", HSNCode),
-                                 new SqlParameter("@FinalAmount",FinalAmount)
+                                 new SqlParameter("@FinalAmount",FinalAmount),
+                                 new SqlParameter("@SponsorIncome",SponsorIncome)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
@@ -107,7 +110,8 @@ namespace MyTrade.Models
                                     new SqlParameter("@ToAmount", ToAmount),
                                  new SqlParameter("@InMultipleOf", InMultipleOf),
                                  new SqlParameter("@HSNCode", HSNCode),
-                                 new SqlParameter("@FinalAmount",FinalAmount)
+                                 new SqlParameter("@FinalAmount",FinalAmount),
+                                 new SqlParameter("@SponsorIncome",SponsorIncome)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("UpdateProduct", para);

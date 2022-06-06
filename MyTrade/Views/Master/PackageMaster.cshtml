@@ -52,7 +52,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">BV <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.BV, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        @Html.TextBoxFor(m => m.BV, new { @class = "form-control", @onkeypress = "return isNumberKey(event)",@onchange = "return CalculateFinalAmount();" })
                                     </div>
                                 </div>
                             </div>
@@ -79,6 +79,14 @@
                                     <label class="col-sm-3 col-form-label">Days <span style="color: red">*</span></label>
                                     <div class="col-sm-9">
                                         @Html.TextBoxFor(m => m.Days, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="divsponsorpercent" style="display:none">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Sponsor Income  <span style="color: red">*</span></label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(m => m.SponsorIncome, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @Maxlength = "3" })
                                     </div>
                                 </div>
                             </div>
@@ -279,6 +287,7 @@
             $("#divgst").hide();
             $("#divhsn").hide();
             $("#divfinal").hide();
+            $("#divsponsorpercent").show();
         }
         else if (packagetype == 1) {
             $("#divfromamount").hide();
@@ -290,6 +299,7 @@
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
+            $("#divsponsorpercent").hide();
         }
         else {
             $("#divfromamount").hide();
@@ -301,6 +311,7 @@
             $("#divpercent").hide();
             $("#divbasis").hide();
             $("#divdays").hide();
+            $("#divsponsorpercent").hide();
         }
     });
     function validate() {
@@ -331,6 +342,7 @@
             $('#Days').focus();
             return false;
         }
+       
         debugger
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
@@ -341,6 +353,11 @@
             if ($('#ToAmount').val() == '') {
                 $("#ToAmount").addClass('errortext');
                 $('#ToAmount').focus();
+                return false;
+            }
+            if ($('#SponsorIncome').val() == '') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
                 return false;
             }
         }
@@ -408,6 +425,7 @@
             $("#divgst").hide();
             $("#divhsn").hide();
             $("#divfinal").hide();
+            $("#divsponsorpercent").show();
         }
         else if (packagetype == 1) {
             $("#divfromamount").hide();
@@ -419,6 +437,7 @@
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
+            $("#divsponsorpercent").hide();
         }
         else {
             $("#divfromamount").hide();
@@ -430,6 +449,7 @@
             $("#divpercent").hide();
             $("#divbasis").hide();
             $("#divdays").hide();
+            $("#divsponsorpercent").hide();
         }
     }
     function isNumberKey(evt) {
@@ -453,7 +473,7 @@
             $('#ProductName').focus();
             return false;
         }
-        if ($('#ProductPrice').val() == '') {
+        if ($('#ProductPrice').val() == '' || $('#ProductPrice').val() == '0') {
             $("#ProductPrice").addClass('errortext');
             $('#ProductPrice').focus();
             return false;
@@ -499,6 +519,12 @@
                 $('#InMultipleOf').focus();
                 return false;
             }
+            if ($('#SponsorIncome').val() == '') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
+                return false;
+            }
+
         }
         if ($('#PackageTypeId').val() == '1') {
             if ($('#IGST').val() == '') {
@@ -521,7 +547,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(),  ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(),  HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val() },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val() },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -604,7 +630,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val() },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val() },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';

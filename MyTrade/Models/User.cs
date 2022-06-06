@@ -65,8 +65,9 @@ namespace MyTrade.Models
 
         public string GrossAmount { get; set; }
         public string ProcessingFee { get; set; }
+     
 
-        
+
 
 
 
