@@ -55,3 +55,4 @@ D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.Resour
 D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
+D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
