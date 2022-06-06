@@ -974,6 +974,7 @@ namespace MyTrade.Controllers
                     obj.NetAmount = r["NetAmount"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
+                    obj.SponsorBonus = r["SponsorBonus"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayout = lst;

@@ -32,6 +32,7 @@ namespace MyTrade.Models
         public string ProcessingFee { get; set; }
         public string TDSAmount { get; set; }
         public string NetAmount { get; set; }
+        public string SponsorBonus { get; set; }
         public string Percentage { get; set; }
         public string Status { get; set; }
         public string BV { get; set; }
