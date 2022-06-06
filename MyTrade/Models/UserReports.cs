@@ -42,7 +42,9 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string ToLoginID { get; set; }
         public string Pk_UserId { get; set; }
-        
+        public string Date { get; set; }
+
+
 
         public List<UserReports> lstSponsor { get; set; }
         

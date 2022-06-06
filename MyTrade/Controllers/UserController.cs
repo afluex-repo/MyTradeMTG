@@ -44,7 +44,7 @@ namespace MyTrade.Controllers
                 ViewBag.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 ViewBag.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
                 ViewBag.TotalTeamTPSId = ds.Tables[0].Rows[0]["TotalTeamTPSId"].ToString();
-                ViewBag.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
+                ViewBag.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorBonus"].ToString());
                 ViewBag.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
                 ViewBag.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 ViewBag.LevelIncomeTR1ForPayout = ds.Tables[0].Rows[0]["LevelIncomeTR1ForPayout"].ToString();
@@ -1702,7 +1702,9 @@ namespace MyTrade.Controllers
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     //obj.Level = r["Lvl"].ToString();
-                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Date = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
@@ -1735,7 +1737,9 @@ namespace MyTrade.Controllers
                     obj.Percentage = r["CommissionPercentage"].ToString();
                     obj.Amount = r["Amount"].ToString();
                     //obj.Level = r["Lvl"].ToString();
-                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    //obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Date = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
