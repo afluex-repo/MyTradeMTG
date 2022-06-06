@@ -54,6 +54,7 @@ namespace MyTrade.Controllers
                 ViewBag.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 ViewBag.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
+                ViewBag.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                
                 if (ViewBag.Status == "InActive")
@@ -1685,7 +1686,7 @@ namespace MyTrade.Controllers
         {
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
-            model.Pk_UserId = Session["Pk_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetSponsorIncomeReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
