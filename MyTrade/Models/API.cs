@@ -213,6 +213,7 @@ namespace MyTrade.Models
         public string TotalTPSAmountReceived { get; set; }
         public dynamic TotalTPSBalanceAmount { get; set; }
         public List<Reward> lstReward { get; set; }
+        public string SponsorBonus { get; set; }
     }
     public class UpdateProfile
     {

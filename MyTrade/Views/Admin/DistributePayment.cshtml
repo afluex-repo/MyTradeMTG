@@ -68,6 +68,7 @@
                                         <th>Name</th>
                                         <th>TTP Level Income</th>
                                         <th>TPS Level Income</th>
+                                        <th>SB</th>
                                         <th>Gross Amount</th>
                                         <th>TDS Amount</th>
                                         <th>Processing</th>
@@ -89,6 +90,7 @@
                                                     <td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPP('@Item.LoginId');">@Item.TPPLevelIncome</a></td>
                                                     <td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPS('@Item.LoginId');">@Item.TPSLevelIncome</a></td>
 
+                                                    <td ><a  class="td-content product-brand text-secondary" target="_blank" href="/Admin/SponsorIncome?loginid=@Item.LoginId">@Item.SponsorBonus</a></td>
                                                     <td>@Item.GrossAmount</td>
                                                     <td>@Item.TDSAmount</td>
                                                     <td>@Item.ProcessingFee</td>
