@@ -974,6 +974,7 @@ namespace MyTrade.Controllers
                     obj.NetAmount = r["NetAmount"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
+                    obj.SponsorBonus = r["SponsorBonus"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayout = lst;
@@ -1064,6 +1065,7 @@ namespace MyTrade.Controllers
             //        obj.Name = r["FirstName"].ToString();
             //        obj.TPSLevelIncome = r["TPSLevelIncome"].ToString();
             //        obj.TPPLevelIncome = r["TPPLevelIncome"].ToString();
+            //        obj.SponsorBonus = r["SponsorBonus"].ToString();
             //        obj.GrossAmount = r["GrossIncome"].ToString();
             //        obj.ProcessingFee = r["Processing"].ToString();
             //        obj.TDSAmount = r["TDS"].ToString();
@@ -1100,6 +1102,7 @@ namespace MyTrade.Controllers
                     obj.Name = r["FirstName"].ToString();
                     obj.TPSLevelIncome = r["TPSLevelIncome"].ToString();
                     obj.TPPLevelIncome = r["TPPLevelIncome"].ToString();
+                    obj.SponsorBonus = r["SponsorIncome"].ToString();
                     obj.GrossAmount = r["GrossIncome"].ToString();
                     obj.ProcessingFee = r["Processing"].ToString();
                     obj.TDSAmount = r["TDS"].ToString();
@@ -1159,6 +1162,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["FirstName"].ToString();
                     obj.TPS = r["TPS"].ToString();
+                    //obj.SponsorBonus = r["SponsorIncome"].ToString();
                     obj.GrossAmount = r["GrossIncome"].ToString();
                     obj.ProcessingFee = r["Processing"].ToString();
                     obj.TDSAmount = r["TDS"].ToString();
@@ -1193,6 +1197,7 @@ namespace MyTrade.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["FirstName"].ToString();
                     obj.TPS = r["TPS"].ToString();
+                    //obj.SponsorBonus = r["SponsorIncome"].ToString();
                     obj.GrossAmount = r["GrossIncome"].ToString();
                     obj.ProcessingFee = r["Processing"].ToString();
                     obj.TDSAmount = r["TDS"].ToString();
@@ -1474,6 +1479,12 @@ namespace MyTrade.Controllers
                     //obj.IFSCCode = r["IFSCCode"].ToString();
                     //obj.UPIID = r["UPIId"].ToString();
                     //obj.MemberAccNo = r["MemberAccNo"].ToString();
+
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.MemberAccNo = r["MemberAccNo"].ToString();
+                    obj.BankBranch = r["MemberBranch"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
 
                     obj.PaymentMode = "IFSC Code - " + r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -2732,10 +2743,14 @@ namespace MyTrade.Controllers
         #endregion
 
         
-        public ActionResult SponsorIncome()
+        public ActionResult SponsorIncome(string loginid)
         {
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
+            if (loginid != "" || loginid !=null)
+            {
+                model.LoginId = loginid;
+            }
             DataSet ds = model.GetSponsorIncomeReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

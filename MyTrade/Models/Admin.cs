@@ -48,6 +48,7 @@ namespace MyTrade.Models
         public List<Admin> lstWallet { get; set; }
         public string WalletId { get; set; }
         public string Name { get; set; }
+        public string SponsorBonus { get; set; }
         public string PK_RequestID { get; set; }
         public List<Admin> lstEpinRequest { get; set; }
         public string ProductName { get; set; }

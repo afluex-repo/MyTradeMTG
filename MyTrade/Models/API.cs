@@ -213,6 +213,7 @@ namespace MyTrade.Models
         public string TotalTPSAmountReceived { get; set; }
         public dynamic TotalTPSBalanceAmount { get; set; }
         public List<Reward> lstReward { get; set; }
+        public string SponsorBonus { get; set; }
     }
     public class UpdateProfile
     {
@@ -1403,7 +1404,7 @@ namespace MyTrade.Models
             SqlParameter[] para =
             {
                 new SqlParameter("@Email",Email),
-                  new SqlParameter("@LoginId",LoginId)
+                new SqlParameter("@LoginId",LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
@@ -1443,5 +1444,36 @@ namespace MyTrade.Models
             return ds;
         }
     }
+    
+    public class GetSponsorIncomeReport
+    {
+        public string LoginId { get; set; }
 
+        public DataSet GetSponsorIncomeReports()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
+            return ds;
+        }
+    }
+
+    public class GetSponsorIncomeList
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<SponsorIncomeReportResponse> lstSponsorIncome { get; set; }
+    }
+    public class SponsorIncomeReportResponse
+    {
+        public string Status { get; set; }
+        public string TransactionDate { get; set; }
+        public string ToName { get; set; }
+        public string FromName { get; set; }
+        public string BusinessAmount { get; set; }
+        public string Amount { get; set; }
+        public string CommissionPercentage { get; set; }
+    }
 }

@@ -16,7 +16,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Sponsor Income</h4>
+                                <h4>Sponsor Bonus</h4>
                             </div>
                         </div>
                     </div>
@@ -76,6 +76,8 @@
                                         <th>Percentage</th>
                                         @*<th>Level</th>
                                             <th>Transaction Date</th>*@
+                                        <th>Status</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,6 +98,8 @@
                                                     <td>@Item.Percentage %</td>
                                                     @*<td>@Item.Level</td>
                                                         <td>@Item.TransactionDate</td>*@
+                                                    <td>@Item.Status</td>
+                                                    <td>@Item.Date</td>
                                                 </tr>
                                                 i++;
                                             }
