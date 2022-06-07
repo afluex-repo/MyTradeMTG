@@ -1423,6 +1423,7 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string Password { get; set; }
     }
+
     public class DownloadResponse
     {
         public string Status { get; set; }
@@ -1443,5 +1444,36 @@ namespace MyTrade.Models
             return ds;
         }
     }
+    
+    public class GetSponsorIncomeReport
+    {
+        public string LoginId { get; set; }
 
+        public DataSet GetSponsorIncomeReports()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
+            return ds;
+        }
+    }
+
+    public class GetSponsorIncomeList
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<SponsorIncomeReportResponse> lstSponsorIncome { get; set; }
+    }
+    public class SponsorIncomeReportResponse
+    {
+        public string Status { get; set; }
+        public string TransactionDate { get; set; }
+        public string ToName { get; set; }
+        public string FromName { get; set; }
+        public string BusinessAmount { get; set; }
+        public string Amount { get; set; }
+        public string CommissionPercentage { get; set; }
+    }
 }

@@ -1717,7 +1717,7 @@ namespace MyTrade.Controllers
         public ActionResult SponsorIncomeForUser(UserReports model)
         {
             List<UserReports> lst = new List<UserReports>();
-            model.Pk_UserId = Session["Pk_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
             model.LoginId = model.LoginId == "" ? null : model.LoginId;
             model.Name = model.Name == "" ? null : model.Name;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");

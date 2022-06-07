@@ -257,7 +257,7 @@ namespace MyTrade.Controllers
                             if (Email != null && Email != "")
                             {
                                 BLMail.SendActivationMail(Name, LoginId, Crypto.Decrypt(Password), "Activation Successful", Email);
-                            
+
                             }
                             return Json(obj, JsonRequestBehavior.AllowGet);
 
@@ -2032,7 +2032,7 @@ namespace MyTrade.Controllers
                     model.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
                     model.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -2079,7 +2079,7 @@ namespace MyTrade.Controllers
                     model.lst = lst;
                 }
             }
-          
+
             catch (Exception ex)
             {
                 model.Status = "1";
@@ -2540,19 +2540,19 @@ namespace MyTrade.Controllers
                     model.Message = "No Record Found";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 model.Status = "1";
                 model.Message = ex.Message;
             }
-            return Json(model,JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult CreateOrder(string Amount, string MobileNo, string Type,string FK_UserId)
+        public ActionResult CreateOrder(string Amount, string MobileNo, string Type, string FK_UserId)
         {
             UserRecharge obj = new UserRecharge();
             UserRechargeAPI model = new UserRechargeAPI();
-            obj.FK_UserId =FK_UserId;
+            obj.FK_UserId = FK_UserId;
             obj.Amount = Convert.ToDecimal(Amount);
             obj.TransactionFor = MobileNo;
             DataSet dsss = obj.GetWalletBalance();
@@ -2615,5 +2615,52 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+        
+        [HttpPost]
+        public ActionResult SponsorIncomeReport(GetSponsorIncomeReport model)
+        {
+            GetSponsorIncomeList res = new GetSponsorIncomeList();
+            List<SponsorIncomeReportResponse> lst = new List<SponsorIncomeReportResponse>();
+            try
+            {
+                DataSet ds = model.GetSponsorIncomeReports();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        SponsorIncomeReportResponse obj = new SponsorIncomeReportResponse();
+                        obj.Status = r["Status"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.ToName = r["ToName"].ToString();
+                        obj.FromName = r["FromName"].ToString();
+                        obj.BusinessAmount = r["BusinessAmount"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lstSponsorIncome = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
     }
 }
