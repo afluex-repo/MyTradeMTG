@@ -1396,12 +1396,14 @@ namespace MyTrade.Models
     public class ForgetPassword
     {
         public string Email { get; set; }
+        public string LoginId { get; set; }
 
         public DataSet ForgetPasword()
         {
             SqlParameter[] para =
             {
-                new SqlParameter("@Email",Email)
+                new SqlParameter("@Email",Email),
+                  new SqlParameter("@LoginId",LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
@@ -1420,6 +1422,7 @@ namespace MyTrade.Models
         public string Name { get; set; }
         public string Password { get; set; }
     }
+
     public class DownloadResponse
     {
         public string Status { get; set; }
