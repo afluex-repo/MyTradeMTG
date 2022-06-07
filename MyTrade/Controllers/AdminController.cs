@@ -2743,10 +2743,14 @@ namespace MyTrade.Controllers
         #endregion
 
         
-        public ActionResult SponsorIncome()
+        public ActionResult SponsorIncome(string loginid)
         {
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
+            if (loginid != "" || loginid !=null)
+            {
+                model.LoginId = loginid;
+            }
             DataSet ds = model.GetSponsorIncomeReport();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

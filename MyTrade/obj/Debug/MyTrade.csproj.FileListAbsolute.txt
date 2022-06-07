@@ -113,3 +113,4 @@ D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateRe
 D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 D:\Ashwani Afluex\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

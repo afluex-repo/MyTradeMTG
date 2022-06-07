@@ -306,7 +306,7 @@ namespace MyTrade.Controllers
                 obj.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 obj.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 obj.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
-                obj.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
+                obj.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorBonus"]);
                 obj.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
                 obj.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 obj.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
@@ -317,6 +317,7 @@ namespace MyTrade.Controllers
                 obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
                 obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 obj.WalletBalance = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
+                obj.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 if (obj.ActiveStatus == "Active")
                 {
                     obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
