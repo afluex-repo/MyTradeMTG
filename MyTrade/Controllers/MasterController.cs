@@ -95,6 +95,7 @@ namespace MyTrade.Controllers
                     obj.IGST = Convert.ToDecimal(r["IGST"]);
                     obj.HSNCode = r["HSNCode"].ToString();
                     obj.FinalAmount = Convert.ToDecimal(r["FinalAmount"]);
+                    obj.SponsorIncome = Convert.ToDecimal(r["SponsorIncome"]);
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
