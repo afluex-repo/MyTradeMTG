@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="widget-content widget-content-area br-6">
+                      
 
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
@@ -63,6 +63,7 @@
                                             <th>Pan Number</th>
                                             <th>Pan Image</th>*@
                                         <th>View</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -94,17 +95,24 @@
                                                     <td>
                                                         <a href="/AdminReports/ViewProfile?Id=@Item.Fk_UserId" class="btn btn-info btn-sm">View</a>
                                                     </td>
-                                                    @if (Item.IsVerified == "False")
+                                                    <td>@Item.Status</td>
+                                                    @if (Item.IsVerified == "False" && Item.Status!="Declined")
                                                     {
                                                         <td>
                                                             <a href="/AdminReports/ViewProfileVeriFy?Id=@Item.Fk_UserId" name="Verify" id="Verify" class="btn btn-success">Verify</a>
                                                             <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
                                                         </td>
                                                     }
+                                                    else if (Item.Status == "Declined")
+                                                    {
+                                                        <td>
+                                                            <a href="/AdminReports/ViewProfileVeriFy?Id=@Item.Fk_UserId" name="Verify" id="Verify" class="btn btn-success">Verify</a>
+                                                        </td>
+                                                    }
                                                     else
                                                     {
                                                         <td>
-                                                            <span>Verified</span>
+                                                            <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
                                                         </td>
                                                     }
                                                     @*@if (Item.IsVerified == "True")
@@ -126,7 +134,6 @@
                                     }
                                 </tbody>
                             </table>
-                        </div>
                     </div>
                 </div>
             </div>

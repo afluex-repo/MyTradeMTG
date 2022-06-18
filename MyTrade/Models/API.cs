@@ -161,6 +161,22 @@ namespace MyTrade.Models
             return ds;
         }
     }
+    public class ActivateUser
+    {
+        public string ePinNo { get; set; }
+        public string LoginId { get; set; }
+        public DataSet ActivateUserByPin()
+        {
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@EPinNo", ePinNo)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUserMobile", para);
+
+            return ds;
+        }
+    }
     public class EpinDetails1
     {
         public string Status { get; set; }
@@ -190,6 +206,7 @@ namespace MyTrade.Models
         public string WalletBalance { get; set; }
         public string Status { get; set; }
         public string ActiveStatus { get; set; }
+        public string ActivationDate { get; set; }
         public string Message { get; set; }
         public string ReferralLink { get; set; }
         public string TotalBusiness { get; set; }
@@ -212,6 +229,7 @@ namespace MyTrade.Models
         public string TotalTPSAmountReceived { get; set; }
         public dynamic TotalTPSBalanceAmount { get; set; }
         public List<Reward> lstReward { get; set; }
+        public string SponsorBonus { get; set; }
     }
     public class UpdateProfile
     {
@@ -297,7 +315,7 @@ namespace MyTrade.Models
         public List<PaymentTypeAPI> lst { get; set; }
         public DataSet PaymentList()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
+            DataSet ds = DBHelper.ExecuteQuery("GetPaymentTypeForUser");
             return ds;
         }
     }
@@ -328,6 +346,7 @@ namespace MyTrade.Models
         public decimal MaximumAmount { get; set; }
         public decimal AmountWithGST { get; set; }
         public string InMultipleOf { get; set; }
+        public decimal ROIPercent { get; set; }
     }
     public class PackageResponse
     {
@@ -335,9 +354,11 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public List<Package> lst { get; set; }
         public List<Level> lstLevel { get; set; }
+        public string ToplistStatus { get; set; }
+        public string Reason {get;set;}
         public DataSet PackageListAll()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetProductList");
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForMobile");
             return ds;
         }
         public DataSet PackageList()
@@ -686,8 +707,6 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@FK_UserId", FK_UserId),
-                                      new SqlParameter("@AadharNo", AadharNo),
-                                      new SqlParameter("@PanNo", PanNo),
                                       new SqlParameter("@Address", Address),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
@@ -714,6 +733,7 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string Fk_UserId { get; set; }
         public string PanNumber { get; set; }
+        public string PanImage { get; set; }
         public string AdharNo { get; set; }
         public string BankName { get; set; }
         public string BranchName { get; set; }
@@ -797,22 +817,7 @@ namespace MyTrade.Models
             return ds;
         }
     }
-    public class ActivateUser
-    {
-        public string ePinNo { get; set; }
-        public string LoginId { get; set; }
-        public DataSet ActivateUserByPin()
-        {
-            SqlParameter[] para = {
-
-                                      new SqlParameter("@LoginId", LoginId),
-                                      new SqlParameter("@EPinNo", ePinNo)
-                                  };
-            DataSet ds = DBHelper.ExecuteQuery("ActivateUserMobile", para);
-
-            return ds;
-        }
-    }
+ 
 
     public class Reward
     {
@@ -1292,6 +1297,8 @@ namespace MyTrade.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
+        public string PayoutsPagestatus { get; set; }
+        public string Reason { get; set; }
         public List<PayoutDetailsForAPI> lst { get; set; }
     }
     public class Level
@@ -1395,12 +1402,14 @@ namespace MyTrade.Models
     public class ForgetPassword
     {
         public string Email { get; set; }
+        public string LoginId { get; set; }
 
         public DataSet ForgetPasword()
         {
             SqlParameter[] para =
             {
-                new SqlParameter("@Email",Email)
+                new SqlParameter("@Email",Email),
+                new SqlParameter("@LoginId",LoginId)
             };
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
             return ds;
@@ -1420,11 +1429,61 @@ namespace MyTrade.Models
         public string Password { get; set; }
     }
 
+    public class DownloadResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public List<Download> lst { get; set; }
+    }
+    public class Download
+    {
+        public string PK_FileId { get; set; }
+        public string Title { get; set; }
+        public string File { get; set; }
+        public DataSet GetFileDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Title",Title)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetFilesDetails", para);
+            return ds;
+        }
+    }
     
-   
+    public class GetSponsorIncomeReport
+    {
+        public string LoginId { get; set; }
 
+        public DataSet GetSponsorIncomeReports()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
+            return ds;
+        }
+    }
 
-
-
-
+    public class GetSponsorIncomeList
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string TotalBusinessAmount { get; set; }
+        public string TotalAmount { get; set; }
+        public List<SponsorIncomeReportResponse> lstSponsorIncome { get; set; }
+    }
+    public class SponsorIncomeReportResponse
+    {
+        public string Status { get; set; }
+        public string TransactionDate { get; set; }
+        public string ToName { get; set; }
+        public string FromName { get; set; }
+        public string BusinessAmount { get; set; }
+        public string FromLoginId { get; set; }
+        public string ToLoginID { get; set; }
+        public string Amount { get; set; }
+        public string CommissionPercentage { get; set; }
+       
+    }
 }

@@ -9,8 +9,6 @@ namespace Razorpay.Api.Errors
         SERVER_ERROR,
         GATEWAY_ERROR
     };
-
-
     public class ErrorCodeHelper
     {
         public static BaseError Get(string message, string code, int httpStatusCode, string field)

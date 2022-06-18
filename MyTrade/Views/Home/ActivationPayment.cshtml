@@ -77,5 +77,6 @@
 
    // @Html.Hidden("rzp_paymentid")
 @Html.HiddenFor(m=>m.orderId)
+    @Html.HiddenFor(m => m.FK_ProductId)
     <button type="submit" id="rzp-paymentresponse" class="btn btn-primary" hidden>Submit</button>
 }

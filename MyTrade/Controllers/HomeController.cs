@@ -26,7 +26,7 @@ namespace MyTrade.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 model.Result = "yes";
-                model.BannerImage = "http://mytrade.co.in/" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
+                model.BannerImage = "https://mytrade.co.in/" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
             }
             else
             {
@@ -53,6 +53,7 @@ namespace MyTrade.Controllers
                     {
                         if ((ds.Tables[0].Rows[0]["UserType"].ToString() == "Associate"))
                         {
+                            var pass = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
                                 Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
@@ -174,7 +175,6 @@ namespace MyTrade.Controllers
             }
             return View();
         }
-
         public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City)
         {
             Home obj = new Home();
@@ -234,6 +234,7 @@ namespace MyTrade.Controllers
         {
             return View();
         }
+
         public ActionResult CompleteRegistration()
         {
             if (Session["LoginId"] == null)
@@ -258,8 +259,26 @@ namespace MyTrade.Controllers
                 }
             }
             ViewBag.ddlProduct = ddlProduct;
+
+
+            Home model = new Home();
+            DataSet ds = model.GetPaymentTypeList();
+            List<Home> lst = new List<Home>();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Home objList = new Home();
+                    objList.Fk_Paymentid = dr["PK_PaymentTypeId"].ToString();
+                    objList.PaymentType = dr["PaymentType"].ToString();
+                    objList.IsActive = dr["IsActive"].ToString();
+                    lst.Add(objList);
+                }
+                model.lstBannerImage = lst;
+            }
             #endregion
-            return View();
+
+            return View(model);
         }
         [HttpPost]
         public ActionResult CompleteRegistration(Home model)
@@ -267,9 +286,9 @@ namespace MyTrade.Controllers
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
             CreateOrderResponse obj1 = new CreateOrderResponse();
-            if (Session["Pk_UserId"].ToString() == "209")
+            if (Session["Pk_UserId"].ToString() == "259")
             {
-                model.Amount = "100";
+                model.Amount = "1";
             }
             else
             {
@@ -300,6 +319,7 @@ namespace MyTrade.Controllers
                 orderModel.name = Session["FullName"].ToString();
                 orderModel.contactNumber = Session["Contact"].ToString();
                 orderModel.email = Session["Email"].ToString();
+                orderModel.FK_ProductId = model.Package;
                 //orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
                 DataSet ds = model.SaveOrderDetails();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -382,7 +402,7 @@ namespace MyTrade.Controllers
                         obj1.error_step = rr["error_step"];
                         obj1.error_reason = rr["error_reason"];
                         obj1.created_at = rr["created_at"];
-
+                        obj1.FK_ProductId = model.FK_ProductId;
                         DataSet ds = obj1.UpdateRazorpayStatus();
                         if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                         {
@@ -491,12 +511,10 @@ namespace MyTrade.Controllers
             return PartialView("_Menu", Menu);
         }
         #endregion
-
         public ActionResult ForgetPassword()
         {
             return View();
         }
-
         [HttpPost]
         [ActionName("ForgetPassword")]
         [OnAction(ButtonName = "forgetpassword")]
@@ -554,28 +572,24 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         public ActionResult CalculateLevelIncomeTr2()
         {
             Home model = new Home();
             DataSet ds = model.CalculateLevelIncomeTr2();
             return View();
         }
-
         public ActionResult CalculateROI()
         {
             Home model = new Home();
             DataSet ds = model.CalculateROI();
             return View();
         }
-
         public ActionResult CalculateDistributePaymentTPS()
         {
             Home model = new Home();
             DataSet ds = model.CalculateDistributePaymentTPS();
             return View();
         }
-
         public ActionResult SaveContact(string name, string email, string phone, string subject, string message)
         {
             Home model = new Home();
@@ -609,6 +623,12 @@ namespace MyTrade.Controllers
                 model.Result = ex.Message;
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AutoDistributeLevelIncome()
+        {
+            Home model = new Home();
+            DataSet ds = model.AutoDistributeLevelIncome();
+            return Json(1, JsonRequestBehavior.AllowGet);
         }
     }
 }

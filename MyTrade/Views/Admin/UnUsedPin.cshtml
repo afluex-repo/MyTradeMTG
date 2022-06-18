@@ -44,6 +44,7 @@
                                 <div class="form-group">
                                     <label>Status  </label>
                                     @Html.HiddenFor(m => m.Fk_UserId)
+                                    @Html.HiddenFor(m => m.Fk_ProductId)
                                     <input type="hidden" id="stt" value="@Model.Status" />
                                     <select id="Status" name="Status" class="form-control">
                                         <option value="">-Select-</option>
@@ -124,6 +125,7 @@
                                             <th>Generated Date</th>
                                             @if (Model.Status == "P")
                                             {
+                                            <th>Activation Date</th>
                                                 <th>Registered To</th>
                                             }
                                             <th>Generate Via</th>
@@ -149,6 +151,7 @@
                                                         <td>@Item.AddedOn</td>
                                                         @if (Item.Status == "Used")
                                                         {
+                                                            <td> @Item.ActivationDate </td>
                                                             <td> @Item.RegisteredTo </td>
                                                         }
                                                         <td>@Item.AddedBy</td>

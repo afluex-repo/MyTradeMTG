@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=103.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.103.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -240,6 +244,11 @@
     <Content Include="assets\js\scrollspyNav.js" />
     <Content Include="assets\js\users\account-settings.js" />
     <Content Include="assets\js\widgets\modules-widgets.js" />
+    <Content Include="BannerImage\3b617820-2891-47cc-8b84-f95510212e36.JPG" />
+    <Content Include="BannerImage\55496215-9bbf-42b3-963c-912f8ea225f6.jpg" />
+    <Content Include="BannerImage\8ceb2d38-aa60-47c7-8460-a4e3940be9e6.png" />
+    <Content Include="BannerImage\a33bea29-bd34-4248-ac35-65bb254aad75.jpg" />
+    <Content Include="BannerImage\dc524edd-47f0-4a14-af6c-54813d760bbc.JPG" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
@@ -466,15 +475,12 @@
     <Content Include="MyTradeWebsite\Coming.html" />
     <Content Include="MyTradeWebsite\contact.html" />
     <Content Include="MyTradeWebsite\error-404.html" />
-    <Content Include="MyTradeWebsite\extra.html" />
-    <Content Include="MyTradeWebsite\faq.html" />
     <Content Include="MyTradeWebsite\forex.html" />
     <Content Include="MyTradeWebsite\index.html" />
     <Content Include="MyTradeWebsite\login.html" />
     <Content Include="MyTradeWebsite\privacy.html" />
     <Content Include="MyTradeWebsite\services.html" />
     <Content Include="MyTradeWebsite\sign-up.html" />
-    <Content Include="MyTradeWebsite\team.html" />
     <Content Include="MyTradeWebsite\terms&amp;condition.html" />
     <Content Include="plugins\animate\animate.css" />
     <Content Include="plugins\apex\apexcharts.css" />
@@ -594,6 +600,7 @@
     <Content Include="plugins\tagInput\tags-input.css" />
     <Content Include="plugins\tagInput\tags-input.js" />
     <Content Include="plugins\treeview\custom-jstree.js" />
+    <Content Include="ProfilePicture\untitled-5.gif" />
     <Content Include="TreeIcon\default.png" />
     <Content Include="TreeIcon\girl-active.png" />
     <Content Include="TreeIcon\girl-active1.png" />
@@ -606,6 +613,7 @@
     <Content Include="TreeIcon\men-block.png" />
     <Content Include="TreeIcon\men-block1.png" />
     <Content Include="TreeIcon\men-inactive.png" />
+    <Content Include="UploadFile\60cd7ff8-4b09-4b8e-b87a-470c88f6541f.png" />
     <Content Include="UploadReward\08b30345-a1f0-4810-ad7d-319145faecfa.JPG" />
     <Content Include="UploadReward\20951d5b-47bb-4d37-9128-9868763dfe78.jpg" />
     <Content Include="UploadReward\22df0343-8cc8-4281-9e78-005c16f9f8c3.jpg" />
@@ -639,6 +647,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
+    <Compile Include="Controllers\RechargeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
@@ -687,6 +696,7 @@
     <Compile Include="Models\Permisssions.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\RazorPayclient.cs" />
+    <Compile Include="Models\Recharge.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\RestClient.cs" />
     <Compile Include="Models\Tree.cs" />
@@ -819,9 +829,10 @@
     <Content Include="Views\Admin\AdvanceDeduction.cshtml" />
     <Content Include="Views\Master\UploadFile.cshtml" />
     <Content Include="Views\Master\UploadFileList.cshtml" />
-    <Content Include="Views\AdminReports\DirectListForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\DownTeamTree.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr2Total.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
+    <None Include="Properties\PublishProfiles\mytradedemo.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -848,10 +859,21 @@
     <Content Include="Views\AdminReports\ContactList.cshtml" />
     <Content Include="Views\Admin\DistributedTPSList.cshtml" />
     <Content Include="Views\Admin\PaidIncomeForAdmin.cshtml" />
-    <Content Include="Views\AdminReports\AssociateTreeForAdmin.cshtml" />
+    <Content Include="Views\AdminReports\DirectListForAdmin.cshtml" />
     <Content Include="Views\AdminReports\TreeTTPForAdmin.cshtml" />
     <Content Include="Views\AdminReports\TreeForAdmin.cshtml" />
     <Content Include="Views\Admin\ViewGenerateEpinDetails.cshtml" />
+    <Content Include="Views\Admin\WalletLedger.cshtml" />
+    <Content Include="Views\Admin\DistributedTPSDetails.cshtml" />
+    <Content Include="Views\Admin\PaymentModeList.cshtml" />
+    <Content Include="Views\Admin\ViewTPSForAdmin.cshtml" />
+    <Content Include="Views\Wallet\ViewTPS.cshtml" />
+    <Content Include="Views\Recharge\Recharge.cshtml" />
+    <Content Include="Views\Admin\SponsorIncome.cshtml" />
+    <Content Include="Views\User\SponsorIncomeForUser.cshtml" />
+    <Content Include="Views\Recharge\RechargeList.cshtml" />
+    <Content Include="Views\AdminReports\RechargeListForAdmin.cshtml" />
+    <Content Include="Views\Recharge\DMT.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -861,9 +883,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BannerImage\" />
     <Folder Include="PanUpload\" />
-    <Folder Include="ProfilePicture\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
@@ -888,7 +908,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53405/</IISUrl>
+          <IISUrl>http://localhost:53402/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

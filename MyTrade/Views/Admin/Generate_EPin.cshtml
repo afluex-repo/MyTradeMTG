@@ -77,19 +77,24 @@
                         </div>
                         <input class="btn btn-success" name="btn_Pin" id="btn_Pin" onclick="return validateform()" type="submit" value="Create Pin" />
 
-                    </div>
-                    <div class="widget-content widget-content-area br-6">
+
+
+
                         <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                             <thead>
                                 <tr>
                                     <th>Sr No.</th>
-                                    <th>Login Id</th>
                                     <th>Name</th>
-                                    <th>Total Pin</th>
                                     <th>Package</th>
-                                    <th>Used Pin</th>
-                                    <th>Available Pin</th>
-                                    <th>Transfer Pin</th>
+                                    <th>Total Pin</th>
+                                    <th>Amount</th>
+                                    @*<th>GST</th>*@
+                                    <th>Final Amount</th>
+                                    <th>Payment Mode</th>
+                                    <th>Generated Date</th>
+                                    @*<th>Used Pin</th>
+                        <th>Available Pin</th>
+                        <th>Transfer Pin</th>*@
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -103,18 +108,22 @@
                                         {
                                             <tr class="text-left">
                                                 <td>@i</td>
-                                                <td>@Item.LoginId</td>
-                                                <td>@Item.Name</td>
-                                                <td>@Item.TotalPin</td>
+                                                <td>@Item.Name (@Item.LoginId)</td>
                                                 <td>@Item.Package</td>
-                                                <td>@Item.UsedPin</td>
-                                                <td>@Item.AvailablePin</td>
-                                                <td>@Item.TransferPin</td>
+                                                <td>@Item.TotalPin</td>
+                                                <td>@Item.PinAmount</td>
+                                                @*<td>@Item.GST</td>*@
+                                                <td>@Item.FinalAmount</td>
+                                                <td>@Item.PaymentMode</td>
+                                                <td>@Item.AddedOn</td>
+                                                @*<td>@Item.UsedPin</td>
+                                    <td>@Item.AvailablePin</td>
+                                    <td>@Item.TransferPin</td>*@
                                                 <td>
-                                                        <a href="/Admin/ViewGenerateEpinDetails?Fk_UserId=@Item.Fk_UserId&&Fk_ProductId=@Item.PK_ProductID" class="btn btn-info btn-sm">
-                                                            View
-                                                        </a>
-                                                    </td>
+                                                    <a href="/Admin/ViewGenerateEpinDetails?Fk_UserId=@Item.Fk_UserId&&Fk_ProductId=@Item.PK_ProductID" class="btn btn-info btn-sm">
+                                                        View
+                                                    </a>
+                                                </td>
 
                                             </tr>
                                             i++;
@@ -123,8 +132,8 @@
                                 }
                             </tbody>
                         </table>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>

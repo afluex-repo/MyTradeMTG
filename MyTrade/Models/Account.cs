@@ -39,7 +39,8 @@ namespace MyTrade.Models
         public string ProductName { get; set; }
         public string Remark { get; set; }
         public string PackageDays { get; set; }
-
+        public string Email { get; set; }
+        
         public string ROI { get; set; }
         
 
@@ -60,7 +61,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId),
-                                        new SqlParameter("@AddedBy", FK_UserId),
+                                        new SqlParameter("@AddedBy",AddedBy),
                                         new SqlParameter("@Fk_ProductId",PackageId),
                                         new SqlParameter("@Amount", Amount)
                                  };

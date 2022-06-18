@@ -70,7 +70,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("DirectList")]
         [OnAction(ButtonName = "Search")]
@@ -120,8 +119,6 @@ namespace MyTrade.Controllers
             ViewBag.ddlleg = Leg;
             return View(model);
         }
-
-
         public ActionResult DownLineList()
         {
             List<SelectListItem> AssociateStatus = Common.AssociateStatus();

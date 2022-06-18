@@ -65,8 +65,9 @@ namespace MyTrade.Models
 
         public string GrossAmount { get; set; }
         public string ProcessingFee { get; set; }
+     
 
-        
+
 
 
 
@@ -252,7 +253,18 @@ namespace MyTrade.Models
         }
 
 
-
+        public DataSet CreateOrder()
+        {
+            SqlParameter[] para = {new SqlParameter("@Fk_UserId",Fk_UserId),
+                                   new SqlParameter("@Amount",Amount),
+                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
+            return ds;
+        }
 
 
 
@@ -290,7 +302,7 @@ namespace MyTrade.Models
         public string FromLoginId { get; set; }
         public string GST { get; set; }
         public string BV { get; set; }
-        
+        public string ActivationDate { get; set; }
 
 
         public DataSet GetPinList()
@@ -339,6 +351,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
             return ds;
         }
-        
+      
     }
 }

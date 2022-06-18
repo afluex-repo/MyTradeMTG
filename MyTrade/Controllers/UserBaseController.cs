@@ -42,6 +42,5 @@ namespace Mytrade.Controllers
             }
             base.OnActionExecuting(filterContext); // re-added in edit
         }
-
     }
 }

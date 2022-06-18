@@ -243,6 +243,7 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    obj.SponsorBonus = r["SponsorBonus"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -271,14 +272,13 @@ namespace MyTrade.Controllers
                     obj.ProcessingFee = r["AdminFee"].ToString();
                     obj.TDSAmount = r["TDSAmount"].ToString();
                     obj.NetAmount = r["NetAmount"].ToString();
+                    obj.SponsorBonus = r["SponsorBonus"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
             }
             return View(model);
         }
-     
-
         public ActionResult PaidIncome(string PayoutNo)
         {
             UserReports model = new UserReports();

@@ -222,6 +222,7 @@
     });
 
     function validate() {
+        debugger;
         if ($('#AdharNo').val() == '') {
             $("#AdharNo").addClass('errortext');
             $('#AdharNo').focus();
@@ -232,7 +233,8 @@
             $('#PanNumber').focus();
             return false;
         }
-        if ($('#Image').val() == '') {
+        if ($('#img').val() != '1') {
+            debugger;
             $("#Image").addClass('errortext');
             $('#Image').focus();
             return false;
@@ -277,11 +279,6 @@
         //    $('#UPIID').focus();
         //    return false;
         //}
-        if ($('#img').val() != '1') {
-            $("#Image").addClass('errortext');
-            $('#Image').focus();
-            return false;
-        }
     }
     function GetBankDetails() {
         debugger;

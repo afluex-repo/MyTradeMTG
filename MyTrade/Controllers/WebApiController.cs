@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using Razorpay.Api;
 using System.Net.Http;
+using System.Net.Mail;
 
 namespace MyTrade.Controllers
 {
@@ -228,7 +229,6 @@ namespace MyTrade.Controllers
 
         #endregion
         #region ActivateUser
-
         public ActionResult ActivateUser(EpinDetails model)
         {
             EpinDetails obj = new EpinDetails();
@@ -249,12 +249,15 @@ namespace MyTrade.Controllers
                         if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
                             string Email = dsResult.Tables[0].Rows[0]["Email"].ToString();
+                            string Name = dsResult.Tables[0].Rows[0]["Name"].ToString();
+                            string LoginId = dsResult.Tables[0].Rows[0]["LoginId"].ToString();
+                            string Password = dsResult.Tables[0].Rows[0]["Password"].ToString();
                             obj.Status = "0";
                             obj.Message = "User Activated Successfully";
                             if (Email != null && Email != "")
                             {
-                                string Body = "Dear User,</br> Your Account have been activated.";
-                                BLMail.SendMail(Email, "Activation Successful", Body, false);
+                                BLMail.SendActivationMail(Name, LoginId, Crypto.Decrypt(Password), "Activation Successful", Email);
+
                             }
                             return Json(obj, JsonRequestBehavior.AllowGet);
 
@@ -303,16 +306,18 @@ namespace MyTrade.Controllers
                 obj.TotalTeam = ds.Tables[0].Rows[0]["TotalTeam"].ToString();
                 obj.TotalTeamActive = ds.Tables[0].Rows[0]["TotalTeamActive"].ToString();
                 obj.TotalTeamInActive = ds.Tables[0].Rows[0]["TotalTeamInActive"].ToString();
-                obj.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]);
+                obj.TotalIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"]) + Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorBonus"]);
                 obj.LevelIncomeTr1 = ds.Tables[0].Rows[0]["TotalLevelIncomeTTP"].ToString();
                 obj.LevelIncomeTr2 = ds.Tables[0].Rows[0]["TotalLevelIncomeTPS"].ToString();
                 obj.UsedPins = ds.Tables[0].Rows[0]["UsedPins"].ToString();
                 obj.AvailablePins = ds.Tables[0].Rows[0]["AvailablePins"].ToString();
                 obj.TotalPins = ds.Tables[0].Rows[0]["TotalPins"].ToString();
                 obj.ActiveStatus = ds.Tables[2].Rows[0]["Status"].ToString();
+                obj.ActivationDate = ds.Tables[0].Rows[0]["ActivationDate"].ToString();
                 obj.TotalPayoutWallet = ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"].ToString();
                 obj.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 obj.WalletBalance = ds.Tables[0].Rows[0]["TotalWalletAmount"].ToString();
+                obj.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 if (obj.ActiveStatus == "Active")
                 {
                     obj.ReferralLink = "http://mytrade.co.in/Home/Registration?Pid=" + associate.Fk_UserId;
@@ -330,10 +335,19 @@ namespace MyTrade.Controllers
                 {
                     obj.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
                 }
+                else
+                {
+                    obj.TotalTPSAmountTobeReceived = "0";
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
                 {
                     obj.TotalTPSAmountReceived = double.Parse(ds.Tables[4].Compute("sum(TotalROI)", "").ToString()).ToString("n2");
                     obj.TotalTPSBalanceAmount = Convert.ToDecimal(obj.TotalTPSAmountTobeReceived) - Convert.ToDecimal(obj.TotalTPSAmountReceived);
+                }
+                else
+                {
+                    obj.TotalTPSAmountReceived = "0";
+                    obj.TotalTPSBalanceAmount = "0";
                 }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -708,8 +722,30 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        //[HttpPost]
+        //public ActionResult WalletBalance(Wallet model)
+        //{
+        //    WalletBalanceAPI obj = new WalletBalanceAPI();
+        //    DataSet ds = model.GetWalletBalance();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        obj.Status = "0";
+        //        obj.Message = "Record Found";
+        //        obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+        //    {
+        //        obj.KYCStatus = ds.Tables[1].Rows[0]["PanStatus"].ToString();
+        //    }
+        //    else
+        //    {
+        //        obj.Status = "1";
+        //        obj.Message = "No Record Found";
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
         [HttpPost]
-        public ActionResult WalletBalance(Wallet model)
+        public ActionResult WalletBalanceNew(Wallet model)
         {
             WalletBalanceAPI obj = new WalletBalanceAPI();
             DataSet ds = model.GetWalletBalance();
@@ -823,9 +859,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
-
         [HttpPost]
         public ActionResult UpdateProfile(ProfileAPI model)
         {
@@ -932,6 +965,7 @@ namespace MyTrade.Controllers
                 obj.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
                 obj.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
                 obj.UPIId = ds.Tables[0].Rows[0]["UPIID"].ToString();
+                obj.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
                 obj.IsVerified = Convert.ToBoolean(ds.Tables[0].Rows[0]["ISVerified"]);
             }
             else
@@ -1063,7 +1097,7 @@ namespace MyTrade.Controllers
                         obj.DrAmount = r["DrAmount"].ToString();
                         obj.Narration = r["Narration"].ToString();
                         obj.TransactionDate = r["TransactionDate"].ToString();
-                        obj.Balance = "0";
+                        obj.Balance = r["Balance"].ToString();
                         lst.Add(obj);
                     }
                     res.lst = lst;
@@ -1200,6 +1234,10 @@ namespace MyTrade.Controllers
             List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.BindProductForJoining();
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[1].Rows.Count > 0){
+                obj.ToplistStatus = ds.Tables[1].Rows[0]["Status"].ToString();
+                obj.Reason = ds.Tables[1].Rows[0]["Reason"].ToString();
+            }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Status = "0";
@@ -1239,6 +1277,11 @@ namespace MyTrade.Controllers
             List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.PackageList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                obj.ToplistStatus = ds.Tables[1].Rows[0]["Status"].ToString();
+                obj.Reason = ds.Tables[1].Rows[0]["Reason"].ToString();
+            }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Status = "0";
@@ -1253,6 +1296,7 @@ namespace MyTrade.Controllers
                     model.MaximumAmount = Convert.ToDecimal(r["ToAmount"]);
                     model.InMultipleOf = Convert.ToString(r["InMultipleOf"]);
                     model.AmountWithGST = Convert.ToDecimal(r["AmountWithGST"]);
+                    model.ROIPercent = Convert.ToDecimal(r["ROIPercent"]);
                     lst.Add(model);
                 }
                 obj.lst = lst;
@@ -1411,7 +1455,18 @@ namespace MyTrade.Controllers
                             }
                             res.lstDetails = lstMember;
                         }
+                        else
+                        {
+                            res.Status = "1";
+                            res.Message = "No Record Found";
+                            res.lstDetails = lstMember;
+                        }
                     }
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
                 }
 
             }
@@ -1486,6 +1541,12 @@ namespace MyTrade.Controllers
                     }
                     res.lst = lst;
                 }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "Record NotFound";
+                    res.lst = lst;
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
                     res.Level = ds.Tables[1].Rows[0]["Lvl"].ToString();
@@ -1522,6 +1583,12 @@ namespace MyTrade.Controllers
                         obj.Color = r["Color"].ToString();
                         lstMember.Add(obj);
                     }
+                    res.lstDetails = lstMember;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "Record Not Found";
                     res.lstDetails = lstMember;
                 }
             }
@@ -1671,6 +1738,11 @@ namespace MyTrade.Controllers
                         lst.Add(obj);
                     }
                     res.lst = lst;
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "Record Not Found";
                 }
             }
             catch (Exception ex)
@@ -1979,12 +2051,19 @@ namespace MyTrade.Controllers
                     }
                     model.lst = lst;
                 }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "Record Not Found";
+                    model.lst = lst;
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
                     model.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
                     model.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
                     model.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
                 }
+
             }
             catch (Exception ex)
             {
@@ -2001,6 +2080,11 @@ namespace MyTrade.Controllers
             {
                 List<PayoutDetailsForAPI> lst = new List<PayoutDetailsForAPI>();
                 DataSet ds = req.GetPayoutRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+                {
+                    model.PayoutsPagestatus = ds.Tables[2].Rows[0]["MenuStatus"].ToString();
+                    model.Reason = ds.Tables[2].Rows[0]["Reason"].ToString();
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     model.Status = "0";
@@ -2024,7 +2108,14 @@ namespace MyTrade.Controllers
                     }
                     model.lst = lst;
                 }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "Record Not Found";
+                    model.lst = lst;
+                }
             }
+
             catch (Exception ex)
             {
                 model.Status = "1";
@@ -2250,11 +2341,11 @@ namespace MyTrade.Controllers
         {
             OrderModel orderModel = new OrderModel();
             string random = Common.GenerateRandom();
-            model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
             try
             {
+                decimal amount = Convert.ToDecimal(model.Amount) * 100;
                 Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", Convert.ToInt32(model.Amount)); // amount in the smallest currency unit
+                options.Add("amount", Convert.ToInt32(amount)); // amount in the smallest currency unit
                 options.Add("receipt", random);
                 options.Add("currency", "INR");
                 options.Add("payment_capture", "1");
@@ -2264,9 +2355,10 @@ namespace MyTrade.Controllers
                 Razorpay.Api.Order order = client.Order.Create(options);
                 model.OrderId = order["id"].ToString();
                 model.PaymentMode = "12";
+                model.Amount = amount.ToString();
                 orderModel.orderId = order.Attributes["id"];
                 orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                orderModel.amount = Convert.ToInt32(model.Amount);
+                orderModel.amount = Convert.ToInt32(amount);
                 orderModel.currency = "INR";
                 orderModel.description = "Recharge Wallet";
                 orderModel.name = model.Name;
@@ -2378,7 +2470,6 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
         [HttpPost]
         public ActionResult ForgetPassword(ForgetPassword model)
         {
@@ -2396,7 +2487,23 @@ namespace MyTrade.Controllers
                         ForgetPasswordResponse obj = new ForgetPasswordResponse();
                         obj.Email = r["Email"].ToString();
                         obj.Name = r["Name"].ToString();
-                        obj.Password = r["Password"].ToString();
+                        obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + obj.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + obj.Password;
+
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
                         lst.Add(obj);
                     }
                     res.lsForgetPassword = lst;
@@ -2414,6 +2521,178 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        
+        public ActionResult UpdateAddress(ProfileAPI model)
+        {
+            Reponse obj = new Reponse();
+            try
+            {
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        obj.Status = "0";
+                        obj.Message = "Profile Updated Successfully";
+                    }
+                    else
+                    {
+                        obj.Status = "1";
+                        obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DownloadFile()
+        {
+            Download obj1 = new Download();
+            DownloadResponse model = new DownloadResponse();
+            List<Download> lst = new List<Download>();
+            try
+            {
+                DataSet ds = obj1.GetFileDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Status = "0";
+                    model.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Download obj = new Download();
+                        obj.PK_FileId = r["PK_RewardId"].ToString();
+                        obj.Title = r["Title"].ToString();
+                        obj.File = r["postedFile"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lst = lst;
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CreateOrder(string Amount, string MobileNo, string Type, string FK_UserId)
+        {
+            UserRecharge obj = new UserRecharge();
+            UserRechargeAPI model = new UserRechargeAPI();
+            obj.FK_UserId = FK_UserId;
+            obj.Amount = Convert.ToDecimal(Amount);
+            obj.TransactionFor = MobileNo;
+            DataSet dsss = obj.GetWalletBalance();
+            if (dsss != null && dsss.Tables.Count > 0 && dsss.Tables[0].Rows.Count > 0)
+            {
+                if (obj.Amount <= Convert.ToDecimal(dsss.Tables[0].Rows[0]["amount"]))
+                {
+                    obj.TransactionType = Type;
+                    DataSet ds = obj.CreateOrder();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Status = "0";
+                            model.OrderNo = ds.Tables[0].Rows[0]["OrderNo"].ToString();
+                            model.Message = "Order Created Successfully";
+                        }
+                        else
+                        {
+                            model.Status = "1";
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Status = "1";
+                        model.Message = "Temporarily issues occurred. Please Try after some time";
+                    }
+                }
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "You have insufficient balance in your wallet for this plan. Kindly choose another plan";
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult SaveRechageOrBillPaymentResponse(UserRecharge model)
+        {
+            UserRechargeAPI obj = new UserRechargeAPI();
+            DataSet ds = model.SaveBillPaymentResponse();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    obj.Message = "Recharge done successfully";
+                    obj.Status = "0";
+                }
+                else
+                {
+                    obj.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    obj.Status = "1";
+                }
+            }
+            else
+            {
+                obj.Message = "Some issues occurred";
+                obj.Status = "1";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult SponsorIncomeReport(GetSponsorIncomeReport model)
+        {
+            GetSponsorIncomeList res = new GetSponsorIncomeList();
+            List<SponsorIncomeReportResponse> lst = new List<SponsorIncomeReportResponse>();
+            try
+            {
+                DataSet ds = model.GetSponsorIncomeReports();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    res.Status = "0";
+                    res.Message = "Record Found";
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        SponsorIncomeReportResponse obj = new SponsorIncomeReportResponse();
+                        obj.Status = r["Status"].ToString();
+                        obj.TransactionDate = r["TransactionDate"].ToString();
+                        obj.ToName = r["ToName"].ToString();
+                        obj.FromName = r["FromName"].ToString();
+                        obj.FromLoginId = r["LoginId"].ToString();
+                        obj.BusinessAmount = r["BusinessAmount"].ToString();
+                        obj.ToLoginID = r["ToLoginId"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.CommissionPercentage = r["CommissionPercentage"].ToString();
+                        lst.Add(obj);
+                    }
+                    res.lstSponsorIncome = lst;
+                    res.TotalBusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                    res.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
+                }
+                else
+                {
+                    res.Status = "1";
+                    res.Message = "No Record Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Status = "1";
+                res.Message = ex.Message;
+            }
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }

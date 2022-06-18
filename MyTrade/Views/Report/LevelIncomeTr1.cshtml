@@ -14,51 +14,54 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-lg-5 col-md-5">
-                                <h4>Level Bonus TTP</h4>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <a href="/Report/LevelIncomeTr1Total" class="btn btn-info btn-sm">Back</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
+                             <div class="col-lg-4">
+                                  <div class="form-group">
+                                       <h4>Level Bonus TTP</h4>
+                                   </div>
+                             </div>
+                            <div class="col-lg-8">
+                                <div class="form-group" style="float:right">
+                                    <h4>  
+                                    <a href="/Report/LevelIncomeTr1Total" class="btn btn-info btn-sm">Back</a></h4>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
                         @*<div class="row">
-                            <div class="col-lg-3 col-md-3">
-                                <div class="form-group">
-                                    <label>
-                                        From Date
-                                    </label>
-                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date" })
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <label>
+                                            From Date
+                                        </label>
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date" })
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3">
-                                <div class="form-group">
-                                    <label> To Date</label>
-                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date" })
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <label> To Date</label>
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date" })
 
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-3 col-md-3">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <input type="hidden" value="@Model.Status" id="st" />
-                                    <select id="Status" name="Status" class="form-control">
-                                        <option value="0">Unpaid</option>
-                                        <option value="1">Paid</option>
-                                    </select>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <input type="hidden" value="@Model.Status" id="st" />
+                                        <select id="Status" name="Status" class="form-control">
+                                            <option value="0">Unpaid</option>
+                                            <option value="1">Paid</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-success" value="Search" name="btnSearch" />
+                                <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-success" value="Search" name="btnSearch" />
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
                         <div class="row">
                             <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                 <thead>

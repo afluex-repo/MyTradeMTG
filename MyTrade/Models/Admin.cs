@@ -19,7 +19,8 @@ namespace MyTrade.Models
         public List<Admin> lstView { get; set; }
         public List<Admin> lstForUserPermission { get; set; }
         public List<Admin> lstgeneratepin { get; set; }
-        
+        public string Fk_InvestmentId { get; set; }
+      
         public string ePinNo { get; set; }
 
         public string RegisteredTo { get; set; }
@@ -29,7 +30,7 @@ namespace MyTrade.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Status { get; set; }
-
+        public string ActivationDate { get; set; }
         public string Password { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmNewPassword { get; set; }
@@ -47,6 +48,7 @@ namespace MyTrade.Models
         public List<Admin> lstWallet { get; set; }
         public string WalletId { get; set; }
         public string Name { get; set; }
+        public string SponsorBonus { get; set; }
         public string PK_RequestID { get; set; }
         public List<Admin> lstEpinRequest { get; set; }
         public string ProductName { get; set; }
@@ -156,7 +158,11 @@ namespace MyTrade.Models
         public string PinAmount { get; set; }
         public string PinStaus { get; set; }
         public string Fk_ProductId { get; set; }
-        
+        public string AvailableBalance { get; set; }
+        public List<Admin> lstWalletLedger { get; set; }
+
+        public List<Admin> lstSponsor { get; set; }
+
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -190,7 +196,7 @@ namespace MyTrade.Models
 
                                         new SqlParameter("@Status", Status),
                                         new SqlParameter("@EPinNo", ePinNo),
-                                        new SqlParameter("@Package", Package),
+                                        new SqlParameter("@Package", Fk_ProductId),
                                         new SqlParameter("@OwnerID", OwnerID ),
                                         new SqlParameter("@RegToId", RegisteredTo ),
                                         new SqlParameter("@Fk_UserId", Fk_UserId )
@@ -224,6 +230,14 @@ namespace MyTrade.Models
             };
             DataSet ds = DBHelper.ExecuteQuery("GetEwalletRequestDetailsForAdmin", para);
 
+            return ds;
+        }
+        public DataSet WalletLedger()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                                    new SqlParameter("@Name",Name)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("[PayoutWalletLedgerForAdmin]", para);
             return ds;
         }
         public DataSet GetEwalletRequestDetails()
@@ -621,8 +635,9 @@ namespace MyTrade.Models
         public DataSet GetDistributedTPSList()
         {
             SqlParameter[] para = {
-                new SqlParameter("@LoginId", LoginId),
-                new SqlParameter("@PayoutNo", PayoutNo)
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo),
+                new SqlParameter("@FK_InvestmentId", Fk_InvestmentId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForTPS", para);
             return ds;
@@ -639,5 +654,40 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPinDetailsGeneratedByAdmin", para);
             return ds;
         }
+
+        #region
+        public DataSet TPSPayoutDetail()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId", LoginId),
+                new SqlParameter("@PayoutNo", PayoutNo),
+                //new SqlParameter("@FromDate", FromDate),
+                //    new SqlParameter("@ToDate", ToDate),
+               // new SqlParameter("@LoginId", LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("TPSPayoutDetails", para);
+            return ds;
+        }
+        #endregion
+
+
+
+
+
+        public DataSet GetSponsorIncomeReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                  new SqlParameter("@Name", Name),
+                new SqlParameter("@FromDate", FromDate),
+                new SqlParameter("@ToDate", ToDate),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
+            return ds;
+        }
+
+        
+
+
+
     }
 }

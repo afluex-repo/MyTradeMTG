@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace MyTrade.Models
+
 {
     public class DBHelper
     {
@@ -16,8 +17,10 @@ namespace MyTrade.Models
         {
             try
             {
+
                 connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
-                //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradetestuser; password=mytrade@123; integrated security=false;";
+                // connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
+
             }
             catch (Exception)
             {

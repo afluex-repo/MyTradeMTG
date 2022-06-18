@@ -19,7 +19,6 @@ namespace MyTrade.Controllers
         {
             return View();
         }
-
         public ActionResult GetMemberName(string LoginId)
         {
             Common obj = new Common();
@@ -33,7 +32,6 @@ namespace MyTrade.Controllers
             else { obj.Result = "No"; }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult AddWallet()
         {
             UserWallet obj = new UserWallet();
@@ -93,7 +91,6 @@ namespace MyTrade.Controllers
 
             return View(obj);
         }
-
         [HttpPost]
         [ActionName("AddWallet")]
         [OnAction(ButtonName = "Save")]
@@ -109,7 +106,7 @@ namespace MyTrade.Controllers
                     model.BankName = null;
                     model.BankBranch = null;
                 }
-                if(model.PaymentType == "Offline")
+                if (model.PaymentType == "2")
                 {
                     DataSet ds = model.SaveEwalletRequest();
                     if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -125,15 +122,16 @@ namespace MyTrade.Controllers
                     }
                     else { }
                 }
-                else if(model.PaymentType == "Online")
+                else if (model.PaymentType == "1")
                 {
                     OrderModel orderModel = new OrderModel();
                     string random = Common.GenerateRandom();
                     CreateOrderResponse obj1 = new CreateOrderResponse();
                     try
                     {
+                        decimal amount = Convert.ToDecimal(model.Amount) * 100;
                         Dictionary<string, object> options = new Dictionary<string, object>();
-                        options.Add("amount", Convert.ToInt32(model.Amount) * 100); // amount in the smallest currency unit
+                        options.Add("amount", Convert.ToInt32(amount)); // amount in the smallest currency unit
                         options.Add("receipt", random);
                         options.Add("currency", "INR");
                         options.Add("payment_capture", "1");
@@ -146,11 +144,12 @@ namespace MyTrade.Controllers
                         model.OrderId = order["id"].ToString();
                         model.LoginId = Session["LoginId"].ToString();
                         model.AddedBy = Session["Pk_UserId"].ToString();
-                        model.Amount = (Convert.ToInt32(model.Amount) * 100).ToString();
+                        model.PaymentType = "Online";
                         model.PaymentMode = "12";
+                        model.Amount = amount.ToString();
                         orderModel.orderId = order.Attributes["id"];
                         orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                        orderModel.amount = Convert.ToInt32(model.Amount) * 100;
+                        orderModel.amount = Convert.ToInt32(amount);
                         orderModel.currency = "INR";
                         orderModel.description = "Recharge Wallet";
                         orderModel.name = Session["FullName"].ToString();
@@ -282,7 +281,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ROIWallet")]
         [OnAction(ButtonName = "Search")]
@@ -312,7 +310,6 @@ namespace MyTrade.Controllers
             return View(model);
 
         }
-
         public ActionResult ROIIncomeReports()
         {
             UserWallet model = new UserWallet();
@@ -337,7 +334,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ROIIncomeReports")]
         [OnAction(ButtonName = "Search")]
@@ -366,8 +362,35 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult ViewROI(string InvId)
+        {
+            UserWallet model = new UserWallet();
+            model.Pk_InvestmentId = InvId;
+            List<UserWallet> lst = new List<UserWallet>();
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = model.GetROIDetails();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserWallet obj = new UserWallet();
+                    obj.ROI = r["Pk_ROIId"].ToString();
+                    obj.ROI = r["ROI"].ToString();
+                    obj.Date = r["ROIDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstROI = lst;
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                ViewBag.ReceivedAmount = ds.Tables[1].Rows[0]["ReceivedAmount"].ToString();
+                ViewBag.TotalAmount = ds.Tables[1].Rows[0]["TotalAmount"].ToString();
+                ViewBag.BalanceAmount = ds.Tables[1].Rows[0]["BalanceAmount"].ToString();
+            }
+            return View(model);
+        }
+        public ActionResult ViewTPS(string InvId)
         {
             UserWallet model = new UserWallet();
             model.Pk_InvestmentId = InvId;
@@ -485,7 +508,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
         public ActionResult DeleteWallet(string id)
         {
             try
