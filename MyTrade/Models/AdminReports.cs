@@ -94,9 +94,20 @@ namespace MyTrade.Models
         public string Level { get; set; }
         public string ActivationMode { get; set; }
         public string TopupVia { get; set; }
-        
-        //public string SponserName { get; set; }
 
+        //public string SponserName { get; set; }
+        public DataSet GetRechargeList()
+        {
+            SqlParameter[] para =
+            {
+               new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                 new SqlParameter("@ToDate",ToDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRechargeList", para);
+            return ds;
+        }
         #region associatelist
         public DataSet GetAssociateList()
         {

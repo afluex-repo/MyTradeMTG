@@ -745,6 +745,28 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        public ActionResult WalletBalanceNew(Wallet model)
+        {
+            WalletBalanceAPI obj = new WalletBalanceAPI();
+            DataSet ds = model.GetWalletBalance();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Status = "0";
+                obj.Message = "Record Found";
+                obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                obj.KYCStatus = ds.Tables[1].Rows[0]["PanStatus"].ToString();
+            }
+            else
+            {
+                obj.Status = "1";
+                obj.Message = "No Record Found";
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
         public ActionResult TransferPin(TransferPin model)
         {
             Reponse obj = new Reponse();
@@ -1212,6 +1234,10 @@ namespace MyTrade.Controllers
             List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.BindProductForJoining();
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[1].Rows.Count > 0){
+                obj.ToplistStatus = ds.Tables[1].Rows[0]["Status"].ToString();
+                obj.Reason = ds.Tables[1].Rows[0]["Reason"].ToString();
+            }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Status = "0";
@@ -1251,6 +1277,11 @@ namespace MyTrade.Controllers
             List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.PackageList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                obj.ToplistStatus = ds.Tables[1].Rows[0]["Status"].ToString();
+                obj.Reason = ds.Tables[1].Rows[0]["Reason"].ToString();
+            }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Status = "0";
@@ -2049,6 +2080,11 @@ namespace MyTrade.Controllers
             {
                 List<PayoutDetailsForAPI> lst = new List<PayoutDetailsForAPI>();
                 DataSet ds = req.GetPayoutRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+                {
+                    model.PayoutsPagestatus = ds.Tables[2].Rows[0]["MenuStatus"].ToString();
+                    model.Reason = ds.Tables[2].Rows[0]["Reason"].ToString();
+                }
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     model.Status = "0";
@@ -2615,7 +2651,6 @@ namespace MyTrade.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
         [HttpPost]
         public ActionResult SponsorIncomeReport(GetSponsorIncomeReport model)
         {
@@ -2635,12 +2670,16 @@ namespace MyTrade.Controllers
                         obj.TransactionDate = r["TransactionDate"].ToString();
                         obj.ToName = r["ToName"].ToString();
                         obj.FromName = r["FromName"].ToString();
+                        obj.FromLoginId = r["LoginId"].ToString();
                         obj.BusinessAmount = r["BusinessAmount"].ToString();
+                        obj.ToLoginID = r["ToLoginId"].ToString();
                         obj.Amount = r["Amount"].ToString();
                         obj.CommissionPercentage = r["CommissionPercentage"].ToString();
                         lst.Add(obj);
                     }
                     res.lstSponsorIncome = lst;
+                    res.TotalBusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                    res.TotalAmount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
                 }
                 else
                 {
@@ -2655,12 +2694,5 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
     }
 }

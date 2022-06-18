@@ -1708,6 +1708,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -1743,6 +1745,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
