@@ -94,8 +94,13 @@ namespace MyTrade.Models
         public string Level { get; set; }
         public string ActivationMode { get; set; }
         public string TopupVia { get; set; }
-
+        public string OperatorId { get; set; }
+        public string CircleId { get; set; }
+        public string Provider { get; set; }
+        public string TransactionFor { get; set; }
+        public string ServerOrderId { get; set; }
         //public string SponserName { get; set; }
+        public string OrderNo { get; set; }
         public DataSet GetRechargeList()
         {
             SqlParameter[] para =

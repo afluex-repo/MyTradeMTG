@@ -24,11 +24,11 @@
                                 <thead>
                                     <tr>
                                         <th>S No.</th>
-                                        <th>Cr Amount</th>
-                                        <th>Dr Amount</th>
-                                        <th>Used For</th>
-                                        <th>Narration</th>
-                                        <th>Date</th>
+                                        <th>Discription</th>
+                                        <th>Partner ID</th>
+                                        <th>Number</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,11 +41,11 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    <td>@Item.CrAmount</td>
-                                                    <td>@Item.DrAmount</td>
+                                                    <td>@Item.Provider (@Item.ServerOrderId)</td>
+                                                    <td>@Item.OrderNo</td>
                                                     <td>@Item.TransactionFor</td>
-                                                    <td>@Item.Remarks</td>
-                                                    <td>@Item.TransactionDate</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.Status</td>
                                                 </tr>
                                                 i++;
                                             }
