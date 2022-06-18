@@ -7,490 +7,479 @@
 
 <script src="~/MyTradeWebsite/assets/js/bootstrap.bundle.min.js"></script>
 <style>
-    #content > .container {
-        max-width: 100% !important;
-    }
-
-    .tab-content.payment-form {
-        background-color: #ecf3f9;
-        padding: 20px 20px;
-    }
-
-    .contact-form form .form-control, .contact-form form .form-select {
-        background-color: #ffffff;
-        border: none;
-        -webkit-box-shadow: 0px 5px 28.5px 1.5px rgb(149 152 200 / 20%) !important;
-        box-shadow: 0px 5px 28.5px 1.5px rgb(149 152 200 / 20%) !important;
-        height: 50px;
-        font-family: "Raleway", sans-serif;
-        font-size: 14.5px;
-    }
-
-    .card-billrecharge .nav-tabs .nav-link.active {
-        background: #910f10;
-        color: #fff;
-    }
-
-    .card-billrecharge .nav-tabs .nav-link:hover {
-        border: none;
-        outline: none;
-        background: #fff;
-        color: #22396c;
-    }
-
-    .card-billrecharge .nav-tabs .nav-link {
-        text-align: center;
-        background: #22396c;
-        color: #fff;
-        height: 100%;
-        width: 129.6px;
-        padding: 15px 10px;
-        outline: none;
-        border: none;
-    }
-
-    .nav-tabs {
-        border-bottom: none;
-    }
-
-    .tab-content .sub-title {
-        display: block;
-        margin-bottom: 10px;
-        text-transform: capitalize;
-        color: #22396c;
-        font-size: 16px;
-        font-family: "Raleway", sans-serif;
-        font-weight: 700;
-    }
-
-    .section-title p {
-        /* max-width: 500px; */
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0;
-    }
-
-    .section-title .bar {
-        height: 5px;
-        width: 90px;
-        background: #cdf1d8;
-        margin: 15px auto 20px;
-        position: relative;
-        border-radius: 30px;
-    }
-
-    a:hover, a:focus {
-        color: #f96332;
-    }
-
-    .plan {
-        color: #e95108;
-        outline: none;
-        text-align: left;
-    }
-
-    .table td, .table th {
-        border-top: none;
-    }
-
-    ._3H1N {
-        background-color: #f8f8f8;
-        font-size: 14px;
-        overflow-x: scroll;
-        display: -ms-flexbox;
-        display: flex;
-        color: #999;
-        overflow: hidden;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-        ._3H1N ._3HKw {
-            padding: 12px 20px 12px 19px;
-            cursor: pointer;
-            color: black;
+        #content > .container {
+            max-width: 100% !important;
         }
 
-        ._3H1N ._2Xj9 {
-            color: #222;
-            font-weight: 600;
-            border-bottom: 3px solid #00b9f5;
-            background: #f3f7f8;
+        .tab-content.payment-form {
+            background-color: #ecf3f9;
+            padding: 20px 20px;
         }
 
-    ._262P {
-        display: -ms-flexbox;
-        display: flex;
-        font-size: 13px;
-        color: black;
-        border-top: 1px solid #ebebeb;
-        border-bottom: 1px solid #ebebeb;
-    }
+        .contact-form form .form-control, .contact-form form .form-select {
+            background-color: #ffffff;
+            border: none;
+            -webkit-box-shadow: 0px 5px 28.5px 1.5px rgb(149 152 200 / 20%) !important;
+            box-shadow: 0px 5px 28.5px 1.5px rgb(149 152 200 / 20%) !important;
+            height: 50px;
+            font-family: "Raleway", sans-serif;
+            font-size: 14.5px;
+        }
 
-    .zUDk {
-        width: 12%;
-        padding: 7px 14px;
-    }
+        .card-billrecharge .nav-tabs .nav-link.active {
+            background: #910f10;
+            color: #fff;
+        }
 
-    ._8nlz {
-        height: 210px;
-        overflow: scroll;
-    }
+        .card-billrecharge .nav-tabs .nav-link:hover {
+            border: none;
+            outline: none;
+            background: #fff;
+            color: #22396c;
+        }
 
-    ._1aEZ:hover {
-        background-color: #f3f7f8;
-    }
+        .card-billrecharge .nav-tabs .nav-link {
+            text-align: center;
+            background: #22396c;
+            color: #fff;
+            height: 100%;
+            width: 129.6px;
+            padding: 15px 10px;
+            outline: none;
+            border: none;
+        }
 
-    ._1aEZ {
-        display: -ms-flexbox;
-        display: flex;
-        padding: 10px 0;
-    }
+        .nav-tabs {
+            border-bottom: none;
+        }
 
-    ._17KN {
-        width: 15%;
-    }
-
-    ._3WAG {
-        width: 37%;
-        word-wrap: break-word;
-    }
-
-    ._3vjB {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
-
-    .LLvJ {
-        color: #00baf2;
-        border: 1px solid #00baf2;
-    }
-
-    ._11kC {
-        border-radius: 6px;
-        margin: 0;
-        text-align: center;
-        font-weight: 600;
-    }
-
-    .contact-form form .help-block ul li {
-        color: red;
-        font-weight: 300;
-    }
-
-    .form-control::-webkit-input-placeholder {
-        color: #888ea8;
-        opacity: 1;
-        white-space: pre-line;
-        position: relative;
-        top: -7px;
-    }
-
-    .loading-image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 200px;
-        z-index: 10;
-    }
-
-    .loader {
-        display: none;
-        width: 200px;
-        height: 200px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        text-align: center;
-        margin-left: -50px;
-        margin-top: -100px;
-        z-index: 2;
-    }
-
-    .loader {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        background-color: transparent;
-        z-index: 999999;
-        transform: translateZ(999999px);
-        display: none;
-    }
-    /*#content {
-    position: relative;
-    width: 50%;
-    flex-grow: 8;
-    margin-top: 60px;
-    margin-bottom: 0;
-    margin-left: 212px;
-    transition: .600s;
-    background-color: white;
-}*/
-    /*.overlay {
-        display: none;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 999;
-        background: rgba(255,255,255,0.8) url('../../ProfilePicture/untitled-5.gif') center no-repeat;
-    }
-    /* Turn off scrollbar when body element has the loading class */
-    /*body.loading {
-        overflow: hidden;
-    }
-
-        body.loading .overlay {
+        .tab-content .sub-title {
             display: block;
-        }*/
-    /*.pageloader {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: url('../../ProfilePicture/untitled-5.gif') 50% 50% no-repeat rgb(249, 249, 249);
-        opacity: .8;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+            color: #22396c;
+            font-size: 16px;
+            font-family: "Raleway", sans-serif;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            /* max-width: 500px; */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 0;
+        }
+
+        .section-title .bar {
+            height: 5px;
+            width: 90px;
+            background: #cdf1d8;
+            margin: 15px auto 20px;
+            position: relative;
+            border-radius: 30px;
+        }
+
+        a:hover, a:focus {
+            color: #f96332;
+        }
+
+        .plan {
+            color: #e95108;
+            outline: none;
+            text-align: left;
+        }
+
+        .table td, .table th {
+            border-top: none;
+        }
+
+        ._3H1N {
+            background-color: #f8f8f8;
+            font-size: 14px;
+            overflow-x: scroll;
+            display: -ms-flexbox;
+            display: flex;
+            color: #999;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+            ._3H1N ._3HKw {
+                padding: 12px 20px 12px 19px;
+                cursor: pointer;
+                color: black;
+            }
+
+            ._3H1N ._2Xj9 {
+                color: #222;
+                font-weight: 600;
+                border-bottom: 3px solid #00b9f5;
+                background: #f3f7f8;
+            }
+
+        ._262P {
+            display: -ms-flexbox;
+            display: flex;
+            font-size: 13px;
+            color: black;
+            border-top: 1px solid #ebebeb;
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        .zUDk {
+            width: 12%;
+            padding: 7px 14px;
+        }
+
+        ._8nlz {
+            height: 210px;
+            overflow: scroll;
+        }
+
+        ._1aEZ:hover {
+            background-color: #f3f7f8;
+        }
+
+        ._1aEZ {
+            display: -ms-flexbox;
+            display: flex;
+            padding: 10px 0;
+        }
+
+        ._17KN {
+            width: 15%;
+        }
+
+        ._3WAG {
+            width: 37%;
+            word-wrap: break-word;
+        }
+
+        ._3vjB {
+            font-size: 14px;
+            padding: 6px 10px;
+        }
+
+        .LLvJ {
+            color: #00baf2;
+            border: 1px solid #00baf2;
+        }
+
+        ._11kC {
+            border-radius: 6px;
+            margin: 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .contact-form form .help-block ul li {
+            color: red;
+            font-weight: 300;
+        }
+
+        .form-control::-webkit-input-placeholder {
+            color: #888ea8;
+            opacity: 1;
+            white-space: pre-line;
+            position: relative;
+            top: -7px;
+        }
+
+        .loading-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            z-index: 10;
+        }
+
+        .loader {
+            display: none;
+            width: 200px;
+            height: 200px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            margin-left: -50px;
+            margin-top: -100px;
+            z-index: 2;
+        }
+
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 999999;
+            transform: translateZ(999999px);
+            display: none;
+        }
+        /*#content {
+        position: relative;
+        width: 50%;
+        flex-grow: 8;
+        margin-top: 60px;
+        margin-bottom: 0;
+        margin-left: 212px;
+        transition: .600s;
+        background-color: white;
     }*/
-    #content1
-    {
-        position: relative !important; 
-     width: 100% !important; 
-     flex-grow: 8 !important; 
-    margin-top: 100px !important;
-    margin-bottom: 0 !important;
-     margin-left: 230px !important; 
-    transition: .600s !important;
-    }
+        /*.overlay {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            background: rgba(255,255,255,0.8) url('../../ProfilePicture/untitled-5.gif') center no-repeat;
+        }
+        /* Turn off scrollbar when body element has the loading class */
+        /*body.loading {
+            overflow: hidden;
+        }
+
+            body.loading .overlay {
+                display: block;
+            }*/
+        /*.pageloader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('../../ProfilePicture/untitled-5.gif') 50% 50% no-repeat rgb(249, 249, 249);
+            opacity: .8;
+        }*/
+        #content1 {
+            position: relative !important;
+            width: 100% !important;
+            flex-grow: 8 !important;
+            margin-top: 100px !important;
+            margin-bottom: 0 !important;
+            margin-left: 230px !important;
+            transition: .600s !important;
+        }
 </style>
 <div class="container">
     <div class="row layout-top-spacing">
         <div class="col-lg-12 col-12 layout-spacing">
-            <div clas="statbox widget box box-shadow">
-                <div class="widget-content widget-content-are">
-                    <section class="how-it-works-area ptb-70">
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-12 col-md-12">
-                                <div class="card" id="content1">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Domestic Money Transfer</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="col-md-12" id="content">
-                                            <form>
-                                                <div class="form-group">
-                                                    <input type="number" id="number" maxlength="10" class="form-control" required="" onkeyup="keyGetSender(this);" name="number" placeholder="Mobile Number">
-                                                </div>
-                                                <input type="hidden" name="token" id="token" value="5fba90-b7cccf-0f4f30-0c82ed-8ca0ae">
-                                                <div class="form-group GetSnd">
-                                                    <div class="input-group">
-                                                        <button type="submit" id="GetSnd" class="btn btn-primary btn-round col-md-12" onclick="clickGetSender(); return false;" disabled="disabled">Continue →</button>
-                                                    </div>
-                                                </div>
-
-
-                                                <!-- create Sender-->
-
-                                                <div class="form-group SenderName" style="display: none;">
-                                                    <input type="text" id="SenderName" class="form-control" name="SenderName" placeholder="Name" required="">
-                                                </div>
-
-                                                <div class="form-group SenderSurname" style="display: none;">
-                                                    <input type="text" id="SenderSurname" class="form-control" required="true" name="SenderSurname" placeholder="Surname">
-                                                </div>
-
-                                                <div class="form-group createNewSender" style="display: none;">
-                                                    <div class="input-group">
-                                                        <button type="submit" id="createNewSender" class="btn btn-primary btn-round col-md-12" onclick="createSender('YES'); return false;">Create Sender →</button>
-                                                    </div>
-                                                </div>
-                                                <!--for verify user-->
-                                                <input type="hidden" name="senderId" id="senderId">
-
-                                                <div class="form-group otp-field" style="display: none;">
-                                                    <input type="number" id="senderOtp" maxlength="6" class="form-control" required="true" onkeyup="verifySender(0,0,this.value);" name="senderOtp" placeholder="Enter OTP">
-                                                </div>
-
-
-
-                                                <div class="form-group verifyUser" style="display: none;">
-                                                    <button type="submit" id="verifyUser" class="btn btn-primary btn-round col-md-12">Verify Sender →</button>
-                                                </div>
-
-                                            </form>
+            <section class="how-it-works-area ptb-70">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                        <div class="card" id="content1">
+                            <div class="card-header">
+                                <h4 class="card-title">Domestic Money Transfer</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-md-12" id="content">
+                                    <form>
+                                        <div class="form-group">
+                                            <input type="number" id="number" maxlength="10" class="form-control" required="" onkeyup="keyGetSender(this);" name="number" placeholder="Mobile Number">
                                         </div>
-                                        <div class="row">
-                                            <div id="left_side" class="col-md-4" style="display: none;">
+                                        <input type="hidden" name="token" id="token" value="5fba90-b7cccf-0f4f30-0c82ed-8ca0ae">
+                                        <div class="form-group GetSnd">
+                                            <div class="input-group">
+                                                <button type="submit" id="GetSnd" class="btn btn-primary btn-round col-md-12" onclick="clickGetSender(); return false;" disabled="disabled">Continue →</button>
+                                            </div>
+                                        </div>
 
 
-                                                <div class="form-group">
-                                                    <div class="dropdown bootstrap-select form-control">
-                                                        <select name="getForm" id="getForm" onchange="changeForm(this);" class="selectpicker form-control" data-size="7" data-style="btn-Custom_2nd btn-round" title="Choose Action" tabindex="-98">
-                                                            <option class="bs-title-option" value=""></option>
-                                                            <option value="trfMoney">Fund Transfer</option>
-                                                            <option value="addBene">Add Beneficiary</option>
-                                                        </select><button type="button" class="btn dropdown-toggle bs-placeholder btn-Custom_2nd btn-round" data-toggle="dropdown" role="button" data-id="getForm" title="Choose Action"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Choose Action</div></div> </div></button><div class="dropdown-menu " role="combobox"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner show"></ul></div></div>
-                                                    </div>
+                                        <!-- create Sender-->
 
-                                                </div>
+                                        <div class="form-group SenderName" style="display: none;">
+                                            <input type="text" id="SenderName" class="form-control" name="SenderName" placeholder="Name" required="">
+                                        </div>
 
+                                        <div class="form-group SenderSurname" style="display: none;">
+                                            <input type="text" id="SenderSurname" class="form-control" required="true" name="SenderSurname" placeholder="Surname">
+                                        </div>
 
-                                                <form id="trfMoney">
-                                                    <div class="form-group">
-                                                        <input type="number" id="accountNo" maxlength="10" name="accountNo" class="form-control" required="true" placeholder="Account Number" readonly="">
-                                                    </div>
+                                        <div class="form-group createNewSender" style="display: none;">
+                                            <div class="input-group">
+                                                <button type="submit" id="createNewSender" class="btn btn-primary btn-round col-md-12" onclick="createSender('YES'); return false;">Create Sender →</button>
+                                            </div>
+                                        </div>
+                                        <!--for verify user-->
+                                        <input type="hidden" name="senderId" id="senderId">
 
-
-
-                                                    <div class="form-group">
-                                                        <input type="text" id="bankName" class="form-control" name="bankName" required="true" placeholder="Bank Name" readonly="">
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <input type="text" id="benName" class="form-control" name="benName" required="true" placeholder="Accoount Holder" readonly="">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="dropdown bootstrap-select form-control">
-                                                            <select name="mode" id="mode" class="selectpicker form-control" data-size="7" data-style="btn-Custom_2nd btn-round" tabindex="-98">
-                                                                <option value="2" selected="">IMPS</option>
-                                                                <option value="1">NEFT</option>
-                                                            </select><button type="button" class="btn dropdown-toggle btn-Custom_2nd btn-round" data-toggle="dropdown" role="button" data-id="mode" title="IMPS"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">IMPS</div></div> </div></button><div class="dropdown-menu " role="combobox"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner show"></ul></div></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="form-row">
-
-                                                            <div class="col">
-                                                                <input type="password" id="amounT" class="form-control" name="amounT" required="true" placeholder="Amount">
-                                                            </div>
-
-                                                            <div class="col">
-                                                                <input type="number" id="camounT" class="form-control" name="camounT" required="true" placeholder="Confirm">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!--sender id-->
-                                                    <input type="hidden" id="sID">
-                                                    <input type="hidden" id="benID">
-
-                                                    <div class="form-group ">
-                                                        <div class="input-group">
-                                                            <button type="submit" id="transferBtn" class="btn btn-primary btn-round col-md-12" disabled="disabled">Transfer <i class="fas fa-location-arrow"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                        <div class="form-group otp-field" style="display: none;">
+                                            <input type="number" id="senderOtp" maxlength="6" class="form-control" required="true" onkeyup="verifySender(0,0,this.value);" name="senderOtp" placeholder="Enter OTP">
+                                        </div>
 
 
 
+                                        <div class="form-group verifyUser" style="display: none;">
+                                            <button type="submit" id="verifyUser" class="btn btn-primary btn-round col-md-12">Verify Sender →</button>
+                                        </div>
 
-                                                <form id="addBene" style="display: none;">
-
-                                                    <div class="form-group">
-                                                        <input type="text" id="Name" class="form-control" name="Name" required="true" placeholder="Name">
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <select id="lbanks" class="form-control" data-live-search="true" data-style="btn btn-Custom_2nd btn-round" data-size="5" onchange="setIfsc(this.value);">
-                                                            <option value="NO">Select Bank</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <input type="number" id="account" maxlength="10" name="account" class="form-control" required="true" placeholder="Account Number">
-                                                    </div>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <div id="left_side" class="col-md-4" style="display: none;">
 
 
+                                        <div class="form-group">
+                                            <div class="dropdown bootstrap-select form-control">
+                                                <select name="getForm" id="getForm" onchange="changeForm(this);" class="selectpicker form-control" data-size="7" data-style="btn-Custom_2nd btn-round" title="Choose Action" tabindex="-98">
+                                                    <option class="bs-title-option" value=""></option>
+                                                    <option value="trfMoney">Fund Transfer</option>
+                                                    <option value="addBene">Add Beneficiary</option>
+                                                </select><button type="button" class="btn dropdown-toggle bs-placeholder btn-Custom_2nd btn-round" data-toggle="dropdown" role="button" data-id="getForm" title="Choose Action"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Choose Action</div></div> </div></button><div class="dropdown-menu " role="combobox"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner show"></ul></div></div>
+                                            </div>
+
+                                        </div>
 
 
-
-
-                                                    <div class="form-group">
-                                                        <input type="text" id="ifsc" class="form-control" name="ifsc" required="true" placeholder="IFSC Code">
-                                                    </div>
-
-
-                                                    <!--sender id-->
-                                                    <input type="hidden" value="" id="sID">
-                                                    <input type="hidden" value="" id="mobile">
-                                                    <input type="hidden" value="" id="mobile">
-
-                                                    <div class="form-group ">
-                                                        <div class="input-group">
-                                                            <button type="submit" id="AddBene" class="btn btn-primary btn-round col-md-12">Add Beneficiary →</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
-
+                                        <form id="trfMoney">
+                                            <div class="form-group">
+                                                <input type="number" id="accountNo" maxlength="10" name="accountNo" class="form-control" required="true" placeholder="Account Number" readonly="">
                                             </div>
 
 
 
-                                            <div id="right_side" class="col-md-8" style="display: none;">
-                                                <div class="row" style="border-bottom:1px solid #F2F2F2; padding-bottom: 5px;">
-                                                    <div class="col-md-7">
+                                            <div class="form-group">
+                                                <input type="text" id="bankName" class="form-control" name="bankName" required="true" placeholder="Bank Name" readonly="">
+                                            </div>
 
-                                                        <button class="btn btn-primary btn-sm" id="change_cust"><i class="fas fa-cogs"></i> Change Remitter</button>
-                                                        <script type="text/javascript">
-                                                            // calling swal
-                                                            $("#change_cust").click(function () {
-                                                                swal.fire({
-                                                                    title: 'Change Remitter?',
 
-                                                                    html:
-                                                                    '<div class="form-group">' +
-                                                                    '<button  class="btn btn-warning btn-sm"><a style="color: inherit;" href="Dmt/index.php">Yes >></a></button></div>',
-                                                                    showCloseButton: true,
-                                                                    //showCancelButton: true,
-                                                                    // customClass: 'getcust_swal',
-                                                                    showConfirmButton: false,
-                                                                    allowOutsideClick: false,
-                                                                    focusConfirm: false,
-                                                                    allowEscapeKey: false,
+                                            <div class="form-group">
+                                                <input type="text" id="benName" class="form-control" name="benName" required="true" placeholder="Accoount Holder" readonly="">
+                                            </div>
 
-                                                                })
-                                                            });
-                                                        </script><br>
-                                                        Hi,<span id="dsname"></span>
-                                                        <br>
-                                                        <span id="dsmobile"></span>
+                                            <div class="form-group">
+                                                <div class="dropdown bootstrap-select form-control">
+                                                    <select name="mode" id="mode" class="selectpicker form-control" data-size="7" data-style="btn-Custom_2nd btn-round" tabindex="-98">
+                                                        <option value="2" selected="">IMPS</option>
+                                                        <option value="1">NEFT</option>
+                                                    </select><button type="button" class="btn dropdown-toggle btn-Custom_2nd btn-round" data-toggle="dropdown" role="button" data-id="mode" title="IMPS"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">IMPS</div></div> </div></button><div class="dropdown-menu " role="combobox"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner show"></ul></div></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-row">
+
+                                                    <div class="col">
+                                                        <input type="password" id="amounT" class="form-control" name="amounT" required="true" placeholder="Amount">
                                                     </div>
 
-                                                    <div class="col-md-5 text-right">
-                                                        <font color="orange">Consumed Limit <i class="fa fa-inr" id="climit"></i></font><br>
-                                                        <font color="green">Remaining Limit <i class="fa fa-inr" id="rlimit"></i></font><br>
-                                                        Total Limit <i class="fa fa-inr" id="tlimit"></i>
+                                                    <div class="col">
+                                                        <input type="number" id="camounT" class="form-control" name="camounT" required="true" placeholder="Confirm">
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <!--sender id-->
+                                            <input type="hidden" id="sID">
+                                            <input type="hidden" id="benID">
+
+                                            <div class="form-group ">
+                                                <div class="input-group">
+                                                    <button type="submit" id="transferBtn" class="btn btn-primary btn-round col-md-12" disabled="disabled">Transfer <i class="fas fa-location-arrow"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+                                        <form id="addBene" style="display: none;">
+
+                                            <div class="form-group">
+                                                <input type="text" id="Name" class="form-control" name="Name" required="true" placeholder="Name">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <select id="lbanks" class="form-control" data-live-search="true" data-style="btn btn-Custom_2nd btn-round" data-size="5" onchange="setIfsc(this.value);">
+                                                    <option value="NO">Select Bank</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="number" id="account" maxlength="10" name="account" class="form-control" required="true" placeholder="Account Number">
+                                            </div>
+
+
+
+
+
+
+                                            <div class="form-group">
+                                                <input type="text" id="ifsc" class="form-control" name="ifsc" required="true" placeholder="IFSC Code">
+                                            </div>
+
+
+                                            <!--sender id-->
+                                            <input type="hidden" value="" id="sID">
+                                            <input type="hidden" value="" id="mobile">
+                                            <input type="hidden" value="" id="mobile">
+
+                                            <div class="form-group ">
+                                                <div class="input-group">
+                                                    <button type="submit" id="AddBene" class="btn btn-primary btn-round col-md-12">Add Beneficiary →</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+
+
+
+                                    <div id="right_side" class="col-md-8" style="display: none;">
+                                        <div class="row" style="border-bottom:1px solid #F2F2F2; padding-bottom: 5px;">
+                                            <div class="col-md-7">
+
+                                                <button class="btn btn-primary btn-sm" id="change_cust"><i class="fas fa-cogs"></i> Change Remitter</button>
+                                                <script type="text/javascript">
+                                                    // calling swal
+                                                    $("#change_cust").click(function () {
+                                                        swal.fire({
+                                                            title: 'Change Remitter?',
+
+                                                            html:
+                                                            '<div class="form-group">' +
+                                                            '<button  class="btn btn-warning btn-sm"><a style="color: inherit;" href="Dmt/index.php">Yes >></a></button></div>',
+                                                            showCloseButton: true,
+                                                            //showCancelButton: true,
+                                                            // customClass: 'getcust_swal',
+                                                            showConfirmButton: false,
+                                                            allowOutsideClick: false,
+                                                            focusConfirm: false,
+                                                            allowEscapeKey: false,
+
+                                                        })
+                                                    });
+                                                </script><br>
+                                                Hi,<span id="dsname"></span>
                                                 <br>
-                                                <div id="BenADD"></div>
+                                                <span id="dsmobile"></span>
+                                            </div>
 
+                                            <div class="col-md-5 text-right">
+                                                <font color="orange">Consumed Limit <i class="fa fa-inr" id="climit"></i></font><br>
+                                                <font color="green">Remaining Limit <i class="fa fa-inr" id="rlimit"></i></font><br>
+                                                Total Limit <i class="fa fa-inr" id="tlimit"></i>
                                             </div>
                                         </div>
-
-
-
+                                        <br>
+                                        <div id="BenADD"></div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 </div>
