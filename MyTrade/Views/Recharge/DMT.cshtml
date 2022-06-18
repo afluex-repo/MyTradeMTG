@@ -221,6 +221,16 @@
         transform: translateZ(999999px);
         display: none;
     }
+    /*#content {
+    position: relative;
+    width: 50%;
+    flex-grow: 8;
+    margin-top: 60px;
+    margin-bottom: 0;
+    margin-left: 212px;
+    transition: .600s;
+    background-color: white;
+}*/
     /*.overlay {
         display: none;
         position: fixed;
@@ -249,21 +259,31 @@
         background: url('../../ProfilePicture/untitled-5.gif') 50% 50% no-repeat rgb(249, 249, 249);
         opacity: .8;
     }*/
+    #content1
+    {
+        position: relative !important; 
+     width: 100% !important; 
+     flex-grow: 8 !important; 
+    margin-top: 100px !important;
+    margin-bottom: 0 !important;
+     margin-left: 230px !important; 
+    transition: .600s !important;
+    }
 </style>
 <div class="container">
     <div class="row layout-top-spacing">
         <div class="col-lg-12 col-12 layout-spacing">
-            <div class="statbox widget box box-shadow">
-                <div class="widget-content widget-content-area">
-                    <section class="how-it-works-area ptb-70" id="">
+            <div clas="statbox widget box box-shadow">
+                <div class="widget-content widget-content-are">
+                    <section class="how-it-works-area ptb-70">
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-md-12">
-                                <div class="card ">
-                                    <div class="card-header ">
+                                <div class="card" id="content1">
+                                    <div class="card-header">
                                         <h4 class="card-title">Domestic Money Transfer</h4>
                                     </div>
-                                    <div class="card-body ">
-                                        <div class="col-md-4" id="content">
+                                    <div class="card-body">
+                                        <div class="col-md-12" id="content">
                                             <form>
                                                 <div class="form-group">
                                                     <input type="number" id="number" maxlength="10" class="form-control" required="" onkeyup="keyGetSender(this);" name="number" placeholder="Mobile Number">
