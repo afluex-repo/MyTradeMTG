@@ -170,3 +170,4 @@ E:\Repository\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Web.Http.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
+E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

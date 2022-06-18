@@ -722,28 +722,28 @@ namespace MyTrade.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public ActionResult WalletBalance(Wallet model)
-        {
-            WalletBalanceAPI obj = new WalletBalanceAPI();
-            DataSet ds = model.GetWalletBalance();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                obj.Status = "0";
-                obj.Message = "Record Found";
-                obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
-            }
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-            {
-                obj.KYCStatus = ds.Tables[1].Rows[0]["PanStatus"].ToString();
-            }
-            else
-            {
-                obj.Status = "1";
-                obj.Message = "No Record Found";
-            }
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public ActionResult WalletBalance(Wallet model)
+        //{
+        //    WalletBalanceAPI obj = new WalletBalanceAPI();
+        //    DataSet ds = model.GetWalletBalance();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //        obj.Status = "0";
+        //        obj.Message = "Record Found";
+        //        obj.Balance = ds.Tables[0].Rows[0]["amount"].ToString();
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+        //    {
+        //        obj.KYCStatus = ds.Tables[1].Rows[0]["PanStatus"].ToString();
+        //    }
+        //    else
+        //    {
+        //        obj.Status = "1";
+        //        obj.Message = "No Record Found";
+        //    }
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
         [HttpPost]
         public ActionResult WalletBalanceNew(Wallet model)
         {

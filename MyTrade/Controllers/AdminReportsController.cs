@@ -1160,11 +1160,14 @@ namespace MyTrade.Controllers
                 {
                     AdminReports obj = new AdminReports();
                     obj.LoginId = r["LoginId"].ToString();
-                    obj.CrAmount = r["CrAmount"].ToString();
-                    obj.DrAmount = r["DrAmount"].ToString();
-                    obj.TransactionType = r["TransactionFor"].ToString();
-                    obj.Narration = r["Narration"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.OrderNo = r["OrderNo"].ToString();
+                    obj.TransactionFor = r["TransactionFor"].ToString();
+                    obj.Remark = r["Msg"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ServerOrderId = r["ServerOrderId"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Provider = r["Provider"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;
@@ -1187,11 +1190,14 @@ namespace MyTrade.Controllers
                 {
                     AdminReports obj = new AdminReports();
                     obj.LoginId = r["LoginId"].ToString();
-                    obj.CrAmount = r["CrAmount"].ToString();
-                    obj.DrAmount = r["DrAmount"].ToString();
-                    obj.TransactionType = r["TransactionFor"].ToString();
-                    obj.Narration = r["Narration"].ToString();
+                    obj.Amount = r["Amount"].ToString();
+                    obj.OrderNo = r["OrderNo"].ToString();
+                    obj.TransactionFor = r["TransactionFor"].ToString();
+                    obj.Remark = r["Msg"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ServerOrderId = r["ServerOrderId"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Provider = r["Provider"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWalletLedger = lst;

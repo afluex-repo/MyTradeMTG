@@ -334,7 +334,7 @@ namespace MyTrade.Controllers
                     string json= JObject.Parse(response.Content).ToString();
                     JObject rss = JObject.Parse(json);
                     string rssTitle = (string)rss["response"]["status"];
-                    if (rssTitle == "FAILED")
+                    if (rssTitle == "REFUNDED")
                     {
                         model.Amount = Convert.ToDecimal(Amount);
                         model.OrderNo = OrderNo;
@@ -386,11 +386,14 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     UserRecharge obj = new UserRecharge();
-                    obj.CrAmount = r["CrAmount"].ToString();
-                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.Amount = Convert.ToDecimal(r["Amount"].ToString());
+                    obj.OrderNo = r["OrderNo"].ToString();
                     obj.TransactionFor = r["TransactionFor"].ToString();
-                    obj.Remarks = r["Narration"].ToString();
+                    obj.Remarks = r["Msg"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ServerOrderId = r["ServerOrderId"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Provider = r["Provider"].ToString();
                     lst.Add(obj);
                 }
                 model.lstrecharge = lst;
@@ -399,6 +402,10 @@ namespace MyTrade.Controllers
                 //ViewBag.Available = double.Parse(ds.Tables[0].Compute("sum(CrAmount)-sum(DrAmount)", "").ToString()).ToString("n2");
             }
             return View(model);
+        }
+        public ActionResult DMT()
+        {
+            return View();
         }
     }
 }
