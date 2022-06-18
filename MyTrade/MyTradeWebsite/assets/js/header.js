@@ -101,7 +101,7 @@ document.write(`
                             </ul>
 
                             <div class ="others-options">
-                                <a href="http://mytrade.co.in/Home/Login" class ="login-btn"><i class ="flaticon-user"></i> Log In</a>
+                                <a href="/Home/Login" class ="login-btn"><i class ="flaticon-user"></i> Log In</a>
                             </div>
                         </div>
                     </nav>

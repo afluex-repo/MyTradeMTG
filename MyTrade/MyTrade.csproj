@@ -871,6 +871,8 @@
     <Content Include="Views\Recharge\Recharge.cshtml" />
     <Content Include="Views\Admin\SponsorIncome.cshtml" />
     <Content Include="Views\User\SponsorIncomeForUser.cshtml" />
+    <Content Include="Views\Recharge\RechargeList.cshtml" />
+    <Content Include="Views\AdminReports\RechargeListForAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -905,7 +907,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53401/</IISUrl>
+          <IISUrl>http://localhost:53402/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -193,7 +193,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width:200px;
+        width: 200px;
         z-index: 10;
     }
 
@@ -208,6 +208,20 @@
         margin-left: -50px;
         margin-top: -100px;
         z-index: 2;
+    }
+
+    .loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 999999;
+        transform: translateZ(999999px);
+        display: none;
     }
     /*.overlay {
         display: none;
@@ -226,7 +240,7 @@
 
         body.loading .overlay {
             display: block;
-        }*/ 
+        }*/
     /*.pageloader {
         position: fixed;
         left: 0px;
@@ -249,6 +263,9 @@
                             <br />
                         </div>
                         <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-md-12">
+                                <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+                            </div>
                             <div class="col-lg-12 col-sm-12 col-md-12">
                                 <div class="card-billrecharge mb-5">
 
@@ -315,7 +332,7 @@
                                             <div id="divPrepaid">
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group">
-                                                        <input type="text" name="PrepaidNo" maxlength="10" id="PrepaidNo" , onkeypress = "return isNumberKey(event);",  class="form-control" required placeholder="Enter Your Mobile Number" onchange="return AutoFillOperator();" />
+                                                        <input type="text" name="PrepaidNo" maxlength="10" id="PrepaidNo" , onkeypress="return isNumberKey(event);" , class="form-control" required placeholder="Enter Your Mobile Number" onchange="return AutoFillOperator();" />
                                                     </div>
                                                 </div>
 
@@ -403,7 +420,7 @@
                                     </form>
                                 </div>
 
-                                @*<div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>*@
+                                <div class="tab-pane fade" id="data-card" role="tabpanel" aria-labelledby="contact-tab">data card</div>
 
                                 <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="profile-tab">
                                     <span class="sub-title">Broadband Recharge</span>
@@ -477,7 +494,7 @@
                                             </div>
 
                                             <div class="col-lg-12 col-md-12">
-                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder('Electricity');">Recharge</button>
+                                                <button type="button" class="btn btn-primary" onclick="return CreateOrder('ELC');">Recharge</button>
                                                 <div id="msgSubmit" class="h3 text-center hidden"></div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -644,7 +661,7 @@
     </div>
     <div class="loader">
         <center>
-            <img class="loading-image" src="~/ProfilePicture/untitled-5.gif" alt="loading.." >
+            <img class="loading-image" src="~/ProfilePicture/untitled-5.gif" alt="loading..">
         </center>
     </div>
 </div>
@@ -685,10 +702,10 @@
             url: '/Recharge/GetOperator',
             Type: "Get",
             DataType: "JSON",
-            beforeSend: function(){
+            beforeSend: function () {
                 $('.loader').show()
             },
-            complete: function(){
+            complete: function () {
                 $('.loader').hide();
             },
             success: function (data) {
@@ -791,8 +808,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 debugger
-                if (obj.success ==false)
-                {
+                if (obj.success == false) {
                     alert(obj.message);
                     $('#PrepaidNo').val('');
                 }
@@ -836,7 +852,7 @@
         });
     }
     function GetPlanDetails(str, name) {
-       
+
         debugger;
         $.ajax({
             url: '/Recharge/GetPlan',
@@ -934,38 +950,44 @@
             $('#PackageId').focus();
             return false;
         }
-        $.ajax({
-            url: '/Recharge/CreateOrder',
-            data: { Amount: $("#" + Type + "Amount").val(), MobileNo: $("#" + Type + "No").val(), Type: Type },
-            Type: "Get",
-            DataType: "JSON",
-            success: function (data) {
-                debugger;
-                if (data.Result == "Yes") {
-                    if (confirm("Are you sure you want to continue for recharge?")) {
-                        if (Type == "Prepaid" || Type == "DTH") {
-                            PrepaidandDTHRecharge(data.OrderNo, Type);
-                        }
-                        else if (Type == "Postpaid") {
-                            PostpaidRecharge(data.OrderNo, Type);
+        else {
+            $('.loader').show()
+            $.ajax({
+                url: '/Recharge/CreateOrder',
+                data: { Amount: $("#" + Type + "Amount").val(), MobileNo: $("#" + Type + "No").val(), Type: Type },
+                Type: "Get",
+                DataType: "JSON",
+                success: function (data) {
+                    debugger;
+                    if (data.Result == "Yes") {
+                        $('.loader').hide()
+                        if (confirm("Are you sure you want to continue for recharge?")) {
+                            $('.loader').show()
+                            if (Type == "Prepaid" || Type == "DTH") {
+                                PrepaidandDTHRecharge(data.OrderNo, Type);
+                            }
+                            else if (Type == "Postpaid") {
+                                PostpaidRecharge(data.OrderNo, Type);
+                            }
+                            else {
+                                UtilityPayments(data.OrderNo, Type);
+                            }
                         }
                         else {
-                            UtilityPayments(data.OrderNo, Type);
+                            $('.loader').hide()
+                            return false;
                         }
                     }
-                    else {
-                        return false;
+                    else if (data.Result == "No") {
+                        alert(data.Message);
+
                     }
+                },
+                error: function () {
+                    alert("Error");
                 }
-                else if (data.Result == "No") {
-                    alert(data.Message);
-                
-                }
-            },
-            error: function () {
-                alert("Error");
-            }
-        });
+            });
+        }
     }
     function PrepaidandDTHRecharge(OrderNo, Type) {
         debugger;

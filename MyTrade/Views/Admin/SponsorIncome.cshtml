@@ -75,6 +75,8 @@
                                         <th>Percentage</th>
                                         @*<th>Level</th>
                                             <th>Transaction Date</th>*@
+                                        <th>Status</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,12 +97,26 @@
                                                     <td>@Item.Percentage %</td>
                                                     @*<td>@Item.Level</td>
                                                         <td>@Item.TransactionDate</td>*@
+                                                    <td>@Item.Status</td>
+                                                    <td>@Item.Date</td>
                                                 </tr>
                                                 i++;
                                             }
                                         }
                                     }
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Total</th>
+                                        <th>@ViewBag.BusinessAmount</th>
+                                        <th>@ViewBag.Amount</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

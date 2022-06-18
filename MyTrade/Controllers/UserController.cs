@@ -1708,6 +1708,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
@@ -1717,7 +1719,7 @@ namespace MyTrade.Controllers
         public ActionResult SponsorIncomeForUser(UserReports model)
         {
             List<UserReports> lst = new List<UserReports>();
-            model.Pk_UserId = Session["Pk_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
             model.LoginId = model.LoginId == "" ? null : model.LoginId;
             model.Name = model.Name == "" ? null : model.Name;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
@@ -1743,6 +1745,8 @@ namespace MyTrade.Controllers
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }
