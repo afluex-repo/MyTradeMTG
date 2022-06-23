@@ -2767,9 +2767,13 @@ namespace MyTrade.Controllers
                     obj.Amount = r["Amount"].ToString();
                     //obj.Level = r["Lvl"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.Date = r["TransactionDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSponsor = lst;
+                ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
+                ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
             }
             return View(model);
         }

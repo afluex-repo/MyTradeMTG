@@ -37,6 +37,23 @@ namespace MyTrade.Models
         public string Opt8 { get; set; }
         public string Opt9 { get; set; }
         public string Opt10 { get; set; }
+        public List<UserRecharge> lstrecharge { get; set; }
+        public string CrAmount { get; set; }
+        public string DrAmount { get; set; }
+        public string TransactionDate { get; set; }
+        public string Remarks { get; set; }
+        public string LoginId { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public DataSet GetRechargeList()
+        {
+            SqlParameter[] para =
+            {
+               new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRechargeList", para);
+            return ds;
+        }
         public DataSet GetWalletBalance()
         {
             SqlParameter[] para = { new SqlParameter("@PK_USerID", FK_UserId)
@@ -105,6 +122,7 @@ namespace MyTrade.Models
     }
     public class BillPayment
     {
+        public string FK_UserId { get; set; }
         public string Name { get; set; }
         public string Id { get; set; }
         public List<BillPayment> lst { get; set; }
@@ -112,6 +130,16 @@ namespace MyTrade.Models
         {
             DataSet ds = DBHelper.ExecuteQuery("GetBillPaymentMaster");
             return ds;
+        }
+        public DataSet GetWalletBalance()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_USerID", FK_UserId)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletBalance", para);
+
+            return ds;
+
         }
     }
     public class UserRechargeAPI

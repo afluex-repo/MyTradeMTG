@@ -31,6 +31,14 @@ namespace MyTrade.Controllers
                 }
                 model.lst = lst;
             }
+            #region Check Balance
+            model.FK_UserId = Session["Pk_UserId"].ToString();
+            DataSet dsbalance = model.GetWalletBalance();
+            if (dsbalance != null && dsbalance.Tables.Count > 0 && dsbalance.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = dsbalance.Tables[0].Rows[0]["amount"].ToString();
+            }
+            #endregion
             return View(model);
         }
         public ActionResult GetOperator()
@@ -326,7 +334,7 @@ namespace MyTrade.Controllers
                     string json= JObject.Parse(response.Content).ToString();
                     JObject rss = JObject.Parse(json);
                     string rssTitle = (string)rss["response"]["status"];
-                    if (rssTitle == "FAILED")
+                    if (rssTitle == "REFUNDED")
                     {
                         model.Amount = Convert.ToDecimal(Amount);
                         model.OrderNo = OrderNo;
@@ -363,6 +371,40 @@ namespace MyTrade.Controllers
                     }
                    }
                 }
+            return View();
+        }
+        public ActionResult RechargeList(UserRecharge model)
+        {
+          
+            List<UserRecharge> lst = new List<UserRecharge>();
+            model.LoginId = Session["LoginId"].ToString();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetRechargeList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    UserRecharge obj = new UserRecharge();
+                    obj.Amount = Convert.ToDecimal(r["Amount"].ToString());
+                    obj.OrderNo = r["OrderNo"].ToString();
+                    obj.TransactionFor = r["TransactionFor"].ToString();
+                    obj.Remarks = r["Msg"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.ServerOrderId = r["ServerOrderId"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Provider = r["Provider"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstrecharge = lst;
+                //ViewBag.TotalCrAmount = double.Parse(ds.Tables[0].Compute("sum(CrAmount)", "").ToString()).ToString("n2");
+                //ViewBag.TotalDrAmount = double.Parse(ds.Tables[0].Compute("sum(DrAmount)", "").ToString()).ToString("n2");
+                //ViewBag.Available = double.Parse(ds.Tables[0].Compute("sum(CrAmount)-sum(DrAmount)", "").ToString()).ToString("n2");
+            }
+            return View(model);
+        }
+        public ActionResult DMT()
+        {
             return View();
         }
     }

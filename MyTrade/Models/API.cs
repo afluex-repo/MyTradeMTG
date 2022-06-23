@@ -161,6 +161,22 @@ namespace MyTrade.Models
             return ds;
         }
     }
+    public class ActivateUser
+    {
+        public string ePinNo { get; set; }
+        public string LoginId { get; set; }
+        public DataSet ActivateUserByPin()
+        {
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@EPinNo", ePinNo)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("ActivateUserMobile", para);
+
+            return ds;
+        }
+    }
     public class EpinDetails1
     {
         public string Status { get; set; }
@@ -338,6 +354,8 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public List<Package> lst { get; set; }
         public List<Level> lstLevel { get; set; }
+        public string ToplistStatus { get; set; }
+        public string Reason {get;set;}
         public DataSet PackageListAll()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForMobile");
@@ -799,22 +817,7 @@ namespace MyTrade.Models
             return ds;
         }
     }
-    public class ActivateUser
-    {
-        public string ePinNo { get; set; }
-        public string LoginId { get; set; }
-        public DataSet ActivateUserByPin()
-        {
-            SqlParameter[] para = {
-
-                                      new SqlParameter("@LoginId", LoginId),
-                                      new SqlParameter("@EPinNo", ePinNo)
-                                  };
-            DataSet ds = DBHelper.ExecuteQuery("ActivateUserMobile", para);
-
-            return ds;
-        }
-    }
+ 
 
     public class Reward
     {
@@ -1294,6 +1297,8 @@ namespace MyTrade.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
+        public string PayoutsPagestatus { get; set; }
+        public string Reason { get; set; }
         public List<PayoutDetailsForAPI> lst { get; set; }
     }
     public class Level
@@ -1464,6 +1469,8 @@ namespace MyTrade.Models
     {
         public string Status { get; set; }
         public string Message { get; set; }
+        public string TotalBusinessAmount { get; set; }
+        public string TotalAmount { get; set; }
         public List<SponsorIncomeReportResponse> lstSponsorIncome { get; set; }
     }
     public class SponsorIncomeReportResponse
@@ -1473,7 +1480,10 @@ namespace MyTrade.Models
         public string ToName { get; set; }
         public string FromName { get; set; }
         public string BusinessAmount { get; set; }
+        public string FromLoginId { get; set; }
+        public string ToLoginID { get; set; }
         public string Amount { get; set; }
         public string CommissionPercentage { get; set; }
+       
     }
 }
