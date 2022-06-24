@@ -1486,4 +1486,5 @@ namespace MyTrade.Models
         public string CommissionPercentage { get; set; }
        
     }
+    
 }
