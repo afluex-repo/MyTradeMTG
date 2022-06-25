@@ -16,6 +16,9 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Domestic Money Transfer</h4>
+                                <span class="text-danger">
+                                    @TempData["msg"]
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -107,7 +110,7 @@
 
                                     <div class="form-group " id="trac6">
                                         <div class="input-group">
-                                            <button type="submit" id="transferBtn" class="btn btn-primary btn-round col-md-12" disabled="disabled">Transfer <i class="fas fa-location-arrow"></i></button>
+                                            <button type="submit" id="transferBtn" class="btn btn-primary btn-round col-md-12" onclick="return transfer();" disabled="disabled">Transfer <i class="fas fa-location-arrow"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -227,80 +230,92 @@
             success: function (data) {
                 debugger
                 var obj = JSON.parse(data);
-                //alert(obj.success);
-                var bol = obj.success;
-                var name = obj.name;
-                var sId = obj.sender_id;
-                var cL = +obj.consumed_limit;
-                var limiT = +obj.limit;
-                var mobile = obj.mobile;
-                var isVerify = obj.is_verified;
-                var accounts = obj.beneficiary;
-                var message = obj.message;
-
-                //set cum limit
-                $("#climit").text(cL);
-                //t limit
-
-                $("#tlimit").text(+cL + limiT);
-                //remaning limit
-                $("#rlimit").text(+limiT);
-                //name
-                $("#dsname").text(name);
-                //mobile no
-                $("#dsmobile").text(mobile);
-
-                //verify sender
-                if (bol == true & message == "OTP sent successfully") {
-
-                    verifySender(sId, mobile, "NO");
-
-                } else if (bol == true) {
-                    //set to form
-                    $("#BenADD").empty();
-                    $("#sID").val(sId);
-                    $("#mobile").val(mobile);
-                    //on success
-
-                    $("#sender").hide();
-                    $("#left_side,#right_side").show();
-                    $.each(accounts, function (index, value) {
-                        //fetch beneficicarys
-                        var bId = value["beneficiary_id"];
-                        var sttS = value["status"];
-                        var repName = value["recipient_name"];
-                        var bank = value["bank"];
-                        var acc = value["account"];
-                        var ifsc = value["ifsc"];
-                        var mob = value["mobile"];
-                        //alert(repName);
-                        var elementz = btoa(bId + "#" + sttS + "#" + bank + "#" + acc + "#" + ifsc + "#" + mobile + "#" + repName + "#" + sId);
-                        //for reverify
-                        if (sttS == 0) {
-                            var trFbtn = "<div class='col-md-5 text-right'><button class='btn btn-warning btn-sm'  disabled>Reverify Account</button> <button class='btn btn-danger btn-sm' id=" + bId + "del onclick='delBen(" + sId + "," + bId + ")'><i class='fa fa-trash'></i></button><div id=" + bId + "otp style='display:none'></div></div></div>";
-                        } else {
-                            //<button class='btn btn-danger btn-sm' id=" + bId + "del onclick='delBen(" + sId + "," + bId + ")'><i class='fa fa-trash'></i></button>
-                            var trFbtn = "<div class='col-md-5 text-right'><button class='btn btn-primary btn-sm'  onclick=trfD('" + elementz + "')>Transfer <i class='fas fa-location-arrow'></i></button> <div id=" + bId + "otp style='display:none'><input type='number' id=" + bId + "otpb class='form-control' name=" + bId + "otpb max-length='6'  placeholder='Enter OTP' onkeyup='confDel(" + sId + "," + bId + ",this.value)'/><button type='submit' id=" + bId + "Resend onclick='resend(" + sId + "," + bId + ")' class='btn btn-info btn-sm'>Resend &rightarrow;</button></div></div></div>";
-
-                        }
-                        if (bId != null)
-                        {
-                            $("#getForm").hide("addBene");
-                            //$("").val('addBene').style.display = "none";
-                        }
-
-                        $("#BenADD").append("<div class='col-md-12' id=" + bId + " style='border-bottom:1px solid #F2F2F2; padding: 5px 0;'><div class='row'><div class='col-md-6 text-left'><b>" + repName + "</b><br />" +
-                           "<small>Bank Name:" + bank + "</small><br />" +
-                           "<small>A/C:" + acc + "</small><br />" +
-                           "<small>IFSC:" + ifsc + "</small></div>" + trFbtn);
-                    });
-                }
-              
-                else if (bol == false) {
-                    //on error/not found create sender
+                if (obj == "1") {
+                    alert('Mobile Number Already Registred .. Please Try Another !!')
                     $("#GetSnd,#number").attr('disabled', false);
-                    $("#GetSnd").html(fetched);
-                    createSender("NO");
+                    $("#number").val('');
+                    $("#number").focus();
+                    $(".SenderSurname,.SenderName,.createNewSender").show(1000);
+                }
+                else {
+                    //alert(obj.success);
+                    var bol = obj.success;
+                    var name = obj.name;
+                    var sId = obj.sender_id;
+                    var cL = +obj.consumed_limit;
+                    var limiT = +obj.limit;
+                    var mobile = obj.mobile;
+                    var isVerify = obj.is_verified;
+                    var accounts = obj.beneficiary;
+                    var message = obj.message;
+
+                    //set cum limit
+                    $("#climit").text(cL);
+                    //t limit
+
+                    $("#tlimit").text(+cL + limiT);
+                    //remaning limit
+                    $("#rlimit").text(+limiT);
+                    //name
+                    $("#dsname").text(name);
+                    //mobile no
+                    $("#dsmobile").text(mobile);
+
+                    //verify sender
+                    if (bol == true & message == "OTP sent successfully") {
+
+                        verifySender(sId, mobile, "NO");
+
+                    } else if (bol == true) {
+                        //set to form
+                        $("#BenADD").empty();
+                        $("#sID").val(sId);
+                        $("#mobile").val(mobile);
+                        //on success
+
+                        $("#sender").hide();
+                        $("#left_side,#right_side").show();
+                        $.each(accounts, function (index, value) {
+                            //fetch beneficicarys
+                            var bId = value["beneficiary_id"];
+                            var sttS = value["status"];
+                            var repName = value["recipient_name"];
+                            var bank = value["bank"];
+                            var acc = value["account"];
+                            var ifsc = value["ifsc"];
+                            var mob = value["mobile"];
+                            //alert(repName);
+                            var elementz = btoa(bId + "#" + sttS + "#" + bank + "#" + acc + "#" + ifsc + "#" + mobile + "#" + repName + "#" + sId);
+                            //for reverify
+                            if (sttS == 0) {
+                                var trFbtn = "<div class='col-md-5 text-right'><button class='btn btn-warning btn-sm'  disabled>Reverify Account</button> <button class='btn btn-danger btn-sm' id=" + bId + "del onclick='delBen(" + sId + "," + bId + ")'><i class='fa fa-trash'></i></button><div id=" + bId + "otp style='display:none'></div></div></div>";
+                            } else {
+                                //<button class='btn btn-danger btn-sm' id=" + bId + "del onclick='delBen(" + sId + "," + bId + ")'><i class='fa fa-trash'></i></button>
+                                var trFbtn = "<div class='col-md-5 text-right'><button class='btn btn-primary btn-sm'  onclick=trfD('" + elementz + "')>Transfer <i class='fas fa-location-arrow'></i></button> <div id=" + bId + "otp style='display:none'><input type='number' id=" + bId + "otpb class='form-control' name=" + bId + "otpb max-length='6'  placeholder='Enter OTP' onkeyup='confDel(" + sId + "," + bId + ",this.value)'/><button type='submit' id=" + bId + "Resend onclick='resend(" + sId + "," + bId + ")' class='btn btn-info btn-sm'>Resend &rightarrow;</button></div></div></div>";
+
+                            }
+                            if (bId != null) {
+                                $("#getForm").hide("addBene");
+                                $("#benName").val(repName);
+                                $("#bankName").val(bank);
+                                $("#accountNo").val(acc);
+                                $("#benID").val(bId);
+                                //$("").val('addBene').style.display = "none";
+                            }
+
+                            $("#BenADD").append("<div class='col-md-12' id=" + bId + " style='border-bottom:1px solid #F2F2F2; padding: 5px 0;'><div class='row'><div class='col-md-6 text-left'><b>" + repName + "</b><br />" +
+                               "<small>Bank Name:" + bank + "</small><br />" +
+                               "<small>A/C:" + acc + "</small><br />" +
+                               "<small>IFSC:" + ifsc + "</small></div>" + trFbtn);
+                        });
+                    }
+
+                    else if (bol == false) {
+                        //on error/not found create sender
+                        $("#GetSnd,#number").attr('disabled', false);
+                        $("#GetSnd").html(fetched);
+                        createSender("NO");
+                    }
                 }
             },
             error: function (e) {
@@ -334,7 +349,7 @@
                     var obj = JSON.parse(data);
                     var verfy = obj.is_verified;
                     var msg = obj.message;
-                    if (obj.success== true) {
+                    if (obj.success == true) {
                         //push to
                         GetSender(userMob);
                         //alert(msg);
@@ -364,7 +379,7 @@
             var surname = encodeURIComponent($("#SenderSurname").val());
             var name = encodeURIComponent($("#SenderName").val());
             var userMob = $("#number").val();
-           // var csnd = "api_token=" + tkn + "&mobile=" + userMob + "&name=" + name + "&surname=" + surname;
+            // var csnd = "api_token=" + tkn + "&mobile=" + userMob + "&name=" + name + "&surname=" + surname;
             $("#createNewSender").html(wait);
             $("#createNewSender").attr('disabled', true);
             //alert(csnd);
@@ -431,7 +446,7 @@
 
         })
     });
- 
+
     //check confirm amount
     $("#camounT,#amounT").keyup(function () {
         amt = $("#amounT").val();
@@ -454,7 +469,8 @@
     //end camt
 
     //transfer money
-    $j("#trfMoney").submit(function () {
+    function transfer() {
+        debugger
         var sid = $("#sID").val();
         var bid = $("#benID").val();
         var acNo = $("#accountNo").val();
@@ -477,7 +493,7 @@
         });
 
         $.ajax({
-            url: '../../app_v2/Dmt/transfer.php',
+            url: '/Recharge/TransferAmount',
             method: 'POST',
             dataType: "json",
             data: {
@@ -492,12 +508,14 @@
                 source: way
             },
             success: function (getResp) {
-                var success = getResp['success'];
-                var message = getResp['response']['message'];
-                var status = getResp['response']['status'];
-                var order_id = getResp['response']['order_id'];
-                var utr = getResp['response']['utr'];
-                var amount = getResp['response']['amount'];
+                debugger
+                var obj = JSON.parse(getResp);
+                var success = obj.success;
+                var message = obj.response.message;
+                var status = obj.response.status;
+                var order_id = obj.response.order_id;
+                var utr = obj.response.utr;
+                var amount = obj.response.amount;
                 //alert(success);
 
                 if (success == true) {
@@ -511,7 +529,7 @@
 '<tr><td><b>Amount</b> </td><td> <i class="fas fa-rupee-sign"></i>' + amount + '</td></tr>' +
 '</tbody></table></div>' +
 '<div class="row"> <br />' +
-' &nbsp; <a href="Dmt/index.php" style="color:#ffffff;" class="btn btn-default btn-sm">Close X</a>' +
+' &nbsp; <a href="/Recharge/DMT" style="color:#ffffff;" class="btn btn-default btn-sm">Close X</a>' +
 '</div></div>');
                 } else {
 
@@ -532,7 +550,7 @@
 
         return false;
 
-    });
+    };
     //end transfer
     //add beneficiary
     $("#addBene").submit(function () {
@@ -588,6 +606,7 @@
     });
 
     function trfD(v) {
+        debugger
         changeForm('trfMoney');
         var data = atob(v);
         var vals = data.split("#");
@@ -739,12 +758,12 @@
             $("#" + val.value).show(1000);
         } else {
             $("#addBene").hide();
-            $("#trac1").hide();
-            $("#trac2").hide();
-            $("#trac3").hide();
-            $("#trac4").hide();
-            $("#trac5").hide();
-            $("#trac6").hide();
+            $("#trac1").show();
+            $("#trac2").show();
+            $("#trac3").show();
+            $("#trac4").show();
+            $("#trac5").show();
+            $("#trac6").show();
             $("#" + val).show(1000);
             $("#getForm").val();
         }

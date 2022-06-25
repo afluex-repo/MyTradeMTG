@@ -184,6 +184,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3" style="display:none" id="divisjoinpackage">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label">Is Combo Package</label>
+                                    <div class="col-sm-6">
+                                        <input type="checkbox" id="Iscombo" class="form-control" style= "width:16px;"/>
+                                        <input type="hidden" value="@Model.IscomboPackage" id="IscomboPackage"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
@@ -298,7 +307,24 @@
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
+            $("#divisjoinpackage").show();
             $("#divsponsorpercent").hide();
+            var ComboPackage = $("#IscomboPackage").val();
+            debugger
+            if (ComboPackage == "Yes") {
+                $("#Iscombo").prop("checked", true);
+                $("#divpercent").show();
+                $("#divbasis").show();
+                $("#divdays").show();
+                $("#divsponsorpercent").show();
+            }
+            else {
+                $("#Iscombo").prop("checked", false);
+                $("#divpercent").hide();
+                $("#divbasis").hide();
+                $("#divdays").hide();
+                $("#divsponsorpercent").hide();
+            }
         }
         else {
             $("#divfromamount").hide();
@@ -310,6 +336,7 @@
             $("#divpercent").hide();
             $("#divbasis").hide();
             $("#divdays").hide();
+            $("#divisjoinpackage").hide();
             $("#divsponsorpercent").hide();
         }
     });
@@ -436,6 +463,7 @@
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
+            $("#divisjoinpackage").show();
             $("#divsponsorpercent").hide();
         }
         else {
@@ -448,6 +476,7 @@
             $("#divpercent").hide();
             $("#divbasis").hide();
             $("#divdays").hide();
+            $("#divisjoinpackage").hide();
             $("#divsponsorpercent").hide();
         }
     }
@@ -460,8 +489,35 @@
 
         return true;
     }
+    const Combopackage = document.getElementById('Iscombo')
+    Combopackage.addEventListener('change', (event) => {
+        if (event.currentTarget.checked) {
+            $("#divpercent").show();
+            $("#divbasis").show();
+            $("#divdays").show();
+            $("#divsponsorpercent").show();
+        } else {
+           $('#ROIPercent').val(0)
+           $('#Days').val(0)
+           $('#SponsorIncome').val(0)
+            $("#divpercent").hide();
+            $("#divbasis").hide();
+            $("#divdays").hide();
+            $("#divsponsorpercent").hide();
+
+        }
+    })
     function saveProduct() {
+        debugger
         $(".errortext").removeClass("errortext");
+        var IscomboPackage = 0;
+        if ($("#Iscombo").is(":checked") == true)
+        {
+            IscomboPackage = "1";
+        }
+        else {
+            IscomboPackage = "0";
+        }
         if ($('#PackageTypeId').val() == '0') {
             $("#PackageTypeId").addClass('errortext');
             $('#PackageTypeId').focus();
@@ -541,12 +597,30 @@
                 $('#FinalAmount').focus();
                 return false;
             }
+            if(IscomboPackage=="1")
+            {
+                if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
+                    $("#ROIPercent").addClass('errortext');
+                    $('#ROIPercent').focus();
+                    return false;
+                }
+                if ($('#Days').val() == '') {
+                    $("#Days").addClass('errortext');
+                    $('#Days').focus();
+                    return false;
+                }
+                if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+                    $("#SponsorIncome").addClass('errortext');
+                    $('#SponsorIncome').focus();
+                    return false;
+                }
+            }
         }
         $.ajax({
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val() },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -558,6 +632,30 @@
 
     function updateProduct() {
         $(".errortext").removeClass("errortext");
+        var IscomboPackage = 0;
+        if ($("#Iscombo").is(":checked") == true) {
+            IscomboPackage = "1";
+        }
+        else {
+            IscomboPackage = "0";
+        }
+        if (IscomboPackage == "1") {
+            if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
+                $("#ROIPercent").addClass('errortext');
+                $('#ROIPercent').focus();
+                return false;
+            }
+            if ($('#Days').val() == '') {
+                $("#Days").addClass('errortext');
+                $('#Days').focus();
+                return false;
+            }
+            if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
+                return false;
+            }
+        }
         if ($('#PackageTypeId').val() == '0') {
             $("#PackageTypeId").addClass('errortext');
             $('#PackageTypeId').focus();
@@ -629,7 +727,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val() },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
