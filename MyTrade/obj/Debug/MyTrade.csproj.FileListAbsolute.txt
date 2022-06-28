@@ -170,7 +170,6 @@ E:\Repository\MyTrade\MyTrade\bin\Newtonsoft.Json.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Net.Http.Formatting.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Web.Http.xml
 E:\Repository\MyTrade\MyTrade\bin\System.Web.Http.WebHost.xml
-E:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\Repository-Projects\repository\MyTrade\MyTrade\bin\ApplicationInsights.config
 E:\Repository-Projects\repository\MyTrade\MyTrade\bin\roslyn\csc.exe
 E:\Repository-Projects\repository\MyTrade\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -228,4 +227,4 @@ E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.R
 E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
-E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

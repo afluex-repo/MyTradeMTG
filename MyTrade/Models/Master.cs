@@ -35,6 +35,7 @@ namespace MyTrade.Models
         public decimal InMultipleOf { get; set; }
         public string HSNCode { get; set; }
         public decimal FinalAmount { get; set; }
+        public string IscomboPackage { get; set; }
         public decimal SponsorIncome { get; set; }
 
         #region ProductMaster
@@ -58,7 +59,8 @@ namespace MyTrade.Models
                                      new SqlParameter("@InMultipleOf", InMultipleOf),
                                       new SqlParameter("@HSNCode", HSNCode),
                                  new SqlParameter("@FinalAmount",FinalAmount),
-                                 new SqlParameter("@SponsorIncome",SponsorIncome)
+                                 new SqlParameter("@SponsorIncome",SponsorIncome),
+                                 new SqlParameter("@IscomboPackage",IscomboPackage)
             };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
@@ -111,7 +113,8 @@ namespace MyTrade.Models
                                  new SqlParameter("@InMultipleOf", InMultipleOf),
                                  new SqlParameter("@HSNCode", HSNCode),
                                  new SqlParameter("@FinalAmount",FinalAmount),
-                                 new SqlParameter("@SponsorIncome",SponsorIncome)
+                                 new SqlParameter("@SponsorIncome",SponsorIncome),
+                                  new SqlParameter("@IscomboPackage",IscomboPackage),
             };
 
             DataSet ds = DBHelper.ExecuteQuery("UpdateProduct", para);

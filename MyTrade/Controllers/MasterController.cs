@@ -75,6 +75,7 @@ namespace MyTrade.Controllers
                 {
                     Master obj = new Master();
                     obj.Packageid = r["Pk_ProductId"].ToString();
+                    obj.IscomboPackage = r["IsComboPackage"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
                     obj.ProductPrice = Convert.ToDecimal(r["ProductPrice"]);
                     obj.IGST = Convert.ToDecimal(r["IGST"]);
@@ -241,7 +242,7 @@ namespace MyTrade.Controllers
                     DataSet ds = obj.ProductList();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
-
+                        obj.IscomboPackage = ds.Tables[0].Rows[0]["IscomboPackage"].ToString();
                         obj.PackageTypeId = ds.Tables[0].Rows[0]["PackageTypeId"].ToString();
                         obj.Packageid = ds.Tables[0].Rows[0]["Pk_ProductId"].ToString();
                         obj.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
@@ -276,7 +277,7 @@ namespace MyTrade.Controllers
             return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage)
         {
             Master obj = new Master();
             try
@@ -295,6 +296,7 @@ namespace MyTrade.Controllers
                 obj.ToAmount = Convert.ToDecimal(ToAmount);
                 obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 obj.SponsorIncome = Convert.ToDecimal(SponsorIncome);
+                obj.IscomboPackage = IscomboPackage;
                 DataSet ds = obj.SaveProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -315,7 +317,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount,string SponsorIncome)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount,string SponsorIncome, string IscomboPackage)
         {
             Master obj = new Master();
             try
@@ -339,6 +341,7 @@ namespace MyTrade.Controllers
                 obj.FromAmount = Convert.ToDecimal(FromAmount);
                 obj.ToAmount = Convert.ToDecimal(ToAmount);
                 obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
+                obj.IscomboPackage = IscomboPackage;
                 DataSet ds = obj.UpdateProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

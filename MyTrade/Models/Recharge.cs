@@ -45,6 +45,8 @@ namespace MyTrade.Models
         public string LoginId { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+        public int Mobile { get; set; }
+        
         public DataSet GetRechargeList()
         {
             SqlParameter[] para =
@@ -119,6 +121,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateFailedPaymentBill", para);
             return ds;
         }
+    
     }
     public class BillPayment
     {
@@ -148,5 +151,91 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string OrderNo { get; set; }
     }
+    public class CreateSenderDMT
+    {
+        public string success { get; set; }
+        public string FK_UserId { get; set; }
+        public string status { get; set; }
+        public string Message { get; set; }
+        public string is_verified { get; set; }
+        public string sender_id { get; set; }
+        public string Status { get; set; }
+        public string Result { get; set; }
+        public string mobile { get; set; }
+        public string Amount { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string HolderName { get; set; }
+        public string AccountNumber { get; set; }
+        public string beneficiaryid { get; set; }
+        public string channel { get; set; }
+        public string order_id { get; set; }
+        public string kwikpin { get; set; }
+        public string source { get; set; }
+        public string IFSC { get; set; }
+        public string TransactionDate { get; set; }
+        public DataSet SaveSenderDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+                 new SqlParameter("@mobile", mobile),
+                new SqlParameter("@name", name),
+                new SqlParameter("@surname", surname),
+                new SqlParameter("@Status", Status),
+                new SqlParameter("@Message", Message),
+                new SqlParameter("@sender_id", sender_id),
+                 new SqlParameter("@is_verified", is_verified),
 
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveSenderDetails", para);
+            return ds;
+        }
+        public DataSet VerifyOTP()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+                new SqlParameter("@sender_id", sender_id),
+                 new SqlParameter("@is_verified", is_verified),
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("VerifyOTP", para);
+            return ds;
+        }
+        public DataSet SaveBeneficiary()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+                 new SqlParameter("@HolderName", HolderName),
+                new SqlParameter("@AccountNumber", AccountNumber),
+                new SqlParameter("@IFSC", IFSC),
+                new SqlParameter("@sender_id", sender_id),
+                 new SqlParameter("@beneficiaryid", beneficiaryid)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveBeneficiary", para);
+            return ds;
+        }
+        public DataSet GetUserRecord()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+                new SqlParameter("@mobile", mobile)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("Getsenderdetails", para);
+            return ds;
+        }
+        public DataSet SaveDMTTransaction()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", FK_UserId),
+                 new SqlParameter("@Amount", Amount),
+                new SqlParameter("@AccountNumber", AccountNumber),
+                new SqlParameter("@Status", Status),
+                new SqlParameter("@BeneficiaryId", beneficiaryid),
+                new SqlParameter("@sender_id", sender_id),
+                new SqlParameter("@TransactionDate", TransactionDate),
+                new SqlParameter("@Message", Message),
+                new SqlParameter("@@Orderid", order_id)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveTransactionDetails", para);
+            return ds;
+        }
+    }
 }
