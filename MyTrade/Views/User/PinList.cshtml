@@ -305,15 +305,9 @@
         $("#ePinNo").val(ePinNo);
         $("#myModal").modal('show');
     }
-
-    function closeModal() {
-        jQuery.noConflict();
-        $("#myModal").hide();
-        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
-    }
-
     function ActivatePin() {
         jQuery.noConflict();
+        debugger
         $(".errortext").removeClass("errortext");
 
         if ($('#Login_Id').val() == '') {
@@ -343,6 +337,13 @@
             });
         }
     }
+    function closeModal() {
+        jQuery.noConflict();
+        $("#myModal").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
+   
 
     //function getpaymentTypedetails() {
     //    debugger;

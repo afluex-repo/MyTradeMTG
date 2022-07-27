@@ -101,6 +101,24 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPlotBookingForAssociate", para);
             return ds;
         }
+        public DataSet RewardList()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@Fk_RewardId", RewardID),
+                                        new SqlParameter("@FK_UserId", UserID)};
+            DataSet ds = DBHelper.ExecuteQuery("_GetRewardData", para);
+            return ds;
+        }
+        public DataSet ClaimReward()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@Fk_RewardItemId", PK_RewardItemId),
+                                        new SqlParameter("@FK_UserId", Fk_UserId),
+                                        new SqlParameter("@Status", Status),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ClaimReward", para);
+            return ds;
+        }
         public DataSet GetDownlineDetails()
         {
             SqlParameter[] para = {
