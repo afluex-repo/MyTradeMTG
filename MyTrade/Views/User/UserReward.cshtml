@@ -30,7 +30,7 @@
                                         <th>Reward</th>
                                         <th>Status</th>
                                         <th>Qualify Date</th>
-                                        <th>Action</th>
+                                        @*<th>Action</th>*@
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,13 +49,13 @@
                                                     </td>
                                                     <td><label class="@Item.Contact">@Item.Status</label></td>
                                                     <td>@Item.QualifyDate</td>
-                                                    <td>
+                                                    @*<td>
                                                         @if (Item.Status == "Achieved")
                                                         {
                                                             <a class="btn btn-info btn-sm" href="/User/ClaimReward/@Item.PK_RewardItemId" onclick="return confirm('Are you sure you wish to claim this Award?');">Claim</a>
                                                             <a class="btn btn-warning btn-sm" href="/User/SkipReward/@Item.PK_RewardItemId" onclick="return confirm('Are you sure you wish to Skip this Award?');">Skip</a>
                                                         }
-                                                    </td>
+                                                    </td>*@
                                                 </tr>
                                                 i++;
                                             }
