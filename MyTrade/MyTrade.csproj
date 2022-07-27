@@ -874,6 +874,7 @@
     <Content Include="Views\Recharge\RechargeList.cshtml" />
     <Content Include="Views\AdminReports\RechargeListForAdmin.cshtml" />
     <Content Include="Views\Recharge\DMT.cshtml" />
+    <Content Include="Views\AdminReports\ClaimRewardReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

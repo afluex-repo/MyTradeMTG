@@ -1204,5 +1204,33 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        
+        #region ClaimRewardReport
+        public ActionResult ClaimRewardReport(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.ClaimRewardReport();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.RewardAchieverID = r["PK_RewardAchieverId"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.AssociateName = r["Name"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.PanImage = r["RewardImage"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRew = lst;
+            }
+            return View(model);
+        }
+
+
+        #endregion
     }
 }
