@@ -1751,9 +1751,6 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-
-
-
-
+       
     }
 }
