@@ -342,6 +342,7 @@ namespace MyTrade.Controllers
                 obj.ToAmount = Convert.ToDecimal(ToAmount);
                 obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 obj.IscomboPackage = IscomboPackage;
+                obj.FinalAmount = Convert.ToDecimal(FinalAmount);
                 DataSet ds = obj.UpdateProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

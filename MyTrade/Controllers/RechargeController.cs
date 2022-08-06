@@ -472,7 +472,7 @@ namespace MyTrade.Controllers
                     {
                         if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
-                            model.Message = "Recharge done successfully";
+                            model.Message = "Customer Add  successfully";
                             model.Result = "Yes";
                         }
                         else

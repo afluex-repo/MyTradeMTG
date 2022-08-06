@@ -632,7 +632,9 @@
     <Content Include="UploadReward\c0659906-862e-42b5-9528-5ae46407cba8.jpg" />
     <Content Include="UploadReward\c80a6e85-c6bd-4e04-b32d-f352cf697a28.jpeg" />
     <Content Include="UploadReward\efac9723-517d-4a1f-9561-6cca06b02dfe.jpeg" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
   </ItemGroup>
@@ -874,7 +876,9 @@
     <Content Include="Views\Recharge\RechargeList.cshtml" />
     <Content Include="Views\AdminReports\RechargeListForAdmin.cshtml" />
     <Content Include="Views\Recharge\DMT.cshtml" />
+    <Content Include="Views\User\UserReward.cshtml" />
     <Content Include="Views\AdminReports\ClaimRewardReport.cshtml" />
+    <Content Include="Views\Home\AutoCalculateRewardBusiness.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -909,7 +913,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53407/</IISUrl>
+          <IISUrl>http://localhost:53409/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

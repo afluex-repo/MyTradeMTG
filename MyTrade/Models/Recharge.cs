@@ -155,7 +155,7 @@ namespace MyTrade.Models
     {
         public string success { get; set; }
         public string FK_UserId { get; set; }
-        public string status { get; set; }
+        //public string status { get; set; }
         public string Message { get; set; }
         public string is_verified { get; set; }
         public string sender_id { get; set; }

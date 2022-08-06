@@ -630,5 +630,11 @@ namespace MyTrade.Controllers
             DataSet ds = model.AutoDistributeLevelIncome();
             return Json(1, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult AutoCalculateRewardBusiness()
+        {
+            Home model = new Home();
+            DataSet ds = model.AutoCalculateRewardBusiness();
+            return View();
+        }
     }
 }
