@@ -104,9 +104,9 @@ namespace MyTrade.Models
         public DataSet RewardList()
         {
             SqlParameter[] para = {
-                                        new SqlParameter("@Fk_RewardId", RewardID),
+                                        //new SqlParameter("@PK_RewardAchieverId", RewardID),
                                         new SqlParameter("@FK_UserId", UserID)};
-            DataSet ds = DBHelper.ExecuteQuery("_GetRewardData", para);
+            DataSet ds = DBHelper.ExecuteQuery("GetAchievedRewardReport", para);
             return ds;
         }
         public DataSet ClaimReward()

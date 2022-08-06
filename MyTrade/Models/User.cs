@@ -65,12 +65,8 @@ namespace MyTrade.Models
 
         public string GrossAmount { get; set; }
         public string ProcessingFee { get; set; }
+
      
-
-
-
-
-
 
         #endregion
         public DataSet ValidateEpin()
@@ -351,6 +347,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaymentType");
             return ds;
         }
-      
+
+       
     }
 }

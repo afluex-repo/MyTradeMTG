@@ -1754,7 +1754,7 @@ namespace MyTrade.Controllers
         {
 
             model.UserID = Session["Pk_userId"].ToString();
-            model.RewardID = "1";
+            //model.RewardID = "1";
 
             List<AssociateBooking> lst = new List<AssociateBooking>();
 
@@ -1770,8 +1770,8 @@ namespace MyTrade.Controllers
                     obj.QualifyDate = r["QualifyDate"].ToString();
                     obj.RewardImage = r["RewardImage"].ToString();
                     obj.RewardName = r["RewardName"].ToString();
-                    obj.Contact = r["BackColor"].ToString();
-                    obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
+                    //obj.Contact = r["BackColor"].ToString();
+                    //obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
