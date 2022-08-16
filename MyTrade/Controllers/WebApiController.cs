@@ -10,6 +10,8 @@ using System.Net;
 using Razorpay.Api;
 using System.Net.Http;
 using System.Net.Mail;
+using RestSharp;
+using Newtonsoft.Json.Linq;
 
 namespace MyTrade.Controllers
 {
@@ -1234,7 +1236,8 @@ namespace MyTrade.Controllers
             List<Level> lstLevel = new List<Level>();
             PackageResponse obj = new PackageResponse();
             DataSet ds = obj.BindProductForJoining();
-            if(ds!=null && ds.Tables.Count>0 && ds.Tables[1].Rows.Count > 0){
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
                 obj.ToplistStatus = ds.Tables[1].Rows[0]["Status"].ToString();
                 obj.Reason = ds.Tables[1].Rows[0]["Reason"].ToString();
             }
@@ -2694,5 +2697,313 @@ namespace MyTrade.Controllers
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
+        #region DMT
+        public ActionResult get_customer(SenderRequest obj)
+        {
+                ResponseSender model = new ResponseSender();
+                var client = new RestSharp.RestClient("https://www.kwikapi.com/api/v2/dmt/get_customer");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddParameter("api_key", RechargeModel.APIKey);
+                request.AddParameter("number", obj.MobileNo);
+                IRestResponse response = client.Execute(request);
+                JObject userObj = JObject.Parse(response.Content);
+                List<BeneficiaryList> lst = new List<BeneficiaryList>();
+               if (userObj["status"].ToString() == "SUCCESS")
+                {
+                model.Status = "1";
+                model.Message = userObj["message"].ToString();
+                model.success = userObj["success"].ToString();
+                //model.message = userObj["message"].ToString();
+                model.is_verified = userObj["is_verified"].ToString();
+                model.sender_id = userObj["sender_id"].ToString();
+                DataSet ds = obj.GetUserRecord();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        model.Status = "0";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        model.Status = "1";
+                        model.Message = userObj["message"].ToString();
+                        model.success = userObj["success"].ToString();
+                        //model.message = userObj["message"].ToString();
+                        model.is_verified = userObj["is_verified"].ToString();
+                        model.sender_id = userObj["sender_id"].ToString();
+                        model.consumed_limit = userObj["consumed_limit"].ToString();
+                        model.limit = userObj["limit"].ToString();
+                        model.mobile = userObj["mobile"].ToString();
+                        if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                        {
+                            foreach (DataRow r in ds.Tables[1].Rows)
+                            {
+                                BeneficiaryList ben = new BeneficiaryList();
+                                ben.beneficiary_id = r["BeneficiaryId"].ToString();
+                                ben.recipient_name = r["HolderName"].ToString();
+                                ben.mobile = r["mobile"].ToString();
+                                ben.status = r["status"].ToString();
+                                ben.bank = r["bank"].ToString();
+                                ben.account = r["AccountNumber"].ToString();
+                                ben.ifsc = r["Ifsc"].ToString();
+                                lst.Add(ben);
+                            }
+                            model.beneficiary = lst;
+                        }
+                    }
+                }
+                else
+                {
+                    model.Message = userObj["message"].ToString();
+                    model.Status = "0";
+                }
+            }
+            else
+            {
+                model.Status = "0";
+                model.Message = userObj["message"].ToString();
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult AddCustomer(CustomerRequest obj)
+        {
+            CreateSenderDMT model = new CreateSenderDMT();
+            var client = new RestSharp.RestClient("https://www.kwikapi.com/api/v2/dmt/add_customer?api_key=" + RechargeModel.APIKey + "&number=" + obj.mobile + "&name=" + obj.name + "&surname=" + obj.surname + "");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key", RechargeModel.APIKey);
+            request.AddParameter("number", obj.mobile);
+            request.AddParameter("name", obj.name);
+            request.AddParameter("surname", obj.surname);
+            IRestResponse response = client.Execute(request);
+            JObject userObj = JObject.Parse(response.Content);
+            if (userObj["status"].ToString() == "SUCCESS")
+            {
+
+                model.FK_UserId = obj.Fk_UserId;
+                model.mobile = obj.mobile;
+                model.name = obj.name;
+                model.surname = obj.surname;
+                model.success = userObj["success"].ToString();
+                model.Status = "1";
+                model.Message = userObj["message"].ToString();
+                model.is_verified = userObj["is_verified"].ToString();
+                model.sender_id = userObj["sender_id"].ToString();
+                DataSet ds = model.SaveSenderDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (model.Status == "SUCCESS")
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Message = userObj["message"].ToString();
+                            model.Result = "Yes";
+                            model.Status = "1";
+                        }
+                        else
+                        {
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            model.Result = "No";
+                            model.Status = "0";
+                        }
+                    }
+                    else
+                    {
+                        model.Message = userObj["message"].ToString();
+                        model.Result = "No";
+                        model.Status = "0";
+                    }
+
+                }
+                else
+                {
+                    model.Message = "Some issues occurred";
+                    model.Result = "No";
+                    model.Status = "0";
+                }
+            }
+            else
+            {
+                model.Message = userObj["message"].ToString();
+                model.Result = "No";
+                model.Status = "0";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult confirm_sender(CustomerOTPRequest obj)
+        {
+            CreateSenderDMT model = new CreateSenderDMT();
+            var client = new RestSharp.RestClient("https://www.kwikapi.com/api/v2/dmt/confirm_sender");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key", RechargeModel.APIKey);
+            request.AddParameter("number", obj.mobile);
+            request.AddParameter("sender_id", obj.sender_id);
+            request.AddParameter("otp", obj.otp);
+            IRestResponse response = client.Execute(request);
+            JObject userObj = JObject.Parse(response.Content);
+            //model.is_verified = userObj["is_verified"].ToString();
+            //model.sender_id = userObj["sender_id"].ToString();
+            model.FK_UserId = obj.Fk_UserId;
+            if (userObj["status"].ToString() == "SUCCESS")
+
+            {
+                model.Status = "1";
+                model.Message = userObj["message"].ToString();
+                model.is_verified = userObj["is_verified"].ToString();
+                model.sender_id = userObj["sender_id"].ToString();
+                model.FK_UserId = obj.Fk_UserId;
+                DataSet ds = model.VerifyOTP();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (model.Status == "SUCCESS")
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Message = userObj["message"].ToString();
+                            model.Result = "Yes";
+                            model.Status = "1";
+                        }
+                        else
+                        {
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            model.Result = "No";
+                            model.Status = "0";
+                        }
+                    }
+                    else
+                    {
+                        model.Message = userObj["message"].ToString();
+                        model.Status = "0";
+                    }
+
+                }
+
+            }
+            else
+            {
+                model.Status = "0";
+                model.Message = userObj["message"].ToString();
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult add_beneficiary(BeneficiaryRequest obj)
+        {
+            CreateSenderDMT model = new CreateSenderDMT();
+            var client = new RestSharp.RestClient("https://www.kwikapi.com/api/v2/dmt/add_beneficiary");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key", RechargeModel.APIKey);
+            request.AddParameter("number", obj.mobile);
+            request.AddParameter("sender_id", obj.sender_id);
+            request.AddParameter("name", obj.holdername);
+            request.AddParameter("account", obj.accountnumber);
+            request.AddParameter("ifsc", obj.ifsc);
+            IRestResponse response = client.Execute(request);
+            JObject userObj = JObject.Parse(response.Content);
+            if (userObj["status"].ToString() == "SUCCESS")
+            {
+                model.FK_UserId = obj.Fk_UserId;
+                //model.Status = userObj["status"].ToString();
+                model.sender_id = obj.sender_id;
+                model.HolderName = obj.holdername;
+                model.AccountNumber = obj.accountnumber;
+                model.IFSC = obj.ifsc;
+                model.beneficiaryid = userObj["beneficiary_id"].ToString();
+                DataSet ds = model.SaveBeneficiary();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (userObj["status"].ToString() == "SUCCESS")
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Message = "Beneficiary  Details Add Successfully ";
+                            model.Status = "1";
+                        }
+                        else
+                        {
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            model.Status = "0";
+                        }
+                    }
+                    else
+                    {
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        model.Status = "0";
+                    }
+
+                }
+
+            }
+            else
+            {
+                model.Message = userObj["message"].ToString();
+                model.Status = "0";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult TransferAmount(string api_token, string sender_id, string number, string amount, string account, string beneficiaryid, string channel, string order_id, string source)
+        {
+            CreateSenderDMT model = new CreateSenderDMT();
+            var client = new RestSharp.RestClient("https://www.kwikapi.com/api/v2/dmt/transfer");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("api_key", RechargeModel.APIKey);
+            request.AddParameter("number", number);
+            request.AddParameter("amount", amount);
+            request.AddParameter("sender_id", sender_id);
+            request.AddParameter("account", account);
+            request.AddParameter("beneficiaryid", beneficiaryid);
+            request.AddParameter("channel", channel);
+            request.AddParameter("order_id", order_id);
+            request.AddParameter("source", source);
+            request.AddParameter("kwikpin", "123456");
+            IRestResponse response = client.Execute(request);
+            JObject userObj = JObject.Parse(response.Content);
+            if (userObj["status"].ToString() == "SUCCESS")
+            {
+                model.FK_UserId = Session["Pk_UserId"].ToString();
+                model.Status = userObj["status"].ToString();
+                model.sender_id = sender_id;
+                model.AccountNumber = account;
+                model.mobile = number;
+                model.Amount = amount;
+                model.beneficiaryid = beneficiaryid;
+                model.channel = channel;
+                model.order_id = order_id;
+                model.source = source;
+                model.kwikpin = "123456";
+                DataSet ds = model.SaveDMTTransaction();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (model.Status == "SUCCESS")
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+                            model.Message = "Transaction Successfully ";
+                            model.Result = "Yes";
+                        }
+                        else
+                        {
+                            model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            model.Result = "No";
+                        }
+                    }
+                    else
+                    {
+                        model.Message = model.Status;
+                        model.Result = "No";
+                    }
+
+                }
+            }
+            return Json(response.Content, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

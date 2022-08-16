@@ -1486,5 +1486,71 @@ namespace MyTrade.Models
         public string CommissionPercentage { get; set; }
        
     }
-    
+    #region DMT
+    public class SenderRequest
+    {
+      
+        public string MobileNo { get; set; }
+        public string Fk_UserId { get; set; }
+        public DataSet GetUserRecord()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_UserId", Fk_UserId),
+                new SqlParameter("@mobile", MobileNo)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("Getsenderdetails", para);
+            return ds;
+        }
+
+    }
+    public class ResponseSender
+    {
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string success { get; set; }
+        //public string message { get; set; }
+        public string is_verified { get; set; }
+        public string sender_id { get; set; }
+        public string name { get; set; }
+        public string consumed_limit { get; set; }
+        public string limit { get; set; }
+        public string mobile { get; set; }
+        public string ResponseStatus { get; set; }
+        public List<BeneficiaryList> beneficiary { get; set; }
+    }
+    public class BeneficiaryList
+    {
+        public string beneficiary_id { get; set; }
+        public string status { get; set; }
+        public string recipient_name { get; set; }
+        public string bank { get; set; }
+        public string account { get; set; }
+        public string ifsc { get; set; }
+        public string mobile { get; set; }
+    }
+    public class CustomerRequest
+    {
+        public string mobile { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string Fk_UserId { get; set; }
+    }
+    public class CustomerOTPRequest
+    {
+        public string mobile { get; set; }
+        public string sender_id { get; set; }
+        public string otp { get; set; }
+        public string Fk_UserId { get; set; }
+    }
+    public class BeneficiaryRequest
+    {
+        public string mobile { get; set; }
+        public string sender_id { get; set; }
+        public string holdername { get; set; }
+        public string accountnumber { get; set; }
+        public string ifsc { get; set; }
+        public string Fk_UserId { get; set; }
+    }
+    #endregion
+
 }

@@ -1750,7 +1750,91 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        public ActionResult UserReward(AssociateBooking model)
+        {
 
-       
+            model.UserID = Session["Pk_userId"].ToString();
+            //model.RewardID = "1";
+
+            List<AssociateBooking> lst = new List<AssociateBooking>();
+
+            DataSet ds = model.RewardList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
+
+                    obj.Status = r["Status"].ToString();
+                    obj.QualifyDate = r["QualifyDate"].ToString();
+                    obj.RewardImage = r["RewardImage"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    //obj.Contact = r["BackColor"].ToString();
+                    //obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
+                    obj.Target = r["Target"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+
+            return View(model);
+        }
+        public ActionResult ClaimReward(string id)
+        {
+            AssociateBooking obj = new AssociateBooking();
+            try
+            {
+                obj.PK_RewardItemId = id;
+                obj.Status = "Claim";
+                obj.Fk_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = obj.ClaimReward();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Rewardmsg"] = "Reward Claimed";
+                    }
+                    else
+                    {
+                        TempData["Rewardmsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Rewardmsg"] = ex.Message;
+            }
+            return RedirectToAction("UserReward");
+        }
+        public ActionResult SkipReward(string id)
+        {
+            AssociateBooking obj = new AssociateBooking();
+            try
+            {
+                obj.PK_RewardItemId = id;
+                obj.Status = "Skip";
+                obj.Fk_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = obj.ClaimReward();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Rewardmsg"] = "Reward Skipped";
+                    }
+                    else
+                    {
+                        TempData["Rewardmsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Rewardmsg"] = ex.Message;
+            }
+            return RedirectToAction("UserReward");
+        }
     }
 }
