@@ -28,8 +28,9 @@
                                     <tr>
                                         <th>S No.</th>
                                         <th>Reward</th>
+                                        <th>Target</th>
                                         <th>Status</th>
-                                        <th>Qualify Date</th>
+                                        <th>Achive Date</th>
                                         @*<th>Action</th>*@
                                     </tr>
                                 </thead>
@@ -47,6 +48,7 @@
                                                         <img src="@Item.RewardImage" height="100" width="100" />
                                                         <br />@Item.RewardName
                                                     </td>
+                                                    <td>@Item.Target</td>
                                                     <td><label class="@Item.Contact">@Item.Status</label></td>
                                                     <td>@Item.QualifyDate</td>
                                                     @*<td>

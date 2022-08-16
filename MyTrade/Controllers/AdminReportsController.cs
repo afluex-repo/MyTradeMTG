@@ -1223,6 +1223,7 @@ namespace MyTrade.Controllers
                     obj.RewardName = r["RewardName"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.PanImage = r["RewardImage"].ToString();
+                    obj.Target = r["Target"].ToString();
                     lst.Add(obj);
                 }
                 model.lstRew = lst;

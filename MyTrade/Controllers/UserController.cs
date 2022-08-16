@@ -1772,6 +1772,7 @@ namespace MyTrade.Controllers
                     obj.RewardName = r["RewardName"].ToString();
                     //obj.Contact = r["BackColor"].ToString();
                     //obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
+                    obj.Target = r["Target"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;
