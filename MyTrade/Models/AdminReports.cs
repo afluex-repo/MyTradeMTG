@@ -294,6 +294,7 @@ namespace MyTrade.Models
         public string AssociateName { get; set; }
         public string PanImage { get; set; }
         public List<AdminReports> lstRew { get; set; }
+        public string Target { get; set; }
 
         #endregion
 

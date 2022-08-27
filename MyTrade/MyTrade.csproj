@@ -676,6 +676,7 @@
     <Compile Include="Models\API.cs" />
     <Compile Include="Models\AssociateBooking.cs" />
     <Compile Include="Models\BLMail.cs" />
+    <Compile Include="Models\BLSMS.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DAL\AgentDAL.cs" />

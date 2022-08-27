@@ -125,17 +125,29 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         string Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        if (Email != null && Email != "")
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Product = ds.Tables[0].Rows[0]["Package"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036877932940";
+                        string str = BLSMS.IdActivated(Name, Product);
+                        try
                         {
-                            try
-                            {
-                                BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", Email);
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
+                            BLSMS.SendSMS(Mobile, str, TempId);
                         }
+                        catch
+                        {
+                        }
+                        //if (Email != null && Email != "")
+                        //{
+                        //    try
+                        //    {
+                        //        BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", Email);
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+
+                        //    }
+                        //}
                         TempData["Activated"] = "User Activated Successfully";
                         FormName = "ConfirmActivation";
                         Controller = "User";
@@ -260,34 +272,45 @@ namespace MyTrade.Controllers
                     {
                         obj.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        if (obj.Email != null)
+                        string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                        string TempId = "1707166036857908702";
+                        string str = BLSMS.Topup(obj.Name, Amount);
+                        try
                         {
-                            string mailbody = "";
-                            try
-                            {
-                                mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
-                                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
-                                {
-                                    Host = "smtp.gmail.com",
-                                    Port = 587,
-                                    EnableSsl = true,
-                                    DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                                    UseDefaultCredentials = true,
-                                    Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022")
-                                };
-                                using (var message = new MailMessage("coustomer.mytrade@gmail.com", obj.Email)
-                                {
-                                    IsBodyHtml = true,
-                                    Subject = "TopUp",
-                                    Body = mailbody
-                                })
-                                    smtp.Send(message);
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
+                            BLSMS.SendSMS(Mobile, str, TempId);
                         }
+                        catch
+                        {
+                        }
+                        //if (obj.Email != null)
+                        //{
+                        //    string mailbody = "";
+                        //    try
+                        //    {
+                        //        mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
+                        //        System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                        //        {
+                        //            Host = "smtp.gmail.com",
+                        //            Port = 587,
+                        //            EnableSsl = true,
+                        //            DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                        //            UseDefaultCredentials = true,
+                        //            Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022")
+                        //        };
+                        //        using (var message = new MailMessage("coustomer.mytrade@gmail.com", obj.Email)
+                        //        {
+                        //            IsBodyHtml = true,
+                        //            Subject = "TopUp",
+                        //            Body = mailbody
+                        //        })
+                        //            smtp.Send(message);
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+
+                        //    }
+                        //}
                         TempData["msg"] = "Top-Up Done successfully";
                     }
                     else
@@ -1772,6 +1795,7 @@ namespace MyTrade.Controllers
                     obj.RewardName = r["RewardName"].ToString();
                     //obj.Contact = r["BackColor"].ToString();
                     //obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
+                    obj.Target = r["Target"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPlot = lst;

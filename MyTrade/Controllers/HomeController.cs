@@ -532,24 +532,33 @@ namespace MyTrade.Controllers
                         model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                         model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         model.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
-
-                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + model.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + model.Password;
-
-                        using (MailMessage mail = new MailMessage())
+                        string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036828812593";
+                        string str = BLSMS.ForgetPassword(model.Name, model.Password);
+                        try
                         {
-                            mail.From = new MailAddress("email@gmail.com");
-                            mail.To.Add(model.Email);
-                            mail.Subject = "Forget Password";
-                            mail.Body = signature;
-                            mail.IsBodyHtml = true;
-                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
-                            {
-                                smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
-                                smtp.EnableSsl = true;
-                                smtp.Send(mail);
-                            }
+                            BLSMS.SendSMS(Mobile, str, TempId);
                         }
-                        TempData["Login"] = "password sent your email-id successfully.";
+                        catch
+                        {
+                        }
+                        //string signature = " &nbsp;&nbsp;&nbsp; Dear  " + model.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + model.Password;
+
+                        //using (MailMessage mail = new MailMessage())
+                        //{
+                        //    mail.From = new MailAddress("email@gmail.com");
+                        //    mail.To.Add(model.Email);
+                        //    mail.Subject = "Forget Password";
+                        //    mail.Body = signature;
+                        //    mail.IsBodyHtml = true;
+                        //    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                        //    {
+                        //        smtp.Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022");
+                        //        smtp.EnableSsl = true;
+                        //        smtp.Send(mail);
+                        //    }
+                        //}
+                        TempData["Login"] = "password sent successfully.";
                     }
 
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
