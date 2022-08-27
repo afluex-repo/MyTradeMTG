@@ -658,6 +658,18 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["verify"] = "Profile verified successfully";
+                        string Name= ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036842875866";
+                        string str = BLSMS.KycApprovel(Name,Status);
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+                        }
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -814,6 +826,18 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["verify"] = "Kyc declined successfully";
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036842875866";
+                        string str = BLSMS.KycApprovel(Name, Status);
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+                        }
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
