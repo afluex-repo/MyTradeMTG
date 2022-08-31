@@ -396,6 +396,18 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["msg"] = "Ewallet Request Approved Successfully";
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036861390648";
+                        string str = BLSMS.Wallet(Name, Status);
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+                        }
                     }
                     else
                     {
@@ -423,6 +435,18 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["msg"] = "Ewallet Request Declined Successfully";
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036861390648";
+                        string str = BLSMS.Wallet(Name, Status);
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+                        }
                     }
                     else
                     {

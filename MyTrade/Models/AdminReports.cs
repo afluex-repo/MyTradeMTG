@@ -280,6 +280,23 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetContactList", para);
             return ds;
         }
-        
+
+        #region claim report
+        public DataSet ClaimRewardReport()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_RewardAchieverId", RewardAchieverID),
+                                      };
+            DataSet ds = DBHelper.ExecuteQuery("ClaimRewardReport", para);
+            return ds;
+        }
+        public string RewardAchieverID { get; set; }
+        public string RewardName { get; set; }
+        public string AssociateName { get; set; }
+        public string PanImage { get; set; }
+        public List<AdminReports> lstRew { get; set; }
+        public string Target { get; set; }
+
+        #endregion
+
     }
 }

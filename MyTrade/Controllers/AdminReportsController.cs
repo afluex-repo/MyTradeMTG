@@ -658,6 +658,18 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["verify"] = "Profile verified successfully";
+                        string Name= ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036842875866";
+                        string str = BLSMS.KycApprovel(Name,Status);
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+                        }
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -814,6 +826,18 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["verify"] = "Kyc declined successfully";
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036842875866";
+                        string str = BLSMS.KycApprovel(Name, Status);
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+                        }
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -1204,5 +1228,34 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        
+        #region ClaimRewardReport
+        public ActionResult ClaimRewardReport(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.ClaimRewardReport();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.RewardAchieverID = r["PK_RewardAchieverId"].ToString();
+                    obj.UserId = r["FK_UserId"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.AssociateName = r["Name"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.PanImage = r["RewardImage"].ToString();
+                    obj.Target = r["Target"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstRew = lst;
+            }
+            return View(model);
+        }
+
+
+        #endregion
     }
 }

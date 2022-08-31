@@ -125,17 +125,29 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         string Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        if (Email != null && Email != "")
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Product = ds.Tables[0].Rows[0]["Package"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string TempId = "1707166036877932940";
+                        string str = BLSMS.IdActivated(Name, Product);
+                        try
                         {
-                            try
-                            {
-                                BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", Email);
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
+                            BLSMS.SendSMS(Mobile, str, TempId);
                         }
+                        catch
+                        {
+                        }
+                        //if (Email != null && Email != "")
+                        //{
+                        //    try
+                        //    {
+                        //        BLMail.SendActivationMail(Session["FullName"].ToString(), Session["LoginId"].ToString(), Crypto.Decrypt(Session["Password"].ToString()), "Activation Successful", Email);
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+
+                        //    }
+                        //}
                         TempData["Activated"] = "User Activated Successfully";
                         FormName = "ConfirmActivation";
                         Controller = "User";
@@ -260,34 +272,45 @@ namespace MyTrade.Controllers
                     {
                         obj.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        if (obj.Email != null)
+                        string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
+                        string TempId = "1707166036857908702";
+                        string str = BLSMS.Topup(obj.Name, Amount);
+                        try
                         {
-                            string mailbody = "";
-                            try
-                            {
-                                mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
-                                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
-                                {
-                                    Host = "smtp.gmail.com",
-                                    Port = 587,
-                                    EnableSsl = true,
-                                    DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                                    UseDefaultCredentials = true,
-                                    Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022")
-                                };
-                                using (var message = new MailMessage("coustomer.mytrade@gmail.com", obj.Email)
-                                {
-                                    IsBodyHtml = true,
-                                    Subject = "TopUp",
-                                    Body = mailbody
-                                })
-                                    smtp.Send(message);
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
+                            BLSMS.SendSMS(Mobile, str, TempId);
                         }
+                        catch
+                        {
+                        }
+                        //if (obj.Email != null)
+                        //{
+                        //    string mailbody = "";
+                        //    try
+                        //    {
+                        //        mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
+                        //        System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                        //        {
+                        //            Host = "smtp.gmail.com",
+                        //            Port = 587,
+                        //            EnableSsl = true,
+                        //            DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                        //            UseDefaultCredentials = true,
+                        //            Credentials = new NetworkCredential("coustomer.mytrade@gmail.com", "Mytrade@2022")
+                        //        };
+                        //        using (var message = new MailMessage("coustomer.mytrade@gmail.com", obj.Email)
+                        //        {
+                        //            IsBodyHtml = true,
+                        //            Subject = "TopUp",
+                        //            Body = mailbody
+                        //        })
+                        //            smtp.Send(message);
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+
+                        //    }
+                        //}
                         TempData["msg"] = "Top-Up Done successfully";
                     }
                     else
@@ -1750,10 +1773,97 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+        public ActionResult UserReward(AssociateBooking model)
+        {
 
+            model.UserID = Session["Pk_userId"].ToString();
+            //model.RewardID = "1";
 
+            List<AssociateBooking> lst = new List<AssociateBooking>();
 
+            DataSet ds = model.RewardList();
 
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AssociateBooking obj = new AssociateBooking();
 
-    }
+                    obj.Status = r["Status"].ToString();
+                    obj.QualifyDate = r["QualifyDate"].ToString();
+                    obj.RewardImage = r["RewardImage"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    //obj.Contact = r["BackColor"].ToString();
+                    //obj.PK_RewardItemId = r["PK_RewardItemId"].ToString();
+                    obj.Target = r["Target"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstPlot = lst;
+            }
+
+            return View(model);
+        }
+        public ActionResult ClaimReward(string id)
+        {
+            AssociateBooking obj = new AssociateBooking();
+            try
+            {
+                obj.PK_RewardItemId = id;
+                obj.Status = "Claim";
+                obj.Fk_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = obj.ClaimReward();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Rewardmsg"] = "Reward Claimed";
+                    }
+                    else
+                    {
+                        TempData["Rewardmsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Rewardmsg"] = ex.Message;
+            }
+            return RedirectToAction("UserReward");
+        }
+        public ActionResult SkipReward(string id)
+        {
+            AssociateBooking obj = new AssociateBooking();
+            try
+            {
+                obj.PK_RewardItemId = id;
+                obj.Status = "Skip";
+                obj.Fk_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = obj.ClaimReward();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Rewardmsg"] = "Reward Skipped";
+                    }
+                    else
+                    {
+                        TempData["Rewardmsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Rewardmsg"] = ex.Message;
+            }
+            return RedirectToAction("UserReward");
+        }
+        
+        public ActionResult RoyaltyClub()
+        {
+            return View();
+        }
+
+        }
 }

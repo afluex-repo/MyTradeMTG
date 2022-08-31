@@ -231,6 +231,11 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("CalculateROI");
             return ds;
         }
+        public DataSet AutoCalculateRewardBusiness()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("AutoCalculateRewardBusiness");
+            return ds;
+        }
 
         public DataSet CalculateDistributePaymentTPS()
         {
