@@ -1859,5 +1859,11 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("UserReward");
         }
-    }
+        
+        public ActionResult RoyaltyClub()
+        {
+            return View();
+        }
+
+        }
 }
