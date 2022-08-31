@@ -630,5 +630,10 @@ namespace MyTrade.Controllers
             DataSet ds = model.AutoDistributeLevelIncome();
             return Json(1, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Maintenance()
+        {
+            return View();
+        }
     }
 }

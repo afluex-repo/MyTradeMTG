@@ -228,3 +228,4 @@ E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.Gener
 E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
 E:\Repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+E:\Repository-Projects\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

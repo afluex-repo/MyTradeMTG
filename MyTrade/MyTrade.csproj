@@ -259,6 +259,19 @@
     <Content Include="EmailTemplateRegistration.html" />
     <Content Include="Global.asax" />
     <Content Include="LevelTree.aspx" />
+    <Content Include="main-assets\css\bootstrap.min.css" />
+    <Content Include="main-assets\css\fontawesome-all.min.css" />
+    <Content Include="main-assets\css\fxt-animation.css" />
+    <Content Include="main-assets\css\style.css" />
+    <Content Include="main-assets\js\bootstrap.min.js" />
+    <Content Include="main-assets\js\imagesloaded.pkgd.min.js" />
+    <Content Include="main-assets\js\jquery-3.5.0.min.js" />
+    <Content Include="main-assets\js\jquery.countdown.min.js" />
+    <Content Include="main-assets\js\main.js" />
+    <Content Include="main-assets\media\figure\maintenance-img.png" />
+    <Content Include="main-assets\webfonts\fa-brands-400.html" />
+    <Content Include="main-assets\webfonts\fa-regular-400.html" />
+    <Content Include="main-assets\webfonts\fa-solid-900.html" />
     <Content Include="Models\WebService\AgentServices.asmx" />
     <Content Include="MyTradeWebsite\about.html" />
     <Content Include="MyTradeWebsite\assets\css\animate.min.css" />
@@ -759,6 +772,21 @@
     <Content Include="MyTradeWebsite\assets\fonts\Flaticon.woff" />
     <Content Include="MyTradeWebsite\assets\fonts\Flaticon.woff2" />
     <Content Include="MyTradeWebsite\assets\fonts\Flaticond41d.eot" />
+    <Content Include="main-assets\webfonts\fa-brands-400.eot" />
+    <Content Include="main-assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="main-assets\webfonts\fa-brands-400.woff" />
+    <Content Include="main-assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="main-assets\webfonts\fa-brands-400d41d.eot" />
+    <Content Include="main-assets\webfonts\fa-regular-400.eot" />
+    <Content Include="main-assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="main-assets\webfonts\fa-regular-400.woff" />
+    <Content Include="main-assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="main-assets\webfonts\fa-regular-400d41d.eot" />
+    <Content Include="main-assets\webfonts\fa-solid-900.eot" />
+    <Content Include="main-assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="main-assets\webfonts\fa-solid-900.woff" />
+    <Content Include="main-assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="main-assets\webfonts\fa-solid-900d41d.eot" />
     <None Include="Properties\PublishProfiles\MyTrade.pubxml" />
     <Content Include="Views\Home\CompleteRegistration.cshtml" />
     <Content Include="Views\User\ActivateByPin.cshtml" />
@@ -874,6 +902,7 @@
     <Content Include="Views\Recharge\RechargeList.cshtml" />
     <Content Include="Views\AdminReports\RechargeListForAdmin.cshtml" />
     <Content Include="Views\Recharge\DMT.cshtml" />
+    <Content Include="Views\Home\Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
