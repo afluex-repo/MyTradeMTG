@@ -1831,3 +1831,21 @@ table .badge-info, table .badge-secondary, table .badge-dark  {
 .position-inherit { position:inherit; }
 .position-initial { position:initial; }
 .position-relative { position:relative; }
+
+.royality_titile
+{
+    font-size:25px;
+    font-weight:700;
+    color:#22396b;
+    background:#faebd7;
+}
+.box_card
+{
+    box-shadow:0px 0px 4px;
+    border-radius:20px;
+}
+.content
+{
+    padding:40px;
+    border-radius:20px;
+}

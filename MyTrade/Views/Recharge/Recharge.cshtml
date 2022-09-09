@@ -934,8 +934,16 @@
 
                 }
                 else {
-                    alert("Recharge services are temporarily unavailable for this plan. Kindly choose another plan");
-                    $("#" + name + "Amount").val('');
+                    if ((Number($("#" + name + "Amount").val()) > Number(obj.response.balance)))
+                    {
+                        alert("Insufficiant Balance in razor pay wallet");
+                        $("#" + name + "Amount").val('');
+                    }
+                    else {
+                        alert("Recharge services are temporarily unavailable for this plan. Kindly choose another plan");
+                        $("#" + name + "Amount").val('');
+                    }
+                  
                 }
             },
             error: function () {
