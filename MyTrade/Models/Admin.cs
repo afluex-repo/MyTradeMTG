@@ -684,14 +684,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
             return ds;
         }
-
-        public DataSet OTPVerified()
-        {
-            SqlParameter[] para = { new SqlParameter("@OtpVerify", OtpVerify)
-            };
-            DataSet ds = DBHelper.ExecuteQuery("OTPVerified", para);
-            return ds;
-        }
-
+        
     }
 }
