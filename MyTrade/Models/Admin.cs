@@ -206,7 +206,7 @@ namespace MyTrade.Models
         }
         #endregion
 
-
+        public string OtpVerify { get; set; }
 
         public DataSet ChangePassword()
         {
@@ -684,10 +684,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
             return ds;
         }
-
         
-
-
-
     }
 }

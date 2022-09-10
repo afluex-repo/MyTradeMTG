@@ -96,6 +96,14 @@ namespace MyTrade.Controllers
                             Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
                             Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
 
+                            string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                            string LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            string Mobile = ds.Tables[0].Rows[0]["Contact"].ToString();
+                            string OtpVerify = ds.Tables[0].Rows[0]["OtpVerify"].ToString();
+                            string TempId = "1707166036874698573";
+
+                            string str = "Dear "+ Name + ", Your OTP "+ OtpVerify + " for "+ LoginId + ". MY TRADE";
+                            
                             if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
                             {
                                 Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
@@ -104,9 +112,19 @@ namespace MyTrade.Controllers
                             }
                             else
                             {
-                                FormName = "AdminDashBoard";
-                                Controller = "Admin";
+                                //FormName = "AdminDashBoard";
+                                FormName = "OTPVerify";
+                                Controller = "Home";
                             }
+
+                            try
+                            {
+                                BLSMS.SendSMS(Mobile,str,TempId);
+                            }
+                            catch { }
+
+                            TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
+                            
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
                         {
@@ -644,6 +662,45 @@ namespace MyTrade.Controllers
             Home model = new Home();
             DataSet ds = model.AutoCalculateRewardBusiness();
             return View();
+        }
+        
+        public ActionResult OTPVerify()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("OTPVerify")]
+        public ActionResult OTPVerify(Home model)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                DataSet ds = model.OTPVerified();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        FormName = "AdminDashBoard";
+                        Controller = "Admin";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        Session["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "Login";
+                        Controller = "Home";
+                    }
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+                FormName = "Login";
+                Controller = "Home";
+            }
+            return RedirectToAction(FormName, Controller);
         }
     }
 }
