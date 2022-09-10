@@ -1874,6 +1874,17 @@ namespace MyTrade.Controllers
                                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                 {
                                     TempData["msg"] = "Approved Successfully";
+                                    
+                                    string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                                    string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                                    string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                                    string TempId = "1707166036849325252";
+                                    string Message = "Dear "+ Name + ", Your Payout request has been "+ Status + ". MY TRADE";
+                                    try
+                                    {
+                                        BLSMS.SendSMS(Mobile, Message, TempId);
+                                    }
+                                    catch { }
                                 }
                                 else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                                 {
@@ -1921,6 +1932,19 @@ namespace MyTrade.Controllers
                                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                 {
                                     TempData["msg"] = "Declined Successfully";
+
+                                    string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                                    string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                                    string Status = ds.Tables[0].Rows[0]["Status"].ToString();
+                                    string TempId = "1707166036849325252";
+                                    string Message = "Dear " + Name + ", Your Payout request has been " + Status + ". MY TRADE";
+                                    try
+                                    {
+                                        BLSMS.SendSMS(Mobile, Message, TempId);
+                                    }
+                                    catch { }
+
+
                                 }
                                 else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                                 {
@@ -2833,9 +2857,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-
-
-
-
-    }
+        
+     }
 }

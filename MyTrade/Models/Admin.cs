@@ -206,7 +206,7 @@ namespace MyTrade.Models
         }
         #endregion
 
-
+        public string OtpVerify { get; set; }
 
         public DataSet ChangePassword()
         {
@@ -685,9 +685,13 @@ namespace MyTrade.Models
             return ds;
         }
 
-        
-
-
+        public DataSet OTPVerified()
+        {
+            SqlParameter[] para = { new SqlParameter("@OtpVerify", OtpVerify)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("OTPVerified", para);
+            return ds;
+        }
 
     }
 }

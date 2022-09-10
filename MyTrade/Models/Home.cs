@@ -51,7 +51,8 @@ namespace MyTrade.Models
         public string Message { get; set; }
         public string PaymentType { get; set; }
         public string IsActive { get; set; }
-
+        public string OtpVerify { get; set; }
+        
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -92,7 +93,8 @@ namespace MyTrade.Models
         public DataSet Login()
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
-                                new SqlParameter("@Password",Password)};
+                                new SqlParameter("@Password",Password)
+            };
             DataSet ds = DBHelper.ExecuteQuery("Login", para);
             return ds;
         }
@@ -289,6 +291,14 @@ namespace MyTrade.Models
             return ds;
         }
 
+
+        public DataSet OTPVerified()
+        {
+            SqlParameter[] para = { new SqlParameter("@OtpVerify", OtpVerify)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("OTPVerified", para);
+            return ds;
+        }
 
     }
 }

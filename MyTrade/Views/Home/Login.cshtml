@@ -61,8 +61,9 @@
                                         <h3>Welcome back</h3>
                                         <p>New to My Trade? <a href="/Home/Registration">Sign up</a></p>
 
-
-                                        <p style="color:red;float:right">@TempData["Login"]</p>
+                                        <p style="color:red;float:right">@TempData["Login"]
+                                            @Session["error"]
+                                        </p>
                                         <form action="/Home/LoginAction" method="post">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
@@ -91,6 +92,9 @@
 
         </div>
     </section>
+
+    
+
     <!-- End Login Area -->
     <!-- Links of JS files -->
     <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
@@ -109,3 +113,6 @@
     <script src="~/MyTradeWebsite/assets/js/main.js"></script>
 </body>
 </html>
+
+
+
