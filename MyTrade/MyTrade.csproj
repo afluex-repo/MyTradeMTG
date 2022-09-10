@@ -881,6 +881,7 @@
     <Content Include="Views\AdminReports\ClaimRewardReport.cshtml" />
     <Content Include="Views\Home\AutoCalculateRewardBusiness.cshtml" />
     <Content Include="Views\User\RoyaltyClub.cshtml" />
+    <Content Include="Views\Home\OTPVerify.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
