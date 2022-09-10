@@ -116,15 +116,21 @@ namespace MyTrade.Controllers
                                 FormName = "OTPVerify";
                                 Controller = "Home";
                             }
-
-                            try
+                            if (Mobile == "" || Mobile == null)
                             {
-                                BLSMS.SendSMS(Mobile,str,TempId);
+                                TempData["mobileupdate"] = "First update your mobile no.";
                             }
-                            catch { }
+                            else
+                            {
+                                try
+                                {
+                                    BLSMS.SendSMS(Mobile, str, TempId);
+                                }
+                                catch { }
 
-                            TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
-                            
+                                TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
+                            }
+ 
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
                         {
