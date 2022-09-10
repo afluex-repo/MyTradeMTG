@@ -687,8 +687,8 @@ namespace MyTrade.Controllers
                     }
                     else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                     {
-                        Session["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "Login";
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "OTPVerify";
                         Controller = "Home";
                     }
                 }
@@ -697,7 +697,7 @@ namespace MyTrade.Controllers
             catch (Exception ex)
             {
                 TempData["error"] = ex.Message;
-                FormName = "Login";
+                FormName = "OTPVerify";
                 Controller = "Home";
             }
             return RedirectToAction(FormName, Controller);

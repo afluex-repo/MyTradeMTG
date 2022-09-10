@@ -18,11 +18,22 @@
         <link href="~/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
         @using (Html.BeginForm("OTPVerify", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", target = "_blank" }))
         {
-            <div class="container" style="margin-top:200px;">
+            <div class="container" style="margin-top:180px;">
                 <div class="row layout-top-spacing">
                     <div class="col-lg-12 col-12 layout-spacing">
                         <div class="statbox widget box box-shadow p-5">
                             <div class="">
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                    </div>
+                                    <div class="col-sm-6">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a href="/Home/Login" class="btn btn-primary btn-block">Back To Login</a>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12 text-center">
                                         <h4 style="color:#ff8100; text-align:center;">OTP Verify</h4>
@@ -37,11 +48,14 @@
                                         <br />
                                         <span style="color:red;">
                                             @TempData["OtpVerify"]
+                                            @TempData["error"]
                                         </span>
                                         <div class="card-star_rating">
                                             @Html.TextBoxFor(m => m.OtpVerify, new { @class = "form-control", @placeholder = "Enter OTP" })
                                         </div>
-                                        <p class="card-text"><input class="btn btn-success" name="btn_Pin" id="btn_Pin" onclick="return validateform()" type="submit" value="Verify" /></p>
+                                        <p class="card-text">
+                                        <input class="btn btn-success btn-block" name="btn_Pin" id="btn_Pin" onclick="return validateform()" type="submit" value="Verify" />                                   
+                                        </p>
                                     </div>
                                 </div>
 
@@ -71,7 +85,7 @@
 <script>
     function validateform() {
         debugger;
-        var OtpVerify= $('#OtpVerify').val();
+        var OtpVerify = $('#OtpVerify').val();
         $(".errortext").removeClass("errortext");
         if ($('#OtpVerify').val() == '') {
             $("#OtpVerify").addClass('errortext');
