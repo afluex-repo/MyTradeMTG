@@ -102,8 +102,8 @@ namespace MyTrade.Controllers
                             string OtpVerify = ds.Tables[0].Rows[0]["OtpVerify"].ToString();
                             string TempId = "1707166036874698573";
 
-                            string str = "Dear "+ Name + ", Your OTP "+ OtpVerify + " for "+ LoginId + ". MY TRADE";
-                            
+                            string str = "Dear " + Name + ", Your OTP " + OtpVerify + " for " + LoginId + ". MY TRADE";
+
                             if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
                             {
                                 Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
@@ -116,21 +116,14 @@ namespace MyTrade.Controllers
                                 FormName = "OTPVerify";
                                 Controller = "Home";
                             }
-                            if (Mobile == "" || Mobile == null)
+                            try
                             {
-                                TempData["mobileupdate"] = "First update your mobile no.";
+                                BLSMS.SendSMS(Mobile, str, TempId);
                             }
-                            else
-                            {
-                                try
-                                {
-                                    BLSMS.SendSMS(Mobile, str, TempId);
-                                }
-                                catch { }
+                            catch { }
 
-                                TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
-                            }
- 
+                            TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
+
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
                         {
@@ -556,7 +549,7 @@ namespace MyTrade.Controllers
                         model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                         model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         model.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
-                        string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string TempId = "1707166036828812593";
                         string str = BLSMS.ForgetPassword(model.Name, model.Password);
                         try
@@ -669,7 +662,7 @@ namespace MyTrade.Controllers
             DataSet ds = model.AutoCalculateRewardBusiness();
             return View();
         }
-        
+
         public ActionResult OTPVerify()
         {
             return View();
