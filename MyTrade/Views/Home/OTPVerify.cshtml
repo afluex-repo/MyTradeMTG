@@ -16,7 +16,7 @@
 
         <link href="~/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
         <link href="~/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
-        @using (Html.BeginForm("OTPVerify", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", target = "_blank" }))
+        @using (Html.BeginForm("OTPVerify", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
         {
             <div class="container" style="margin-top:180px;">
                 <div class="row layout-top-spacing">
@@ -49,12 +49,13 @@
                                         <span style="color:red;">
                                             @TempData["OtpVerify"]
                                             @TempData["error"]
+                                            @TempData["mobileupdate"]
                                         </span>
                                         <div class="card-star_rating">
                                             @Html.TextBoxFor(m => m.OtpVerify, new { @class = "form-control", @placeholder = "Enter OTP" })
                                         </div>
                                         <p class="card-text">
-                                        <input class="btn btn-success btn-block" name="btn_Pin" id="btn_Pin" onclick="return validateform()" type="submit" value="Verify" />                                   
+                                            <input class="btn btn-success btn-block" name="btn_Pin" id="btn_Pin" onclick="return validateform()" type="submit" value="Verify" />
                                         </p>
                                     </div>
                                 </div>
