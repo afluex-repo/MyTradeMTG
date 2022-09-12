@@ -55,7 +55,6 @@ F:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.Properties.R
 F:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 F:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.dll
 F:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.pdb
-F:\SachinMishraProject\repository\MyTrade\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\Repository\MyTrade\MyTrade\bin\ApplicationInsights.config
 E:\Repository\MyTrade\MyTrade\bin\roslyn\csc.exe
 E:\Repository\MyTrade\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

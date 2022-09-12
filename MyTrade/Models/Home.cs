@@ -290,8 +290,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("[GetPaymentTypeForUser]");
             return ds;
         }
-
-
+        
         public DataSet OTPVerified()
         {
             SqlParameter[] para = { new SqlParameter("@OtpVerify", OtpVerify)

@@ -96,13 +96,13 @@ namespace MyTrade.Controllers
                             Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
                             Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
 
-                            string Name = ds.Tables[0].Rows[0]["Name"].ToString();
-                            string LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                            string Mobile = ds.Tables[0].Rows[0]["Contact"].ToString();
-                            string OtpVerify = ds.Tables[0].Rows[0]["OtpVerify"].ToString();
-                            string TempId = "1707166036874698573";
+                            //string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                            //string LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                            //string Mobile = ds.Tables[0].Rows[0]["Contact"].ToString();
+                            //string OtpVerify = ds.Tables[0].Rows[0]["OtpVerify"].ToString();
+                            //string TempId = "1707166036874698573";
 
-                            string str = "Dear "+ Name + ", Your OTP "+ OtpVerify + " for "+ LoginId + ". MY TRADE";
+                            //string str = "Dear "+ Name + ", Your OTP "+ OtpVerify + " for "+ LoginId + ". MY TRADE";
                             
                             if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
                             {
@@ -112,18 +112,18 @@ namespace MyTrade.Controllers
                             }
                             else
                             {
-                                //FormName = "AdminDashBoard";
-                                FormName = "OTPVerify";
-                                Controller = "Home";
+                               FormName = "AdminDashBoard";
+                                //FormName = "OTPVerify";
+                                Controller = "Admin";
                             }
 
-                            try
-                            {
-                                BLSMS.SendSMS(Mobile,str,TempId);
-                            }
-                            catch { }
+                            //try
+                            //{
+                            //    BLSMS.SendSMS(Mobile,str,TempId);
+                            //}
+                            //catch { }
 
-                            TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
+                            //TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
                             
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
@@ -687,8 +687,8 @@ namespace MyTrade.Controllers
                     }
                     else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                     {
-                        Session["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "Login";
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "OTPVerify";
                         Controller = "Home";
                     }
                 }
@@ -697,7 +697,7 @@ namespace MyTrade.Controllers
             catch (Exception ex)
             {
                 TempData["error"] = ex.Message;
-                FormName = "Login";
+                FormName = "OTPVerify";
                 Controller = "Home";
             }
             return RedirectToAction(FormName, Controller);
