@@ -550,7 +550,7 @@ namespace MyTrade.Controllers
                         model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                         model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         model.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
-                        string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string TempId = "1707166036828812593";
                         string str = BLSMS.ForgetPassword(model.Name, model.Password);
                         try
@@ -663,7 +663,7 @@ namespace MyTrade.Controllers
             DataSet ds = model.AutoCalculateRewardBusiness();
             return View();
         }
-        
+
         public ActionResult OTPVerify()
         {
             return View();
