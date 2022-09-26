@@ -125,7 +125,7 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         string Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString()+","+ ds.Tables[0].Rows[0]["LoginId"].ToString();
                         string Product = ds.Tables[0].Rows[0]["Package"].ToString();
                         string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string TempId = "1707166036877932940";
@@ -722,6 +722,16 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         model.Response = "1";
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString() + "," + ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string Package = ds.Tables[0].Rows[0]["Package"].ToString();
+                        string TempId = "1707166036877932940";
+                        string Message = "Dear "+Name+", Your Profile is activated successfully with package "+ Package + ". Kindly check your account for more details. MY TRADE";
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, Message, TempId);
+                        }
+                        catch { }
                     }
                     else
                     {

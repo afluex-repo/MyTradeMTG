@@ -326,7 +326,15 @@
                 success: function (data) {
                     if (data != null) {
                         if (data.Response == "1") {
-                            alert("User activated successfully");
+                            $(document).ready(function () {
+                                Snackbar.show({
+                                    text: 'User activated successfully',
+                                    actionTextColor: '#fff',
+                                    backgroundColor: '#1abc9c',
+                                    pos: 'top-right'
+                                });
+                            });
+                            window.location.reload();
                         }
                         else {
                             alert(data.Message);
@@ -343,7 +351,7 @@
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 
-   
+
 
     //function getpaymentTypedetails() {
     //    debugger;
