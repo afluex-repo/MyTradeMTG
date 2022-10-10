@@ -62,15 +62,14 @@ namespace MyTrade
 
 
         }
-        static public string Payout(string Name, string Payout,string payoutNo)
+        static public string Payout(string Name, string Payout,string payoutNo,string Date)
         {
 
             string Message = ConfigurationSettings.AppSettings["Payout"].ToString();
-
-
             Message = Message.Replace("[Name]", Name);
             Message = Message.Replace("[Payout]", Payout);
             Message = Message.Replace("[PayoutNo]", payoutNo);
+            Message = Message.Replace("[PayoutDate]", Date);
             return Message;
 
 
@@ -136,6 +135,6 @@ namespace MyTrade
 
 
         }
-       
+        
     }
 }

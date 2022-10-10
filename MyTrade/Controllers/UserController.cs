@@ -56,10 +56,13 @@ namespace MyTrade.Controllers
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 ViewBag.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
-               
+
                 if (ViewBag.Status == "InActive")
                 {
+                    Session["IdActivated"] = false;
                     return RedirectToAction("CompleteRegistration", "Home");
+                  
+
                 }
                 else
                 {
@@ -193,8 +196,11 @@ namespace MyTrade.Controllers
         {
             Account model = new Account();
             model.LoginId = Session["LoginId"].ToString();
-            model.BankName = Session["Bank"].ToString();
-            model.BankBranch = Session["Branch"].ToString();
+            if (Session["IdActivated"].ToString()=="true")
+            {
+                model.BankName = Session["Bank"].ToString();
+                model.BankBranch = Session["Branch"].ToString();
+            }
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -270,7 +276,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString()+","+obj.LoginId+"";
                         obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                         string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
@@ -891,8 +897,12 @@ namespace MyTrade.Controllers
             User model = new User();
             List<User> list = new List<User>();
             model.LoginId = Session["LoginId"].ToString();
-            model.BankName = Session["Bank"].ToString();
-            model.BranchName = Session["Branch"].ToString();
+            if (Session["IdActivated"].ToString() == "true")
+            {
+                model.BankName = Session["Bank"].ToString();
+                model.BranchName = Session["Branch"].ToString();
+           
+            }
             DataSet dss = model.GetEPinRequestDetails();
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[1].Rows.Count > 0)
             {

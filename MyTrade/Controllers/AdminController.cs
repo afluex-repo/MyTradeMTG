@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Mytrade.Models;
 using System.IO;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace MyTrade.Controllers
 {
@@ -1160,7 +1162,24 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["msg"] = "Distribute payment successfully";
-                    }
+                            foreach (DataRow r  in ds.Tables[0].Rows)
+                            {
+                                string Name = r["Username"].ToString();
+                                string Amount = r["NetAmount"].ToString();
+                                 string Mobile = r["Mobile"].ToString();
+                                 string PayoutNo = r["PayoutNo"].ToString();
+                                 string ClossingDate = r["ClosingDate"].ToString();
+                                string TempId = "1707166036854019761";
+                                string str = BLSMS.Payout(Name, Amount,PayoutNo,ClossingDate);
+                                try
+                                {
+                                    BLSMS.SendSMS(Mobile, str, TempId);
+                                }
+                                catch
+                                {
+                              }
+                            }
+                        }
                     else
                     {
                         TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -2857,6 +2876,42 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
+        public ActionResult BonazaReward()
+        {
+            return View();
+        } 
+        [HttpPost]
+        public JsonResult SaveBonaza(Admin model,string datavalue)
+        {
+            try
+            {
+                string Reward = "";
+                string BusinessTarget = "";
+                string Amount = "";
+                string RewardImage = "";
+                var jss = new JavaScriptSerializer();
+                var jdv = jss.Deserialize<dynamic>(datavalue);
+                DataTable dt = new DataTable();
+                dt.Columns.Add("RewardName");
+                dt.Columns.Add("BusinessTarget");
+                dt.Columns.Add("Amount");
+                dt.Columns.Add("RewardImage");
+                DataTable bonazalist = JsonConvert.DeserializeObject<DataTable>(jdv["rewardlist"]);
+                foreach (DataRow r in bonazalist.Rows)
+                {
+                    Reward = r["Reward"].ToString();
+                    BusinessTarget = r["BusinessAmount"].ToString();
+                    Amount = r["RewardAmount"].ToString();
+
+                }
+               
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
      }
 }

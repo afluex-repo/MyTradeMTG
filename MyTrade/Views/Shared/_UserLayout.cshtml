@@ -246,10 +246,10 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Wallet" data-parent="#accordionExample">
-                            @if (Session["IdActivated"] != null)
+                            @*@if (Session["IdActivated"] != null)
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {
+                                {*@
                                     <li>
                                         <a href="/Wallet/AddWallet">Wallet Request</a>
                                     </li>
@@ -262,11 +262,11 @@
                                     @*<li>
                                             <a href="/User/PayoutRequest">Transfer to Account</a>
                                         </li>*@
-                                }
-                                else
-                                {
-                                }
-                            }
+                                    @*//}
+                                    //else
+                                    //{
+                                    //    }*@
+                                @*}*@
 
                         </ul>
                     </li>
@@ -281,15 +281,15 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Pin" data-parent="#accordionExample">
-                            @if (Session["IdActivated"] != null)
+                            @*@if (Session["IdActivated"] != null)
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {
+                                {*@
                                     <li>
                                         <a href="/User/EPinRequest">Generate E-Pin</a>
                                     </li>
-                                }
-                            }
+                                @*}
+                            }*@
                             <li>
                                 <a href="/User/PinList">Pin List</a>
                             </li>
@@ -310,31 +310,31 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="Account" data-parent="#accordionExample">
-                            @if (Session["IdActivated"] != null)
+                            @*@if (Session["IdActivated"] != null)
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {
-                                    //if (Session["TopUp"] != null)
+                                {*@
+                                    @*//if (Session["TopUp"] != null)
                                     //{
                                     //    if (Session["TopUp"].ToString() == "False")
-                                    //    {
+                                    //    {*@
                                     <li>
                                         <a href="/user/Topup">Topup</a>
                                     </li>
-                                    //    }
-                                    //}
+                                    @*//    }
+                                    //}*@
                                     <li>
                                         <a href="/user/TopUpList">Topup List</a>
                                     </li>
                                     <li>
                                         <a href="/User/PayoutRequest">Transfer To Bank</a>
                                     </li>
-                                }
+                                @*}
                                 else
                                 {
 
                                 }
-                            }
+                            }*@
                         </ul>
                     </li>
                     <li class="menu">

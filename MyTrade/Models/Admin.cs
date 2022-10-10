@@ -52,6 +52,9 @@ namespace MyTrade.Models
         public string PK_RequestID { get; set; }
         public List<Admin> lstEpinRequest { get; set; }
         public string ProductName { get; set; }
+        public string RewardName { get; set; }
+        public string RewardAmount { get; set; }
+        public string Reward { get; set; }
         public List<Admin> lstTps { get; set; }
         public string CrAmount { get; set; }
         public decimal CrDrAmount { get; set; }
@@ -470,7 +473,8 @@ namespace MyTrade.Models
                  new SqlParameter("@Status",Status),
                   new SqlParameter("@TransactionNo",TransactionNo),
                 new SqlParameter("@DeclinedBy",UpdatedBy),
-                 new SqlParameter("@TransactionDate",TransactionDate)
+                 new SqlParameter("@TransactionDate",TransactionDate),
+                 new SqlParameter("@Narration",Narration)
             };
             DataSet ds = DBHelper.ExecuteQuery("DeclinePayoutRequest", para);
             return ds;

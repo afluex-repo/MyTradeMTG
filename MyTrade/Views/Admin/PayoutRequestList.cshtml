@@ -105,21 +105,22 @@
                                             {
                                                 <tr class="text-left">
 
-                                                    @if (Item.Status == "Pending")
-                                                    {
+                                                    @*@if (Item.Status == "Pending")
+                                                    {*@
                                                         <td>
 
                                                             <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
                                                             <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
                                                             <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                            <input type="hidden" name="Status_ @i" id="Status_ @i" value="@Item.Status" />
                                                         </td>
-                                                    }
+                                                    @*}
                                                     else
                                                     {
                                                         <td>
                                                             <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
                                                         </td>
-                                                    }
+                                                    }*@
                                                     <td>@i</td>
                                                     <td id="txnNo">@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
@@ -318,7 +319,10 @@
     //});
     function openPopup(PK_RequestID) {
         jQuery.noConflict();
+        debugger
         $("#PK_RequestID").val(PK_RequestID);
+        //var approved = $("#Status_" + PK_RequestID + "").val();
+        //alert(approved);
         $("#myModal").modal('show');
     }
     function closeModal() {
