@@ -1,0 +1,151 @@
+﻿@model MyTrade.Models.Admin
+
+@{
+    ViewBag.Title = "BonazaReward";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+
+@using (Html.BeginForm("BonazaReward", "Admin", FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Bonaza Reward Master</h4>
+                                <span class="text-danger">
+                                    @TempData["Bonaza"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row mb-2">
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Reward Name<span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.RewardName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">From Date</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.FromDate, new { @placeholder = "From Date", @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">To Date</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.ToDate, new { @placeholder = "To Date", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          <div class="table table-responsive" >
+                                    <table class="table tab-content table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Reward</th>
+                                                <th>Business Target</th>
+                                                <th>Reward Amount</th>
+                                                <th>Reward Image</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="Maintable">
+                                                <td>@Html.TextBoxFor(m => m.Reward, new { @class = "reward form-control" })</td>
+                                                <td>@Html.TextBoxFor(m => m.BusinessAmount, new { @class = "BusinessAmount form-control" })</td>
+                                                <td>@Html.TextBoxFor(m => m.RewardAmount, new { @class = "RewardAmount form-control" })</td>
+                                                <td><input type="file" class="RewardImage form-control" id="RewardImage"/></td>
+                                               <td><input type="button" id="add" data-toggle="tooltip" data-original-title="Add" value="add"  class="btn btn-success" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              <div class="table table-responsive" id="duplicatediv">
+                                  <table class="table tab-content" id="duplicatetableitem"></table>
+                                  <span class="text-danger" id="itemerror"></span>
+                              </div>
+                         
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                    <input type="button" id="btnSave" class="btn btn-success" name="btnSave" value="Save" />
+                            </div>
+                        </div>
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    $("#add").click(function () {
+        debugger
+        $newRow = $("#Maintable").clone().removeAttr("id");
+        $(".reward", $newRow).prop("disabled", true).val($("#Reward").val());
+        $(".BusinessAmount", $newRow).prop("disabled", true).val($("#BusinessAmount").val());
+        $(".RewardAmount", $newRow).prop("disabled", true).val($("#RewardAmount").val());
+        $(".RewardImage", $newRow).prop("disabled", true).val();
+        $("#add", $newRow).addClass("remove").val("Remove").removeClass("btn-success").addClass("btn-danger");
+        $("#Reward, #BusinessAmount,#RewardAmount,#RewardImage", $newRow).removeAttr("id");
+        $("#Reward, #BusinessAmount,#RewardAmount").val("");
+        $("#duplicatetableitem").append($newRow);
+      
+    })
+    $('#duplicatetableitem').on('click', '.remove', function () {
+        $(this).parents('tr').remove();
+    })
+    $("#btnSave").click(function () {
+        debugger
+        var list = [];
+        $("#duplicatetableitem tr").each(function(index,ele)
+        {
+            debugger
+            var item = {
+                Reward: $(".reward", this).val(),
+                BusinessAmount: $(".BusinessAmount", this).val(),
+                RewardAmount: $(".RewardAmount", this).val(),
+                RewardImage: $('.RewardImage',this)[0].files[0].name
+            }
+            list.push(item);
+        })
+        console.log(list);
+        if (($('#duplicatetableitem tr').length) == 0) {
+            alert("testing");
+        }
+        else {
+            var data = {
+                rewardlist: JSON.stringify(list),
+                RewardName: $("#RewardName").val(),
+                FromDate: $("#FromDate").val(),
+                ToDate:$("#ToDate").val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "SaveBonaza",
+                data: JSON.stringify({ datavalue: JSON.stringify(data) }),
+                contentType: "application/json",
+                success: function (data) {
+
+                }
+            })
+        }
+    })
+</script>

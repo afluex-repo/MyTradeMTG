@@ -99,6 +99,8 @@ namespace MyTrade.Models
         public string Provider { get; set; }
         public string TransactionFor { get; set; }
         public string ServerOrderId { get; set; }
+        public string IsHoldTPS { get; set; }
+        public string WithdrawalStatus { get; set; }
         //public string SponserName { get; set; }
         public string OrderNo { get; set; }
         public DataSet GetRechargeList()
@@ -176,7 +178,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetDirectListForAdmin", para);
             return ds;
         }
-
+        public DataSet getJoiningPackagelist()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("getJoiningPackageReport", para);
+            return ds;
+        }
         public DataSet GetAdminProfileDetails()
         {
             SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId)
@@ -296,6 +308,30 @@ namespace MyTrade.Models
         public List<AdminReports> lstRew { get; set; }
         public string Target { get; set; }
 
+        #endregion
+        #region TPSStatus
+        public DataSet UpdateTPSStatus()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Fk_Userid",Fk_UserId),
+                new SqlParameter("@IsHoldTPS",IsHoldTPS),
+                new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateTPSStatus", para);
+            return ds;
+        }
+        public DataSet UpdateWithdrawalStatus()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Fk_Userid",Fk_UserId),
+                new SqlParameter("@WithdrawalStatus",WithdrawalStatus),
+                new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateWithdrawalStatus", para);
+            return ds;
+        }
         #endregion
 
     }

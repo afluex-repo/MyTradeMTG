@@ -221,6 +221,7 @@ namespace MyTrade.Controllers
                         Session["PassWord"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["Transpassword"] = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["MobileNo"] = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+                        Session["FullName"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         Session["Email"] = ds.Tables[0].Rows[0]["Email"].ToString();
                         Session["Profile"] = "";
                         obj.Result = "1";

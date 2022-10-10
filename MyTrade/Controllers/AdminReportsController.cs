@@ -49,6 +49,8 @@ namespace MyTrade.Controllers
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
                     obj.ActivationMode = r["ActivationMode"].ToString();
+                    obj.IsHoldTPS = r["IsTPSHold"].ToString();
+                    obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -92,6 +94,8 @@ namespace MyTrade.Controllers
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
                     obj.ActivationMode = r["ActivationMode"].ToString();
+                    obj.IsHoldTPS = r["IsTPSHold"].ToString();
+                    obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -221,6 +225,124 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AssociateList", "AdminReports");
         }
+        #region TPSStatusManage
+        public ActionResult HoldTPS(string Fk_UserId)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Fk_UserId = Fk_UserId;
+                model.UpdatedBy = Session["PK_AdminId"].ToString();
+                model.IsHoldTPS = "1";
+                DataSet ds = model.UpdateTPSStatus();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "TPS Hold successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["BlockUnblock"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
+        public ActionResult UnHoldTPS(string Fk_UserId)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Fk_UserId = Fk_UserId;
+                model.UpdatedBy = Session["PK_AdminId"].ToString();
+                model.IsHoldTPS = "0";
+                DataSet ds = model.UpdateTPSStatus();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "TPS UNHold successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["BlockUnblock"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
+        public ActionResult StopWithdrawal(string Fk_UserId)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Fk_UserId = Fk_UserId;
+                model.UpdatedBy = Session["PK_AdminId"].ToString();
+                model.WithdrawalStatus = "1";
+                DataSet ds = model.UpdateWithdrawalStatus();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "Withdrawal Stopped successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["BlockUnblock"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
+        public ActionResult StartWithdrawal(string Fk_UserId)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Fk_UserId = Fk_UserId;
+                model.UpdatedBy = Session["PK_AdminId"].ToString();
+                model.WithdrawalStatus = "0";
+                DataSet ds = model.UpdateWithdrawalStatus();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["BlockUnblock"] = "Withdrawal Start successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        TempData["BlockUnblock"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["BlockUnblock"] = ex.Message;
+            }
+            return RedirectToAction("AssociateList", "AdminReports");
+        }
+        #endregion
         #region topupreport
         public ActionResult TopupReport()
         {
@@ -1228,7 +1350,6 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
         #region ClaimRewardReport
         public ActionResult ClaimRewardReport(AdminReports model)
         {
@@ -1257,5 +1378,71 @@ namespace MyTrade.Controllers
 
 
         #endregion
+        public ActionResult JoiningPackageReport()
+
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            try
+            {
+                DataSet ds = model.getJoiningPackagelist();
+                if (ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        AdminReports obj = new AdminReports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.BV = r["BV"].ToString();
+                        obj.Package = r["PackageType"].ToString();
+                        obj.Date = r["Date"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstWalletLedger = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("JoiningpackageReport")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult JoiningReport(AdminReports model)
+
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate,"dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                DataSet ds = model.getJoiningPackagelist();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        AdminReports obj = new AdminReports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Amount = r["Amount"].ToString();
+                        obj.BV = r["BV"].ToString();
+                        obj.Package = r["PackageType"].ToString();
+                        obj.Date = r["Date"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstWalletLedger = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return View(model);
+        }
     }
 }
