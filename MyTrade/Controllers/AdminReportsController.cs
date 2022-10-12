@@ -1480,11 +1480,11 @@ namespace MyTrade.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         AdminReports obj = new AdminReports();
-                        obj.LoginId = r["LoginId"].ToString();
-                        obj.Name = r["Name"].ToString();
-                        obj.Amount = r["BusinessAmount"].ToString();
-                        obj.Date = r["Date"].ToString();
-                        lst.Add(obj);
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Amount = r["tdsAmount"].ToString();
+                    obj.Date = r["CurrentDate"].ToString();
+                    lst.Add(obj);
                     }
                     model.lstTDSReport = lst;
                 }
