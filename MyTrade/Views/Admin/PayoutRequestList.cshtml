@@ -82,6 +82,7 @@
                                         <th>Name</th>
                                         <th>Net Amount</th>
                                         <th>Procesing Charges</th>
+                                        <th>TDS</th>
                                         <th>Gross Amount</th>
                                         <th>Bank Details</th>
                                         <th class="showallbankdetails" style="display:none">Bank Name</th>
@@ -127,6 +128,7 @@
                                                     <td>@Item.Name</td>
                                                     <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
                                                     <td>@Item.ProcessingFee</td>
+                                                    <td>@Item.TDSAmount</td>
                                                     <td>@Item.GrossAmount</td>
 
                                                     @*<td class="showifsccode">@Item.IFSCCode</td>*@

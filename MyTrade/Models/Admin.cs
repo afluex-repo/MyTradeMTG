@@ -163,9 +163,9 @@ namespace MyTrade.Models
         public string Fk_ProductId { get; set; }
         public string AvailableBalance { get; set; }
         public List<Admin> lstWalletLedger { get; set; }
-
+        public HttpPostedFileBase rewardImage { get; set; }
         public List<Admin> lstSponsor { get; set; }
-
+        public DataTable bonazalist { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -646,7 +646,18 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForTPS", para);
             return ds;
         }
-
+        //public DataSet SaveBonazaList()
+        //{
+        //    SqlParameter[] para = {
+        //        new SqlParameter("@RewardName",RewardName),
+        //        new SqlParameter("@FromDate", FromDate),
+        //        new SqlParameter("@ToDate", ToDate),
+        //        new SqlParameter("@AddedBy",AddedBy),
+        //        new SqlParameter("@BonazaDetails",bonazalist)
+        //    };
+        //    DataSet ds = DBHelper.ExecuteQuery("SaveBonaza", para);
+        //    return ds;
+        //}
         public DataSet GetGeneratedEpinDetails()
         {
             SqlParameter[] para = {

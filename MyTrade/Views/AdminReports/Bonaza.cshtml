@@ -17,7 +17,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Bonaza</h4>
+                                <h4>Bonaza <a href="/AdminReports/BonazaRewardList" class="btn btn-primary float-right">Back to List</a></h4>
                                 <span class="text-danger">
                                     @TempData["Bonaza"]
                                 </span>
@@ -35,19 +35,19 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>Reward</label>
-                                    @Html.TextBoxFor(m => m.Reward, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                    @Html.TextBoxFor(m => m.Reward, new { @class = "form-control", @Placeholder = "Reward" })
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>Business Target</label>
-                                    @Html.TextBoxFor(m => m.BusinessTarget, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                    @Html.TextBoxFor(m => m.BusinessTarget, new { @class = "form-control", @Placeholder = "Business Target" })
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>Reward Amount</label>
-                                    @Html.TextBoxFor(m => m.RewardAmount, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
+                                    @Html.TextBoxFor(m => m.RewardAmount, new { @class = "form-control", @Placeholder = "Reward Amount" })
                                 </div>
                             </div>
                            
@@ -75,16 +75,16 @@
         $("#divload").css({ 'display': 'none' });
         $(".errortext").removeClass('errortext');
 
-        if ($("#Fk_BonazaDetailsId").val() == '') {
-            $("#Fk_BonazaDetailsId").addClass('errortext');
-            $("#Fk_BonazaDetailsId").focus();
+        if ($("#Fk_BonazaId").val() == '') {
+            $("#Fk_BonazaId").addClass('errortext');
+            $("#Fk_BonazaId").focus();
             return false;
         }
-        //if ($("#Reward").val() == '') {
-        //    $("#Reward").addClass('errortext');
-        //    $("#Reward").focus();
-        //    return false;
-        //}
+        if ($("#Reward").val() == '') {
+            $("#Reward").addClass('errortext');
+            $("#Reward").focus();
+            return false;
+        }
         //if ($("#BusinessTarget").val() == '') {
         //    $("#BusinessTarget").addClass('errortext');
         //    $("#BusinessTarget").focus();
