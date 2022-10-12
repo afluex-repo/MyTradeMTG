@@ -886,6 +886,9 @@
     <Content Include="Views\Admin\BonazaReward.cshtml" />
     <Content Include="Views\AdminReports\TDSReport.cshtml" />
     <Content Include="Views\AdminReports\BonazaRewardList.cshtml" />
+    <Content Include="Views\Master\RewardMaster.cshtml" />
+    <Content Include="Views\Master\RewardMasterList.cshtml" />
+    <Content Include="Views\AdminReports\Bonaza.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

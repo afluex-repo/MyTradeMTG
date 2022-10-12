@@ -106,6 +106,11 @@ namespace MyTrade.Models
         //public string SponserName { get; set; }
         public string OrderNo { get; set; }
         public string Reward { get; set; }
+        public string Fk_BonazaId { get; set; }
+        public string BusinessTarget { get; set; }
+        public string RewardAmount { get; set; }
+        public string RewardImage { get; set; }
+
 
         public DataSet GetRechargeList()
         {
@@ -361,5 +366,24 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet GetReward()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetReward");
+            return ds;
+        }
+
+        public DataSet SaveBonaza()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@Fk_BonazaDetailsId",Fk_BonazaId),
+                   new SqlParameter("@Reward",Reward),
+                   new SqlParameter("@BusinessTarget",BusinessTarget),
+                   new SqlParameter("@RewardAmount",RewardAmount),
+                   new SqlParameter("@RewardImage",RewardImage),
+                   new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveBonaza", para);
+            return ds;
+        }
     }
 }
