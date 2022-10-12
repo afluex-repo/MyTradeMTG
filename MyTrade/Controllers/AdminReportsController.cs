@@ -1444,5 +1444,185 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
+
+        public ActionResult TDSReport()
+        {
+                AdminReports model = new AdminReports();
+                List<AdminReports> lst = new List<AdminReports>();
+                DataSet ds = model.GetTdsReport();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                     AdminReports obj = new AdminReports();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.Amount = r["tdsAmount"].ToString();
+                    obj.Date = r["CurrentDate"].ToString();
+                    lst.Add(obj);
+                    }
+                    model.lstTDSReport = lst;
+                }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("TDSReport")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetTDSReport(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                DataSet ds = model.GetTdsReport();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        AdminReports obj = new AdminReports();
+                        obj.LoginId = r["LoginId"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.Amount = r["BusinessAmount"].ToString();
+                        obj.Date = r["Date"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstTDSReport = lst;
+                }
+            return View(model);
+        }
+
+        public ActionResult BonazaRewardList()
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.GetBonazaRewardList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.LoginId = r["BusinessTarget"].ToString();
+                    obj.Name = r["Reward"].ToString();
+                    obj.Amount = r["RewardAmount"].ToString();
+                    obj.Date = r["RewardImage"].ToString();
+                    obj.LoginId = r["RewardName"].ToString();
+                    obj.Name = r["FromDate"].ToString();
+                    obj.Amount = r["ToDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBonazaReward = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("BonazaRewardList")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetBonazaRewardList(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetBonazaRewardList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Target = r["BusinessTarget"].ToString();
+                    obj.Reward = r["Reward"].ToString();
+                    obj.Amount = r["RewardAmount"].ToString();
+                    obj.Image = r["RewardImage"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.FromDate = r["FromDate"].ToString();
+                    obj.ToDate = r["ToDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBonazaReward = lst;
+            }
+            return View(model);
+        }
+
+        public ActionResult Bonaza()
+        {
+            AdminReports model = new AdminReports();
+            #region ddlReward
+            int count = 0;
+            List<SelectListItem> ddlReward = new List<SelectListItem>();
+            DataSet ds = model.GetReward();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlReward.Add(new SelectListItem { Text = "-Select-", Value = "" });
+                    }
+                    ddlReward.Add(new SelectListItem { Text = r["RewardName"].ToString(), Value = r["Pk_BonazaRewardId"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlReward = ddlReward;
+            #endregion
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("Bonaza")]
+        [OnAction(ButtonName = "save")]
+        public ActionResult SaveBonaza(AdminReports model, HttpPostedFileBase RewardImage)
+        {
+            #region ddlReward
+            int count = 0;
+            List<SelectListItem> ddlReward = new List<SelectListItem>();
+            DataSet dss = model.GetReward();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlReward.Add(new SelectListItem { Text = "Reward Name", Value = "" });
+                    }
+                    ddlReward.Add(new SelectListItem { Text = r["RewardName"].ToString(), Value = r["Pk_BonazaRewardId"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlReward = ddlReward;
+            #endregion
+            try
+            {
+                if (RewardImage != null)
+                {
+                    model.RewardImage = "/BannerImage/" + Guid.NewGuid() + Path.GetExtension(RewardImage.FileName);
+                    RewardImage.SaveAs(Path.Combine(Server.MapPath(model.RewardImage)));
+                }
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveBonaza();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Bonaza"] = "Bonaza Save Successfully !!";
+                    }
+                    else
+                    {
+                        TempData["Bonaza"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Bonaza"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Bonaza"] = ex.Message;
+            }
+            return RedirectToAction("Bonaza", "AdminReports");
+        }
     }
 }
