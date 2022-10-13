@@ -63,20 +63,20 @@
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lstTDSReport != null)
+                                        if (Model.lstBonazaReward != null)
                                         {
                                             int i = 1;
-                                            foreach (var Item in Model.lstTDSReport)
+                                            foreach (var Item in Model.lstBonazaReward)
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
                                                     <td>@Item.RewardName</td>
                                                     <td>@Item.Reward</td>
                                                     <td>@Item.Amount</td>
-                                                    <td>@Item.Target</td>
+                                                    <td>@Item.BusinessTarget</td>
                                                     <td>@Item.FromDate</td>
                                                     <td>@Item.ToDate</td>
-                                                    <td>@Item.Image</td>
+                                                    <td><img src="@Item.Image" height="80" width="80" /></td>
                                                 </tr>
                                                 i++;
                                             }

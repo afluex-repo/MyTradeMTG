@@ -1391,6 +1391,8 @@ namespace MyTrade.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         AdminReports obj = new AdminReports();
+                        obj.SponsorId = r["SponsorId"].ToString();
+                        obj.SponsorName = r["SponsorName"].ToString();
                         obj.LoginId = r["LoginId"].ToString();
                         obj.Name = r["Name"].ToString();
                         obj.Amount = r["Amount"].ToString();
@@ -1426,6 +1428,8 @@ namespace MyTrade.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         AdminReports obj = new AdminReports();
+                        obj.SponsorId = r["SponsorId"].ToString();
+                        obj.SponsorName = r["SponsorName"].ToString();
                         obj.LoginId = r["LoginId"].ToString();
                         obj.Name = r["Name"].ToString();
                         obj.Amount = r["Amount"].ToString();
@@ -1501,13 +1505,13 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     AdminReports obj = new AdminReports();
-                    obj.LoginId = r["BusinessTarget"].ToString();
-                    obj.Name = r["Reward"].ToString();
+                    obj.BusinessTarget = r["BusinessTarget"].ToString();
+                    obj.Reward = r["Reward"].ToString();
                     obj.Amount = r["RewardAmount"].ToString();
-                    obj.Date = r["RewardImage"].ToString();
-                    obj.LoginId = r["RewardName"].ToString();
-                    obj.Name = r["FromDate"].ToString();
-                    obj.Amount = r["ToDate"].ToString();
+                    obj.Image = r["RewardImage"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.FromDate = r["FromDate"].ToString();
+                    obj.ToDate = r["ToDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstBonazaReward = lst;
