@@ -54,8 +54,11 @@ namespace MyTrade.Controllers
             ViewBag.ddlpaymentType = ddlpaymentType;
             #endregion
             obj.LoginId = Session["LoginId"].ToString();
-            obj.BankBranch = Session["Branch"].ToString();
-            obj.BankName = Session["Bank"].ToString();
+            if (Session["IdActivated"].ToString() == "true")
+            {
+                obj.BankBranch = Session["Branch"].ToString();
+                obj.BankName = Session["Bank"].ToString();
+            }
 
             #region Check Balance
             obj.FK_UserId = Session["Pk_UserId"].ToString();

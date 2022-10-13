@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using Mytrade.Models;
 using System.IO;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using System.Configuration;
 
 namespace MyTrade.Controllers
 {
@@ -1160,7 +1163,24 @@ namespace MyTrade.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["msg"] = "Distribute payment successfully";
-                    }
+                            foreach (DataRow r  in ds.Tables[0].Rows)
+                            {
+                                string Name = r["Username"].ToString();
+                                string Amount = r["NetAmount"].ToString();
+                                 string Mobile = r["Mobile"].ToString();
+                                 string PayoutNo = r["PayoutNo"].ToString();
+                                 string ClossingDate = r["ClosingDate"].ToString();
+                                string TempId = "1707166036854019761";
+                                string str = BLSMS.Payout(Name, Amount,PayoutNo,ClossingDate);
+                                try
+                                {
+                                    BLSMS.SendSMS(Mobile, str, TempId);
+                                }
+                                catch
+                                {
+                              }
+                            }
+                        }
                     else
                     {
                         TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -1468,6 +1488,7 @@ namespace MyTrade.Controllers
                     obj.BankBranch = r["MemberBranch"].ToString();
                     obj.BankName = r["MemberBankName"].ToString();
                     obj.UPIID = r["UPIId"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
                     obj.PaymentMode = "IFSC Code - " + r["IFSCCode"].ToString() + ",AccNo- " + r["MemberAccNo"].ToString() + ",Branch- " + r["MemberBranch"].ToString() + ",Bank Name- " + r["MemberBankName"].ToString() + ",UPI Id- " + r["UPIId"].ToString();
 
                     obj.Status = r["Status"].ToString();
@@ -1503,7 +1524,7 @@ namespace MyTrade.Controllers
                     //obj.IFSCCode = r["IFSCCode"].ToString();
                     //obj.UPIID = r["UPIId"].ToString();
                     //obj.MemberAccNo = r["MemberAccNo"].ToString();
-
+                    obj.TDSAmount = r["TDS"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.MemberAccNo = r["MemberAccNo"].ToString();
                     obj.BankBranch = r["MemberBranch"].ToString();
@@ -2857,6 +2878,68 @@ namespace MyTrade.Controllers
             }
             return View(model);
         }
-        
+        //public ActionResult BonazaReward()
+        //{
+        //    return View();
+        //} 
+        //public ActionResult SaveBonaza(Admin model,string datavalue)
+        //{
+        //    try
+        //    {
+        //        string Reward = "";
+        //        string BusinessTarget = "";
+        //        string Amount = "";
+        //        string RewardImage = null;
+        //        HttpPostedFileBase file = null;
+        //        var jss = new JavaScriptSerializer();
+        //        var jdv = jss.Deserialize<dynamic>(datavalue);
+        //        DataTable dt = new DataTable();
+        //        dt.Columns.Add("RewardName");
+        //        dt.Columns.Add("BusinessTarget");
+        //        dt.Columns.Add("Amount");
+        //        dt.Columns.Add("RewardImage");
+        //        string path = Server.MapPath("~/Uploads/");
+        //        if (!Directory.Exists(path))
+        //        {
+        //            Directory.CreateDirectory(path);
+        //        }
+        //        DataTable bonazalist = JsonConvert.DeserializeObject<DataTable>(jdv["rewardlist"]);
+        //        model.RewardName =jdv["RewardName"].ToString();
+        //        model.FromDate =string.IsNullOrEmpty(jdv["FromDate"].ToString())?null :Common.ConvertToSystemDate(jdv["FromDate"].ToString(), "dd/MM/yyyy");
+        //        model.ToDate = string.IsNullOrEmpty(jdv["ToDate"].ToString()) ? null : Common.ConvertToSystemDate(jdv["ToDate"].ToString(), "dd/MM/yyyy");
+               
+        //        foreach (DataRow r in bonazalist.Rows)
+        //        {
+        //            Reward = r["Reward"].ToString();
+        //            BusinessTarget = r["BusinessAmount"].ToString();
+        //            Amount = r["RewardAmount"].ToString();
+        //            var rew = r["RewardImage"].ToString();
+        //            HttpPostedFileBase file1 = Request.Files["RewardImage"]; ;
+        //            RewardImage = Path.GetFileName(r["RewardImage"].ToString());
+        //            file1.SaveAs(path + RewardImage);
+        //            dt.Rows.Add( BusinessTarget, Amount, RewardImage, Reward);
+        //        }
+        //        model.bonazalist = dt;
+        //        model.AddedBy = Session["Pk_AdminId"].ToString();
+        //        DataSet ds = model.SaveBonazaList();
+        //        if (ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+        //        {
+        //            if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+        //            {
+        //                model.Result = "1";
+        //            }
+        //            else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+        //            {
+        //                model.Result = ds.Tables[0].Rows[0]["ErrorMsg"].ToString();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
      }
 }

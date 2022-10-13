@@ -220,7 +220,8 @@ namespace MyTrade.Controllers
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+            }
             return Json(objregi, JsonRequestBehavior.AllowGet);
         }
     }

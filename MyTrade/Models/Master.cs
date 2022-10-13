@@ -9,6 +9,7 @@ namespace MyTrade.Models
 {
     public class Master : Common
     {
+        public List<Master> lstBonazaReward { get; set; }
         public List<Master> lstpackage { get; set; }
 
         public decimal BinaryPercent { get; set; }
@@ -37,6 +38,10 @@ namespace MyTrade.Models
         public decimal FinalAmount { get; set; }
         public string IscomboPackage { get; set; }
         public decimal SponsorIncome { get; set; }
+
+        public string RewardName { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
 
         #region ProductMaster
 
@@ -175,5 +180,23 @@ namespace MyTrade.Models
             return ds;
         }
         #endregion
+
+        public DataSet SaveRewardMaster()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@RewardName",RewardName),
+                 new SqlParameter("@FromDate",FromDate),
+                  new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveRewardMaster", para);
+            return ds;
+        }
+
+        public DataSet GetRewardList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetRewardList");
+            return ds;
+        }
     }
 }

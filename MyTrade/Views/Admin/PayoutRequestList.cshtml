@@ -82,6 +82,7 @@
                                         <th>Name</th>
                                         <th>Net Amount</th>
                                         <th>Procesing Charges</th>
+                                        <th>TDS</th>
                                         <th>Gross Amount</th>
                                         <th>Bank Details</th>
                                         <th class="showallbankdetails" style="display:none">Bank Name</th>
@@ -105,27 +106,29 @@
                                             {
                                                 <tr class="text-left">
 
-                                                    @if (Item.Status == "Pending")
-                                                    {
+                                                    @*@if (Item.Status == "Pending")
+                                                    {*@
                                                         <td>
 
                                                             <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
                                                             <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
                                                             <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                            <input type="hidden" name="Status_ @i" id="Status_ @i" value="@Item.Status" />
                                                         </td>
-                                                    }
+                                                    @*}
                                                     else
                                                     {
                                                         <td>
                                                             <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
                                                         </td>
-                                                    }
+                                                    }*@
                                                     <td>@i</td>
                                                     <td id="txnNo">@Item.TransactionNo</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
                                                     <td>@Item.ProcessingFee</td>
+                                                    <td>@Item.TDSAmount</td>
                                                     <td>@Item.GrossAmount</td>
 
                                                     @*<td class="showifsccode">@Item.IFSCCode</td>*@
@@ -318,7 +321,10 @@
     //});
     function openPopup(PK_RequestID) {
         jQuery.noConflict();
+        debugger
         $("#PK_RequestID").val(PK_RequestID);
+        //var approved = $("#Status_" + PK_RequestID + "").val();
+        //alert(approved);
         $("#myModal").modal('show');
     }
     function closeModal() {

@@ -52,6 +52,9 @@ namespace MyTrade.Models
         public string PK_RequestID { get; set; }
         public List<Admin> lstEpinRequest { get; set; }
         public string ProductName { get; set; }
+        public string RewardName { get; set; }
+        public string RewardAmount { get; set; }
+        public string Reward { get; set; }
         public List<Admin> lstTps { get; set; }
         public string CrAmount { get; set; }
         public decimal CrDrAmount { get; set; }
@@ -160,9 +163,9 @@ namespace MyTrade.Models
         public string Fk_ProductId { get; set; }
         public string AvailableBalance { get; set; }
         public List<Admin> lstWalletLedger { get; set; }
-
+        public HttpPostedFileBase rewardImage { get; set; }
         public List<Admin> lstSponsor { get; set; }
-
+        public DataTable bonazalist { get; set; }
         #endregion
         #region PinGenerated
         public DataSet CreatePin()
@@ -470,7 +473,8 @@ namespace MyTrade.Models
                  new SqlParameter("@Status",Status),
                   new SqlParameter("@TransactionNo",TransactionNo),
                 new SqlParameter("@DeclinedBy",UpdatedBy),
-                 new SqlParameter("@TransactionDate",TransactionDate)
+                 new SqlParameter("@TransactionDate",TransactionDate),
+                 new SqlParameter("@Narration",Narration)
             };
             DataSet ds = DBHelper.ExecuteQuery("DeclinePayoutRequest", para);
             return ds;
@@ -642,7 +646,18 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPaidIncomesForTPS", para);
             return ds;
         }
-
+        //public DataSet SaveBonazaList()
+        //{
+        //    SqlParameter[] para = {
+        //        new SqlParameter("@RewardName",RewardName),
+        //        new SqlParameter("@FromDate", FromDate),
+        //        new SqlParameter("@ToDate", ToDate),
+        //        new SqlParameter("@AddedBy",AddedBy),
+        //        new SqlParameter("@BonazaDetails",bonazalist)
+        //    };
+        //    DataSet ds = DBHelper.ExecuteQuery("SaveBonaza", para);
+        //    return ds;
+        //}
         public DataSet GetGeneratedEpinDetails()
         {
             SqlParameter[] para = {

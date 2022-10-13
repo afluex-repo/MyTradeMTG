@@ -9,6 +9,8 @@ namespace MyTrade.Models
 {
     public class AdminReports : Common
     {
+        public List<AdminReports> lstBonazaReward { get; set; }
+        public List<AdminReports> lstTDSReport { get; set; }
         public List<AdminReports> lsttopupreport { get; set; }
         public string isBlocked { get; set; }
         public string Email { get; set; }
@@ -99,8 +101,17 @@ namespace MyTrade.Models
         public string Provider { get; set; }
         public string TransactionFor { get; set; }
         public string ServerOrderId { get; set; }
+        public string IsHoldTPS { get; set; }
+        public string WithdrawalStatus { get; set; }
         //public string SponserName { get; set; }
         public string OrderNo { get; set; }
+        public string Reward { get; set; }
+        public string Fk_BonazaId { get; set; }
+        public string BusinessTarget { get; set; }
+        public string RewardAmount { get; set; }
+        public string RewardImage { get; set; }
+
+
         public DataSet GetRechargeList()
         {
             SqlParameter[] para =
@@ -176,7 +187,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetDirectListForAdmin", para);
             return ds;
         }
-
+        public DataSet getJoiningPackagelist()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("getJoiningPackageReport", para);
+            return ds;
+        }
         public DataSet GetAdminProfileDetails()
         {
             SqlParameter[] para = { new SqlParameter("@PK_UserId", Fk_UserId)
@@ -297,6 +318,72 @@ namespace MyTrade.Models
         public string Target { get; set; }
 
         #endregion
+        #region TPSStatus
+        public DataSet UpdateTPSStatus()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Fk_Userid",Fk_UserId),
+                new SqlParameter("@IsHoldTPS",IsHoldTPS),
+                new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateTPSStatus", para);
+            return ds;
+        }
+        public DataSet UpdateWithdrawalStatus()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Fk_Userid",Fk_UserId),
+                new SqlParameter("@WithdrawalStatus",WithdrawalStatus),
+                new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateWithdrawalStatus", para);
+            return ds;
+        }
+        #endregion
 
+        public DataSet GetTdsReport()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@LoginId",LoginId),
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GETTDSREPORTS", para);
+            return ds;
+        }
+
+        public DataSet GetBonazaRewardList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@FromDate",FromDate),
+                new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetBonazaRewardList", para);
+            return ds;
+        }
+
+        public DataSet GetReward()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetReward");
+            return ds;
+        }
+
+        public DataSet SaveBonaza()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@Fk_BonazaDetailsId",Fk_BonazaId),
+                   new SqlParameter("@Reward",Reward),
+                   new SqlParameter("@BusinessTarget",BusinessTarget),
+                   new SqlParameter("@RewardAmount",RewardAmount),
+                   new SqlParameter("@RewardImage",RewardImage),
+                   new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveBonaza", para);
+            return ds;
+        }
     }
 }

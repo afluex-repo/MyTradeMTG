@@ -1,4 +1,5 @@
-﻿using MyTrade.Models;
+﻿using MyTrade.Filter;
+using MyTrade.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -584,6 +585,66 @@ namespace MyTrade.Controllers
                 TempData["Reward"] = ex.Message;
             }
             return RedirectToAction("UploadFileList", "Master");
+        }
+
+        public ActionResult RewardMaster()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RewardMaster")]
+        [OnAction(ButtonName = "save")]
+        public ActionResult RewardMasterAction(Master model)
+        {
+            try
+            {
+                //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "mm/dd/yyyy");
+                //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "mm/dd/yyyy");
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveRewardMaster();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Reward"] = "Reward Save Successfully !!";
+                    }
+                    else
+                    {
+                        TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Reward"] = ex.Message;
+            }
+            return RedirectToAction("RewardMaster", "Master");
+        }
+
+        public ActionResult RewardMasterList()
+        {
+            Master model = new Master();
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetRewardList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_RewardId = r["Pk_BonazaRewardId"].ToString();
+                    obj.RewardName = r["RewardName"].ToString();
+                    obj.FromDate = r["FromDate"].ToString();
+                    obj.ToDate = r["ToDate"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstBonazaReward = lst;
+            }
+            return View(model);
         }
     }
 }

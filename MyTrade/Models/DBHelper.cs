@@ -12,22 +12,20 @@ namespace MyTrade.Models
     public class DBHelper
     {
         public static string connectionString = string.Empty;
-
         static DBHelper()
         {
             try
             {
 
-                //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
-                connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
+                connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
+                // connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
-
         public static int ExecuteNonQuery(string commandText, params SqlParameter[] commandParameters)
         {
             int k = 0;
@@ -48,7 +46,6 @@ namespace MyTrade.Models
                 return k;
             }
         }
-
         public static DataSet ExecuteQuery(string commandText, params SqlParameter[] parameters)
         {
             DataSet ds = new DataSet();
@@ -69,7 +66,6 @@ namespace MyTrade.Models
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Msg");
                 dt.Columns.Add("ErrorMessage");
-
                 DataRow dr = dt.NewRow();
                 dr["Msg"] = "0";
                 dr["ErrorMessage"] = ex.Message;
@@ -79,6 +75,7 @@ namespace MyTrade.Models
             }
             return ds;
         }
+
     }
 }
 
