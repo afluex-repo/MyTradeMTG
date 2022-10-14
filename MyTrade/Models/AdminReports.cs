@@ -110,7 +110,7 @@ namespace MyTrade.Models
         public string BusinessTarget { get; set; }
         public string RewardAmount { get; set; }
         public string RewardImage { get; set; }
-
+        public string FK_BonazaDetailsId { get; set; }
 
         public DataSet GetRechargeList()
         {
@@ -360,7 +360,8 @@ namespace MyTrade.Models
             SqlParameter[] para =
             {
                 new SqlParameter("@FromDate",FromDate),
-                new SqlParameter("@ToDate",ToDate)
+                new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@Fk_BonazaId",FK_BonazaDetailsId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetBonazaRewardList", para);
             return ds;
@@ -383,6 +384,30 @@ namespace MyTrade.Models
                    new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveBonaza", para);
+            return ds;
+        }
+        public DataSet updateBonaza()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@Fk_BonazaRewardId",Fk_BonazaId),
+                   new SqlParameter("@Reward",Reward),
+                   new SqlParameter("@BusinessTarget",BusinessTarget),
+                   new SqlParameter("@RewardAmount",RewardAmount),
+                   new SqlParameter("@RewardImage",RewardImage),
+                   new SqlParameter("@AddedBy",AddedBy),
+                   new SqlParameter("@Fk_BonazaDetailsId",FK_BonazaDetailsId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBonaza", para);
+            return ds;
+        }
+        public DataSet deleteBonaza()
+        {
+            SqlParameter[] para =
+            {
+             new SqlParameter("@Fk_BonazaId",FK_BonazaDetailsId),
+             new SqlParameter("@DeletedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteBonazaRewardDetails", para);
             return ds;
         }
     }

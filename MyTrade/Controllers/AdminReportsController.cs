@@ -1459,6 +1459,8 @@ namespace MyTrade.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                      AdminReports obj = new AdminReports();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Amount = r["tdsAmount"].ToString();
@@ -1484,6 +1486,8 @@ namespace MyTrade.Controllers
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         AdminReports obj = new AdminReports();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.PanNo = r["PanNumber"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.Amount = r["tdsAmount"].ToString();
@@ -1505,6 +1509,7 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     AdminReports obj = new AdminReports();
+                    obj.FK_BonazaDetailsId = r["Pk_BonazaDetailsId"].ToString();
                     obj.BusinessTarget = r["BusinessTarget"].ToString();
                     obj.Reward = r["Reward"].ToString();
                     obj.Amount = r["RewardAmount"].ToString();
@@ -1547,7 +1552,7 @@ namespace MyTrade.Controllers
             return View(model);
         }
 
-        public ActionResult Bonaza()
+        public ActionResult Bonaza(string BonazaId)
         {
             AdminReports model = new AdminReports();
             #region ddlReward
@@ -1569,6 +1574,21 @@ namespace MyTrade.Controllers
 
             ViewBag.ddlReward = ddlReward;
             #endregion
+            if (BonazaId !=null && BonazaId !="")
+            {
+                model.FK_BonazaDetailsId = BonazaId;
+                DataSet bds = model.GetBonazaRewardList();
+                if (bds !=null && bds.Tables.Count>0 && bds.Tables[0].Rows.Count>0)
+                {
+                    model.Fk_BonazaId = bds.Tables[0].Rows[0]["Fk_BonazaRewardId"].ToString();
+                    model.Reward= bds.Tables[0].Rows[0]["Reward"].ToString();
+                    model.FK_BonazaDetailsId= bds.Tables[0].Rows[0]["Pk_BonazaDetailsId"].ToString();
+                    model.BusinessTarget= bds.Tables[0].Rows[0]["BusinessTarget"].ToString();
+                    model.RewardAmount= bds.Tables[0].Rows[0]["RewardAmount"].ToString();
+                    model.RewardImage= bds.Tables[0].Rows[0]["RewardImage"].ToString();
+                }
+
+            }
             return View(model);
         }
 
@@ -1627,6 +1647,96 @@ namespace MyTrade.Controllers
                 TempData["Bonaza"] = ex.Message;
             }
             return RedirectToAction("Bonaza", "AdminReports");
+        }
+        [HttpPost]
+        [ActionName("Bonaza")]
+        [OnAction(ButtonName = "Update")]
+        public ActionResult UpdateBonaza(AdminReports model, HttpPostedFileBase RewardImage)
+        {
+            #region ddlReward
+            int count = 0;
+            List<SelectListItem> ddlReward = new List<SelectListItem>();
+            DataSet dss = model.GetReward();
+            if (dss != null && dss.Tables.Count > 0 && dss.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dss.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlReward.Add(new SelectListItem { Text = "Reward Name", Value = "" });
+                    }
+                    ddlReward.Add(new SelectListItem { Text = r["RewardName"].ToString(), Value = r["Pk_BonazaRewardId"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlReward = ddlReward;
+            #endregion
+            try
+            {
+                if (RewardImage != null)
+                {
+                    model.RewardImage = "/BannerImage/" + Guid.NewGuid() + Path.GetExtension(RewardImage.FileName);
+                    RewardImage.SaveAs(Path.Combine(Server.MapPath(model.RewardImage)));
+                }
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.updateBonaza();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Bonaza"] = "Bonaza Details Update Successfully !!";
+                    }
+                    else
+                    {
+                        TempData["Bonaza"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Bonaza"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Bonaza"] = ex.Message;
+            }
+            return RedirectToAction("Bonaza", "AdminReports");
+        }
+        public ActionResult DeleteBonazaReward(string BonazaId)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                AdminReports obj = new AdminReports();
+                obj.FK_BonazaDetailsId = BonazaId;
+                obj.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = obj.deleteBonaza();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
+                    {
+                        TempData["Msg"] = "Reward Details deleted successfully";
+                        FormName = "BonazaRewardList";
+                        Controller = "AdminReports";
+                    }
+                    else
+                    {
+                        TempData["Msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "BonazaRewardList";
+                        Controller = "AdminReports";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Msg"] = ex.Message;
+                FormName = "BonazaRewardList";
+                Controller = "AdminReports";
+            }
+
+            return RedirectToAction(FormName, Controller);
         }
     }
 }

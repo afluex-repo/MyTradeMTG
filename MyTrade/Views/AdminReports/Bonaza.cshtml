@@ -55,15 +55,28 @@
                                 <div class="form-group">
                                     <label>Reward  Image</label>
                                     <input type="file" class="form-control" name="RewardImage" id="RewardImage" />
+                                    @if (Model.FK_BonazaDetailsId != "" && Model.RewardImage != "")
+                                    {
+                                        <img src="@Model.RewardImage" height="100"/>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 " style="margin-top:16px;">
+                                <div class="form-group">
+                                    @if (Model.FK_BonazaDetailsId != null)
+                                    {
+                                        @Html.HiddenFor(m => m.FK_BonazaDetailsId);
+                                        <input type="submit" class="btn btn-success" id="Update" name="Update" value="Update" onclick="return ValidateForm();" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" class="btn btn-success" id="save" name="save" value="Save" onclick="return ValidateForm();" />
+                                    }
                                 </div>
                             </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3" style="margin-top:28px">
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" id="save" name="save" value="Save" onclick="return ValidateForm();"/>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

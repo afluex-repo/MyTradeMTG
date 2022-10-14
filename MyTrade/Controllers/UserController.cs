@@ -1375,6 +1375,7 @@ namespace MyTrade.Controllers
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayoutRequest = lst;

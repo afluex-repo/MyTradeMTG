@@ -58,6 +58,7 @@
                                         <th>From Date</th>
                                         <th>To Date</th>
                                         <th>Reward Image</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,6 +78,10 @@
                                                     <td>@Item.FromDate</td>
                                                     <td>@Item.ToDate</td>
                                                     <td><img src="@Item.Image" height="80" width="80" /></td>
+                                                    <td>
+                                                        <a class="btn btn-info btn-sm" href="/AdminReports/Bonaza?BonazaId=@Item.FK_BonazaDetailsId">Edit</a>
+                                                        <a class="btn btn-danger btn-sm" href="/AdminReports/DeleteBonazaReward?BonazaId=@Item.FK_BonazaDetailsId">Delete</a>
+                                                    </td>
                                                 </tr>
                                                 i++;
                                             }

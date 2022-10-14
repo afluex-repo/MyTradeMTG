@@ -587,9 +587,23 @@ namespace MyTrade.Controllers
             return RedirectToAction("UploadFileList", "Master");
         }
 
-        public ActionResult RewardMaster()
+        public ActionResult RewardMaster(string RewardId)
         {
-            return View();
+            Master model = new Master();
+            if (RewardId !="" && RewardId !=null)
+            {
+                model.PK_RewardId = RewardId;
+                DataSet ds = model.GetRewardList();
+                if (ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+                {
+                    model.RewardName = ds.Tables[0].Rows[0]["RewardName"].ToString();
+                    model.FromDate = ds.Tables[0].Rows[0]["FromDate"].ToString();
+                    model.ToDate = ds.Tables[0].Rows[0]["ToDate"].ToString();
+                    model.PK_RewardId = ds.Tables[0].Rows[0]["Pk_BonazaRewardId"].ToString();
+                }
+                
+            }
+            return View(model);
         }
 
         [HttpPost]
@@ -599,8 +613,8 @@ namespace MyTrade.Controllers
         {
             try
             {
-                //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "mm/dd/yyyy");
-                //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "mm/dd/yyyy");
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.SaveRewardMaster();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
@@ -626,6 +640,39 @@ namespace MyTrade.Controllers
             return RedirectToAction("RewardMaster", "Master");
         }
 
+        [HttpPost]
+        [ActionName("RewardMaster")]
+        [OnAction(ButtonName = "Update")]
+        public ActionResult updateReward(Master model)
+        {
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateReward();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["Reward"] = "Reward Updated Successfully !!";
+                    }
+                    else
+                    {
+                        TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["Reward"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Reward"] = ex.Message;
+            }
+            return RedirectToAction("RewardMaster", "Master");
+        }
         public ActionResult RewardMasterList()
         {
             Master model = new Master();
@@ -645,6 +692,41 @@ namespace MyTrade.Controllers
                 model.lstBonazaReward = lst;
             }
             return View(model);
+        }
+        public ActionResult DeleteReward(string RewardId)
+        {
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                Master obj = new Master();
+                obj.PK_RewardId = RewardId;
+                obj.AddedBy = Session["PK_AdminId"].ToString();
+                DataSet ds = obj.deleteReward();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
+                    {
+                        TempData["Msg"] = "Reward Details deleted successfully";
+                        FormName = "RewardMasterList";
+                        Controller = "Master";
+                    }
+                    else
+                    {
+                        TempData["Msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "RewardMasterList";
+                        Controller = "Master";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Msg"] = ex.Message;
+                FormName = "RewardMasterList";
+                Controller = "Master";
+            }
+
+            return RedirectToAction(FormName, Controller);
         }
     }
 }
