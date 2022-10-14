@@ -192,10 +192,35 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveRewardMaster", para);
             return ds;
         }
-
+        public DataSet UpdateReward()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_RewardId",PK_RewardId),
+                new SqlParameter("@RewardName",RewardName),
+                 new SqlParameter("@FromDate",FromDate),
+                  new SqlParameter("@ToDate",ToDate),
+                new SqlParameter("@UpdatedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdaterewardMaster", para);
+            return ds;
+        }
         public DataSet GetRewardList()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetRewardList");
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Pk_RewardId",PK_RewardId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetRewardList",para);
+            return ds;
+        }
+        public DataSet deleteReward()
+        {
+            SqlParameter[] para =
+            {
+             new SqlParameter("@Fk_RewardId",PK_RewardId),
+             new SqlParameter("@DeletedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteBonazaReward", para);
             return ds;
         }
     }

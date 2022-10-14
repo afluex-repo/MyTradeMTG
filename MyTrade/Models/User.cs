@@ -26,7 +26,7 @@ namespace MyTrade.Models
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
 
-
+        public string TDSAmount { get; set; }
         public decimal Amount { get; set; }
         public string NoofPins { get; set; }
         public string FinalAmount { get; set; }

@@ -33,6 +33,7 @@
                                         <th>Reward Name</th>
                                         <th>From Date</th>
                                         <th>To Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +49,8 @@
                                                     <td>@Item.RewardName</td>
                                                     <td>@Item.FromDate</td>
                                                     <td>@Item.ToDate</td>
+                                                    <td><a class="btn btn-info btn-sm" href="/Master/RewardMaster?RewardId=@Item.PK_RewardId">Edit</a>
+                                                        <a class="btn btn-danger btn-sm" href="/Master/DeleteReward?RewardId=@Item.PK_RewardId">Delete</a></td>
                                                 </tr>
                                                 i++;
                                             }
