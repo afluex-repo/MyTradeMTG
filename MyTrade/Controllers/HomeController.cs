@@ -664,7 +664,7 @@ namespace MyTrade.Controllers
             DataSet ds = model.AutoCalculateRewardBusiness();
             return View();
         }
-
+        
         public ActionResult OTPVerify()
         {
             return View();
@@ -703,5 +703,16 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction(FormName, Controller);
         }
+
+
+        public ActionResult CalculateSponsorIncome()
+        {
+            Home model = new Home();
+            DataSet ds = model.CalculateSponsorIncome();
+            return View();
+        }
+
+
+
     }
 }

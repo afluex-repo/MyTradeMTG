@@ -299,5 +299,12 @@ namespace MyTrade.Models
             return ds;
         }
 
+        public DataSet CalculateSponsorIncome()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("CalculateSponsorIncome");
+            return ds;
+        }
+
+
     }
 }
