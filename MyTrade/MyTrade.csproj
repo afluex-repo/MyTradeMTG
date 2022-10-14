@@ -889,6 +889,7 @@
     <Content Include="Views\Master\RewardMaster.cshtml" />
     <Content Include="Views\Master\RewardMasterList.cshtml" />
     <Content Include="Views\AdminReports\Bonaza.cshtml" />
+    <Content Include="Views\Home\CalculateSponsorIncome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
