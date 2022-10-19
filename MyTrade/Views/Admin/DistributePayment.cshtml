@@ -60,7 +60,9 @@
                         </div>
                         <div class="row">
                             @*<div class="widget-content widget-content-area br-12">*@
-                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='2000'>
+
+
+                            <table id="html5-extension" class="table table-hover non-hover" data-page-length='2000'>
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
@@ -70,9 +72,9 @@
                                         <th>TPS Level Income</th>
                                         <th>SB</th>
                                         <th>Gross Amount</th>
-                                        <th>TDS Amount</th>
+                                        @*<th>TDS Amount</th>
                                         <th>Processing</th>
-                                        <th>Net Amount</th>
+                                        <th>Net Amount</th>*@
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,9 +94,9 @@
 
                                                     <td ><a  class="td-content product-brand text-secondary" target="_blank" href="/Admin/SponsorIncome?loginid=@Item.LoginId">@Item.SponsorBonus</a></td>
                                                     <td>@Item.GrossAmount</td>
-                                                    <td>@Item.TDSAmount</td>
+                                                    @*<td>@Item.TDSAmount</td>
                                                     <td>@Item.ProcessingFee</td>
-                                                    <td>@Item.NetAmount</td>
+                                                    <td>@Item.NetAmount</td>*@
                                                 </tr>
                                                 i++;
                                             }
