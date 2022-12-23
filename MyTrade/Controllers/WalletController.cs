@@ -53,6 +53,8 @@ namespace MyTrade.Controllers
             }
             ViewBag.ddlpaymentType = ddlpaymentType;
             #endregion
+
+           obj.Country = Session["Country"].ToString();
             obj.LoginId = Session["LoginId"].ToString();
             if (Session["IdActivated"].ToString() == "true")
             {
@@ -103,7 +105,7 @@ namespace MyTrade.Controllers
             {
                 model.DDChequeDate = string.IsNullOrEmpty(model.DDChequeDate) ? null : Common.ConvertToSystemDate(model.DDChequeDate, "dd/mm/yyyy");
                 model.AddedBy = Session["Pk_userId"].ToString();
-
+             
                 if (model.PaymentMode == "1")
                 {
                     model.BankName = null;
@@ -116,7 +118,7 @@ namespace MyTrade.Controllers
                     {
                         if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
-                            TempData["msg"] = "Requested successfully";
+                            TempData["msg"] = "Requested Successfully.";
                         }
                         else
                         {

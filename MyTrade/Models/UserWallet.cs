@@ -10,7 +10,7 @@ namespace MyTrade.Models
 {
     public class UserWallet
     {
-
+        public string Country { get; set; }
         public string LoginId { get; set; }
         public string Amount { get; set; }
         public string PaymentMode { get; set; }

@@ -2881,8 +2881,8 @@ namespace MyTrade.Controllers
         //public ActionResult BonazaReward()
         //{
         //    return View();
-        //} 
-        //public ActionResult SaveBonaza(Admin model,string datavalue)
+        //}
+        //public ActionResult SaveBonaza(Admin model, string datavalue)
         //{
         //    try
         //    {
@@ -2894,7 +2894,7 @@ namespace MyTrade.Controllers
         //        var jss = new JavaScriptSerializer();
         //        var jdv = jss.Deserialize<dynamic>(datavalue);
         //        DataTable dt = new DataTable();
-        //        dt.Columns.Add("RewardName");
+        //        dt.Columns.Add("RewardName";)
         //        dt.Columns.Add("BusinessTarget");
         //        dt.Columns.Add("Amount");
         //        dt.Columns.Add("RewardImage");
@@ -2904,10 +2904,10 @@ namespace MyTrade.Controllers
         //            Directory.CreateDirectory(path);
         //        }
         //        DataTable bonazalist = JsonConvert.DeserializeObject<DataTable>(jdv["rewardlist"]);
-        //        model.RewardName =jdv["RewardName"].ToString();
-        //        model.FromDate =string.IsNullOrEmpty(jdv["FromDate"].ToString())?null :Common.ConvertToSystemDate(jdv["FromDate"].ToString(), "dd/MM/yyyy");
+        //        model.RewardName = jdv["RewardName"].ToString();
+        //        model.FromDate = string.IsNullOrEmpty(jdv["FromDate"].ToString()) ? null : Common.ConvertToSystemDate(jdv["FromDate"].ToString(), "dd/MM/yyyy");
         //        model.ToDate = string.IsNullOrEmpty(jdv["ToDate"].ToString()) ? null : Common.ConvertToSystemDate(jdv["ToDate"].ToString(), "dd/MM/yyyy");
-               
+
         //        foreach (DataRow r in bonazalist.Rows)
         //        {
         //            Reward = r["Reward"].ToString();
@@ -2917,14 +2917,14 @@ namespace MyTrade.Controllers
         //            HttpPostedFileBase file1 = Request.Files["RewardImage"]; ;
         //            RewardImage = Path.GetFileName(r["RewardImage"].ToString());
         //            file1.SaveAs(path + RewardImage);
-        //            dt.Rows.Add( BusinessTarget, Amount, RewardImage, Reward);
+        //            dt.Rows.Add(BusinessTarget, Amount, RewardImage, Reward);
         //        }
         //        model.bonazalist = dt;
         //        model.AddedBy = Session["Pk_AdminId"].ToString();
         //        DataSet ds = model.SaveBonazaList();
-        //        if (ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
         //        {
-        //            if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+        //            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
         //            {
         //                model.Result = "1";
         //            }
@@ -2941,5 +2941,5 @@ namespace MyTrade.Controllers
         //    }
         //    return Json(model, JsonRequestBehavior.AllowGet);
         //}
-     }
+    }
 }
