@@ -47087,6 +47087,7 @@ $color_pallate_15: #ed0b4c; */
         .demo-content {
           position: relative;
         }
+
         .demo-wrap:before {
           content: ' ';
           position: absolute;
