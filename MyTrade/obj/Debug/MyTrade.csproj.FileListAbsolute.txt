@@ -454,7 +454,6 @@ F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\bin\Newtonsoft.Json.xml
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\bin\System.Net.Http.Formatting.xml
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\bin\System.Web.Http.xml
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\bin\System.Web.Http.WebHost.xml
-F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.dll
