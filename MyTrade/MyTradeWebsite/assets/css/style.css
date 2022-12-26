@@ -163,14 +163,14 @@ p {
         width: 100%;
         height: 100%;
         z-index: -1;
-        background: -webkit-gradient(linear, left top, right top, from(#22396c), to(#1a8ad3));
-        background: linear-gradient(90deg, #22396c 0%, #1a8ad3 100%);
+        /*background: -webkit-gradient(linear, left top, right top, from(#22396c), to(#1a8ad3));
+        background: linear-gradient(90deg, #22396c 0%, #1a8ad3 100%);*/
         border-radius: 4px;
         -webkit-transition: 0.5s;
         transition: 0.5s;
     }
 
-    .btn-primary::after {
+    /*.btn-primary::after {
         content: '';
         position: absolute;
         left: 0;
@@ -184,16 +184,16 @@ p {
         transition: 0.5s;
         opacity: 0;
         visibility: hidden;
-    }
+    }*/
 
-    .btn-primary:hover, .btn-primary:focus {
+    /*.btn-primary:hover, .btn-primary:focus {
         background-color: transparent !important;
         color: #ffffff !important;
         -webkit-box-shadow: unset !important;
         box-shadow: unset !important;
-    }
+    }*/
 
-        .btn-primary:hover::before, .btn-primary:focus::before {
+        /*.btn-primary:hover::before, .btn-primary:focus::before {
             opacity: 0;
             visibility: hidden;
         }
@@ -201,7 +201,7 @@ p {
         .btn-primary:hover::after, .btn-primary:focus::after {
             opacity: 1;
             visibility: visible;
-        }
+        }*/
 
 /*section-title*/
 .section-title {
@@ -256,7 +256,7 @@ p {
 
 /*form-control*/
 .form-control, .form-select {
-    height: 50px;
+    height: 3.5rem;
     padding: 0 15px;
     font-size: 15px;
     line-height: 50px;

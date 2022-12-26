@@ -17,7 +17,7 @@ namespace MyTrade.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return Redirect("~/MyTradeWebsite/index.html");
+            return Redirect("~/MyTradeNewWebsite/index.html");
         }
         public ActionResult GetBanner()
         {
@@ -106,7 +106,7 @@ namespace MyTrade.Controllers
                             //string TempId = "1707166036874698573";
 
                             //string str = "Dear "+ Name + ", Your OTP "+ OtpVerify + " for "+ LoginId + ". MY TRADE";
-                            
+
                             if (ds.Tables[0].Rows[0]["isFranchiseAdmin"].ToString() == "True")
                             {
                                 Session["FranchiseAdminID"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
@@ -115,7 +115,7 @@ namespace MyTrade.Controllers
                             }
                             else
                             {
-                               FormName = "AdminDashBoard";
+                                FormName = "AdminDashBoard";
                                 //FormName = "OTPVerify";
                                 Controller = "Admin";
                             }
@@ -127,7 +127,7 @@ namespace MyTrade.Controllers
                             //catch { }
 
                             //TempData["OtpVerify"] = "Otp is sent successfully on registerd mobile no.";
-                            
+
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
                         {
@@ -182,6 +182,12 @@ namespace MyTrade.Controllers
             Home obj = new Home();
             List<SelectListItem> Gender = Common.BindGender();
             ViewBag.Gender = Gender;
+
+            #region ddlcountry
+            List<SelectListItem> ddlcountry = Common.BindCountry();
+            ViewBag.ddlcountry = ddlcountry;
+            #endregion
+
             if (!string.IsNullOrEmpty(PId))
             {
                 obj.Fk_UserId = PId;
@@ -196,8 +202,9 @@ namespace MyTrade.Controllers
             }
             return View();
         }
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City, string Country)
         {
+
             Home obj = new Home();
             try
             {
@@ -211,6 +218,7 @@ namespace MyTrade.Controllers
                 obj.Password = Crypto.Encrypt(Password);
                 obj.Email = Email;
                 obj.Gender = Gender;
+                obj.Country = Country;
                 obj.State = State;
                 obj.City = City;
                 DataSet ds = obj.Registration();
@@ -245,6 +253,7 @@ namespace MyTrade.Controllers
                         obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -667,7 +676,7 @@ namespace MyTrade.Controllers
             DataSet ds = model.AutoCalculateRewardBusiness();
             return View();
         }
-        
+
         public ActionResult OTPVerify()
         {
             return View();
