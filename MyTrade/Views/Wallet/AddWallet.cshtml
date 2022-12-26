@@ -47,7 +47,12 @@
                                     <div class="example">
                                         <p class="mb-1"> In Rupess<span style="color: red"></span></p>
                                         <label id="result" class="pt-3 form-control"></label>
+                                     
+                                           <input type="hidden" id="IndianValue" value="@ViewBag.IndianValue" />
+                                       
                                     </div>
+
+
                                 </div>
 
                                 @*-----Convert USD TO INR Link Start-------*@
@@ -281,13 +286,14 @@
             $("#InUsDoller").text($("#Amount").val() + "$");
             $("#dvinrupees").hide();
         }
-
+        debugger;
         //const convert = document.getElementById("convert");
         const result = document.getElementById("result");
         const from = document.getElementById("from");
         const to = document.getElementById("to");
         const amount = document.getElementById("Amount");
-
+        const IndianValue = document.getElementById("IndianValue");
+        //var TodaysCurrency = $('#IndianValue').val();
         let fromCurrency = from.value;
         let toCurrency = to.value;
         let amt = amount.value;
@@ -295,12 +301,16 @@
         .then(response => {
             return response.json();
         })
+
         .then(data => {
             let rate = data.rates[toCurrency];
             let total = rate * amt;
+           
             //result.innerHTML = `${amt} ${fromCurrency} = ${total}
             result.innerHTML = `${amt}$  = ${total}
+             
             ${toCurrency}`;
+            IndianValue.innerHTML = total;
         });
     }
 
