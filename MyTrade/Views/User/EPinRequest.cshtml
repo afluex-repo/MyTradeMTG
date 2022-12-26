@@ -23,7 +23,7 @@
                         <div class="card-body" id="divtop">
                             <div class="row mb-4">
                                 <div class="col-md-12">
-                                    <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+                                    <label style="color:red">MTG Coin Wallet Balance: @ViewBag.WalletBalance</label>
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
 
                                     @if (ViewBag.WalletBalance == "0")
@@ -47,8 +47,8 @@
                                     <input type="hidden" id="hdfFinal" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="Amount">Amount</label>
-                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @disabled = "disabled" })
+                                    <label for="Amount">MTG Coin</label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG Coin", @disabled = "disabled" })
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -57,9 +57,9 @@
                                     @Html.TextBoxFor(m => m.NoofPins, new { @class = "form-control", @placeholder = "No of Pins", @onchange = "getfinalamount();", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="FinalAmount">Final Amount</label>
+                                    <label for="FinalAmount">Final MTG Coin</label>
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                    @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount(GST Included)", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
+                                    @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final MTG Coin(GST Included)", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
                                 </div>
                                 @*<div class="col-md-4">
                                         <label for="Fk_Paymentid">Payment Mode</label>

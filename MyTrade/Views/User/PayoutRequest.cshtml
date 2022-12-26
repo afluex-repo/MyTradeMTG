@@ -31,7 +31,7 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
-                                        Balance <span style="color: red">*</span>
+                                        MTG Coin Balance <span style="color: red">*</span>
                                         @Html.TextBoxFor(m => m.PayoutBalance, new { @class = "form-control", @Readonly = "true" })
                                     </div>
                                 </div>
@@ -43,8 +43,8 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
-                                        Amount<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })
+                                        MTG Coin<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Coin", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3" style="margin-top:25px">
@@ -71,10 +71,10 @@
                                             <th>Narration</th>
                                             @*<th>Login Id</th>
                         <th>Name</th>*@
-                                            <th>Gross Amount</th>
+                                            <th>Gross MTG Coin</th>
                                             <th>Procesing Charges</th>
-                                            <th>TDS Amount</th>
-                                            <th>Net Amount</th>
+                                            <th>TDS MTG Coin</th>
+                                            <th>Net MTG Coin</th>
                                             <th>Date</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
