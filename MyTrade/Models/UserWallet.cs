@@ -13,6 +13,7 @@ namespace MyTrade.Models
         public string Country { get; set; }
         public string LoginId { get; set; }
         public string Amount { get; set; }
+
         public string PaymentMode { get; set; }
         public string DDChequeNo { get; set; }
         public string DDChequeDate { get; set; }
@@ -50,6 +51,7 @@ namespace MyTrade.Models
         public string TransactionType { get; set; }
 
         public string Status { get; set; }
+        public string TodaysCurrency { get; set; }
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
@@ -72,7 +74,8 @@ namespace MyTrade.Models
                                       new SqlParameter("@BankBranch", BankBranch) ,
                                           new SqlParameter("@BankName", BankName),
                                             new SqlParameter("@Remarks", Remark),
-                                            new SqlParameter("@AddedBy", AddedBy)
+                                            new SqlParameter("@AddedBy", AddedBy),
+                                            new SqlParameter("@TodaysCurrency", TodaysCurrency)
                                      };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
             return ds;
