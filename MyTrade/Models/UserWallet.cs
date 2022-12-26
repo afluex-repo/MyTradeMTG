@@ -52,6 +52,11 @@ namespace MyTrade.Models
 
         public string Status { get; set; }
         public string TodaysCurrency { get; set; }
+        public string IndianValue { get; set; }
+        public string result { get; set; }
+
+        
+
         public DataSet GetMemberDetails()
         {
             SqlParameter[] para = {
@@ -75,7 +80,7 @@ namespace MyTrade.Models
                                           new SqlParameter("@BankName", BankName),
                                             new SqlParameter("@Remarks", Remark),
                                             new SqlParameter("@AddedBy", AddedBy),
-                                            new SqlParameter("@TodaysCurrency", TodaysCurrency)
+                                            new SqlParameter("@TodaysCurrency", IndianValue)
                                      };
             DataSet ds = DBHelper.ExecuteQuery("EwalletRequest", para);
             return ds;
