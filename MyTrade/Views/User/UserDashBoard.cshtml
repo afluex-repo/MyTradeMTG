@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="~/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+@*<link href="~/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
 <link href="~/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/elements/alert.css" rel="stylesheet" />
+<link href="~/assets/css/elements/alert.css" rel="stylesheet" />*@
 <style>
     .referral {
         font-weight: 600;
@@ -410,6 +410,154 @@
                         </div>
                     </div>
                     <div class="card-body pb-0 pt-sm-3 pt-0 tab-content">
+                        <div class="tab-pane fade active show" id="Month">
+                            <div class="row">
+                                <div class="d-flex col-6 align-items-center">
+                                    <div class="fs-18 font-w600 me-3">
+                                        <span class="text-success pe-3">BUY</span>
+                                        <span class="text-black pe-3">$5,673</span>
+                                    </div>
+                                    <div class="fs-18 font-w600 ms-auto">
+                                        <span class="text-danger pe-3">SELL</span>
+                                        <span class="text-black pe-3">$5,982</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                </div>
+                            </div>
+                            <div id="chartBarRunning" class="bar-chart"></div>
+                        </div>
+                        <div class="tab-pane fade" id="Week">
+                            <div class="row">
+                                <div class="d-flex col-6 align-items-center">
+                                    <div class="fs-18 font-w600 me-3">
+                                        <span class="text-success pe-3">BUY</span>
+                                        <span class="text-black pe-3">$3,472</span>
+                                    </div>
+                                    <div class="fs-18 font-w600 ms-auto">
+                                        <span class="text-danger pe-3">SELL</span>
+                                        <span class="text-black pe-3">$6,542</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                </div>
+                            </div>
+                            <div id="chartBarRunning2" class="bar-chart"></div>
+                        </div>
+                        <div class="tab-pane fade" id="Year">
+                            <div class="row">
+                                <div class="d-flex col-6 align-items-center">
+                                    <div class="fs-18 font-w600 me-3">
+                                        <span class="text-success pe-3">BUY</span>
+                                        <span class="text-black pe-3">$1,343</span>
+                                    </div>
+                                    <div class="fs-18 font-w600 ms-auto">
+                                        <span class="text-danger pe-3">SELL</span>
+                                        <span class="text-black pe-3">$3,482</span>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                </div>
+                            </div>
+                            <div id="chartBarRunning3" class="bar-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-xxl-12">
+                <div class="card">
+                    <div class="card-header d-sm-flex d-block pb-0 border-0">
+                        <div>
+                            <h4 class="fs-20 text-black">Crypto Statistics</h4>
+                            <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                        </div>
+                        <div class="d-flex mt-sm-0 mt-3">
+                            <div class="form-check form-switch text-end me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customSwitch11">
+                                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch11">Date</label>
+                            </div>
+                            <div class="form-check form-switch text-end me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customSwitch12">
+                                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch12">Value</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="d-flex flex-wrap crypto">
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck9">
+                                <label class="form-check-label" for="customCheck9">
+                                    <span class="d-block text-black font-w500">Bitcoin</span>
+                                    <span class="fs-12">BTC</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck91">
+                                <label class="form-check-label" for="customCheck91">
+                                    <span class="d-block text-black font-w500">Ripple</span>
+                                    <span class="fs-12">XRP</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck92">
+                                <label class="form-check-label" for="customCheck92">
+                                    <span class="d-block text-black font-w500">Ethereum</span>
+                                    <span class="fs-12">ETH</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck93">
+                                <label class="form-check-label" for="customCheck93">
+                                    <span class="d-block text-black font-w500">Zcash</span>
+                                    <span class="fs-12">ZEC</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck94">
+                                <label class="form-check-label" for="customCheck94">
+                                    <span class="d-block text-black font-w500">LiteCoin</span>
+                                    <span class="fs-12">LTC</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="lineChart"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @*<div class="col-xl-6 col-xxl-12">
+                <div class="card">
+                    <div class="card-header d-block d-sm-flex border-0">
+                        <div>
+                            <h4 class="fs-20 text-black">Market Overview</h4>
+                            <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                        </div>
+                        <div class="card-action card-tabs mt-3 mt-sm-0">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#Week" role="tab">
+                                        Week
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#Month" role="tab">
+                                        Month
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#Year" role="tab">
+                                        Year
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 pt-sm-3 pt-0 tab-content">
                         <div class="tab-pane fade active show" id="Month" style="position: relative;">
                             <div class="row">
                                 <div class="d-flex col-6 align-items-center">
@@ -671,8 +819,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-6 col-xxl-12">
+            </div>*@
+            @*<div class="col-xl-6 col-xxl-12">
                 <div class="card">
                     <div class="card-header d-sm-flex d-block pb-0 border-0">
                         <div>
@@ -797,31 +945,6 @@
                                             </g>
                                             <line id="SvgjsLine1191" x1="0" y1="290.11199999999997" x2="1047.337890625" y2="290.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" stroke-width="1"></line>
                                         </g>
-                                        <g id="SvgjsG1193" class="apexcharts-grid">
-                                            <g id="SvgjsG1194" class="apexcharts-gridlines-horizontal">
-                                                <line id="SvgjsLine1207" x1="0" y1="0" x2="1047.337890625" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                                <line id="SvgjsLine1208" x1="0" y1="48.185333333333325" x2="1047.337890625" y2="48.185333333333325" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                                <line id="SvgjsLine1209" x1="0" y1="96.37066666666665" x2="1047.337890625" y2="96.37066666666665" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                                <line id="SvgjsLine1210" x1="0" y1="144.55599999999998" x2="1047.337890625" y2="144.55599999999998" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                                <line id="SvgjsLine1211" x1="0" y1="192.7413333333333" x2="1047.337890625" y2="192.7413333333333" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                                <line id="SvgjsLine1212" x1="0" y1="240.92666666666662" x2="1047.337890625" y2="240.92666666666662" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                                <line id="SvgjsLine1213" x1="0" y1="289.11199999999997" x2="1047.337890625" y2="289.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line>
-                                            </g>
-                                            <g id="SvgjsG1195" class="apexcharts-gridlines-vertical"></g>
-                                            <line id="SvgjsLine1196" x1="0" y1="290.11199999999997" x2="0" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1197" x1="104.7337890625" y1="290.11199999999997" x2="104.7337890625" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1198" x1="209.467578125" y1="290.11199999999997" x2="209.467578125" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1199" x1="314.20136718749995" y1="290.11199999999997" x2="314.20136718749995" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1200" x1="418.93515625" y1="290.11199999999997" x2="418.93515625" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1201" x1="523.6689453125" y1="290.11199999999997" x2="523.6689453125" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1202" x1="628.402734375" y1="290.11199999999997" x2="628.402734375" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1203" x1="733.1365234375" y1="290.11199999999997" x2="733.1365234375" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1204" x1="837.8703125000001" y1="290.11199999999997" x2="837.8703125000001" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1205" x1="942.6041015625001" y1="290.11199999999997" x2="942.6041015625001" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1206" x1="1047.337890625" y1="290.11199999999997" x2="1047.337890625" y2="296.11199999999997" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-xaxis-tick"></line>
-                                            <line id="SvgjsLine1215" x1="0" y1="289.11199999999997" x2="1047.337890625" y2="289.11199999999997" stroke="transparent" stroke-dasharray="0"></line>
-                                            <line id="SvgjsLine1214" x1="0" y1="1" x2="0" y2="289.11199999999997" stroke="transparent" stroke-dasharray="0"></line>
-                                        </g>
                                         <g id="SvgjsG1145" class="apexcharts-area-series apexcharts-plot-series">
                                             <g id="SvgjsG1146" class="apexcharts-series" seriesName="series1" data:longestSeries="true" rel="1" data:realIndex="0">
                                                 <path id="SvgjsPath1149" d="M0 289.11199999999997L0 192.74133333333333C36.656826171875004 192.74133333333333 68.076962890625 96.37066666666666 104.73378906250001 96.37066666666666C141.39061523437502 96.37066666666666 172.81075195312502 144.55599999999998 209.46757812500002 144.55599999999998C246.124404296875 144.55599999999998 277.544541015625 96.37066666666666 314.2013671875 96.37066666666666C350.85819335937504 96.37066666666666 382.278330078125 96.37066666666666 418.93515625000003 96.37066666666666C455.591982421875 96.37066666666666 487.01211914062503 144.55599999999998 523.6689453125 144.55599999999998C560.325771484375 144.55599999999998 591.745908203125 192.74133333333333 628.402734375 192.74133333333333C665.059560546875 192.74133333333333 696.4796972656251 120.46333333333334 733.1365234375 120.46333333333334C769.793349609375 120.46333333333334 801.2134863281251 72.27800000000002 837.8703125000001 72.27800000000002C874.527138671875 72.27800000000002 905.9472753906251 24.092666666666673 942.6041015625001 24.092666666666673C979.2609277343751 24.092666666666673 1010.681064453125 96.37066666666666 1047.337890625 96.37066666666666C1047.337890625 96.37066666666666 1047.337890625 96.37066666666666 1047.337890625 289.11199999999997M1047.337890625 96.37066666666666C1047.337890625 96.37066666666666 1047.337890625 96.37066666666666 1047.337890625 96.37066666666666 " fill="rgba(255,171,45,0.2)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask8dbbaj3t)" pathTo="M 0 289.11199999999997L 0 192.74133333333333C 36.656826171875004 192.74133333333333 68.076962890625 96.37066666666666 104.73378906250001 96.37066666666666C 141.39061523437502 96.37066666666666 172.81075195312502 144.55599999999998 209.46757812500002 144.55599999999998C 246.124404296875 144.55599999999998 277.544541015625 96.37066666666666 314.2013671875 96.37066666666666C 350.85819335937504 96.37066666666666 382.278330078125 96.37066666666666 418.93515625000003 96.37066666666666C 455.591982421875 96.37066666666666 487.01211914062503 144.55599999999998 523.6689453125 144.55599999999998C 560.325771484375 144.55599999999998 591.745908203125 192.74133333333333 628.402734375 192.74133333333333C 665.059560546875 192.74133333333333 696.4796972656251 120.46333333333334 733.1365234375 120.46333333333334C 769.793349609375 120.46333333333334 801.2134863281251 72.27800000000002 837.8703125000001 72.27800000000002C 874.527138671875 72.27800000000002 905.9472753906251 24.092666666666673 942.6041015625001 24.092666666666673C 979.2609277343751 24.092666666666673 1010.681064453125 96.37066666666666 1047.337890625 96.37066666666666C 1047.337890625 96.37066666666666 1047.337890625 96.37066666666666 1047.337890625 289.11199999999997M 1047.337890625 96.37066666666666z" pathFrom="M -1 337.2973333333333L -1 337.2973333333333L 104.73378906250001 337.2973333333333L 209.46757812500002 337.2973333333333L 314.2013671875 337.2973333333333L 418.93515625000003 337.2973333333333L 523.6689453125 337.2973333333333L 628.402734375 337.2973333333333L 733.1365234375 337.2973333333333L 837.8703125000001 337.2973333333333L 942.6041015625001 337.2973333333333L 1047.337890625 337.2973333333333"></path>
@@ -890,7 +1013,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
 
             <div class="col-xl-4 col-sm-6">
                 <div class="card overflow-hidden">
@@ -1480,8 +1603,8 @@
         </div>
     </div>*@
 
-<script src="~/plugins/apex/apexcharts.min.js"></script>
-<script src="~/plugins/apex/custom-apexcharts.js"></script>
+@*<script src="~/plugins/apex/apexcharts.min.js"></script>
+<script src="~/plugins/apex/custom-apexcharts.js"></script>*@
 <script>
     // Donut Chart
     var donutChart1 = {
@@ -1515,7 +1638,7 @@
     );
     donut1.render();
 
-    var donutChart2 = {
+    @*var donutChart2 = {
 
         chart: {
             height: 300,
@@ -1545,5 +1668,5 @@
        donutChart2
    );
 
-    donut2.render();
+    donut2.render();*@
 </script>

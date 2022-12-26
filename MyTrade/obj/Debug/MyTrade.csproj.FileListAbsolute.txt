@@ -400,7 +400,6 @@ E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.Proper
 E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.dll
 E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.pdb
-E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\MyTradeNew\New folder\MyTradeGlobal\MyTrade\bin\ApplicationInsights.config
 E:\MyTradeNew\New folder\MyTradeGlobal\MyTrade\bin\roslyn\csc.exe
 E:\MyTradeNew\New folder\MyTradeGlobal\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
