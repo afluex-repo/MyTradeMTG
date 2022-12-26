@@ -81,6 +81,7 @@ namespace MyTrade.Models
                                      new SqlParameter("@PinCode",PinCode),
                                      new SqlParameter("@State",State),
                                       new SqlParameter("@City",City),
+                                      new SqlParameter("@Country",Country),
                                      new SqlParameter("@Leg",Leg),
                                      new SqlParameter("@Password",Password)
 
