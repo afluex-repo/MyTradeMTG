@@ -30,7 +30,7 @@
                         <div class="card-body" id="divtop">
                             <div class="row mb-4">
                                 <div class="col-md-12">
-                                    <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+                                    <label style="color:red">MTG Coin Wallet Balance: @ViewBag.WalletBalance</label>
 
                                     @if (ViewBag.WalletBalance == "0")
                                     {
@@ -55,8 +55,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                    <label for="Amount">Amount <span style="color:red">*</span></label>
-                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
+                                    <label for="Amount">MTG Coin <span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG Coin", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
                                     <span style="color:red">Min  : <span id="spfrom"></span> </span><span style="color:red;padding-left:50px"> Max : <span id="spto"></span> </span><span style="color:red;padding-left:50px"> In Multiple Of : <span id="spmul"></span></span>
                                     <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
                                     <input type="hidden" id="hdfMin" />
