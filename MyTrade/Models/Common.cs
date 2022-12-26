@@ -263,7 +263,7 @@ namespace MyTrade.Models
         public static List<SelectListItem> BindCountry()
         {
             List<SelectListItem> ddlcountry = new List<SelectListItem>();
-            ddlcountry.Add(new SelectListItem { Text = "", Value = "-Select Country-" });
+            ddlcountry.Add(new SelectListItem { Text = "-Select Country-", Value = "-Select Country-" });
             ddlcountry.Add(new SelectListItem { Text = "Afghanistan", Value = "Afghanistan" });
             ddlcountry.Add(new SelectListItem { Text = "Albania", Value = "Albania" });
             ddlcountry.Add(new SelectListItem { Text = "Algeria", Value = "Algeria" });
