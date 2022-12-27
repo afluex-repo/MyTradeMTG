@@ -14,7 +14,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-
 namespace MyTrade.Controllers
 {
     public class UserController : UserBaseController
