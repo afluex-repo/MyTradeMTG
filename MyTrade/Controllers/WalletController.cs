@@ -54,7 +54,7 @@ namespace MyTrade.Controllers
             ViewBag.ddlpaymentType = ddlpaymentType;
             #endregion
 
-           obj.Country = Session["Country"].ToString();
+            obj.Country = Session["Country"].ToString();
             obj.LoginId = Session["LoginId"].ToString();
             if (Session["IdActivated"].ToString() == "true")
             {
@@ -96,6 +96,8 @@ namespace MyTrade.Controllers
 
             return View(obj);
         }
+
+
         [HttpPost]
         [ActionName("AddWallet")]
         [OnAction(ButtonName = "Save")]
@@ -105,7 +107,6 @@ namespace MyTrade.Controllers
             {
                 model.DDChequeDate = string.IsNullOrEmpty(model.DDChequeDate) ? null : Common.ConvertToSystemDate(model.DDChequeDate, "dd/mm/yyyy");
                 model.AddedBy = Session["Pk_userId"].ToString();
-                model.TodaysCurrency = Request.Params["IndianValue"]; 
                 if (model.PaymentMode == "1")
                 {
                     model.BankName = null;
@@ -179,6 +180,8 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("AddWallet", "Wallet");
         }
+
+        
         public ActionResult FetchPaymentByOrder(OrderModel model)
         {
             FetchPaymentByOrder obj = new FetchPaymentByOrder();

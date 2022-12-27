@@ -47,9 +47,13 @@
                                     <div class="example">
                                         <p class="mb-1"> In Rupess<span style="color: red"></span></p>
                                         <label id="result" class="pt-3 form-control"></label>
-                                     
-                                           <input type="hidden" id="IndianValue" value="@ViewBag.IndianValue" />
-                                       
+
+                                        @*<input type="hidden" id="IndianValue" name="IndianValue" value="@ViewBag.IndianValue" />*@
+
+
+                                        <input type="hidden" id="IndianValue" name="IndianValue" />
+
+
                                     </div>
 
 
@@ -102,7 +106,7 @@
                                     @Html.TextBoxFor(m => m.DDChequeNo, new { @class = "form-control", @placeholder = "Transaction No" })
                                 </div>
                                 @*<div class="col-md-3 form-it" id="chequdate" style="display: none">*@
-                                <div class="col-md-3 my-3" id="divPaymentMode" style="display: none">
+                                <div class="col-md-3" id="divPaymentMode" style="display: none">
                                     @*<label> Transaction Date</label> <span style="color: red">*</span>*@
                                     <span id="txndt"></span><span id="spntradate" style="color: red">*</span>
                                     @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
@@ -265,6 +269,8 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 
 <script>
+
+
     function ConvertMony() {
         debugger;
         //if ($("#Countryid").val() == "America") {
@@ -303,14 +309,17 @@
         })
 
         .then(data => {
+            debugger;
             let rate = data.rates[toCurrency];
             let total = rate * amt;
-           
+
             //result.innerHTML = `${amt} ${fromCurrency} = ${total}
             result.innerHTML = `${amt}$  = ${total}
-             
+
             ${toCurrency}`;
-            IndianValue.innerHTML = total;
+            //IndianValue.innerHTML = total;
+         $("#IndianValue").val(total);
+
         });
     }
 
@@ -324,6 +333,7 @@
         //getpaymentTypedetails();
     });
     function validateform() {
+        debugger;
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {
             $("#LoginId").addClass('errortext');
@@ -389,13 +399,21 @@
 
             }
         }
-
         return true;
     }
-    jQuery.noConflict();
+
+    //jQuery.noConflict();
     $('#DDChequeDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+    
+    //$(document).ready(function () {
+    //    debugger;
+    //    jQuery.noConflict();
+    //    $('#DDChequeDate').datepicker({
+    //        dateFormat: 'dd/mm/yy',
+    //    });
+    //});
 
     function preview_image(event, mode) {
         debugger;
@@ -672,6 +690,7 @@
 
         return true;
     }
+
 
 
 </script>
