@@ -260,75 +260,7 @@
     <Content Include="Global.asax" />
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
-    <Content Include="MyTradeNewWebsite\about.html" />
-    <Content Include="MyTradeNewWebsite\assets\bootstrap\css\bootstrap.min.css" />
-    <Content Include="MyTradeNewWebsite\assets\bootstrap\js\bootstrap.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\css\animate.css" />
-    <Content Include="MyTradeNewWebsite\assets\css\magnific-popup.css" />
-    <Content Include="MyTradeNewWebsite\assets\css\popup.css" />
-    <Content Include="MyTradeNewWebsite\assets\css\responsive.css" />
-    <Content Include="MyTradeNewWebsite\assets\css\slicknav.css" />
-    <Content Include="MyTradeNewWebsite\assets\css\style.css" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\font-awesome.min.css" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\fontawesome-webfont3295.svg" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\themify-icons.css" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\themify9f24.svg" />
-    <Content Include="MyTradeNewWebsite\assets\img\01-Chat.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\02-Chat.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\app-store-logo.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\favicon.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\footer_logo.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\google-play-logo.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\home-main.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\home_banner.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\home_banner2.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\logo-1.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\logo.png" />
-    <Content Include="MyTradeNewWebsite\assets\img\partner\logo-1.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\partner\logo-2.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\partner\logo-3.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\partner\logo-4.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\partner\logo-5.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\partner\logo-6.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\team\team1.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\team\team2.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\team\team3.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\img\team\team4.jpg" />
-    <Content Include="MyTradeNewWebsite\assets\js\app.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\config-theme.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\countdown.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\footer.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\header.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\jquery-1.12.4.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\jquery.counterup.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\jquery.leanModal.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\jquery.magnific-popup.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\jquery.nav.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\jquery.slicknav.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\login.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\main.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\modernizr-2.8.3.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\particles.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\scrolltopcontrol.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\smooth-scroll.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\trading-widget.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\utilities.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\js\wow.min.js" />
-    <Content Include="MyTradeNewWebsite\assets\owlcarousel\css\AjaxLoader.html" />
-    <Content Include="MyTradeNewWebsite\assets\owlcarousel\css\grabbing.html" />
-    <Content Include="MyTradeNewWebsite\assets\owlcarousel\css\owl.carousel.css" />
-    <Content Include="MyTradeNewWebsite\assets\owlcarousel\css\owl.theme.css" />
-    <Content Include="MyTradeNewWebsite\assets\owlcarousel\js\owl.carousel.min.js" />
-    <Content Include="MyTradeNewWebsite\contact.html" />
-    <Content Include="MyTradeNewWebsite\faq.html" />
-    <Content Include="MyTradeNewWebsite\index.html" />
-    <Content Include="MyTradeNewWebsite\registration.html" />
-    <Content Include="MyTradeNewWebsite\roadmap.html" />
-    <Content Include="MyTradeNewWebsite\token-sale.html" />
     <Content Include="plugins\animate\animate.css" />
-    <Content Include="plugins\apex\apexcharts.css" />
-    <Content Include="plugins\apex\apexcharts.min.js" />
-    <Content Include="plugins\apex\custom-apexcharts.js" />
     <Content Include="plugins\autocomplete\autocomplete.css" />
     <Content Include="plugins\autocomplete\countries.js" />
     <Content Include="plugins\autocomplete\demo.js" />
@@ -835,15 +767,6 @@
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400.woff2" />
     <Content Include="plugins\font-icons\fontawesome\webfonts\fa-regular-400d41d.eot" />
     <Content Include="Models\WebService\AgentServices.asmx.bak" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\fontawesome-webfont3295.eot" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\fontawesome-webfont3295.ttf" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\fontawesome-webfont3295.woff" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\fontawesome-webfont3295.woff2" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\fontawesome-webfontd41d.eot" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\themify9f24.eot" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\themify9f24.ttf" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\themify9f24.woff" />
-    <Content Include="MyTradeNewWebsite\assets\fonts\themifyd41d.eot" />
     <None Include="Properties\PublishProfiles\MyTrade.pubxml" />
     <Content Include="Views\Home\CompleteRegistration.cshtml" />
     <Content Include="Views\User\ActivateByPin.cshtml" />
@@ -919,6 +842,9 @@
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
     <None Include="Properties\PublishProfiles\MyTrade1.pubxml" />
     <None Include="Properties\PublishProfiles\mytradedemo.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeGlobal.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeGlobal1.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeGlobals.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeTest.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeTest1.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -1068,7 +994,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53408/</IISUrl>
+          <IISUrl>http://localhost:53409/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
