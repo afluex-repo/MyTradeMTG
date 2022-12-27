@@ -17,7 +17,7 @@ namespace MyTrade.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return Redirect("~/MyTradeNewWebsite/index.html");
+           return Redirect("~/MyTradeWebsite/index.html");
         }
         public ActionResult GetBanner()
         {

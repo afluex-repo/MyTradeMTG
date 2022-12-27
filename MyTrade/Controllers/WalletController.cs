@@ -98,103 +98,15 @@ namespace MyTrade.Controllers
         }
 
 
-        //[HttpPost]
-        //[ActionName("AddWallet")]
-        //[OnAction(ButtonName = "Save")]
-        //public ActionResult AddWallet(UserWallet model)
-        //{
-        //    try
-        //    {
-        //        model.DDChequeDate = string.IsNullOrEmpty(model.DDChequeDate) ? null : Common.ConvertToSystemDate(model.DDChequeDate, "dd/mm/yyyy");
-        //        model.AddedBy = Session["Pk_userId"].ToString();
-        //        model.TodaysCurrency = Request.Params["IndianValue"];
-        //        if (model.PaymentMode == "1")
-        //        {
-        //            model.BankName = null;
-        //            model.BankBranch = null;
-        //        }
-        //        if (model.PaymentType == "2")
-        //        {
-        //            DataSet ds = model.SaveEwalletRequest();
-        //            if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
-        //            {
-        //                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-        //                {
-        //                    TempData["msg"] = "Requested Successfully.";
-        //                }
-        //                else
-        //                {
-        //                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //                }
-        //            }
-        //            else { }
-        //        }
-        //        else if (model.PaymentType == "1")
-        //        {
-        //            OrderModel orderModel = new OrderModel();
-        //            string random = Common.GenerateRandom();
-        //            CreateOrderResponse obj1 = new CreateOrderResponse();
-        //            try
-        //            {
-        //                decimal amount = Convert.ToDecimal(model.Amount) * 100;
-        //                Dictionary<string, object> options = new Dictionary<string, object>();
-        //                options.Add("amount", Convert.ToInt32(amount)); // amount in the smallest currency unit
-        //                options.Add("receipt", random);
-        //                options.Add("currency", "INR");
-        //                options.Add("payment_capture", "1");
-
-        //                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        //                RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
-        //                Razorpay.Api.Order order = client.Order.Create(options);
-        //                obj1.OrderId = order["id"].ToString();
-        //                obj1.Status = "0";
-        //                model.OrderId = order["id"].ToString();
-        //                model.LoginId = Session["LoginId"].ToString();
-        //                model.AddedBy = Session["Pk_UserId"].ToString();
-        //                model.PaymentType = "Online";
-        //                model.PaymentMode = "12";
-        //                model.Amount = amount.ToString();
-        //                orderModel.orderId = order.Attributes["id"];
-        //                orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-        //                orderModel.amount = Convert.ToInt32(amount);
-        //                orderModel.currency = "INR";
-        //                orderModel.description = "Recharge Wallet";
-        //                orderModel.name = Session["FullName"].ToString();
-        //                orderModel.contactNumber = Session["Contact"].ToString();
-        //                orderModel.email = Session["Email"].ToString();
-        //                orderModel.image = "http://mytrade.co.in/MyTradeWebsite/assets/img/logo.png";
-        //                DataSet ds = model.SaveEwalletRequestNew();
-        //                return View("PaymentPage", orderModel);
-        //                // Return on PaymentPage with Order data
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                obj1.Status = "1";
-        //                TempData["error"] = ex.Message;
-        //                return RedirectToAction("AddWallet", "Wallet");
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["error"] = ex.Message;
-        //    }
-        //    return RedirectToAction("AddWallet", "Wallet");
-        //}
-
-
-
-        ///////////////////////////////////////
-
-
-
-        public ActionResult AddWalletUsingJson(UserWallet model)
+        [HttpPost]
+        [ActionName("AddWallet")]
+        [OnAction(ButtonName = "Save")]
+        public ActionResult AddWallet(UserWallet model)
         {
             try
             {
                 model.DDChequeDate = string.IsNullOrEmpty(model.DDChequeDate) ? null : Common.ConvertToSystemDate(model.DDChequeDate, "dd/mm/yyyy");
                 model.AddedBy = Session["Pk_userId"].ToString();
-                model.TodaysCurrency = Request.Params["IndianValue"];
                 if (model.PaymentMode == "1")
                 {
                     model.BankName = null;
@@ -207,7 +119,6 @@ namespace MyTrade.Controllers
                     {
                         if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                         {
-                            model.result = "yes";
                             TempData["msg"] = "Requested Successfully.";
                         }
                         else
@@ -259,8 +170,7 @@ namespace MyTrade.Controllers
                     {
                         obj1.Status = "1";
                         TempData["error"] = ex.Message;
-                        //return RedirectToAction("AddWallet", "Wallet");
-                        return Json(model, JsonRequestBehavior.AllowGet);
+                        return RedirectToAction("AddWallet", "Wallet");
                     }
                 }
             }
@@ -268,21 +178,10 @@ namespace MyTrade.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
-            //return RedirectToAction("AddWallet", "Wallet");
+            return RedirectToAction("AddWallet", "Wallet");
         }
 
-
-
-        ///////////////////////////////////////
-
-
-
-
-
-
-
-
+        
         public ActionResult FetchPaymentByOrder(OrderModel model)
         {
             FetchPaymentByOrder obj = new FetchPaymentByOrder();

@@ -1,112 +1,74 @@
-/// <reference path="header.js" />
 document.write(`
-<!doctype html>
-<html lang="zxx">
+<!-- Meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="keywords" content="">		
+		<!-- SITE TITLE -->
+		<title>My Trade</title>			
+		<!-- Latest Bootstrap min CSS -->
+		<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">		
+		<!-- Google Font -->
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">  
+		<link rel="icon" type="image/png" href="assets/img/favicon.png">
+		<!-- Font Awesome CSS -->
+		<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/fonts/themify-icons.css">
+		<!--- owl carousel Css-->
+		<link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
+		<link rel="stylesheet" href="assets/owlcarousel/css/owl.theme.css">
+		<!--slicknav Css-->
+        <link rel="stylesheet" href="assets/css/slicknav.css">		
+		<!-- animate CSS -->
+		<link rel="stylesheet" href="assets/css/animate.css">	
+		<!-- Style CSS -->		
+		<link rel="stylesheet" href="assets/css/style.css">			
+		<link rel="stylesheet" href="assets/css/responsive.css">
 
-<head>
-        <!--Required meta tags-->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <div class="body-particles"></div>
 
-        <!--Links of CSS files-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/animate.min.css">
-        <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-        <link rel="stylesheet" href="assets/css/flaticon.css">
-        <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
-        <link rel="stylesheet" href="assets/css/nice-select.css">
-        <link rel="stylesheet" href="assets/css/slick.min.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="assets/css/meanmenu.css">
-		<link rel="stylesheet" href="assets/css/odometer.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
-        <title>My Trade</title>
+        <!-- particles.js container -->
+        <div id="particles-js"></div>	
+		<!-- START PRELOADER -->
+		<div class="preloader">
+			<div class="status">
+				<div class="status-mes"></div>
+			</div>
+		</div>
+		<!-- END PRELOADER -->		
 
-        <link rel="icon" type="image/png" href="../img/favicon.png">
-    </head>
+		<!-- START NAVBAR -->  
+		<div id="navigation" class="fixed-top navbar-light bg-faded site-navigation">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-4">
+						<div class="site-logo">
+							<a class="navbar-logo" href="index.html"><img src="assets/img/logo-2.png" alt=""></a>
+						</div>
+					</div><!--- END Col -->					
+					<div class="col-lg-9 col-md-9 col-sm-8">
+						<div class="header_right">
+							<nav id="main-menu" class="ml-auto">
+								<ul>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="about.html">About</a></li>
+								<li><a href="index.html#token_sale">Token sale</a></li>
+								<li><a href="roadmap.html">Roadmap</a></li>								  							  
+								<li><a href="faq.html">faq</a></li>	
+								<li><a href="index.html#download">Get App</a></li>									  
+								<li><a href="contact.html">Contact Us</a></li>
+								<li><a class ="block-menu" href="/Home/Login">Login</a></li>
+								</ul>
+							</nav>
+							<div id="mobile_menu"></div>
+						</div>
+					</div><!--- END Col -->
+				</div><!--- END ROW -->
+			</div><!--- END CONTAINER -->
+		</div> 	  
+		<!-- END NAVBAR -->
 
-        <!--Preloader-->
-        <div class ="preloader">
-            <div class ="loader">
-                <div class ="shadow"></div>
-                <div class ="box"></div>
-            </div>
-        </div>
-        <!--End Preloader-->
 
-        <!--Start Navbar Area-->
-        <div class ="navbar-area">
-            <div class ="luvion-responsive-nav">
-                <div class ="container">
-                    <div class ="luvion-responsive-menu">
-                        <div class ="logo" style="width: 100px">
-                            <a href="index.html">
-                                <img src="assets/img/logo.png" alt="logo">
-                                <img src="assets/img/logo.png" alt="logo">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class ="luvion-nav">
-                <div class ="container">
-                    <nav class ="navbar navbar-expand-md navbar-light">
-                        <a class ="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" alt="logo" width="100px">
-                            <img src="assets/img/logo.png" alt="logo" width="100px">
-                        </a>
-
-                        <div class ="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class ="navbar-nav">
-
-                               <li class ="nav-item"><a href="index.html" class ="nav-link">Home</a></li>
-
-                                <li class ="nav-item"><a href="about.html" class ="nav-link">About Us</a></li>
-
-                                <li class ="nav-item"><a href="forex.html" class ="nav-link">Forex</a></li>
-
-                                <li class ="nav-item"><a href="services.html" class ="nav-link">Services</a></li>
-
-                                <li class ="nav-item"><a href="coming.html" class ="nav-link">Products</a></li>
-
-                                <li class ="nav-item"><a class ="nav-link">Recharge & Bill<i class ="fas fa-chevron-down"></i></a>
-                                    <ul class ="dropdown-menu">
-                                        <li class ="nav-item"><a href="#recharge&bill" class ="nav-link">Mobile</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">DTH</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Data Card</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Broadband</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Landline</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">CableTv</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Electricity</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Flight</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Gas</a></li>
-
-                                        <li class ="nav-item"><a href="#" class ="nav-link">Water</a></li>
-
-                                    </ul>
-                                </li>
-
-                                <li class ="nav-item"><a href="contact.html" class ="nav-link">Contact Us</a></li>
-                            </ul>
-
-                            <div class ="others-options">
-                                <a href="/Home/Login" class ="login-btn"><i class ="flaticon-user"></i> Log In</a>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!--End Navbar Area-->
 `);
