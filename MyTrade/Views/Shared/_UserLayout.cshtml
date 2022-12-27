@@ -1015,13 +1015,51 @@
     <script src="/UserPanel/js/demo.js"></script>
 
     <script>
-        jQuery(document).ready(function () {
-            setTimeout(function () {
+		jQuery(document).ready(function(){
+			 setTimeout(function(){
                 dezSettingsOptions.version = 'dark';
                 new dezSettings(dezSettingsOptions);
-            }, 100);
+            }, 200);
 
-        });
+		});
+
+		function carouselReview(){
+			jQuery('.testimonial-one').owlCarousel({
+				loop:true,
+				autoplay:true,
+				margin:20,
+				nav:false,
+				rtl:true,
+				dots: false,
+				navText: ['', ''],
+				responsive:{
+					0:{
+						items:3
+					},
+					450:{
+						items:4
+					},
+					600:{
+						items:5
+					},
+					991:{
+						items:5
+					},
+
+					1200:{
+						items:7
+					},
+					1601:{
+						items:5
+					}
+				}
+			})
+		}
+		jQuery(window).on('load',function(){
+			setTimeout(function(){
+				carouselReview();
+			}, 1000);
+		});
     </script>
     <script>
             $('#html5-extension').DataTable({
