@@ -45,7 +45,7 @@
                                     <label for="LoginId">LoginId</label>
                                     @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
                                     @Html.HiddenFor(m => m.Name)
-                                    <label style="color:blue;" id="lblName">@Session["FullName"]</label>
+                                    <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="amt" />
