@@ -136,7 +136,7 @@
                 <div class="card overflow-hidden">
                     <div class="card-header align-items-start border-0 pb-0">
                         <div class="me-auto">
-                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total MTG Coin @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin6" height="47" />*@</p>
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total MTG Token/USDT @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin6" height="47" />*@</p>
                             <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalAmount</h3>
                         </div>
                     </div>
@@ -154,11 +154,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            @*<div class="col-xl-3 col-sm-6">
                 <div class="card overflow-hidden">
                     <div class="card-header align-items-start border-0 pb-0">
                         <div class="me-auto">
-                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>E-Pin @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin7" height="47" />*@</p>
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>E-Pin <img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin7" height="47" /></p>
                             <h3 class="text-black mb-0 font-w600">@ViewBag.TotalPins</h3>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                         <canvas id="widgetChart7" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="col-xl-3 col-sm-6">
                 <div class="card overflow-hidden">
                     <div class="card-header align-items-start border-0 pb-0">
@@ -316,7 +316,7 @@
                             <div class="form-check custom-checkbox me-5 mb-2">
                                 <input type="checkbox" class="form-check-input" id="customCheck9">
                                 <label class="form-check-label" for="customCheck9">
-                                    <span class="d-block text-black font-w500">MTGcoin</span>
+                                    <span class="d-block text-black font-w500">MTGToken/USDT</span>
                                     <span class="fs-12">MTG</span>
                                 </label>
                             </div>
@@ -383,14 +383,20 @@
                                     <a href="javascript:void(0);" class="btn-link">View more</a>
                                 </div>
                                 <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
-                                    <div class="items">
+                                    @foreach (var item in Model.lstCustomer)
+                                    {
+                                        int i = 0;
+                                    <div class="items" style="width: 151px;margin:5px;">
                                         <div class="text-center">
                                             <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                            <h5 class="text-black mb-0">Samuel</h5>
-                                            <span class="fs-12">sam224</span>
+                                            <h5 class="text-black mb-0">@item.CustomerName</h5>
+                                            <b style="font-size:small;">MTG Contact Address</b>
+                                            <span class="fs-12">@item.CustomerId</span>
                                         </div>
                                     </div>
-                                    <div class="items">
+                                        i++;
+                                    }
+                                    @*<div class="items">
                                         <div class="text-center">
                                             <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
                                             <h5 class="text-black mb-0">Cindy</h5>
@@ -417,10 +423,10 @@
                                             <h5 class="text-black mb-0">Olivia</h5>
                                             <span class="fs-12">oliv62</span>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                                 <div class="amount-bx">
-                                    <label>MTG Coin</label>
+                                    <label>MTG Token/USDT</label>
                                     <input type="number" class="form-control" placeholder="8,621.22">
                                 </div>
                                 <a href="javascript:(0);" class="btn btn-primary d-block btn-lg text-uppercase">Send Money</a>
@@ -447,7 +453,7 @@
                             </div>
                             <div class="card-body p-3">
                                 <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Coin</option>
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Dash Coin</option>
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>
@@ -528,7 +534,7 @@
                             </div>
                             <div class="card-body p-3">
                                 <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTGcoin</option>
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Litecoin</option>
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
@@ -595,7 +601,7 @@
                     </div>
 
 
-                    <div class="col-xl-4 col-sm-6">
+                    @*<div class="col-xl-4 col-sm-6">
                         <div class="card overflow-hidden">
                             <div class="card-header align-items-start border-0 pb-0">
                                 <div class="widget widget-chart-two " style="background-color:#14112e;border:#14112e 1px solid">
@@ -618,7 +624,7 @@
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="widget widget-chart-two" style="background-color:#14112e;border:#14112e 1px solid">
                                         <div class="widget-heading">
-                                            @*<p class="">Business Details</p>*@
+                                            <p class="">Business Details</p>
                                             <p class="UserDetailsss">Business Details</p>
                                         </div>
                                     </div>
@@ -636,7 +642,7 @@
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="widget widget-chart-two" style="background-color:#14112e;border:#14112e 1px solid">
                                         <div class="widget-heading">
-                                            @*<h5 class="">Business Details</h5>*@
+                                            <h5 class="">Business Details</h5>
                                             <p class="UserDetailsss">Business Details</p>
                                         </div>
                                     </div>
@@ -652,9 +658,9 @@
                         <div class="card overflow-hidden">
                             <div class="card-header align-items-start border-0 pb-0">
                                 <div class="widget widget-chart-two ">
-                                    @*<div class="widget-heading">
+                                    <div class="widget-heading">
                                             <h5 class="">Rewards</h5>
-                                        </div>*@
+                                        </div>
                                     <div class="widget-content1">
                                         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 
@@ -668,13 +674,13 @@
 
                                                             <div class="carousel-item active" style="padding: 0px 10px;">
                                                                 <div class="widget-heading mb-3">
-                                                                    @*<h5 class="">@Model.lstReward[i].Title</h5>*@
+                                                                    <h5 class="">@Model.lstReward[i].Title</h5>
                                                                     <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
                                                                 </div>
                                                                 <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
-                                                                @*<div class="carousel-caption">
+                                                                <div class="carousel-caption">
                                                                         <h5>@Model.lstReward[i].Title</h5>
-                                                                    </div>*@
+                                                                    </div>
                                                             </div>
                                                         }
                                                     }
@@ -688,18 +694,18 @@
 
                                                             <div class="carousel-item" style="padding:0px 10px">
                                                                 <div class="widget-heading">
-                                                                    @*<h5>@Model.lstReward[i].Title</h5>*@
+                                                                    <h5>@Model.lstReward[i].Title</h5>
                                                                     <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
                                                                 </div>
                                                                 <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
-                                                                @*<div class="carousel-caption">
+                                                                <div class="carousel-caption">
                                                                         <h5>@Model.lstReward[i].Title</h5>
-                                                                    </div>*@
+                                                                    </div>
                                                             </div>
                                                         }
                                                     }
                                                 }
-                                                @*<div class="carousel-item active">
+                                                <div class="carousel-item active">
                                                         <img class="d-block w-100 img-height" src="~/MyTradeWebsite/assets/img/4.jpg" alt="Second slide">
                                                         <div class="carousel-caption d-none d-sm-block">
                                                             <h5>Second slide</h5>
@@ -712,7 +718,7 @@
                                                             <h5>Third slide</h5>
                                                             <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
                                                         </div>
-                                                    </div>*@
+                                                    </div>
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -727,7 +733,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
