@@ -241,4 +241,4 @@ function deleteAllCookie(reload = true)
         });
 	
 
-    })(jQuery);
+    })(jQuery);}

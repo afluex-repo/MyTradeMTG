@@ -58,8 +58,8 @@ namespace MyTrade.Controllers
                             {
 
                                 Session["Country"] = ds.Tables[0].Rows[0]["Country"].ToString();
-
-                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                       
+                                Session["LoginId"] = ds.Tables[0].Rows[0]["CustomerId"].ToString();
                                 Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                                 Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
                                 Session["FullName"] = ds.Tables[0].Rows[0]["FullName"].ToString();
