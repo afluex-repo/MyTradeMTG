@@ -55,6 +55,12 @@ namespace MyTrade.Controllers
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 ViewBag.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
+                
+                ViewBag.TotalCrAmount = ds.Tables[7].Rows[0]["TotalCrAmount"].ToString();
+                ViewBag.TotalDrAmount = ds.Tables[7].Rows[0]["TotalDrAmount"].ToString();
+
+                //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
+                //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
 
                 if (ViewBag.Status == "InActive")
                 {
@@ -92,6 +98,23 @@ namespace MyTrade.Controllers
                 }
                 obj.lstReward = lst;
             }
+
+            List<Dashboard> lst2 = new List<Dashboard>();
+            obj.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds2 = obj.GetCustomerList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    Dashboard obj1 = new Dashboard();
+                    
+                    obj1.CustomerId = r["CustomerId"].ToString();
+                    obj1.CustomerName = r["CustomerName"].ToString();
+                    lst2.Add(obj1);
+                }
+                obj.lstCustomer = lst2;
+            }
+
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
             {
                 ViewBag.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
@@ -194,7 +217,8 @@ namespace MyTrade.Controllers
         public ActionResult TopUp()
         {
             Account model = new Account();
-            model.LoginId = Session["LoginId"].ToString();
+            model.LoginId = Session["CustomerId"].ToString();
+            //model.LoginId = Session["LoginId"].ToString();
             if (Session["IdActivated"].ToString()=="true")
             {
                 model.BankName = Session["Bank"].ToString();
@@ -565,7 +589,6 @@ namespace MyTrade.Controllers
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-
                     model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
                     model.DisplayName = ds.Tables[0].Rows[0]["Name"].ToString();
                 }

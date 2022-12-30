@@ -570,7 +570,7 @@ select.form-control.form-custom {
 .dropdown:not(.custom-dropdown-icon):not(.custom-dropdown) .dropdown-menu.show {
     opacity: 1;
     visibility: visible;
-    top: 21px!important;
+    top: 90px!important;
 }
 .dropdown:not(.custom-dropdown-icon):not(.custom-dropdown) .dropdown-menu a.dropdown-item {
     /* border-radius: 5px; */
@@ -579,7 +579,7 @@ select.form-control.form-custom {
     padding: 6px 17px;
     clear: both;
     font-weight: 500;
-    color: #030305;
+    /*color: #030305;*/
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;

@@ -19,8 +19,8 @@
 </style>
 @using (Html.BeginForm("PayoutRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -37,13 +37,13 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label>Login Id </label>
+                                    <label>Login Id </label><br />
                                     @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label> From Date</label>
+                                    <label> From Date</label><br />
                                     @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
                                 </div>
                             </div>
