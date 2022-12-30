@@ -128,7 +128,7 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="widgetChart5" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                        <canvas id="widgetChart5" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:25px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="widgetChart6" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                        <canvas id="widgetChart6" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:25px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -386,12 +386,12 @@
                                     @foreach (var item in Model.lstCustomer)
                                     {
                                         int i = 0;
-                                    <div class="items" style="width: 151px;margin:5px;">
+                                    <div class="items">
                                         <div class="text-center">
-                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                            <h5 class="text-black mb-0">@item.CustomerName</h5>
-                                            <b style="font-size:small;">MTG Contact Address</b>
-                                            <span class="fs-12">@item.CustomerId</span>
+                                            <img class="mb-3 rounded" src="@item.ProfilePic" alt="">
+                                            <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                            <b style="font-size:small;">MTG Contact Address<br /></b>
+                                            <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
                                         </div>
                                     </div>
                                         i++;

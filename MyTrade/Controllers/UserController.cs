@@ -107,7 +107,7 @@ namespace MyTrade.Controllers
                 foreach (DataRow r in ds2.Tables[0].Rows)
                 {
                     Dashboard obj1 = new Dashboard();
-                    
+                    obj1.ProfilePic = r["ProfilePic"].ToString();
                     obj1.CustomerId = r["CustomerId"].ToString();
                     obj1.CustomerName = r["CustomerName"].ToString();
                     lst2.Add(obj1);

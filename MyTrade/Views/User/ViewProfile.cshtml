@@ -18,6 +18,8 @@
                             <form id="general-info" class="section general-info" action="/User/ViewProfile" method="Post" enctype="multipart/form-data">
                                 <div class="info">
                                     <h6 class="">Update Profile</h6>
+                                    <br />
+                                    <p style="color:#4cff00;">@TempData["msg"]</p>
                                     <div class="row">
                                         <div class="col-xl-2 col-lg-12 col-md-4">
                                             <div class="upload mt-4 pr-md-4">
@@ -60,6 +62,7 @@
                                 <div class="info">
                                     <h5 class="">View Profile</h5><span class="text-danger text-left">
                                         @TempData["UserProfile"]
+                                    
                                     </span>
                                     <div class="row">
                                         <div class="col-md-11 mx-auto">
