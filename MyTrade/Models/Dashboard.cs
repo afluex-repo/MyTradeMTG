@@ -12,6 +12,7 @@ namespace MyTrade.Models
         public string cssclass { get; set; }
         public List<Dashboard> lstmessages { get; set; }
         public string FK_UserId { get; set; }
+        public string PK_UserId { get; set; }
         public string MemberName { get;  set; }
         public string Message { get;  set; }
         public string MessageTitle { get;  set; }
@@ -21,6 +22,7 @@ namespace MyTrade.Models
         public string Image { get; set; }
         public string Title { get; set; }
         public List<Dashboard> lstReward { get; set; }
+        public List<Dashboard> lstCustomer { get; set; }
         public string PK_RewardId { get; set; }
 
 
@@ -31,6 +33,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetailsForAssociate", para);
             return ds;
         }
+
+        public DataSet GetCustomerList()
+        {
+            SqlParameter[] para = {
+              
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetCustomerList", para);
+            return ds;
+        }
+
+
         public DataSet GetDashBoardDetails()
         {
 
