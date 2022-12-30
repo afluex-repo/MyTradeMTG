@@ -7,7 +7,7 @@
 
 @using (Html.BeginForm("EmployeeRegistration", "EmployeeRegistration", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
+    <div class="container-fluid">
         <div class="row layout-top-spacing">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
@@ -25,29 +25,23 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">User Type <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label class="col-form-label">User Type <span style="color: red">*</span></label>
                                         @Html.DropDownListFor(m => m.Fk_UserTypeId, new SelectList(ViewBag.ddlUserType, "Value", "Text"), new { @class = "form-control" })
                                     </div>
-                                </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Name <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label class="col-form-label">Name <span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                                     </div>
-                                </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Mobile No <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label class="col-form-label">Mobile No <span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile No", @Maxlength = "10", @onkeypress = "return isNumberKey(event);" })
 
                                     </div>
-                                </div>
                             </div>
 
                         </div>
@@ -55,26 +49,22 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Email Id <span style="color: red">*</span></label>
-                                    <div class="col-sm-9">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Onchange = "checkEmail();" })
+                                <div class="form-group">
+                                    <label class="col-form-label">Email Id <span style="color: red">*</span></label>
+                                       @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Onchange = "checkEmail();" })
                                     </div>
-                                </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Qualification </label>
-                                    <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label class="col-form-label">Qualification </label>
                                         @Html.TextBoxFor(m => m.EducationQualififcation, new { @class = "form-control" })
                                     </div>
-                                </div>
                             </div>
 
                         </div>
                         @Html.HiddenFor(m => m.LoginId)
 
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-md-9">
 
                                 @if (Model.LoginId == null)

@@ -7,7 +7,7 @@
 
 @using (Html.BeginForm("PaymentTypeMaster", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
+    <div class="container-fluid">
         <div class="row layout-top-spacing">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
@@ -24,34 +24,27 @@
                     <div class="widget-content widget-content-area">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        PaymentType <span style="color: red">*</span>
+                                <div class="form-group">
+                                        Payment Type <span style="color: red">*</span>
                                             @Html.DropDownListFor(m => m.PaymentTypeId, new SelectList(ViewBag.ddlPaymentRype, "Value", "Text"), new { @class = "form-control"})
                                     </div>
-                                </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
+                                <div class="form-group">
                                         Status<span style="color: red">*</span>
                                         <select  class = "form-control" id="Status" name="Status">
                                             <option value="">Select</option>
                                             <option value="1">Active</option>
                                             <option value="0">In Active</option>
                                         </select>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4 pt-4">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Submit" id="Update" name="Update" onclick="return validateform();" />
+                                    <input class="btn btn-success" type="submit" value="Submit" id="Update" name="Update" onclick="return validateform();" />
                                 </div>
                             </div>
                         </div>
-                       
 
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
                                 <thead>
