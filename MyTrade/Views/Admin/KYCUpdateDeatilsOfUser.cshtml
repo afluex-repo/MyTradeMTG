@@ -8,8 +8,8 @@
 
 @using (Html.BeginForm("KYCUpdateDeatilsOfUser", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -36,8 +36,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <br />
-                                    <input type="submit" id="btnSearch" class="btn btn-success pull-left" name="Search" value="Search" style="margin-top:15px;" />
+                                    <input type="submit" id="btnSearch" class="btn btn-success mt-30" name="Search" value="Search" />
                                 </div>
                             </div>
                         </div>
