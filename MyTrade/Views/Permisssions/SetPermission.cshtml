@@ -26,13 +26,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Select User <span style="color: red">*</span></label>
-                                       @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "form-control" })
+                                       @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "default-select wide form-control" })
                                     </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Select Main Menu <span style="color: red">*</span></label>
-                                        @Html.DropDownListFor(m => m.Fk_FormTypeId, new SelectList(ViewBag.ddlformtype, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Fk_FormTypeId, new SelectList(ViewBag.ddlformtype, "Value", "Text"), new { @class = "default-select wide form-control" })
                                     </div>
                             </div>
                             <div class="col-md-4 mt-2">

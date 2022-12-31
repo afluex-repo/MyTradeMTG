@@ -38,7 +38,7 @@
                                         <label>
                                             Payout No.
                                         </label>
-                                        @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "default-select wide form-control" })
                                         <input type="hidden" id="hdf" value="@Model.PayoutNo" />
                                         @*@Html.TextBoxFor(m => m.PayoutNo, new { @class = "form-control", @Placeholder = "Payout No" })*@
                                     </div>
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                          
-                                <table  class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                                <table class="table table-hover non-hover" id="html5-extension" style="width:100%" data-page-length='10'>
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>

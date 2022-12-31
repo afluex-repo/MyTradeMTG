@@ -45,7 +45,7 @@
                                 <div class="form-group">
                                     <label>Payment Mode</label>
                                     <input type="hidden" id="PMode" value="@Model.PaymentMode" />
-                                    <select id="PaymentMode" name="PaymentMode" class="form-control" onchange="return setstatus();">
+                                    <select id="PaymentMode" name="PaymentMode" class="default-select wide form-control" onchange="return setstatus();">
                                         @*<option value="0">-Select-</option>
                                         <option value="Online">Online</option>*@
                                         <option value="Offline">Offline</option>
@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <input type="hidden" id="st" value="@Model.Status" />
-                                    <select id="Status" name="Status" class="form-control">
+                                    <select id="Status" name="Status" class="default-select wide form-control">
                                         @*<option value="0">-Select-</option>*@
                                         <option value="Pending">Pending</option>
                                         <option value="Approved">Approved</option>
@@ -117,9 +117,9 @@
                                                     <td>@Item.Status</td>
                                                     @if (Item.Status == "Pending")
                                                     {
-                                                        <td>
-                                                            <a href="/Admin/Approve?id=@Item.RequestID" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a>
-                                                            <a href="/Admin/DeClined?id=@Item.RequestID" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>
+                                                        <td class="d-flex">
+                                                            <a href="/Admin/Approve?id=@Item.RequestID" class="m-1 btn btn-success btn-sm " onclick="return confirm('Are you sure you want to Approve this ewallet request ?') ">Approve</a>
+                                                            <a href="/Admin/DeClined?id=@Item.RequestID" class="m-1 btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this ewallet request  ?') ">Decline</a>
 
                                                         </td>
                                                     }
