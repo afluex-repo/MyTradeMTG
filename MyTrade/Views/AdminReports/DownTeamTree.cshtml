@@ -52,14 +52,14 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "default-select wide form-control" })
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Self/Team</label>
                                         <input type="hidden" id="hdf" value="@Model.DirectStatus">
-                                        <select id="DirectStatus" name="DirectStatus" class="form-control">
+                                        <select id="DirectStatus" name="DirectStatus" class="default-select wide form-control">
                                             <option value="0">-select-</option>
                                             <option value="Self">Self</option>
                                             <option value="Team">Team</option>

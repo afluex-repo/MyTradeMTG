@@ -26,13 +26,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                         Payment Type <span style="color: red">*</span>
-                                            @Html.DropDownListFor(m => m.PaymentTypeId, new SelectList(ViewBag.ddlPaymentRype, "Value", "Text"), new { @class = "form-control"})
+                                            @Html.DropDownListFor(m => m.PaymentTypeId, new SelectList(ViewBag.ddlPaymentRype, "Value", "Text"), new { @class = "default-select wide form-control" })
                                     </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                         Status<span style="color: red">*</span>
-                                        <select  class = "form-control" id="Status" name="Status">
+                                        <select  class = "default-select wide form-control" id="Status" name="Status">
                                             <option value="">Select</option>
                                             <option value="1">Active</option>
                                             <option value="0">In Active</option>

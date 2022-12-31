@@ -176,7 +176,7 @@
     <Content Include="assets\css\forms\switches.css" />
     <Content Include="assets\css\forms\theme-checkbox-radio.css" />
     <Content Include="assets\css\loader.css" />
-    <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\main1.css" />
     <Content Include="assets\css\pages\coming-soon\style.css" />
     <Content Include="assets\css\pages\contact_us.css" />
     <Content Include="assets\css\pages\error\style-400.css" />

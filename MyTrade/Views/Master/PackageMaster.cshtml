@@ -23,10 +23,10 @@
                     <div class="widget-content widget-content-area">
                         <div class="row mb-2">
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="example">
                                     <label class="col-form-label">Package Type<span style="color: red">*</span></label>
                                   
-                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
+                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "default-select wide", @onchange = "return ChangePackagetype();" })
                                    
                                 </div>
                             </div>
