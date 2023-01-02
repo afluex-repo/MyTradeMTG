@@ -14,6 +14,7 @@ namespace MyTrade.Models
 
         public decimal BinaryPercent { get; set; }
         public decimal BV { get; set; }
+        public decimal ActivationMTGToken { get; set; }
         public decimal CGST { get; set; }
         public decimal DirectPercent { get; set; }
         public decimal IGST { get; set; }
@@ -49,7 +50,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = { new SqlParameter("@ProductName", ProductName),
                                   new SqlParameter("@ProductPrice", ProductPrice),
-                                  new SqlParameter("@IGST", IGST),
+                                  //new SqlParameter("@IGST", IGST),
                                   //new SqlParameter("@CGST", CGST),
                                   //new SqlParameter("@SGST", SGST),
                                   //new SqlParameter("@BinaryPercent", BinaryPercent),
@@ -64,6 +65,7 @@ namespace MyTrade.Models
                                      new SqlParameter("@InMultipleOf", InMultipleOf),
                                       new SqlParameter("@HSNCode", HSNCode),
                                  new SqlParameter("@FinalAmount",FinalAmount),
+                                  new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                  new SqlParameter("@IscomboPackage",IscomboPackage)
             };
@@ -115,6 +117,7 @@ namespace MyTrade.Models
                                      new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
                                     new SqlParameter("@ToAmount", ToAmount),
+                                 new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@InMultipleOf", InMultipleOf),
                                  new SqlParameter("@HSNCode", HSNCode),
                                  new SqlParameter("@FinalAmount",FinalAmount),

@@ -515,3 +515,4 @@ F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csproj.Gen
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.dll
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.pdb
 E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache

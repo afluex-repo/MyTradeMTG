@@ -144,6 +144,7 @@ namespace MyTrade.Controllers
             try
             {
                 obj.Fk_UserId = Session["Pk_UserId"].ToString();
+                
                 DataSet ds = obj.ActivateUser();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -218,37 +219,62 @@ namespace MyTrade.Controllers
         {
             Account model = new Account();
             model.LoginId = Session["CustomerId"].ToString();
-            //model.LoginId = Session["LoginId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+
             if (Session["IdActivated"].ToString()=="true")
             {
                 model.BankName = Session["Bank"].ToString();
                 model.BankBranch = Session["Branch"].ToString();
             }
+
+            #region PackageType Bind
+            
+            Common objcommpkg = new Common();
+            List<SelectListItem> ddlPackageType = new List<SelectListItem>();
+            DataSet dspkg = objcommpkg.BindPackageType();
+            if (dspkg != null && dspkg.Tables.Count > 0 && dspkg.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dspkg.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPackageType.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlPackageType.Add(new SelectListItem { Text = r["PackageTypeName"].ToString(), Value = r["Pk_PackageTypeId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlPackageType = ddlPackageType;
+            #endregion
+
             #region Product Bind
             Common objcomm = new Common();
-            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            //List<SelectListItem> ddlProduct = new List<SelectListItem>();
             DataSet ds1 = objcomm.BindProductForTopUp();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
-                int count = 0;
+               // int count = 0;
                 ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
+                ViewBag.ActivationMTGToken = ds1.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
                 ViewBag.Status = ds1.Tables[1].Rows[0]["Status"].ToString();
                 ViewBag.Reason = ds1.Tables[1].Rows[0]["Reason"].ToString();
-                foreach (DataRow r in ds1.Tables[0].Rows)
-                {
-                    if (count == 0)
-                    {
-                        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    }
-                    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
-                    count++;
-                }
+                //foreach (DataRow r in ds1.Tables[0].Rows)
+                //{
+                //    if (count == 0)
+                //    {
+                //        ddlProduct.Add(new SelectListItem { Text = "Select", Value = "0" });
+                //    }
+                //    ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                //    count++;
+                //}
             }
-            ViewBag.ddlProduct = ddlProduct;
+           // ViewBag.ddlProduct = ddlProduct;
             #endregion
+
             #region Check Balance
             objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = objcomm.GetWalletBalance();
@@ -257,10 +283,12 @@ namespace MyTrade.Controllers
                 ViewBag.WalletBalance = ds.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
+
             #region ddlpaymentType
             List<SelectListItem> ddlpaymentType = Common.BindPaymentType();
             ViewBag.ddlpaymentType = ddlpaymentType;
             #endregion
+
             #region ddlpaymentmode
             UserWallet obj = new UserWallet();
             int count1 = 0;
@@ -282,8 +310,48 @@ namespace MyTrade.Controllers
             ViewBag.ddlpaymentmode = ddlpaymentmode;
 
             #endregion
+            
+
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            ddlProduct.Add(new SelectListItem { Text = "Select Package type", Value = "0" });
+            ViewBag.ddlProduct = ddlProduct;
+
             return View(model);
         }
+
+        public ActionResult GetProductList(string PackageTypeId)
+        {
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            Account model = new Account();
+            model.PackageTypeId = PackageTypeId;
+            DataSet ds = model.GetProductListForTopUp();
+            
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    ddlProduct.Add(new SelectListItem { Text = dr["ProductName"].ToString(), Value = dr["Pk_ProductId"].ToString() });
+                }
+            }
+            model.ddlProduct = ddlProduct;
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        //public ActionResult GetActivationMTG(string PackageTypeId)
+        //{
+        //    List<SelectListItem> ActivationMTGToken = new List<SelectListItem>();
+        //    Account obj = new Account();
+        //    obj.PackageTypeId = PackageTypeId;
+        //    DataSet ds = obj.GetActivationMTGForTopUp();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //    {
+        //            obj.ActivationMTGToken = ds.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
+        //    }
+        //    ViewBag.ActivationMTGToken = ActivationMTGToken;
+        //    return Json(obj, JsonRequestBehavior.AllowGet);
+        //}
+
         [HttpPost]
         public ActionResult TopUp(Account obj)
         {
@@ -355,6 +423,7 @@ namespace MyTrade.Controllers
             }
             return RedirectToAction("Topup", "User");
         }
+
         public ActionResult FillAmount(string ProductId)
         {
             Admin obj = new Admin();
@@ -1735,6 +1804,7 @@ namespace MyTrade.Controllers
                 {
                     obj.Result = "yes";
                     obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
+                    obj.ActivationMTGToken = Convert.ToDecimal(ds.Tables[0].Rows[0]["ActivationMTGToken"]);
                     obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
                     obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
                     obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);

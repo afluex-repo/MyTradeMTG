@@ -48,11 +48,17 @@
                                     <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
                                 </div>
                                 <div class="col-md-4">
+                                    <label for="Package">Package Type<span style="color:red">*</span></label>
+                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
+                                </div>
+                                <div class="col-md-4">
                                     <input type="hidden" id="amt" />
                                     <input type="hidden" id="pkg" />
                                     <label for="Package">Package <span style="color:red">*</span></label>
-                                    @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "default-select  form-control wide", @onchange = "return GetPackageDetails();" })
+                                    @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control wide", @onchange = "return GetPackageDetails();" })
                                 </div>
+                            </div>
+                            <div class="row mb-4">
                                 <div class="col-md-4">
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
                                     <label for="Amount">MTG Token/USDT <span style="color:red">*</span></label>
@@ -61,7 +67,16 @@
                                     <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
                                     <input type="hidden" id="hdfMin" />
                                 </div>
+                                <div class="col-md-4">
+                                    <label for="ActivationMtg">Activation MTG Token <span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ActivationMTGToken, new { @class = "form-control", @placeholder = "0" , @onkeypress = "return isNumberKey(event);"})
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="TotalAmount">Total<span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Total" })
+                                </div>
                             </div>
+                            
                             @*<div class="row mb-4">
                                     <div class="col-md-4">
                                         <label for="Amount">
@@ -154,7 +169,6 @@
 
         <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
         <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
         <script>
@@ -191,11 +205,12 @@
                     return false;
                 return true;
             }
+
             function CheckAmount() {
                 debugger;
                 var Amount = $("#Amount").val();
                 var WalletBalance = $("#WalletAmount").val();
-                //alert($("#hdfMax").val());
+                alert($("#hdfMax").val());
                 if (Amount == "0") {
                     Snackbar.show({
                         text: "Amount should not be zero !!",
@@ -363,6 +378,8 @@
                     }
                 });
             }
+
+
             function GetPackageDetails() {
                 $.ajax({
                     url: '/User/GetPackageDetails', type: 'post', dataType: 'json',
@@ -373,6 +390,7 @@
                             $("#Amount").val('');
                             $("#spfrom").text(data.FromAmount);
                             $("#spto").text(data.ToAmount);
+                            $("#ActivationMTGToken").text(data.ActivationMTGToken);
                             $("#spmul").text(data.InMultipleOf);
                             $("#hdfMax").val(data.ToAmount);
                             $("#hdfMin").val(data.FromAmount);
@@ -384,6 +402,7 @@
                     }
                 });
             }
+
         </script>
 
         @if (TempData["msg"] != null)
@@ -442,3 +461,29 @@
                 }
             })
         </script>
+
+
+<script>
+    function ChangePackagetype() {
+        debugger;
+        $("#divload").css({ 'display': '' });
+        var PackageTypeId = $('#PackageTypeId').val();
+        $.ajax({
+            url: '/User/GetProductList', type: 'post', dataType: 'json',
+            data: { 'PackageTypeId': PackageTypeId },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#PackageId").html(""); // clear before appending new list
+                $("#PackageId").empty();
+                $("#PackageId").append(
+                      $('<option></option>').val(0).html('Select Package Type'));
+                $.each(data.ddlProduct, function (index, PackagetypeCount) {
+                    $("#PackageId").append(
+                          $('<option></option>').val(PackagetypeCount.Value).html(PackagetypeCount.Text));
+                });
+              
+            }
+
+        });
+    } 
+</script>

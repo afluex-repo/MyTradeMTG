@@ -43,15 +43,21 @@
                                        @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Product Price", @class = "form-control", @onkeypress = "return isNumberKey(event)", onchange = "return bindbvprice();" })
                                  </div>
                             </div>
-                            <div class="col-md-3">
+                            @*<div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-form-label">BV <span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.BV, new { @class = "form-control", @onkeypress = "return isNumberKey(event)",@onchange = "return CalculateFinalAmount();" })
                                 </div>
+                            </div>*@
+                            <div class="col-md-3" id="divmtgtoken">
+                                <div class="form-group">
+                                    <label class="col-form-label">Activation MTG Token <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ActivationMTGToken, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
                             </div>
                             <div class="col-md-3" id="divpercent" style="display:none">
                                 <div class="form-group">
-                                    <label class="col-form-label">Percent <span style="color: red">*</span></label>
+                                    <label class="col-form-label">Return Percent <span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.ROIPercent, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                </div>
                             </div>
@@ -59,13 +65,23 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Basis on <span style="color: red">*</span></label>
                                        <select name="Basis" class="form-control">
-                                            <option value="Daily">Daily</option>
+                                            @*<option value="Daily">Daily</option>*@
+                                           <option value="Daily">One Time</option>
                                         </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="divbasis2" style="display:none">
+                                <div class="form-group">
+                                    <label class="col-form-label">Basis on <span style="color: red">*</span></label>
+                                    <select name="Basis" class="form-control">
+                                        <option value="Daily">Daily</option>
+                                        <option value="Monthly">Monthly</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-3" id="divdays" style="display:none">
                                 <div class="form-group">
-                                    <label class="col-form-label">Days <span style="color: red">*</span></label>
+                                    <label class="col-form-label">Return Days <span style="color: red">*</span></label>
                                        @Html.TextBoxFor(m => m.Days, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                  </div>
                             </div>
@@ -140,7 +156,7 @@
                                 </div>*@
                         </div>
                         <div class="row mb-2">
-                            <div class="col-md-3" style="display:none" id="divgst">
+                            @*<div class="col-md-3" style="display:none" id="divgst">
                                 <div class="form-group">
                                     <label class="col-form-label">GST(%)<span style="color: red">*</span></label>
                                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)",@onchange="return CalculateFinalAmount();" })
@@ -157,14 +173,14 @@
                                     <label class="col-form-label">Final Price<span style="color: red">*</span></label>
                                        @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @disabled = "disabled" })
                                 </div>
-                            </div>
-                            <div class="col-md-3" style="display:none" id="divisjoinpackage">
+                            </div>*@
+                            @*<div class="col-md-3" style="display:none" id="divisjoinpackage">
                                 <div class="form-group">
                                     <label class="col-form-label">Is Combo Package</label>
                                         <input type="checkbox" id="Iscombo" class="form-control" style= "width:16px;"/>
                                         <input type="hidden" value="@Model.IscomboPackage" id="IscomboPackage"/>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
@@ -262,7 +278,8 @@
             $("#divtoamount").show();
             $("#divmultiple").show();
             $("#divpercent").show();
-            $("#divbasis").show();
+            $("#divbasis2").hide();
+            $("#divmtgtoken").hide();
             $("#divdays").show();
             $("#divgst").hide();
             $("#divhsn").hide();
@@ -270,33 +287,34 @@
             $("#divsponsorpercent").show();
         }
         else if (packagetype == 1) {
-            $("#divfromamount").hide();
-            $("#divtoamount").hide();
-            $("#divmultiple").hide();
+            $("#divfromamount").show();
+            $("#divtoamount").show();
+            $("#divmultiple").show();
             $("#divpercent").hide();
             $("#divbasis").hide();
+            $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
             $("#divisjoinpackage").show();
-            $("#divsponsorpercent").hide();
-            var ComboPackage = $("#IscomboPackage").val();
-            debugger
-            if (ComboPackage == "Yes") {
-                $("#Iscombo").prop("checked", true);
-                $("#divpercent").show();
-                $("#divbasis").show();
-                $("#divdays").show();
-                $("#divsponsorpercent").show();
-            }
-            else {
-                $("#Iscombo").prop("checked", false);
-                $("#divpercent").hide();
-                $("#divbasis").hide();
-                $("#divdays").hide();
-                $("#divsponsorpercent").hide();
-            }
+            $("#divsponsorpercent").show();
+            //var ComboPackage = $("#IscomboPackage").val();
+            //debugger
+            //if (ComboPackage == "Yes") {
+            //    $("#Iscombo").prop("checked", true);
+            //    $("#divpercent").show();
+            //    $("#divbasis").show();
+            //    $("#divdays").show();
+            //    $("#divsponsorpercent").show();
+            //}
+            //else {
+            //    $("#Iscombo").prop("checked", false);
+            //    $("#divpercent").hide();
+            //    $("#divbasis").hide();
+            //    $("#divdays").hide();
+            //    $("#divsponsorpercent").hide();
+            //}
         }
         else {
             $("#divfromamount").hide();
@@ -307,6 +325,8 @@
             $("#divfinal").hide();
             $("#divpercent").hide();
             $("#divbasis").hide();
+            $("#divbasis2").hide();
+            $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divisjoinpackage").hide();
             $("#divsponsorpercent").hide();
@@ -340,7 +360,6 @@
             $('#Days').focus();
             return false;
         }
-       
         debugger
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
@@ -419,7 +438,9 @@
             $("#divtoamount").show();
             $("#divmultiple").show();
             $("#divpercent").show();
-            $("#divbasis").show();
+            $("#divbasis").hide();
+            $("#divbasis2").show();
+            $("#divmtgtoken").show();
             $("#divdays").show();
             $("#divgst").hide();
             $("#divhsn").hide();
@@ -427,17 +448,19 @@
             $("#divsponsorpercent").show();
         }
         else if (packagetype == 1) {
-            $("#divfromamount").hide();
-            $("#divtoamount").hide();
-            $("#divmultiple").hide();
-            $("#divpercent").hide();
-            $("#divbasis").hide();
-            $("#divdays").hide();
+            $("#divfromamount").show();
+            $("#divtoamount").show();
+            $("#divmultiple").show();
+            $("#divpercent").show();
+            $("#divbasis").show();
+            $("#divbasis2").hide();
+            $("#divmtgtoken").show();
+            $("#divdays").show();
             $("#divgst").show();
             $("#divhsn").show();
             $("#divfinal").show();
             $("#divisjoinpackage").show();
-            $("#divsponsorpercent").hide();
+            $("#divsponsorpercent").show();
         }
         else {
             $("#divfromamount").hide();
@@ -448,6 +471,8 @@
             $("#divfinal").hide();
             $("#divpercent").hide();
             $("#divbasis").hide();
+            $("#divbasis2").hide();
+            $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divisjoinpackage").hide();
             $("#divsponsorpercent").hide();
@@ -462,24 +487,24 @@
 
         return true;
     }
-    const Combopackage = document.getElementById('Iscombo')
-    Combopackage.addEventListener('change', (event) => {
-        if (event.currentTarget.checked) {
-            $("#divpercent").show();
-            $("#divbasis").show();
-            $("#divdays").show();
-            $("#divsponsorpercent").show();
-        } else {
-           $('#ROIPercent').val(0)
-           $('#Days').val(0)
-           $('#SponsorIncome').val(0)
-            $("#divpercent").hide();
-            $("#divbasis").hide();
-            $("#divdays").hide();
-            $("#divsponsorpercent").hide();
+    //const Combopackage = document.getElementById('Iscombo')
+    //Combopackage.addEventListener('change', (event) => {
+    //    if (event.currentTarget.checked) {
+    //        $("#divpercent").show();
+    //        $("#divbasis").show();
+    //        $("#divdays").show();
+    //        $("#divsponsorpercent").show();
+    //    } else {
+    //       $('#ROIPercent').val(0)
+    //       $('#Days').val(0)
+    //       $('#SponsorIncome').val(0)
+    //        $("#divpercent").hide();
+    //        $("#divbasis").hide();
+    //        $("#divdays").hide();
+    //        $("#divsponsorpercent").hide();
 
-        }
-    })
+    //    }
+    //})
     function saveProduct() {
         debugger
         $(".errortext").removeClass("errortext");
@@ -526,11 +551,17 @@
         //    $('#BinaryPercent').focus();
         //    return false;
         //}
-        if ($('#BV').val() == '') {
-            $("#BV").addClass('errortext');
-            $('#BV').focus();
+        //if ($('#BV').val() == '') {
+        //    $("#BV").addClass('errortext');
+        //    $('#BV').focus();
+        //    return false;
+        //}
+        if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
+            $("#ActivationMTGToken").addClass('errortext');
+            $('#ActivationMTGToken').focus();
             return false;
         }
+
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
                 $("#FromAmount").addClass('errortext');
@@ -555,16 +586,17 @@
 
         }
         if ($('#PackageTypeId').val() == '1') {
-            if ($('#IGST').val() == '') {
-                $("#IGST").addClass('errortext');
-                $('#IGST').focus();
-                return false;
-            }
-            if ($('#HSNCode').val() == '') {
-                $("#HSNCode").addClass('errortext');
-                $('#HSNCode').focus();
-                return false;
-            }
+            //if ($('#IGST').val() == '') {
+            //    $("#IGST").addClass('errortext');
+            //    $('#IGST').focus();
+            //    return false;
+            //}
+            //if ($('#HSNCode').val() == '') {
+            //    $("#HSNCode").addClass('errortext');
+            //    $('#HSNCode').focus();
+            //    return false;
+            //}
+           
             if ($('#FinalAmount').val() == '') {
                 $("#FinalAmount").addClass('errortext');
                 $('#FinalAmount').focus();
@@ -593,13 +625,12 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
 
             }
-
         });
     }
 
@@ -674,11 +705,18 @@
         //    $('#ROIPercent').focus();
         //    return false;
         //}
-        if ($('#BV').val() == '') {
-            $("#BV").addClass('errortext');
-            $('#BV').focus();
+        //if ($('#BV').val() == '') {
+        //    $("#BV").addClass('errortext');
+        //    $('#BV').focus();
+        //    return false;
+        //}
+
+        if ($('#ActivationMTGToken').val() == '') {
+            $("#ActivationMTGToken").addClass('errortext');
+            $('#ActivationMTGToken').focus();
             return false;
         }
+
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
                 $("#FromAmount").addClass('errortext');
@@ -700,7 +738,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';

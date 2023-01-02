@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Mvc;
 
 namespace MyTrade.Models
 {
@@ -11,6 +12,7 @@ namespace MyTrade.Models
     {
         public string LoginId { get; set; }
         public string PackageId { get; set; }
+        public string PackageTypeId { get; set; }
         public string TopUpDate { get; set; }
         public string Amount { get; set; }
         public string Remarks { get; set; }
@@ -40,8 +42,14 @@ namespace MyTrade.Models
         public string Remark { get; set; }
         public string PackageDays { get; set; }
         public string Email { get; set; }
-        
+        public string ActivationMTG { get; set; }
+
         public string ROI { get; set; }
+
+        public List<SelectListItem> ddlProduct { get; set; }
+
+
+
         
 
 
@@ -92,9 +100,33 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTotalWalletAmountOfMyTrade");
             return ds;
         }
-        
 
 
+
+
+        public DataSet GetProductListForTopUp()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@PackageTypeId", PackageTypeId),
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp", para);
+            return ds;
+        }
+
+        public DataSet GetActivationMTGForTopUp()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@PackageTypeId", PackageTypeId),
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp", para);
+            return ds;
+        }
+
+        public string ActivationMTGToken { get; set; }
 
     }
 }
