@@ -515,6 +515,7 @@ F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csproj.Gen
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.dll
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.pdb
 E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
+F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\ApplicationInsights.config
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\roslyn\csc.exe
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -568,6 +569,7 @@ E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\Newtonsoft.Json.xml
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\System.Net.Http.Formatting.xml
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\System.Web.Http.xml
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\System.Web.Http.WebHost.xml
+E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.Properties.Resources.resources
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.csproj.GenerateResource.Cache
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.dll

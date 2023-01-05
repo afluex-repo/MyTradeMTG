@@ -11,9 +11,10 @@ namespace MyTrade.Models
     {
         public List<Master> lstBonazaReward { get; set; }
         public List<Master> lstpackage { get; set; }
-
+        public List<Master> lstbalancetransfer { get; set; }
         public decimal BinaryPercent { get; set; }
         public decimal BV { get; set; }
+        public decimal ActivationMTGToken { get; set; }
         public decimal CGST { get; set; }
         public decimal DirectPercent { get; set; }
         public decimal IGST { get; set; }
@@ -38,18 +39,21 @@ namespace MyTrade.Models
         public decimal FinalAmount { get; set; }
         public string IscomboPackage { get; set; }
         public decimal SponsorIncome { get; set; }
-
-        public string RewardName { get; set; }
         public string FromDate { get; set; }
+        public string RewardName { get; set; }
+        public string BasisOn { get; set; }
         public string ToDate { get; set; }
-
+        public string LoginId { get; set; }
+        public string Name { get; set; }
+        public string Amount { get; set; }
         #region ProductMaster
 
         public DataSet SaveProduct()
         {
             SqlParameter[] para = { new SqlParameter("@ProductName", ProductName),
                                   new SqlParameter("@ProductPrice", ProductPrice),
-                                  new SqlParameter("@IGST", IGST),
+                                  new SqlParameter("@BasisOn", BasisOn),
+                                  //new SqlParameter("@IGST", IGST),
                                   //new SqlParameter("@CGST", CGST),
                                   //new SqlParameter("@SGST", SGST),
                                   //new SqlParameter("@BinaryPercent", BinaryPercent),
@@ -64,6 +68,7 @@ namespace MyTrade.Models
                                      new SqlParameter("@InMultipleOf", InMultipleOf),
                                       new SqlParameter("@HSNCode", HSNCode),
                                  new SqlParameter("@FinalAmount",FinalAmount),
+                                  new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                  new SqlParameter("@IscomboPackage",IscomboPackage)
             };
@@ -79,6 +84,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("ProductList", para);
             return ds;
         }
+
+        public string PK_AdminId { get; set; }
+        public DataSet GetadminDetails()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
+                 
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetAdminloginid", para);
+            return ds;
+        }
+
         public DataSet DeleteProduct()
         {
             SqlParameter[] para = { new SqlParameter("@ProductID", Packageid),
@@ -103,6 +119,7 @@ namespace MyTrade.Models
             SqlParameter[] para = { new SqlParameter("@ProductID", Packageid),
                                   new SqlParameter("@ProductName", ProductName),
                                   new SqlParameter("@ProductPrice", ProductPrice),
+                                  new SqlParameter("@BasisOn",BasisOn),
                                   new SqlParameter("@IGST", IGST),
                                   //new SqlParameter("@CGST", CGST),
                                   //new SqlParameter("@SGST", SGST),
@@ -115,6 +132,7 @@ namespace MyTrade.Models
                                      new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
                                     new SqlParameter("@ToAmount", ToAmount),
+                                 new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@InMultipleOf", InMultipleOf),
                                  new SqlParameter("@HSNCode", HSNCode),
                                  new SqlParameter("@FinalAmount",FinalAmount),
@@ -145,6 +163,17 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("UploadFile", para);
             return ds;
         }
+
+        public DataSet GetNameDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetNameDetails", para);
+            return ds;
+        }
+
+
         public DataSet GetRewarDetails()
         {
             SqlParameter[] para = {
@@ -223,5 +252,53 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteBonazaReward", para);
             return ds;
         }
+
+        #region BalanceTransfer
+        public string Pk_BalanceTransferId { get; set; }
+        public string DirectPayment { get; set; }
+        public string BuySales { get; set; }
+
+
+        public DataSet SaveBalanceTransfer()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",Fk_UserId),
+                new SqlParameter("@DirectPayment",DirectPayment),
+                new SqlParameter("@BuySales",BuySales),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveBalanceTransfer", para);
+            return ds;
+        }
+
+        public DataSet GetBalanceTransferList()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_BalanceTransferId", Pk_BalanceTransferId),
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("BalanceTransferList", para);
+            return ds;
+        }
+
+
+        public DataSet UpdateBalanceTransfer()
+        {
+            SqlParameter[] para = {
+                 new SqlParameter("@Pk_BalanceTransferId",Pk_BalanceTransferId),
+                new SqlParameter("@Fk_UserId",Fk_UserId),
+                new SqlParameter("@AddedBy",AddedBy),
+                //new SqlParameter("@Status",Status),
+                new SqlParameter("@DirectPayment", DirectPayment),
+                new SqlParameter("@BuySales", BuySales),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBalanceTransfer", para);
+            return ds;
+        }
+
+
+
+        #endregion BalanceTransfer
+
+
     }
 }

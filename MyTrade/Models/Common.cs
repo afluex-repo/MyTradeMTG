@@ -179,6 +179,9 @@ namespace MyTrade.Models
 
             return ds;
         }
+
+        public string LoginId { get; set; }
+        
         public DataSet GetStateCity()
         {
             SqlParameter[] para = {
@@ -207,10 +210,16 @@ namespace MyTrade.Models
         }
         public DataSet BindPackageType()
         {
+            SqlParameter[] para =
+            {
+                  //new SqlParameter("@PackageTypeId",PackageTypeId),
+            };
 
-            DataSet ds = DBHelper.ExecuteQuery("GetPackageType");
+            DataSet ds = DBHelper.ExecuteQuery("GetPackageType",para);
             return ds;
         }
+
+        public string PackageTypeId { get; set; }
         public DataSet PaymentList()
         {
             SqlParameter[] para =
