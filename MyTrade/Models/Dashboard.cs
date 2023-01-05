@@ -9,6 +9,7 @@ namespace MyTrade.Models
 {
     public class Dashboard :Common
     {
+        
         public string cssclass { get; set; }
         public List<Dashboard> lstmessages { get; set; }
         public string FK_UserId { get; set; }
@@ -60,5 +61,43 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRewarDetails", para);
             return ds;
         }
+        
     }
+
+
+    public class ProgressReport
+    {
+
+        public string FK_UserId { get; set; }
+        public string Year { get; set; }
+        public string TotalBusiness { get; set; }
+        public string PaidCramount { get; set; }
+        public string PaidDramount { get; set; }
+        public List<ProgressReport> lstCoin { get; set; }
+        public DataSet GetAssociateDashboard()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",FK_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetchartBarRunningData", para);
+            return ds;
+        }
+
+        public DataSet GetlineChart()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Fk_UserId",FK_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetlineChart", para);
+            return ds;
+        }
+
+        
+
+
+
+    }
+
+
+
 }
