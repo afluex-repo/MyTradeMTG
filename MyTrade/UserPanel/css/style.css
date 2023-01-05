@@ -36886,7 +36886,7 @@ svg text {
   .form-control:hover, .form-control:focus, .form-control.active {
     box-shadow: none;
     background: #fff;
-    color: #6e6e6e; }
+    color:#000; }
   .form-control:focus {
     border-color: var(--primary); }
   .form-control.solid {
