@@ -23,7 +23,7 @@
                 <div class="widget-content widget-content-area">
                     <div class="row">
                         <div class="col-md-4">
-                            <span style="color:red;">My Trade Wallet Balance : @ViewBag.TotalWalletAmount</span>
+                            <span style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.TotalWalletAmount</span>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                             <input type="hidden" id="amt" />
                             <input type="hidden" id="pkg" />
                             <label for="Package">Package <span style="color:red">*</span></label>
-                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange="return GetPackageDetails();" })
+                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "default-select wide form-control", @onchange="return GetPackageDetails();" })
                             <p class="text-success" id="spName"></p>
                         </div>
                         <div class="col-md-4">

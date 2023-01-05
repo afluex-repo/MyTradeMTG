@@ -179,6 +179,9 @@ namespace MyTrade.Models
 
             return ds;
         }
+
+        public string LoginId { get; set; }
+        
         public DataSet GetStateCity()
         {
             SqlParameter[] para = {

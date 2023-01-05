@@ -220,11 +220,13 @@ namespace MyTrade.Controllers
             Account model = new Account();
             model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
-
+            model.CustomerId = Session["LoginId"].ToString();
+         
             if (Session["IdActivated"].ToString()=="true")
             {
                 model.BankName = Session["Bank"].ToString();
                 model.BankBranch = Session["Branch"].ToString();
+              
             }
 
             #region PackageType Bind
@@ -257,7 +259,15 @@ namespace MyTrade.Controllers
                // int count = 0;
                 ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
-                ViewBag.ActivationMTGToken = ds1.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
+                if (Session["UserActivationTopUp"].ToString() == "0")
+                {
+                    ViewBag.ActivationMTGToken = ds1.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
+                }
+                else
+                {
+                    ViewBag.ActivationMTGToken = "0";
+                }
+               // ViewBag.ActivationMTGToken = ds1.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
                 ViewBag.Status = ds1.Tables[1].Rows[0]["Status"].ToString();
@@ -324,6 +334,7 @@ namespace MyTrade.Controllers
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             Account model = new Account();
             model.PackageTypeId = PackageTypeId;
+           
             DataSet ds = model.GetProductListForTopUp();
             
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -357,7 +368,8 @@ namespace MyTrade.Controllers
         {
             try
             {
-                //obj.LoginId = Session["LoginId"].ToString();
+                obj.LoginId = Session["CustomerId"].ToString();
+                obj.LoginId = Session["LoginId"].ToString();
                 obj.AddedBy = Session["Pk_userId"].ToString();
                 //  obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
                 //obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/mm/yyyy");
@@ -929,6 +941,7 @@ namespace MyTrade.Controllers
                     model.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
                     model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
                     model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                    model.Country = ds.Tables[0].Rows[0]["Country"].ToString();
                     model.City = ds.Tables[0].Rows[0]["City"].ToString();
                     model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
@@ -1254,6 +1267,7 @@ namespace MyTrade.Controllers
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
+            model.LoginId = Session["CustomerId"].ToString();
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
@@ -1286,6 +1300,7 @@ namespace MyTrade.Controllers
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
+            model.LoginId = Session["CustomerId"].ToString();
             model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
             model.LoginId = model.LoginId == "0" ? null : model.LoginId;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
@@ -1805,6 +1820,7 @@ namespace MyTrade.Controllers
                     obj.Result = "yes";
                     obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
                     obj.ActivationMTGToken = Convert.ToDecimal(ds.Tables[0].Rows[0]["ActivationMTGToken"]);
+                    obj.BasisOn = (ds.Tables[0].Rows[0]["BasisOn"]).ToString();
                     obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
                     obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
                     obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);

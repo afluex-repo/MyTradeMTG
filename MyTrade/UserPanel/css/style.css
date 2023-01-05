@@ -2885,7 +2885,7 @@ textarea.form-control {
   border-radius: 0.75rem; }
   .dropdown-menu[data-bs-popper] {
     top: 100%;
-    left: 0;
+    /*left: 0;*/
     margin-top: 0.125rem; }
 
 .dropdown-menu-start {
@@ -36886,7 +36886,7 @@ svg text {
   .form-control:hover, .form-control:focus, .form-control.active {
     box-shadow: none;
     background: #fff;
-    color: #fff; }
+    color:#000; }
   .form-control:focus {
     border-color: var(--primary); }
   .form-control.solid {

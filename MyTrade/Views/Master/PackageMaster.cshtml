@@ -23,10 +23,10 @@
                     <div class="widget-content widget-content-area">
                         <div class="row mb-2">
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="example">
                                     <label class="col-form-label">Package Type<span style="color: red">*</span></label>
                                   
-                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
+                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "default-select wide", @onchange = "return ChangePackagetype();" })
                                    
                                 </div>
                             </div>
@@ -64,21 +64,15 @@
                             <div class="col-md-3" id="divbasis" style="display:none">
                                 <div class="form-group">
                                     <label class="col-form-label">Basis on <span style="color: red">*</span></label>
-                                       <select name="Basis" class="form-control">
-                                            @*<option value="Daily">Daily</option>*@
-                                           <option value="Daily">One Time</option>
-                                        </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3" id="divbasis2" style="display:none">
-                                <div class="form-group">
-                                    <label class="col-form-label">Basis on <span style="color: red">*</span></label>
-                                    <select name="Basis" class="form-control">
-                                        <option value="Daily">Daily</option>
-                                        <option value="Monthly">Monthly</option>
+                                    <select name="BasisOn" id="BasisOn" class="form-control" required">
+                                        <option value="0">-Select-</option>
+                                        <option id="opt1" value="OneTime">OneTime</option>
+                                        <option id="opt2" value="Daily">Daily</option>
+                                        <option id="opt3" value="Monthly">Monthly</option>
                                     </select>
                                 </div>
                             </div>
+                            
                             <div class="col-md-3" id="divdays" style="display:none">
                                 <div class="form-group">
                                     <label class="col-form-label">Return Days <span style="color: red">*</span></label>
@@ -105,13 +99,13 @@
                         <div class="row mb-2">
                             <div class="col-md-3" style="display:none" id="divfromamount">
                                 <div class="form-group">
-                                    <label class="col-form-label">From Amount<span style="color: red">*</span></label>
+                                    <label class="col-form-label">From MTG Token/USDT<span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.FromAmount, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                  </div>
                             </div>
                             <div class="col-md-3" style="display:none" id="divtoamount">
                                 <div class="form-group">
-                                    <label class="col-form-label">To Amount<span style="color: red">*</span></label>
+                                    <label class="col-form-label">To MTG Token/USDT<span style="color: red">*</span></label>
                                         @Html.TextBoxFor(m => m.ToAmount, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @onchange = "return checkAmount();" })
                                  </div>
                             </div>
@@ -278,7 +272,10 @@
             $("#divtoamount").show();
             $("#divmultiple").show();
             $("#divpercent").show();
-            $("#divbasis2").hide();
+            $("#opt1").hide();
+            $("#opt2").show();
+            $("#opt3").show();
+            $("#BasisOn").val('');
             $("#divmtgtoken").hide();
             $("#divdays").show();
             $("#divgst").hide();
@@ -292,6 +289,10 @@
             $("#divmultiple").show();
             $("#divpercent").hide();
             $("#divbasis").hide();
+            $("#opt1").show();
+            $("#opt2").hide();
+            $("#opt3").hide();
+            $("#BasisOn").val('');
             $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divgst").show();
@@ -325,7 +326,6 @@
             $("#divfinal").hide();
             $("#divpercent").hide();
             $("#divbasis").hide();
-            $("#divbasis2").hide();
             $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divisjoinpackage").hide();
@@ -438,8 +438,11 @@
             $("#divtoamount").show();
             $("#divmultiple").show();
             $("#divpercent").show();
-            $("#divbasis").hide();
-            $("#divbasis2").show();
+            $("#divbasis").show();
+            $("#opt1").hide();
+            $("#opt2").show();
+            $("#opt3").show();
+            $("#BasisOn").val('');
             $("#divmtgtoken").show();
             $("#divdays").show();
             $("#divgst").hide();
@@ -453,7 +456,10 @@
             $("#divmultiple").show();
             $("#divpercent").show();
             $("#divbasis").show();
-            $("#divbasis2").hide();
+            $("#opt1").show();
+            $("#opt2").hide();
+            $("#opt3").hide();
+            $("#BasisOn").val('');
             $("#divmtgtoken").show();
             $("#divdays").show();
             $("#divgst").show();
@@ -471,7 +477,6 @@
             $("#divfinal").hide();
             $("#divpercent").hide();
             $("#divbasis").hide();
-            $("#divbasis2").hide();
             $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divisjoinpackage").hide();
@@ -505,6 +510,9 @@
 
     //    }
     //})
+
+
+
     function saveProduct() {
         debugger
         $(".errortext").removeClass("errortext");
@@ -561,6 +569,13 @@
             $('#ActivationMTGToken').focus();
             return false;
         }
+
+        if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
+            $("#BasisOn").addClass('errortext');
+            $('#BasisOn').focus();
+            return false;
+        }
+
 
         if ($('#PackageTypeId').val() == '2') {
             if ($('#FromAmount').val() == '') {
@@ -625,7 +640,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -738,7 +753,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';

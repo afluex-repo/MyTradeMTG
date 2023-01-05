@@ -88,7 +88,7 @@ namespace MyTrade.Controllers
                     obj.ROIPercent = Convert.ToDecimal(r["ROIPercent"]);
                     obj.Days = r["PackageDays"].ToString();
                     obj.BV = Convert.ToDecimal(r["BV"]);
-
+                    obj.ActivationMTGToken = Convert.ToDecimal(r["ActivationMTGToken"]);
                     obj.PackageTypeId = r["PackageTypeId"].ToString();
                     model.PackageTypeId = obj.PackageTypeId;
                     obj.PackageTypeName = r["PackageTypeName"].ToString();
@@ -281,13 +281,14 @@ namespace MyTrade.Controllers
             return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage,string ActivationMTGToken)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage,string ActivationMTGToken,string BasisOn)
         {
             Master obj = new Master();
             try
             {
                 obj.PackageTypeId = PackageType;
                 obj.ProductName = ProductName;
+                obj.BasisOn = BasisOn;
                 obj.ProductPrice = Convert.ToDecimal(ProductPrice);
                 obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
@@ -322,7 +323,7 @@ namespace MyTrade.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount,string SponsorIncome, string IscomboPackage,string ActivationMTGToken)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount,string SponsorIncome, string IscomboPackage,string ActivationMTGToken,string BasisOn)
         {
             Master obj = new Master();
             try
@@ -330,6 +331,7 @@ namespace MyTrade.Controllers
                 obj.PackageTypeId = PackageType;
                 obj.Packageid = Packageid;
                 obj.ProductName = ProductName;
+                obj.BasisOn = BasisOn;
                 obj.ProductPrice = Convert.ToDecimal(ProductPrice);
                 obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
@@ -733,5 +735,133 @@ namespace MyTrade.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
+
+        public ActionResult BalanceTransfer(Master model,string Pk_BalanceTransferId)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetBalanceTransferList();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.Pk_BalanceTransferId = r["Pk_BalanceTransferId"].ToString();
+                    obj.DirectPayment = r["DirectPayment"].ToString();
+                    obj.BuySales = r["BuySales"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstbalancetransfer = lst;
+            }
+            
+            if (Pk_BalanceTransferId != null)
+            {
+                model.Pk_BalanceTransferId = Pk_BalanceTransferId;
+
+                DataSet ds2 = model.GetBalanceTransferList();
+                if (ds2 != null && ds2.Tables.Count > 0)
+                {
+                    model.Pk_BalanceTransferId= ds2.Tables[0].Rows[0]["Pk_BalanceTransferId"].ToString();
+                    model.DirectPayment = ds2.Tables[0].Rows[0]["DirectPayment"].ToString();
+                    model.BuySales = ds2.Tables[0].Rows[0]["BuySales"].ToString();
+                    model.Status = ds2.Tables[0].Rows[0]["Status"].ToString();
+                }
+                
+            }
+            return View(model);
+            
+        }
+
+        public ActionResult BalanceTransferList(Master model)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("BalanceTransfer")]
+        [OnAction(ButtonName = "Save")]
+        public ActionResult SaveBalanceTransfer(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                model.Fk_UserId = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveBalanceTransfer();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Transfermsg"] = "Balance Transferred  successfully";
+                    }
+                    else
+                    {
+                        TempData["Transfermsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Transfermsg"] = ex.Message;
+            }
+            return RedirectToAction("BalanceTransfer", "Master");
+        }
+
+
+        [HttpPost]
+        [ActionName("BalanceTransfer")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateBalanceTransfer(Master model,Master modelinsrtupdt)
+        {
+            try
+            {
+                modelinsrtupdt.AddedBy = Session["Pk_AdminId"].ToString();
+                modelinsrtupdt.Fk_UserId = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.UpdateBalanceTransfer();
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                            {
+
+                                TempData["UpdateBalancetransfer"] = "Balance Transfer updated Successfully";
+                            }
+                            else
+                            {
+                                TempData["UpdateBalancetransfer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            }
+                        }
+            }
+            catch (Exception ex)
+            {
+                TempData["UpdateBalancetransfer"] = ex.Message;
+            }
+
+            try
+            {
+                //modelinsrtupdt.AddedBy = Session["Pk_AdminId"].ToString();
+                //modelinsrtupdt.Fk_UserId = Session["Pk_AdminId"].ToString();
+                DataSet ds2 = modelinsrtupdt.UpdateBalanceTransfer();
+                if (ds2 != null && ds2.Tables.Count > 0)
+                {
+                    if (ds2.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["UpdateBalancetransfer"] = "Balance Transfer updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["UpdateBalancetransfer"] = ds2.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["UpdateBalancetransfer"] = ex.Message;
+            }
+
+
+
+            return RedirectToAction("BalanceTransfer");
+        }
+        
     }
 }

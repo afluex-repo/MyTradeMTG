@@ -119,6 +119,12 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label for="email">Country</label>
+                                                        <input type="text" class="form-control mb-4" id="Country" placeholder="Country" value="@Model.Country" disabled="disabled">
+                                                    </div>
+                                                </div>
+                                                @*<div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="country">Pin Code</label>
                                                         <input type="text" class="form-control mb-4" id="email" placeholder="Pin Code" value="@Model.PinCode" disabled="disabled">
                                                     </div>
@@ -134,7 +140,7 @@
                                                         <label for="location">City</label>
                                                         <input type="text" class="form-control mb-4" id="location" placeholder="City" value="@Model.City" disabled="disabled">
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 @if (Model.Address != null && Model.Address != "")
                                                 {
                                                     <div class="col-md-12" id="addr">

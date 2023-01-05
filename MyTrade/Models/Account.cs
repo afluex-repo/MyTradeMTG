@@ -43,7 +43,7 @@ namespace MyTrade.Models
         public string PackageDays { get; set; }
         public string Email { get; set; }
         public string ActivationMTG { get; set; }
-
+        public string CustomerId { get; set; }
         public string ROI { get; set; }
 
         public List<SelectListItem> ddlProduct { get; set; }
@@ -60,7 +60,8 @@ namespace MyTrade.Models
                                         new SqlParameter("@LoginId", LoginId),
                                         new SqlParameter("@AddedBy", FK_UserId),
                                         new SqlParameter("@Fk_ProductId",PackageId),
-                                        new SqlParameter("@Amount", Amount)
+                                        new SqlParameter("@Amount", Amount),
+                                        new SqlParameter("@ActivationMTGToken", ActivationMTGToken)
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
             return ds;

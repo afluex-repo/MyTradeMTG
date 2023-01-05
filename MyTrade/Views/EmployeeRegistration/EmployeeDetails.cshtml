@@ -50,20 +50,20 @@
                                                     <td>@Html.DisplayFor(m => item.EducationQualififcation)</td>
                                                     <td>@Html.DisplayFor(m => item.Mobile)</td>
                                                     <td>@Html.DisplayFor(m => item.Email)</td>
-                                                    <td>
-                                                        <a href="/EmployeeRegistration/EmployeeRegistration?LoginID=@item.LoginId" class="btn btn-info btn-sm">
+                                                    <td class="d-flex">
+                                                        <a href="/EmployeeRegistration/EmployeeRegistration?LoginID=@item.LoginId" class="m-1 btn btn-info btn-sm">
                                                             Edit
                                                         </a>
                                                 
                                                         @if (item.Status == "Inactive")
                                                         {
-                                                        <a href="/EmployeeRegistration/ActivateEmployee?LoginId=@item.LoginId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
+                                                        <a href="/EmployeeRegistration/ActivateEmployee?LoginId=@item.LoginId" class="m-1 btn btn-success btn-sm" onclick="return confirm('Sure you want to activate this User ?')">
                                                             Activate
                                                         </a>
                                                         }
                                                         else
                                                         {
-                                                        <a href="/EmployeeRegistration/DeactivateEmployee?LoginId=@item.LoginId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to deactivate this User ?')">
+                                                        <a href="/EmployeeRegistration/DeactivateEmployee?LoginId=@item.LoginId" class="m-1 btn btn-danger btn-sm" onclick="return confirm('Sure you want to deactivate this User ?')">
                                                             Deactivate
                                                         </a>
                                                         }
