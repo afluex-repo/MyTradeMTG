@@ -139,7 +139,7 @@ namespace MyTrade.Controllers
                     //obj.BV = Convert.ToDecimal(r["BV"]);
                     obj.ActivationMTGToken = Convert.ToDecimal(r["ActivationMTGToken"]);
                     obj.PackageTypeId = r["PackageTypeId"].ToString();
-                    model.PackageTypeId = obj.PackageTypeId;
+                    obj.PackageTypeId = obj.PackageTypeId;
                     obj.PackageTypeName = r["PackageTypeName"].ToString();
                     obj.FromAmount = Convert.ToDecimal(r["FromAmount"]);
                     obj.ToAmount = Convert.ToDecimal(r["ToAmount"]);

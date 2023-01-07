@@ -82,8 +82,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                        new SqlParameter("@FK_UserId", FK_UserId),
-                                      //new SqlParameter("@LoginId", LoginId),
-                                      new SqlParameter("@LoginId", CustomerId),
+                                      new SqlParameter("@LoginId", LoginId),
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate)
                                  };
