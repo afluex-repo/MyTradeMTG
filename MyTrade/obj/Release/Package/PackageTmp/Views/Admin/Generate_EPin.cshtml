@@ -7,8 +7,8 @@
 
 @using (Html.BeginForm("Generate_EPin", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -30,13 +30,13 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="Package">Package</label>
-                                @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = "FillAmount();" })
+                                @Html.DropDownListFor(m => m.Package, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "default-select wide form-control", @onchange = "FillAmount();" })
                                 <p class="text-success" id="spName"></p>
                             </div>
 
                             <div class="col-md-4">
-                                <label for="Amount">MTG Coin</label>
-                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG Coin", @disabled = "disabled" })
+                                <label for="Amount">MTG Token/USDT</label>
+                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG Token/USDT", @disabled = "disabled" })
                                 <input type="hidden" id="hdfFinal" />
                             </div>
 
@@ -47,12 +47,12 @@
                                 @Html.TextBoxFor(m => m.NoofPins, new { @class = "form-control", @placeholder = "No of Pins", @onchange = "getfinalamount();", @onkeypress = "return isNumberKey(event);" })
                             </div>
                             <div class="col-md-4">
-                                <label for="FinalAmount">Final MTG Coin</label>
-                                @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount", @disabled = "disabled" })
+                                <label for="FinalAmount">Final MTG Token/USDT</label>
+                                @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final MTG Token", @disabled = "disabled" })
                             </div>
                             <div class="col-md-4">
                                 <label for="Fk_Paymentid">Payment Mode</label>
-                                @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
+                                @Html.DropDownListFor(m => m.Fk_Paymentid, new SelectList(ViewBag.ddlPayment, "Value", "Text"), new { @class = "default-select wide form-control", @onchange = "return CheckPayMode();" })
 
                             </div>
 
@@ -79,60 +79,60 @@
 
 
 
-
-                        <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
-                            <thead>
-                                <tr>
-                                    <th>Sr No.</th>
-                                    <th>Name</th>
-                                    <th>Package</th>
-                                    <th>Total Pin</th>
-                                    <th>MTG Coin</th>
-                                    @*<th>GST</th>*@
-                                    <th>Final MTG Coin</th>
-                                    <th>Payment Mode</th>
-                                    <th>Generated Date</th>
-                                    @*<th>Used Pin</th>
+                        <div class="mt-3">
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%" data-page-length='20'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Name</th>
+                                        <th>Package</th>
+                                        <th>Total Pin</th>
+                                        <th>MTG Token/USDT</th>
+                                        @*<th>GST</th>*@
+                                        <th>Final MTG Token/USDT</th>
+                                        <th>Payment Mode</th>
+                                        <th>Generated Date</th>
+                                        @*<th>Used Pin</th>
                         <th>Available Pin</th>
                         <th>Transfer Pin</th>*@
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
-                                {
-                                    if (Model.lst != null)
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                     {
-                                        int i = 1;
-                                        foreach (var Item in Model.lst)
+                                        if (Model.lst != null)
                                         {
-                                            <tr class="text-left">
-                                                <td>@i</td>
-                                                <td>@Item.Name (@Item.LoginId)</td>
-                                                <td>@Item.Package</td>
-                                                <td>@Item.TotalPin</td>
-                                                <td>@Item.PinAmount</td>
-                                                @*<td>@Item.GST</td>*@
-                                                <td>@Item.FinalAmount</td>
-                                                <td>@Item.PaymentMode</td>
-                                                <td>@Item.AddedOn</td>
-                                                @*<td>@Item.UsedPin</td>
+                                            int i = 1;
+                                            foreach (var Item in Model.lst)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.Name (@Item.LoginId)</td>
+                                                    <td>@Item.Package</td>
+                                                    <td>@Item.TotalPin</td>
+                                                    <td>@Item.PinAmount</td>
+                                                    @*<td>@Item.GST</td>*@
+                                                    <td>@Item.FinalAmount</td>
+                                                    <td>@Item.PaymentMode</td>
+                                                    <td>@Item.AddedOn</td>
+                                                    @*<td>@Item.UsedPin</td>
                                     <td>@Item.AvailablePin</td>
                                     <td>@Item.TransferPin</td>*@
-                                                <td>
-                                                    <a href="/Admin/ViewGenerateEpinDetails?Fk_UserId=@Item.Fk_UserId&&Fk_ProductId=@Item.PK_ProductID" class="btn btn-info btn-sm">
-                                                        View
-                                                    </a>
-                                                </td>
+                                                    <td>
+                                                        <a href="/Admin/ViewGenerateEpinDetails?Fk_UserId=@Item.Fk_UserId&&Fk_ProductId=@Item.PK_ProductID" class="btn btn-info btn-sm">
+                                                            View
+                                                        </a>
+                                                    </td>
 
-                                            </tr>
-                                            i++;
+                                                </tr>
+                                                i++;
+                                            }
                                         }
                                     }
-                                }
-                            </tbody>
-                        </table>
-
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

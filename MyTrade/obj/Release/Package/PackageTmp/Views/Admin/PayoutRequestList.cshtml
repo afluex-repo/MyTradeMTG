@@ -19,8 +19,8 @@
 </style>
 @using (Html.BeginForm("PayoutRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -37,13 +37,13 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label>Login Id </label>
+                                    <label>Login Id </label><br />
                                     @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label> From Date</label>
+                                    <label> From Date</label><br />
                                     @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "dd/mm/yyyy" })
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <input type="hidden" id="st" value="@Model.Status" />
-                                    <select id="Status" name="Status" class="form-control">
+                                    <select id="Status" name="Status" class="default-select wide form-control">
                                         <option value="0">-Select-</option>
                                         <option value="Approved">Approve</option>
                                         <option value="Declined">Decline</option>
@@ -65,9 +65,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
-                                <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group mt-1">
+                                    <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />
                                 </div>
                             </div>
                         </div>
@@ -80,10 +80,10 @@
                                         <th>Narration</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Net MTG Coin</th>
+                                        <th>Net MTG Token/USDT</th>
                                         <th>Procesing Charges</th>
                                         <th>TDS</th>
-                                        <th>Gross MTG Coin</th>
+                                        <th>Gross MTG Token/USDT</th>
                                         <th>Bank Details</th>
                                         <th class="showallbankdetails" style="display:none">Bank Name</th>
                                         <th class="showallbankdetails" style="display:none">Bank Branch</th>
@@ -194,7 +194,7 @@
                 <div class="modal-body" style="color: black">
                     <div class="row">
                         <div class="col-md-12">
-                            <span style="color:red">Total MTG Coin:</span> <span style="color:red" id="total"></span>
+                            <span style="color:red">Total MTG Token/USDT:</span> <span style="color:red" id="total"></span>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">

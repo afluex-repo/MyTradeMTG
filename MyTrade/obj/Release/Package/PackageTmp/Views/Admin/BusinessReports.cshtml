@@ -11,8 +11,8 @@
 
 @using (Html.BeginForm("BusinessReports", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -61,13 +61,13 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label> Package Type</label>
-                                    @Html.DropDownListFor(m => m.PK_ProductID, new SelectList(ViewBag.ddlProductName, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.PK_ProductID, new SelectList(ViewBag.ddlProductName, "Value", "Text"), new { @class = "default-select wide form-control" })
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>Level</label>
-                                    <select id="Level" name="Level" class = "form-control">
+                                    <select id="Level" name="Level" class = "default-select wide form-control">
                                         <option value="0">-select-</option>
                                         <option value="1">Level-1</option>
                                         <option value="2">Level-2</option>
@@ -94,18 +94,18 @@
                             </div>
                             <div class="col-lg-3 col-md-3" style="margin-top:28px">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails"  onclick="return Validate()"  />
+                                    <input class="btn btn-success" type="submit" value="Get Details" id="GetDetails" name="GetDetails"  onclick="return Validate()"  />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <table id="html5-extension" class="table table-hover non-hover" ,data-page-length='25'>
+                            <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>MTG Coin</th>
+                                        <th>MTG Token/USDT</th>
                                         <th>BV</th>
                                         <th>Level</th>
                                         <th>Date</th>
