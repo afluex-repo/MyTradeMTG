@@ -515,7 +515,6 @@ F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csproj.Gen
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.dll
 F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.pdb
 E:\Repository-Projects\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
-F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\ApplicationInsights.config
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\roslyn\csc.exe
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

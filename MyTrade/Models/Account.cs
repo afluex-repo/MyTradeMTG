@@ -45,6 +45,7 @@ namespace MyTrade.Models
         public string ActivationMTG { get; set; }
         public string CustomerId { get; set; }
         public string ROI { get; set; }
+        public string Topupid { get; set; }
 
         public List<SelectListItem> ddlProduct { get; set; }
 
@@ -81,7 +82,8 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                        new SqlParameter("@FK_UserId", FK_UserId),
-                                      new SqlParameter("@LoginId", LoginId),
+                                      //new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@LoginId", CustomerId),
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate)
                                  };
@@ -101,9 +103,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTotalWalletAmountOfMyTrade");
             return ds;
         }
-
-
-
+        
 
         public DataSet GetProductListForTopUp()
         {

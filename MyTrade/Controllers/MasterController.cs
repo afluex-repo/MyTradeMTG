@@ -36,6 +36,7 @@ namespace MyTrade.Controllers
             }
             ViewBag.ddlPackageType = ddlPackageType;
             #endregion
+
             #region pacakge Bind
             List<SelectListItem> ddlPackage = new List<SelectListItem>();
             DataSet ds2 = objcomm.BindProduct();
@@ -54,8 +55,56 @@ namespace MyTrade.Controllers
             }
             ViewBag.ddlPackage = ddlPackage;
             #endregion
+
             return View(model);
         }
+
+        public ActionResult GetProductList(string PackageTypeId)
+        {
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            Master model = new Master();
+            model.PackageTypeId = PackageTypeId;
+
+            DataSet ds = model.GetProductListForPackageList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    ddlProduct.Add(new SelectListItem { Text = dr["ProductName"].ToString(), Value = dr["Pk_ProductId"].ToString() });
+                }
+            }
+            model.ddlProduct = ddlProduct;
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetPackageDetails(string PackageId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.Packageid = PackageId;
+                DataSet ds = obj.ProductList();
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    obj.Result = "yes";
+                    obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
+                    obj.ActivationMTGToken = Convert.ToDecimal(ds.Tables[0].Rows[0]["ActivationMTGToken"]);
+                    obj.BasisOn = (ds.Tables[0].Rows[0]["BasisOn"]).ToString();
+                    obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
+                    obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
+                    obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult PackageList(Master model)
         {
@@ -80,14 +129,14 @@ namespace MyTrade.Controllers
                     obj.IscomboPackage = r["IsComboPackage"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
                     obj.ProductPrice = Convert.ToDecimal(r["ProductPrice"]);
-                    obj.IGST = Convert.ToDecimal(r["IGST"]);
-                    obj.CGST = Convert.ToDecimal(r["CGST"]);
-                    obj.SGST = Convert.ToDecimal(r["SGST"]);
+                    //obj.IGST = Convert.ToDecimal(r["IGST"]);
+                    //obj.CGST = Convert.ToDecimal(r["CGST"]);
+                    //obj.SGST = Convert.ToDecimal(r["SGST"]);
                     obj.BinaryPercent = Convert.ToDecimal(r["BinaryPercent"]);
                     obj.DirectPercent = Convert.ToDecimal(r["DirectPercent"]);
                     obj.ROIPercent = Convert.ToDecimal(r["ROIPercent"]);
                     obj.Days = r["PackageDays"].ToString();
-                    obj.BV = Convert.ToDecimal(r["BV"]);
+                    //obj.BV = Convert.ToDecimal(r["BV"]);
                     obj.ActivationMTGToken = Convert.ToDecimal(r["ActivationMTGToken"]);
                     obj.PackageTypeId = r["PackageTypeId"].ToString();
                     model.PackageTypeId = obj.PackageTypeId;
@@ -96,14 +145,16 @@ namespace MyTrade.Controllers
                     obj.ToAmount = Convert.ToDecimal(r["ToAmount"]);
                     obj.Status = r["Status"].ToString();
                     obj.InMultipleOf = Convert.ToDecimal(r["InMultipleOf"]);
-                    obj.IGST = Convert.ToDecimal(r["IGST"]);
-                    obj.HSNCode = r["HSNCode"].ToString();
-                    obj.FinalAmount = Convert.ToDecimal(r["FinalAmount"]);
+                    //obj.IGST = Convert.ToDecimal(r["IGST"]);
+                    //obj.HSNCode = r["HSNCode"].ToString();
+                    //obj.FinalAmount = Convert.ToDecimal(r["FinalAmount"]);
                     obj.SponsorIncome = Convert.ToDecimal(r["SponsorIncome"]);
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
             }
+
+
             #region pacakgeTpe Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlPackageType = new List<SelectListItem>();
@@ -250,23 +301,23 @@ namespace MyTrade.Controllers
                         obj.Packageid = ds.Tables[0].Rows[0]["Pk_ProductId"].ToString();
                         obj.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                         obj.ProductPrice = Convert.ToDecimal(ds.Tables[0].Rows[0]["ProductPrice"]);
-                        obj.IGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["IGST"]);
-                        obj.CGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["CGST"]);
-                        obj.SGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["SGST"]);
+                        //obj.IGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["IGST"]);
+                        //obj.CGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["CGST"]);
+                        //obj.SGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["SGST"]);
                         obj.BinaryPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["BinaryPercent"]);
                         obj.DirectPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["DirectPercent"]);
                         obj.Days = ds.Tables[0].Rows[0]["PackageDays"].ToString();
                         obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);
-                        obj.BV = Convert.ToDecimal(ds.Tables[0].Rows[0]["BV"]);
+                        //obj.BV = Convert.ToDecimal(ds.Tables[0].Rows[0]["BV"]);
                         obj.ActivationMTGToken = Convert.ToDecimal(ds.Tables[0].Rows[0]["ActivationMTGToken"]);
                         obj.PackageTypeId = (ds.Tables[0].Rows[0]["PackageTypeId"].ToString());
                         obj.PackageTypeName = (ds.Tables[0].Rows[0]["PackageTypeName"].ToString());
                         obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
                         obj.ToAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["ToAmount"]);
                         obj.InMultipleOf = Convert.ToDecimal(ds.Tables[0].Rows[0]["InMultipleOf"]);
-                        obj.IGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["IGST"]);
-                        obj.HSNCode = ds.Tables[0].Rows[0]["HSNCode"].ToString();
-                        obj.FinalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FinalAmount"]);
+                        //obj.IGST = Convert.ToDecimal(ds.Tables[0].Rows[0]["IGST"]);
+                        //obj.HSNCode = ds.Tables[0].Rows[0]["HSNCode"].ToString();
+                        //obj.FinalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FinalAmount"]);
                         obj.SponsorIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorIncome"]);
                     }
                 }
@@ -290,11 +341,11 @@ namespace MyTrade.Controllers
                 obj.ProductName = ProductName;
                 obj.BasisOn = BasisOn;
                 obj.ProductPrice = Convert.ToDecimal(ProductPrice);
-                obj.IGST = Convert.ToDecimal(IGST);
+                //obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
                 obj.ROIPercent = Convert.ToDecimal(ROIPercent);
-                obj.HSNCode = HSNCode == null ? "" : HSNCode;
-                obj.FinalAmount = Convert.ToDecimal(FinalAmount);
+                //obj.HSNCode = HSNCode == null ? "" : HSNCode;
+                //obj.FinalAmount = Convert.ToDecimal(FinalAmount);
                 //obj.BV = Convert.ToDecimal(BV);
                 obj.ActivationMTGToken = Convert.ToDecimal(ActivationMTGToken);
                 obj.AddedBy = Session["PK_AdminId"].ToString();
@@ -333,16 +384,16 @@ namespace MyTrade.Controllers
                 obj.ProductName = ProductName;
                 obj.BasisOn = BasisOn;
                 obj.ProductPrice = Convert.ToDecimal(ProductPrice);
-                obj.IGST = Convert.ToDecimal(IGST);
+                //obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
                 obj.SponsorIncome = Convert.ToDecimal(SponsorIncome);
                 obj.ROIPercent = Convert.ToDecimal(ROIPercent);
-                obj.HSNCode = HSNCode;
+                //obj.HSNCode = HSNCode;
                 if (obj.IGST != 0)
                 {
                     obj.FinalAmount = (obj.ProductPrice * (obj.IGST / 100)) + obj.ProductPrice;
                 }
-               
+
                 //obj.BV = Convert.ToDecimal(BV);
                 obj.ActivationMTGToken = Convert.ToDecimal(ActivationMTGToken);
                 obj.UpdatedBy = Session["PK_AdminId"].ToString();
@@ -350,7 +401,7 @@ namespace MyTrade.Controllers
                 obj.ToAmount = Convert.ToDecimal(ToAmount);
                 obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 obj.IscomboPackage = IscomboPackage;
-                obj.FinalAmount = Convert.ToDecimal(FinalAmount);
+                //obj.FinalAmount = Convert.ToDecimal(FinalAmount);
                 DataSet ds = obj.UpdateProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

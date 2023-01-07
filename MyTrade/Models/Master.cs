@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MyTrade.Models
 {
@@ -46,7 +47,25 @@ namespace MyTrade.Models
         public string LoginId { get; set; }
         public string Name { get; set; }
         public string Amount { get; set; }
+        public List<SelectListItem> ddlProduct { get; set; }
+
         #region ProductMaster
+        public DataSet GetProductListForPackageList()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@PackageTypeId", PackageTypeId),
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForPackageList", para);
+            return ds;
+        }
+
+        public DataSet BindProductForPackageList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp");
+            return ds;
+        }
 
         public DataSet SaveProduct()
         {
@@ -60,14 +79,14 @@ namespace MyTrade.Models
                                   //new SqlParameter("@DirectPercent", DirectPercent),
                                   new SqlParameter("@ROIPercent", ROIPercent),
                                    new SqlParameter("@Days", Days),
-                                  new SqlParameter("@BV",BV),
+                                  //new SqlParameter("@BV",BV),
                                   new SqlParameter("@AddedBy", AddedBy),
                                   new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
                                     new SqlParameter("@ToAmount", ToAmount),
                                      new SqlParameter("@InMultipleOf", InMultipleOf),
-                                      new SqlParameter("@HSNCode", HSNCode),
-                                 new SqlParameter("@FinalAmount",FinalAmount),
+                                      //new SqlParameter("@HSNCode", HSNCode),
+                                 //new SqlParameter("@FinalAmount",FinalAmount),
                                   new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                  new SqlParameter("@IscomboPackage",IscomboPackage)
@@ -120,22 +139,22 @@ namespace MyTrade.Models
                                   new SqlParameter("@ProductName", ProductName),
                                   new SqlParameter("@ProductPrice", ProductPrice),
                                   new SqlParameter("@BasisOn",BasisOn),
-                                  new SqlParameter("@IGST", IGST),
+                                  //new SqlParameter("@IGST", IGST),
                                   //new SqlParameter("@CGST", CGST),
                                   //new SqlParameter("@SGST", SGST),
                                   //new SqlParameter("@BinaryPercent", BinaryPercent),
                                   //new SqlParameter("@DirectPercent", DirectPercent),
                                   new SqlParameter("@ROIPercent", ROIPercent),
                                   new SqlParameter("@Days",Days),
-                                  new SqlParameter("@BV", BV),
+                                  //new SqlParameter("@BV", BV),
                                   new SqlParameter("@UpdatedBy", UpdatedBy),
                                      new SqlParameter("@PackageTypeId", PackageTypeId),
                                    new SqlParameter("@FromAmount", FromAmount),
                                     new SqlParameter("@ToAmount", ToAmount),
                                  new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@InMultipleOf", InMultipleOf),
-                                 new SqlParameter("@HSNCode", HSNCode),
-                                 new SqlParameter("@FinalAmount",FinalAmount),
+                                 //new SqlParameter("@HSNCode", HSNCode),
+                                 //new SqlParameter("@FinalAmount",FinalAmount),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                   new SqlParameter("@IscomboPackage",IscomboPackage),
             };

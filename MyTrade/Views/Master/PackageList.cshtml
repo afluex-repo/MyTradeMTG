@@ -46,8 +46,8 @@
                                     <tr>
                                         <th>S No.</th>
                                         <th>Package Type</th>
-                                        <th>Product Name</th>
-                                        <th>Product Price</th>
+                                        <th>Package Name</th>
+                                        <th>Package Price</th>
                                         @*<th>BV</th>*@
                                         <th>Activation MTG Token</th>
                                         @if (Model.PackageTypeId == "2")
@@ -60,13 +60,13 @@
                                         }
                                         @if (Model.PackageTypeId == "1")
                                         {
-                                            <th>IGST</th>
-                                            <th>HSN Code</th>
-                                            <th>Final Amount</th>
+                                            @*<th>IGST</th>
+                                            <th>HSN Code</th>*@
+                                            @*<th>Final Amount</th>*@
                                         }
                                         <th>Status</th>
                                         <th>Sponsor Income</th>
-                                        <th>Is Combo Package</th>
+                                        @*<th>Is Combo Package</th>*@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -95,13 +95,13 @@
                                                     }
                                                     @if (Model.PackageTypeId == "1")
                                                     {
-                                                        <td>@Item.IGST</td>
-                                                        <td>@Item.HSNCode</td>
-                                                        <td>@Item.FinalAmount</td>
+                                                        @*<td>@Item.IGST</td>
+                                                        <td>@Item.HSNCode</td>*@
+                                                        @*<td>@Item.FinalAmount</td>*@
                                                     }
                                                     <td>@Item.Status</td>
                                                     <td>@Item.SponsorIncome</td>
-                                                    <td>@Item.IscomboPackage</td>
+                                                    @*<td>@Item.IscomboPackage</td>*@
                                                     <td>
                                                         <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-sm">Edit</a>
                                                         <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>
