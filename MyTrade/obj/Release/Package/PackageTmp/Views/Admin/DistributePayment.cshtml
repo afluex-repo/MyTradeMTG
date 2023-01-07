@@ -20,8 +20,8 @@
 </style>
 @using (Html.BeginForm("DistributePayment", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -36,11 +36,14 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                            <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>Last Closing Date : </label>
                                     @Html.DisplayFor(m => m.LastClosingDate)
-                                    <br />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
                                     <label>Last Payout No : </label>
                                     @Html.DisplayFor(m => m.PayoutNo)
                                 </div>
@@ -71,7 +74,7 @@
                                         <th>TTP Level Income</th>
                                         <th>TPS Level Income</th>
                                         <th>SB</th>
-                                        <th>Gross MTG Coin</th>
+                                        <th>Gross MTG Token/USDT</th>
                                         @*<th>TDS Amount</th>
                                         <th>Processing</th>
                                         <th>Net Amount</th>*@
@@ -149,7 +152,7 @@
                                             <th>CurrentDate</th>
                                             <th>From LoginId</th>
                                             <th>From Name</th>
-                                            <th>MTG Coin</th>
+                                            <th>MTG Token/USDT</th>
                                             <th>Level</th>
                                             @*<th>UsedFor</th>*@
                                         </tr>

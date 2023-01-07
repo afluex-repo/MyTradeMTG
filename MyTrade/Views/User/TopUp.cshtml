@@ -4,11 +4,11 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-
-<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+@*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />*@
 
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -21,9 +21,9 @@
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h4>Top-Up</h4>
-                                    @*<span class="text-danger">
-                                            @TempData["TopUp"]
-                                        </span>*@
+                                    <span class="text-danger" style="color:red;">
+                                            @TempData["msg"]
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -42,26 +42,43 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-4">
-                                    <label for="LoginId">LoginId</label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                                    <label for="LoginId">User Id</label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();",@readonly="" })
                                     @Html.HiddenFor(m => m.Name)
                                     <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="Package">Package Type<span style="color:red">*</span></label>
+                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="amt" />
                                     <input type="hidden" id="pkg" />
                                     <label for="Package">Package <span style="color:red">*</span></label>
-                                    @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "default-select  form-control wide", @onchange = "return GetPackageDetails();" })
+                                    @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control wide", @onchange = "return GetPackageDetails();" })
+                                    <span style="color:red;">Basis On  : <span id="BasisOn"></span></span>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="ActivationMTGToken">Activation MTG Token <span style="color:red">*</span></label>
+                                    <input name="ActivationMTGToken" id="ActivationMTGToken" value="" class="form-control"  readonly onchange = "return GetPackageDetails();">
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
                                     <label for="Amount">MTG Token/USDT <span style="color:red">*</span></label>
                                     @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG Token/USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
-                                    <span style="color:red">Min  : <span id="spfrom"></span> </span><span style="color:red;padding-left:50px"> Max : <span id="spto"></span> </span><span style="color:red;padding-left:50px"> In Multiple Of : <span id="spmul"></span></span>
+                                    <span style="color:red;font-size:small;">Min  : <span id="spfrom"></span> </span><span style="color:red;padding-left:50px;font-size:small;"> Max : <span id="spto"></span> </span><span style="color:red;padding-left:50px;font-size:small;"> In Multiple Of : <span id="spmul"></span></span>
                                     <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
                                     <input type="hidden" id="hdfMin" />
                                 </div>
+                                <div class="col-md-4">
+                                    <label for="TotalAmount">Total<span style="color:red">*</span></label>
+                                    <input name="TotalAmount" id="TotalAmount" value="" readonly class="form-control">
+                                </div>
                             </div>
+                            
                             @*<div class="row mb-4">
                                     <div class="col-md-4">
                                         <label for="Amount">
@@ -115,7 +132,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Top-Up</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                         </button>
@@ -154,9 +171,10 @@
 
         <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
-        <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
+        @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+        <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
+<script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/assets/js/components/notification/custom-snackbar.js"></script>
         <script>
             //$(document).ready(function () {
             //    $("#PaymentType").val('Online');
@@ -191,6 +209,7 @@
                     return false;
                 return true;
             }
+
             function CheckAmount() {
                 debugger;
                 var Amount = $("#Amount").val();
@@ -266,6 +285,7 @@
                     return true;
                 }
             }
+            
             function ValidateForm() {
                 debugger;
                 jQuery.noConflict();
@@ -291,7 +311,7 @@
                 debugger;
                 jQuery.noConflict();
                 $('#exampleModal').modal('show');
-                $("#lblAmount").text($("#Amount").val());
+                $("#lblAmount").text($("#TotalAmount").val());
                 $("#lblLoginId").text($("#LoginId").val());
                 $("#lblTPS").text($("#PackageId :selected").text());
             }
@@ -363,6 +383,8 @@
                     }
                 });
             }
+
+
             function GetPackageDetails() {
                 $.ajax({
                     url: '/User/GetPackageDetails', type: 'post', dataType: 'json',
@@ -377,6 +399,8 @@
                             $("#hdfMax").val(data.ToAmount);
                             $("#hdfMin").val(data.FromAmount);
                             $("#lblROI").text(data.ROIPercent);
+                            $("#ActivationMTGToken").val(data.ActivationMTGToken);
+                            $("#BasisOn").text(data.BasisOn);
                         }
                         else {
                             $("#PackageId").val('0')
@@ -384,6 +408,7 @@
                     }
                 });
             }
+
         </script>
 
         @if (TempData["msg"] != null)
@@ -442,3 +467,40 @@
                 }
             })
         </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    function ChangePackagetype() {
+        debugger;
+        $("#divload").css({ 'display': '' });
+        var PackageTypeId = $('#PackageTypeId').val();
+        $.ajax({
+            url: '/User/GetProductList', type: 'post', dataType: 'json',
+            data: { 'PackageTypeId': PackageTypeId },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                $("#PackageId").html(""); // clear before appending new list
+                $("#PackageId").empty();
+                $("#PackageId").append(
+                      $('<option></option>').val(0).html('Select Package Type'));
+                $.each(data.ddlProduct, function (index, PackagetypeCount) {
+                    $("#PackageId").append(
+                          $('<option></option>').val(PackagetypeCount.Value).html(PackagetypeCount.Text));
+                });
+              
+            }
+
+        });
+    }
+
+    var input = $('[name="ActivationMTGToken"],[name="Amount"]'),
+    input1 = $('[name="ActivationMTGToken"]'),
+    input2 = $('[name="Amount"]'),
+    input3 = $('[name="TotalAmount"]');
+    input.change(function () {
+        var val1 = (isNaN(parseFloat(input1.val()))) ? 0 : parseFloat(input1.val());
+        var val2 = (isNaN(parseFloat(input2.val()))) ? 0 : parseFloat(input2.val());
+        input3.val(val1 + val2);
+    });
+
+</script>
