@@ -230,7 +230,7 @@ namespace MyTrade.Controllers
             }
 
             #region PackageType Bind
-            
+
             Common objcommpkg = new Common();
             List<SelectListItem> ddlPackageType = new List<SelectListItem>();
             DataSet dspkg = objcommpkg.BindPackageType();
@@ -320,7 +320,7 @@ namespace MyTrade.Controllers
             ViewBag.ddlpaymentmode = ddlpaymentmode;
 
             #endregion
-            
+
 
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             ddlProduct.Add(new SelectListItem { Text = "Select Package type", Value = "0" });
@@ -1043,8 +1043,7 @@ namespace MyTrade.Controllers
                 ViewBag.WalletBalance = dsss.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
-
-
+            
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -1266,8 +1265,9 @@ namespace MyTrade.Controllers
             Account model = new Account();
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
-            model.LoginId = Session["LoginId"].ToString();
-            model.LoginId = Session["CustomerId"].ToString();
+            //model.LoginId = Session["LoginId"].ToString();
+            //model.LoginId = Session["CustomerId"].ToString();
+            model.CustomerId = Session["LoginId"].ToString();
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
@@ -1278,7 +1278,9 @@ namespace MyTrade.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.PinAmount = r["PinAmount"].ToString();
                     obj.UsedFor = r["UsedFor"].ToString();
-                    obj.BV = r["BV"].ToString();
+                    //obj.BV = r["BV"].ToString();
+                    obj.Topupid = r["Topupid"].ToString();
+                    obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -1299,8 +1301,9 @@ namespace MyTrade.Controllers
         {
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
-            model.LoginId = Session["LoginId"].ToString();
-            model.LoginId = Session["CustomerId"].ToString();
+            //model.LoginId = Session["LoginId"].ToString();
+            //model.LoginId = Session["CustomerId"].ToString();
+            model.CustomerId = Session["LoginId"].ToString();
             model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
             model.LoginId = model.LoginId == "0" ? null : model.LoginId;
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
@@ -1315,7 +1318,9 @@ namespace MyTrade.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.PinAmount = r["PinAmount"].ToString();
                     obj.UsedFor = r["UsedFor"].ToString();
-                    obj.BV = r["BV"].ToString();
+                    //obj.BV = r["BV"].ToString();
+                    obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
+                    obj.Topupid = r["Topupid"].ToString();
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.Status = r["Status"].ToString();

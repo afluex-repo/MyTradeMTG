@@ -47,6 +47,7 @@ namespace MyTrade.Models
         public string BV { get; set; }
         public string Date { get; set; }
         public string PackageType { get; set; }
+        public string PackageId { get; set; }
         public string PayoutBalance { get; set; }
 
         public string Status { get; set; }
@@ -65,10 +66,12 @@ namespace MyTrade.Models
 
         public string GrossAmount { get; set; }
         public string ProcessingFee { get; set; }
+        public string PackageTypeId { get; set; }
 
-     
 
         #endregion
+
+     
         public DataSet ValidateEpin()
         {
             SqlParameter[] para = {
@@ -348,6 +351,7 @@ namespace MyTrade.Models
             return ds;
         }
 
-       
+        
+
     }
 }

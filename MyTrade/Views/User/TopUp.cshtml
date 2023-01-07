@@ -42,8 +42,8 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-4">
-                                    <label for="LoginId">MTG Contact Address</label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                                    <label for="LoginId">User Id</label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();",@readonly="" })
                                     @Html.HiddenFor(m => m.Name)
                                     <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
                                 </div>
@@ -58,7 +58,7 @@
                                     <label for="Package">Package <span style="color:red">*</span></label>
                                     @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control wide", @onchange = "return GetPackageDetails();" })
                                     <span style="color:red;">Basis On  : <span id="BasisOn"></span></span>
-</div>
+                                </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-4">

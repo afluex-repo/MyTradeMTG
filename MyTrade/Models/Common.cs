@@ -212,7 +212,7 @@ namespace MyTrade.Models
         {
             SqlParameter[] para =
             {
-                  //new SqlParameter("@PackageTypeId",PackageTypeId),
+                  new SqlParameter("@PackageTypeId",PackageTypeId),
             };
 
             DataSet ds = DBHelper.ExecuteQuery("GetPackageType",para);

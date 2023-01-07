@@ -333,7 +333,7 @@ namespace MyTrade.Models
                                       new SqlParameter("@Name", Name),
                                       new SqlParameter("@FromDate", FromDate),
                                       new SqlParameter("@ToDate", ToDate),
-                                      new SqlParameter("@Package", Package),
+                                      new SqlParameter("@Package",Package),
                                       new SqlParameter("@ClaculationStatus", Status),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetTopupreportByKit", para);

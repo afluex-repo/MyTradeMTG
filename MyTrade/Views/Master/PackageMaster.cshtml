@@ -32,15 +32,15 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-form-label">Product Name <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.ProductName, new { @placeholder = "Product Name", @class = "form-control" })
+                                    <label class="col-form-label">Package Name <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.ProductName, new { @placeholder = "Package Name", @class = "form-control" })
                                         @Html.HiddenFor(m => m.Packageid)
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-form-label">Product Price <span style="color: red">*</span></label>
-                                       @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Product Price", @class = "form-control", @onkeypress = "return isNumberKey(event)", onchange = "return bindbvprice();" })
+                                    <label class="col-form-label">Package Price <span style="color: red">*</span></label>
+                                       @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Package Price", @class = "form-control", @onkeypress = "return isNumberKey(event)", onchange = "return bindbvprice();" })
                                  </div>
                             </div>
                             @*<div class="col-md-3">
@@ -640,7 +640,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $('#HSNCode').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -705,21 +705,21 @@
         //    $('#SGST').focus();
         //    return false;
         //}
-        //if ($('#BinaryPercent').val() == '') {
-        //    $("#BinaryPercent").addClass('errortext');
-        //    $('#BinaryPercent').focus();
-        //    return false;
-        //}
-        //if ($('#DirectPercent').val() == '') {
-        //    $("#DirectPercent").addClass('errortext');
-        //    $('#DirectPercent').focus();
-        //    return false;
-        //}
-        //if ($('#ROIPercent').val() == '') {
-        //    $("#ROIPercent").addClass('errortext');
-        //    $('#ROIPercent').focus();
-        //    return false;
-        //}
+        if ($('#BinaryPercent').val() == '') {
+            $("#BinaryPercent").addClass('errortext');
+            $('#BinaryPercent').focus();
+            return false;
+        }
+        if ($('#DirectPercent').val() == '') {
+            $("#DirectPercent").addClass('errortext');
+            $('#DirectPercent').focus();
+            return false;
+        }
+        if ($('#ROIPercent').val() == '') {
+            $("#ROIPercent").addClass('errortext');
+            $('#ROIPercent').focus();
+            return false;
+        }
         //if ($('#BV').val() == '') {
         //    $("#BV").addClass('errortext');
         //    $('#BV').focus();
@@ -753,7 +753,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), IGST: $("#IGST").val(), ROIPercent: $("#ROIPercent").val(), BV: $("#BV").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), HSNCode: $("#HSNCode").val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
