@@ -59,8 +59,11 @@ namespace MyTrade.Controllers
                 ViewBag.TotalCrAmount = ds.Tables[7].Rows[0]["TotalCrAmount"].ToString();
                 ViewBag.TotalDrAmount = ds.Tables[7].Rows[0]["TotalDrAmount"].ToString();
 
+                
                 //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
                 //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
+
+
 
                 if (ViewBag.Status == "InActive")
                 {
@@ -130,6 +133,75 @@ namespace MyTrade.Controllers
             }
             return View(obj);
         }
+
+
+       
+        ////////////////////////////////////////////////////
+     
+
+
+        public JsonResult GetchartBarRunning()
+        {
+            ProgressReport model = new ProgressReport();
+            try
+            {
+                List<ProgressReport> lst = new List<ProgressReport>();
+                model.FK_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = model.GetAssociateDashboard();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ProgressReport obj = new ProgressReport();
+                        obj.Year = r["Year"].ToString();
+                        obj.PaidCramount = r["PaidCramount"].ToString();
+                        obj.PaidDramount = r["PaidDramount"].ToString();
+                        lst.Add(obj);
+                   }
+                    model.lstCoin = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Json(model.lstCoin, JsonRequestBehavior.AllowGet);
+        }
+
+        
+        public JsonResult GetlineChart()
+        {
+            ProgressReport model = new ProgressReport();
+            try
+            {
+                List<ProgressReport> lst = new List<ProgressReport>();
+                model.FK_UserId = Session["Pk_UserId"].ToString();
+                DataSet ds = model.GetlineChart();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ProgressReport obj = new ProgressReport();
+                        obj.Year = r["Year"].ToString();
+                        obj.TotalBusiness = (r["TotalBusiness"].ToString());
+                        lst.Add(obj);
+                    }
+                    model.lstCoin = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Json(model.lstCoin, JsonRequestBehavior.AllowGet);
+        }
+        
+        ////////////////////////////////////////////////////
+
+
+
         public ActionResult ActivateByPin(User model)
         {
             return View(model);

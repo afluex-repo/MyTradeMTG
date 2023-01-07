@@ -57,7 +57,7 @@ function getCookie(cname)
 	
         var dezThemeSet0 = { /* Default Theme */
             typography: "poppins",
-            version: "light",
+            version: "dark",
             layout: "vertical",
             headerBg: "color_1",
             primary: "color_1",
@@ -72,7 +72,7 @@ function getCookie(cname)
 	
         var dezThemeSet1 = {
             typography: "poppins",
-            version: "light",
+            version: "dark",
             layout: "vertical",
             primary: "color_14",
             headerBg: "color_1",
@@ -87,7 +87,7 @@ function getCookie(cname)
 	
         var dezThemeSet2 = {
             typography: "poppins",
-            version: "light",
+            version: "dark",
             layout: "vertical",
             primary: "color_4",
             headerBg: "color_1",
@@ -118,7 +118,7 @@ function getCookie(cname)
 	
         var dezThemeSet4 = {
             typography: "poppins",
-            version: "light",
+            version: "dark",
             layout: "vertical",
             primary: "color_15",
             headerBg: "color_15",
@@ -133,7 +133,7 @@ function getCookie(cname)
 	
         var dezThemeSet5 = {
             typography: "poppins",
-            version: "light",
+            version: "dark",
             layout: "horizontal",
             primary: "color_11",
             headerBg: "color_1",
