@@ -189,7 +189,7 @@ namespace MyTrade.Models
         }
         public DataSet BindPriceByProduct()
         {
-            SqlParameter[] para = { new SqlParameter("@ProductId", Package) };
+            SqlParameter[] para = { new SqlParameter("@ProductId",Package) };
             DataSet ds = DBHelper.ExecuteQuery("GetProductList", para);
             return ds;
         }

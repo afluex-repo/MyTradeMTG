@@ -58,9 +58,7 @@ namespace MyTrade.Controllers
                             {
 
                                 Session["Country"] = ds.Tables[0].Rows[0]["Country"].ToString();
-                                Session["CustomerId"] = ds.Tables[0].Rows[0]["CustomerId"].ToString();
-
-                                Session["LoginId"] = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                                Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                                 Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                                 Session["UserType"] = ds.Tables[0].Rows[0]["UserType"].ToString();
                                 Session["FullName"] = ds.Tables[0].Rows[0]["FullName"].ToString();
@@ -97,7 +95,7 @@ namespace MyTrade.Controllers
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
                         {
-                            Session["LoginId"] = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                            Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                             Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
                             Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
                             Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();
@@ -134,7 +132,7 @@ namespace MyTrade.Controllers
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Back Office")
                         {
-                            Session["LoginId"] = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                            Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                             Session["Pk_AdminId"] = ds.Tables[0].Rows[0]["Pk_adminId"].ToString();
                             Session["UsertypeName"] = ds.Tables[0].Rows[0]["UsertypeName"].ToString();
                             Session["Name"] = ds.Tables[0].Rows[0]["Name"].ToString();

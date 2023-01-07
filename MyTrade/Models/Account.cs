@@ -45,6 +45,7 @@ namespace MyTrade.Models
         public string ActivationMTG { get; set; }
         public string CustomerId { get; set; }
         public string ROI { get; set; }
+        public string Topupid { get; set; }
 
         public List<SelectListItem> ddlProduct { get; set; }
 
@@ -101,9 +102,7 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("GetTotalWalletAmountOfMyTrade");
             return ds;
         }
-
-
-
+        
 
         public DataSet GetProductListForTopUp()
         {
