@@ -8934,7 +8934,7 @@ a {
     color: #fff;
     text-decoration: none;
     padding-left: 50px;
-    padding-right: 50px;
+    /*padding-right: 50px;*/
     font-weight: 700; }
     [data-sidebar-style="compact"] .nav-header .brand-logo,
     [data-sidebar-style="mini"] .nav-header .brand-logo {
@@ -8949,7 +8949,7 @@ a {
   .nav-header .brand-title {
     margin-left: 10px;
     max-width: 110px;
-    height:65px
+    /*height:65px*/
   }
     [data-theme-version="dark"] .nav-header .brand-title {
       background-position: 0 120%; }
