@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("TPSListForDistributePaymentNew", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-<div class="container">
+<div class="container-fluid">
     <div class="row layout-top-spacing">
         <div class="col-lg-12 col-12 layout-spacing">
             <div class="statbox widget box box-shadow">
@@ -26,18 +26,21 @@
                 </div>
                 <div class="widget-content widget-content-area">
                     <div class="row">
-                        <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                        <div class="col-lg-3 col-md-3">
                             <div class="form-group">
-                                <label>Last Closing Date : </label>
+                                <label>Last Closing Date : </label><br/>
                                 @Html.DisplayFor(m => m.LastClosingDate)
-                                <br />
-                                <label>Last Payout No : </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="form-group">
+                                <label>Last Payout No : </label><br />
                                 @Html.DisplayFor(m => m.PayoutNo)
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3">
                             <div class="form-group">
-                                <label> Clossing Date</label>
+                                <label> Closing Date</label>
                                 @Html.TextBoxFor(m => m.ClosingDate, new { @class = "form-control", @Placeholder = "Closing Date" })
 
                             </div>
@@ -57,10 +60,10 @@
                                     <th>Login Id</th>
                                     <th>Name</th>
                                     <th>TPS</th>
-                                    <th>Gross MTG Coin</th>
-                                    <th>TDS MTG Coin</th>
+                                    <th>Gross MTG Token/USDT</th>
+                                    <th>TDS MTG Token/USDT</th>
                                     <th>Processing</th>
-                                    <th>Net MTG Coin</th>
+                                    <th>Net MTG Token/USDT</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -12,8 +12,8 @@
 
 @using (Html.BeginForm("DistributePaymentTPS", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
-        <div class="row layout-top-spacing">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-lg-12 col-12 layout-spacing">
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
@@ -28,11 +28,14 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3" style="margin-left:10px">
+                            <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label>Last Closing Date : </label>
                                     @Html.DisplayFor(m => m.LastClosingDate)
-                                    <br />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
                                     <label>Last Payout No : </label>
                                     @Html.DisplayFor(m => m.PayoutNo)
                                 </div>
@@ -44,9 +47,9 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                            <div class="col-lg-3 col-md-3" style="margin-top:30px">
                                 <div class="form-group">
-                                    <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" onclick="return Validate()" />
+                                    <input class="btn btn-success" type="submit" value="Get Details" id="GetDetails" name="GetDetails" onclick="return Validate()" />
                                     @*<input type="submit" class="btn btn-success" value="Distribute Payment TPS" name="btnSearch" onclick="return Validate()"  />*@
                                 </div>
                             </div>
@@ -60,7 +63,7 @@
                                         <th>Login Id</th>
                                         <th>Name</th>
                                         <th>TPS</th>
-                                        <th>Gross MTG Coin</th>
+                                        <th>Gross MTG Token/USDT</th>
                                         @*<th>TDS Amount</th>
                                             <th>Processing</th>
                                             <th>Net Amount</th>*@
