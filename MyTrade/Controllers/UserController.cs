@@ -192,10 +192,6 @@ namespace MyTrade.Controllers
             return Json(model.lstCoin, JsonRequestBehavior.AllowGet);
         }
         
-        ////////////////////////////////////////////////////
-
-
-
         public ActionResult ActivateByPin(User model)
         {
             return View(model);
@@ -284,10 +280,9 @@ namespace MyTrade.Controllers
         public ActionResult TopUp()
         {
             Account model = new Account();
-            model.LoginId = Session["CustomerId"].ToString();
+           //model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
-            model.CustomerId = Session["LoginId"].ToString();
-         
+          
             if (Session["IdActivated"].ToString()=="true")
             {
                 model.BankName = Session["Bank"].ToString();
@@ -434,7 +429,6 @@ namespace MyTrade.Controllers
         {
             try
             {
-                obj.LoginId = Session["CustomerId"].ToString();
                 obj.LoginId = Session["LoginId"].ToString();
                 obj.AddedBy = Session["Pk_userId"].ToString();
                 //  obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
@@ -1131,6 +1125,7 @@ namespace MyTrade.Controllers
             ViewBag.ddlProduct = ddlProduct;
 
             #endregion
+
             #region PaymentMode
             Common com = new Common();
             List<SelectListItem> ddlPayment = new List<SelectListItem>();
@@ -1331,9 +1326,8 @@ namespace MyTrade.Controllers
             Account model = new Account();
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
-            //model.LoginId = Session["LoginId"].ToString();
-            //model.LoginId = Session["CustomerId"].ToString();
-            model.CustomerId = Session["LoginId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+           
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
@@ -1345,7 +1339,7 @@ namespace MyTrade.Controllers
                     obj.PinAmount = r["PinAmount"].ToString();
                     obj.UsedFor = r["UsedFor"].ToString();
                     //obj.BV = r["BV"].ToString();
-                    obj.Topupid = r["Topupid"].ToString();
+                    //obj.Topupid = r["Topupid"].ToString();
                     obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
@@ -1386,7 +1380,7 @@ namespace MyTrade.Controllers
                     obj.UsedFor = r["UsedFor"].ToString();
                     //obj.BV = r["BV"].ToString();
                     obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
-                    obj.Topupid = r["Topupid"].ToString();
+                    //obj.Topupid = r["Topupid"].ToString();
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.Status = r["Status"].ToString();
