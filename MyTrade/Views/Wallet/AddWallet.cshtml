@@ -121,10 +121,6 @@
                                     <img src="~/assets/img/QR.jpeg" height="200" width="200" />
                                 </div>
 
-
-
-
-
                             </div>
 
 
@@ -322,10 +318,6 @@
 
         });
     }
-
-
-    ////////////////////////////////////////
-
 
     $(document).ready(function () {
         $("#PaymentType").val("1");
@@ -728,7 +720,21 @@
     }
 </style>
 
+<script>
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", "OJYFezpazEnNXADFqcXvoFGQWhoEmlPo");
 
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders
+    };
+
+    fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=INR&base=USD", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+</script>
 
 
 

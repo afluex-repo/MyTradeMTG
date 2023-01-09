@@ -843,7 +843,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Transfermsg"] = "Balance Transferred  successfully";
+                        TempData["Transfermsg"] = "Brokerage Deduction Successfully";
                     }
                     else
                     {
@@ -874,7 +874,7 @@ namespace MyTrade.Controllers
                             if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
 
-                                TempData["UpdateBalancetransfer"] = "Balance Transfer updated Successfully";
+                                TempData["UpdateBalancetransfer"] = "Brokerage Deduction updated Successfully";
                             }
                             else
                             {
@@ -896,7 +896,7 @@ namespace MyTrade.Controllers
                 {
                     if (ds2.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["UpdateBalancetransfer"] = "Balance Transfer updated Successfully";
+                        TempData["UpdateBalancetransfer"] = "Brokerage Deduction updated Successfully";
                     }
                     else
                     {
