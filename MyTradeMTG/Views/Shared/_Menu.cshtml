@@ -1,0 +1,50 @@
+﻿@model MyTradeMTG.Models.Home
+<ul class="metismenu" id="menu">
+    <li>
+        <a class="ai-icon" href="/Admin/AdminDashboard" aria-expanded="false">
+            <i class="flaticon-381-networking"></i>
+            <span class="nav-text">Dashboard</span>
+        </a>
+    </li>
+
+    @if (Model != null)
+    {
+        if (Model.lstMenu != null)
+        {
+            foreach (var item in Model.lstMenu)
+            {
+                <li>
+                    <a class="has-arrow ai-icon" href="#@item.MenuName" aria-expanded="false">
+                        <i class="@item.Icon"></i>
+                        <span class="nav-text">@item.MenuName</span>
+                    </a>
+
+                    @*<a href="#@item.MenuName" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="@item.Icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                                <span>@item.MenuName</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>*@
+                    @if (item.Url == "#")
+                    {
+                        <ul aria-expanded="false" id="@item.MenuName">
+                            @foreach (var item1 in Model.lstsubmenu)
+                            {
+                                if (item1.MenuId == item.MenuId)
+                                {
+                                    <li>
+                                        <a href="@item1.Url">@item1.SubMenuName</a>
+                                    </li>
+                                }
+                            }
+
+                        </ul>
+                    }
+                </li>
+            }
+
+        }
+    }
+</ul>

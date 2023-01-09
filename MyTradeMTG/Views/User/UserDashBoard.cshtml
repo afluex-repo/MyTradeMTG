@@ -1,0 +1,1253 @@
+﻿@model MyTradeMTG.Models.Dashboard
+
+@{
+    ViewBag.Title = "UserDashBoard";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+<link href="~/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/elements/alert.css" rel="stylesheet" />
+<style>
+    .form-control.custom-image-select-1 {
+        height: 50px;
+    }
+
+    divdash>h2{
+    margin-left: 357px;
+    margin-top: 26px;
+    position: fixed;
+    float: inherit;
+    z-index: 30;
+    }
+    
+    @@media only screen and (max-width: 768px) {
+    divdash>h2{
+    margin-left: 140px;
+    margin-top: 26px;
+    position: fixed;
+    float: inherit;
+    z-index: 30;
+    }
+  }
+
+</style>
+
+<divdash>
+    <h2>Dashboard</h2>
+</divdash>
+
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+
+                        <div class="me-auto">
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Business@*<img src="~/UserPanel/images/MtgCoinPng1.png" class="mtgcoin1" height="47" />*@</p>
+
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalBusiness</h3>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between border-0">
+                        <div class="footer-info font-w600">
+                            <span class="text-success pr-2">Self- </span>
+                            <span class="text-black"> @ViewBag.SelfBusiness</span><br />
+                            <span class="text-danger pr-2">Team- </span>
+                            <span class="text-black"> @ViewBag.TeamBusiness</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart" class="max-h80 mt-auto chartjs-render-monitor" style="display: block; width: 267px; height: 80px;" width="267" height="80"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Direct @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin2" height="47" />*@</p>
+                            <h3 class="text-black mb-0 font-w600"> @ViewBag.TotalDirect</h3>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between border-0">
+                        <div class="footer-info font-w600">
+                            <span class="text-success pr-2">Active- </span>
+                            <span class="text-black"> @ViewBag.TotalActive</span><br />
+                            <span class="text-danger pr-2">InActive- </span>
+                            <span class="text-black"> @ViewBag.TotalInActive</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart2" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Team @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin3" height="47" />*@</p>
+                            <h3 class="text-black mb-0 font-w600"> @ViewBag.TotalTeam</h3>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between border-0">
+                        <div class="footer-info font-w600">
+                            <span class="text-success pr-2">Active- </span>
+                            <span class="text-black"> @ViewBag.TotalTeamActive</span><br />
+                            <span class="text-danger pr-2">InActive- </span>
+                            <span class="text-black"> @ViewBag.TotalTeamInActive</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart3" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Bonus @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin4" height="47" />*@</p>
+                            <h3 class="text-black mb-0 font-w600">@ViewBag.TotalIncome</h3>
+                        </div>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between border-0">
+                        <div class="footer-info font-w600">
+                            <span class="text-success pr-2">TTP- </span>
+                            <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
+                            <span class="text-danger pr-2">TPS- </span>
+                            <span class="text-black">@ViewBag.LevelIncomeTr2</span><br />
+                            <span class="text-danger pr-2">SB- </span>
+                            <span class="text-black">@ViewBag.SponsorBonus</span><br />
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart4" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total MTG Wallet @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin5" height="47" />*@</p>
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalTPSAmountTobeReceived</h3>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between border-0">
+                        <div class="footer-info font-w600">
+                            <span class="text-success pr-2">Received- </span>
+                            <span class="text-black">@ViewBag.TotalTPSAmountReceived</span><br />
+                            <span class="text-danger pr-2">Balance- </span>
+                            <span class="text-black"> @ViewBag.TotalTPSBalanceAmount</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart5" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:25px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total MTG Token/USDT @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin6" height="47" />*@</p>
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalAmount</h3>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between border-0">
+                        <div class="footer-info font-w600">
+                            <span class="text-success pr-2">Payout- </span>
+                            <span class="text-black"> @ViewBag.TotalPayoutWallet</span><br />
+                            <span class="text-danger pr-2">Reward- </span>
+                            <span class="text-black">00.00</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart6" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:25px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-xl-3 col-sm-6">
+                    <div class="card overflow-hidden">
+                        <div class="card-header align-items-start border-0 pb-0">
+                            <div class="me-auto">
+                                <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>E-Pin <img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin7" height="47" /></p>
+                                <h3 class="text-black mb-0 font-w600">@ViewBag.TotalPins</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between border-0">
+                            <div class="footer-info font-w600">
+                                <span class="text-success pr-2">Used- </span>
+                                <span class="text-black">@ViewBag.UsedPins</span><br />
+                                <span class="text-danger pr-2">Available- </span>
+                                <span class="text-black">@ViewBag.AvailablePins</span>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <canvas id="widgetChart7" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <a href="/Wallet/WalletLedgerList" class="btn btn-info btn-block py-1">
+                                <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>MTG Wallet Balance</p>
+                                <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalWalletAmount</h3>
+                            </a>
+
+                            @*<p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Wallet Balance</p>
+                                <h3 class="text-black mb-0 font-w600">Rs. @ViewBag.TotalWalletAmount</h3>*@
+
+                        </div>
+                    </div>
+                    @*<div class="card-footer d-flex justify-content-between border-0">
+                            <div class="footer-info font-w600 d-flex">
+                                <div class="">
+                                    <a href="~/Coming.html" class="btn btn-danger btn-sm mr-2"> Recharge</a>
+                                </div>
+                                <div class="ms-1">
+                                    <a href="~/Coming.html" class="btn btn-secondary btn-sm"> Bill Payment</a>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:85px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-xxl-12">
+                <div class="card">
+                    <div class="card-header d-block d-sm-flex border-0">
+                        <div>
+                            <h4 class="fs-20 text-black">Market Overview</h4>
+                            <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                        </div>
+                        <div class="card-action card-tabs mt-3 mt-sm-0">
+                            <ul class="nav nav-tabs" role="tablist">
+                                @*<li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#Week" role="tab">
+                                            Week
+                                        </a>
+                                    </li>*@
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#Month" role="tab">
+                                        Month
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#Total" role="tab">
+                                        Total
+                                    </a>
+                                </li>
+
+
+
+                                @*<li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#Month" role="tab">
+                                            Month
+                                        </a>
+                                    </li>*@
+                                @*<li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#Year" role="tab">
+                                            Year
+                                        </a>
+                                    </li>*@
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0 pt-sm-3 pt-0 tab-content">
+                        <div class="tab-pane fade active show" id="Month">
+                            <div class="row">
+                                <div class="d-flex col-6 align-items-center">
+                                    <div class="fs-18 font-w600 me-3">
+
+                                        <span class="text-success pe-3">BUY</span>
+                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp; @ViewBag.TotalCrAmount</span>
+                                    </div>
+                                    <div class="fs-18 font-w600 ms-auto">
+                                        <span class="text-danger pe-3">SELL</span>
+                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp;@ViewBag.TotalDrAmount </span>
+                                    </div>
+                                </div>
+                                @*<div class="col-6 text-end">
+                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                </div>*@
+                            </div>
+                            <div id="chartBarRunning" class="bar-chart"></div>
+                        </div>
+                        @*<div class="tab-pane fade" id="Week">
+                            <div class="row">
+                                <div class="d-flex col-6 align-items-center">
+                                    <div class="fs-18 font-w600 me-3">
+                                        <span class="text-success pe-3">BUY</span>
+                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp; @ViewBag.TotalCrAmount</span>
+                                    </div>
+                                    <div class="fs-18 font-w600 ms-auto">
+                                        <span class="text-danger pe-3">SELL</span>
+                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp;@ViewBag.TotalDrAmount </span>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                </div>
+                            </div>
+                            <div id="chartBarRunning2" class="bar-chart"></div>
+                        </div>*@
+                        @*<div class="tab-pane fade" id="Year">
+                            <div class="row">
+                                <div class="d-flex col-6 align-items-center">
+                                    <div class="fs-18 font-w600 me-3">
+                                        <span class="text-success pe-3">BUY</span>
+                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp; @ViewBag.TotalCrAmount</span>
+                                    </div>
+                                    <div class="fs-18 font-w600 ms-auto">
+                                        <span class="text-danger pe-3">SELL</span>
+                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp;@ViewBag.TotalDrAmount </span>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                </div>
+                            </div>
+                            <div id="chartBarRunning3" class="bar-chart"></div>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-xxl-12">
+                <div class="card">
+                    <div class="card-header d-sm-flex d-block pb-0 border-0">
+                        <div>
+                            <h4 class="fs-20 text-black">Crypto Statistics</h4>
+                            <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                        </div>
+                        <div class="d-flex mt-sm-0 mt-3">
+                            <div class="form-check form-switch text-end me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customSwitch11">
+                                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch11">Date</label>
+                            </div>
+                            <div class="form-check form-switch text-end me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customSwitch12">
+                                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch12">Value</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="d-flex flex-wrap crypto">
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck9">
+                                <label class="form-check-label" for="customCheck9">
+                                    <span class="d-block text-black font-w500">MTGToken/USDT</span>
+                                    <span class="fs-12">MTG</span>
+                                </label>
+                            </div>
+
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck9">
+                                <label class="form-check-label" for="customCheck9">
+                                    <span class="d-block text-black font-w500">Rupees</span>
+                                    <span class="fs-12">Rupees</span>
+                                </label>
+                            </div>
+                            @*<div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck91">
+                                <label class="form-check-label" for="customCheck91">
+                                    <span class="d-block text-black font-w500">Ripple</span>
+                                    <span class="fs-12">XRP</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck92">
+                                <label class="form-check-label" for="customCheck92">
+                                    <span class="d-block text-black font-w500">Ethereum</span>
+                                    <span class="fs-12">ETH</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-5 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck93">
+                                <label class="form-check-label" for="customCheck93">
+                                    <span class="d-block text-black font-w500">Zcash</span>
+                                    <span class="fs-12">ZEC</span>
+                                </label>
+                            </div>
+                            <div class="form-check custom-checkbox me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="customCheck94">
+                                <label class="form-check-label" for="customCheck94">
+                                    <span class="d-block text-black font-w500">LiteCoin</span>
+                                    <span class="fs-12">LTC</span>
+                                </label>
+                            </div>*@
+                        </div>
+                        <div id="lineChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-xxl-12">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header d-sm-flex d-block pb-0 border-0">
+                                <div>
+                                    <h4 class="fs-20 text-black">Quick Transfer</h4>
+                                    <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                                </div>
+                                <select class="form-control custom-image-select-1 image-select mt-3 mt-sm-0">
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">23,511 MTG</option>
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">345,455 MTG</option>
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">789,123 MTG</option>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex mb-3 justify-content-between align-items-center">
+                                    <h4 class="text-black fs-20 mb-0">Recent Contacts</h4>
+                                    <a href="javascript:void(0);" class="btn-link">View more</a>
+                                </div>
+                                <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
+                                    @foreach (var item in Model.lstCustomer)
+                                    {
+                                        int i = 0;
+                                        <div class="items">
+                                            <div class="text-center">
+                                                <img class="mb-3 rounded" src="@item.ProfilePic" alt="">
+                                                <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                <b style="font-size:small;">MTG Contact Address<br /></b>
+                                                <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
+                                            </div>
+                                        </div>
+                                        i++;
+                                    }
+                                    @*<div class="items">
+                                            <div class="text-center">
+                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                <h5 class="text-black mb-0">Cindy</h5>
+                                                <span class="fs-12">cindyss</span>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <div class="text-center">
+                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                <h5 class="text-black mb-0">David</h5>
+                                                <span class="fs-12">davidxc</span>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <div class="text-center">
+                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                <h5 class="text-black mb-0">Martha</h5>
+                                                <span class="fs-12">marthaa</span>
+                                            </div>
+                                        </div>
+                                        <div class="items">
+                                            <div class="text-center">
+                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                <h5 class="text-black mb-0">Olivia</h5>
+                                                <span class="fs-12">oliv62</span>
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="amount-bx">
+                                    <label>MTG Token/USDT</label>
+                                    <input type="number" class="form-control" placeholder="0">
+                                </div>
+                                <a href="javascript:(0);" class="btn btn-primary d-block btn-lg text-uppercase">Send Money</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-xxl-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header border-0 pb-0">
+                                <h4 class="mb-0 text-black fs-20">Sell Order</h4>
+                                <div class="dropdown ms-auto">
+                                    <div class="btn-link" data-bs-toggle="dropdown">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                    </div>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-3">
+                                <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
+                                    @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Dash Coin</option>
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>*@
+                                </select>
+                                <div class="table-responsive">
+                                    <table class="table text-center bg-info-hover tr-rounded">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Price</th>
+                                                <th class="text-center">Amount</th>
+                                                <th class="text-end">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">82.3</td>
+                                                <td>0.15</td>
+                                                <td class="text-end">$134,12</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">83.9</td>
+                                                <td>0.18</td>
+                                                <td class="text-end">$237,31</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">84.2</td>
+                                                <td>0.25</td>
+                                                <td class="text-end">$252,58</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">86.2</td>
+                                                <td>0.35</td>
+                                                <td class="text-end">$126,26</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">91.6</td>
+                                                <td>0.75</td>
+                                                <td class="text-end">$46,92</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">92.6</td>
+                                                <td>0.21</td>
+                                                <td class="text-end">$123,27</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">93.9</td>
+                                                <td>0.55</td>
+                                                <td class="text-end">$212,56</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">94.2</td>
+                                                <td>0.18</td>
+                                                <td class="text-end">$129,26</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 pt-0 text-center">
+                                <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header border-0 pb-0">
+                                <h4 class="mb-0 text-black fs-20">Buy Order</h4>
+                                <div class="dropdown ms-auto">
+                                    <div class="btn-link" data-bs-toggle="dropdown">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                    </div>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-3">
+                                <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
+                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
+                                    @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Litecoin</option>
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>*@
+                                </select>
+                                <div class="table-responsive">
+                                    <table class="table text-center bg-warning-hover tr-rounded">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Price</th>
+                                                <th class="text-center">Amount</th>
+                                                <th class="text-end">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left">82.3</td>
+                                                <td>0.15</td>
+                                                <td class="text-end">$134,12</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">83.9</td>
+                                                <td>0.18</td>
+                                                <td class="text-end">$237,31</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">84.2</td>
+                                                <td>0.25</td>
+                                                <td class="text-end">$252,58</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">86.2</td>
+                                                <td>0.35</td>
+                                                <td class="text-end">$126,26</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">91.6</td>
+                                                <td>0.75</td>
+                                                <td class="text-end">$46,92</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">92.6</td>
+                                                <td>0.21</td>
+                                                <td class="text-end">$123,27</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">93.9</td>
+                                                <td>0.55</td>
+                                                <td class="text-end">$212,56</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">94.2</td>
+                                                <td>0.18</td>
+                                                <td class="text-end">$129,26</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 pt-0 text-center">
+                                <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0">
+                                <div class="widget widget-chart-two">
+                                    <div class="widget-heading">
+                                        <p class="UserDetailsss">User Details</p>
+                                    </div>
+                                    <div class="widget-content1">
+                                        <div id="chart-user" class=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @if (ViewBag.TotalBusiness != "0.00")
+                    {
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card overflow-hidden">
+                                <div class="card-header align-items-start border-0 pb-0">
+                                    <div class="widget widget-chart-two" style="background-color:#14112e;border:#14112e 1px solid">
+                                        <div class="widget-heading">
+                                            <p class="UserDetailsss">Business Details</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content1">
+                                    <div id="chart-user2" class=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                            <div class="card overflow-hidden">
+                                <div class="card-header align-items-start border-0 pb-0">
+                                    <div class="widget widget-chart-two">
+                                        <div class="widget-heading">
+                                            <h5 class="UserDetailsss">Business Details</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content1">
+                                    No Business
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+
+
+
+
+
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-header align-items-start border-0 pb-0">
+                                <div class="widget widget-chart-two ">
+                                    <div class="widget-heading">
+                                        <h5 class="">Rewards</h5>
+                                    </div>
+                                    <div class="widget-content1">
+                                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+
+                                            <div class="carousel-inner">
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstReward != null)
+                                                    {
+                                                        for (int i = 0; i < 1; i++)
+                                                        {
+
+                                                            <div class="carousel-item active" style="padding: 0px 10px;">
+                                                                @*<div class="widget-heading mb-3">
+                                                                    <h5 class="">@Model.lstReward[i].Title</h5>
+                                                                    <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
+                                                                </div>*@
+                                                                <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
+                                                                @*<div class="carousel-caption">
+                                                                    <h5>@Model.lstReward[i].Title</h5>
+                                                                </div>*@
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstReward != null)
+                                                    {
+                                                        for (int i = 1; i < Model.lstReward.Count; i++)
+                                                        {
+
+                                                            <div class="carousel-item" style="padding:0px 10px">
+                                                                @*<div class="widget-heading">
+                                                                    <h5>@Model.lstReward[i].Title</h5>
+                                                                    <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
+                                                                </div>*@
+                                                                <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;width:100%">
+                                                                @*<div class="carousel-caption">
+                                                                    <h5>@Model.lstReward[i].Title</h5>
+                                                                </div>*@
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                                @*<div class="carousel-item active">
+                                                    <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Second slide">
+                                                    <div class="carousel-caption d-none d-sm-block">
+                                                        <h5>Second slide</h5>
+                                                        <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Third slide">
+                                                    <div class="carousel-caption d-none d-sm-block">
+                                                        <h5>Third slide</h5>
+                                                        <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- share link modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Share Link On</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card" style="border:none">
+                    <div class="">
+                        @if (Session["LoginId"].ToString() != "")
+                        {
+                            //var link = Session["Pk_UserId"].ToString();
+                            <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://www.instagram.com/?url=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--   //  share link modal -->
+@*<div class="layout-px-spacing" style="margin-bottom: 70px;">
+    <div class="row layout-top-spacing">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three one">
+                <div class="widget-heading">
+                    <a href="/User/BusinessReportsForUser">
+                        <div class="wallet-balance">
+                            <p>Business</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalBusiness</h5>
+                        </div>
+                    </a>
+                    <div class="particular-balance d-flex mt-5">
+                        <div class="fisrtdiv">
+                            <p>Self <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.SelfBusiness</h5>
+                        </div>
+                        <div class="seconddiv">
+                            <p>Team <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up"><polyline points="18 15 12 9 6 15"></polyline></svg></p>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TeamBusiness</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three second">
+                <div class="widget-heading">
+                    <a href="/Downline/AssociateTree">
+                        <div class="wallet-balance">
+                            <p>Direct</p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalDirect</h5>
+                        </div>
+                    </a>
+                    <div class="particular-balance d-flex mt-5">
+                        <div class="fisrtdiv">
+                            <p>Active </p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalActive</</h5>
+                        </div>
+                        <div class="seconddiv">
+                            <p>In-Active </p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalInActive</h5>
+                        </div>
+                        @*<div class="seconddiv">
+                                <p>TPS Id </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.TPSId</h5>
+                            </div>*
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three four">
+                <div class="widget-heading">
+                    <a href="/Downline/DirectList">
+                        <div class="wallet-balance">
+                            <p>Team</p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeam</h5>
+                        </div>
+                    </a>
+                    <div class="particular-balance d-flex mt-5">
+                        <div class="fisrtdiv">
+                            <p>Active </p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamActive</</h5>
+                        </div>
+                        <div class="seconddiv">
+                            <p>In-Active </p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamInActive</h5>
+                        </div>
+                        @*<div class="seconddiv">
+                                <p>TPS Id </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.TotalTeamTPSId</h5>
+                            </div>*
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three five">
+                <div class="widget-heading">
+                    <div class="wallet-balance">
+                        <p>Total Bonus</p>
+                        <h5 class=""><span class="w-currency"></span> @ViewBag.TotalIncome</h5>
+                    </div>
+                    <div class="particular-balance d-flex mt-5">
+                        <a href="/Report/LevelIncomeTr1">
+                            <div class="fisrtdiv">
+                                <p> TTP </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr1</h5>
+                            </div>
+                        </a>
+                        <a href="/Report/LevelIncomeTr2">
+                            <div class="seconddiv">
+                                <p> TPS </p>
+                                <h5 class=""><span class="w-currency"></span> @ViewBag.LevelIncomeTr2</h5>
+                            </div>
+                        </a>
+                        <a href="/User/SponsorIncomeForuser">
+                            <div class="fisrtdiv">
+                                <p class="text-uppercase">SB</p>
+                                <h5 class="text-right"><span class="w-currency"></span> @ViewBag.SponsorBonus</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three third">
+                <div class="widget-heading">
+                    <a href="/Wallet/ViewROI">
+                        <div class="wallet-balance">
+                            <p>Total Wallet</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalTPSAmountTobeReceived</h5>
+                        </div>
+                    </a>
+                    <div class="particular-balance d-flex mt-5">
+                        <div class="firstdiv">
+                            <p>Received</p>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalTPSAmountReceived</h5>
+                        </div>
+                        <div class="seconddiv">
+                            <p>Balance</p>
+                            <h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalTPSBalanceAmount</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three six">
+                <div class="widget-heading">
+                    <div class="wallet-balance">
+                            <p>Total Amount</p>
+                            <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalAmount</h5>
+                        </div>
+                    <div class="particular-balance d-flex mt-5">
+                        <a href="/Report/PayoutWalletLedger">
+                            <div class="fisrtdiv">
+                                <p>Payout</p>
+                                <h5 class=""><span class="w-currency"></span>Rs. @ViewBag.TotalPayoutWallet</</h5>
+                            </div>
+                        </a>
+                        <div class="seconddiv">
+                            <p>Reward</p>
+                            <h5 class=""><span class="w-currency"></span> Rs. 0.00</h5>
+                            @*<h5 class=""><span class="w-currency"></span> Rs. @ViewBag.TotalROI</h5>*
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three seven">
+                <div class="widget-heading">
+                    <a href="/User/PinList">
+                        <div class="wallet-balance">
+                            <p>E-Pin</p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.TotalPins</h5>
+                        </div>
+                    </a>
+                    <div class="particular-balance d-flex mt-5">
+                        <div class="fisrtdiv">
+                            <p>Used</p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.UsedPins</</h5>
+                        </div>
+                        <div class="seconddiv">
+                            <p>Available</p>
+                            <h5 class=""><span class="w-currency"></span> @ViewBag.AvailablePins</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-account-invoice-three eight">
+                <div class="widget-heading">
+                    <div class="wallet-balance">
+                        <a href="/Wallet/WalletLedgerList" class="btn btn-info mr-2"><i class="fa fa-folder-open" aria-hidden="true"></i> Wallet Balance Rs. @ViewBag.TotalWalletAmount</a>
+                    </div>
+                    <div class="wallet-balance">
+                        <a href="~/Coming.html" class="btn btn-danger mr-2"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Recharge</a>
+                        @*<p><a href="~/MyTradeMTGWebsite/Coming.html"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  Recharge</a></p>*
+                    </div>
+                    <div class="wallet-balance">
+                        <div class="fisrtdiv">
+                            <a href="~/Coming.html" class="btn btn-secondary mr-2"><i class="fa fa-file-text" aria-hidden="true"></i> Bill Payment</a>
+                            @*<p><a href="~/MyTradeMTGWebsite/Coming.html"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>  Bill Payment</a></p>*
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-chart-two ">
+                <div class="widget-heading">
+                    <h5 class="">User Details</h5>
+                </div>
+                <div class="widget-content1">
+                    <div id="chart-user" class=""></div>
+                </div>
+            </div>
+        </div>
+        @if (ViewBag.TotalBusiness != "0.00")
+        {
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                <div class="widget widget-chart-two ">
+                    <div class="widget-heading">
+                        <h5 class="">Business Details</h5>
+                    </div>
+                    <div class="widget-content1">
+                        <div id="chart-user2" class=""></div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                <div class="widget widget-chart-two ">
+                    <div class="widget-heading">
+                        <h5 class="">Business Details</h5>
+                    </div>
+                    <div class="widget-content1">
+                        No Business
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+            <div class="widget widget-chart-two ">
+                @*<div class="widget-heading">
+                    <h5 class="">Rewards</h5>
+                </div>*
+                <div class="widget-content1">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        @*<ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        </ol>*
+                        <div class="carousel-inner">
+                            @if (Model != null)
+                            {
+                                if (Model.lstReward != null)
+                                {
+                                    for (int i = 0; i < 1; i++)
+                                    {
+
+                                        <div class="carousel-item active" style="padding: 0px 10px;">
+                                            <div class="widget-heading">
+                                                <h5 class="">@Model.lstReward[i].Title</h5>
+                                            </div>
+                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
+                                            @*<div class="carousel-caption">
+                                                <h5>@Model.lstReward[i].Title</h5>
+                                            </div>*
+                                        </div>
+                                    }
+                                }
+                            }
+                            @if (Model != null)
+                            {
+                                if (Model.lstReward != null)
+                                {
+                                    for (int i = 1; i < Model.lstReward.Count; i++)
+                                    {
+
+                                        <div class="carousel-item" style="padding:0px 10px">
+                                            <div class="widget-heading">
+                                                <h5>@Model.lstReward[i].Title</h5>
+                                            </div>
+                                            <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
+                                            @*<div class="carousel-caption">
+                                                <h5>@Model.lstReward[i].Title</h5>
+                                            </div>*
+                                        </div>
+                                    }
+                                }
+                            }
+                            @*<div class="carousel-item active">
+                                    <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Second slide">
+                                    <div class="carousel-caption d-none d-sm-block">
+                                        <h5>Second slide</h5>
+                                        <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Third slide">
+                                    <div class="carousel-caption d-none d-sm-block">
+                                        <h5>Third slide</h5>
+                                        <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                    </div>
+                                </div>*
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-5">
+                <div class="widget widget-chart-two ">
+                    <div class="widget-heading">
+                        <h5 class="">Videos</h5>
+                    </div>
+                    <div class="widget-content1">
+                        <video controls autoplay muted style="width: 100%" class="img-height">
+                            <source src="~/assets/img/sample-mp4-file.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>*@
+
+@*<div id="alertCustom" class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
+
+        <div class="statbox widget box box-shadow referral">
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4 class="referral">Referral Link</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content ">
+                <div class="alert alert-icon-right alert-light-red" role="alert">
+
+                    <strong><a target="_blank" style="font-size: 14px;color:red;word-wrap:break-word" href="http://MyTradeMTG.co.in//Home/Registration?Pid=@Session[" Pk_UserId"].ToString()">http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()</a></strong>
+
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>*
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Share Link On</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card" style="border:none">
+                        <div class="">
+                            @if (Session["LoginId"].ToString() != "")
+                            {
+                                //var link = Session["Pk_UserId"].ToString();
+
+                                <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://www.instagram.com/?url=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*
+        </div>*@
+@*<div class="alert custom-alert-1 mb-4" role="alert">
+
+        <div class="media">
+
+            <div class="media-body">
+                <div class="alert-text">
+                    <a target="_blank" style="font-size: 14px;" href="http://MyTradeMTG.co.in//Home/Registration?Pid=@Session[" Pk_UserId"].ToString()"><strong>http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()</strong></a>
+                </div>
+
+            </div>
+            <div class="alert-icon">
+                <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#exampleModal" style="background:transparent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12" y2="17"></line></svg>
+                </button>
+
+            </div>
+
+
+        </div>
+    </div>*@
+@*
+    </div>*@
+@*@if (ViewBag.Status == "Active")
+    {
+
+    <div class="row my-2">
+        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+            <div class="referral-url copy" style="text-align:left; word-wrap: break-word;">
+                <a target="_blank" style="font-size: 14px;" href="http://MyTradeMTG.co.in//Home/Registration?Pid=@Session[" Pk_UserId"].ToString()">http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()</a>
+
+            </div>
+        </div>
+
+    </div>
+
+    }*@
+
+@*
+                    </div>
+
+                </div>*
+
+
+        </div>
+    </div>*@
+@*<script src="~/plugins/apex/apexcharts.min.js"></script>
+    <script src="~/plugins/apex/custom-apexcharts.js"></script>*@
+@*<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>*@
+
+
+
+
+
+
+
+
+
+
+
+
+

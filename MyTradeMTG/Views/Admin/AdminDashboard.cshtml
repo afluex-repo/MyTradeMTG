@@ -1,0 +1,120 @@
+﻿@model MyTradeMTG.Models.Dashboard
+
+@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .card
+    {
+        height:initial !important;
+    }
+
+    divdash>h2{
+    margin-left: 21px;
+    margin-top: -62px;
+    position: fixed;
+    float: inherit;
+    z-index: 30;
+    }
+    
+    @@media only screen and (max-width: 768px) {
+    divdash>h2{
+    margin-left: 142px;
+    margin-top: -52px;
+    position: fixed;
+    float: inherit;
+    z-index: 30;
+    }
+  }
+</style>
+
+<divdash>
+    <h2>DASHBOARD</h2>
+</divdash>
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="card overflow-hidden">
+                <div class="card-header align-items-start border-0 pb-0">
+                    <div class="me-auto">
+                        <h3 class="text-black mb-0 font-w600">Total User</h3>
+                    </div>
+                    <h4> @ViewBag.TotalUsers</h4>
+                </div>
+                <div class="card-body p-0">
+                    <canvas id="widgetChart" class="max-h80 mt-auto"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="card overflow-hidden">
+                <div class="card-header align-items-start border-0 pb-0">
+                    <div class="me-auto">
+                        <h3 class="text-black mb-0 font-w600">Active Users</h3>
+                    </div>
+                    <h4>@ViewBag.ActiveUsers</h4>
+                </div>
+                <div class="card-body p-0">
+                    <canvas id="widgetChart2" class="max-h80 mt-auto"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="card overflow-hidden">
+                <div class="card-header align-items-start border-0 pb-0">
+                    <div class="me-auto">
+                        <h3 class="text-black mb-0 font-w600">InActive Users</h3>
+                    </div>
+                    <h4>@ViewBag.InActiveUsers</h4>
+                </div>
+                <div class="card-body p-0">
+                    <canvas id="widgetChart3" class="max-h80 mt-auto"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+            <div class="card overflow-hidden">
+                <div class="card-header align-items-start border-0 pb-0">
+                    <div class="me-auto">
+                        <h3 class="text-black mb-0 font-w600">Blocked Users</h3>
+                    </div>
+                    <h4>@ViewBag.BlockedUsers</h4>
+                </div>
+                <div class="card-body p-0">
+                    <canvas id="widgetChart4" class="max-h80 mt-auto"></canvas>
+                </div>
+            </div>
+        </div>
+        @*<div id="chartDonut" class="col-xl-6 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                            <h4>User Details</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div id="AssociateDetails" class=""></div>
+                    
+                </div>
+            </div>
+        </div>
+        <div id="chartDonut" class="col-xl-6 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">
+                    <div class="row">
+                        <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                            <h4>Business Details</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div id="PayoutDetails" class=""></div>
+                </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
