@@ -573,4 +573,3 @@ E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.csproj.Gener
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.dll
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.pdb
 E:\MyTradeNew\New folder\MyTradeGlobalOld\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
-F:\Rahul Prajapati\repository\MyTradeGlobal\MyTrade\obj\Debug\MyTrade.csprojResolveAssemblyReference.cache
