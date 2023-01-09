@@ -71,8 +71,8 @@ namespace MyTrade.Models
         public string FK_UserId { get; set; }
         public string Year { get; set; }
         public string TotalBusiness { get; set; }
-        public string PaidCramount { get; set; }
-        public string PaidDramount { get; set; }
+        public string Cramount { get; set; }
+        public string Dramount { get; set; }
         public List<ProgressReport> lstCoin { get; set; }
         public DataSet GetAssociateDashboard()
         {

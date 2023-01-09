@@ -148,8 +148,8 @@ namespace MyTrade.Controllers
                     {
                         ProgressReport obj = new ProgressReport();
                         obj.Year = r["Year"].ToString();
-                        obj.PaidCramount = r["PaidCramount"].ToString();
-                        obj.PaidDramount = r["PaidDramount"].ToString();
+                        obj.Cramount = r["Cramount"].ToString();
+                        obj.Dramount = r["Dramount"].ToString();
                         lst.Add(obj);
                    }
                     model.lstCoin = lst;
