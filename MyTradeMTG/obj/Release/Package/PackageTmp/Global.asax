@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="MyTrade.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="MyTradeMTG.Global" Language="C#" %>

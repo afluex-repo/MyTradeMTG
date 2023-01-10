@@ -1,4 +1,4 @@
-﻿@model MyTrade.Models.Home
+﻿@model MyTradeMTG.Models.Home
 @{
     Layout = null;
 }
@@ -18,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>My Trade || User Login</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" href="~/MytradeWebsite/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="~/MyTradeMTGWebsite/assets/img/favicon.png">
     <link href="/UserPanel/css/style.css" rel="stylesheet">
 </head>
 <body class="vh-100 demo-wrap">
@@ -31,7 +31,11 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <div class="text-center mb-3">
-                                        <a href="/Home/index"><img src="~/MytradeWebsite/assets/img/logo-2.png" style="width:170px" alt=""></a>
+                                        <a href="/Home/index">
+                                            <img src="~/UserPanel/images/MtgCoinPng.png" class="img-fluid" style="width:170px;" />
+                                            <h3 class="text-white">My Trade</h3>
+                                             @*<img src="~/MyTradeMTGWebsite/assets/img/logo-2.png" style="width:170px" alt="">*@
+                                        </a>
                                     </div>
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     <form action="/Home/LoginAction" method="post">
@@ -100,7 +104,7 @@
                                     <div class="d-table-cell">
                                         <div class="login-form">
                                             <div class="logo">
-                                                <a href="/Home/Index"><img src="~/MytradeWebsite/assets/img/logo.png" alt="image" width="200px"></a>
+                                                <a href="/Home/Index"><img src="~/MyTradeMTGWebsite/assets/img/logo.png" alt="image" width="200px"></a>
                                                 <h6 class="logo-tagline">One Step Towards Success</h6>
                                             </div>
 
@@ -124,7 +128,7 @@
                                             <button type="submit" class="btn btn-primary">Login</button>
 
                                             <div class="forgot-password d-flex justify-content-between">
-                                                <a href="~/MyTradeWebsite/index.html">Back To Home</a>
+                                                <a href="~/MyTradeMTGWebsite/index.html">Back To Home</a>
                                                 <a href="/Home/ForgetPassword">Forgot Password?</a>
                                             </div>
 
@@ -146,20 +150,20 @@
     <!-- Required vendors -->
     <script src="/UserPanel/vendor/global/global.min.js"></script>
     <!-- Links of JS files --
-    <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/meanmenu.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/nice-select.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/slick.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/magnific-popup.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/appear.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/odometer.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/owl.carousel.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/parallax.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/wow.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/form-validator.min.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/contact-form-script.js"></script>
-    <script src="~/MyTradeWebsite/assets/js/main.js"></script>-->
+    <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/meanmenu.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/nice-select.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/slick.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/magnific-popup.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/appear.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/odometer.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/owl.carousel.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/parallax.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/wow.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/form-validator.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/contact-form-script.js"></script>
+    <script src="~/MyTradeMTGWebsite/assets/js/main.js"></script>-->
 </body>
 </html>
 

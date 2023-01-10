@@ -1,9 +1,10 @@
-﻿@model MyTrade.Models.AdminReports
+﻿@model MyTradeMTG.Models.AdminReports
 
 @{
     ViewBag.Title = "RechargeListForAdmin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 @using (Html.BeginForm("RechargeListForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {

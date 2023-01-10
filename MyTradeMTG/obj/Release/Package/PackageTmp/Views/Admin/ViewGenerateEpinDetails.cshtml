@@ -1,4 +1,4 @@
-﻿@model MyTrade.Models.Admin
+﻿@model MyTradeMTG.Models.Admin
 
 @{
     ViewBag.Title = "ViewGenerateEpinDetails";
@@ -95,7 +95,7 @@
                                             <th>Sr No.</th>
                                             <th>E-Pin No</th>
                                             <th>Amount</th>
-                                            <th>GST</th>
+                                            @*<th>GST</th>*@
                                             <th>Final Amount</th>
                                             <th class="dt-no-sorting">Status</th>
                                             @*<th>Payment Mode</th>*@
@@ -118,7 +118,7 @@
                                                         <td>@i</td>
                                                         <td>@Item.ePinNo</td>
                                                         <td>@Item.PinAmount</td>
-                                                        <td>@Item.GST</td>
+                                                        @*<td>@Item.GST</td>*@
                                                         <td>@Item.TotalAmount</td>
                                                         <td>@Item.PinStaus</td>
                                                         @*<td>@Item.PaymentMode</td>*@
@@ -146,7 +146,7 @@
         </div>
     </div>
 }
-<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         jQuery.noConflict();

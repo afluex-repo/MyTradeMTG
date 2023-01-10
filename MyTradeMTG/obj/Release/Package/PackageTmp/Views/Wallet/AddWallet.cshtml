@@ -1,4 +1,4 @@
-﻿@model MyTrade.Models.UserWallet
+﻿@model MyTradeMTG.Models.UserWallet
 
 @{
     ViewBag.Title = "AddWallet";
@@ -120,10 +120,6 @@
                                     <label id="lblQr"> Scan QR </label>
                                     <img src="~/assets/img/QR.jpeg" height="200" width="200" />
                                 </div>
-
-
-
-
 
                             </div>
 
@@ -266,7 +262,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
 <script>
  
 
@@ -322,10 +318,6 @@
 
         });
     }
-
-
-    ////////////////////////////////////////
-
 
     $(document).ready(function () {
         $("#PaymentType").val("1");
@@ -728,7 +720,21 @@
     }
 </style>
 
+<script>
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", "OJYFezpazEnNXADFqcXvoFGQWhoEmlPo");
 
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders
+    };
+
+    fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=INR&base=USD", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+</script>
 
 
 

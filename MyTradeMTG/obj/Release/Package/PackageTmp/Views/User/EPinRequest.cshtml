@@ -1,10 +1,9 @@
-﻿@model MyTrade.Models.User
+﻿@model MyTradeMTG.Models.User
 
 @{
     ViewBag.Title = "EPinRequest";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-
 
 @using (Html.BeginForm("EPinRequest", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -24,7 +23,7 @@
                         <div class="card-body" id="divtop">
                             <div class="row mb-4">
                                 <div class="col-md-12">
-                                    <label style="color:red">MTG Token/USDT Wallet Balance: @ViewBag.WalletBalance</label>
+                                    <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
 
                                     @if (ViewBag.WalletBalance == "0")
@@ -48,8 +47,8 @@
                                     <input type="hidden" id="hdfFinal" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="Amount">MTG Token/USDT</label>
-                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG Token/USDT", @disabled = "disabled" })
+                                    <label for="Amount">Amount</label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @disabled = "disabled" })
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -58,9 +57,9 @@
                                     @Html.TextBoxFor(m => m.NoofPins, new { @class = "form-control", @placeholder = "No of Pins", @onchange = "getfinalamount();", @onkeypress = "return isNumberKey(event);" })
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="FinalAmount">Final MTG Token/USDT</label>
+                                    <label for="FinalAmount">Final Amount</label>
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                    @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final MTG Token/USDT(GST Included)", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
+                                    @Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount(GST Included)", @onkeypress = "return isNumberKey(event);", @readonly = "true" })
                                 </div>
                                 @*<div class="col-md-4">
                                         <label for="Fk_Paymentid">Payment Mode</label>
@@ -97,25 +96,25 @@
                 </div>
             </div>
         </div>
-        </div>
-        }
-        @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>*@
-        @*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-            <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
-            <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
-        <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </div>
+}
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>*@
+@*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
+<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
-        <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
-        <script>
+<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
+<script>
             $('#TransactionDate').datepicker({
                 dateFormat: 'dd/mm/yy',
             });
-        </script>
+</script>
 
-        <script>
+<script>
 
             function isNumberKey(evt) {
                 var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -539,11 +538,11 @@
                 return true;
             }
 
-        </script>
+</script>
 
-        @if (TempData["msg"] != null)
-        {
-            <script>
+@if (TempData["msg"] != null)
+{
+    <script>
                 $(document).ready(function () {
                     Snackbar.show({
                         text: '@TempData["msg"]',
@@ -552,11 +551,11 @@
                         pos: 'top-right'
                     });
                 });
-            </script>
-        }
-        @if (TempData["error"] != null)
-        {
-            <script>
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
                 $(document).ready(function () {
                     Snackbar.show({
                         text: '@TempData["error"]',
@@ -565,9 +564,9 @@
                         pos: 'top-right'
                     });
                 });
-            </script>
-        }
-        <script>
+    </script>
+}
+<script>
             $(document).ready(function () {
                 debugger;
                 if ($("#hdf").val() == "InActive") {
@@ -595,17 +594,11 @@
                     $("#divtop").show();
                 }
             })
-        </script>
-        <style>
-            .errortext {
-                border: 1px solid red !important;
-                background-color: #fff0f0 !important;
-            }
-        </style>
-
-
-
-
-
-
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
 

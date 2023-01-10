@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LevelTree.aspx.cs" Inherits="MyTrade.LevelTree" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LevelTree.aspx.cs" Inherits="MyTradeMTG.LevelTree" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server" id="hdf">
     <!-- Required meta tags -->
    
-    <title>MyTrade</title>
+    <title>MyTradeMTG</title>
 </head><body>
     <form id="form1" runat="server">
         <div id="BrokerTree">

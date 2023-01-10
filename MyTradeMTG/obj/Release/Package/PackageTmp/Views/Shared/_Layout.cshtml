@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title</title>
-    <link rel="icon" type="image/x-icon" href="/MytradeWebsite/assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/MyTradeMTGWebsite/assets/img/favicon.png" />
     @*<link href="~/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="~/assets/js/loader.js"></script>*@
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -68,7 +68,7 @@
     <link href="~/assets/css/user-profile.css" rel="stylesheet" />*@
 
 </head>
-<body>
+<body data-typography="poppins" data-theme-version="dark" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sibebarbg="color_1" data-sidebar-position="fixed" data-header-position="fixed" data-container="wide" direction="ltr" data-primary="color_1">
     <!-- BEGIN LOADER --
     <div id="load_screen">
         <div class="loader">
@@ -86,8 +86,9 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/user/UserDashboard" class="brand-logo">
-                <img src="~/MyTradeWebsite/assets/img/logo-2.png" class="img-fluid" style="width:120px;" />
-                <img src="~/UserPanel/images/MtgCoinPng.png" class="brand-title" />
+                <img src="~/UserPanel/images/MtgCoinPng.png" class="img-fluid" style="width:120px;" />
+                @*<img src="~/UserPanel/images/MtgCoinPng.png" class="brand-title" />*@
+                <h4 class="brand-title">My Trade</h4>
             </a>
 
             <div class="nav-control">
@@ -176,7 +177,7 @@
             <ul class="navbar-item theme-brand flex-row  text-center">
                 <li class="nav-item theme-logo">
                     <a href="/Admin/AdminDashboard">
-                        <img src="~/MyTradeWebsite/assets/img/logo.png" class="navbar-logo" alt="logo" />
+                        <img src="~/MyTradeMTGWebsite/assets/img/logo.png" class="navbar-logo" alt="logo" />
 
                     </a>
                     <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
@@ -404,7 +405,6 @@
             "pageLength": 20
         } );
     </script>
-
    
     @*<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>*@
 </body>
