@@ -52,7 +52,7 @@ namespace MyTradeMTG.Models
 
         public string Status { get; set; }
         public string ROIPercentage { get; set; }
-        
+
 
         public List<User> lstBReports { get; set; }
         public List<SelectListItem> ddlProductName { get; set; }
@@ -68,10 +68,11 @@ namespace MyTradeMTG.Models
         public string ProcessingFee { get; set; }
         public string PackageTypeId { get; set; }
 
+       
 
         #endregion
 
-     
+
         public DataSet ValidateEpin()
         {
             SqlParameter[] para = {
@@ -259,14 +260,13 @@ namespace MyTradeMTG.Models
                                     new SqlParameter("@Status",Status),
                                     new SqlParameter("@Status",Status),
                                     new SqlParameter("@Status",Status),
-                                    new SqlParameter("@Status",Status),
+                                    new SqlParameter("@Status",Status)
             };
             DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
             return ds;
         }
 
-
-
+        
     }
 
 
@@ -351,7 +351,7 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
-        
+
 
     }
 }

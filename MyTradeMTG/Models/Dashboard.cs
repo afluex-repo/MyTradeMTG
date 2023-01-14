@@ -7,17 +7,17 @@ using System.Data.SqlClient;
 
 namespace MyTradeMTG.Models
 {
-    public class Dashboard :Common
+    public class Dashboard : Common
     {
-        
+
         public string cssclass { get; set; }
         public List<Dashboard> lstmessages { get; set; }
         public string FK_UserId { get; set; }
         public string PK_UserId { get; set; }
-        public string MemberName { get;  set; }
-        public string Message { get;  set; }
-        public string MessageTitle { get;  set; }
-        public string Pk_MessageId { get;  set; }
+        public string MemberName { get; set; }
+        public string Message { get; set; }
+        public string MessageTitle { get; set; }
+        public string Pk_MessageId { get; set; }
 
 
         public string Image { get; set; }
@@ -27,6 +27,11 @@ namespace MyTradeMTG.Models
         public string PK_RewardId { get; set; }
 
 
+        public string FirmName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string AccountNo { get; set; }
+        public string IFSCCode { get; set; }
 
         public DataSet GetAssociateDashboard()
         {
@@ -38,7 +43,7 @@ namespace MyTradeMTG.Models
         public DataSet GetCustomerList()
         {
             SqlParameter[] para = {
-              
+
             };
             DataSet ds = DBHelper.ExecuteQuery("GetCustomerList", para);
             return ds;
@@ -61,7 +66,27 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetRewarDetails", para);
             return ds;
         }
+
+
+        public DataSet FranchiseRequest()
+        {
+            SqlParameter[] para = {new SqlParameter("@FirmName",FirmName),
+                                    new SqlParameter("@Email",Email),
+                                    new SqlParameter("@Mobile",Mobile),
+                                       new SqlParameter("@BankName",BankName),
+                                    new SqlParameter("@BranchName",BranchName),
+                                       new SqlParameter("@AccountNo",AccountNo),
+                                    new SqlParameter("@IFSCCode",IFSCCode),
+                                       new SqlParameter("@Address",Address),
+                                           new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("FranchiseRequest", para);
+            return ds;
+        }
+
         
+
+
     }
 
 
@@ -92,7 +117,7 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
-        
+
 
 
 

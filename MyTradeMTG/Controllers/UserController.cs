@@ -55,11 +55,11 @@ namespace MyTradeMTG.Controllers
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 ViewBag.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
-                
+
                 ViewBag.TotalCrAmount = ds.Tables[7].Rows[0]["TotalCrAmount"].ToString();
                 ViewBag.TotalDrAmount = ds.Tables[7].Rows[0]["TotalDrAmount"].ToString();
 
-                
+
                 //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
                 //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
 
@@ -69,7 +69,7 @@ namespace MyTradeMTG.Controllers
                 {
                     Session["IdActivated"] = false;
                     return RedirectToAction("CompleteRegistration", "Home");
-                  
+
 
                 }
                 else
@@ -129,11 +129,12 @@ namespace MyTradeMTG.Controllers
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[6].Rows.Count > 0)
             {
-                Session["TopUp"]= ds.Tables[6].Rows[0]["IsActive"].ToString();
+                Session["TopUp"] = ds.Tables[6].Rows[0]["IsActive"].ToString();
             }
+
             return View(obj);
         }
-        
+
         public JsonResult GetchartBarRunning()
         {
             ProgressReport model = new ProgressReport();
@@ -151,7 +152,7 @@ namespace MyTradeMTG.Controllers
                         obj.Cramount = r["Cramount"].ToString();
                         obj.Dramount = r["Dramount"].ToString();
                         lst.Add(obj);
-                   }
+                    }
                     model.lstCoin = lst;
                 }
             }
@@ -163,7 +164,7 @@ namespace MyTradeMTG.Controllers
             return Json(model.lstCoin, JsonRequestBehavior.AllowGet);
         }
 
-        
+
         public JsonResult GetlineChart()
         {
             ProgressReport model = new ProgressReport();
@@ -191,7 +192,7 @@ namespace MyTradeMTG.Controllers
             }
             return Json(model.lstCoin, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult ActivateByPin(User model)
         {
             return View(model);
@@ -206,14 +207,14 @@ namespace MyTradeMTG.Controllers
             try
             {
                 obj.Fk_UserId = Session["Pk_UserId"].ToString();
-                
+
                 DataSet ds = obj.ActivateUser();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         string Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        string Name = ds.Tables[0].Rows[0]["Name"].ToString()+","+ ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString() + "," + ds.Tables[0].Rows[0]["LoginId"].ToString();
                         string Product = ds.Tables[0].Rows[0]["Package"].ToString();
                         string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string TempId = "1707166036877932940";
@@ -280,14 +281,14 @@ namespace MyTradeMTG.Controllers
         public ActionResult TopUp()
         {
             Account model = new Account();
-           //model.LoginId = Session["CustomerId"].ToString();
+            //model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
-          
-            if (Session["IdActivated"].ToString()=="true")
+
+            if (Session["IdActivated"].ToString() == "true")
             {
                 model.BankName = Session["Bank"].ToString();
                 model.BankBranch = Session["Branch"].ToString();
-              
+
             }
 
             #region PackageType Bind
@@ -317,7 +318,7 @@ namespace MyTradeMTG.Controllers
             DataSet ds1 = objcomm.BindProductForTopUp();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
-               // int count = 0;
+                // int count = 0;
                 ViewBag.FromAmount = ds1.Tables[0].Rows[0]["FromAmount"].ToString();
                 ViewBag.ToAmount = ds1.Tables[0].Rows[0]["ToAmount"].ToString();
                 if (Session["UserActivationTopUp"].ToString() == "0")
@@ -328,7 +329,7 @@ namespace MyTradeMTG.Controllers
                 {
                     ViewBag.ActivationMTGToken = "0";
                 }
-               // ViewBag.ActivationMTGToken = ds1.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
+                // ViewBag.ActivationMTGToken = ds1.Tables[0].Rows[0]["ActivationMTGToken"].ToString();
                 ViewBag.InMultipleOf = ds1.Tables[0].Rows[0]["InMultipleOf"].ToString();
                 ViewBag.ROIPercent = ds1.Tables[0].Rows[0]["ROIPercent"].ToString();
                 ViewBag.Status = ds1.Tables[1].Rows[0]["Status"].ToString();
@@ -343,7 +344,7 @@ namespace MyTradeMTG.Controllers
                 //    count++;
                 //}
             }
-           // ViewBag.ddlProduct = ddlProduct;
+            // ViewBag.ddlProduct = ddlProduct;
             #endregion
 
             #region Check Balance
@@ -395,9 +396,9 @@ namespace MyTradeMTG.Controllers
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             Account model = new Account();
             model.PackageTypeId = PackageTypeId;
-           
+
             DataSet ds = model.GetProductListForTopUp();
-            
+
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -439,9 +440,9 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString()+","+obj.LoginId+"";
+                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString() + "," + obj.LoginId + "";
                         obj.Email = ds.Tables[0].Rows[0]["Email"].ToString();
-                        string Mobile= ds.Tables[0].Rows[0]["Mobile"].ToString();
+                        string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string Amount = ds.Tables[0].Rows[0]["Amount"].ToString();
                         string TempId = "1707166036857908702";
                         string str = BLSMS.Topup(obj.Name, Amount);
@@ -895,7 +896,7 @@ namespace MyTradeMTG.Controllers
                         string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string Package = ds.Tables[0].Rows[0]["Package"].ToString();
                         string TempId = "1707166036877932940";
-                        string Message = "Dear "+Name+", Your Profile is activated successfully with package "+ Package + ". Kindly check your account for more details. MY TRADE";
+                        string Message = "Dear " + Name + ", Your Profile is activated successfully with package " + Package + ". Kindly check your account for more details. MY TRADE";
                         try
                         {
                             BLSMS.SendSMS(Mobile, Message, TempId);
@@ -1065,7 +1066,7 @@ namespace MyTradeMTG.Controllers
             {
                 model.BankName = Session["Bank"].ToString();
                 model.BranchName = Session["Branch"].ToString();
-           
+
             }
             DataSet dss = model.GetEPinRequestDetails();
             if (dss != null && dss.Tables.Count > 0 && dss.Tables[1].Rows.Count > 0)
@@ -1103,7 +1104,7 @@ namespace MyTradeMTG.Controllers
                 ViewBag.WalletBalance = dsss.Tables[0].Rows[0]["amount"].ToString();
             }
             #endregion
-            
+
             #region Product Bind
             Common objcomm = new Common();
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -1327,7 +1328,7 @@ namespace MyTradeMTG.Controllers
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
-           
+
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
@@ -1689,7 +1690,7 @@ namespace MyTradeMTG.Controllers
             #region ddlpaymentType
             List<SelectListItem> ddlpaymentType = Common.BindPaymentTypeOnline();
             ViewBag.ddlpaymentType = ddlpaymentType;
-            
+
             #endregion
             #region Check Balance
             obj.FK_UserId = Session["Pk_UserId"].ToString();
@@ -1763,7 +1764,7 @@ namespace MyTradeMTG.Controllers
                 obj.PaymentMode = "12";
                 orderModel.orderId = order.Attributes["id"];
                 orderModel.razorpayKey = "rzp_live_k8z9ufVw0R0MLV";
-                orderModel.amount = Convert.ToInt32(obj.Amount)*100;
+                orderModel.amount = Convert.ToInt32(obj.Amount) * 100;
                 orderModel.currency = "INR";
                 orderModel.description = "Recharge Wallet";
                 orderModel.name = Session["FullName"].ToString();
@@ -1834,13 +1835,13 @@ namespace MyTradeMTG.Controllers
                         obj1.error_step = rr["error_step"];
                         obj1.error_reason = rr["error_reason"];
                         obj1.created_at = rr["created_at"];
-                        
+
                         DataSet ds = obj1.SaveFetchPaymentResponse();
-                        if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                         {
-                            if (ds.Tables[0].Rows[0]["Msg"].ToString()=="1")
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
-                                if(obj1.captured== "captured")
+                                if (obj1.captured == "captured")
                                 {
                                     TempData["Msg"] = "Amount credited successfully. Order Id : " + obj1.OrderId + " and PaymentId : " + obj1.PaymentId;
                                 }
@@ -1898,7 +1899,7 @@ namespace MyTradeMTG.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult SponsorIncomeForUser()
         {
             List<UserReports> lst = new List<UserReports>();
@@ -2053,11 +2054,52 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("UserReward");
         }
-        
+
         public ActionResult RoyaltyClub()
         {
             return View();
         }
 
+
+
+        [HttpPost]
+        public ActionResult FranchiseRequest(Dashboard model, string FirmName, string Email, string Mobile,
+            string BankName, string BranchName, string AccountNo, string IFSCCode, string Address)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_UserId"].ToString();
+                model.FirmName = FirmName;
+                model.Email = Email;
+                model.Mobile = Mobile;
+                model.BankName = BankName;
+                model.BranchName = BranchName;
+                model.AccountNo = AccountNo;
+                model.IFSCCode = IFSCCode;
+                model.Address = Address;
+                DataSet ds = model.FranchiseRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        TempData["FranchiseRequest"] = "Franchise requested submited !!";
+                    }
+                    else
+                    {
+                        TempData["FranchiseRequest"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["FranchiseRequest"] = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+
+       
+
+    }
 }
