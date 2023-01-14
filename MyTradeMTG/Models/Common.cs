@@ -270,6 +270,16 @@ namespace MyTradeMTG.Models
 
         }
 
+        public DataSet GetWalletTransferCharge()
+        {
+            SqlParameter[] para = { /*new SqlParameter("@MemberTransferCharge", MemberTransferCharge)*/ };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletTransferCharge", para);
+
+            return ds;
+
+        }
+
+
 
         public static List<SelectListItem> BindCountry()
         {
