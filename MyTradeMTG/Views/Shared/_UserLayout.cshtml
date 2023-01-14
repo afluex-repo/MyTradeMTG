@@ -124,7 +124,7 @@
             /*background-color: #05031A;*/
             border-color: #2a2833;
             /*color: #0a0917;*/
-             color: #ffffff;
+            color: #ffffff;
         }
     </style>
 
@@ -168,8 +168,26 @@
                                 @*Dashboard*@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                               
+                                @if (Session["IsFranchise"].ToString() == "")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                                else if (Session["IsFranchise"].ToString() == "False")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                                else if (Session["PendingStatus"].ToString()== "Pending")
+                                {
+                                    <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
+                                }
+                                else
+                                {
+                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                }
+
+
+
                             </div>
                         </div>
 
@@ -415,7 +433,7 @@
 
     </div>
 
-    
+
 
     <!--**********************************
     Main wrapper end

@@ -1,0 +1,127 @@
+﻿@model MyTradeMTG.Models.Admin
+
+@{
+    ViewBag.Title = "FranchiseRequestList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("FranchiseRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Franchise Request List</h4>
+                                <span class="text-danger">
+                                    @TempData["FranchiseRequest"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            @*<div class="col-md-3">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        Name
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        Login Id
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        From Date
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        To Date
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="margin-top:25px;">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" />
+                                    </div>
+                                </div>
+                            </div>*@
+                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Firm Name</th>
+                                        <th>Email Id</th>
+                                        <th>Mobile</th>
+                                        <th>Bank Name</th>
+                                        <th>Branch Name</th>
+                                        <th>Account No</th>
+                                        <th>IFSC Code</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstFranchiseRequest != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstFranchiseRequest)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.FirmName</td>
+                                                    <td>@Item.Email</td>
+                                                    <td>@Item.Mobile</td>
+                                                    <td>@Item.BankName</td>
+                                                    <td>@Item.BranchName</td>
+                                                    <td>@Item.AccountNo</td>
+                                                    <td>@Item.IFSCCode</td>
+                                                    <td>@Item.Address</td>
+                                                    <td>@Item.Status</td>
+                                                    @if (Item.IsFranchise=="False") 
+                                                    {
+                                                        <td><a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a></td>
+                                                    }
+                                                    else if (Item.IsFranchise == "True")
+                                                    {
+                                                        <td><a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>pending</td>
+                                                    }
+
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

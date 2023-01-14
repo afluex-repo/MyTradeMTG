@@ -266,7 +266,29 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
-        
+
+
+
+        public DataSet FranchiseRequest()
+        {
+            SqlParameter[] para = {new SqlParameter("@FirmName",FirmName),
+                                    new SqlParameter("@Email",Email),
+                                    new SqlParameter("@Mobile",Mobile),
+                                       new SqlParameter("@BankName",BankName),
+                                    new SqlParameter("@BranchName",BranchName),
+                                       new SqlParameter("@AccountNo",AccountNo),
+                                    new SqlParameter("@IFSCCode",IFSCCode),
+                                       new SqlParameter("@Address",Address),
+                                           new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("FranchiseRequest", para);
+            return ds;
+        }
+
+        public string FirmName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+
     }
 
 
