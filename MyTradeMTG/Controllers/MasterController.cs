@@ -310,6 +310,12 @@ namespace MyTradeMTG.Controllers
                         obj.ROIPercent = Convert.ToDecimal(ds.Tables[0].Rows[0]["ROIPercent"]);
                         //obj.BV = Convert.ToDecimal(ds.Tables[0].Rows[0]["BV"]);
                         obj.ActivationMTGToken = Convert.ToDecimal(ds.Tables[0].Rows[0]["ActivationMTGToken"]);
+                        obj.DrAmount1 = Convert.ToDecimal(ds.Tables[0].Rows[0]["DrAmount1"]);
+                        obj.DrAmount2 = Convert.ToDecimal(ds.Tables[0].Rows[0]["DrAmount2"]);
+                        obj.DrAmount3 = Convert.ToDecimal(ds.Tables[0].Rows[0]["DrAmount3"]);
+                        obj.ReturnPercent1 = Convert.ToDecimal(ds.Tables[0].Rows[0]["ReturnPercent1"]);
+                        obj.ReturnPercent2 = Convert.ToDecimal(ds.Tables[0].Rows[0]["ReturnPercent2"]);
+                        obj.ReturnPercent3 = Convert.ToDecimal(ds.Tables[0].Rows[0]["ReturnPercent3"]);
                         obj.PackageTypeId = (ds.Tables[0].Rows[0]["PackageTypeId"].ToString());
                         obj.PackageTypeName = (ds.Tables[0].Rows[0]["PackageTypeName"].ToString());
                         obj.FromAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FromAmount"]);
@@ -326,13 +332,14 @@ namespace MyTradeMTG.Controllers
                     TempData["Package"] = ex.Message;
                 }
             }
-            else { 
-            
+            else
+            {
+
             }
             return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage,string ActivationMTGToken,string BasisOn)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3)
         {
             Master obj = new Master();
             try
@@ -344,6 +351,12 @@ namespace MyTradeMTG.Controllers
                 //obj.IGST = Convert.ToDecimal(IGST);
                 obj.Days = Days;
                 obj.ROIPercent = Convert.ToDecimal(ROIPercent);
+                obj.DrAmount1 = Convert.ToDecimal(DrAmount1);
+                obj.DrAmount2 = Convert.ToDecimal(DrAmount2);
+                obj.DrAmount3 = Convert.ToDecimal(DrAmount3);
+                obj.ReturnPercent1 = Convert.ToDecimal(ReturnPercent1);
+                obj.ReturnPercent2 = Convert.ToDecimal(ReturnPercent2);
+                obj.ReturnPercent3 = Convert.ToDecimal(ReturnPercent3);
                 //obj.HSNCode = HSNCode == null ? "" : HSNCode;
                 //obj.FinalAmount = Convert.ToDecimal(FinalAmount);
                 //obj.BV = Convert.ToDecimal(BV);
@@ -374,7 +387,7 @@ namespace MyTradeMTG.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount,string SponsorIncome, string IscomboPackage,string ActivationMTGToken,string BasisOn)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3)
         {
             Master obj = new Master();
             try
@@ -388,6 +401,12 @@ namespace MyTradeMTG.Controllers
                 obj.Days = Days;
                 obj.SponsorIncome = Convert.ToDecimal(SponsorIncome);
                 obj.ROIPercent = Convert.ToDecimal(ROIPercent);
+                obj.DrAmount1 = Convert.ToDecimal(DrAmount1);
+                obj.DrAmount2 = Convert.ToDecimal(DrAmount2);
+                obj.DrAmount3 = Convert.ToDecimal(DrAmount3);
+                obj.ReturnPercent1 = Convert.ToDecimal(ReturnPercent1);
+                obj.ReturnPercent2 = Convert.ToDecimal(ReturnPercent2);
+                obj.ReturnPercent3 = Convert.ToDecimal(ReturnPercent3);
                 //obj.HSNCode = HSNCode;
                 if (obj.IGST != 0)
                 {
@@ -787,7 +806,7 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-        public ActionResult BalanceTransfer(Master model,string Pk_BalanceTransferId)
+        public ActionResult BalanceTransfer(Master model, string Pk_BalanceTransferId)
         {
             List<Master> lst = new List<Master>();
             DataSet ds = model.GetBalanceTransferList();
@@ -797,14 +816,14 @@ namespace MyTradeMTG.Controllers
                 {
                     Master obj = new Master();
                     obj.Pk_BalanceTransferId = r["Pk_BalanceTransferId"].ToString();
-                    obj.DirectPayment = r["DirectPayment"].ToString();
-                    obj.BuySales = r["BuySales"].ToString();
+                    obj.MemberTransferCharge = r["MemberTransferCharge"].ToString();
+                    obj.BrokerTransferCharge = r["BrokerTransferCharge"].ToString();
                     obj.Status = r["Status"].ToString();
                     lst.Add(obj);
                 }
                 model.lstbalancetransfer = lst;
             }
-            
+
             if (Pk_BalanceTransferId != null)
             {
                 model.Pk_BalanceTransferId = Pk_BalanceTransferId;
@@ -812,15 +831,15 @@ namespace MyTradeMTG.Controllers
                 DataSet ds2 = model.GetBalanceTransferList();
                 if (ds2 != null && ds2.Tables.Count > 0)
                 {
-                    model.Pk_BalanceTransferId= ds2.Tables[0].Rows[0]["Pk_BalanceTransferId"].ToString();
-                    model.DirectPayment = ds2.Tables[0].Rows[0]["DirectPayment"].ToString();
-                    model.BuySales = ds2.Tables[0].Rows[0]["BuySales"].ToString();
+                    model.Pk_BalanceTransferId = ds2.Tables[0].Rows[0]["Pk_BalanceTransferId"].ToString();
+                    model.MemberTransferCharge = ds2.Tables[0].Rows[0]["MemberTransferCharge"].ToString();
+                    model.BrokerTransferCharge = ds2.Tables[0].Rows[0]["BrokerTransferCharge"].ToString();
                     model.Status = ds2.Tables[0].Rows[0]["Status"].ToString();
                 }
-                
+
             }
             return View(model);
-            
+
         }
 
         public ActionResult BalanceTransferList(Master model)
@@ -843,7 +862,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Transfermsg"] = "Brokerage Deduction Successfully";
+                        TempData["Transfermsg"] = "Brokerage Deduction Saved Successfully";
                     }
                     else
                     {
@@ -862,25 +881,25 @@ namespace MyTradeMTG.Controllers
         [HttpPost]
         [ActionName("BalanceTransfer")]
         [OnAction(ButtonName = "btnUpdate")]
-        public ActionResult UpdateBalanceTransfer(Master model,Master modelinsrtupdt)
+        public ActionResult UpdateBalanceTransfer(Master model, Master modelinsrtupdt)
         {
             try
             {
                 modelinsrtupdt.AddedBy = Session["Pk_AdminId"].ToString();
                 modelinsrtupdt.Fk_UserId = Session["Pk_AdminId"].ToString();
                 DataSet ds = model.UpdateBalanceTransfer();
-                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                        {
-                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-                            {
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
 
-                                TempData["UpdateBalancetransfer"] = "Brokerage Deduction updated Successfully";
-                            }
-                            else
-                            {
-                                TempData["UpdateBalancetransfer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                            }
-                        }
+                        TempData["UpdateBalancetransfer"] = "Brokerage Deduction updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["UpdateBalancetransfer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -913,6 +932,6 @@ namespace MyTradeMTG.Controllers
 
             return RedirectToAction("BalanceTransfer");
         }
-        
+
     }
 }

@@ -65,11 +65,33 @@ namespace MyTradeMTG.Models
         public string UPIID { get; set; }
 
         public string GrossAmount { get; set; }
+        public string Franchise { get; set; }
         public string ProcessingFee { get; set; }
         public string PackageTypeId { get; set; }
+        public string MemberTransferCharge { get; set; }
+        #endregion
 
-       
 
+        #region Wallet Transfer for user
+        public DataSet SaveWalletTransferBalance()
+        {
+            SqlParameter[] para = {
+                 new SqlParameter("@Fk_UserId",Fk_UserId),
+                new SqlParameter("@Amount",Amount),
+                 new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveWalletTransfer", para);
+            return ds;
+        }
+
+        public DataSet GetNameDetailsforUserWalletTransfer()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetNameDetailsforTransferwallet", para);
+            return ds;
+        }
         #endregion
 
 
