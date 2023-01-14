@@ -2063,8 +2063,8 @@ namespace MyTradeMTG.Controllers
 
 
         [HttpPost]
-        public ActionResult FranchiseRequest(Dashboard model, string FirmName, string Email, string Mobile,
-            string BankName, string BranchName, string AccountNo, string IFSCCode, string Address)
+        public ActionResult FranchiseRequest(User model, string FirmName, string Email, string Mobile, string BankName, string BranchName, string AccountNo, string IFSCCode, string Address)
+
         {
             try
             {
@@ -2080,10 +2080,12 @@ namespace MyTradeMTG.Controllers
                 DataSet ds = model.FranchiseRequest();
                 if (ds != null && ds.Tables.Count > 0)
                 {
+                   
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
                         model.Result = "yes";
-                        TempData["FranchiseRequest"] = "Franchise requested submited !!";
+                        Session["PendingStatus"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
+                        //TempData["FranchiseRequest"] = "Franchise requested submited !!";
                     }
                     else
                     {

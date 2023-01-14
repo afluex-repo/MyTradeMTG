@@ -853,7 +853,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             Bank Branch<span style="color: red"></span>
-                            <input type="text" id="Branch" name="Branch" class="form-control" placeholder="Branch" />
+                            <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" />
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -891,17 +891,17 @@
 <script>
     function FranchiseRequest() {
         debugger;
-        if ($("#FirmName").val() == "") {
+        if($("#FirmName").val() == "") {
             $("#FirmName").addClass('errortextfor');
             $("#FirmName").focus();
             return false;
         }
-        else if ($("#Email").val() == "") {
+        else if($("#Email").val() == "") {
             $("#Email").addClass('errortextfor');
             $("#Email").focus();
             return false;
         }
-        else if ($("#Mobile").val() == "") {
+        else if($("#Mobile").val() == "") {
             $("#Mobile").addClass('errortextfor');
             $("#Mobile").focus();
             return false;
@@ -914,6 +914,7 @@
                 data: { "FirmName": $("#FirmName").val(), "Email": $("#Email").val(), "Mobile": $("#Mobile").val(), "BankName": $("#BankName").val(), "BranchName": $("#BranchName").val(), "AccountNo": $("#AccountNo").val(), "IFSCCode": $("#IFSCCode").val(), "Address": $("#Address").val() },
                 success: function (data) {
                     if (data.Result == "yes") {
+                        $("#myModalAddFranchise").modal('show');
                         alert('Franchise requested submited !!');
                         window.location.reload();
                     }
