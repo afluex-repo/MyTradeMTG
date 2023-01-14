@@ -168,8 +168,13 @@
                                 @*Dashboard*@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                               
-                                @if (Session["IsFranchise"].ToString() == "")
+
+
+                                @*@if (Session["IsFranchise"].ToString() == "")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                                else if (Session["PendingStatusLogin"].ToString() == "")
                                 {
                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
                                 }
@@ -177,14 +182,30 @@
                                 {
                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
                                 }
-                                else if (Session["PendingStatus"].ToString()== "Pending")
+                                else if (Session["PendingStatusLogin"].ToString() == "Pending" && (Session["IsFranchise"].ToString() == "False"))
                                 {
                                     <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
                                 }
                                 else
                                 {
                                     <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                }*@
+
+                                @if (Session["Franchisestatus"].ToString() == "" || Session["Franchisestatus"].ToString() == "Rejected")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
                                 }
+                               
+                                else if (Session["Franchisestatus"].ToString() == "Pending")
+                                {
+                                    <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
+                                }
+                                else if (Session["Franchisestatus"].ToString() == "Approved")
+                                {
+                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                }
+                              
+
 
 
 

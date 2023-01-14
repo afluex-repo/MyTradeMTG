@@ -109,6 +109,17 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetMenuUserWise", para);
             return ds;
         }
+
+        public DataSet GetFranchisedetails(string Pk_UserId)
+        {
+            SqlParameter[] para = {
+                              
+                                 new SqlParameter("@Pk_userId", Pk_UserId)
+            };
+
+            DataSet ds = DBHelper.ExecuteQuery("GetFranchisedetails", para);
+            return ds;
+        }
         public static Home GetMenus(string Pk_AdminId, string UserType)
         {
             Home model = new Home();
