@@ -2084,7 +2084,8 @@ namespace MyTradeMTG.Controllers
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
                         model.Result = "yes";
-                        Session["PendingStatus"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
+                        Session["Franchisestatus"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
+                        //Session["PendingStatus"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
                         //TempData["FranchiseRequest"] = "Franchise requested submited !!";
                     }
                     else
