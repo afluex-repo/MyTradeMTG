@@ -2101,7 +2101,10 @@ namespace MyTradeMTG.Controllers
         }
 
 
-       
+        public ActionResult MTGPurchaseSell()
+        {
+            return View();
+        }
 
     }
 }

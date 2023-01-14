@@ -1042,7 +1042,7 @@
     <Content Include="UserPanel\vendor\lightgallery\fonts\lgd641.ttf" />
     <Content Include="UserPanel\vendor\lightgallery\fonts\lgd641.woff" />
     <Content Include="Views\Master\BalanceTransfer.cshtml" />
-    <Content Include="Views\Admin\FranchiseRequestList.cshtml" />
+    <Content Include="Views\User\MTGPurchaseSell.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
