@@ -288,6 +288,7 @@
     <Content Include="MyTradeMTGWebsite\assets\img\logo-1.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\logo-2.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\logo.png" />
+    <Content Include="MyTradeMTGWebsite\assets\img\mytrade_logo %283%29.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-1.jpg" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-2.jpg" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-3.jpg" />
@@ -920,6 +921,7 @@
     <Content Include="Views\Report\LevelIncomeTr2Total.cshtml" />
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
     <None Include="Properties\PublishProfiles\MyTradeMTG1.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG14jan23.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGdemo.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGOld.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGOld1.pubxml" />
@@ -1044,6 +1046,7 @@
     <Content Include="Views\Master\BalanceTransfer.cshtml" />
     <Content Include="Views\User\MTGPurchaseSell.cshtml" />
     <Content Include="Views\User\WalletTransfer.cshtml" />
+    <Content Include="Views\Admin\FranchiseRequestList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

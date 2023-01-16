@@ -13,24 +13,23 @@
         height: 50px;
     }
 
-    divdash>h2{
-    margin-left: 357px;
-    margin-top: 26px;
-    position: fixed;
-    float: inherit;
-    z-index: 30;
+    divdash > h2 {
+        margin-left: 357px;
+        margin-top: 26px;
+        position: fixed;
+        float: inherit;
+        z-index: 30;
     }
-    
-    @@media only screen and (max-width: 768px) {
-    divdash>h2{
-    margin-left: 140px;
-    margin-top: 26px;
-    position: fixed;
-    float: inherit;
-    z-index: 30;
-    }
-  }
 
+    @@media only screen and (max-width: 768px) {
+        divdash > h2 {
+            margin-left: 140px;
+            margin-top: 26px;
+            position: fixed;
+            float: inherit;
+            z-index: 30;
+        }
+    }
 </style>
 
 <divdash>
@@ -236,7 +235,7 @@
                     <div class="card-header d-block d-sm-flex border-0">
                         <div>
                             <h4 class="fs-20 text-black">Market Overview</h4>
-                            <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                            @*<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>*@
                         </div>
                         <div class="card-action card-tabs mt-3 mt-sm-0">
                             <ul class="nav nav-tabs" role="tablist">
@@ -288,47 +287,47 @@
                                     </div>
                                 </div>
                                 @*<div class="col-6 text-end">
-                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
-                                </div>*@
+                                        <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
+                                    </div>*@
                             </div>
                             <div id="chartBarRunning" class="bar-chart"></div>
                         </div>
                         @*<div class="tab-pane fade" id="Week">
-                            <div class="row">
-                                <div class="d-flex col-6 align-items-center">
-                                    <div class="fs-18 font-w600 me-3">
-                                        <span class="text-success pe-3">BUY</span>
-                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp; @ViewBag.TotalCrAmount</span>
+                                <div class="row">
+                                    <div class="d-flex col-6 align-items-center">
+                                        <div class="fs-18 font-w600 me-3">
+                                            <span class="text-success pe-3">BUY</span>
+                                            <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp; @ViewBag.TotalCrAmount</span>
+                                        </div>
+                                        <div class="fs-18 font-w600 ms-auto">
+                                            <span class="text-danger pe-3">SELL</span>
+                                            <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp;@ViewBag.TotalDrAmount </span>
+                                        </div>
                                     </div>
-                                    <div class="fs-18 font-w600 ms-auto">
-                                        <span class="text-danger pe-3">SELL</span>
-                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" />&nbsp;@ViewBag.TotalDrAmount </span>
+                                    <div class="col-6 text-end">
+                                        <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
                                     </div>
                                 </div>
-                                <div class="col-6 text-end">
-                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
-                                </div>
-                            </div>
-                            <div id="chartBarRunning2" class="bar-chart"></div>
-                        </div>*@
+                                <div id="chartBarRunning2" class="bar-chart"></div>
+                            </div>*@
                         @*<div class="tab-pane fade" id="Year">
-                            <div class="row">
-                                <div class="d-flex col-6 align-items-center">
-                                    <div class="fs-18 font-w600 me-3">
-                                        <span class="text-success pe-3">BUY</span>
-                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp; @ViewBag.TotalCrAmount</span>
+                                <div class="row">
+                                    <div class="d-flex col-6 align-items-center">
+                                        <div class="fs-18 font-w600 me-3">
+                                            <span class="text-success pe-3">BUY</span>
+                                            <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp; @ViewBag.TotalCrAmount</span>
+                                        </div>
+                                        <div class="fs-18 font-w600 ms-auto">
+                                            <span class="text-danger pe-3">SELL</span>
+                                            <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp;@ViewBag.TotalDrAmount </span>
+                                        </div>
                                     </div>
-                                    <div class="fs-18 font-w600 ms-auto">
-                                        <span class="text-danger pe-3">SELL</span>
-                                        <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp;@ViewBag.TotalDrAmount </span>
+                                    <div class="col-6 text-end">
+                                        <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
                                     </div>
                                 </div>
-                                <div class="col-6 text-end">
-                                    <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
-                                </div>
-                            </div>
-                            <div id="chartBarRunning3" class="bar-chart"></div>
-                        </div>*@
+                                <div id="chartBarRunning3" class="bar-chart"></div>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -336,8 +335,8 @@
                 <div class="card">
                     <div class="card-header d-sm-flex d-block pb-0 border-0">
                         <div>
-                            <h4 class="fs-20 text-black">Crypto Statistics</h4>
-                            <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                            <h4 class="fs-20 text-black">Currency Statistics</h4>
+                            @*<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>*@
                         </div>
                         <div class="d-flex mt-sm-0 mt-3">
                             <div class="form-check form-switch text-end me-4 mb-2">
@@ -368,33 +367,33 @@
                                 </label>
                             </div>
                             @*<div class="form-check custom-checkbox me-5 mb-2">
-                                <input type="checkbox" class="form-check-input" id="customCheck91">
-                                <label class="form-check-label" for="customCheck91">
-                                    <span class="d-block text-black font-w500">Ripple</span>
-                                    <span class="fs-12">XRP</span>
-                                </label>
-                            </div>
-                            <div class="form-check custom-checkbox me-5 mb-2">
-                                <input type="checkbox" class="form-check-input" id="customCheck92">
-                                <label class="form-check-label" for="customCheck92">
-                                    <span class="d-block text-black font-w500">Ethereum</span>
-                                    <span class="fs-12">ETH</span>
-                                </label>
-                            </div>
-                            <div class="form-check custom-checkbox me-5 mb-2">
-                                <input type="checkbox" class="form-check-input" id="customCheck93">
-                                <label class="form-check-label" for="customCheck93">
-                                    <span class="d-block text-black font-w500">Zcash</span>
-                                    <span class="fs-12">ZEC</span>
-                                </label>
-                            </div>
-                            <div class="form-check custom-checkbox me-4 mb-2">
-                                <input type="checkbox" class="form-check-input" id="customCheck94">
-                                <label class="form-check-label" for="customCheck94">
-                                    <span class="d-block text-black font-w500">LiteCoin</span>
-                                    <span class="fs-12">LTC</span>
-                                </label>
-                            </div>*@
+                                    <input type="checkbox" class="form-check-input" id="customCheck91">
+                                    <label class="form-check-label" for="customCheck91">
+                                        <span class="d-block text-black font-w500">Ripple</span>
+                                        <span class="fs-12">XRP</span>
+                                    </label>
+                                </div>
+                                <div class="form-check custom-checkbox me-5 mb-2">
+                                    <input type="checkbox" class="form-check-input" id="customCheck92">
+                                    <label class="form-check-label" for="customCheck92">
+                                        <span class="d-block text-black font-w500">Ethereum</span>
+                                        <span class="fs-12">ETH</span>
+                                    </label>
+                                </div>
+                                <div class="form-check custom-checkbox me-5 mb-2">
+                                    <input type="checkbox" class="form-check-input" id="customCheck93">
+                                    <label class="form-check-label" for="customCheck93">
+                                        <span class="d-block text-black font-w500">Zcash</span>
+                                        <span class="fs-12">ZEC</span>
+                                    </label>
+                                </div>
+                                <div class="form-check custom-checkbox me-4 mb-2">
+                                    <input type="checkbox" class="form-check-input" id="customCheck94">
+                                    <label class="form-check-label" for="customCheck94">
+                                        <span class="d-block text-black font-w500">LiteCoin</span>
+                                        <span class="fs-12">LTC</span>
+                                    </label>
+                                </div>*@
                         </div>
                         <div id="lineChart"></div>
                     </div>
@@ -408,7 +407,7 @@
                             <div class="card-header d-sm-flex d-block pb-0 border-0">
                                 <div>
                                     <h4 class="fs-20 text-black">Quick Transfer</h4>
-                                    <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
+                                    @*<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>*@
                                 </div>
                                 <select class="form-control custom-image-select-1 image-select mt-3 mt-sm-0">
                                     <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">23,511 MTG</option>
@@ -429,7 +428,7 @@
                                             <div class="text-center">
                                                 <img class="mb-3 rounded" src="@item.ProfilePic" alt="">
                                                 <h6 class="text-black mb-0">@item.CustomerName</h6>
-                                                <b style="font-size:small;">MTG Contact Address<br /></b>
+                                                <b style="font-size:small;">MTG CA<br /></b>
                                                 <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
                                             </div>
                                         </div>
@@ -717,13 +716,13 @@
 
                                                             <div class="carousel-item active" style="padding: 0px 10px;">
                                                                 @*<div class="widget-heading mb-3">
-                                                                    <h5 class="">@Model.lstReward[i].Title</h5>
-                                                                    <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
-                                                                </div>*@
+                                                                        <h5 class="">@Model.lstReward[i].Title</h5>
+                                                                        <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
+                                                                    </div>*@
                                                                 <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
                                                                 @*<div class="carousel-caption">
-                                                                    <h5>@Model.lstReward[i].Title</h5>
-                                                                </div>*@
+                                                                        <h5>@Model.lstReward[i].Title</h5>
+                                                                    </div>*@
                                                             </div>
                                                         }
                                                     }
@@ -737,31 +736,31 @@
 
                                                             <div class="carousel-item" style="padding:0px 10px">
                                                                 @*<div class="widget-heading">
-                                                                    <h5>@Model.lstReward[i].Title</h5>
-                                                                    <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
-                                                                </div>*@
+                                                                        <h5>@Model.lstReward[i].Title</h5>
+                                                                        <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
+                                                                    </div>*@
                                                                 <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;width:100%">
                                                                 @*<div class="carousel-caption">
-                                                                    <h5>@Model.lstReward[i].Title</h5>
-                                                                </div>*@
+                                                                        <h5>@Model.lstReward[i].Title</h5>
+                                                                    </div>*@
                                                             </div>
                                                         }
                                                     }
                                                 }
                                                 @*<div class="carousel-item active">
-                                                    <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Second slide">
-                                                    <div class="carousel-caption d-none d-sm-block">
-                                                        <h5>Second slide</h5>
-                                                        <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                                        <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Second slide">
+                                                        <div class="carousel-caption d-none d-sm-block">
+                                                            <h5>Second slide</h5>
+                                                            <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Third slide">
-                                                    <div class="carousel-caption d-none d-sm-block">
-                                                        <h5>Third slide</h5>
-                                                        <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
-                                                    </div>
-                                                </div>*@
+                                                    <div class="carousel-item">
+                                                        <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Third slide">
+                                                        <div class="carousel-caption d-none d-sm-block">
+                                                            <h5>Third slide</h5>
+                                                            <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
+                                                        </div>
+                                                    </div>*@
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -810,6 +809,167 @@
         </div>
     </div>
 </div>
+
+
+
+@*------------------------AddFranchise PopUp Start----------------------------------------------------*@
+
+<div class="modal fade md" id="myModalAddFranchise" role="dialog" style="display: none;padding-top:100px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:150%">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>
+                &nbsp;&nbsp;&nbsp;<span style="color:red;">@TempData["FranchiseRequest"]</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Firm Name<span style="color: red">*</span>
+                            <input type="text" id="FirmName" name="FormName" class="form-control" placeholder="Firm Name" onkeypress="return onlyAlphabets();" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Email<span style="color: red"></span>
+                            <input type="text" id="Email" name="Email" class="form-control" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Mobile<span style="color: red">*</span>
+                            <input type="text" id="Mobile" name="Mobile" class="form-control" placeholder="Mobile" maxlength="10" onkeypress="return isNumberKey(event);" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Bank Name<span style="color: red"></span>
+                            <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Bank Branch<span style="color: red"></span>
+                            <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            Account No.<span style="color: red"></span>
+                            <input type="text" id="AccountNo" name="AccountNo" class="form-control" placeholder="Account No" onkeypress="return isNumberKey(event);" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            IFSC Code<span style="color: red"></span>
+                            <input type="text" id="IFSCCode" name="IFSCCode" class="form-control" placeholder="IFSC Code" />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            Address<span style="color: red"></span>
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address", })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>
+                <button type="submit" class="btn btn-primary btn-sm" onclick="return FranchiseRequest();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*------------------------AddFranchise PopUp end----------------------------------------------------*@
+
+<script>
+    function FranchiseRequest() {
+        debugger;
+        if($("#FirmName").val() == "") {
+            $("#FirmName").addClass('errortextfor');
+            $("#FirmName").focus();
+            return false;
+        }
+        else if($("#Email").val() == "") {
+            $("#Email").addClass('errortextfor');
+            $("#Email").focus();
+            return false;
+        }
+        else if($("#Mobile").val() == "") {
+            $("#Mobile").addClass('errortextfor');
+            $("#Mobile").focus();
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/User/FranchiseRequest',
+                type: 'Post',
+                dataType: 'json',
+                data: { "FirmName": $("#FirmName").val(), "Email": $("#Email").val(), "Mobile": $("#Mobile").val(), "BankName": $("#BankName").val(), "BranchName": $("#BranchName").val(), "AccountNo": $("#AccountNo").val(), "IFSCCode": $("#IFSCCode").val(), "Address": $("#Address").val() },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        $("#myModalAddFranchise").modal('show');
+                        alert('Franchise requested submited !!');
+                        window.location.reload();
+                    }
+                    else {
+                        alert(data.Result);
+                    }
+                }
+            });
+
+        }
+    }
+
+
+</script>
+<script>
+
+
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+<style>
+    .errortextfor {
+        border: 1px solid red !important;
+        /*background-color: #fff0f0 !important;*/
+    }
+</style>
+
 
 
 <!--   //  share link modal -->

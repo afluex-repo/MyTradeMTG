@@ -2846,7 +2846,6 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-
         [ActionName("SponsorIncome")]
         [OnAction(ButtonName = "btnSearch")]
         public ActionResult SponsorIncome(Admin model)
@@ -2941,8 +2940,7 @@ namespace MyTradeMTG.Controllers
         //    }
         //    return Json(model, JsonRequestBehavior.AllowGet);
         //}
-
-
+        
         public ActionResult FranchiseRequestList()
         {
             Admin model = new Admin();
@@ -2970,10 +2968,6 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-
-
-        
-      
         public ActionResult ApproveFranchiseRequest(string Id)
         {
             try
@@ -3000,10 +2994,6 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
-
-
-
-
         public ActionResult RejectFranchiseRequest(string Id)
         {
             try
@@ -3030,8 +3020,5 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
-
-
-
     }
 }
