@@ -46,7 +46,7 @@ document.write(`
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-4">
 						<div class="site-logo">
-							<a class ="navbar-logo" href="index.html"><img src="assets/img/mytrade_logoTesting.png" alt=""></a>
+							<a class ="navbar-logo" href="index.html"><img src="assets/img/mytrade_logo.png" alt=""></a>
 						</div>
 					</div><!--- END Col -->					
 					<div class="col-lg-9 col-md-9 col-sm-8">
