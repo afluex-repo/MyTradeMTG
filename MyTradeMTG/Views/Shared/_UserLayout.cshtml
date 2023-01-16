@@ -167,9 +167,6 @@
                             <div class="dashboard_bar">
                                 @*Dashboard*@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
                                 @*@if (Session["IsFranchise"].ToString() == "")
                                 {
                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
@@ -198,11 +195,11 @@
                                
                                 else if (Session["Franchisestatus"].ToString() == "Pending")
                                 {
-                                    <span class="btn btn-warning">Franchise Requested  : @Session["FirmName"]</span>
+                                    <span style="color:#4cff00">Franchise Requested  : @Session["FirmName"]</span>
                                 }
                                 else if (Session["Franchisestatus"].ToString() == "Approved")
                                 {
-                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                    <span  style="color:#4cff00">Franchise Registered : @Session["FirmName"]</span>
                                 }
                               
 
