@@ -512,7 +512,10 @@ color:#333!important;
 * 15.START PARTNER DESIGN
 * ----------------------------------------------------------------------------------------
 */
-.partner-logo {margin-right: 100px;}
+.partner-logo
+ {
+    /*margin-right: 100px;*/
+}
 .partner-bg {
 	background: #0B2E8A;
 	padding: 60px 30px;
@@ -675,6 +678,7 @@ padding:60px;
 .currency_content p {
 	margin-top: 20px;
 	margin-bottom: 30px;
+    text-align:justify;
 }
 
 .cryptonatorwidget {
