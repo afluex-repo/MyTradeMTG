@@ -124,7 +124,7 @@
             /*background-color: #05031A;*/
             border-color: #2a2833;
             /*color: #0a0917;*/
-             color: #ffffff;
+            color: #ffffff;
         }
     </style>
 
@@ -168,8 +168,47 @@
                                 @*Dashboard*@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+
+
+                                @*@if (Session["IsFranchise"].ToString() == "")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                                else if (Session["PendingStatusLogin"].ToString() == "")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                                else if (Session["IsFranchise"].ToString() == "False")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                                else if (Session["PendingStatusLogin"].ToString() == "Pending" && (Session["IsFranchise"].ToString() == "False"))
+                                {
+                                    <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
+                                }
+                                else
+                                {
+                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                }*@
+
+                                @if (Session["Franchisestatus"].ToString() == "" || Session["Franchisestatus"].ToString() == "Rejected")
+                                {
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                }
+                               
+                                else if (Session["Franchisestatus"].ToString() == "Pending")
+                                {
+                                    <span class="btn btn-warning">Franchise Requested  : @Session["FirmName"]</span>
+                                }
+                                else if (Session["Franchisestatus"].ToString() == "Approved")
+                                {
+                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                }
+                              
+
+
+
+
                             </div>
                         </div>
 
@@ -256,6 +295,7 @@
                                     <li><a href="/Wallet/AddWallet">Wallet Request</a></li>
                                     <li><a href="/Wallet/WalletList">Wallet Request List</a></li>
                                     <li><a href="/Wallet/WalletLedgerList">Wallet Ledger</a></li>
+                                    <li><a href="/User/WalletTransfer">Direct Transfer</a></li>
                                     <li><a href="/User/MTGPurchaseSell">MTG Purchase Sell</a></li>
                                 }
                             }
@@ -319,6 +359,7 @@
                             <li><a href="/user/TreeTTP"> Level Tree TTP</a></li>
                             <li><a href="/user/Tree"> Level Tree TPS</a></li>
                             <li><a href="/Downline/AssociateTree"> Direct List</a></li>
+                         
                         </ul>
                     </li>
                     <li>
@@ -416,7 +457,7 @@
 
     </div>
 
-    
+
 
     <!--**********************************
     Main wrapper end

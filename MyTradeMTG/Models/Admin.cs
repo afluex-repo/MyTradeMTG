@@ -20,7 +20,7 @@ namespace MyTradeMTG.Models
         public List<Admin> lstForUserPermission { get; set; }
         public List<Admin> lstgeneratepin { get; set; }
         public string Fk_InvestmentId { get; set; }
-      
+
         public string ePinNo { get; set; }
 
         public string RegisteredTo { get; set; }
@@ -111,7 +111,7 @@ namespace MyTradeMTG.Models
         public List<Admin> lstKycUpdate { get; set; }
         public List<Admin> lstViewLedger { get; set; }
         public List<Admin> lstPaymentMode { get; set; }
-        
+
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
@@ -165,6 +165,16 @@ namespace MyTradeMTG.Models
         public List<Admin> lstWalletLedger { get; set; }
         public HttpPostedFileBase rewardImage { get; set; }
         public List<Admin> lstSponsor { get; set; }
+
+        public List<Admin> lstFranchiseRequest { get; set; }
+
+        public string Pk_FranchiseId { get; set; }
+        public string FirmName { get; set; }
+        public string AccountNo { get; set; }
+        public string IsFranchise { get; set; }
+
+        
+
         public DataTable bonazalist { get; set; }
         #endregion
         #region PinGenerated
@@ -189,7 +199,7 @@ namespace MyTradeMTG.Models
         }
         public DataSet BindPriceByProduct()
         {
-            SqlParameter[] para = { new SqlParameter("@ProductId",Package) };
+            SqlParameter[] para = { new SqlParameter("@ProductId", Package) };
             DataSet ds = DBHelper.ExecuteQuery("GetProductList", para);
             return ds;
         }
@@ -632,10 +642,10 @@ namespace MyTradeMTG.Models
         {
             SqlParameter[] para = {
             };
-            DataSet ds = DBHelper.ExecuteQuery("GetPinsGeneratedByAdmin"); 
+            DataSet ds = DBHelper.ExecuteQuery("GetPinsGeneratedByAdmin");
             return ds;
         }
-        
+
         public DataSet GetDistributedTPSList()
         {
             SqlParameter[] para = {
@@ -699,6 +709,38 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSponsorIncomeReport", para);
             return ds;
         }
-        
+
+
+
+
+        public DataSet FranchiseRequestList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("FranchiseRequestList");
+            return ds;
+        }
+
+
+        public DataSet ApproveFranchiseRequest()
+        {
+            SqlParameter[] para = {
+                 new SqlParameter("@Pk_FranchiseId", Pk_FranchiseId),
+                   new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApproveFranchiseRequest", para);
+            return ds;
+        }
+
+
+        public DataSet RejectFranchiseRequest()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@Pk_FranchiseId", Pk_FranchiseId),
+                   new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("RejectFranchiseRequest", para);
+            return ds;
+        }
+
+
     }
 }

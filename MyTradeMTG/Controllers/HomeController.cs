@@ -39,6 +39,8 @@ namespace MyTradeMTG.Controllers
             Session.Abandon();
             return View();
         }
+
+      
         public ActionResult LoginAction(Home obj)
         {
             string FormName = "";
@@ -56,7 +58,9 @@ namespace MyTradeMTG.Controllers
                             var pass = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
-
+                                //Session["PendingStatusLogin"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
+                                Session["FirmName"] = ds.Tables[0].Rows[0]["FirmName"].ToString();
+                                Session["IsFranchise"] = ds.Tables[0].Rows[0]["IsFranchise"].ToString();
                                 Session["Country"] = ds.Tables[0].Rows[0]["Country"].ToString();
                                 Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                                 Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
@@ -72,7 +76,15 @@ namespace MyTradeMTG.Controllers
                                 Session["Bank"] = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 Session["UserActivationTopUp"] = ds.Tables[0].Rows[0]["UserActivationTopUp"].ToString();
-                                
+                                DataSet ds1 = obj.GetFranchisedetails(Session["Pk_UserId"].ToString());
+                                 if(ds1!=null && ds1.Tables[0].Rows.Count>0)
+                                {
+                                    Session["Franchisestatus"] = ds1.Tables[0].Rows[0]["Status"].ToString();
+                                }
+                                else
+                                {
+                                    Session["Franchisestatus"] = "";
+                                }
                                 if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
                                 {
                                     Session["IdActivated"] = true;
