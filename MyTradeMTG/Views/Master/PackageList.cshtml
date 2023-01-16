@@ -64,9 +64,9 @@
                                         }
                                         @if (Model.PackageTypeId == "1")
                                         {
-                                            <th>Direct Amount 1</th>
-                                            <th>Direct Amount 2</th>
-                                            <th>Direct Amount 3</th>
+                                            <th>Direct Count 1</th>
+                                            <th>Direct Count 2</th>
+                                            <th>Direct Count 3</th>
                                             <th>Return Percent 1</th>
                                             <th>Return Percent 2</th>
                                             <th>Return Percent 3</th>
@@ -119,11 +119,11 @@
                                                     <td>@Item.Status</td>
                                                     <td>@Item.SponsorIncome</td>
                                                     @*<td>@Item.IscomboPackage</td>*@
-                                                    <td>
-                                                        <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-sm">Edit</a>
-                                                        <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>
-                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=true" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to activate this Package?');" name="btnactive">Active</a>
-                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=false" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure you want to de-activate this Package?');" name="btndeactive">De-Active</a>
+                                                    <td class="d-flex">
+                                                        <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-xxs m-1">Edit</a>
+                                                        <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-xxs m-1" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=true" class="btn btn-success btn-xxs m-1" onclick="return confirm('Are you sure you want to activate this Package?');" name="btnactive">Active</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=false" class="btn btn-dark btn-xxs m-1" onclick="return confirm('Are you sure you want to de-activate this Package?');" name="btndeactive">De-Active</a>
                                                     </td>
 
                                                 </tr>
