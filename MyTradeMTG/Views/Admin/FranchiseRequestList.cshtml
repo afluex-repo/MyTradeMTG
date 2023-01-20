@@ -99,7 +99,15 @@
                                                     <td>@Item.Status</td>
                                                     @if (Item.IsFranchise=="False") 
                                                     {
-                                                        <td><a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a></td>
+                                                        <td><a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a>
+                                                    
+                                                    
+                                                    </td>
+
+
+
+                                                        
+
                                                     }
                                                     else if (Item.IsFranchise == "True")
                                                     {

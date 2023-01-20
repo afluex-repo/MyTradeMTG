@@ -318,12 +318,20 @@
             $("#divfinal").hide();
             $("#divsponsorpercent").show();
 
-            $("#divdramount1").hide();
-            $("#divdramount2").hide();
-            $("#divdramount3").hide();
-            $("#divReturnPercent1").hide();
-            $("#divReturnPercent2").hide();
-            $("#divReturnPercent3").hide();
+            //$("#divdramount1").hide();
+            //$("#divdramount2").hide();
+            //$("#divdramount3").hide();
+            //$("#divReturnPercent1").hide();
+            //$("#divReturnPercent2").hide();
+            //$("#divReturnPercent3").hide();
+
+
+            $("#divdramount1").show();
+            $("#divdramount2").show();
+            $("#divdramount3").show();
+            $("#divReturnPercent1").show();
+            $("#divReturnPercent2").show();
+            $("#divReturnPercent3").show();
         }
         else if (packagetype == 1) {
             $("#divfromamount").show();
@@ -577,12 +585,20 @@
             //$("#divisjoinpackage").hide();
             $("#divsponsorpercent").hide();
 
-            $("#divdramount1").hide();
-            $("#divdramount2").hide();
-            $("#divdramount3").hide();
-            $("#divReturnPercent1").hide();
-            $("#divReturnPercent2").hide();
-            $("#divReturnPercent3").hide();
+            //$("#divdramount1").hide();
+            //$("#divdramount2").hide();
+            //$("#divdramount3").hide();
+            //$("#divReturnPercent1").hide();
+            //$("#divReturnPercent2").hide();
+            //$("#divReturnPercent3").hide();
+
+
+            $("#divdramount1").show();
+            $("#divdramount2").show();
+            $("#divdramount3").show();
+            $("#divReturnPercent1").show();
+            $("#divReturnPercent2").show();
+            $("#divReturnPercent3").show();
         }
     }
     function isNumberKey(evt) {
@@ -686,6 +702,45 @@
             if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
                 $("#ROIPercent").addClass('errortext');
                 $('#ROIPercent').focus();
+                return false;
+            }
+
+
+
+            if ($('#dramount1').val() == '' || $('#dramount1').val() == '0') {
+                $("#dramount1").addclass('errortext');
+                $('#dramount1').focus();
+                return false;
+            }
+
+            if ($('#dramount2').val() == '' || $('#dramount2').val() == '0') {
+                $("#dramount2").addclass('errortext');
+                $('#dramount2').focus();
+                return false;
+            }
+
+            if ($('#dramount3').val() == '' || $('#dramount3').val() == '0') {
+                $("#dramount3").addclass('errortext');
+                $('#dramount3').focus();
+                return false;
+            }
+
+            if ($('#returnpercent1').val() == '' || $('#returnpercent1').val() == '0') {
+                $("#returnpercent1").addclass('errortext');
+                $('#returnpercent1').focus();
+                return false;
+            }
+
+
+            if ($('#returnpercent2').val() == '' || $('#returnpercent2').val() == '0') {
+                $("#returnpercent2").addclass('errortext');
+                $('#returnpercent2').focus();
+                return false;
+            }
+
+            if ($('#returnpercent3').val() == '' || $('#returnpercent3').val() == '0') {
+                $("#returnpercent3").addclass('errortext');
+                $('#returnpercent3').focus();
                 return false;
             }
 

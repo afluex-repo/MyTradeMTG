@@ -2183,7 +2183,92 @@ namespace MyTradeMTG.Controllers
 
         public ActionResult MTGPurchaseSell()
         {
-            return View();
+            
+            User model = new User();
+            model.AddedBy = Session["PK_UserId"].ToString();
+            DataSet ds = model.GetUserDetailsForMTGPurchaseSell();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                ViewBag.Password =Crypto.Decrypt( ds.Tables[0].Rows[0]["Password"].ToString());
+                ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+            }
+            Common objcomm = new Common();
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds1 = objcomm.GetWalletBalance();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds1.Tables[0].Rows[0]["Amount"].ToString();
+            }
+            #endregion
+
+            #region FranchisetList
+            List<User> lst = new List<User>();
+            DataSet ds2 = model.FranchiseList();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    User obj = new User();
+                    obj.Pk_FranchiseId = r["Pk_FranchiseId"].ToString();
+                    obj.FirmName = r["FirmName"].ToString();
+                    obj.CustomerId = r["CustomerAddressId"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstFranchise = lst;
+            }
+            #endregion
+
+            DataSet ds13 = objcomm.GetWalletTransferCharge();
+            if (ds13 != null && ds1.Tables.Count > 0 && ds13.Tables[0].Rows.Count > 0)
+            {
+                model.MemberTransferCharge = ds13.Tables[0].Rows[0]["MemberTransferCharge"].ToString();
+            }
+
+
+            return View(model);
+        }
+
+
+        
+
+
+        [HttpPost]
+        public ActionResult SaveMTGTransferCharge(string CustomerId, string FirmName, string MTGToken, string TransferCharge)
+        {
+            User model = new User();
+            model.CustomerId = CustomerId;
+            model.FirmName = FirmName;
+            model.MTGToken = MTGToken;
+            model.TransferCharge = TransferCharge;
+            model.AddedBy = Session["PK_UserId"].ToString();
+            DataSet ds = model.SaveMTGTransferCharge();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    model.Result = "yes";
+                    TempData["SaveMTGTransferCharge"] = "Record submited successfully !!";
+                }
+                else if(ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    model.Result = "no";
+                    TempData["SaveMTGTransferCharge"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+                else
+                {
+                    model.Result= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                model.Result= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
     }

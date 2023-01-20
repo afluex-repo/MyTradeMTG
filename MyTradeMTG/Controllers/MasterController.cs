@@ -149,6 +149,14 @@ namespace MyTradeMTG.Controllers
                     //obj.HSNCode = r["HSNCode"].ToString();
                     //obj.FinalAmount = Convert.ToDecimal(r["FinalAmount"]);
                     obj.SponsorIncome = Convert.ToDecimal(r["SponsorIncome"]);
+
+
+                    obj.DrAmount1 = Convert.ToDecimal(r["DrAmount1"]);
+                    obj.DrAmount2= Convert.ToDecimal(r["DrAmount2"]);
+                    obj.DrAmount3 = Convert.ToDecimal(r["DrAmount3"]);
+                    obj.ReturnPercent1 = Convert.ToDecimal(r["ReturnPercent1"]);
+                    obj.ReturnPercent2 = Convert.ToDecimal(r["ReturnPercent2"]);
+                    obj.ReturnPercent3 = Convert.ToDecimal(r["ReturnPercent3"]);
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
@@ -209,13 +217,13 @@ namespace MyTradeMTG.Controllers
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
                         TempData["Package"] = "Product deleted successfully";
-                        FormName = "PackageMaster";
+                        FormName = "PackageList";
                         Controller = "Master";
                     }
                     else
                     {
                         TempData["Package"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "PackageMaster";
+                        FormName = "PackageList";
                         Controller = "Master";
                     }
                 }
@@ -223,7 +231,7 @@ namespace MyTradeMTG.Controllers
             catch (Exception ex)
             {
                 TempData["Package"] = ex.Message;
-                FormName = "PackageMaster";
+                FormName = "PackageList";
                 Controller = "Master";
             }
 
