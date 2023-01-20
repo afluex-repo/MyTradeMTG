@@ -716,7 +716,7 @@ namespace MyTradeMTG.Models
         public DataSet FranchiseRequestList()
         {
            SqlParameter[] para = {
-            new SqlParameter("@Fk_UserId", Fk_UserId),
+            new SqlParameter("@Status", Status),
             };
             DataSet ds = DBHelper.ExecuteQuery("FranchiseRequestListForAdmin", para);
             return ds;
