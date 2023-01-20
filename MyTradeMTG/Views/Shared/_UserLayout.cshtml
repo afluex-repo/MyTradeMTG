@@ -197,11 +197,11 @@
                                
                                 else if (Session["Franchisestatus"].ToString() == "Pending")
                                 {
-                                    <span style="color:green;font-size:23px">Franchise Requested  : @Session["FirmName"]</span>
+                                    <span class="text-success" style="font-size:23px">Franchise Requested  : @Session["FirmName"]</span>
                                 }
                                 else if (Session["Franchisestatus"].ToString() == "Approved")
                                 {
-                                    <span style="color:green;font-size:23px">Franchise Registered : @Session["FirmName"]</span>
+                                    <span class="text-success" style="font-size:23px">Franchise Registered : @Session["FirmName"]</span>
                                 }
                               
 

@@ -227,7 +227,7 @@ namespace MyTradeMTG.Models
             SqlParameter[] para =
             {
                 new SqlParameter("@LoginId",LoginId),
-                new SqlParameter("@Email",Email)
+                new SqlParameter("@Mobile",MobileNo)
             };
             
             DataSet ds = DBHelper.ExecuteQuery("CheckLoginDetails", para);
