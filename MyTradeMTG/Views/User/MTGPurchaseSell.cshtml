@@ -14,74 +14,105 @@
 <div class="content-body">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4">
+            <div class="col-5">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">User Details</h4>
                     </div>
+                    <label id="WalletBalance" style="color:red;margin-left:30px;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
                     <div class="card-body">
                         <div class="row">
                             <div class="col d-flex justify-content-between">
-                                <h4 class="m-b-0">Address</h4>
-                                <p>jnkdf</p>
+                                <h4 class="m-b-0">Name :</h4>
+                                <p>@ViewBag.Name</p>
                             </div>
                             <div class="col d-flex justify-content-between">
-                                <h4 class="m-b-0">Email</h4>
-                                <p>user@gmail.com</p>
+                                <h4 class="m-b-0">LoginId :</h4>
+                                <p>@ViewBag.LoginId</p>
                             </div>
                             <div class="col d-flex justify-content-between">
-                                <h4 class="m-b-0">Phone No.</h4>
-                                <p>9876543210</p>
+                                <h4 class="m-b-0">Password :</h4>
+                                <p>@ViewBag.Password</p>
                             </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Franchise List</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example5" class="display">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Contact Address ID</th>
-                                            <th>Firm Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check custom-checkbox">
-                                                    <input type="radio" class="form-check-input" data-bs-toggle="modal" data-bs-target="#basicModal">
-                                                    <label class="form-check-label" for="customCheckBox2"></label>
-                                                </div>
-                                            </td>   
-                                            <td>#P-00001</td>
-                                            <td>New</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col d-flex justify-content-between">
+                                <h4 class="m-b-0">Address :</h4>
+                                <p>@ViewBag.Address</p>
+                            </div>
+                            <div class="col d-flex justify-content-between">
+                                <h4 class="m-b-0">Email :</h4>
+                                <p>@ViewBag.Email</p>
+                            </div>
+                            <div class="col d-flex justify-content-between">
+                                <h4 class="m-b-0">Mobile :</h4>
+                                <p>@ViewBag.Mobile</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Franchise List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example5" class="display">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none">Sr No</th>
+                                        <th></th>
+                                        <th>Contact Address ID</th>
+                                        <th>Firm Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        int i = 1;
+                                        if (Model.lstFranchise != null)
+                                        {
+                                            foreach (var Item in Model.lstFranchise)
+                                            {
+                                                <tr>
+                                                    <td style="display:none">@i</td>
+                                                    <td>
+                                                        <div class="form-check custom-checkbox">
+                                                            <input type="radio" class="form-check-input" data-bs-toggle="modal" data-bs-target="#basicModal" onclick="return GetFranchiseDetails(@i)">
+                                                            <label class="form-check-label" for="customCheckBox2"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td id="CustomerId_@i">@Item.CustomerId</td>
+                                                    <td id="FirmName_@i">@Item.FirmName</td>
+                                                </tr>
+                                                i++;
+                                            }
+
+
+                                        }
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--**********************************
     Content body end
 ***********************************-->
-
- <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="basicModal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add Details</h5>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                @*<span style="color:red;">@TempData["SaveMTGTransferCharge"]</span>*@
                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                     <span class="close_icon">&times;</span>
                 </button>
@@ -90,37 +121,170 @@
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1">Contact Address Id<span style="color: red">*</span></p>
-                        <input class="form-control" type="text"/>
+                        <input id="CustomerId" name="CustomerId" class="form-control" type="text" readonly="true" />
                     </div>
                 </div>
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1"> Name<span style="color: red">*</span></p>
-                        <input class="form-control" type="text" />
+                        <input id="FirmName" name="FirmName" class="form-control" type="text" readonly="true" />
                     </div>
                 </div>
                 <div class="col-xl-6 mb-3">
                     <div class="example">
+                        <input type="hidden" id="WalletAmounteee" value="@ViewBag.WalletBalance" />
                         <p class="mb-1"> MTG Token<span style="color: red">*</span></p>
-                        <input class="form-control" type="text" />
+                        <input id="MTGToken" name="MTGToken" class="form-control" type="text" onchange="return OnchangeMTGTokenGetTransferCharge()" />
                     </div>
                 </div>
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1">Transfer Charge<span style="color: red">*</span></p>
-                        <input class="form-control" type="text" />
+                        <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" />
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <input class="btn btn-success" type="submit"/>
+                    <input class="btn btn-success" type="submit" onclick="return SaveMTGTransferCharge()" />
                 </div>
             </div>
         </div>
     </div>
 </div>
+<input type="hidden" id="MemberTransferCharge" value="@Model.MemberTransferCharge" />
+<script>
+    function GetFranchiseDetails(i) {
+        debugger;
+        var CustomerId = $("#CustomerId_" + i).text();
+        var FirmName = $("#FirmName_" + i).text();
+        $("#CustomerId").val(CustomerId);
+        $("#FirmName").val(FirmName);
+    }
+
+    function OnchangeMTGTokenGetTransferCharge() {
+        debugger;
+        var WalletAmount = $("#WalletAmounteee").val();
+        var Amount = parseFloat($("#MTGToken").val());
+
+        var MemberTransferCharge = parseFloat($("#MemberTransferCharge").val());
+
+        var Percent = Amount * parseFloat(MemberTransferCharge/ 100);
+        var PercentValues = parseFloat(Percent);
+        var TotalSumValues = Amount + PercentValues;
+        //alert(sum);
+
+        var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
+        $("#TransferCharge").attr("readonly", true);
+
+        if (TotalSumValues > WalletAmount) {
+            alert("Transfer charge should be less than or equal from wallet balance.");
+            $("#MTGToken").addClass('errortext');
+            $('#MTGToken').focus();
+            $("#MTGToken").val('');
+        }
+        else if (TotalSumValues <= WalletAmount) {
+            //alert("Right h");
+        }
+        else
+        {
+            $("#MTGToken").addClass('errortext');
+            $('#MTGToken').focus();
+        }
+
+
+
+
+
+        //var WalletBalance = ($("#WalletBalance").text());
+        //var MTGToken = parseFloat($("#MTGToken").val());
+
+        //var MemberTransferCharge = parseFloat($("#MemberTransferCharge").val());
+
+        //var Percent = MTGToken * parseFloat(MemberTransferCharge / 100);
+        //var PercentValues = parseFloat(Percent);
+        //var TotalSumValues = MTGToken + PercentValues;
+
+        //var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
+        //$("#TransferCharge").attr("readonly", true);
+
+        //if (TransferCharge > WalletBalance) {
+        //    alert("Transfer charge should be less then or equal from wallet balance.");
+        //    $("#MTGToken").addClass('errortext');
+        //    $('#MTGToken').focus();
+        //    $("#MTGToken").val('');
+        //}
+        //else if (TransferCharge <= WalletBalance) {
+        //    alert("Right h");
+        //}
+
+
+    }
+
+    function SaveMTGTransferCharge() {
+        debugger;
+        var CustomerId = $("#CustomerId").val();
+        var FirmName = $("#FirmName").val();
+        var MTGToken = $("#MTGToken").val();
+        var TransferCharge = $("#TransferCharge").val();
+
+        if ($("#MTGToken").val() == "") {
+            $("#MTGToken").addClass('errortext');
+            $('#MTGToken').focus();
+            $("#MTGToken").val('');
+            return false;
+        }
+        if ($("#TransferCharge").val() == "") {
+            $("#TransferCharge").addClass('errortext');
+            $('#TransferCharge').focus();
+            $("#TransferCharge").val('');
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/User/SaveMTGTransferCharge', type: 'post', datatype: 'json',
+                data: { CustomerId: CustomerId, FirmName: FirmName, MTGToken: MTGToken, TransferCharge: TransferCharge },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Transferred  successfully !!");
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        alert("Some occured error.");
+                    }
+                    else {
+                        alert("Some occured error.");
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+<script>
+    function closeModal() {
+        jQuery.noConflict();
+        $("#basicModal").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+<style>
+    .errortexteeee {
+        border: 1px solid red !important;
+        background-color: #1b1919 !important;
+    }
+</style>
+
+
 
 <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
-   <!-- Datatable -->
+<!-- Datatable -->
 <script src="/UserPanel/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/UserPanel/js/plugins-init/datatables.init.js"></script>
 

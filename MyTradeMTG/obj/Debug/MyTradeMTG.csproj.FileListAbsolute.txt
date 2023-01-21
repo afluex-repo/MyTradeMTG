@@ -284,3 +284,4 @@ F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Propert
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
+E:\MyTradeMTGUpdatedAfterRahul\MyTradeMTG 11-03-2023\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache

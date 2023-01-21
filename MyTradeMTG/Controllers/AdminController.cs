@@ -2945,6 +2945,7 @@ namespace MyTradeMTG.Controllers
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
+            model.Fk_UserId = model.Fk_UserId == "0" ? null : model.Fk_UserId;
             DataSet ds = model.FranchiseRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -3020,5 +3021,7 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
+
+        
     }
 }

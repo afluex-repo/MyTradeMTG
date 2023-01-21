@@ -95,8 +95,15 @@ namespace MyTradeMTG.Models
                                  //new SqlParameter("@FinalAmount",FinalAmount),
                                   new SqlParameter("@ActivationMTGToken",ActivationMTGToken),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
-                                 new SqlParameter("@IscomboPackage",IscomboPackage)
-            };
+                                 new SqlParameter("@IscomboPackage",IscomboPackage),
+
+                                    new SqlParameter("@DrAmount1",DrAmount1),
+                                 new SqlParameter("@DrAmount2",DrAmount2),
+                                 new SqlParameter("@DrAmount3",DrAmount3),
+                                    new SqlParameter("@ReturnPercent1",ReturnPercent1),
+                                 new SqlParameter("@ReturnPercent2",ReturnPercent2),
+                                 new SqlParameter("@ReturnPercent3",ReturnPercent3)
+        };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
             return ds;
@@ -114,7 +121,7 @@ namespace MyTradeMTG.Models
         public DataSet GetadminDetails()
         {
             SqlParameter[] para = { new SqlParameter("@LoginId", LoginId),
-                 
+
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAdminloginid", para);
             return ds;
@@ -163,6 +170,19 @@ namespace MyTradeMTG.Models
                                  //new SqlParameter("@FinalAmount",FinalAmount),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                   new SqlParameter("@IscomboPackage",IscomboPackage),
+
+
+
+                                    new SqlParameter("@DrAmount1",DrAmount1),
+                                 new SqlParameter("@DrAmount2",DrAmount2),
+                                 new SqlParameter("@DrAmount3",DrAmount3),
+                                    new SqlParameter("@ReturnPercent1",ReturnPercent1),
+                                 new SqlParameter("@ReturnPercent2",ReturnPercent2),
+                                 new SqlParameter("@ReturnPercent3",ReturnPercent3)
+
+
+
+
             };
 
             DataSet ds = DBHelper.ExecuteQuery("UpdateProduct", para);
@@ -264,7 +284,7 @@ namespace MyTradeMTG.Models
             {
                 new SqlParameter("@Pk_RewardId",PK_RewardId)
             };
-            DataSet ds = DBHelper.ExecuteQuery("GetRewardList",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetRewardList", para);
             return ds;
         }
         public DataSet deleteReward()
