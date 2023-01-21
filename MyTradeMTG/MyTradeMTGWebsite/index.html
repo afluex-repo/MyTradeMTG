@@ -2,99 +2,6 @@
 <html lang="en">
 <head>
     <script src="assets/js/header.js"></script>
-    <style>
-   .owl-theme .owl-controls{
-	text-align: center;
-    margin-top:20px;
-}
-
-/* Styling Next and Prev buttons */
-
-.owl-theme .owl-controls .owl-buttons div{
-	color: #FFF;
-	display: inline-block;
-	zoom: 1;
-	*display: inline;/*IE7 life-saver */
-	margin: 5px;
-	padding: 3px 10px;
-	font-size: 12px;
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	border-radius: 30px;
-	background: #869791;
-	filter: Alpha(Opacity=50);/*IE7 fix*/
-	opacity: 0.5;
-}
-/* Clickable class fix problem with hover on touch devices */
-/* Use it for non-touch hover action */
-.owl-theme .owl-controls.clickable .owl-buttons div:hover{
-	filter: Alpha(Opacity=100);/*IE7 fix*/
-	opacity: 1;
-	text-decoration: none;
-}
-
-/* Styling Pagination*/
-
-.owl-theme .owl-controls .owl-page{
-	display: inline-block;
-	zoom: 1;
-	*display: inline;/*IE7 life-saver */
-}
-.owl-theme .owl-controls .owl-page span{
-	display: block;
-	width: 12px;
-	height: 12px;
-	margin: 5px 7px;
-	filter: Alpha(Opacity=50);/*IE7 fix*/
-	opacity: 0.5;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	background: #869791;
-}
-
-.owl-theme .owl-controls .owl-page.active span,
-.owl-theme .owl-controls.clickable .owl-page:hover span{
-	filter: Alpha(Opacity=100);/*IE7 fix*/
-	opacity: 1;
-}
-
-/* If PaginationNumbers is true */
-
-.owl-theme .owl-controls .owl-page span.owl-numbers{
-	height: auto;
-	width: auto;
-	color: #FFF;
-	padding: 2px 10px;
-	font-size: 12px;
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	border-radius: 30px;
-}
-
-#owl-demo .owl-item > div img {
-    display: block;
-}
-
-#owl-demo .owl-item > div{
-  text-align: center;
-  margin:3px;
-}
- 
-.owl-theme .owl-controls .owl-buttons div {
-  position: absolute;
-}
- 
-.owl-theme .owl-controls .owl-buttons .owl-prev{
-  left: -45px;
-  top: 5px; 
-}
- 
-.owl-theme .owl-controls .owl-buttons .owl-next{
-  right: -45px;
-  top: 5px;
-}
-    </style>
 </head>
 
 <body data-spy="scroll" data-offset="80">
@@ -288,7 +195,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-xs-12">
                             <div id="roadmap-slider" class="owl-carousel">
-                                <div class="timeline">
+                                <div class="timeline h-100">
                                     <div class="timeline-content">
                                         <div class="timeline-year">
                                             <span>TR-1</span>
@@ -297,16 +204,16 @@
                                             <h3 class="roadmap_title">V.I.P</h3>
                                             <h5>200%Package</h5>
                                             <p class="roadmap_description">
-                                                Min. Trade      -    $50
+                                                Min. Trade      -    50 MTG
                                             </p>
-                                            <p class="roadmap_description">Max. Trade   -  $5000</p>
+                                            <p class="roadmap_description">Max. Trade   -  5000 MTG</p>
                                             <p class="roadmap_description">Duration   - 200 Days</p>
                                             <a class="btn_one mt-4" href="#">Buy Now</a>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class="timeline">
+                                <div class="timeline h-100">
                                     <div class="timeline-content">
                                         <div class="timeline-year">
                                             <span>TR-2</span>
@@ -316,15 +223,15 @@
                                             <h3 class="roadmap_title">SMART</h3>
                                             <h5>0.5%Package</h5>
                                             <p class="roadmap_description">
-                                                Min. Trade      -    $100
+                                                Min. Trade      -    100 MTG
                                             </p>
-                                            <p class="roadmap_description">Max. Trade   -  $10000</p>
+                                            <p class="roadmap_description">Max. Trade   -  10000 MTG</p>
                                             <p class="roadmap_description">Duration   - 600 Days</p>
                                             <a class="btn_one mt-4" href="#">Buy Now</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="timeline">
+                                <div class="timeline h-100">
                                     <div class="timeline-content">
                                         <div class="timeline-year">
                                             <span>TR-2</span>
@@ -333,15 +240,15 @@
                                             <h3 class="roadmap_title">SMART PLUS</h3>
                                             <h5>1%Package</h5>
                                             <p class="roadmap_description">
-                                                Min. Trade   -  $10000
+                                                Min. Trade   -  10000 MTG
                                             </p>
-                                            <p class="roadmap_description">Max. Trade   -  $10000</p>
+                                            <p class="roadmap_description">Max. Trade   -  10000 MTG</p>
                                             <p class="roadmap_description">Duration   - 300 Days</p>
                                             <a class="btn_one mt-4" href="#">Upgrade Now</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="timeline">
+                                <div class="timeline h-100">
                                     <div class="timeline-content">
                                         <div class="timeline-year">
                                             <span>TR-2</span>
@@ -350,9 +257,9 @@
                                             <h3 class="roadmap_title">ULTRA SMART</h3>
                                             <h5>2%Package</h5>
                                             <p class="roadmap_description">
-                                                Min. Trade   -  $100
+                                                Min. Trade   -  100 MTG
                                             </p>
-                                            <p class="roadmap_description">Max. Trade   -  $10000</p>
+                                            <p class="roadmap_description">Max. Trade   -  10000 MTG</p>
                                             <p class="roadmap_description">Duration   - 100 Days</p>
                                             <a class="btn_one mt-4" href="#">Upgrade Now</a>
                                         </div>
@@ -583,15 +490,6 @@
             <!-- END CONTACT -->
 
             <script src="assets/js/footer.js"></script>
-            <script>
-                $(document).ready(function () {
-                    var carousel = $("#owl-demo");
-                    carousel.owlCarousel({
-                        navigation: true,
-                        navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-                    });
-                });
-            </script>
 </body>
 
 </html>
