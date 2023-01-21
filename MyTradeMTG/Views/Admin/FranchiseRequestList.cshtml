@@ -23,45 +23,24 @@
                     </div>
                     <div class="widget-content widget-content-area">
                         <div class="row">
-                            @*<div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Name
-                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-3">
                                 <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        Login Id
-                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        From Date
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-9">
-                                        To Date
-                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "dd/mm/yy", @readonly = true })
-                                    </div>
+                                        <label>Status</label>
+                                        <input type="hidden"  value="@Model.State" id="st" />
+                                          <select id="Status" name="Status" class="form-control">
+                                              <option value="0">-Select-</option>
+                                              <option value="Approved">Approved</option>
+                                              <option value="Rejected">Rejected</option>
+                                          </select>
                                 </div>
                             </div>
                             <div class="col-md-3" style="margin-top:25px;">
                                 <div class="form-group row">
                                     <div class="col-sm-9">
-                                        <input class="btn btn-success pull-left" type="submit" value="Get Details" id="GetDetails" name="GetDetails" />
+                                        <input class="btn btn-success pull-left" type="submit" value="Search" id="GetDetails" name="GetDetails" />
                                     </div>
                                 </div>
-                            </div>*@
+                            </div>
                             <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
                                 <thead>
                                     <tr>
@@ -99,7 +78,8 @@
                                                     <td>@Item.Status</td>
                                                     @if (Item.IsFranchise=="False") 
                                                     {
-                                                        <td><a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a></td>
+                                                        <td><a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a>                                                   
+                                                    </td>
                                                     }
                                                     else if (Item.IsFranchise == "True")
                                                     {
@@ -124,4 +104,14 @@
         </div>
     </div>
 }
+
+<script>
+
+    if ($("#st").val() != 0) {
+        $("#Status").val($("#st").val()).attr("selected", "selected");
+    }
+    //if ($("#Ste123").val() != 0) {
+    //    $("#Status").val($("#Ste123").val()).attr("selected", "selected");
+    //}
+</script>
 

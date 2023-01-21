@@ -142,9 +142,9 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/user/UserDashboard" class="brand-logo">
-                <img src="~/UserPanel/images/MtgCoinPng.png" class="img-fluid" style="width:80px;" />
+                <img src="~/UserPanel/images/logo with bg.gif" class="img-fluid" style="width:12rem" />
                 @*<img src="~/UserPanel/images/MtgCoinPng.png" class="brand-title" />*@
-                <h4 class="brand-title">My Trade</h4>
+                @*<h4 class="brand-title">My Trade</h4>*@
             </a>
 
             <div class="nav-control">
@@ -166,7 +166,6 @@
                         <div class="header-left">
                             <div class="dashboard_bar">
                                 @*Dashboard*@
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
@@ -198,16 +197,13 @@
                                
                                 else if (Session["Franchisestatus"].ToString() == "Pending")
                                 {
-                                    <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
+                                    <span class="text-success" style="font-size:23px">Franchise Requested  : @Session["FirmName"]</span>
                                 }
                                 else if (Session["Franchisestatus"].ToString() == "Approved")
                                 {
-                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                    <span class="text-success" style="font-size:23px">Franchise Registered : @Session["FirmName"]</span>
                                 }
                               
-
-
-
 
                             </div>
                         </div>

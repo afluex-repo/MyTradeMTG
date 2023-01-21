@@ -8,6 +8,7 @@
 @using (Html.BeginForm("WalletTransfer", "User", FormMethod.Post, new
 { /*@id = "form1",*/ @onSubmit = "if(!confirm('Are You Sure? You want to Transfer Your MTG Token To Below Contact Address Id')){return false;}", enctype = "multipart/form-data" }))
 {
+
     <div class="content-body">
         <div class="container-fluid">
             <div class="row">
@@ -74,8 +75,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 }
@@ -103,7 +102,7 @@
             //alert(sum);
 
             if (TotalSumValues > WalletAmount) {
-                alert("MTG Token Should be Not Greater Than MTG Wallet Balance");
+                alert("MTG Token Should not be Greater Than MTG Wallet Balance");
                 $("#Amount").addClass('errortext');
                 $('#Amount').focus();
                 $("#Amount").val('');

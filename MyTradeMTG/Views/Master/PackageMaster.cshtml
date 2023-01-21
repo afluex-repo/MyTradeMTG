@@ -63,71 +63,74 @@
                             </div>
 
                             <div class="col-md-3" id="divdramount1">
-                                <label>Direct Amount 1 <span style="color: red">*</span></label>
+                                <label>Direct Count 1 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.DrAmount1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
-
-                            <div class="col-md-3" id="divdramount2">
-                                <label>Direct Amount 2 <span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-                            <div class="col-md-3" id="divdramount3">
-                                <label>Direct Amount 3 <span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
                             <div class="col-md-3" id="divReturnPercent1">
                                 <label>Return Percentage 1 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.ReturnPercent1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
 
-                            <div class="col-md-3" id="divReturnPercent2">
-                                <label>Return Percentage 2 <span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-                            <div class="col-md-3" id="divReturnPercent3">
-                                <label>Return Percentage 3 <span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.ReturnPercent3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-
-                            <div class="col-md-3" id="divbasis" style="display:none">
-                                <div class="form-group">
-                                    <label>Basis on <span style="color: red">*</span></label>
-                                    <select name="BasisOn" id="BasisOn" class="form-control" required" style="color:#737074;">
-                                        <option value="">---Select ---</option>
-                                        <option id="opt1" value="OneTime">OneTime</option>
-                                        <option id="opt2" value="Daily">Daily</option>
-                                        <option id="opt3" value="Monthly">Monthly</option>
-                                    </select>
+                            @*<div class="row">*@
+                                <div class="col-md-3" id="divdramount2">
+                                    <label>Direct Count 2 <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                 </div>
-                            </div>
+                                <div class="col-md-3" id="divReturnPercent2">
+                                    <label>Return Percentage 2 <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
 
-                            <div class="col-md-3" id="divdays" style="display:none">
-                                <div class="form-group">
-                                    <label class="col-form-label">Return Days <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.Days, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                <div class="col-md-3" id="divdramount3">
+                                    <label>Direct Count 3 <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                 </div>
-                            </div>
-                            <div class="col-md-3" id="divsponsorpercent" style="display:none">
-                                <div class="form-group">
-                                    <label class="col-form-label">Sponsor Income  <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.SponsorIncome, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @Maxlength = "3" })
+                                <div class="col-md-3" id="divReturnPercent3">
+                                    <label>Return Percentage 3 <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ReturnPercent3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                 </div>
-                            </div>
-                            @*<div class="col-md-3">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
-                                        <div class="col-sm-9">
-                                            @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+
+                            @*</div>*@
+                                @*<div class="row">*@
+
+                                    <div class="col-md-3" id="divbasis" style="display:none">
+                                        <div class="form-group">
+                                            <label>Basis on <span style="color: red">*</span></label>
+                                            <select name="BasisOn" id="BasisOn" class="form-control" required" style="color:#737074;">
+                                                <option value="">---Select ---</option>
+                                                <option id="opt1" value="OneTime">OneTime</option>
+                                                <option id="opt2" value="Daily">Daily</option>
+                                                <option id="opt3" value="Monthly">Monthly</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>*@
+
+                                    <div class="col-md-3" id="divdays" style="display:none">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Return Days <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Days, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" id="divsponsorpercent" style="display:none">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Sponsor Income  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.SponsorIncome, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @Maxlength = "3" })
+                                        </div>
+                                    </div>
+                                @*</div>*@
 
 
-                        </div>
+                                @*<div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                    </div>
+                </div>
+            </div>*@
+
+
+                            </div>
                         <div class="row mb-2">
                             <div class="col-md-3" style="display:none" id="divfromamount">
                                 <div class="form-group">
@@ -315,12 +318,20 @@
             $("#divfinal").hide();
             $("#divsponsorpercent").show();
 
-            $("#divdramount1").hide();
-            $("#divdramount2").hide();
-            $("#divdramount3").hide();
-            $("#divReturnPercent1").hide();
-            $("#divReturnPercent2").hide();
-            $("#divReturnPercent3").hide();
+            //$("#divdramount1").hide();
+            //$("#divdramount2").hide();
+            //$("#divdramount3").hide();
+            //$("#divReturnPercent1").hide();
+            //$("#divReturnPercent2").hide();
+            //$("#divReturnPercent3").hide();
+
+
+            $("#divdramount1").show();
+            $("#divdramount2").show();
+            $("#divdramount3").show();
+            $("#divReturnPercent1").show();
+            $("#divReturnPercent2").show();
+            $("#divReturnPercent3").show();
         }
         else if (packagetype == 1) {
             $("#divfromamount").show();
@@ -504,15 +515,25 @@
             $("#divfinal").hide();
             $("#divsponsorpercent").show();
 
-            $("#divdramount1").hide();
-            $("#divdramount2").hide();
-            $("#divdramount3").hide();
-            $("#divReturnPercent1").hide();
-            $("#divReturnPercent2").hide();
-            $("#divReturnPercent3").hide();
+
+          
+            $("#divdramount1").show();
+            $("#divdramount2").show();
+            $("#divdramount3").show();
+            $("#divReturnPercent1").show();
+            $("#divReturnPercent2").show();
+            $("#divReturnPercent3").show();
+
+            //$("#divdramount1").hide();
+            //$("#divdramount2").hide();
+            //$("#divdramount3").hide();
+            //$("#divReturnPercent1").hide();
+            //$("#divReturnPercent2").hide();
+            //$("#divReturnPercent3").hide();
 
 
         }
+        //else if (packagetype == 1) {
         else if (packagetype == 1) {
             $("#divfromamount").show();
             $("#divtoamount").show();
@@ -531,12 +552,24 @@
             //$("#divisjoinpackage").show();
             $("#divsponsorpercent").show();
 
-            $("#divdramount1").show();
-            $("#divdramount2").show();
-            $("#divdramount3").show();
-            $("#divReturnPercent1").show();
-            $("#divReturnPercent2").show();
-            $("#divReturnPercent3").show();
+
+            //$("#divdramount1").show();
+            //$("#divdramount2").show();
+            //$("#divdramount3").show();
+            //$("#divReturnPercent1").show();
+            //$("#divReturnPercent2").show();
+            //$("#divReturnPercent3").show();
+
+
+            $("#divdramount1").hide();
+            $("#divdramount2").hide();
+            $("#divdramount3").hide();
+            $("#divReturnPercent1").hide();
+            $("#divReturnPercent2").hide();
+            $("#divReturnPercent3").hide();
+
+
+          
         }
         else {
             $("#divfromamount").hide();
@@ -552,12 +585,20 @@
             //$("#divisjoinpackage").hide();
             $("#divsponsorpercent").hide();
 
-            $("#divdramount1").hide();
-            $("#divdramount2").hide();
-            $("#divdramount3").hide();
-            $("#divReturnPercent1").hide();
-            $("#divReturnPercent2").hide();
-            $("#divReturnPercent3").hide();
+            //$("#divdramount1").hide();
+            //$("#divdramount2").hide();
+            //$("#divdramount3").hide();
+            //$("#divReturnPercent1").hide();
+            //$("#divReturnPercent2").hide();
+            //$("#divReturnPercent3").hide();
+
+
+            $("#divdramount1").show();
+            $("#divdramount2").show();
+            $("#divdramount3").show();
+            $("#divReturnPercent1").show();
+            $("#divReturnPercent2").show();
+            $("#divReturnPercent3").show();
         }
     }
     function isNumberKey(evt) {
@@ -664,6 +705,45 @@
                 return false;
             }
 
+
+
+            if ($('#dramount1').val() == '' || $('#dramount1').val() == '0') {
+                $("#dramount1").addclass('errortext');
+                $('#dramount1').focus();
+                return false;
+            }
+
+            if ($('#dramount2').val() == '' || $('#dramount2').val() == '0') {
+                $("#dramount2").addclass('errortext');
+                $('#dramount2').focus();
+                return false;
+            }
+
+            if ($('#dramount3').val() == '' || $('#dramount3').val() == '0') {
+                $("#dramount3").addclass('errortext');
+                $('#dramount3').focus();
+                return false;
+            }
+
+            if ($('#returnpercent1').val() == '' || $('#returnpercent1').val() == '0') {
+                $("#returnpercent1").addclass('errortext');
+                $('#returnpercent1').focus();
+                return false;
+            }
+
+
+            if ($('#returnpercent2').val() == '' || $('#returnpercent2').val() == '0') {
+                $("#returnpercent2").addclass('errortext');
+                $('#returnpercent2').focus();
+                return false;
+            }
+
+            if ($('#returnpercent3').val() == '' || $('#returnpercent3').val() == '0') {
+                $("#returnpercent3").addclass('errortext');
+                $('#returnpercent3').focus();
+                return false;
+            }
+
             if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0')  {
                 $("#BasisOn").addClass('errortext');
                 $('#BasisOn').focus();
@@ -707,42 +787,42 @@
                 return false;
             }
 
-            if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
-                $("#DrAmount1").addClass('errortext');
-                $('#DrAmount1').focus();
-                return false;
-            }
+            //if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
+            //    $("#DrAmount1").addClass('errortext');
+            //    $('#DrAmount1').focus();
+            //    return false;
+            //}
 
-            if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
-                $("#DrAmount2").addClass('errortext');
-                $('#DrAmount2').focus();
-                return false;
-            }
+            //if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
+            //    $("#DrAmount2").addClass('errortext');
+            //    $('#DrAmount2').focus();
+            //    return false;
+            //}
 
-            if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
-                $("#DrAmount3").addClass('errortext');
-                $('#DrAmount3').focus();
-                return false;
-            }
+            //if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
+            //    $("#DrAmount3").addClass('errortext');
+            //    $('#DrAmount3').focus();
+            //    return false;
+            //}
 
-            if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
-                $("#ReturnPercent1").addClass('errortext');
-                $('#ReturnPercent1').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
+            //    $("#ReturnPercent1").addClass('errortext');
+            //    $('#ReturnPercent1').focus();
+            //    return false;
+            //}
 
 
-            if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
-                $("#ReturnPercent2").addClass('errortext');
-                $('#ReturnPercent2').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
+            //    $("#ReturnPercent2").addClass('errortext');
+            //    $('#ReturnPercent2').focus();
+            //    return false;
+            //}
 
-            if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
-                $("#ReturnPercent3").addClass('errortext');
-                $('#ReturnPercent3').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
+            //    $("#ReturnPercent3").addClass('errortext');
+            //    $('#ReturnPercent3').focus();
+            //    return false;
+            //}
 
             if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
                 $("#BasisOn").addClass('errortext');

@@ -57,8 +57,12 @@ namespace MyTradeMTG.Models
         public List<User> lstBReports { get; set; }
         public List<SelectListItem> ddlProductName { get; set; }
         public List<User> lstPayoutRequest { get; set; }
+        public List<User> lstFranchise { get; set; }
+        public string Pk_FranchiseId { get; set; }
 
-
+        public string MTGToken { get; set; }
+        public string TransferCharge { get; set; }
+      
         public string Title { get; set; }
         public List<User> lstReward { get; set; }
         public string PK_RewardId { get; set; }
@@ -311,6 +315,42 @@ namespace MyTradeMTG.Models
         public string Email { get; set; }
         public string Mobile { get; set; }
 
+
+
+        public DataSet GetUserDetailsForMTGPurchaseSell()
+        {
+            SqlParameter[] para = {new SqlParameter("@Pk_userId",AddedBy)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserDetailsForMTGPurchaseSell", para);
+            return ds;
+        }
+
+
+
+        public DataSet FranchiseList()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@Fk_UserId",AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("FranchiseRequestList",para);
+            return ds;
+        }
+
+
+
+        public DataSet SaveMTGTransferCharge()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@CustomerAddressId",CustomerId),
+                                     new SqlParameter("@FirmName",FirmName),
+                                      new SqlParameter("@MTGToken",MTGToken),
+                                       new SqlParameter("@TransferCharge",TransferCharge),
+                                        new SqlParameter("@AddedBy",AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SaveMTGTransferCharge", para);
+            return ds;
+        }
     }
 
 
@@ -395,6 +435,9 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
+
+
+   
 
 
     }

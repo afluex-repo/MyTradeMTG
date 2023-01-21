@@ -227,7 +227,6 @@ E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Pro
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
-E:\MyTradeMTGUpdatedAfterRahul\MyTradeMTG 11-03-2023\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\ApplicationInsights.config
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\csc.exe
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
