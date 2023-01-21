@@ -2191,7 +2191,7 @@ namespace MyTradeMTG.Controllers
             {
                 ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
                 ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
-                ViewBag.Password =Crypto.Decrypt( ds.Tables[0].Rows[0]["Password"].ToString());
+                ViewBag.ContactAddressId = ds.Tables[0].Rows[0]["ContactAddressId"].ToString();
                 ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                 ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
@@ -2214,7 +2214,7 @@ namespace MyTradeMTG.Controllers
                 foreach (DataRow r in ds2.Tables[0].Rows)
                 {
                     User obj = new User();
-                    obj.Pk_FranchiseId = r["Pk_FranchiseId"].ToString();
+                    //obj.Pk_FranchiseId = r["Pk_FranchiseId"].ToString();
                     obj.FirmName = r["FirmName"].ToString();
                     obj.CustomerId = r["CustomerAddressId"].ToString();
                     lst.Add(obj);
