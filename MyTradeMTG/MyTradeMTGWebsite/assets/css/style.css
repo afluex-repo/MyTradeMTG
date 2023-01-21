@@ -518,7 +518,7 @@ color:#333!important;
 }
 .partner-bg {
 	background: #0B2E8A;
-	padding: 60px 30px;
+	padding: 42px 30px;
 	border-radius: 5px;
 }
 .partner-logo img{width: 130px;}
@@ -539,8 +539,9 @@ display:none !important;
 */
 .single_about {
 	background: #0B2E8A;
-	padding: 60px;
+	padding: 20px;
 	border-radius: 5px;
+    height:100%;
 	margin-top:32px;
 }
 .single_about span {
@@ -562,11 +563,11 @@ display:none !important;
 }
 .single_about h4 {
 	font-weight: 700;
-	font-size: 20px;
-	margin-bottom: 20px;
-	text-transform: capitalize;
-	margin-top:10px;
-	line-height: 30px;
+    font-size: 17px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    margin-top: 40px;
+    line-height: 30px;
 }
 .single_about p{}
 /*
@@ -1340,6 +1341,12 @@ display: inline-block;
 {
     font-weight:500;
 }
+
+.text-yellow
+{
+    color:#ffd234;
+}
+
 /*
 * ----------------------------------------------------------------------------------------
 * 16.END FOOTER DESIGN
