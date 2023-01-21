@@ -73,5 +73,29 @@ document.write(`
                 $('#modal').hide();
                 })
        </script>
+       <script>
+        $(document).ready(function () {
+                    var carousel = $("#owl-demo");
+                    carousel.owlCarousel({
+                    navigation: true,
+                    navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+                            responsive: {
+                                0: {
+                            items: 2,
+                            nav: true
+                        },
+                                600: {
+                            items: 2,
+                            nav: false
+                        },
+                                1000: {
+                            items: 5,
+                            nav: true,
+                            loop: false
+                        }
+                        }
+                });
+                });
+       </script>
 			
 `);
