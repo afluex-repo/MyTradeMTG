@@ -19,30 +19,31 @@
                     <div class="card-header">
                         <h4 class="card-title">User Details</h4>
                     </div>
-                    <label id="WalletBalance" style="color:red;margin-left:30px;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
+                    
                     <div class="card-body">
+                        <label id="WalletBalance" style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
                         <div class="row">
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Name :</h4>
                                 <p>@ViewBag.Name</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">LoginId :</h4>
                                 <p>@ViewBag.LoginId</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
-                                <h4 class="m-b-0">Password :</h4>
-                                <p>@ViewBag.Password</p>
+                            <div class="col-12 d-flex justify-content-between">
+                                <h4 class="m-b-0">Contact Address Id :</h4>
+                                <p>@ViewBag.ContactAddressId</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Address :</h4>
                                 <p>@ViewBag.Address</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Email :</h4>
                                 <p>@ViewBag.Email</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Mobile :</h4>
                                 <p>@ViewBag.Mobile</p>
                             </div>
@@ -110,7 +111,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Details</h5>
+                <h5 class="modal-title">MTG Sell</h5>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 @*<span style="color:red;">@TempData["SaveMTGTransferCharge"]</span>*@
                 <button type="button" class="btn-close" data-bs-dismiss="modal">
@@ -172,7 +173,10 @@
         var TotalSumValues = Amount + PercentValues;
         //alert(sum);
 
-        var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
+        var TransferCharge = ($("#TransferCharge").val(PercentValues));
+
+
+        //var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
         $("#TransferCharge").attr("readonly", true);
 
         if (TotalSumValues > WalletAmount) {

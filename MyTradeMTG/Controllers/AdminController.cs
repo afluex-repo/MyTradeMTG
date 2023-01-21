@@ -2940,12 +2940,11 @@ namespace MyTradeMTG.Controllers
         //    }
         //    return Json(model, JsonRequestBehavior.AllowGet);
         //}
-        
+
         public ActionResult FranchiseRequestList()
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
-            model.Fk_UserId = model.Fk_UserId == "0" ? null : model.Fk_UserId;
             DataSet ds = model.FranchiseRequestList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2969,6 +2968,38 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult FranchiseRequestList(Admin model)
+        {
+            List<Admin> lst = new List<Admin>();
+            //model.Status = model.Status == "" ? null : model.Status;
+            DataSet ds = model.FranchiseRequestList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Admin obj = new Admin();
+                    obj.Pk_FranchiseId = r["Pk_FranchiseId"].ToString();
+                    obj.FirmName = r["FirmName"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.BankName = r["BankName"].ToString();
+                    obj.BranchName = r["BranchName"].ToString();
+                    obj.AccountNo = r["AccountNo"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.Address = r["Address"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    obj.IsFranchise = r["IsFranchise"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstFranchiseRequest = lst;
+            }
+            return View(model);
+        }
+
+
+
         public ActionResult ApproveFranchiseRequest(string Id)
         {
             try
