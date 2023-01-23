@@ -50,6 +50,8 @@ namespace MyTradeMTG.Models
         public string PackageId { get; set; }
         public string PayoutBalance { get; set; }
 
+        //public string FK_UserId { get; set; }
+        public string Pk_userId { get; set; }
         public string Status { get; set; }
         public string ROIPercentage { get; set; }
 
@@ -58,7 +60,12 @@ namespace MyTradeMTG.Models
         public List<SelectListItem> ddlProductName { get; set; }
         public List<User> lstPayoutRequest { get; set; }
         public List<User> lstFranchise { get; set; }
+        public List<User> lstSalesReport { get; set; }
         public string Pk_FranchiseId { get; set; }
+        public string FranchiseContactAddressId { get; set; }
+        public string SalesDate { get; set; }
+        public string FK_FranchiseUserId { get; set; }
+
 
         public string MTGToken { get; set; }
         public string TransferCharge { get; set; }
@@ -338,6 +345,20 @@ namespace MyTradeMTG.Models
         }
 
 
+        public string Pk_FranchisetransferId { get; set; }
+
+        public DataSet SalesReport()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@Fk_UserId", Fk_UserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetSalesReportforUser", para);
+            return ds;
+        }
 
         public DataSet SaveMTGTransferCharge()
         {
@@ -346,7 +367,10 @@ namespace MyTradeMTG.Models
                                      new SqlParameter("@FirmName",FirmName),
                                       new SqlParameter("@MTGToken",MTGToken),
                                        new SqlParameter("@TransferCharge",TransferCharge),
-                                        new SqlParameter("@AddedBy",AddedBy)
+                                        new SqlParameter("@AddedBy",AddedBy),
+                                        //new SqlParameter("@AddedBy",Fk_UserId),
+                                        new SqlParameter("@FK_FranchiseUserId",FK_FranchiseUserId),
+
                                   };
             DataSet ds = DBHelper.ExecuteQuery("SaveMTGTransferCharge", para);
             return ds;

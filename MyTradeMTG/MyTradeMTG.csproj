@@ -1047,6 +1047,7 @@
     <Content Include="Views\User\MTGPurchaseSell.cshtml" />
     <Content Include="Views\User\WalletTransfer.cshtml" />
     <Content Include="Views\Admin\FranchiseRequestList.cshtml" />
+    <Content Include="Views\User\SalesReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
