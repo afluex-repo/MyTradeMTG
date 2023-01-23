@@ -279,7 +279,6 @@ F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.xml
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
-F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
