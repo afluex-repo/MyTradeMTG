@@ -2278,9 +2278,7 @@ namespace MyTradeMTG.Controllers
           
             List<User> lst = new List<User>();
             model.Fk_UserId = Session["PK_UserId"].ToString();
-            DataSet ds = model.SalesReport();
-            //model.Pk_userId = Session["PK_UserId"].ToString();
-           
+            DataSet ds = model.GetSalesReport();
             //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2308,10 +2306,10 @@ namespace MyTradeMTG.Controllers
         //public ActionResult GetSalesReports(User model)
         //{
         //    List<User> lst = new List<User>();
-        //    DataSet ds = model.SalesReport();
+        //    DataSet ds = model.GetSalesReport();
         //    //model.Pk_userId = Session["PK_UserId"].ToString();
         //    model.Fk_UserId = model.Fk_UserId == "0" ? null : model.Fk_UserId;
-       
+
         //    model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
         //    model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
         //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2333,6 +2331,31 @@ namespace MyTradeMTG.Controllers
         //    }
         //    return View(model);
         //}
+
+        public ActionResult SaleRequest(User  model)
+        {
+            List<User> lst = new List<User>();
+            model.Fk_FranchiseUserId = Session["PK_UserId"].ToString(); 
+            DataSet ds = model.GetSaleRequest();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    User obj = new User();
+
+                    obj.UserContactAddressId = r["UserContactAddress"].ToString();
+                    obj.UserName = r["Username"].ToString();
+                    obj.MTGToken = r["mtgtoken"].ToString();
+                    obj.TransferCharge = r["TransferCharge"].ToString();
+                    obj.SalesDate = r["SaleRequestDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSaleRequest = lst;
+            }
+            return View(model);
+          
+        }
 
     }
 }

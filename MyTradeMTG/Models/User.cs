@@ -61,7 +61,11 @@ namespace MyTradeMTG.Models
         public List<User> lstPayoutRequest { get; set; }
         public List<User> lstFranchise { get; set; }
         public List<User> lstSalesReport { get; set; }
+        public List<User> lstSaleRequest { get; set; }
         public string Pk_FranchiseId { get; set; }
+        public string UserName { get; set; }
+        public string UserContactAddressId { get; set; }
+        public string Fk_FranchiseUserId { get; set; }
         public string FranchiseContactAddressId { get; set; }
         public string SalesDate { get; set; }
         public string FK_FranchiseUserId { get; set; }
@@ -347,7 +351,7 @@ namespace MyTradeMTG.Models
 
         public string Pk_FranchisetransferId { get; set; }
 
-        public DataSet SalesReport()
+        public DataSet GetSalesReport()
         {
             SqlParameter[] para = {
                                     new SqlParameter("@Fk_UserId", Fk_UserId),
@@ -359,6 +363,20 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSalesReportforUser", para);
             return ds;
         }
+
+        public DataSet GetSaleRequest()
+        {
+            SqlParameter[] para = {
+                                    new SqlParameter("@Fk_FranchiseUserId", Fk_FranchiseUserId),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", ToDate)
+
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetSalesReportforFranchise", para);
+            return ds;
+        }
+
 
         public DataSet SaveMTGTransferCharge()
         {
