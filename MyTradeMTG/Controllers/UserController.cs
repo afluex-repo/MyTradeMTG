@@ -2275,7 +2275,6 @@ namespace MyTradeMTG.Controllers
 
         public ActionResult SalesReport(User model)
         {
-          
             List<User> lst = new List<User>();
             model.Fk_UserId = Session["PK_UserId"].ToString();
             DataSet ds = model.GetSalesReport();
@@ -2285,15 +2284,15 @@ namespace MyTradeMTG.Controllers
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    User obj = new User();
-                 
-                    obj.FranchiseContactAddressId = r["FranchiseeContactAddress"].ToString();
-                    obj.FirmName = r["FirmName"].ToString();
-                    obj.MTGToken = r["mtgtoken"].ToString();
-                    obj.TransferCharge = r["TransferCharge"].ToString();
-                    obj.SalesDate = r["SaleRequestDate"].ToString();
-                    obj.Status = r["Status"].ToString();
-                    lst.Add(obj);
+                    User obj1 = new User();
+                    obj1.Fk_UserId = r["Fk_UserId"].ToString();
+                    obj1.FranchiseContactAddressId = r["FranchiseeContactAddress"].ToString();
+                    obj1.FirmName = r["FirmName"].ToString();
+                    obj1.MTGToken = r["mtgtoken"].ToString();
+                    obj1.TransferCharge = r["TransferCharge"].ToString();
+                    obj1.SalesDate = r["SaleRequestDate"].ToString();
+                    obj1.Status = r["Status"].ToString();
+                    lst.Add(obj1);
                 }
                 model.lstSalesReport = lst;
             }
@@ -2334,28 +2333,120 @@ namespace MyTradeMTG.Controllers
 
         public ActionResult SaleRequest(User  model)
         {
+            #region ddlpaymentmode
+
+            int count1 = 0;
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet ds2 = model.GetPaymentMode();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+
+            #endregion
+
+            Common objcomm = new Common();
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds1 = objcomm.GetWalletBalance();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds1.Tables[0].Rows[0]["Amount"].ToString();
+            }
+            #endregion
+
             List<User> lst = new List<User>();
-            model.Fk_FranchiseUserId = Session["PK_UserId"].ToString(); 
+            model.FK_FranchiseUserId = Session["PK_UserId"].ToString(); 
             DataSet ds = model.GetSaleRequest();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     User obj = new User();
-
+                    
+                    obj.Pk_FranchisetransferId = r["pk_franchisetransferid"].ToString();
+                    obj.Fk_UserId = r["fk_userid"].ToString();
                     obj.UserContactAddressId = r["UserContactAddress"].ToString();
                     obj.UserName = r["Username"].ToString();
                     obj.MTGToken = r["mtgtoken"].ToString();
                     obj.TransferCharge = r["TransferCharge"].ToString();
                     obj.SalesDate = r["SaleRequestDate"].ToString();
                     obj.Status = r["Status"].ToString();
+
+                    obj.BankName =r["MemberBankName"].ToString();
+                    obj.BranchName = r["MemberBranch"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.AccountNo =r["MemberAccNo"].ToString();
+                    obj.UPIID = r["UPIID"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSaleRequest = lst;
             }
             return View(model);
-          
         }
 
+        [HttpPost]
+        public ActionResult ApproveSaleRequest(string MTGToken, string BankName, string BranchName, string IFSCCode, string AccountNo, string UPIID,string TransactionDate, string Transaction,String PaymentMode, string CustomerId,string Fk_UserIdddd, string UserName,string TransferCharge,string Pk_FranchisetransferId) 
+        {
+            string FormName = "";
+            string Controller = "";
+            try { 
+            User model = new User();
+            model.MTGToken = MTGToken;
+            model.BankName = BankName;
+            model.BranchName = BranchName;
+            model.IFSCCode = IFSCCode;
+            model.AccountNo = AccountNo;
+            model.UPIID = UPIID;
+            model.TransactionDate = TransactionDate;
+            model.TransactionNo = Transaction;
+            model.PaymentMode = PaymentMode;
+            model.CustomerId = CustomerId;
+            model.Fk_UserId = Fk_UserIdddd;
+            model.UserName = UserName;
+                model.Pk_FranchisetransferId = Pk_FranchisetransferId;
+                model.TransferCharge = TransferCharge;
+                model.AddedBy = Session["PK_UserId"].ToString();
+            DataSet ds = model.ApproveSaleRequest();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    TempData["msg"] = "Record submited successfully !!";
+                        FormName = "SaleRequest";
+                        Controller = "User";
+                }
+                else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "SaleRequest";
+                        Controller = "User";
+                    }
+            }
+            else
+            {
+                TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    FormName = "SaleRequest";
+                    Controller = "User";
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+                FormName = "SaleRequest";
+                Controller = "User";
+            }
+            return View(FormName, Controller);
+        }
     }
 }
