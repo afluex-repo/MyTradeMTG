@@ -3053,6 +3053,10 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
 
-        
+
+
+       
+
+
     }
 }

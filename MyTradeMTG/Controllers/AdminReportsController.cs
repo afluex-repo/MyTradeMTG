@@ -57,7 +57,7 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-        
+
         [HttpPost]
         [ActionName("AssociateList")]
         [OnAction(ButtonName = "Search")]
@@ -780,11 +780,11 @@ namespace MyTradeMTG.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["verify"] = "Profile verified successfully";
-                        string Name= ds.Tables[0].Rows[0]["Name"].ToString();
+                        string Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Status = ds.Tables[0].Rows[0]["Status"].ToString();
                         string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                         string TempId = "1707166036842875866";
-                        string str = BLSMS.KycApprovel(Name,Status);
+                        string str = BLSMS.KycApprovel(Name, Status);
                         try
                         {
                             BLSMS.SendSMS(Mobile, str, TempId);
@@ -1056,9 +1056,9 @@ namespace MyTradeMTG.Controllers
             {
                 model.Fk_UserId = AssociateID;
             }
-            else 
+            else
             {
-                
+
             }
             model.FK_RootId = FK_UserId;
             List<AssociateBooking> lst = new List<AssociateBooking>();
@@ -1216,7 +1216,7 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-         #endregion
+        #endregion
         public ActionResult TreeForAdmin(string LoginId, string Id)
         {
             Tree model = new Tree();
@@ -1386,7 +1386,7 @@ namespace MyTradeMTG.Controllers
             try
             {
                 DataSet ds = model.getJoiningPackagelist();
-                if (ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
@@ -1420,7 +1420,7 @@ namespace MyTradeMTG.Controllers
             List<AdminReports> lst = new List<AdminReports>();
             try
             {
-                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate,"dd/MM/yyyy");
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
                 model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
                 DataSet ds = model.getJoiningPackagelist();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -1451,14 +1451,14 @@ namespace MyTradeMTG.Controllers
 
         public ActionResult TDSReport()
         {
-                AdminReports model = new AdminReports();
-                List<AdminReports> lst = new List<AdminReports>();
-                DataSet ds = model.GetTdsReport();
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.GetTdsReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
-                     AdminReports obj = new AdminReports();
+                    AdminReports obj = new AdminReports();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.PanNo = r["PanNumber"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
@@ -1466,9 +1466,9 @@ namespace MyTradeMTG.Controllers
                     obj.Amount = r["tdsAmount"].ToString();
                     obj.Date = r["CurrentDate"].ToString();
                     lst.Add(obj);
-                    }
-                    model.lstTDSReport = lst;
                 }
+                model.lstTDSReport = lst;
+            }
             return View(model);
         }
 
@@ -1478,14 +1478,14 @@ namespace MyTradeMTG.Controllers
         public ActionResult GetTDSReport(AdminReports model)
         {
             List<AdminReports> lst = new List<AdminReports>();
-                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-                DataSet ds = model.GetTdsReport();
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetTdsReport();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    foreach (DataRow r in ds.Tables[0].Rows)
-                    {
-                        AdminReports obj = new AdminReports();
+                    AdminReports obj = new AdminReports();
                     obj.Mobile = r["Mobile"].ToString();
                     obj.PanNo = r["PanNumber"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
@@ -1493,9 +1493,9 @@ namespace MyTradeMTG.Controllers
                     obj.Amount = r["tdsAmount"].ToString();
                     obj.Date = r["CurrentDate"].ToString();
                     lst.Add(obj);
-                    }
-                    model.lstTDSReport = lst;
                 }
+                model.lstTDSReport = lst;
+            }
             return View(model);
         }
 
@@ -1574,18 +1574,18 @@ namespace MyTradeMTG.Controllers
 
             ViewBag.ddlReward = ddlReward;
             #endregion
-            if (BonazaId !=null && BonazaId !="")
+            if (BonazaId != null && BonazaId != "")
             {
                 model.FK_BonazaDetailsId = BonazaId;
                 DataSet bds = model.GetBonazaRewardList();
-                if (bds !=null && bds.Tables.Count>0 && bds.Tables[0].Rows.Count>0)
+                if (bds != null && bds.Tables.Count > 0 && bds.Tables[0].Rows.Count > 0)
                 {
                     model.Fk_BonazaId = bds.Tables[0].Rows[0]["Fk_BonazaRewardId"].ToString();
-                    model.Reward= bds.Tables[0].Rows[0]["Reward"].ToString();
-                    model.FK_BonazaDetailsId= bds.Tables[0].Rows[0]["Pk_BonazaDetailsId"].ToString();
-                    model.BusinessTarget= bds.Tables[0].Rows[0]["BusinessTarget"].ToString();
-                    model.RewardAmount= bds.Tables[0].Rows[0]["RewardAmount"].ToString();
-                    model.RewardImage= bds.Tables[0].Rows[0]["RewardImage"].ToString();
+                    model.Reward = bds.Tables[0].Rows[0]["Reward"].ToString();
+                    model.FK_BonazaDetailsId = bds.Tables[0].Rows[0]["Pk_BonazaDetailsId"].ToString();
+                    model.BusinessTarget = bds.Tables[0].Rows[0]["BusinessTarget"].ToString();
+                    model.RewardAmount = bds.Tables[0].Rows[0]["RewardAmount"].ToString();
+                    model.RewardImage = bds.Tables[0].Rows[0]["RewardImage"].ToString();
                 }
 
             }
@@ -1738,5 +1738,188 @@ namespace MyTradeMTG.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
+
+
+
+
+        public ActionResult SalesReportsForAdmin(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            DataSet ds = model.GetSalesReportforAdmin();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_FranchisetransferId = r["Pk_FranchisetransferId"].ToString();
+                    obj.UserContactAddress = r["UserContactAddress"].ToString();
+                    obj.UserName = r["UserName"].ToString();
+                    obj.FranchiseeContactAddress = r["FranchiseeContactAddress"].ToString();
+                    obj.FirmName = r["FirmName"].ToString();
+                    obj.mtgtoken = r["mtgtoken"].ToString();
+                    obj.TransferCharge = r["TransferCharge"].ToString();
+                    obj.SaleDate = r["SaleDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+
+                    obj.SaleRequestDate = r["SaleRequestDate"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.BankName = r["Bankname"].ToString();
+                    obj.BankBranch = r["BranchName"].ToString();
+                    obj.TransactionId = r["TransactionId"].ToString();
+                    obj.DocumentUrl = r["DocumentUrl"].ToString();
+                    obj.FranchiseApprovalRejectionDate = r["FranchiseApprovalRejectionDate"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+
+
+                    lst.Add(obj);
+                }
+                model.lstsalesreports = lst;
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ActionName("SalesReportsForAdmin")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult GetSalesReportsForAdmin(AdminReports model)
+        {
+            List<AdminReports> lst = new List<AdminReports>();
+            model.UserCA = model.UserCA == "" ? null : model.UserCA;
+            model.FranchiseeCA = model.FranchiseeCA == "" ? null : model.FranchiseeCA;
+            model.Status = model.Status == "0" ? null : model.Status;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.GetSalesReportforAdmin();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_FranchisetransferId = r["Pk_FranchisetransferId"].ToString();
+                    obj.UserContactAddress = r["UserContactAddress"].ToString();
+                    obj.UserName = r["UserName"].ToString();
+                    obj.FranchiseeContactAddress = r["FranchiseeContactAddress"].ToString();
+                    obj.FirmName = r["FirmName"].ToString();
+                    obj.mtgtoken = r["mtgtoken"].ToString();
+                    obj.TransferCharge = r["TransferCharge"].ToString();
+                    obj.SaleDate = r["SaleDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+
+                    obj.SaleRequestDate = r["SaleRequestDate"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.BankName = r["Bankname"].ToString();
+                    obj.BankBranch = r["BranchName"].ToString();
+                    obj.TransactionId = r["TransactionId"].ToString();
+                    obj.DocumentUrl = r["DocumentUrl"].ToString();
+                    obj.FranchiseApprovalRejectionDate = r["FranchiseApprovalRejectionDate"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstsalesreports = lst;
+            }
+            return View(model);
+        }
+
+
+
+        public ActionResult ViewReports(string Id)
+        {
+            AdminReports model = new AdminReports();
+            List<AdminReports> lst = new List<AdminReports>();
+            model.Pk_FranchisetransferId = Id;
+            DataSet ds = model.GetViewSalesReportforAdmin();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    AdminReports obj = new AdminReports();
+                    obj.Pk_FranchisetransferId = r["Pk_FranchisetransferId"].ToString();
+                    obj.UserContactAddress = r["UserContactAddress"].ToString();
+                    obj.UserName = r["UserName"].ToString();
+                    obj.FranchiseeContactAddress = r["FranchiseeContactAddress"].ToString();
+                    obj.FirmName = r["FirmName"].ToString();
+                    obj.SaleRequestDate = r["SaleRequestDate"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString();
+                    obj.BankName = r["Bankname"].ToString();
+                    obj.BankBranch = r["BranchName"].ToString();
+                    obj.TransactionId = r["TransactionId"].ToString();
+                    obj.DocumentUrl = r["DocumentUrl"].ToString();
+                    obj.FranchiseApprovalRejectionDate = r["FranchiseApprovalRejectionDate"].ToString();
+                    obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstsaleViewReports = lst;
+            }
+            return View(model);
+        }
+
+
+
+
+        public ActionResult ApproveRequest(string Pk_FranchitraferId,string Status)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Pk_FranchisetransferId = Pk_FranchitraferId;
+                model.Status = Status;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.ApproveRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        TempData["msgs"] = "Request approved successfully. ";
+                    }
+                    else
+                    {
+                        TempData["msgs"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msgs"] = ex.Message;
+            }
+            //return RedirectToAction("ViewReports", "AdminReports", new { Id = Id });
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RejectRequest(string Pk_FranchitraferId, string Status)
+        {
+            AdminReports model = new AdminReports();
+            try
+            {
+                model.Pk_FranchisetransferId = Pk_FranchitraferId;
+                model.Status = Status;
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.RejectRequest();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        TempData["msgs"] = "Request rejected successfully. ";
+                    }
+                    else
+                    {
+                        TempData["msgs"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msgs"] = ex.Message;
+            }
+            //return RedirectToAction("ViewReports", "AdminReports", new { Id = Id });
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }

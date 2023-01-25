@@ -1,0 +1,105 @@
+﻿@model MyTradeMTG.Models.AdminReports
+
+@{
+    ViewBag.Title = "ViewReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("ViewReports", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Sales Reports</h4>
+                                <span class="text-danger">
+                                    @TempData["msgs"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-content widget-content-area">
+                        <div class="row">
+                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>User Contact Address</th>
+                                        <th>User Name</th>
+                                        <th>Franchise Contact Address</th>
+                                        <th>Firm Name</th>
+                                        <th>Sale Request Date</th>
+                                        <th>Franchise Approval/Rejection Date</th>
+                                        <th>Payment Mode</th>
+                                        <th>Bank name</th>
+                                        <th>Branch Name</th>
+                                        <th>TransactionId</th>
+                                        <th>TransactionDate</th>
+                                        <th>Document</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstsaleViewReports != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstsaleViewReports)
+                                            {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.UserContactAddress</td>
+                                                    <td>@Item.UserName</td>
+                                                    <td>@Item.FranchiseeContactAddress</td>
+                                                    <td>@Item.FirmName</td>
+                                                    <td>@Item.SaleRequestDate</td>
+                                                    <td>@Item.FranchiseApprovalRejectionDate</td>
+                                                    <td>@Item.PaymentMode</td>
+                                                    <td>@Item.BankName</td>
+                                                    <td>@Item.BankBranch</td>
+                                                    <td>@Item.TransactionId</td>
+                                                    <td>@Item.TransactionDate</td>
+                                                    <td><img src="@Item.DocumentUrl" class="rounded-circle" height="80"/></td>
+                                                    <td>
+                                                        @if (Item.Status == "InProcess")
+                                                        {
+                                                        <a href="/AdminReports/ApproveRequest?Id=@Item.Pk_FranchisetransferId" class="btn btn-success btn-block" onclick="return confirm('Are you sure you want to approve this Request ?')">Approve</a>
+                                                        <a href="/AdminReports/RejectRequest?Id=@Item.Pk_FranchisetransferId" class="btn btn-danger btn-block" onclick="return confirm('Are you sure you want to reject this Request ?')">Reject</a>
+                                                        }
+                                                        else if (Item.Status == "Approved")
+                                                        {
+                                                           <span>Approved</span>
+                                                        }
+                                                        else if (Item.Status == "Rejected")
+                                                        {
+                                                            <span>Rejected</span>
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
