@@ -40,6 +40,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
+                                            <th style="display:none">Pk_UserId_</th>
                                             <th style="display:none">Fk_UserId_</th>
                                             <th>User Contact Address</th>
                                             <th>User Name</th>
@@ -65,13 +66,11 @@
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
-                                                        <td style="display:none" id="Pk_FranchisetransferId_@i">@Item.Fk_UserId</td>
+                                                        <td style="display:none" id="Pk_FranchisetransferId_@i">@Item.Pk_FranchisetransferId</td>
                                                         <td style="display:none" id="Fk_UserId_@i">@Item.Fk_UserId</td>
                                                         <td id="CustomerId_@i">@Item.UserContactAddressId</td>
                                                         <td id="UserName_@i">@Item.UserName</td>
                                                         <td id="MTGToken_@i">@Item.MTGToken</td>
-
-
                                                         <td style="display:none" id="BankName_@i">@Item.BankName</td>
                                                         <td style="display:none" id="BranchName_@i">@Item.BranchName</td>
                                                         <td style="display:none" id="IFSCCode_@i">@Item.IFSCCode</td>
@@ -150,19 +149,17 @@
                                                 </div>
                                                 @*-----Convert USD TO INR Link End-------*@
 
-
-
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Bank Name</label>
 
-                                                        <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control" placeholder="Bank Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Branch Name</label>
-                                                        <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control" placeholder="Branch Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -194,7 +191,7 @@
                                                 <div class="col-md-4" id="paymentmode">
                                                     <div class="example">
                                                         Payment Mode<span style="color: red">*</span>
-                                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "default-select  form-control wide", @onchange = "getpaymentdetails();" })
+                                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentdetails();", @style = "color:#828690" })
                                                     </div>
                                                 </div>
 
@@ -215,7 +212,7 @@
                                                 <div class="col-md-4" id="divtransactiono">
                                                     <div class="form-group">
                                                         <span id="lbltransaction"><span style="color: red">*</span></span>
-                                                        <input type="text" id="Trasaction" name="Trasaction" class="form-control" placeholder="Trasaction Id" />
+                                                        <input type="text" id="Transaction" name="Transaction" class="form-control" placeholder="Transaction Id" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4" id="divtransactiondate">
@@ -227,7 +224,7 @@
                                                 <div class="col-md-4" id="divDocument">
                                                     <div class="form-group">
                                                         Attach Document<span style="color: red">*</span>
-                                                        <input type="file" name="postedFile" id="documenturl" multiple="multiple" class="form-control" />
+                                                        <input type="file" name="documenturl" id="documenturl" multiple="multiple" class="form-control" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,8 +232,8 @@
                                         <div class="modal-footer">
                                             @*<button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>*@
                                             @*<button type="submit" class="btn btn-primary btn-sm" onclick="return SaveSaleRequest();">Save</button>*@
-                                            <button type="submit" id="btnapprove" name="btnapprove" class="btn btn-primary btn-sm" onclick="return validateform();">Approve</button>
-                                            <button type="submit" id="btnReject" name="btnReject" class="btn btn-danger btn-sm">Reject</button>
+                                            <button type="submit" class="btn btn-primary btn-sm" onclick="return ApproveSaleRequest();" id="btnapprove" value="Inprocess">Approve</button>
+                                            <button type="submit" id="btnReject" name="btnReject" class="btn btn-danger btn-sm" onclick="return RejectSaleRequest();" value="Reject">Reject</button>
 
                                         </div>
                                     </div>
@@ -259,6 +256,7 @@
 <script>
     function ConvertMony() {
         debugger;
+
         //if ($("#Countryid").val() == "America") {
         //    $("#divusdoller").show();
         //    $("#InUsDoller").text($("#Amount").val()+"$");
@@ -310,7 +308,6 @@
     }
 
 
-
     function GetFranchiseDetails(i) {
         debugger;
         var Fk_UserId = $("#Fk_UserId_" + i).text();
@@ -328,10 +325,10 @@
 
         $("#Fk_UserIdddd").val(Fk_UserId);
         $("#Pk_FranchisetransferId").val(Pk_FranchisetransferId);
-        
+
         $("#Amount").val(Amount);
-        $("#BankName").val(BankName);
-        $("#BranchName").val(BranchName);
+        $("#Bank_Name").val(BankName);
+        $("#Branch_Name").val(BranchName);
         $("#IFSCCode").val(IFSCCode);
         $("#AccountNo").val(AccountNo);
         $("#UPI").val(UPI);
@@ -340,13 +337,14 @@
         $("#TransferCharge").val(TransferCharge);
     }
 
-
-
 </script>
 
 <script>
     $(document).ready(function () {
-        //jQuery('#PaymentMode').val('1').hide();
+
+        "placeholder", "UPI ID"
+        jQuery('option[value="0"]').attr("Selected", "Selected");
+        jQuery('option[value="3"]').removeAttr("Selected", "Selected");
         jQuery('#PaymentMode').children('option[value="1"]').hide();
         jQuery('#PaymentMode').children('option[value="2"]').hide();
         jQuery('#PaymentMode').children('option[value="4"]').hide();
@@ -356,64 +354,28 @@
         $("#divtransactiono").hide();
         $("#divtransactiondate").hide();
         $("#divDocument").hide();
+
     });
+
 </script>
 <script>
-    function validateform() {
-        debugger;
-        $(".errortext").removeClass("errortext");
-
-        //if ($('#MTGtoken').val() == '') {
-        //    $("#MTGtoken").addClass('errortext');
-        //    $('#MTGtoken').focus();
-        //    return false;
-        //}
-        if ($('#PaymentMode').val() == '') {
-            $("#PaymentMode").addClass('errortext');
-            $('#PaymentMode').focus();
-            return false;
-        }
-        if ($('#BankName').val() == '') {
-            $("#BankName").addClass('errortext');
-            $('#BankName').focus();
-            return false;
-        }
-        if ($('#Trasaction').val() == '') {
-            $("#Trasaction").addClass('errortext');
-            $('#Trasaction').focus();
-            return false;
-        }
-        if ($('#TransactionDate').val() == '') {
-            $("#TransactionDate").addClass('errortext');
-            $('#TransactionDate').focus();
-            return false;
-        }
-
-        if ($('#documenturl').val() == '') {
-            $("#documenturl").addClass('errortext');
-            $('#documenturl').focus();
-            return false;
-        }
-        return true;
-    }
 
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
-
 
     $('#TransactionDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
 
 
-
     function getpaymentdetails() {
         debugger;
-        if ($('#PaymentMode').val() == "") {
+        if ($('#PaymentMode').val() == "0") {
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divtransactiono").hide();
@@ -421,7 +383,6 @@
             $("#divDocument").hide();
 
         }
-
 
         else if ($('#PaymentMode').val() == '3') {
             $("#divbankname").show();
@@ -467,8 +428,8 @@
             $("#BankName").attr("placeholder", "UPI ID");
         }
         else {
-            $('#Fk_BankId').attr('disabled', false);
-            $('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divtransactiono").hide();
@@ -477,13 +438,120 @@
         }
 
     }
+
+    function ApproveSaleRequest() {
+        debugger;
+
+        var PaymentMode = $("#PaymentMode").val();
+        var BankName = $("#BankName").val();
+        var BranchName = $("#BranchName").val();
+        var Transaction = $("#Transaction").val();
+        var TransactionDate = $("#TransactionDate").val();
+        var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
+        var documenturl = $("#documenturl").val();
+
+        var Status = $("#btnapprove").val();
+    
+
+  
+
+
+        if ($("#PaymentMode").val() == "0") {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            $("#PaymentMode").val('');
+            return false;
+        }
+
+        if ($("#BankName").val() == "") {
+            $("#BankName").addClass('errortext');
+            $('#BankName').focus();
+            $("#BankName").val('');
+            return false;
+        }
+
+        if ($("#BranchName").val() == "") {
+            $("#BranchName").addClass('errortext');
+            $('#BranchName').focus();
+            $("#BranchName").val('');
+            return false;
+        }
+        if ($("#Trasaction").val() == "") {
+            $("#Trasaction").addClass('errortext');
+            $('#Trasaction').focus();
+            $("#Trasaction").val('');
+            return false;
+        }
+
+        if ($("#TransactionDate").val() == "") {
+            $("#TransactionDate").addClass('errortext');
+            $('#TransactionDate').focus();
+            $("#TransactionDate").val('');
+            return false;
+        }
+
+        if ($("#documenturl").val() == "") {
+            $("#documenturl").addClass('errortext');
+            $('#documenturl').focus();
+            $("#documenturl").val('');
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
+                data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, documenturl: documenturl },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Sale Request Appproved Successfully !!");
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        alert("Some occured error.");
+                    }
+                    else {
+                        alert("Some occured error.");
+                    }
+                }
+            });
+        }
+    }
+
+    function RejectSaleRequest() {
+        debugger;
+
+        var PaymentMode = $("#PaymentMode").val();
+        var BankName = $("#BankName").val();
+        var BranchName = $("#BranchName").val();
+        var Transaction = $("#Transaction").val();
+        var TransactionDate = $("#TransactionDate").val();
+        var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
+        var documenturl = $("#documenturl").val();
+
+        var Status = 'Reject';
+
+            $.ajax({
+                url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
+                data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, documenturl: documenturl },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Sale Request Rejected Successfully !!");
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        alert("Some occured error.");
+                    }
+                    else {
+                        alert("Some occured error.");
+                    }
+                }
+            });
+        
+    }
+
+
 </script>
 
-
 <script>
-
-
-
     function onlyAlphabets(e, t) {
         try {
             if (window.event) {
@@ -502,7 +570,6 @@
             alert(err.Description);
         }
     }
-
 
     function isNumberKey(evt) {
 

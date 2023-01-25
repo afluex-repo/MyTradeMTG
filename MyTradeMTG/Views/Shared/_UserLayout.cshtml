@@ -1827,7 +1827,7 @@
                 ///////////////////////////////////////////////////////////////////////////
 
                 var chartBarRunning = function () {
-                    debugger;
+                    //debugger;
                     $.ajax({
                         url: "/User/GetchartBarRunning",
                         type: "GET",
@@ -1835,7 +1835,7 @@
                         data: JSON.stringify(),
                         contentType: 'application/json;',
                         success: function (d) {
-                            debugger;
+                              //debugger;
                             var PaidCramount = [];
                             var PaidDramount = [];
                             var AllYear = [];
@@ -1846,12 +1846,12 @@
                                 PaidDramount.push(t[i].Dramount);
                             }
 
-                            debugger;
+                              //debugger;
                             let x = AllYear;
                             let yb = PaidCramount;
                             let ys = PaidDramount;
 
-                            debugger;
+                              //debugger;
                             var chartBarRunningOptions = {
                                 series: [{
                                     name: 'Buy',
@@ -2425,7 +2425,7 @@
 
                 var lineChart = function () {
 
-                    debugger;
+                      //debugger;
                     $.ajax({
                         url: "/User/GetlineChart",
                         type: "GET",
@@ -2433,7 +2433,7 @@
                         data: JSON.stringify(),
                         contentType: 'application/json;',
                         success: function (d) {
-                            debugger;
+                              //debugger;
                             var TotalBusiness = [];
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
@@ -2442,10 +2442,10 @@
                                 TotalBusiness.push(t[i].TotalBusiness);
                             }
 
-                            debugger;
+                              //debugger;
                             let x = AllYear;
                             let y = TotalBusiness;
-                            debugger;
+                              //debugger;
                             var options = {
                                 series: [{
                                     name: 'series1',
