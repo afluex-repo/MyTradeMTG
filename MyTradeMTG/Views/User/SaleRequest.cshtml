@@ -40,6 +40,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
+                                            <th style="display:none">Pk_UserId_</th>
                                             <th style="display:none">Fk_UserId_</th>
                                             <th>User Contact Address</th>
                                             <th>User Name</th>
@@ -65,13 +66,11 @@
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
-                                                        <td style="display:none" id="Pk_FranchisetransferId_@i">@Item.Fk_UserId</td>
+                                                        <td style="display:none" id="Pk_FranchisetransferId_@i">@Item.Pk_FranchisetransferId</td>
                                                         <td style="display:none" id="Fk_UserId_@i">@Item.Fk_UserId</td>
                                                         <td id="CustomerId_@i">@Item.UserContactAddressId</td>
                                                         <td id="UserName_@i">@Item.UserName</td>
                                                         <td id="MTGToken_@i">@Item.MTGToken</td>
-
-
                                                         <td style="display:none" id="BankName_@i">@Item.BankName</td>
                                                         <td style="display:none" id="BranchName_@i">@Item.BranchName</td>
                                                         <td style="display:none" id="IFSCCode_@i">@Item.IFSCCode</td>
@@ -156,13 +155,13 @@
                                                     <div class="form-group">
                                                         <label>Bank Name</label>
 
-                                                        <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control" placeholder="Bank Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Branch Name</label>
-                                                        <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control" placeholder="Branch Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -259,6 +258,7 @@
 <script>
     function ConvertMony() {
         debugger;
+
         //if ($("#Countryid").val() == "America") {
         //    $("#divusdoller").show();
         //    $("#InUsDoller").text($("#Amount").val()+"$");
@@ -310,7 +310,6 @@
     }
 
 
-
     function GetFranchiseDetails(i) {
         debugger;
         var Fk_UserId = $("#Fk_UserId_" + i).text();
@@ -330,8 +329,8 @@
         $("#Pk_FranchisetransferId").val(Pk_FranchisetransferId);
         
         $("#Amount").val(Amount);
-        $("#BankName").val(BankName);
-        $("#BranchName").val(BranchName);
+        $("#Bank_Name").val(BankName);
+        $("#Branch_Name").val(BranchName);
         $("#IFSCCode").val(IFSCCode);
         $("#AccountNo").val(AccountNo);
         $("#UPI").val(UPI);
@@ -339,8 +338,6 @@
         $("#UserName").val(UserName);
         $("#TransferCharge").val(TransferCharge);
     }
-
-
 
 </script>
 
@@ -356,7 +353,9 @@
         $("#divtransactiono").hide();
         $("#divtransactiondate").hide();
         $("#divDocument").hide();
+        
     });
+
 </script>
 <script>
     function validateform() {
@@ -376,6 +375,11 @@
         if ($('#BankName').val() == '') {
             $("#BankName").addClass('errortext');
             $('#BankName').focus();
+            return false;
+        }
+        if ($('#BranchName').val() == '') {
+            $("#BranchName").addClass('errortext');
+            $('#BranchName').focus();
             return false;
         }
         if ($('#Trasaction').val() == '') {
@@ -400,20 +404,19 @@
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
-
 
     $('#TransactionDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
 
 
-
     function getpaymentdetails() {
         debugger;
-        if ($('#PaymentMode').val() == "") {
+        if ($('#PaymentMode').val() == "0") {
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divtransactiono").hide();
@@ -421,7 +424,6 @@
             $("#divDocument").hide();
 
         }
-
 
         else if ($('#PaymentMode').val() == '3') {
             $("#divbankname").show();
@@ -467,8 +469,8 @@
             $("#BankName").attr("placeholder", "UPI ID");
         }
         else {
-            $('#Fk_BankId').attr('disabled', false);
-            $('#Fk_BankId').val('0');
+            //$('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
             $("#divbankname").hide();
             $("#divbankbranch").hide();
             $("#divtransactiono").hide();
@@ -479,11 +481,7 @@
     }
 </script>
 
-
 <script>
-
-
-
     function onlyAlphabets(e, t) {
         try {
             if (window.event) {
@@ -502,7 +500,6 @@
             alert(err.Description);
         }
     }
-
 
     function isNumberKey(evt) {
 
