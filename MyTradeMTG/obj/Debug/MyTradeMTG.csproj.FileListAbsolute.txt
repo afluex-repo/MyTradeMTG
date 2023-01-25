@@ -222,7 +222,6 @@ E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.xml
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
-E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
@@ -280,7 +279,6 @@ F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.xml
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
-F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 F:\Rahul Prajapati\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
@@ -342,7 +340,7 @@ E:\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.R
 E:\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 E:\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 E:\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
-E:\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
+E:\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\bin\ApplicationInsights.config
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\bin\roslyn\csc.exe
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -400,4 +398,3 @@ E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.P
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
-E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache

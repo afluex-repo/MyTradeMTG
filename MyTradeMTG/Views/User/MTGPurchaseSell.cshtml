@@ -19,30 +19,31 @@
                     <div class="card-header">
                         <h4 class="card-title">User Details</h4>
                     </div>
-                    <label id="WalletBalance" style="color:red;margin-left:30px;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
+                    
                     <div class="card-body">
+                        <label id="WalletBalance" style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
                         <div class="row">
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Name :</h4>
                                 <p>@ViewBag.Name</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">LoginId :</h4>
                                 <p>@ViewBag.LoginId</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
-                                <h4 class="m-b-0">Contact AddressId :</h4>
+                            <div class="col-12 d-flex justify-content-between">
+                                <h4 class="m-b-0">Contact Address Id :</h4>
                                 <p>@ViewBag.ContactAddressId</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Address :</h4>
                                 <p>@ViewBag.Address</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Email :</h4>
                                 <p>@ViewBag.Email</p>
                             </div>
-                            <div class="col d-flex justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
                                 <h4 class="m-b-0">Mobile :</h4>
                                 <p>@ViewBag.Mobile</p>
                             </div>
@@ -62,6 +63,7 @@
                                     <tr>
                                         <th style="display:none">Sr No</th>
                                         <th></th>
+                                        <th style="display:none" >Fk_UserId_</th>
                                         <th>Contact Address ID</th>
                                         <th>Firm Name</th>
                                     </tr>
@@ -82,6 +84,10 @@
                                                             <label class="form-check-label" for="customCheckBox2"></label>
                                                         </div>
                                                     </td>
+
+
+
+                                                    <td style="display:none" id="Fk_UserId_@i">@Item.Fk_UserId</td>
                                                     <td id="CustomerId_@i">@Item.CustomerId</td>
                                                     <td id="FirmName_@i">@Item.FirmName</td>
                                                 </tr>
@@ -117,10 +123,18 @@
                     <span class="close_icon">&times;</span>
                 </button>
             </div>
+                <div class="modal-header">
+                    <label id="WalletBalance" style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
+
+                    <input id="Fk_UserIdddd" name="Fk_UserIdddd" class="form-control" type="text" style="display:none" />
+
+
+                </div>
             <div class="modal-body row">
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1">Contact Address Id<span style="color: red">*</span></p>
+                        
                         <input id="CustomerId" name="CustomerId" class="form-control" type="text" readonly="true" />
                     </div>
                 </div>
@@ -140,7 +154,7 @@
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1">Transfer Charge<span style="color: red">*</span></p>
-                        <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" />
+                        <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" readonly />
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -154,8 +168,13 @@
 <script>
     function GetFranchiseDetails(i) {
         debugger;
+
+        
+        var Fk_UserId = $("#Fk_UserId_" + i).text();
         var CustomerId = $("#CustomerId_" + i).text();
         var FirmName = $("#FirmName_" + i).text();
+
+        $("#Fk_UserIdddd").val(Fk_UserId);
         $("#CustomerId").val(CustomerId);
         $("#FirmName").val(FirmName);
     }
@@ -224,6 +243,8 @@
 
     function SaveMTGTransferCharge() {
         debugger;
+
+        var Fk_UserId = $("#Fk_UserIdddd").val();
         var CustomerId = $("#CustomerId").val();
         var FirmName = $("#FirmName").val();
         var MTGToken = $("#MTGToken").val();
@@ -244,7 +265,7 @@
         else {
             $.ajax({
                 url: '/User/SaveMTGTransferCharge', type: 'post', datatype: 'json',
-                data: { CustomerId: CustomerId, FirmName: FirmName, MTGToken: MTGToken, TransferCharge: TransferCharge },
+                data: { CustomerId: CustomerId, FirmName: FirmName, MTGToken: MTGToken, TransferCharge: TransferCharge,Fk_UserId: Fk_UserId },
                 success: function (data) {
                     if (data.Result == "yes") {
                         alert("Transferred  successfully !!");
