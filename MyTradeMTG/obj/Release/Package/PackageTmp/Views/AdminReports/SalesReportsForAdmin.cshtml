@@ -13,88 +13,6 @@
     }
 </style>
 
-    <style>
-
-        header /* delet it */
-{
-    height:100vh;
-    background-color:#444444;
-    font-family:roboto;
-}
-
-#demo h1 /* delet it */
-{
-    text-align:center;
-    color:#888;
-    padding-bottom:5px;
-}
-
-#demo p /* delet it */
-{
-    text-align:center;
-    color:#777;
-    padding-bottom:15px;
-    font-size:21px;
-    letter-spacing:1px;
-}
-
-#demo .row /* delet it */
-{
-    padding-top:20vh;
-    padding-bottom:40px;
-}
-
-#demo img
-{
-    box-shadow:1px 1px 5px #000;
-    max-height:15em; /* delet it */
-}
-
-#demo img:hover
-{
-    transition:all 0.6s; /* Change Speed */
-    -ms-transform: scale(2, 2); /* IE 9 */
-    -webkit-transform: scale(2, 2); /* Safari */
-    transform: scale(2, 2); /* Change Size */
-    overflow:visible;
-    z-index:1 !important; /* you can change it, but better let this in default */
-}
-
-
-#demo .item-1:hover
-{
-    -ms-transform: translate(100px); /* IE 9 */
-    -webkit-transform: translate(100px); /* Safari */
-    transform: translate(100px); /* Change Offset */
-    z-index:2; /* you can change it, but better let this in default */
-}
-
-#demo .item-2:hover
-{
-    z-index:2; /* you can change it, but better let this in default */
-}
-
-#demo .item-3:hover
-{
-    -ms-transform: translate(-100); /* IE 9 */
-    -webkit-transform: translate(-100px); /* Safari */
-    transform: translate(-100px); /* Change Offset */
-    z-index:2; /* you can change it, but better let this in default */
-}
-
-
-.modal:nth-of-type(even) {
-    z-index: 1052 !important;
-}
-
-
-    </style>
-
-
-
-
-
-
 @using (Html.BeginForm("SalesReportsForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container">
@@ -222,8 +140,7 @@
                                                         @if (Item.Status == "InProcess")
                                                         {
                                                             @*<a href="/AdminReports/ViewReports?Id=@Item.Pk_FranchisetransferId" class="btn btn-success btn-block py-0 px-0">View</a>*@
-                                                            @*<a href="javascript:void(0)" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)" class="btn btn-success btn-block py-2 px-0">View</a>*@
-                                                            <a data-toggle="modal" href="#myModalApproRejectFranchise" class="btn btn-success btn-block py-2 px-0" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)">View</a>
+                                                            <a href="javascript:void(0)" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)" class="btn btn-success btn-block py-0 px-0">View</a>
                                                         }
                                                     </td>
                                                 </tr>
@@ -245,15 +162,12 @@
     @*------------------------ApproReject PopUp Start----------------------------------------------------*@
 
     <div class="modal fade md" id="myModalApproRejectFranchise" role="dialog" style="display: none;padding-top:100px;">
-        <div class="modal-dialog modal-lg" role="document">
-
-            @*<div class="modal-dialog modal-lg" role="document">*@
-                @*<div class="modal-content" style="width:150%">*@
-            <div class="modal-content">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:150%">
                 <div class="modal-header">
                     @*<h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>*@
                     &nbsp;&nbsp;&nbsp;<span style="color:red;">@TempData["msgs"]</span>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -329,29 +243,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <h6>Document</h6>
-                                @*<img id="imgCategory" height="80" class="rounded-circle"/>*@
-                                @*/////////////////statrt////////////////////*@
-                                <a href="javascript:void(0)" onclick="return ViewzoomImage()">
-                                    <img id="imgCategory" class="rounded-circle" height="80" />
-                                </a>
-                                <!-- Creates the bootstrap modal where the image will appear -->
-                                <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <button type="button" onclick="return close_modal()" id="modal2" class="close"><span aria-hidden="true">&times;</span></button>
-                                            @*<h4 class="modal-title" id="myModalLabel">Image preview</h4>*@
-                                        </div>
-                                            <div class="modal-body py-0 px-0 h-100" style="min-height:500px">
-                                                <img src="" id="imagepreview" style="min-height:500px;width:100%">
-                                            </div>
-                                            @*<div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>*@
-                                        </div>
-                                    </div>
-                                </div>
-                                @*/////////////////////end////////////////*@
+                                @*<label id="DocumentUrl"></label>*@
+                                <img id="DocumentUrl" src=""  />
                             </div>
                         </div>
                     </div>
@@ -361,14 +254,12 @@
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return RejectRequest();">Reject</button>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
+
+
     @*------------------------ApproReject PopUp end----------------------------------------------------*@
 
-
-    <!----- modal  -->
-
-    
 
 
 }
@@ -379,23 +270,7 @@
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
 
 <script>
-    
-    function close_modal()
-    {
-        $('#imagemodal').modal('hide');
-    }
-
-    function ViewzoomImage()
-    {
-        debugger;
-        $('#imagepreview').attr('src', $('#imgCategory').attr('src')); // here asign the image to the modal when the user click the enlarge link
-        $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
-    }
-</script>
-<script>
-
     $(document).ready(function () {
-       
 
         if ($("#hdf").val() != 0) {
             $("#Status").val($("#hdf").val()).attr("selected", "selected");
@@ -427,7 +302,10 @@
         var TransactionId_ = $("#TransactionId_" + Id).text();
         var TransactionDate_ = $("#TransactionDate_" + Id).text();
         var Status_ = $("#Status_" + Id).text();
+
+        //var DocumentUrl_ = $("#DocumentUrl_" + Id).text();
         var DocumentUrl_ = $('#DocumentUrl_' + Id).prop('src');
+        //alert(DocumentUrl_)
 
         var Pk_FranchitraferId = $("#Pk_FranchitraferId").text(Pk_FranchisetransferId_);
         $("#UserContactAddress").text(UserContactAddress_);
@@ -442,15 +320,23 @@
         $("#TransactionId").text(TransactionId_);
         $("#TransactionDate").text(TransactionDate_);
         $("#Statuss").text(Status_);
-        $('#myModalApproRejectFranchise').find('[id*=imgCategory]').attr('src', '');
-        $('#myModalApproRejectFranchise').find('[id*=imgCategory]').attr('src', DocumentUrl_);
+
+        //var Image = $("DocumentUrl").text(DocumentUrl_);
+
+        $("#DocumentUrl").attr("src", $("#DocumentUrl").attr("src").replace(DocumentUrl_, ""));
+
+        
         jQuery.noConflict();
         $("#myModalApproRejectFranchise").modal('show');
     }
     function closeModal() {
         jQuery.noConflict();
         $("#myModalApproRejectFranchise").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
+
+
+
     function ApproveRequest(Pk_FranchitraferId) {
         debugger;
         var Pk_FranchitraferId = $('#Pk_FranchitraferId').text();
@@ -466,9 +352,12 @@
                         alert("Request approved successfully. ");
                     }
                 }
+
             });
         }
     }
+
+
     function RejectRequest(Pk_FranchitraferId) {
         debugger;
         var Pk_FranchitraferId = $('#Pk_FranchitraferId').text();
@@ -484,7 +373,14 @@
                         alert("Request rejected successfully. ");
                     }
                 }
+
             });
         }
+
     }
+
+
+
+
+
 </script>

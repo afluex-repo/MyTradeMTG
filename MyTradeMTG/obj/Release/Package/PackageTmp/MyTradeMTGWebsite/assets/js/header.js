@@ -17,7 +17,7 @@ document.write(`
 		<link rel="stylesheet" href="assets/fonts/themify-icons.css">
 		<!--- owl carousel Css-->
 		<link rel="stylesheet" href="assets/owlcarousel/css/owl.carousel.css">
-		<link rel="stylesheet" href="assets/owlcarousel/css/owl.theme.css">
+		
 		<!--slicknav Css-->
         <link rel="stylesheet" href="assets/css/slicknav.css">		
 		<!-- animate CSS -->
