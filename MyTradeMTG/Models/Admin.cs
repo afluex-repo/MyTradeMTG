@@ -167,7 +167,8 @@ namespace MyTradeMTG.Models
         public List<Admin> lstSponsor { get; set; }
 
         public List<Admin> lstFranchiseRequest { get; set; }
-
+       
+        
         public string Pk_FranchiseId { get; set; }
         public string FirmName { get; set; }
         public string AccountNo { get; set; }
