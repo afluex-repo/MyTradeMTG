@@ -2398,10 +2398,9 @@ namespace MyTradeMTG.Controllers
         }
 
         [HttpPost]
-        public ActionResult ApproveSaleRequest(User model, string BankName, string BranchName,string UPIID, string TransactionDate, string Transaction, String PaymentMode, string CustomerId, string Fk_UserIdddd, string UserName,string Pk_FranchisetransferId,String Status,string documenturl)
+        public ActionResult ApproveSaleRequest(string BankName, string BranchName,string UPIID, string TransactionDate, string Transaction, String PaymentMode, string CustomerId, string Fk_UserIdddd, string UserName,string Pk_FranchisetransferId,String Status,string documenturl)
         {
-            string FormName = "";
-            string Controller = "";
+            User model = new User();
             try
             {
                 model.BankName = BankName;
@@ -2413,7 +2412,6 @@ namespace MyTradeMTG.Controllers
                 model.AddedBy = Session["PK_UserId"].ToString();
                 model.Status = Status;
                 model.Documenturl = documenturl;
-
                 DataSet ds = model.ApproveSaleRequest();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -2421,31 +2419,25 @@ namespace MyTradeMTG.Controllers
                     {
                         model.Result = "yes";
                         TempData["msg"] = "Record submited successfully !!";
-                        FormName = "SaleRequest";
-                        Controller = "User";
+
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
                         model.Result = "no";
                         TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "SaleRequest";
-                        Controller = "User";
                     }
                 }
                 else
                 {
                     TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    FormName = "SaleRequest";
-                    Controller = "User";
                 }
             }
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
-                FormName = "SaleRequest";
-                Controller = "User";
+                
             }
-            return Json(FormName, Controller, JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }
