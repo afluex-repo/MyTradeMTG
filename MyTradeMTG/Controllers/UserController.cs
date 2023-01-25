@@ -2414,9 +2414,9 @@ namespace MyTradeMTG.Controllers
             model.CustomerId = CustomerId;
             model.Fk_UserId = Fk_UserIdddd;
             model.UserName = UserName;
-                model.Pk_FranchisetransferId = Pk_FranchisetransferId;
-                model.TransferCharge = TransferCharge;
-                model.AddedBy = Session["PK_UserId"].ToString();
+            model.Pk_FranchisetransferId = Pk_FranchisetransferId;
+            model.TransferCharge = TransferCharge;
+            model.AddedBy = Session["PK_UserId"].ToString();
             DataSet ds = model.ApproveSaleRequest();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
