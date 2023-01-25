@@ -15,11 +15,11 @@
 
 @using (Html.BeginForm("SalesReportsForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
+    <div class="container-fluid">
         <div class="row layout-top-spacing">
             <div class="col-lg-12 col-12 layout-spacing">
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
+                <div class="card">
+                    <div class="card-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Sales Reports</h4>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="widget-content widget-content-area">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     @*<input type="hidden" id="hdf" value="@Model.Status" />*@
-                                    <select id="Status" name="Status" class="form-control">
+                                    <select id="Status" name="Status" class="default-select  form-control">
                                         <option value="0">-Select-</option>
                                         <option value="InProcess">InProcess</option>
                                         <option value="Pending">Pending</option>
@@ -76,80 +76,84 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
-                                <thead>
-                                    <tr>
-                                        <th>Sr No.</th>
-                                        <th>User Contact Address</th>
-                                        <th>User Name</th>
-                                        <th>Franchise Contact Address</th>
-                                        <th>Firm Name</th>
-                                        <th>MTG Token</th>
-                                        <th>Transfer Charge</th>
-                                        <th>Sale Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
+                            <div class="table-responsive">
+                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>User Contact Address</th>
+                                            <th>User Name</th>
+                                            <th>Franchise Contact Address</th>
+                                            <th>Firm Name</th>
+                                            <th>MTG Token</th>
+                                            <th>Transfer Charge</th>
+                                            <th>Sale Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
                                         if (Model.lstsalesreports != null)
                                         {
-                                            int i = 1;
-                                            foreach (var Item in Model.lstsalesreports)
-                                            {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstsalesreports)
+                                        {
 
-                                                @*<div class="img1">
-                                                        <img src="@Item.DocumentUrl" height="100" />
-                                                    </div>*@
-
-
-
-
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td id="UserContactAddress_@Item.Pk_FranchisetransferId">@Item.UserContactAddress</td>
-                                                    <td id="UserName_@Item.Pk_FranchisetransferId">@Item.UserName</td>
-                                                    <td id="FranchiseeContactAddress_@Item.Pk_FranchisetransferId">@Item.FranchiseeContactAddress</td>
-                                                    <td id="FirmName_@Item.Pk_FranchisetransferId">@Item.FirmName</td>
-                                                    <td>@Item.mtgtoken</td>
-                                                    <td>@Item.TransferCharge</td>
-                                                    <td>@Item.SaleDate</td>
-                                                    <td id="Status_@Item.Pk_FranchisetransferId">@Item.Status</td>
-
-
-                                                    <td style="display:none" id="Pk_FranchisetransferId_@Item.Pk_FranchisetransferId">@Item.Pk_FranchisetransferId</td>
-                                                    <td style="display:none" id="SaleRequestDate_@Item.Pk_FranchisetransferId">@Item.SaleRequestDate</td>
-                                                    <td style="display:none" id="FranchiseApprovalRejectionDate_@Item.Pk_FranchisetransferId">@Item.FranchiseApprovalRejectionDate</td>
-                                                    <td style="display:none" id="PaymentMode_@Item.Pk_FranchisetransferId">@Item.PaymentMode</td>
-                                                    <td style="display:none" id="BankName_@Item.Pk_FranchisetransferId">@Item.BankName</td>
-                                                    <td style="display:none" id="BankBranch_@Item.Pk_FranchisetransferId">@Item.BankBranch</td>
-                                                    <td style="display:none" id="TransactionId_@Item.Pk_FranchisetransferId">@Item.TransactionId</td>
-                                                    <td style="display:none" id="TransactionDate_@Item.Pk_FranchisetransferId">@Item.TransactionDate</td>
-                                                    @*<td style="display:none" id="DocumentUrl_@Item.Pk_FranchisetransferId"><img src="@Item.DocumentUrl" height="100" /></td>*@
-
-
-
-                                                    <td style="display:none"><img src="@Item.DocumentUrl" class="preview" id="DocumentUrl_@Item.Pk_FranchisetransferId" height="100" /></td>
+                                        @*
+                                        <div class="img1">
+                                            <img src="@Item.DocumentUrl" height="100" />
+                                        </div>*@
 
 
 
 
-                                                    <td>
-                                                        @if (Item.Status == "InProcess")
-                                                        {
-                                                            @*<a href="/AdminReports/ViewReports?Id=@Item.Pk_FranchisetransferId" class="btn btn-success btn-block py-0 px-0">View</a>*@
-                                                            <a href="javascript:void(0)" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)" class="btn btn-success btn-block py-0 px-0">View</a>
-                                                        }
-                                                    </td>
-                                                </tr>
-                                                i++;
-                                            }
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td id="UserContactAddress_@Item.Pk_FranchisetransferId">@Item.UserContactAddress</td>
+                                            <td id="UserName_@Item.Pk_FranchisetransferId">@Item.UserName</td>
+                                            <td id="FranchiseeContactAddress_@Item.Pk_FranchisetransferId">@Item.FranchiseeContactAddress</td>
+                                            <td id="FirmName_@Item.Pk_FranchisetransferId">@Item.FirmName</td>
+                                            <td>@Item.mtgtoken</td>
+                                            <td>@Item.TransferCharge</td>
+                                            <td>@Item.SaleDate</td>
+                                            <td id="Status_@Item.Pk_FranchisetransferId">@Item.Status</td>
+
+
+                                            <td style="display:none" id="Pk_FranchisetransferId_@Item.Pk_FranchisetransferId">@Item.Pk_FranchisetransferId</td>
+                                            <td style="display:none" id="SaleRequestDate_@Item.Pk_FranchisetransferId">@Item.SaleRequestDate</td>
+                                            <td style="display:none" id="FranchiseApprovalRejectionDate_@Item.Pk_FranchisetransferId">@Item.FranchiseApprovalRejectionDate</td>
+                                            <td style="display:none" id="PaymentMode_@Item.Pk_FranchisetransferId">@Item.PaymentMode</td>
+                                            <td style="display:none" id="BankName_@Item.Pk_FranchisetransferId">@Item.BankName</td>
+                                            <td style="display:none" id="BankBranch_@Item.Pk_FranchisetransferId">@Item.BankBranch</td>
+                                            <td style="display:none" id="TransactionId_@Item.Pk_FranchisetransferId">@Item.TransactionId</td>
+                                            <td style="display:none" id="TransactionDate_@Item.Pk_FranchisetransferId">@Item.TransactionDate</td>
+                                            @*
+                                            <td style="display:none" id="DocumentUrl_@Item.Pk_FranchisetransferId"><img src="@Item.DocumentUrl" height="100" /></td>*@
+
+
+
+                                            <td style="display:none"><img src="@Item.DocumentUrl" class="preview" id="DocumentUrl_@Item.Pk_FranchisetransferId" height="100" /></td>
+
+
+
+
+                                            <td>
+                                                @if (Item.Status == "InProcess")
+                                                {
+                                                @*<a href="/AdminReports/ViewReports?Id=@Item.Pk_FranchisetransferId" class="btn btn-success btn-block py-0 px-0">View</a>*@
+                                                <a href="javascript:void(0)" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)" class="btn btn-success btn-block py-0 px-0">View</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        i++;
                                         }
-                                    }
-                                </tbody>
-                            </table>
+                                        }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
