@@ -1760,7 +1760,6 @@ namespace MyTradeMTG.Controllers
                     obj.TransferCharge = r["TransferCharge"].ToString();
                     obj.SaleDate = r["SaleDate"].ToString();
                     obj.Status = r["Status"].ToString();
-
                     obj.SaleRequestDate = r["SaleRequestDate"].ToString();
                     obj.PaymentMode = r["PaymentMode"].ToString();
                     obj.BankName = r["Bankname"].ToString();

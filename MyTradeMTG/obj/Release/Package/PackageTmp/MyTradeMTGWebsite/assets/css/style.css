@@ -512,10 +512,13 @@ color:#333!important;
 * 15.START PARTNER DESIGN
 * ----------------------------------------------------------------------------------------
 */
-.partner-logo {margin-right: 100px;}
+.partner-logo
+ {
+    /*margin-right: 100px;*/
+}
 .partner-bg {
 	background: #0B2E8A;
-	padding: 60px 30px;
+	padding: 42px 30px;
 	border-radius: 5px;
 }
 .partner-logo img{width: 130px;}
@@ -536,8 +539,9 @@ display:none !important;
 */
 .single_about {
 	background: #0B2E8A;
-	padding: 60px;
+	padding: 20px;
 	border-radius: 5px;
+    height:100%;
 	margin-top:32px;
 }
 .single_about span {
@@ -559,11 +563,11 @@ display:none !important;
 }
 .single_about h4 {
 	font-weight: 700;
-	font-size: 20px;
-	margin-bottom: 20px;
-	text-transform: capitalize;
-	margin-top:10px;
-	line-height: 30px;
+    font-size: 17px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    margin-top: 40px;
+    line-height: 30px;
 }
 .single_about p{}
 /*
@@ -675,6 +679,7 @@ padding:60px;
 .currency_content p {
 	margin-top: 20px;
 	margin-bottom: 30px;
+    text-align:justify;
 }
 
 .cryptonatorwidget {
@@ -1336,6 +1341,106 @@ display: inline-block;
 {
     font-weight:500;
 }
+
+.text-yellow
+{
+    color:#ffd234;
+}
+
+/* brand carousel css */
+
+.owl-theme .owl-controls{
+	text-align: center;
+    margin-top:20px;
+}
+
+/* Styling Next and Prev buttons */
+
+.owl-theme .owl-controls .owl-buttons div{
+	color: #FFF;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+	margin: 5px;
+	padding: 3px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	background: #869791;
+	filter: Alpha(Opacity=50);/*IE7 fix*/
+	opacity: 0.5;
+}
+/* Clickable class fix problem with hover on touch devices */
+/* Use it for non-touch hover action */
+.owl-theme .owl-controls.clickable .owl-buttons div:hover{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+	text-decoration: none;
+}
+
+/* Styling Pagination*/
+
+.owl-theme .owl-controls .owl-page{
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+}
+.owl-theme .owl-controls .owl-page span{
+	display: block;
+	width: 12px;
+	height: 12px;
+	margin: 5px 7px;
+	filter: Alpha(Opacity=50);/*IE7 fix*/
+	opacity: 0.5;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background: #869791;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+}
+
+/* If PaginationNumbers is true */
+
+.owl-theme .owl-controls .owl-page span.owl-numbers{
+	height: auto;
+	width: auto;
+	color: #FFF;
+	padding: 2px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
+
+#owl-demo .owl-item > div img {
+    display: block;
+}
+
+#owl-demo .owl-item > div{
+  text-align: center;
+  margin:3px;
+}
+ 
+.owl-theme .owl-controls .owl-buttons div {
+  position: absolute;
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-prev{
+  left: -45px;
+  top: 5px; 
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-next{
+  right: -45px;
+  top: 5px;
+}
+
 /*
 * ----------------------------------------------------------------------------------------
 * 16.END FOOTER DESIGN

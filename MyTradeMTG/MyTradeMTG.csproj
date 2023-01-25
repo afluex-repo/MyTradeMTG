@@ -278,7 +278,6 @@
     <Content Include="MyTradeMTGWebsite\assets\img\app-store-logo.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\favicon.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\footer_logo.png" />
-    <Content Include="MyTradeMTGWebsite\assets\img\footer_logo1.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\google-play-logo.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\home-main.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\home_banner.png" />
@@ -288,7 +287,6 @@
     <Content Include="MyTradeMTGWebsite\assets\img\logo-1.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\logo-2.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\logo.png" />
-    <Content Include="MyTradeMTGWebsite\assets\img\mytrade_logo %283%29.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-1.jpg" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-2.jpg" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-3.jpg" />
@@ -922,6 +920,9 @@
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
     <None Include="Properties\PublishProfiles\MyTradeMTG1.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTG14jan23.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG25jan.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG25jan023.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG25jan23.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGdemo.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGOld.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGOld1.pubxml" />
@@ -1049,6 +1050,7 @@
     <Content Include="Views\Admin\FranchiseRequestList.cshtml" />
     <Content Include="Views\User\SalesReport.cshtml" />
     <Content Include="Views\User\SaleRequest.cshtml" />
+    <Content Include="Views\AdminReports\SalesReportsForAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
