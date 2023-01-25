@@ -7,11 +7,11 @@
 
 @using (Html.BeginForm("FranchiseRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
+    <div class="container-fluid">
         <div class="row layout-top-spacing">
             <div class="col-lg-12 col-12 layout-spacing">
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
+                <div class="card">
+                    <div class="card-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Franchise Request List</h4>
@@ -21,13 +21,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="widget-content widget-content-area">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group row">
                                         <label>Status</label>
-                                        <input type="hidden"  value="@Model.State" id="st" />
-                                          <select id="Status" name="Status" class="form-control">
+                                        <input type="hidden"  value="@Model.Status" id="st" />
+                                          <select id="Status" name="Status" class="default-select  form-control wide">
                                               <option value="0">-Select-</option>
                                               <option value="Approved">Approved</option>
                                               <option value="Rejected">Rejected</option>

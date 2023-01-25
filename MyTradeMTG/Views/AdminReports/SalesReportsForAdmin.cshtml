@@ -1,0 +1,390 @@
+﻿@model MyTradeMTG.Models.AdminReports
+
+@{
+    ViewBag.Title = "SalesReportsForAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-dangersss {
+        color: #ffffff;
+        background-color: #14112e;
+        border-color: #f72b50;
+    }
+</style>
+
+@using (Html.BeginForm("SalesReportsForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>Sales Reports</h4>
+                                <span class="text-danger">
+                                    @TempData["FranchiseRequest"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>User Contact Address</label>
+                                    @Html.TextBoxFor(m => m.UserCA, new { @class = "form-control", @Placeholder = "User Contact Address" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Franchise Contact Address</label>
+                                    @Html.TextBoxFor(m => m.FranchiseeCA, new { @class = "form-control", @Placeholder = "Franchisee Contact Address" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    @*<input type="hidden" id="hdf" value="@Model.Status" />*@
+                                    <select id="Status" name="Status" class="default-select  form-control">
+                                        <option value="0">-Select-</option>
+                                        <option value="InProcess">InProcess</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>From Date</label>
+                                    @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>To Date</label>
+                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date" })
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="margin-top:25px;">
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <input class="btn btn-success pull-left" type="submit" value="Search" id="Search" name="Search" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>User Contact Address</th>
+                                            <th>User Name</th>
+                                            <th>Franchise Contact Address</th>
+                                            <th>Firm Name</th>
+                                            <th>MTG Token</th>
+                                            <th>Transfer Charge</th>
+                                            <th>Sale Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                        if (Model.lstsalesreports != null)
+                                        {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstsalesreports)
+                                        {
+
+                                        @*
+                                        <div class="img1">
+                                            <img src="@Item.DocumentUrl" height="100" />
+                                        </div>*@
+
+
+
+
+                                        <tr class="text-left">
+                                            <td>@i</td>
+                                            <td id="UserContactAddress_@Item.Pk_FranchisetransferId">@Item.UserContactAddress</td>
+                                            <td id="UserName_@Item.Pk_FranchisetransferId">@Item.UserName</td>
+                                            <td id="FranchiseeContactAddress_@Item.Pk_FranchisetransferId">@Item.FranchiseeContactAddress</td>
+                                            <td id="FirmName_@Item.Pk_FranchisetransferId">@Item.FirmName</td>
+                                            <td>@Item.mtgtoken</td>
+                                            <td>@Item.TransferCharge</td>
+                                            <td>@Item.SaleDate</td>
+                                            <td id="Status_@Item.Pk_FranchisetransferId">@Item.Status</td>
+
+
+                                            <td style="display:none" id="Pk_FranchisetransferId_@Item.Pk_FranchisetransferId">@Item.Pk_FranchisetransferId</td>
+                                            <td style="display:none" id="SaleRequestDate_@Item.Pk_FranchisetransferId">@Item.SaleRequestDate</td>
+                                            <td style="display:none" id="FranchiseApprovalRejectionDate_@Item.Pk_FranchisetransferId">@Item.FranchiseApprovalRejectionDate</td>
+                                            <td style="display:none" id="PaymentMode_@Item.Pk_FranchisetransferId">@Item.PaymentMode</td>
+                                            <td style="display:none" id="BankName_@Item.Pk_FranchisetransferId">@Item.BankName</td>
+                                            <td style="display:none" id="BankBranch_@Item.Pk_FranchisetransferId">@Item.BankBranch</td>
+                                            <td style="display:none" id="TransactionId_@Item.Pk_FranchisetransferId">@Item.TransactionId</td>
+                                            <td style="display:none" id="TransactionDate_@Item.Pk_FranchisetransferId">@Item.TransactionDate</td>
+                                            @*
+                                            <td style="display:none" id="DocumentUrl_@Item.Pk_FranchisetransferId"><img src="@Item.DocumentUrl" height="100" /></td>*@
+
+
+
+                                            <td style="display:none"><img src="@Item.DocumentUrl" class="preview" id="DocumentUrl_@Item.Pk_FranchisetransferId" height="100" /></td>
+
+
+
+
+                                            <td>
+                                                @if (Item.Status == "InProcess")
+                                                {
+                                                @*<a href="/AdminReports/ViewReports?Id=@Item.Pk_FranchisetransferId" class="btn btn-success btn-block py-0 px-0">View</a>*@
+                                                <a href="javascript:void(0)" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)" class="btn btn-success btn-block py-0 px-0">View</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        i++;
+                                        }
+                                        }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @*------------------------ApproReject PopUp Start----------------------------------------------------*@
+
+    <div class="modal fade md" id="myModalApproRejectFranchise" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:150%">
+                <div class="modal-header">
+                    @*<h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>*@
+                    &nbsp;&nbsp;&nbsp;<span style="color:red;">@TempData["msgs"]</span>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal();">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>User Contact Address</h6>
+                                <label id="UserContactAddress"></label>
+                                <label style="display:none" id="Pk_FranchitraferId"></label>
+                                <label style="display:none" id="Statuss"></label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>User Name</h6>
+                                <label id="UserName"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Franchise Contact Address</h6>
+                                <label id="FranchiseeContactAddress"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Firm Name</h6>
+                                <label id="FirmName"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Sale Request Date</h6>
+                                <label id="SaleRequestDate"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Franchise Appro/Reje Date</h6>
+                                <label id="FranchiseApprovalRejectionDate"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Payment Mode</h6>
+                                <label id="PaymentMode"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Bank name</h6>
+                                <label id="Banknamee"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Branch Name</h6>
+                                <label id="BranchNamee"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>TransactionId</h6>
+                                <label id="TransactionId"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Transaction Date</h6>
+                                <label id="TransactionDate"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h6>Document</h6>
+                                @*<label id="DocumentUrl"></label>*@
+                                <img id="DocumentUrl" src=""  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-sm" onclick="return ApproveRequest(Pk_FranchitraferId);">Approve</button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return RejectRequest();">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*------------------------ApproReject PopUp end----------------------------------------------------*@
+
+
+
+}
+
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+
+<script>
+    $(document).ready(function () {
+
+        if ($("#hdf").val() != 0) {
+            $("#Status").val($("#hdf").val()).attr("selected", "selected");
+        }
+    });
+</script>
+<script>
+    var f3 = flatpickr(document.getElementById('FromDate'), {
+        mode: "range"
+    });
+    var f4 = flatpickr(document.getElementById('ToDate'), {
+        mode: "range"
+    });
+</script>
+
+<script>
+    function OpenPopupForApproReject(Id) {
+        debugger;
+        var Pk_FranchisetransferId_ = $("#Pk_FranchisetransferId_" + Id).text();
+        var UserContactAddress_ = $("#UserContactAddress_" + Id).text();
+        var UserName_ = $("#UserName_" + Id).text();
+        var FranchiseeContactAddress_ = $("#FranchiseeContactAddress_" + Id).text();
+        var FirmName_ = $("#FirmName_" + Id).text();
+        var SaleRequestDate_ = $("#SaleRequestDate_" + Id).text();
+        var FranchiseApprovalRejectionDate_ = $("#FranchiseApprovalRejectionDate_" + Id).text();
+        var PaymentMode_ = $("#PaymentMode_" + Id).text();
+        var BankName_ = $("#BankName_" + Id).text();
+        var BankBranch_ = $("#BankBranch_" + Id).text();
+        var TransactionId_ = $("#TransactionId_" + Id).text();
+        var TransactionDate_ = $("#TransactionDate_" + Id).text();
+        var Status_ = $("#Status_" + Id).text();
+
+        //var DocumentUrl_ = $("#DocumentUrl_" + Id).text();
+        var DocumentUrl_ = $('#DocumentUrl_' + Id).prop('src');
+        //alert(DocumentUrl_)
+
+        var Pk_FranchitraferId = $("#Pk_FranchitraferId").text(Pk_FranchisetransferId_);
+        $("#UserContactAddress").text(UserContactAddress_);
+        $("#UserName").text(UserName_);
+        $("#FranchiseeContactAddress").text(FranchiseeContactAddress_);
+        $("#FirmName").text(FirmName_);
+        $("#SaleRequestDate").text(SaleRequestDate_);
+        $("#FranchiseApprovalRejectionDate").text(FranchiseApprovalRejectionDate_);
+        $("#PaymentMode").text(PaymentMode_);
+        $("#Banknamee").text(BankName_);
+        $("#BranchNamee").text(BankBranch_);
+        $("#TransactionId").text(TransactionId_);
+        $("#TransactionDate").text(TransactionDate_);
+        $("#Statuss").text(Status_);
+
+        //var Image = $("DocumentUrl").text(DocumentUrl_);
+
+        $("#DocumentUrl").attr("src", $("#DocumentUrl").attr("src").replace(DocumentUrl_, ""));
+
+        
+        jQuery.noConflict();
+        $("#myModalApproRejectFranchise").modal('show');
+    }
+    function closeModal() {
+        jQuery.noConflict();
+        $("#myModalApproRejectFranchise").hide();
+        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+    }
+
+
+
+    function ApproveRequest(Pk_FranchitraferId) {
+        debugger;
+        var Pk_FranchitraferId = $('#Pk_FranchitraferId').text();
+        var Status = $('#Statuss').text();
+        var r = confirm('Are you sure you want to approve this Request ?');
+        if (r == true) {
+            $.ajax({
+                url: '/AdminReports/ApproveRequest', type: 'post', dataType: 'json',
+                data: { 'Pk_FranchitraferId': Pk_FranchitraferId, 'Status': Status },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        //$("#myModalApproRejectFranchise").modal('show');
+                        alert("Request approved successfully. ");
+                    }
+                }
+
+            });
+        }
+    }
+
+
+    function RejectRequest(Pk_FranchitraferId) {
+        debugger;
+        var Pk_FranchitraferId = $('#Pk_FranchitraferId').text();
+        var Status = $('#Statuss').text();
+        var r = confirm('Are you sure you want to reject this Request ?');
+        if (r == true) {
+            $.ajax({
+                url: '/AdminReports/RejectRequest', type: 'post', dataType: 'json',
+                data: { 'Pk_FranchitraferId': Pk_FranchitraferId, 'Status': Status },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        //$("#myModalApproRejectFranchise").modal('show');
+                        alert("Request rejected successfully. ");
+                    }
+                }
+
+            });
+        }
+
+    }
+
+
+
+
+
+</script>

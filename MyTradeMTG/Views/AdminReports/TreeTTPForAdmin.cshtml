@@ -60,12 +60,11 @@
 <link href="~/assets/css/structure.css" rel="stylesheet" />
 @using (Html.BeginForm("TreeTTPForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1" }))
 {
-<div class="container-fluid">
-    <div class="row layout-top-spacing" style="justify-content:center">
-        <div class="col-xl-12 col-lg-12 col-md-5 col-sm-12 layout-top-spacing">
+<div class="container-fluid card mt-30">
+    <div class="row" style="justify-content:center">
+        <div class="col-xl-12 col-lg-12 col-md-5 col-sm-12 layout-top-spacing card-body">
             <a class="btn btn-primary" href="/adminreports/TreeTTPForAdmin">Refresh</a>
-            <br /><br />
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label>  LoginId </label>

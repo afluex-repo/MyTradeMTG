@@ -21,6 +21,7 @@ namespace MyTradeMTG.Models
         public List<AdminReports> lstassociate { get; set; }
         public List<AdminReports> lstPinTransfer { get; set; }
         public List<AdminReports> lstDirect { get; set; }
+        
         public string Mobile { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
@@ -111,6 +112,25 @@ namespace MyTradeMTG.Models
         public string RewardAmount { get; set; }
         public string RewardImage { get; set; }
         public string FK_BonazaDetailsId { get; set; }
+        public List<AdminReports> lstsalesreports { get; set; }
+        public List<AdminReports> lstsaleViewReports { get; set; }
+        public string UserCA { get; set; }
+        public string FranchiseeCA { get; set; }
+        
+        public string UserContactAddress { get; set; }
+        public string UserName { get; set; }
+        public string FranchiseeContactAddress { get; set; }
+        public string FirmName { get; set; }
+        public string mtgtoken { get; set; }
+        public string TransferCharge { get; set; }
+        public string SaleDate { get; set; }
+
+        public string TransactionId { get; set; }
+        public string DocumentUrl { get; set; }
+        public string FranchiseApprovalRejectionDate { get; set; }
+        public string SaleRequestDate { get; set; }
+        public string Pk_FranchisetransferId { get; set; }
+        
 
         public DataSet GetRechargeList()
         {
@@ -410,5 +430,62 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteBonazaRewardDetails", para);
             return ds;
         }
+
+
+
+        public DataSet GetSalesReportforAdmin()
+        {
+            SqlParameter[] para =
+            {
+             new SqlParameter("@UserCA",UserCA),
+                 new SqlParameter("@FranchiseeCA",FranchiseeCA),
+                     new SqlParameter("@FromDate",FromDate),
+                         new SqlParameter("@ToDate",ToDate),
+                             new SqlParameter("@Status",Status)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetSalesReportforAdmin", para);
+            return ds;
+        }
+
+
+        public DataSet GetViewSalesReportforAdmin()
+        {
+
+            SqlParameter[] para =
+           {
+                 new SqlParameter("@Pk_FranchisetransferId",Pk_FranchisetransferId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetViewSalesReportforAdmin",para);
+            return ds;
+        }
+
+
+
+
+        public DataSet ApproveRequest()
+        {
+            SqlParameter[] para = {
+                       new SqlParameter("@Pk_FranchisetransferId",Pk_FranchisetransferId),
+                           new SqlParameter("@Status","Approved"),
+                   new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApproveRequest", para);
+            return ds;
+        }
+
+
+
+        public DataSet RejectRequest()
+        {
+            SqlParameter[] para = {
+                   new SqlParameter("@Pk_FranchisetransferId",Pk_FranchisetransferId),
+                    new SqlParameter("@Status","Rejected"),
+                   new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ApproveRequest", para);
+            return ds;
+        }
+
+
     }
 }
