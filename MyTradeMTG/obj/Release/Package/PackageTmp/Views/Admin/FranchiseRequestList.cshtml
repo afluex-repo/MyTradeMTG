@@ -7,11 +7,11 @@
 
 @using (Html.BeginForm("FranchiseRequestList", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="container">
+    <div class="container-fluid">
         <div class="row layout-top-spacing">
             <div class="col-lg-12 col-12 layout-spacing">
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
+                <div class="card">
+                    <div class="card-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Franchise Request List</h4>
@@ -21,14 +21,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="widget-content widget-content-area">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group row">
                                         <label>Status</label>
                                         <input type="hidden"  value="@Model.Status" id="st" />
-                                          <select id="Status" name="Status" class="form-control">
+                                          <select id="Status" name="Status" class="default-select  form-control wide">
                                               <option value="0">-Select-</option>
+                                              <option value="Pending">Pending</option>
                                               <option value="Approved">Approved</option>
                                               <option value="Rejected">Rejected</option>
                                           </select>
@@ -45,6 +46,9 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>LoginId</th>
+                                        <th>Name</th>
+                                        <th>Contact Address</th>
                                         <th>Firm Name</th>
                                         <th>Email Id</th>
                                         <th>Mobile</th>
@@ -67,6 +71,9 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
+                                                    <td>@Item.LoginId</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.CustomerId</td>
                                                     <td>@Item.FirmName</td>
                                                     <td>@Item.Email</td>
                                                     <td>@Item.Mobile</td>
@@ -76,19 +83,19 @@
                                                     <td>@Item.IFSCCode</td>
                                                     <td>@Item.Address</td>
                                                     <td>@Item.Status</td>
-                                                    @if (Item.IsFranchise=="False") 
+                                                    @if (Item.Status=="Pending")
                                                     {
-                                                        <td><a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a>                                                   
+
+                                                     <td>
+                                                            <a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a>  
+                                                         <a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a>                                         
                                                     </td>
-                                                    }
-                                                    else if (Item.IsFranchise == "True")
-                                                    {
-                                                        <td><a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a></td>
                                                     }
                                                     else
                                                     {
-                                                        <td>pending</td>
+                                                        @*<td><a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a></td>*@
                                                     }
+                                                 
 
                                                 </tr>
                                                 i++;

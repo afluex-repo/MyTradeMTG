@@ -81,7 +81,14 @@
                                                         <td style="display:none;" id="TransferCharge_@i">@Item.TransferCharge</td>
                                                         <td>@Item.SalesDate</td>
                                                         <td>@Item.Status</td>
-                                                        <td><a href="javascript:void(0)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModalsalerquest" onclick="return GetFranchiseDetails(@i)" style="width:168px;">Accept Sale Request</a></td>
+
+                                                        @if (Item.Status == "Pending")
+                                                        {
+                                                            <td><a href="javascript:void(0)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModalsalerquest" onclick="return GetFranchiseDetails(@i)" style="width:168px;">Accept Sale Request</a></td>
+                                                        }
+
+
+                                                        
                                                     </tr>
                                                     i++;
                                                 }
@@ -90,16 +97,14 @@
                                     </tbody>
                                 </table>
                             </div>
-
-
                             <div class="modal fade md" id="myModalsalerquest" role="dialog" style="display: none;padding-top:100px;">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="width:150%">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="EditModalLabel">Accept Sale Request</h5>
                                             &nbsp;&nbsp;&nbsp;<span style="color:red;">@*@TempData["FranchiseRequest"]*@</span>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                <span class="close_icon">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
@@ -116,7 +121,7 @@
                                                     <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" @*style="display:none"*@ hidden />
                                                     <div class="form-group">
                                                         <label>MTG Token<span style="color: red"></span></label>
-                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()", @style = "background:none;border:none;margin-top:-15px" })
+                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony_dd()", @style = "background:none;border:none;margin-top:-15px" })
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4" style="display:none;">
@@ -152,50 +157,39 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Bank Name</label>
-
-                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control" placeholder="Bank Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control"  readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Branch Name</label>
-                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control" placeholder="Branch Name" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control"  readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Account No.</label>
-                                                        <input type="text" id="AccountNo" name="AccountNo" class="form-control" placeholder="Account No" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="AccountNo" name="AccountNo" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label> IFSC Code</label>
-                                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code", @readonly = true, @style = "background:none;border:none;margin-top:-15px" })
+                                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control",  @readonly = true, @style = "background:none;border:none;margin-top:-15px" })
                                                     </div>
                                                 </div>
-
-
-
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>UPI Id</label>
-                                                        <input type="text" id="UPI" name="UPI" class="form-control" placeholder="UPI Id" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <input type="text" id="UPI" name="UPI" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
                                                     </div>
                                                 </div>
-
-
-
-
-
                                                 <div class="col-md-4" id="paymentmode">
                                                     <div class="example">
                                                         Payment Mode<span style="color: red">*</span>
                                                         @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentdetails();", @style = "color:#828690" })
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-md-4" id="divbankname">
                                                     <div class="form-group">
                                                         <span id="lblbnkname"><span style="color: red">*</span></span>
@@ -221,10 +215,10 @@
                                                         @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4" id="divDocument">
+                                                <div class="col-md-4" id="divDocument" style="display:none;">
                                                     <div class="form-group">
                                                         Attach Document<span style="color: red">*</span>
-                                                        <input type="file" name="documenturl" id="documenturl" multiple="multiple" class="form-control" />
+                                                        <input type="file" name="Documenturl" id="Documenturl"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,8 +226,8 @@
                                         <div class="modal-footer">
                                             @*<button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>*@
                                             @*<button type="submit" class="btn btn-primary btn-sm" onclick="return SaveSaleRequest();">Save</button>*@
-                                            <button type="submit" class="btn btn-primary btn-sm" onclick="return ApproveSaleRequest();" id="btnapprove" value="InProcess">Approve</button>
-                                            <button type="submit" id="btnReject" name="btnReject" class="btn btn-danger btn-sm" onclick="return RejectSaleRequest();" value="Reject">Reject</button>
+                                            <button type="submit" class="btn btn-primary btn-sm" onclick="return ApproveSaleRequest();" id="btnapprove" value="Approved">Approve</button>
+                                            <button type="submit" id="btnReject" name="btnReject" class="btn btn-danger btn-sm" onclick="return RejectSaleRequest();" value="Rejected">Reject</button>
 
                                         </div>
                                     </div>
@@ -245,35 +239,26 @@
             </div>
         </div>
     </div>
-
+    <input type="hidden" id="Amounttttss" />
 }
-
-
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 <script>
+
+
     function ConvertMony() {
         debugger;
-
-        //if ($("#Countryid").val() == "America") {
-        //    $("#divusdoller").show();
-        //    $("#InUsDoller").text($("#Amount").val()+"$");
-        //    $("#dvinrupees").hide();
-        //}
-        //else {
-        //    $("#dvinrupees").show();
-        //    $("#divusdoller").hide();
-        //}
-
+        var Amounttttss = $("#Amounttttss").val();
         if ($("#Countryid").val() == "India") {
             $("#dvinrupees").show();
             $("#divusdoller").hide();
         }
         else {
             $("#divusdoller").show();
-            $("#InUsDoller").text($("#Amount").val() + "$");
+            $("#InUsDoller").text($("#Amounttttss").val() + "$");
+            //$("#InUsDoller").text($("#MTGToken_" + i).text());
             $("#dvinrupees").hide();
         }
         debugger;
@@ -281,7 +266,8 @@
         const result = document.getElementById("result");
         const from = document.getElementById("from");
         const to = document.getElementById("to");
-        const amount = document.getElementById("Amount");
+        //const amount = document.getElementById("Amount");
+        const amount = document.getElementById("Amounttttss");
         const IndianValue = document.getElementById("IndianValue");
         //var TodaysCurrency = $('#IndianValue').val();
         let fromCurrency = from.value;
@@ -312,6 +298,7 @@
         debugger;
         var Fk_UserId = $("#Fk_UserId_" + i).text();
         var Amount = $("#MTGToken_" + i).text();
+        var Amounttttss = $("#Amounttttss").val(Amount);
         var BankName = $("#BankName_" + i).text();
         var BranchName = $("#BranchName_" + i).text();
         var IFSCCode = $("#IFSCCode_" + i).text();
@@ -325,7 +312,6 @@
 
         $("#Fk_UserIdddd").val(Fk_UserId);
         $("#Pk_FranchisetransferId").val(Pk_FranchisetransferId);
-
         $("#Amount").val(Amount);
         $("#Bank_Name").val(BankName);
         $("#Branch_Name").val(BranchName);
@@ -439,22 +425,103 @@
 
     }
 
+    //function ApproveSaleRequest() {
+    //    debugger;
+
+    //    var files = $("#Documenturl").get(0).files;
+
+    //    var PaymentMode = $("#PaymentMode").val();
+    //    var BankName = $("#BankName").val();
+    //    var BranchName = $("#BranchName").val();
+    //    var Transaction = $("#Transaction").val();
+    //    var TransactionDate = $("#TransactionDate").val();
+    //    var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
+    //    //var documenturl = $("#documenturl").val();
+
+    //    var Status = $("#btnapprove").val();
+
+    //    if ($("#PaymentMode").val() == "0") {
+    //        $("#PaymentMode").addClass('errortext');
+    //        $('#PaymentMode').focus();
+    //        $("#PaymentMode").val('');
+    //        return false;
+    //    }
+
+    //    if ($("#BankName").val() == "") {
+    //        $("#BankName").addClass('errortext');
+    //        $('#BankName').focus();
+    //        $("#BankName").val('');
+    //        return false;
+    //    }
+
+    //    if ($("#BranchName").val() == "") {
+    //        $("#BranchName").addClass('errortext');
+    //        $('#BranchName').focus();
+    //        $("#BranchName").val('');
+    //        return false;
+    //    }
+    //    if ($("#Trasaction").val() == "") {
+    //        $("#Trasaction").addClass('errortext');
+    //        $('#Trasaction').focus();
+    //        $("#Trasaction").val('');
+    //        return false;
+    //    }
+
+    //    if ($("#TransactionDate").val() == "") {
+    //        $("#TransactionDate").addClass('errortext');
+    //        $('#TransactionDate').focus();
+    //        $("#TransactionDate").val('');
+    //        return false;
+    //    }
+
+    //    //if ($("#documenturl").val() == "") {
+    //    //    $("#documenturl").addClass('errortext');
+    //    //    $('#documenturl').focus();
+    //    //    $("#documenturl").val('');
+    //    //    return false;
+    //    //}
+    //    else {
+    //        $.ajax({
+
+    //            url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
+    //            data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, files: files },
+
+    //            success: function (data) {
+    //                if (data.Result == "yes") {
+    //                    alert("Sale Request Appproved Successfully !!");
+    //                    window.location.reload();
+    //                }
+    //                else if (data.Result == "no") {
+    //                    alert("Some occured error.");
+    //                }
+    //                else {
+    //                    alert("Some occured error.");
+    //                }
+    //            }
+    //        });
+    //    }
+    //}
+
     function ApproveSaleRequest() {
         debugger;
-
         var PaymentMode = $("#PaymentMode").val();
         var BankName = $("#BankName").val();
         var BranchName = $("#BranchName").val();
         var Transaction = $("#Transaction").val();
         var TransactionDate = $("#TransactionDate").val();
         var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
-        var documenturl = $("#documenturl").val();
-
         var Status = $("#btnapprove").val();
-    
-
-  
-
+        var fileUpload = $("#Documenturl").get(0);
+        var files = fileUpload.files;
+        var formData = new FormData();
+        formData.append("Pk_FranchisetransferId", $("#Pk_FranchisetransferId").val());
+        formData.append("PaymentMode", $("#PaymentMode").val());
+        formData.append("BankName", $("#BankName").val());
+        formData.append("BranchName", $("#BranchName").val());
+        formData.append("TransactionNo", $("#Transaction").val());
+        formData.append("TransactionDate", $("#TransactionDate").val());
+        formData.append("files", files[0]);
+        formData.append("Status", Status);
 
         if ($("#PaymentMode").val() == "0") {
             $("#PaymentMode").addClass('errortext');
@@ -490,16 +557,18 @@
             return false;
         }
 
-        if ($("#documenturl").val() == "") {
-            $("#documenturl").addClass('errortext');
-            $('#documenturl').focus();
-            $("#documenturl").val('');
-            return false;
-        }
+            //if ($("#documenturl").val() == "") {
+            //    $("#documenturl").addClass('errortext');
+            //    $('#documenturl').focus();
+            //    $("#documenturl").val('');
+            //    return false;
+            //}
         else {
             $.ajax({
                 url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
-                data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, documenturl: documenturl },
+                processData: false,
+                contentType: false,
+                data: formData,
                 success: function (data) {
                     if (data.Result == "yes") {
                         alert("Sale Request Appproved Successfully !!");
@@ -516,6 +585,10 @@
         }
     }
 
+
+
+
+
     function RejectSaleRequest() {
         debugger;
 
@@ -527,7 +600,8 @@
         var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
         var documenturl = $("#documenturl").val();
 
-        var Status = 'Reject';
+        var Status = 'Rejected';
+
 
             $.ajax({
                 url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
@@ -545,7 +619,7 @@
                     }
                 }
             });
-        
+
     }
 
 

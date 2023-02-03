@@ -86,6 +86,9 @@ namespace MyTradeMTG.Models
         public string ProcessingFee { get; set; }
         public string PackageTypeId { get; set; }
         public string MemberTransferCharge { get; set; }
+
+        public string BrokerTransferCharge { get; set; }
+        
         #endregion
 
 
