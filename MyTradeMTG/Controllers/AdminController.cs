@@ -2962,6 +2962,10 @@ namespace MyTradeMTG.Controllers
                     obj.Address = r["Address"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.IsFranchise = r["IsFranchise"].ToString();
+                    obj.LoginId = r["Loginid"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.CustomerId = r["CustomerAddressId"].ToString();
+                  
                     lst.Add(obj);
                 }
                 model.lstFranchiseRequest = lst;
@@ -2991,6 +2995,9 @@ namespace MyTradeMTG.Controllers
                     obj.Address = r["Address"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.IsFranchise = r["IsFranchise"].ToString();
+                    obj.LoginId = r["Loginid"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.CustomerId = r["CustomerAddressId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstFranchiseRequest = lst;
@@ -3012,7 +3019,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
-                        TempData["FranchiseRequest"] = "Franchise requeste approved successfully. ";
+                        TempData["FranchiseRequest"] = "Franchise Request Approved Successfully. ";
                     }
                     else
                     {
@@ -3038,7 +3045,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
-                        TempData["FranchiseRequest"] = "Franchise requeste rejected successfully. ";
+                        TempData["FranchiseRequest"] = "Franchise Request Rejected Successfully. ";
                     }
                     else
                     {
@@ -3053,9 +3060,20 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
 
-
-
-       
+        public ActionResult ForTesting()
+        {
+            return View();
+        }
+        
+        public ActionResult Testing()
+        {
+            return View();
+        }
+        
+        public ActionResult KumarError()
+        {
+            return View();
+        }
 
 
     }

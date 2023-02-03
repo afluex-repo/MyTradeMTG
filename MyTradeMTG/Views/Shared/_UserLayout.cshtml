@@ -170,31 +170,31 @@
 
 
                                 @*@if (Session["IsFranchise"].ToString() == "")
-                                {
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
-                                }
-                                else if (Session["PendingStatusLogin"].ToString() == "")
-                                {
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
-                                }
-                                else if (Session["IsFranchise"].ToString() == "False")
-                                {
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
-                                }
-                                else if (Session["PendingStatusLogin"].ToString() == "Pending" && (Session["IsFranchise"].ToString() == "False"))
-                                {
-                                    <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
-                                }
-                                else
-                                {
-                                    <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
-                                }*@
+                                    {
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                    }
+                                    else if (Session["PendingStatusLogin"].ToString() == "")
+                                    {
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                    }
+                                    else if (Session["IsFranchise"].ToString() == "False")
+                                    {
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
+                                    }
+                                    else if (Session["PendingStatusLogin"].ToString() == "Pending" && (Session["IsFranchise"].ToString() == "False"))
+                                    {
+                                        <span class="btn btn-warning">Franchise Requested Pending : @Session["FirmName"]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
+                                    }*@
 
                                 @if (Session["Franchisestatus"].ToString() == "" || Session["Franchisestatus"].ToString() == "Rejected")
                                 {
                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
                                 }
-                               
+
                                 else if (Session["Franchisestatus"].ToString() == "Pending")
                                 {
                                     <span class="text-success" style="font-size:23px">Franchise Requested  : @Session["FirmName"]</span>
@@ -203,7 +203,7 @@
                                 {
                                     <span class="text-success" style="font-size:23px">Franchise Registered : @Session["FirmName"]</span>
                                 }
-                              
+
 
                             </div>
                         </div>
@@ -284,22 +284,31 @@
                             <span class="nav-text">MTG Wallet</span>
                         </a>
                         <ul aria-expanded="false">
-                            @if (Session["IdActivated"] != null)
+                            @*@if (Session["IdActivated"] != null)
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {
+                                {*@
                                     <li><a href="/Wallet/AddWallet">Wallet Request</a></li>
                                     <li><a href="/Wallet/WalletList">Wallet Request List</a></li>
                                     <li><a href="/Wallet/WalletLedgerList">Wallet Ledger</a></li>
                                     <li><a href="/User/WalletTransfer">Direct Transfer</a></li>
-                                    <li><a href="/User/MTGPurchaseSell">MTG Purchase Sell</a></li>
-                                    <li><a href="/User/SalesReport">Sale Report</a></li>
-                                    <li><a href="/User/SaleRequest">Sale Request</a></li>
-                                }
-                            }
+
+
+
+                                    @if (Session["Franchisestatus"].ToString() == "Approved")
+                                    {
+                                        <li><a href="/User/SaleRequest">Sale Request</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/User/MTGPurchaseSell">MTG Sell</a></li>
+                                        <li><a href="/User/SalesReport">Sell Report</a></li>
+                                    }
+                                @*}
+                            }*@
                         </ul>
                     </li>
-                    <li>
+                    @*<li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-thumbtack"></i>
                             <span class="nav-text">Pin Management</span>
@@ -315,7 +324,7 @@
                             <li><a href="/User/PinList">Pin List</a></li>
                             <li><a href="/User/PinTransferReport">Transfer Report</a></li>
                         </ul>
-                    </li>
+                    </li>*@
 
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -323,7 +332,7 @@
                             <span class="nav-text">Account</span>
                         </a>
                         <ul aria-expanded="false">
-                            @if (Session["IdActivated"] != null)
+                            @*@if (Session["IdActivated"] != null)
                             {
                                 if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                 {
@@ -331,19 +340,19 @@
                                     if (Session["TopUp"] != null)
                                     {
                                         if (Session["TopUp"].ToString() == "False")
-                                        {
+                                        {*@
                                             <li><a href="/user/Topup"> Topup </a></li>
 
-                                        }
-                                    }
+                                        @*}
+                                    }*@
                                     <li><a href="/user/TopUpList"> Topup List </a></li>
                                     <li><a href="/User/PayoutRequest"> Transfer to bank</a></li>
-                                }
+                                @*}
                                 else
                                 {
 
                                 }
-                            }
+                            }*@
 
                         </ul>
                     </li>
@@ -357,7 +366,7 @@
                             <li><a href="/user/TreeTTP"> Level Tree TTP</a></li>
                             <li><a href="/user/Tree"> Level Tree TPS</a></li>
                             <li><a href="/Downline/AssociateTree"> Direct List</a></li>
-                         
+
                         </ul>
                     </li>
                     <li>
@@ -1835,7 +1844,7 @@
                         data: JSON.stringify(),
                         contentType: 'application/json;',
                         success: function (d) {
-                              //debugger;
+                            //debugger;
                             var PaidCramount = [];
                             var PaidDramount = [];
                             var AllYear = [];
@@ -1846,12 +1855,12 @@
                                 PaidDramount.push(t[i].Dramount);
                             }
 
-                              //debugger;
+                            //debugger;
                             let x = AllYear;
                             let yb = PaidCramount;
                             let ys = PaidDramount;
 
-                              //debugger;
+                            //debugger;
                             var chartBarRunningOptions = {
                                 series: [{
                                     name: 'Buy',
@@ -2425,7 +2434,7 @@
 
                 var lineChart = function () {
 
-                      //debugger;
+                    //debugger;
                     $.ajax({
                         url: "/User/GetlineChart",
                         type: "GET",
@@ -2433,7 +2442,7 @@
                         data: JSON.stringify(),
                         contentType: 'application/json;',
                         success: function (d) {
-                              //debugger;
+                            //debugger;
                             var TotalBusiness = [];
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
@@ -2442,10 +2451,10 @@
                                 TotalBusiness.push(t[i].TotalBusiness);
                             }
 
-                              //debugger;
+                            //debugger;
                             let x = AllYear;
                             let y = TotalBusiness;
-                              //debugger;
+                            //debugger;
                             var options = {
                                 series: [{
                                     name: 'series1',
@@ -2572,6 +2581,169 @@
         }
 
     </script>
+
+
+
+    <div class="modal fade md" id="myModalAddFranchise" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:150%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>
+                    &nbsp;&nbsp;&nbsp;<span style="color:red;">@TempData["FranchiseRequest"]</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Firm Name<span style="color: red">*</span>
+                                <input type="text" id="FirmName" name="FormName" class="form-control" placeholder="Firm Name" onkeypress="return onlyAlphabets();" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Email<span style="color: red"></span>
+                                <input type="text" id="Email" name="Email" class="form-control" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Mobile<span style="color: red">*</span>
+                                <input type="text" id="Mobile" name="Mobile" class="form-control" placeholder="Mobile" maxlength="10" onkeypress="return isNumberKey(event);" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Bank Name<span style="color: red"></span>
+                                <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Bank Branch<span style="color: red"></span>
+                                <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Account No.<span style="color: red"></span>
+                                <input type="text" id="AccountNo" name="AccountNo" class="form-control" placeholder="Account No" onkeypress="return isNumberKey(event);" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                IFSC Code<span style="color: red"></span>
+                                <input type="text" id="IFSCCode" name="IFSCCode" class="form-control" placeholder="IFSC Code" />
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                Address<span style="color: red"></span>
+                                @*@Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address", })*@
+
+                                @*<input type="text" id="Address" name="Address" class="form-control" placeholder="Address" />*@
+
+
+                                <textarea id="Address" name="Address" class="form-control"></textarea>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="return FranchiseRequest();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+    function FranchiseRequest() {
+        debugger;
+        if($("#FirmName").val() == "") {
+            $("#FirmName").addClass('errortextfor');
+            $("#FirmName").focus();
+            return false;
+        }
+        else if($("#Email").val() == "") {
+            $("#Email").addClass('errortextfor');
+            $("#Email").focus();
+            return false;
+        }
+        else if($("#Mobile").val() == "") {
+            $("#Mobile").addClass('errortextfor');
+            $("#Mobile").focus();
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/User/FranchiseRequest',
+                type: 'Post',
+                dataType: 'json',
+                data: { "FirmName": $("#FirmName").val(), "Email": $("#Email").val(), "Mobile": $("#Mobile").val(), "BankName": $("#BankName").val(), "BranchName": $("#BranchName").val(), "AccountNo": $("#AccountNo").val(), "IFSCCode": $("#IFSCCode").val(), "Address": $("#Address").val() },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        $("#myModalAddFranchise").modal('show');
+                        alert('Franchise requested submited !!');
+                        window.location.reload();
+                    }
+                    else {
+                        alert(data.Result);
+                    }
+                }
+            });
+
+        }
+    }
+
+
+    </script>
+    <script>
+
+
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    </script>
+    <style>
+        .errortextfor {
+            border: 1px solid red !important;
+            /*background-color: #fff0f0 !important;*/
+        }
+    </style>
 
 </body>
 </html>

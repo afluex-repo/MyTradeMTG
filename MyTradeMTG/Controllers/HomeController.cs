@@ -85,18 +85,24 @@ namespace MyTradeMTG.Controllers
                                 {
                                     Session["Franchisestatus"] = "";
                                 }
-                                if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
-                                {
-                                    Session["IdActivated"] = true;
-                                    FormName = "UserDashBoard";
-                                    Controller = "User";
-                                }
-                                else
-                                {
-                                    Session["IdActivated"] = false;
-                                    FormName = "CompleteRegistration";
-                                    Controller = "Home";
-                                }
+
+
+                                FormName = "UserDashBoard";
+                                Controller = "User";
+                                
+
+                                //if (ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "O" || ds.Tables[0].Rows[0]["TeamPermanent"].ToString() == "P")
+                                //{
+                                //    Session["IdActivated"] = true;
+                                //    FormName = "UserDashBoard";
+                                //    Controller = "User";
+                                //}
+                                //else
+                                //{
+                                //    Session["IdActivated"] = false;
+                                //    FormName = "CompleteRegistration";
+                                //    Controller = "Home";
+                                //}
                             }
                             else
                             {

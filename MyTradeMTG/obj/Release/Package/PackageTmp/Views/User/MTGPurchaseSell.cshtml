@@ -80,7 +80,7 @@
                                                     <td style="display:none">@i</td>
                                                     <td>
                                                         <div class="form-check custom-checkbox">
-                                                            <input type="radio" class="form-check-input" data-bs-toggle="modal" data-bs-target="#basicModal" onclick="return GetFranchiseDetails(@i)">
+                                                            <input type="radio" id="radio123" name="radio123" class="form-check-input" data-bs-toggle="modal" data-bs-target="#basicModal" onclick="return GetFranchiseDetails(@i)">
                                                             <label class="form-check-label" for="customCheckBox2"></label>
                                                         </div>
                                                     </td>
@@ -153,7 +153,9 @@
                 </div>
                 <div class="col-xl-6 mb-3">
                     <div class="example">
-                        <p class="mb-1">Transfer Charge<span style="color: red">*</span></p>
+                        <p class="mb-1">Sale Charge<span style="color: red">*</span>
+                          (Sale % : <label id="BrokerTransferChargehdfgglabel"></label>) 
+                         </p>
                         <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" readonly />
                     </div>
                 </div>
@@ -164,7 +166,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="MemberTransferCharge" value="@Model.MemberTransferCharge" />
+<input type="hidden" id="BrokerTransferChargehtf" value="@Model.BrokerTransferCharge" />
 <script>
     function GetFranchiseDetails(i) {
         debugger;
@@ -177,6 +179,17 @@
         $("#Fk_UserIdddd").val(Fk_UserId);
         $("#CustomerId").val(CustomerId);
         $("#FirmName").val(FirmName);
+
+        var WalletAmount = $("#WalletAmounteee").val();
+        var Amount = parseFloat($("#MTGToken").val());
+
+        var BrokerTransferChargehtf = parseFloat($("#BrokerTransferChargehtf").val());
+
+        var BrokerTransferCharge= parseFloat($("#BrokerTransferChargehdfgglabel").text(BrokerTransferChargehtf));
+
+        var BrokerTransferCharge= ("#BrokerTransferChargehdfgg").text(PercentValuesofBrokerTransferCharge);
+
+
     }
 
     function OnchangeMTGTokenGetTransferCharge() {
@@ -184,8 +197,37 @@
         var WalletAmount = $("#WalletAmounteee").val();
         var Amount = parseFloat($("#MTGToken").val());
 
-        var MemberTransferCharge = parseFloat($("#MemberTransferCharge").val());
 
+        var BrokerTransferChargehtf = parseFloat($("#BrokerTransferChargehtf").val());
+        var Percent = Amount * parseFloat(BrokerTransferChargehtf/ 100);
+        var PercentValuesofBrokerTransferCharge = parseFloat(Percent);
+        var TotalSumValuesOfBrokerTransferCharge = Amount + PercentValuesofBrokerTransferCharge;
+        
+
+        //var TransferCharge = ($("#TransferCharge").val(PercentValuesofBrokerTransferCharge));
+
+        //if (TotalSumValuesOfBrokerTransferCharge > WalletAmount) {
+        //    alert("Transfer charge should be less than or equal from wallet balance.");
+        //    $("#MTGToken").addClass('errortext');
+        //    $('#MTGToken').focus();
+        //    $("#MTGToken").val('');
+        //    $("#TransferCharge").val('');
+            
+
+        //}
+        //else if (TotalSumValuesOfBrokerTransferCharge <= WalletAmount) {
+        //    //alert("Right h");
+        //}
+        //else
+        //{
+        //    $("#MTGToken").addClass('errortext');
+        //    $('#MTGToken').focus();
+        //}
+
+
+
+
+        var MemberTransferCharge = parseFloat($("#BrokerTransferChargehtf").val());
         var Percent = Amount * parseFloat(MemberTransferCharge/ 100);
         var PercentValues = parseFloat(Percent);
         var TotalSumValues = Amount + PercentValues;
@@ -193,15 +235,16 @@
 
         var TransferCharge = ($("#TransferCharge").val(PercentValues));
 
-
         //var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
         $("#TransferCharge").attr("readonly", true);
+
 
         if (TotalSumValues > WalletAmount) {
             alert("Transfer charge should be less than or equal from wallet balance.");
             $("#MTGToken").addClass('errortext');
             $('#MTGToken').focus();
             $("#MTGToken").val('');
+            $("#TransferCharge").val('');
         }
         else if (TotalSumValues <= WalletAmount) {
             //alert("Right h");
