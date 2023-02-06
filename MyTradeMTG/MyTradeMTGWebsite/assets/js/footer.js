@@ -59,6 +59,7 @@ document.write(`
 			<script src="assets/js/main.js"></script>
             <script>
             $('#modal').hide();
+
             $('#modal_trigger').click(function()
                 {
             $('#modal').toggle();
@@ -71,7 +72,7 @@ document.write(`
                 {
 
                 $('#modal').hide();
-                })
+        })
        </script>
        <script>
         $(document).ready(function () {
@@ -97,5 +98,7 @@ document.write(`
                 });
                 });
        </script>
-			
+			<script>
+           
+            </script>
 `);

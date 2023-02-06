@@ -260,7 +260,7 @@
     <Content Include="Global.asax" />
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
-    <Content Include="MyTradeMTGWebsite\about.html" />
+    <Content Include="MyTradeMTGWebsite\error_page.html" />
     <Content Include="MyTradeMTGWebsite\assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="MyTradeMTGWebsite\assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="MyTradeMTGWebsite\assets\css\animate.css" />
