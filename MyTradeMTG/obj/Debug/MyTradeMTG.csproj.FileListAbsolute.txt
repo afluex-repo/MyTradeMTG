@@ -455,3 +455,4 @@ E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTrade
 E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
