@@ -16,7 +16,7 @@
 	height: auto;
 	left:45%;
 	top:80px;
-	background: #FFF;
+	background: #0e1934;
 }
 
 #modal_trigger {}
@@ -125,6 +125,20 @@ a.btn_red {color: #FFF;}
 	background: none;
 	border: 1px solid rgba(255,255,255,0.2) !important;
 }
+
+/* forget form */
+
+/* User Login Form */
+/*.user_login {display: none;}*/
+.forget_form label {display: block; margin-bottom:5px;}
+.forget_form input[type="text"], .forget_form input[type="email"], .forget_form input[type="password"] {display: block; width:90%; padding: 10px; border:1px solid #DDD; color:#000;}
+.forget_form input[type="checkbox"] {float:left; margin-right:5px;}
+.forget_form input[type="checkbox"]+label {float:left;}
+.forget_form input {
+	background: none;
+	border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
 .user_login .checkbox {margin-bottom: 10px; clear: both; overflow: hidden;}
 .forgot_password {display:block; margin: 20px 0 10px; clear: both; overflow: hidden; text-decoration: none; color:#fff;}
 .forgot_password:hover {color:#ffd234;}

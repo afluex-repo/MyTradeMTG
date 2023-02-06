@@ -45,9 +45,9 @@ namespace MyTradeMTG.Controllers
         {
             string FormName = "";
             string Controller = "";
+            //Home Modal = new Home();
             try
             {
-                Home Modal = new Home();
                 DataSet ds = obj.Login();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -107,8 +107,9 @@ namespace MyTradeMTG.Controllers
                             else
                             {
                                 TempData["Login"] = "Incorrect Password";
-                                FormName = "Login";
-                                Controller = "Home";
+                                return Redirect("/MyTradeMTGWebsite/error_page.html");
+                                //FormName = "Login";
+                                //Controller = "Home";
                             }
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
@@ -170,29 +171,34 @@ namespace MyTradeMTG.Controllers
                         else
                         {
                             TempData["Login"] = "Incorrect LoginId Or Password";
-                            FormName = "Login";
-                            Controller = "Home";
+                            return Redirect("/MyTradeMTGWebsite/error_page.html");
+                            //FormName = "Login";
+                            //Controller = "Home";
                         }
                     }
                     else
                     {
                         TempData["Login"] = "Incorrect LoginId Or Password";
-                        FormName = "Login";
-                        Controller = "Home";
+                        return Redirect("/MyTradeMTGWebsite/error_page.html");
+                        //FormName = "Login";
+                        //Controller = "Home";
                     }
                 }
                 else
                 {
-                    TempData["Login"] = "Incorrect LoginId Or Password";
-                    FormName = "Login";
-                    Controller = "Home";
+                   TempData["Login"] = "Incorrect LoginId Or Password";
+                    return Redirect("/MyTradeMTGWebsite/error_page.html");
+                    //FormName = "Login";
+                    //Controller = "Home";
+                    //Redirect("/MyTradeMTGWebsite/index.html");
                 }
             }
             catch (Exception ex)
             {
                 TempData["Login"] = ex.Message;
-                FormName = "Login";
-                Controller = "Home";
+                return Redirect("/MyTradeMTGWebsite/error_page.html");
+                //FormName = "Login";
+                //Controller = "Home";
             }
             return RedirectToAction(FormName, Controller);
         }
@@ -565,10 +571,10 @@ namespace MyTradeMTG.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [ActionName("ForgetPassword")]
-        [OnAction(ButtonName = "forgetpassword")]
-        public ActionResult ForgetPassword(Home model)
+        //[HttpPost]
+        //[ActionName("ForgetPassword")]
+        //[OnAction(ButtonName = "forgetpassword")]
+        public ActionResult ForgetPasswordAction(Home model)
         {
             SmtpClient smtpClient = new SmtpClient();
             MailMessage message = new MailMessage();
@@ -625,7 +631,8 @@ namespace MyTradeMTG.Controllers
             {
                 TempData["Login"] = ex.Message;
             }
-            return RedirectToAction("Login", "Home");
+            //return RedirectToAction("Login", "Home");
+            return Redirect("/MyTradeMTGWebsite/index.html");
         }
         public ActionResult SignUp()
         {
