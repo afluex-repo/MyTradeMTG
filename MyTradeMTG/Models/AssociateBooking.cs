@@ -21,16 +21,16 @@ namespace MyTradeMTG.Models
         public string PK_PaidPayoutId { get; set; }
         public string Fk_SponsorId { get; set; }
         public string ActiveStatus { get; set; }
-        public string ProfilePic { get; set; }
+        //public string ProfilePic { get; set; }
         public string PK_BookingId { get; set; }
         public string UserID { get; set; }
         public string BranchID { get; set; }
-        public string BranchName { get; set; }
+        //public string BranchName { get; set; }
         public string PlotID { get; set; }
         public string PlotNumber { get; set; }
-        public string CustomerID { get; set; }
+        //public string CustomerID { get; set; }
         public string CustomerLoginID { get; set; }
-        public string CustomerName { get; set; }
+        //public string CustomerName { get; set; }
         public string AssociateID { get; set; }
         public string AssociateLoginID { get; set; }
         public string AssociateName { get; set; }
@@ -48,12 +48,12 @@ namespace MyTradeMTG.Models
         public string PaymentDate { get; set; }
         public string PaymentMode { get; set; }
         public string TransactionNumber { get; set; }
-        public string TransactionDate { get; set; }
-        public string BankName { get; set; }
+        //public string TransactionDate { get; set; }
+        //public string BankName { get; set; }
         public string BankBranch { get; set; }
         public string Remark { get; set; }
         public string TotalPLC { get; set; }
-        public string LoginId { get; set; }
+        //public string LoginId { get; set; }
         public List<SelectListItem> lstBlock { get; set; }
         public List<SelectListItem> ddlSite { get; set; }
         public List<SelectListItem> ddlSector { get; set; }
@@ -87,7 +87,7 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
                                       new SqlParameter("@PK_BookingId", PK_BookingId),
                                      new SqlParameter("@AssociateID", AssociateID),
-                                     new SqlParameter("@CustomerLoginID",CustomerID),
+                                     new SqlParameter("@CustomerLoginID",CustomerId),
                                      new SqlParameter("@Loginid",LoginId),
                                     new SqlParameter("@CustomerName", CustomerName)   ,
                                     new SqlParameter("@PK_SiteID", SiteID)   ,
@@ -167,7 +167,7 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
 
                                       new SqlParameter("@PK_BookingId", PK_BookingId),
-                                        new SqlParameter("@CustomerID", CustomerID),
+                                        new SqlParameter("@CustomerID", CustomerId),
                                           new SqlParameter("@AssociateID", AssociateID)
 
                                   };
@@ -238,7 +238,7 @@ namespace MyTradeMTG.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PanNo { get; set; }
-        public string Address { get; set; }
+        //public string Address { get; set; }
         public string ActionStatus { get; set; }
         public string NewsFor { get; set; }
 

@@ -21,7 +21,7 @@ namespace MyTradeMTG.Models
         public List<AdminReports> lstassociate { get; set; }
         public List<AdminReports> lstPinTransfer { get; set; }
         public List<AdminReports> lstDirect { get; set; }
-        
+        public string BasisOn { get; set; }
         public string Mobile { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
@@ -130,7 +130,10 @@ namespace MyTradeMTG.Models
         public string FranchiseApprovalRejectionDate { get; set; }
         public string SaleRequestDate { get; set; }
         public string Pk_FranchisetransferId { get; set; }
+        public string ActivationMTGToken { get; set; }
+
         
+
 
         public DataSet GetRechargeList()
         {

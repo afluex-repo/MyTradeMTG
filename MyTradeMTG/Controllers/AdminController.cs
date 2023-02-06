@@ -3059,22 +3059,6 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
-
-        public ActionResult ForTesting()
-        {
-            return View();
-        }
         
-        public ActionResult Testing()
-        {
-            return View();
-        }
-        
-        public ActionResult KumarError()
-        {
-            return View();
-        }
-
-
     }
 }

@@ -46,6 +46,9 @@ namespace MyTradeMTG.Models
         public string CustomerId { get; set; }
         public string ROI { get; set; }
         public string Topupid { get; set; }
+        public string BasisOn { get; set; }
+
+        
 
         public List<SelectListItem> ddlProduct { get; set; }
 
@@ -109,6 +112,7 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
 
                 new SqlParameter("@PackageTypeId", PackageTypeId),
+                new SqlParameter("@LoginId", LoginId),
 
             };
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp", para);

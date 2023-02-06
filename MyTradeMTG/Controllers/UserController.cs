@@ -286,12 +286,12 @@ namespace MyTradeMTG.Controllers
             //model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
 
-            if (Session["IdActivated"].ToString() == "true")
-            {
+            //if (Session["IdActivated"].ToString() == "true")
+            //{
                 model.BankName = Session["Bank"].ToString();
                 model.BankBranch = Session["Branch"].ToString();
 
-            }
+           //}
 
             #region PackageType Bind
 
@@ -393,11 +393,12 @@ namespace MyTradeMTG.Controllers
             return View(model);
         }
 
-        public ActionResult GetProductList(string PackageTypeId)
+        public ActionResult GetProductList(string PackageTypeId,string LoginId)
         {
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             Account model = new Account();
             model.PackageTypeId = PackageTypeId;
+            model.LoginId = LoginId;
 
             DataSet ds = model.GetProductListForTopUp();
 
@@ -409,6 +410,10 @@ namespace MyTradeMTG.Controllers
                 }
             }
             model.ddlProduct = ddlProduct;
+
+
+           model.Status = ds.Tables[3].Rows[0]["Status"].ToString();
+
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -1352,6 +1357,8 @@ namespace MyTradeMTG.Controllers
                     obj.TopUpDate = r["TopUpDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
+                    obj.BasisOn = r["BasisOn"].ToString();
+                    
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -1391,6 +1398,7 @@ namespace MyTradeMTG.Controllers
                     obj.TopUpDate = r["TopUpDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
+                    obj.BasisOn = r["BasisOn"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -1986,8 +1994,8 @@ namespace MyTradeMTG.Controllers
                 {
                     AssociateBooking obj = new AssociateBooking();
 
-                    obj.Status = r["Status"].ToString();
-                    obj.QualifyDate = r["QualifyDate"].ToString();
+                    //obj.Status = r["Status"].ToString();
+                    //obj.QualifyDate = r["QualifyDate"].ToString();
                     obj.RewardImage = r["RewardImage"].ToString();
                     obj.RewardName = r["RewardName"].ToString();
                     //obj.Contact = r["BackColor"].ToString();
@@ -2477,13 +2485,6 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-
-
-        public ActionResult Test()
-        {
-            return View();
-        }
-
-
+        
     }
 }

@@ -6,9 +6,9 @@
 
 <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
 @*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
-<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-<link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />*@
 
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -22,8 +22,8 @@
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h4>Top-Up</h4>
                                     <span class="text-danger" style="color:red;">
-                                            @TempData["msg"]
-                                        </span>
+                                        @TempData["msg"]
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -43,9 +43,11 @@
                             <div class="row mb-4">
                                 <div class="col-md-4">
                                     <label for="LoginId">User Id</label>
-                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();",@readonly="" })
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();", @readonly = "" })
                                     @Html.HiddenFor(m => m.Name)
                                     <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
+                                    <input type="hidden" id="Status" name="Status" value="@Model.Status" />
+
                                 </div>
 
                                 <div class="col-md-4">
@@ -63,7 +65,7 @@
                             <div class="row mb-4">
                                 <div class="col-md-4">
                                     <label for="ActivationMTGToken">Activation MTG Token <span style="color:red">*</span></label>
-                                    <input name="ActivationMTGToken" id="ActivationMTGToken" value="" class="form-control"  readonly onchange = "return GetPackageDetails();">
+                                    <input name="ActivationMTGToken" id="ActivationMTGToken" value="" class="form-control" readonly onchange="return GetPackageDetails();">
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
@@ -78,7 +80,7 @@
                                     <input name="TotalAmount" id="TotalAmount" value="" readonly class="form-control">
                                 </div>
                             </div>
-                            
+
                             @*<div class="row mb-4">
                                     <div class="col-md-4">
                                         <label for="Amount">
@@ -156,7 +158,7 @@
                             {
                                 <span>@Session["FullName"]</span>
                             }
-                            , your <label id="lblTPS"></label> package for Rs. <label id="lblAmount"></label> is being initiated for <label id="lblLoginId"></label> with ROI <label id="lblROI"></label> % per day
+                            , your <label id="lblTPS"></label> package for Rs. <label id="lblAmountsssss"></label> is being initiated for <label id="lblLoginId"></label> with ROI <label id="lblROI"></label> % <label id="lblbasisons"></label>
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -166,112 +168,90 @@
                 </div>
             </div>
         </div>
-        </div>
-        }
+    </div>
+}
 
-        <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
-        <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
+<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+@*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
-        <script>
-            //$(document).ready(function () {
-            //    $("#PaymentType").val('Online');
-            //});
-            //$(function () {
-            //    var $j = jQuery.noConflict();
-            //    $("#TopUpDate").datepicker({
-            //        dateFormat: 'dd/mm/yy',
-            //    });
-            //    $("#TransactionDate").datepicker({
-            //        dateFormat: 'dd/mm/yy',
-            //    });
-            //});
-            //function getpaymentTypedetails() {
-            //    debugger;
-            //    if ($('#PaymentType').val() == 'Offline') {
-            //        $("#paymentmode").show();
-            //    }
-            //    else if ($('#PaymentType').val() == 'Online') {
-            //        $("#paymentmode").hide();
-            //        $("#divPaymentMode").hide();
-            //        $("#BankName").val('');
-            //        $("#BankBranch").val('');
-            //        $("#TransactionNo").val('');
-            //        $("#TransactionDate").val('');
-            //    }
-            //}
-            function isNumberKey(evt) {
-                var charCode = (evt.which) ? evt.which : event.keyCode;
-                if (charCode != 46 && charCode > 31
-                  && (charCode < 48 || charCode > 57))
-                    return false;
-                return true;
-            }
+<script>
+    //$(document).ready(function () {
+    //    $("#PaymentType").val('Online');
+    //});
+    //$(function () {
+    //    var $j = jQuery.noConflict();
+    //    $("#TopUpDate").datepicker({
+    //        dateFormat: 'dd/mm/yy',
+    //    });
+    //    $("#TransactionDate").datepicker({
+    //        dateFormat: 'dd/mm/yy',
+    //    });
+    //});
+    //function getpaymentTypedetails() {
+    //    debugger;
+    //    if ($('#PaymentType').val() == 'Offline') {
+    //        $("#paymentmode").show();
+    //    }
+    //    else if ($('#PaymentType').val() == 'Online') {
+    //        $("#paymentmode").hide();
+    //        $("#divPaymentMode").hide();
+    //        $("#BankName").val('');
+    //        $("#BankBranch").val('');
+    //        $("#TransactionNo").val('');
+    //        $("#TransactionDate").val('');
+    //    }
+    //}
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
 
-            function CheckAmount() {
-                debugger;
-                var Amount = $("#Amount").val();
-                var WalletBalance = $("#WalletAmount").val();
-                //alert($("#hdfMax").val());
-                if (Amount == "0") {
-                    Snackbar.show({
-                        text: "Amount should not be zero !!",
-                        actionTextColor: '#fff',
-                        backgroundColor: '#e7515a',
-                        pos: 'top-right'
-                    });
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    $("#Amount").val('');
-                    return false;
-                }
-                else {
-                    if (Amount != null && Amount != "" && Amount != "0") {
-                        if (parseInt(Amount) % 1000 == 0) {
-                            if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
-                                Snackbar.show({
-                                    text: "Amount should not be greater than max amount",
-                                    actionTextColor: '#fff',
-                                    backgroundColor: '#e7515a',
-                                    pos: 'top-right'
-                                });
-                                $("#Amount").addClass('errortext');
-                                $('#Amount').focus();
-                                $("#Amount").val('');
-                                return false;
-                            }
-                            else if (parseInt(Amount) > parseInt(WalletBalance)) {
-                                Snackbar.show({
-                                    text: "Insufficient Balance",
-                                    actionTextColor: '#fff',
-                                    backgroundColor: '#e7515a',
-                                    pos: 'top-right'
-                                });
-                                $("#Amount").addClass('errortext');
-                                $('#Amount').focus();
-                                $("#Amount").val('');
-                                return false;
-                            }
-                            else if (parseInt(Amount) < parseInt($("#hdfMin").val())) {
-                                Snackbar.show({
-                                    text: "Amount should not be less than min amount",
-                                    actionTextColor: '#fff',
-                                    backgroundColor: '#e7515a',
-                                    pos: 'top-right'
-                                });
-                                $("#Amount").addClass('errortext');
-                                $('#Amount').focus();
-                                $("#Amount").val('');
-                                return false;
-                            }
-                            else {
-                            }
-                        }
-                        else {
+    function CheckAmount() {
+        debugger;
+        var Amount = $("#Amount").val();
+        var WalletBalance = $("#WalletAmount").val();
+        //alert($("#hdfMax").val());
+        if (Amount == "0") {
+            Snackbar.show({
+                text: "Amount should not be zero !!",
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            $("#Amount").val('');
+            return false;
+        }
+        else {
+            if (Amount != null && Amount != "" && Amount != "0") {
+
+                var inmultipleof = $("#spmul").text();
+
+                if (parseInt(Amount) % parseInt(inmultipleof) == 0) {
+                    if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
+                        Snackbar.show({
+                            text: "MTG should not be greater than max MTG",
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-right'
+                        });
+                        $("#Amount").addClass('errortext');
+                        $('#Amount').focus();
+                        $("#Amount").val('');
+                        return false;
+                    }
+                    else
+
+                        if (parseInt(Amount) > parseInt(WalletBalance)) {
                             Snackbar.show({
-                                text: "Invalid Amount",
+                                text: "Insufficient MTG Balance",
                                 actionTextColor: '#fff',
                                 backgroundColor: '#e7515a',
                                 pos: 'top-right'
@@ -281,139 +261,178 @@
                             $("#Amount").val('');
                             return false;
                         }
-                    }
-                    return true;
-                }
-            }
-            
-            function ValidateForm() {
-                debugger;
-                jQuery.noConflict();
-                $('#exampleModal').modal('hide');
-                $(".errortext").removeClass("errortext");
-                if ($('#PackageId').val() == '0') {
-                    $("#PackageId").addClass('errortext');
-                    $('#PackageId').focus();
-                    return false;
-                }
-                else if ($('#Amount').val() == '') {
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    return false;
-                }
-                else {
-                    SetAmountandPackage();
-                    return true;
-                }
-
-            }
-            function SetAmountandPackage() {
-                debugger;
-                jQuery.noConflict();
-                $('#exampleModal').modal('show');
-                $("#lblAmount").text($("#TotalAmount").val());
-                $("#lblLoginId").text($("#LoginId").val());
-                $("#lblTPS").text($("#PackageId :selected").text());
-            }
-            //function CheckPayMode() {
-            //    debugger;
-            //    if ($('#PaymentMode').val() != '1' && $('#PaymentMode').val() != "10") {
-            //        $('#lbltno').html('Transaction No.');
-            //        $('#lbltdate').html('Transaction Date');
-            //        $('#lblbank').html('Bank Name');
-            //        $("#divtrdate").show();
-            //        $("#divPaymentMode").show();
-            //        $("#divtransactiono").show();
-            //        $("#divbankname").show();
-            //        $("#divbankbranch").show();
-            //        $("#divQr").hide();
-            //        $("#BankName").attr("placeholder", "Bank Name");
-            //        $("#TransactionNo").attr("placeholder", "Transaction No.");
-            //        $("#TransactionDate").attr("placeholder", "Transaction Date");
-            //    }
-            //    else if ($('#PaymentMode').val() == "10") {
-            //        $('#lbltno').html('Transaction Id');
-            //        $('#lbltdate').html('Transaction Date');
-            //        $('#lblbank').html('UPI Id');
-            //        $("#BankName").val('');
-            //        $("#BankBranch").val('');
-            //        $("#divtrdate").show();
-            //        $("#divPaymentMode").show();
-            //        $("#divtransactiono").show();
-            //        $("#divbankname").show();
-            //        $("#divQr").show();
-            //        $("#divbankbranch").hide();
-            //        $("#BankName").attr("placeholder", "UPI Id");
-            //        $("#TransactionNo").attr("placeholder", "Transaction Id");
-            //        $("#TransactionDate").attr("placeholder", "Transaction Date");
-            //    }
-            //    else {
-            //        $("#divPaymentMode").hide();
-            //        $("#divtransactiono").hide();
-            //        $("#divbankname").hide();
-            //        $("#divbankbranch").hide();
-            //        $("#divtrdate").hide();
-            //        $("#divQr").hide();
-            //    }
-
-            //}
-
-            function GetNameDetails() {
-                debugger;
-                var LoginId = $('#LoginId').val();
-                $.ajax({
-                    url: '/User/GetNameDetails', type: 'post', dataType: 'json',
-                    data: { 'LoginId': LoginId },
-                    success: function (data) {
-                        if (data.Result == "yes") {
-                            $("#Fk_UserId").val(data.Fk_UserId);
-                            $("#Name").val(data.Name);
-                            $("#lblName").text($("#Name").val());
-                            $("#LoginId").removeClass('errortext');
-                            $("#Name").removeClass('errortext');
-                        }
-                        else if (data.Result == "no") {
-                            alert('Invailid LoginId');
-                            $("#LoginId").val('');
-                            $("#Name").val('');
-                            $("#LoginId").addClass('errortext');
-                            $("#Name").addClass('errortext');
-                            $('#LoginId').focus();
-                        }
-                    }
-                });
-            }
-
-
-            function GetPackageDetails() {
-                $.ajax({
-                    url: '/User/GetPackageDetails', type: 'post', dataType: 'json',
-                    data: { 'PackageId': $("#PackageId").val() },
-                    success: function (data) {
-                        debugger;
-                        if (data.Result == "yes") {
+                        else if (parseInt(Amount) < parseInt($("#hdfMin").val())) {
+                            Snackbar.show({
+                                text: "MTG should not be less than min MTG",
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a',
+                                pos: 'top-right'
+                            });
+                            $("#Amount").addClass('errortext');
+                            $('#Amount').focus();
                             $("#Amount").val('');
-                            $("#spfrom").text(data.FromAmount);
-                            $("#spto").text(data.ToAmount);
-                            $("#spmul").text(data.InMultipleOf);
-                            $("#hdfMax").val(data.ToAmount);
-                            $("#hdfMin").val(data.FromAmount);
-                            $("#lblROI").text(data.ROIPercent);
-                            $("#ActivationMTGToken").val(data.ActivationMTGToken);
-                            $("#BasisOn").text(data.BasisOn);
+                            return false;
                         }
                         else {
-                            $("#PackageId").val('0')
                         }
-                    }
-                });
+                }
+                else {
+                    Snackbar.show({
+                        text: "Invalid MTG, MTG Should be in Multiple as required. ",
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    $("#Amount").val('');
+                    return false;
+                }
             }
+            return true;
+        }
+    }
 
-        </script>
+    function ValidateForm() {
+        debugger;
+        jQuery.noConflict();
+        $('#exampleModal').modal('hide');
+        $(".errortext").removeClass("errortext");
+        if ($('#PackageId').val() == '0') {
+            $("#PackageId").addClass('errortext');
+            $('#PackageId').focus();
+            return false;
+        }
+        else if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        else {
+            SetAmountandPackage();
+            return true;
+        }
 
-        @if (TempData["msg"] != null)
-        {
-            <script>
+    }
+    function SetAmountandPackage() {
+        debugger;
+        jQuery.noConflict();
+        var Amount = ($("#Amount").val());
+        var BasisOn = $("#BasisOn").text();
+        $('#exampleModal').modal('show');
+        $("#lblAmount").text($("#TotalAmount").val());
+        $("#lblLoginId").text($("#LoginId").val());
+        $("#lblTPS").text($("#PackageId :selected").text());
+        $("#lblAmountsssss").text(Amount);
+        $("#lblbasisons").text(BasisOn);
+    }
+    //function CheckPayMode() {
+    //    debugger;
+    //    if ($('#PaymentMode').val() != '1' && $('#PaymentMode').val() != "10") {
+    //        $('#lbltno').html('Transaction No.');
+    //        $('#lbltdate').html('Transaction Date');
+    //        $('#lblbank').html('Bank Name');
+    //        $("#divtrdate").show();
+    //        $("#divPaymentMode").show();
+    //        $("#divtransactiono").show();
+    //        $("#divbankname").show();
+    //        $("#divbankbranch").show();
+    //        $("#divQr").hide();
+    //        $("#BankName").attr("placeholder", "Bank Name");
+    //        $("#TransactionNo").attr("placeholder", "Transaction No.");
+    //        $("#TransactionDate").attr("placeholder", "Transaction Date");
+    //    }
+    //    else if ($('#PaymentMode').val() == "10") {
+    //        $('#lbltno').html('Transaction Id');
+    //        $('#lbltdate').html('Transaction Date');
+    //        $('#lblbank').html('UPI Id');
+    //        $("#BankName").val('');
+    //        $("#BankBranch").val('');
+    //        $("#divtrdate").show();
+    //        $("#divPaymentMode").show();
+    //        $("#divtransactiono").show();
+    //        $("#divbankname").show();
+    //        $("#divQr").show();
+    //        $("#divbankbranch").hide();
+    //        $("#BankName").attr("placeholder", "UPI Id");
+    //        $("#TransactionNo").attr("placeholder", "Transaction Id");
+    //        $("#TransactionDate").attr("placeholder", "Transaction Date");
+    //    }
+    //    else {
+    //        $("#divPaymentMode").hide();
+    //        $("#divtransactiono").hide();
+    //        $("#divbankname").hide();
+    //        $("#divbankbranch").hide();
+    //        $("#divtrdate").hide();
+    //        $("#divQr").hide();
+    //    }
+
+    //}
+
+    function GetNameDetails() {
+        debugger;
+        var LoginId = $('#LoginId').val();
+        $.ajax({
+            url: '/User/GetNameDetails', type: 'post', dataType: 'json',
+            data: { 'LoginId': LoginId },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $("#Fk_UserId").val(data.Fk_UserId);
+                    $("#Name").val(data.Name);
+                    $("#lblName").text($("#Name").val());
+                    $("#LoginId").removeClass('errortext');
+                    $("#Name").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    alert('Invailid LoginId');
+                    $("#LoginId").val('');
+                    $("#Name").val('');
+                    $("#LoginId").addClass('errortext');
+                    $("#Name").addClass('errortext');
+                    $('#LoginId').focus();
+                }
+            }
+        });
+    }
+
+
+    function GetPackageDetails() {
+        debugger;
+        $.ajax({
+            url: '/User/GetPackageDetails', type: 'post', dataType: 'json',
+            data: { 'PackageId': $("#PackageId").val() },
+            success: function (data) {
+                debugger;
+                if (data.Result == "yes") {
+                    $("#Amount").val('');
+                    $("#spfrom").text(data.FromAmount);
+                    $("#spto").text(data.ToAmount);
+                    $("#spmul").text(data.InMultipleOf);
+                    $("#hdfMax").val(data.ToAmount);
+                    $("#hdfMin").val(data.FromAmount);
+                    $("#lblROI").text(data.ROIPercent);
+                    $("#ActivationMTGToken").val(data.ActivationMTGToken);
+                    $("#BasisOn").text(data.BasisOn);
+
+                    var status = $("#Status").val();
+
+                    if (status == "1") {
+                        $("#ActivationMTGToken").val('0');
+                    }
+
+                }
+                else {
+                    $("#PackageId").val('0')
+                }
+            }
+        });
+    }
+
+</script>
+
+@if (TempData["msg"] != null)
+{
+    <script>
                 $(document).ready(function () {
                     swal({
                         text: '@TempData["msg"]',
@@ -422,51 +441,51 @@
                         padding: '2em'
                     })
                 });
-            </script>
-        }
-        @if (TempData["error"] != null)
-        {
-            <script>
-                $(document).ready(function () {
-                    Snackbar.show({
-                        text: '@TempData["error"]',
-                        actionTextColor: '#fff',
-                        backgroundColor: '#e7515a',
-                        pos: 'top-right'
-                    });
-                });
-            </script>
-        }
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
 
-        <script>
-            $(document).ready(function () {
-                debugger;
-                if ($("#hdf").val() == "InActive") {
-                    jQuery.noConflict();
-                    $("#divtop").hide();
-                    swal({
-                        backdrop: true,
-                        allowOutsideClick: false,
-                        title: 'Warning!',
-                        text: '@ViewBag.Reason',
-                        type: 'warning',
-                        showCancelButton: 0,
-                        confirmButtonText: 'OK',
-                    }).then(function (e) {
-                        if (e.value) {
-                            window.location = '/User/UserDashboard';
-                        }
-                    })
-
-                    //window.alert("Your KYC is not updated. Please update your KYC first.")
-                    //window.location = '/User/BankDetailsUpdate';
-                }
-                else {
-                    //die();
-                    $("#divtop").show();
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#hdf").val() == "InActive") {
+            jQuery.noConflict();
+            $("#divtop").hide();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: '@ViewBag.Reason',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/UserDashboard';
                 }
             })
-        </script>
+
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
+            //die();
+            $("#divtop").show();
+        }
+    })
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
@@ -474,10 +493,13 @@
         debugger;
         $("#divload").css({ 'display': '' });
         var PackageTypeId = $('#PackageTypeId').val();
+        var LoginId = $('#LoginId').val();
         $.ajax({
             url: '/User/GetProductList', type: 'post', dataType: 'json',
-            data: { 'PackageTypeId': PackageTypeId },
+            //GetProductListForTopUp
+            data: { 'PackageTypeId': PackageTypeId, 'LoginId': LoginId },
             success: function (data) {
+                $("#Status").val(data.Status);
                 $("#divload").css({ 'display': 'none' });
                 $("#PackageId").html(""); // clear before appending new list
                 $("#PackageId").empty();
@@ -487,7 +509,7 @@
                     $("#PackageId").append(
                           $('<option></option>').val(PackagetypeCount.Value).html(PackagetypeCount.Text));
                 });
-              
+
             }
 
         });

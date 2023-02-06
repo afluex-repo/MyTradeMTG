@@ -38,27 +38,54 @@ namespace MyTradeMTG.Controllers
             #endregion
 
             #region pacakge Bind
+            //List<SelectListItem> ddlPackage = new List<SelectListItem>();
+            //DataSet ds2 = objcomm.BindProduct();
+            //if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            //{
+            //    int count = 0;
+            //    foreach (DataRow r in ds2.Tables[0].Rows)
+            //    {
+            //        if (count == 0)
+            //        {
+            //            ddlPackage.Add(new SelectListItem { Text = "Select", Value = "0" });
+            //        }
+            //        ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+            //        count++;
+            //    }
+            //}
+            //ViewBag.ddlPackage = ddlPackage;
+
             List<SelectListItem> ddlPackage = new List<SelectListItem>();
-            DataSet ds2 = objcomm.BindProduct();
-            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
-            {
-                int count = 0;
-                foreach (DataRow r in ds2.Tables[0].Rows)
-                {
-                    if (count == 0)
-                    {
-                        ddlPackage.Add(new SelectListItem { Text = "Select", Value = "0" });
-                    }
-                    ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
-                    count++;
-                }
-            }
+            ddlPackage.Add(new SelectListItem { Text = "--Select--", Value = "0" });
             ViewBag.ddlPackage = ddlPackage;
+
+
             #endregion
 
             return View(model);
         }
 
+
+        public ActionResult GetPackageTypeList(string PackageTypeId)
+        {
+           
+            Master model = new Master();
+            List<SelectListItem> ddlPackage = new List<SelectListItem>();
+            model.PackageTypeId = PackageTypeId;
+            DataSet d3 = model.BindProductList();
+            #region pacakge Bind
+            if (d3 != null && d3.Tables.Count > 0 && d3.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in d3.Tables[0].Rows)
+                {
+                ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                }
+            }
+            model.ddlPackage = ddlPackage;
+            #endregion
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
         public ActionResult GetProductList(string PackageTypeId)
         {
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -109,11 +136,11 @@ namespace MyTradeMTG.Controllers
         public ActionResult PackageList(Master model)
         {
             List<Master> lst = new List<Master>();
-            if(model.Packageid=="0")
+            if (model.Packageid == "0")
             {
                 model.Packageid = null;
             }
-            if(model.PackageTypeId=="0")
+            if (model.PackageTypeId == "0")
             {
                 model.PackageTypeId = null;
             }
@@ -150,13 +177,14 @@ namespace MyTradeMTG.Controllers
                     //obj.FinalAmount = Convert.ToDecimal(r["FinalAmount"]);
                     obj.SponsorIncome = Convert.ToDecimal(r["SponsorIncome"]);
 
-
                     obj.DrAmount1 = Convert.ToDecimal(r["DrAmount1"]);
-                    obj.DrAmount2= Convert.ToDecimal(r["DrAmount2"]);
+                    obj.DrAmount2 = Convert.ToDecimal(r["DrAmount2"]);
                     obj.DrAmount3 = Convert.ToDecimal(r["DrAmount3"]);
                     obj.ReturnPercent1 = Convert.ToDecimal(r["ReturnPercent1"]);
                     obj.ReturnPercent2 = Convert.ToDecimal(r["ReturnPercent2"]);
                     obj.ReturnPercent3 = Convert.ToDecimal(r["ReturnPercent3"]);
+                    obj.BasisOn = r["BasisOn"].ToString();
+
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
@@ -675,18 +703,18 @@ namespace MyTradeMTG.Controllers
         public ActionResult RewardMaster(string RewardId)
         {
             Master model = new Master();
-            if (RewardId !="" && RewardId !=null)
+            if (RewardId != "" && RewardId != null)
             {
                 model.PK_RewardId = RewardId;
                 DataSet ds = model.GetRewardList();
-                if (ds !=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     model.RewardName = ds.Tables[0].Rows[0]["RewardName"].ToString();
                     model.FromDate = ds.Tables[0].Rows[0]["FromDate"].ToString();
                     model.ToDate = ds.Tables[0].Rows[0]["ToDate"].ToString();
                     model.PK_RewardId = ds.Tables[0].Rows[0]["Pk_BonazaRewardId"].ToString();
                 }
-                
+
             }
             return View(model);
         }
@@ -940,6 +968,13 @@ namespace MyTradeMTG.Controllers
 
             return RedirectToAction("BalanceTransfer");
         }
+
+
+
+
+
+
+
 
     }
 }

@@ -379,6 +379,10 @@ namespace MyTradeMTG.Controllers
                     Obj.TopUpDate = r["TopUpDate"].ToString();
                     Obj.TopupVia = r["TopupVia"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    Obj.BasisOn = r["BasisOn"].ToString();
+                    Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
+
+
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
@@ -458,6 +462,9 @@ namespace MyTradeMTG.Controllers
                     Obj.TopUpDate = r["TopUpDate"].ToString();
                     Obj.TopupVia = r["TopupVia"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    Obj.BasisOn = r["BasisOn"].ToString();
+                    Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
+
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
