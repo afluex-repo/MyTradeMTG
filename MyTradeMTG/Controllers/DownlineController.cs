@@ -150,7 +150,6 @@ namespace MyTradeMTG.Controllers
                 }
                 model.lstassociate = lst;
 
-
             }
             return View(model);
         }
