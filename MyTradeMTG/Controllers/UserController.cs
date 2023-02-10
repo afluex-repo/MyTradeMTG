@@ -14,6 +14,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+
+
 namespace MyTradeMTG.Controllers
 {
     public class UserController : UserBaseController
@@ -65,17 +67,17 @@ namespace MyTradeMTG.Controllers
 
 
 
-                if (ViewBag.Status == "InActive")
-                {
-                    Session["IdActivated"] = false;
-                    return RedirectToAction("CompleteRegistration", "Home");
+                //if (ViewBag.Status == "InActive")
+                //{
+                //    Session["IdActivated"] = false;
+                //    return RedirectToAction("CompleteRegistration", "Home");
 
 
-                }
-                else
-                {
-                    Session["IdActivated"] = true;
-                }
+                //}
+                //else
+                //{
+                //    Session["IdActivated"] = true;
+                //}
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
             {
@@ -1363,7 +1365,7 @@ namespace MyTradeMTG.Controllers
         {
             List<Account> lst = new List<Account>();
             model.Pk_userId = Session["PK_UserId"].ToString();
-          
+
             model.CustomerId = Session["LoginId"].ToString();
             model.FK_UserId = model.FK_UserId == "0" ? null : model.FK_UserId;
             model.LoginId = model.LoginId == "0" ? null : model.LoginId;
@@ -2080,7 +2082,7 @@ namespace MyTradeMTG.Controllers
                 DataSet ds = model.FranchiseRequest();
                 if (ds != null && ds.Tables.Count > 0)
                 {
-                   
+
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
                         model.Result = "yes";
@@ -2180,10 +2182,8 @@ namespace MyTradeMTG.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult MTGPurchaseSell()
         {
-            
             User model = new User();
             model.AddedBy = Session["PK_UserId"].ToString();
             DataSet ds = model.GetUserDetailsForMTGPurchaseSell();
@@ -2205,7 +2205,6 @@ namespace MyTradeMTG.Controllers
                 ViewBag.WalletBalance = ds1.Tables[0].Rows[0]["Amount"].ToString();
             }
             #endregion
-
             #region FranchisetList
             List<User> lst = new List<User>();
             DataSet ds2 = model.FranchiseList();
@@ -2222,21 +2221,15 @@ namespace MyTradeMTG.Controllers
                 model.lstFranchise = lst;
             }
             #endregion
-
             DataSet ds13 = objcomm.GetWalletTransferCharge();
             if (ds13 != null && ds1.Tables.Count > 0 && ds13.Tables[0].Rows.Count > 0)
             {
-                model.MemberTransferCharge = ds13.Tables[0].Rows[0]["MemberTransferCharge"].ToString();
+                model.BrokerTransferCharge = ds13.Tables[0].Rows[0]["BrokerTransferCharge"].ToString();
             }
-
-
             return View(model);
         }
-
-        
-
         [HttpPost]
-        public ActionResult SaveMTGTransferCharge(string CustomerId, string FirmName, string MTGToken, string TransferCharge,string Fk_UserId)
+        public ActionResult SaveMTGTransferCharge(string CustomerId, string FirmName, string MTGToken, string TransferCharge, string Fk_UserId)
         {
             User model = new User();
             model.FK_FranchiseUserId = Fk_UserId;
@@ -2245,12 +2238,10 @@ namespace MyTradeMTG.Controllers
             model.MTGToken = MTGToken;
             model.TransferCharge = TransferCharge;
             model.AddedBy = Session["PK_UserId"].ToString();
-          
             
             //DataSet ds2 = model.FranchiseList();
             //model.FK_FranchiseUserId = Session["PK_UserId"].ToString();
-
-
+            
             DataSet ds = model.SaveMTGTransferCharge();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2259,7 +2250,7 @@ namespace MyTradeMTG.Controllers
                     model.Result = "yes";
                     TempData["SaveMTGTransferCharge"] = "Record submited successfully !!";
                 }
-                else if(ds.Tables[0].Rows[0][0].ToString() == "0")
+                else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                 {
                     model.Result = "no";
                     TempData["SaveMTGTransferCharge"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -2267,12 +2258,10 @@ namespace MyTradeMTG.Controllers
             }
             else
             {
-                model.Result= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                model.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
-
         public ActionResult SalesReport(User model)
         {
             List<User> lst = new List<User>();
@@ -2331,7 +2320,7 @@ namespace MyTradeMTG.Controllers
         //    return View(model);
         //}
 
-        public ActionResult SaleRequest(User  model)
+        public ActionResult SaleRequest(User model)
         {
             #region ddlpaymentmode
 
@@ -2366,14 +2355,14 @@ namespace MyTradeMTG.Controllers
             #endregion
 
             List<User> lst = new List<User>();
-            model.FK_FranchiseUserId = Session["PK_UserId"].ToString(); 
+            model.FK_FranchiseUserId = Session["PK_UserId"].ToString();
             DataSet ds = model.GetSaleRequest();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     User obj = new User();
-                    
+
                     obj.Pk_FranchisetransferId = r["pk_franchisetransferid"].ToString();
                     obj.Fk_UserId = r["fk_userid"].ToString();
                     obj.UserContactAddressId = r["UserContactAddress"].ToString();
@@ -2383,10 +2372,10 @@ namespace MyTradeMTG.Controllers
                     obj.SalesDate = r["SaleRequestDate"].ToString();
                     obj.Status = r["Status"].ToString();
 
-                    obj.BankName =r["MemberBankName"].ToString();
+                    obj.BankName = r["MemberBankName"].ToString();
                     obj.BranchName = r["MemberBranch"].ToString();
                     obj.IFSCCode = r["IFSCCode"].ToString();
-                    obj.AccountNo =r["MemberAccNo"].ToString();
+                    obj.AccountNo = r["MemberAccNo"].ToString();
                     obj.UPIID = r["UPIID"].ToString();
                     lst.Add(obj);
                 }
@@ -2395,58 +2384,106 @@ namespace MyTradeMTG.Controllers
             return View(model);
         }
 
+        //[HttpPost]
+        //public ActionResult ApproveSaleRequest(string BankName, string BranchName,string UPIID, string TransactionDate, string Transaction, String PaymentMode, string CustomerId, string Fk_UserIdddd, string UserName,string Pk_FranchisetransferId,String Status, HttpPostedFileBase files)
+        //{
+        //    User model = new User();
+        //    try
+        //    {
+        //        model.BankName = BankName;
+        //        model.BranchName = BranchName;
+        //        model.TransactionDate = string.IsNullOrEmpty(TransactionDate) ? null : Common.ConvertToSystemDate(TransactionDate, "dd/MM/yyyy");
+        //        model.TransactionNo = Transaction;
+        //        model.PaymentMode = PaymentMode;
+        //        model.Pk_FranchisetransferId = Pk_FranchisetransferId;
+        //        model.AddedBy = Session["PK_UserId"].ToString();
+        //        model.Status = Status;
+        //        //model.Documenturl = documenturl;
+                
+        //        if (files != null)
+        //        {
+
+        //            model.Documenturl = "/Document/" + Guid.NewGuid() + Path.GetExtension(files.FileName);
+        //            files.SaveAs(Path.Combine(Server.MapPath(model.Documenturl)));
+        //        }
+
+                
+
+        //        DataSet ds = model.ApproveSaleRequest();
+        //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                model.Result = "yes";
+        //                TempData["msg"] = "Record submited successfully !!";
+
+        //            }
+        //            else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+        //            {
+        //                model.Result = "no";
+        //                TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["msg"] = ex.Message;
+                
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
+        
         [HttpPost]
-        public ActionResult ApproveSaleRequest(string MTGToken, string BankName, string BranchName, string IFSCCode, string AccountNo, string UPIID,string TransactionDate, string Transaction,String PaymentMode, string CustomerId,string Fk_UserIdddd, string UserName,string TransferCharge,string Pk_FranchisetransferId) 
+        public ActionResult ApproveSaleRequest(User model, HttpPostedFileBase files)
         {
-            string FormName = "";
-            string Controller = "";
-            try { 
-            User model = new User();
-            model.MTGToken = MTGToken;
-            model.BankName = BankName;
-            model.BranchName = BranchName;
-            model.IFSCCode = IFSCCode;
-            model.AccountNo = AccountNo;
-            model.UPIID = UPIID;
-            model.TransactionDate = TransactionDate;
-            model.TransactionNo = Transaction;
-            model.PaymentMode = PaymentMode;
-            model.CustomerId = CustomerId;
-            model.Fk_UserId = Fk_UserIdddd;
-            model.UserName = UserName;
-            model.Pk_FranchisetransferId = Pk_FranchisetransferId;
-            model.TransferCharge = TransferCharge;
-            model.AddedBy = Session["PK_UserId"].ToString();
-            DataSet ds = model.ApproveSaleRequest();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            try
             {
-                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+             model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+                if (files != null)
                 {
-                    TempData["msg"] = "Record submited successfully !!";
-                        FormName = "SaleRequest";
-                        Controller = "User";
+                    model.Documenturl = "/Document/" + Guid.NewGuid() + Path.GetExtension(files.FileName);
+                    files.SaveAs(Path.Combine(Server.MapPath(model.Documenturl)));
                 }
-                else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                model.AddedBy = Session["PK_UserId"].ToString();
+                DataSet ds = model.ApproveSaleRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        TempData["msg"] = "Record submited successfully !!";
+
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
                 {
                     TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "SaleRequest";
-                        Controller = "User";
-                    }
-            }
-            else
-            {
-                TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    FormName = "SaleRequest";
-                    Controller = "User";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TempData["msg"] = ex.Message;
-                FormName = "SaleRequest";
-                Controller = "User";
+
             }
-            return View(FormName, Controller);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+
     }
 }

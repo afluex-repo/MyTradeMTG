@@ -34,7 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -260,7 +260,7 @@
     <Content Include="Global.asax" />
     <Content Include="LevelTree.aspx" />
     <Content Include="Models\WebService\AgentServices.asmx" />
-    <Content Include="MyTradeMTGWebsite\about.html" />
+    <Content Include="MyTradeMTGWebsite\error_page.html" />
     <Content Include="MyTradeMTGWebsite\assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="MyTradeMTGWebsite\assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="MyTradeMTGWebsite\assets\css\animate.css" />
@@ -278,7 +278,6 @@
     <Content Include="MyTradeMTGWebsite\assets\img\app-store-logo.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\favicon.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\footer_logo.png" />
-    <Content Include="MyTradeMTGWebsite\assets\img\footer_logo1.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\google-play-logo.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\home-main.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\home_banner.png" />
@@ -288,7 +287,6 @@
     <Content Include="MyTradeMTGWebsite\assets\img\logo-1.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\logo-2.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\logo.png" />
-    <Content Include="MyTradeMTGWebsite\assets\img\mytrade_logo %283%29.png" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-1.jpg" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-2.jpg" />
     <Content Include="MyTradeMTGWebsite\assets\img\partner\logo-3.jpg" />
@@ -821,9 +819,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -925,6 +921,11 @@
     <Content Include="Views\Report\LevelIncomeTr1Total.cshtml" />
     <None Include="Properties\PublishProfiles\MyTradeMTG1.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTG14jan23.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG25jan.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG25jan023.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG25jan23.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG27jan.pubxml" />
+    <None Include="Properties\PublishProfiles\MyTradeMTG6.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGdemo.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGOld.pubxml" />
     <None Include="Properties\PublishProfiles\MyTradeMTGOld1.pubxml" />
@@ -1052,6 +1053,11 @@
     <Content Include="Views\Admin\FranchiseRequestList.cshtml" />
     <Content Include="Views\User\SalesReport.cshtml" />
     <Content Include="Views\User\SaleRequest.cshtml" />
+    <Content Include="Views\AdminReports\SalesReportsForAdmin.cshtml" />
+    <Content Include="Views\Admin\ForTesting.cshtml" />
+    <Content Include="Views\Admin\Testing.cshtml" />
+    <Content Include="Views\User\Test.cshtml" />
+    <Content Include="Views\Admin\KumarError.cshtml" />
     <Content Include="Views\Shared\Website_LayoutPage.cshtml" />
     <Content Include="Views\Website\Index.cshtml" />
     <None Include="Web.Debug.config">
@@ -1063,6 +1069,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Document\" />
     <Folder Include="PanUpload\" />
     <Folder Include="plugins\apex\" />
     <Folder Include="Views\API\" />
@@ -1089,7 +1096,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53405</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53407/</IISUrl>
+          <IISUrl>http://localhost:53408/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

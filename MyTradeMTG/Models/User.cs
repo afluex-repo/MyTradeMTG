@@ -21,7 +21,8 @@ namespace MyTradeMTG.Models
         public string PanNumber { get; set; }
         public string AccountNo { get; set; }
         public string IFSCCode { get; set; }
-
+        public string FileUpload { get; internal set; }
+        public string FileName { get; internal set; }
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
@@ -70,7 +71,7 @@ namespace MyTradeMTG.Models
         public string FranchiseContactAddressId { get; set; }
         public string SalesDate { get; set; }
         public string FK_FranchiseUserId { get; set; }
-
+        public string Documenturl { get; set; }
 
         public string MTGToken { get; set; }
         public string TransferCharge { get; set; }
@@ -85,6 +86,9 @@ namespace MyTradeMTG.Models
         public string ProcessingFee { get; set; }
         public string PackageTypeId { get; set; }
         public string MemberTransferCharge { get; set; }
+
+        public string BrokerTransferCharge { get; set; }
+        
         #endregion
 
 
@@ -351,6 +355,7 @@ namespace MyTradeMTG.Models
 
 
         public string Pk_FranchisetransferId { get; set; }
+        
 
         public DataSet GetSalesReport()
         {
@@ -403,17 +408,24 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
+  
+
+
         public DataSet ApproveSaleRequest()
         {
             SqlParameter[] para = {
-                         new SqlParameter("@Pk_FranchisetransferId",Pk_FranchisetransferId),
+               
                 new SqlParameter("@AddedBy",AddedBy),
                 new SqlParameter("@TransactionDate",TransactionDate),
-                new SqlParameter("@TransactionNo",TransactionNo),
+                new SqlParameter("@TransactionId",TransactionNo),
                 new SqlParameter("@PaymentMode",PaymentMode),
-
+                 new SqlParameter("@Pk_FranchisetransferId",Pk_FranchisetransferId),
+                new SqlParameter("@BankName",BankName),
+                new SqlParameter("@BranchName",BranchName),
+                new SqlParameter("@Status",Status),
+                new SqlParameter("@DocumentUrl",Documenturl),
             };
-            DataSet ds = DBHelper.ExecuteQuery("ApproveSaleRequest");
+            DataSet ds = DBHelper.ExecuteQuery("ApproveSaleRequest", para);
             return ds;
         }
 

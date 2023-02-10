@@ -398,6 +398,121 @@ E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.P
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 E:\Repository\MyTradeMTG\MyTradeMTG\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\ApplicationInsights.config
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\csc.exe
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\System.Collections.Immutable.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\System.Reflection.Metadata.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\vbc.exe
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\VBCSCompiler.exe
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\roslyn\VBCSCompiler.exe.config
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\MyTradeMTG.dll.config
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\MyTradeMTG.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\MyTradeMTG.pdb
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.Agent.Intercept.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.DependencyCollector.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.Web.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.WindowsServer.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.ApplicationInsights.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.Web.Infrastructure.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\RestSharp.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Helpers.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Mvc.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Razor.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Deployment.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Razor.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.DependencyCollector.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.Web.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.WindowsServer.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.ApplicationInsights.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\RestSharp.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Razor.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Deployment.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Razor.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Helpers.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Mvc.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\ApplicationInsights.config
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\csc.exe
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\System.Collections.Immutable.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\System.Reflection.Metadata.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\vbc.exe
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\VBCSCompiler.exe
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\VBCSCompiler.exe.config
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\MyTradeMTG.dll.config
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\MyTradeMTG.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\MyTradeMTG.pdb
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.Agent.Intercept.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.DependencyCollector.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.PerfCounterCollector.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.ServerTelemetryChannel.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.Web.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.WindowsServer.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.ApplicationInsights.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.Web.Infrastructure.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\RestSharp.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Helpers.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Mvc.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Razor.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Deployment.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Razor.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.DependencyCollector.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.ServerTelemetryChannel.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.Web.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.AI.WindowsServer.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.ApplicationInsights.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\RestSharp.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Razor.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Deployment.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Webpages.Razor.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Helpers.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Mvc.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\Newtonsoft.Json.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\ApplicationInsights.config
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\csc.exe
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -451,8 +566,8 @@ D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
+D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
-D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
