@@ -750,6 +750,7 @@
     <Compile Include="Controllers\UserBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WebsiteController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1057,6 +1058,8 @@
     <Content Include="Views\Admin\Testing.cshtml" />
     <Content Include="Views\User\Test.cshtml" />
     <Content Include="Views\Admin\KumarError.cshtml" />
+    <Content Include="Views\Shared\Website_LayoutPage.cshtml" />
+    <Content Include="Views\Website\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

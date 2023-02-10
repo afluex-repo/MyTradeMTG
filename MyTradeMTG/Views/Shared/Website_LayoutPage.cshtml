@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- SITE TITLE -->
+    <title>My Trade</title>
+    <!-- Latest Bootstrap min CSS -->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/bootstrap/css/bootstrap.min.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="~/MyTradeMTGWebsite/asset/img/MtgCoinPng.png">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/fonts/themify-icons.css">
+    <!--- owl carousel Css-->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/owlcarousel/css/owl.carousel.css">
+
+    <!--slicknav Css-->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/css/slicknav.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/css/animate.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/css/style.css">
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/css/responsive.css">
+    <!--Popup CSS-->
+    <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/css/popup.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
+
+
+</head>
+<body data-spy="scroll" data-offset="80">
+
+    <div class="body-particles"></div>
+
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    <!-- START PRELOADER -->
+    <div class="preloader">
+        <div class="status">
+            <div class="status-mes"></div>
+        </div>
+    </div>
+    <!-- END PRELOADER -->
+    <!-- START NAVBAR -->
+    <div id="navigation" class="fixed-top navbar-light bg-faded site-navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <div class="site-logo">
+                        <a class="navbar-logo" href="index.html"><img src="~/MyTradeMTGWebsite/asset/img/wbg.gif" alt=""></a>
+                    </div>
+                </div><!--- END Col -->
+                <div class="col-lg-9 col-md-9 col-sm-8">
+                    <div class="header_right">
+                        <nav id="main-menu" class="ml-auto">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="index.html#about">About</a></li>
+                                <li><a href="index.html#forex">Forex</a></li>
+                                <li><a href="index.html#business">Business</a></li>
+                                <li><a href="index.html#faq">faq</a></li>
+                                <li><a href="index.html#download">Get App</a></li>
+                                <li><a href="index.html#contact">Contact Us</a></li>
+                                <li><a href="#" class="block-menu" id="modal_trigger" hre="#modal">Login</a></li>
+                            </ul>
+                        </nav>
+                        <div id="mobile_menu"></div>
+                    </div>
+                </div><!--- END Col -->
+            </div><!--- END ROW -->
+        </div><!--- END CONTAINER -->
+    </div>
+    <!-- END NAVBAR -->
+    <!--START LOGIN-->
+    <div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
+    top: 100px;">
+        <header class="popupHeader">
+            <span class="header_title">Login</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
+
+        <div class="popupBody">
+            <!--Social Login-->
+            <div class="social_login forget_form">
+                <div class="">
+                    <form>
+                        <label>Login Id</label>
+                        <input type="text" />
+                        <br />
+
+                        <label>Mobile No.</label>
+                        <input type="password" />
+                        <br />
+                        <div class="action_btns">
+                            <div>Already have an account ?<a href="#" class="login_modal"> Login</a></div>
+                            <div class="one_half last" style="width:85%"><a href="#" class="abtn" style="width:85%">Forget Password</a></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!--Username & Password Login form-->
+            <div class="user_login">
+                <form>
+                    <label>Email / Username</label>
+                    <input type="text" />
+                    <br />
+
+                    <label>Password</label>
+                    <input type="password" />
+                    <br />
+                    <a href="#" class="back_btn"> Forget Password ?</a>
+                    <div class="action_btns">
+                        <div class="one_half last"><a href="#" class="abtn">Login</a></div>
+                    </div>
+                </form><br />
+                <center>Don't have an account? <a href="#" id="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>
+
+            </div>
+
+            <!--Register Form-->
+            <div class="user_register">
+                <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="#">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label></label>
+                            <input type="text" placeholder="Reference Id" />
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <input type="text" placeholder="Enter Your First Name" />
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <input type="email" placeholder="Enter Your Last Name" />
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <input id="phone" type="tel" placeholder="Enter Mobile No.">
+                            <span id="valid-msg" class="hide">Valid</span>
+                            <span id="error-msg" class="hide">Invalid number</span>
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <input type="email" placeholder="Your Email Address" />
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <input type="password" placeholder="Enter Password" />
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <input type="password" placeholder="Confirm Password" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">
+                        <label>I accept all <a href="javascript:void(0)">Terms &amp; Use.</a></label>
+                    </div>
+
+                    <center><a href="#" class="abtn mt-0">Register</a></center>
+                    <div class="action_btns">
+                        <center><div class="d-flex">Already have an account ?<a href="#" class="login_modal" style="color:#ffd234"> Login</a></div></center>
+                    </div>
+            </div>
+
+            </form>
+
+        </div>
+    </div>
+    </div>
+    <!--END LOGIN-->
+    <!--Modal-->
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:100000">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content" style="background:#0f1b39;">
+                <div class="modal-header">
+                    <h5 class="title" id="exampleModalLabel">Terms & Use</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times; </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Visiting the Website</h5>
+                    <p>These terms and conditions, including the privacy statement provided by this website (collectively, the "Terms and Conditions"), govern your use of this website.By accessing and using this website, you agree to comply with these Terms and Conditions.</p>
+                    <p>The copyright of this website and all text, graphics, images, software and any other materials on this website belongs to  MY TRADE GLOBAL(" MTG Club") or its licensor.Except as permitted by the MY TRADE Product Disclosure Statement ("PDS"), the materials on this website are for your personal and non-commercial use only.</p>
+                    <h5 class="mt-1">Entire Agreement</h5>
+                    <p>These Terms and Conditions (and, if applicable, MY TRADE GLOBAL contain the entire agreement between you and us regarding your access to and use of the website.MY TRADE GLOBAL may change these Terms and Conditions at any time by posting an updated version of these Terms and Conditions on this website.You are responsible for reviewing these terms and conditions from time to time, and if your use of the website after any changes have been published on the website constitutes your consent to such changes.</p>
+                    <h5 class="mt-1">Third Party Materials and Websites</h5>
+                    <p>
+                        This website may contain materials produced by third parties or links to other websites.These materials and websites are provided by third parties and are not under the direct control of MY TRADE GLOBAL and MY TRADE GLOBAL shall not be responsible for the operation or content of any third-party materials or other websites (whether or not linked to this website).You agree that if you install any link from other websites to this website without a prior written consent from MY TRADE GLOBAL, MY TRADE GLOBAL has the right to request
+                        you to remove them.
+                    </p>
+                    <p>Although MY TRADE GLOBAL updates this website periodically, there is no guarantee that the information or materials contained in the website are up-to-date or accurate, or that the products or services available through the Website are available or useful.Materials displayed on this website may be changed by MY TRADE GLOBAL at any time without notice.</p>
+                    <p>Except as provided above with respect to the services contained herein, this website and all software and other materials on the website are provided on an "present" and "as available" basis without warranty of accuracy, timeliness or completeness.To the maximum extent permitted by law, all representations and warranties, whether express, implied, statutory or otherwise, including, without limitation, any warranties or conditions of or relating to accuracy, timeliness, merchantability, satisfactory quality or fitness for a particular or any purpose, are excluded.</p>
+                    <h5 class="mt-1">Right of Recovery</h5>
+                    <p>You agree to indemnify, to defend and maintain MY TRADE GLOBAL, its parent companies, subsidiaries, affiliates, managers and employees of any violation of the terms and conditions by you for the loss caused by negligence, or use the web sites, damage, claim or demand, including by any third party or by MY TRADE GLOBAL, its parents, subsidiaries, affiliates, managers and employees due to your violation of the terms and conditions or use the website negligence resulting reasonable legal fees.</p>
+                    <h5 class="mt-1">Your Personal Data</h5>
+                    <p>If you register to become a customer of MY TRADE GLOBAL, in addition to any responsibilities you may have, you agree to ensure that all information you provide to MY TRADE GLOBAL is complete and accurate to the best of your knowledge and belief.You agree to notify MY TRADE GLOBAL immediately about any changes to any of the details you have provided to ensure that MY TRADE GLOBAL 's records are up-to-date and correct.</p>
+                    <p>The personal data you provide to MY TRADE GLOBAL will only be used by MY TRADE GLOBAL in accordance with its Privacy Policy and privacy and data protection laws.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="abtn mt-0" data-dismiss="modal">I Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        @RenderBody()
+
+    <!-- START FOOTER -->
+    <div class="footer">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="footer_profile">
+                        <img src="asset/img/MtgCoinPng.png" class="img-fluid mb-1" style="height:5rem;" />
+                        <h2 class="text-dark mb-4 mtg_footer">MTG Coin</h2>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer_copyright">
+                        <p>&copy; 2022. All Rights Reserved by My Trade</p>
+                    </div>
+                </div><!--- END COL -->
+            </div><!--- END ROW -->
+        </div><!--- END CONTAINER -->
+    </div>
+    <!-- END FOOTER -->	
+    <script src="~/MyTradeMTGWebsite/asset/js/jquery-1.12.4.min.js"></script>
+    <!--Latest compiled and minified Bootstrap-->
+    <script src="~/MyTradeMTGWebsite/asset/bootstrap/js/bootstrap.min.js"></script>
+    <!--owl-carousel min js-->
+    <script src="~/MyTradeMTGWebsite/asset/owlcarousel/js/owl.carousel.min.js"></script>
+    <!--jquery counterup-->
+    <script src="~/MyTradeMTGWebsite/asset/js/jquery.counterup.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/asset/js/countdown.js"></script>
+    <!--jquery.slicknav-->
+    <script src="~/MyTradeMTGWebsite/asset/js/jquery.slicknav.js"></script>
+    <!--particles-->
+    <script src="~/MyTradeMTGWebsite/asset/js/particles.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/asset/js/app.js"></script>
+    <!--jquery.smooth-scroll-->
+    <script src="~/MyTradeMTGWebsite/asset/js/smooth-scroll.js"></script>
+    <!--magnific-popup js-->
+    <script src="~/MyTradeMTGWebsite/asset/js/jquery.magnific-popup.min.js"></script>
+    <!--scrolltopcontrol js-->
+    <script src="~/MyTradeMTGWebsite/asset/js/scrolltopcontrol.js"></script>
+    <!--WOW -Reveal Animations When You Scroll-->
+    <script src="~/MyTradeMTGWebsite/asset/js/wow.min.js"></script>
+
+    <!--scripts js-->
+    <script src="~/MyTradeMTGWebsite/asset/js/main.js"></script>
+    <script src="~/MyTradeMTGWebsite/asset/js/trading-widget.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/asset/js/utilities.min.js"></script>
+    <script src="~/MyTradeMTGWebsite/asset/js/config-theme.js"></script>
+    <!--jquery leanModal min js-->
+    <script src="~/MyTradeMTGWebsite/asset/js/jquery.leanModal.min.js"></script>
+    <!--login js-->
+    <script src="~/MyTradeMTGWebsite/asset/js/login.js"></script>
+    <!--scripts js-->
+    <script src="~/MyTradeMTGWebsite/asset/js/main.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"></script>
+
+    <script>
+            $('#modal').hide();
+            $('#modal_trigger').click(function()
+                {
+            $('#modal').toggle();
+             })
+             $('#modal_sign').click(function()
+            {
+                 $('#modal').toggle();
+                })
+                 $('.modal_close').click(function()
+                {
+
+                $('#modal').hide();
+                })
+    </script>
+    <script>
+
+var telInput = $("#phone"),
+  errorMsg = $("#error-msg"),
+  validMsg = $("#valid-msg");
+
+// initialise plugin
+telInput.intlTelInput({
+
+    allowExtensions: true,
+    formatOnDisplay: true,
+    autoFormat: true,
+    autoHideDialCode: true,
+    autoPlaceholder: true,
+    defaultCountry: "auto",
+    ipinfoToken: "yolo",
+
+    nationalMode: false,
+    numberType: "MOBILE",
+  //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+    preferredCountries: ['sa', 'ae', 'qa', 'om', 'bh', 'kw', 'ma'],
+    preventInvalidNumbers: true,
+    separateDialCode: true,
+    initialCountry: "auto",
+    geoIpLookup: function(callback) {
+  $.get("http://ipinfo.io", function() { }, "jsonp").always(function(resp) {
+    var countryCode = (resp && resp.country) ? resp.country: "";
+    callback(countryCode);
+});
+},
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
+});
+
+var reset = function() {
+  telInput.removeClass("error");
+  errorMsg.addClass("hide");
+  validMsg.addClass("hide");
+};
+
+// on blur: validate
+telInput.blur(function() {
+  reset();
+  if ($.trim(telInput.val())) {
+    if (telInput.intlTelInput("isValidNumber")) {
+      validMsg.removeClass("hide");
+} else {
+      telInput.addClass("error");
+      errorMsg.removeClass("hide");
+}
+}
+});
+
+// on keyup / change flag: reset
+telInput.on("keyup change", reset);
+
+
+
+    </script>
+</body>
+</html>
