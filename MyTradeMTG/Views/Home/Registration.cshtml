@@ -1718,6 +1718,9 @@
                 max-height:150px;
                 overflow-y:scroll !important;
             }
+            h5,p{
+                color:white;
+            }
     </style>
 </head>
 
@@ -1825,8 +1828,8 @@
                                             </div>-->
                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="checkbox" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable" />
-                                                    <label>I accept all <a href="#" data-toggle="modal" data-target="#exampleModalScrollable">Terms &amp; Use.</a></label>
+                                                    <input type="checkbox" class="mt-1" data-bs-toggle="modal" data-bs-target="#GFG" />
+                                                    <label>I accept all <a href="#" data-bs-toggle="modal" data-bs-target="#GFG">Terms &amp; Use.</a></label>
                                                     <!--<input type="checkbox" value="Yes" name="wp-comment-cookies-consent" id="wp-comment-cookies-consent">
                                                     <label for="wp-comment-cookies-consent">I accept all <a href="javascript:void(0)">Terms & Conditions. </a></label>-->
                                                 </div>
@@ -1852,42 +1855,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal-->
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:100000">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            <div class="modal-content" style="background:#0f1b39;">
-                <div class="modal-header">
-                    <h5 class="title" id="exampleModalLabel">Terms & Use</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times; </span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5>Visiting the Website</h5>
-                    <p>These terms and conditions, including the privacy statement provided by this website (collectively, the "Terms and Conditions"), govern your use of this website.By accessing and using this website, you agree to comply with these Terms and Conditions.</p>
-                    <p>The copyright of this website and all text, graphics, images, software and any other materials on this website belongs to  MY TRADE GLOBAL(" MTG Club") or its licensor.Except as permitted by the MY TRADE Product Disclosure Statement ("PDS"), the materials on this website are for your personal and non-commercial use only.</p>
-                    <h5 class="mt-1">Entire Agreement</h5>
-                    <p>These Terms and Conditions (and, if applicable, MY TRADE GLOBAL contain the entire agreement between you and us regarding your access to and use of the website.MY TRADE GLOBAL may change these Terms and Conditions at any time by posting an updated version of these Terms and Conditions on this website.You are responsible for reviewing these terms and conditions from time to time, and if your use of the website after any changes have been published on the website constitutes your consent to such changes.</p>
-                    <h5 class="mt-1">Third Party Materials and Websites</h5>
-                    <p>
-                        This website may contain materials produced by third parties or links to other websites.These materials and websites are provided by third parties and are not under the direct control of MY TRADE GLOBAL and MY TRADE GLOBAL shall not be responsible for the operation or content of any third-party materials or other websites (whether or not linked to this website).You agree that if you install any link from other websites to this website without a prior written consent from MY TRADE GLOBAL, MY TRADE GLOBAL has the right to request
-                        you to remove them.
-                    </p>
-                    <p>Although MY TRADE GLOBAL updates this website periodically, there is no guarantee that the information or materials contained in the website are up-to-date or accurate, or that the products or services available through the Website are available or useful.Materials displayed on this website may be changed by MY TRADE GLOBAL at any time without notice.</p>
-                    <p>Except as provided above with respect to the services contained herein, this website and all software and other materials on the website are provided on an "present" and "as available" basis without warranty of accuracy, timeliness or completeness.To the maximum extent permitted by law, all representations and warranties, whether express, implied, statutory or otherwise, including, without limitation, any warranties or conditions of or relating to accuracy, timeliness, merchantability, satisfactory quality or fitness for a particular or any purpose, are excluded.</p>
-                    <h5 class="mt-1">Right of Recovery</h5>
-                    <p>You agree to indemnify, to defend and maintain MY TRADE GLOBAL, its parent companies, subsidiaries, affiliates, managers and employees of any violation of the terms and conditions by you for the loss caused by negligence, or use the web sites, damage, claim or demand, including by any third party or by MY TRADE GLOBAL, its parents, subsidiaries, affiliates, managers and employees due to your violation of the terms and conditions or use the website negligence resulting reasonable legal fees.</p>
-                    <h5 class="mt-1">Your Personal Data</h5>
-                    <p>If you register to become a customer of MY TRADE GLOBAL, in addition to any responsibilities you may have, you agree to ensure that all information you provide to MY TRADE GLOBAL is complete and accurate to the best of your knowledge and belief.You agree to notify MY TRADE GLOBAL immediately about any changes to any of the details you have provided to ensure that MY TRADE GLOBAL 's records are up-to-date and correct.</p>
-                    <p>The personal data you provide to MY TRADE GLOBAL will only be used by MY TRADE GLOBAL in accordance with its Privacy Policy and privacy and data protection laws.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="abtn mt-0" data-dismiss="modal">I Accept</button>
                 </div>
             </div>
         </div>
@@ -2048,31 +2015,42 @@
     *@
     <!-- End Login Area -->
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div class="container">
+        <div class="modal fade" id="GFG">
+            <div class="modal-dialog  modal-lg modal-dialog-scrollable">
+                <div class="modal-content" style="background:#363062;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="GFGLabel"> Terms & Use</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span class="fa fa-window-close"></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Visiting the Website</h5>
+                        <p>These terms and conditions, including the privacy statement provided by this website (collectively, the "Terms and Conditions"), govern your use of this website.By accessing and using this website, you agree to comply with these Terms and Conditions.</p>
+                        <p>The copyright of this website and all text, graphics, images, software and any other materials on this website belongs to  MY TRADE GLOBAL(" MTG Club") or its licensor.Except as permitted by the MY TRADE Product Disclosure Statement ("PDS"), the materials on this website are for your personal and non-commercial use only.</p>
+                        <h5 class="mt-1">Entire Agreement</h5>
+                        <p>These Terms and Conditions (and, if applicable, MY TRADE GLOBAL contain the entire agreement between you and us regarding your access to and use of the website.MY TRADE GLOBAL may change these Terms and Conditions at any time by posting an updated version of these Terms and Conditions on this website.You are responsible for reviewing these terms and conditions from time to time, and if your use of the website after any changes have been published on the website constitutes your consent to such changes.</p>
+                        <h5 class="mt-1">Third Party Materials and Websites</h5>
+                        <p>
+                            This website may contain materials produced by third parties or links to other websites.These materials and websites are provided by third parties and are not under the direct control of MY TRADE GLOBAL and MY TRADE GLOBAL shall not be responsible for the operation or content of any third-party materials or other websites (whether or not linked to this website).You agree that if you install any link from other websites to this website without a prior written consent from MY TRADE GLOBAL, MY TRADE GLOBAL has the right to request
+                            you to remove them.
+                        </p>
+                        <p>Although MY TRADE GLOBAL updates this website periodically, there is no guarantee that the information or materials contained in the website are up-to-date or accurate, or that the products or services available through the Website are available or useful.Materials displayed on this website may be changed by MY TRADE GLOBAL at any time without notice.</p>
+                        <p>Except as provided above with respect to the services contained herein, this website and all software and other materials on the website are provided on an "present" and "as available" basis without warranty of accuracy, timeliness or completeness.To the maximum extent permitted by law, all representations and warranties, whether express, implied, statutory or otherwise, including, without limitation, any warranties or conditions of or relating to accuracy, timeliness, merchantability, satisfactory quality or fitness for a particular or any purpose, are excluded.</p>
+                        <h5 class="mt-1">Right of Recovery</h5>
+                        <p>You agree to indemnify, to defend and maintain MY TRADE GLOBAL, its parent companies, subsidiaries, affiliates, managers and employees of any violation of the terms and conditions by you for the loss caused by negligence, or use the web sites, damage, claim or demand, including by any third party or by MY TRADE GLOBAL, its parents, subsidiaries, affiliates, managers and employees due to your violation of the terms and conditions or use the website negligence resulting reasonable legal fees.</p>
+                        <h5 class="mt-1">Your Personal Data</h5>
+                        <p>If you register to become a customer of MY TRADE GLOBAL, in addition to any responsibilities you may have, you agree to ensure that all information you provide to MY TRADE GLOBAL is complete and accurate to the best of your knowledge and belief.You agree to notify MY TRADE GLOBAL immediately about any changes to any of the details you have provided to ensure that MY TRADE GLOBAL 's records are up-to-date and correct.</p>
+                        <p>The personal data you provide to MY TRADE GLOBAL will only be used by MY TRADE GLOBAL in accordance with its Privacy Policy and privacy and data protection laws.</p>
+                        <hr/>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary mt-0" data-dismiss="modal">I Accept</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <!-- Links of JS files -->
     <script src="~/MyTradeWebsite1/assets/js/jquery.min.js"></script>
