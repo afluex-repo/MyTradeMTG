@@ -107,9 +107,9 @@ namespace MyTradeMTG.Controllers
                             else
                             {
                                 TempData["Login"] = "Incorrect Password";
-                                return Redirect("/MyTradeMTGWebsite/error_page.html");
-                                //FormName = "Login";
-                                //Controller = "Home";
+                                //return Redirect("/MyTradeMTGWebsite/error_page.html");
+                                FormName = "Login";
+                                Controller = "Home";
                             }
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
@@ -171,34 +171,34 @@ namespace MyTradeMTG.Controllers
                         else
                         {
                             TempData["Login"] = "Incorrect LoginId Or Password";
-                            return Redirect("/MyTradeMTGWebsite/error_page.html");
-                            //FormName = "Login";
-                            //Controller = "Home";
+                            //return Redirect("/MyTradeMTGWebsite/error_page.html");
+                            FormName = "Login";
+                            Controller = "Home";
                         }
                     }
                     else
                     {
                         TempData["Login"] = "Incorrect LoginId Or Password";
-                        return Redirect("/MyTradeMTGWebsite/error_page.html");
-                        //FormName = "Login";
-                        //Controller = "Home";
+                        //return Redirect("/MyTradeMTGWebsite/error_page.html");
+                        FormName = "Login";
+                        Controller = "Home";
                     }
                 }
                 else
                 {
                    TempData["Login"] = "Incorrect LoginId Or Password";
-                    return Redirect("/MyTradeMTGWebsite/error_page.html");
-                    //FormName = "Login";
-                    //Controller = "Home";
-                    //Redirect("/MyTradeMTGWebsite/index.html");
+                    //return Redirect("/MyTradeMTGWebsite/error_page.html");
+                    FormName = "Login";
+                    Controller = "Home";
+                    Redirect("/MyTradeMTGWebsite/index.html");
                 }
             }
             catch (Exception ex)
             {
                 TempData["Login"] = ex.Message;
-                return Redirect("/MyTradeMTGWebsite/error_page.html");
-                //FormName = "Login";
-                //Controller = "Home";
+                //return Redirect("/MyTradeMTGWebsite/error_page.html");
+                FormName = "Login";
+                Controller = "Home";
             }
             return RedirectToAction(FormName, Controller);
         }
