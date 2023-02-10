@@ -1750,13 +1750,16 @@
                                                     <div class="form-group">
                                                         @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Reference Id*" })
                                                         @Html.ValidationMessageFor(m => m.LoginId)
+                                                        <label style="display:none;color:#ff9900" id="GetSponsorName"></label>
+
+
                                                     </div>
                                                 </div>
-                                                <!--<div class="col-sm-12 col-md-6 col-lg-6">
+                                                @*<div class="col-sm-12 col-md-6 col-lg-6">
                                                     <div class="form-group">
                                                         @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true", @placeholder = "Sponsor Name" })
                                                     </div>
-                                                </div>-->
+                                                </div>*@
                                             }
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
@@ -1770,11 +1773,11 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <input id="phone" type="tel" placeholder="Enter Mobile No." class="form-control">
-                                                    <span id="valid-msg" class="hide">Valid</span>
-                                                    <span id="error-msg" class="hide">Invalid number</span>
-                                                   <!-- @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No*", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                                -->
+                                                    <input id="phone" type="tel" placeholder="Enter Mobile No." class="form-control"  maxlength = "10" onkeypress = "return isNumberKey(event);" >
+                                                    @*<span id="valid-msg" class="hide">Valid</span>*@
+                                                    <span style="color:red;" id="error-msg" class="hide">Invalid number</span>
+                                                   @*@Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No*", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })*@
+                                               
                                                        </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
@@ -1843,7 +1846,7 @@
                                         </div>
 
                                         <div class="forgot-password d-flex justify-content-between mt-2">
-                                            <a href="/Home/Index">Back To Home</a>
+                                            <a href="/Website/Index">Back To Home</a>
                                             <a href="/Home/Login">Back To Login</a>
                                         </div>
 
@@ -2103,12 +2106,14 @@
                 data: { 'ReferBy': $(obj).val() },
                 success: function (response) {
                     if (response.Result == "Yes") {
-                        $('#SponsorName').val(response.DisplayName);
+                        $('#GetSponsorName').text(response.DisplayName);
+                        $('#GetSponsorName').show();
+
                     }
                     else {
 
                         $("#SponsorId").addClass('errortext');
-                        $('#SponsorName').val('');
+                        $('#GetSponsorName').val('');
                         $('#SponsorId').val('');
                         $('#SponsorId').focus();
                         alert(response.Result);
@@ -2126,6 +2131,7 @@
         }
 
         function confirmregistration() {
+            debugger;
             $(".errortext").removeClass("errortext");
             if ($('#SponsorId').val() == '') {
                 $("#SponsorId").addClass('errortext');
@@ -2137,9 +2143,9 @@
                 $('#FirstName').focus();
                 return false;
             }
-            if ($('#MobileNo').val() == '') {
-                $("#MobileNo").addClass('errortext');
-                $('#MobileNo').focus();
+            if ($('#phone').val() == '') {
+                $("#phone").addClass('errortext');
+                $('#phone').focus();
                 return false;
             }
             if ($('#Email').val() == '') {
@@ -2158,17 +2164,17 @@
                 return false;
             }
 
-            if ($('#Gender').val() == '0') {
-                alert("Please select Gender!");
-                return false;
-            }
+            //if ($('#Gender').val() == '0') {
+            //    alert("Please select Gender!");
+            //    return false;
+            //}
 
-            if ($('#Country').val() == '') {
-                alert('Please select Country!')
-                return false;
-            }
+            //if ($('#Country').val() == '') {
+            //    alert('Please select Country!')
+            //    return false;
+            //}
 
-            $("#MobileNo").attr("disabled", "disabled");
+            $("#phone").attr("disabled", "disabled");
             $("#FirstName").attr("disabled", "disabled");
             $("#SponsorId").attr("disabled", "disabled");
             $("#LastName").attr("disabled", "disabled");
@@ -2184,7 +2190,7 @@
         }
 
         function editregistration() {
-            $("#MobileNo").attr("disabled", false);
+            $("#phone").attr("disabled", false);
             $("#FirstName").attr("disabled", false);
             $("#LastName").attr("disabled", false);
             $("#SponsorId").attr("disabled", false);
@@ -2214,7 +2220,7 @@
                 url: "/Home/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val(), Country: $("#Country :selected").val() },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val(), Country: $("#Country :selected").val() },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
