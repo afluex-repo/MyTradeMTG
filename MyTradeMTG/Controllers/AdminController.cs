@@ -3059,6 +3059,41 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
-        
+
+
+
+        public ActionResult UserTopUpAllow()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserTopUpAllow(Admin model)
+        {
+            try
+            {
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveUserTopUpAllow();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        TempData["UserTopUpAllow"] = "User TopUp Allow Successfully. ";
+                    }
+                    else
+                    {
+                        TempData["UserTopUpAllow"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["UserTopUpAllow"] = ex.Message;
+            }
+            return RedirectToAction("UserTopUpAllow", "Admin");
+        }
+
+
+
     }
 }

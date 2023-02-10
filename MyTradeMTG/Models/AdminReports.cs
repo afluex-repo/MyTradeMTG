@@ -132,7 +132,9 @@ namespace MyTradeMTG.Models
         public string Pk_FranchisetransferId { get; set; }
         public string ActivationMTGToken { get; set; }
 
-        
+        public string Topupid { get; set; }
+
+
 
 
         public DataSet GetRechargeList()

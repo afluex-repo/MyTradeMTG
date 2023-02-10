@@ -1053,6 +1053,7 @@
     <Content Include="Views\User\SalesReport.cshtml" />
     <Content Include="Views\User\SaleRequest.cshtml" />
     <Content Include="Views\AdminReports\SalesReportsForAdmin.cshtml" />
+    <Content Include="Views\Admin\UserTopUpAllow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
