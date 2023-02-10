@@ -1,4 +1,5 @@
-﻿
+﻿@model MyTradeMTG.Models.Home
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Website_LayoutPage.cshtml";
@@ -498,4 +499,356 @@
         </div><!-- END ROW -->
     </div><!-- END CONTAINER -->
 </section>
+
+
+<!--START LOGIN-->
+<div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
+    top: 100px;">
+    <header class="popupHeader">
+        <span class="header_title">Login</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <div class="popupBody">
+        <!--Social Forget start-->
+        <div class="social_login forget_form">
+            <div class="">
+                <form action="/Website/ForgetPasswordAction" method="post">
+                    <label>Login Id</label>
+
+                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId" })
+                    <br />
+
+                    <label>Mobile No.</label>
+                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No" })
+                    <br />
+                    <div class="action_btns">
+                        <div>Already have an account ?<a href="#" class="login_modal"> Login</a></div>
+                        @*<div class="one_half last" style="width:85%"><a href="#" class="abtn" style="width:85%">Forget Password</a></div>*@
+
+
+                        @*<input type="submit" id="forgetpassword" class="abtn" name="forgetpassword" value="Submit" onclick="return validateform();" />*@
+
+                        <button type="submit" id="forgetpassword" class="abtn" name="forgetpassword" onclick="return validateform();">Submit</button>
+                        <br />
+                        <span class="text-danger"> @TempData["Login"] </span><br />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Social Forget end-->
+        <!--Social login statrt-->
+        <div class="user_login">
+            <form action="/Website/LoginAction" method="post">
+                <label>Login Id</label>
+                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
+                <br />
+
+                <label>Password</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
+                <br />
+                <a href="/Home/ForgetPassword" class="back_btn"> Forget Password ?</a>
+                <div class="action_btns">
+                    @*<div class="one_half last"><a href="#" class="abtn">Login</a></div>*@
+                    <button type="submit" class="abtn">Login</button>
+                </div>
+            </form><br />
+            <center>Don't have an account? <a href="/Website/Registration" id="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>
+
+        </div>
+        <!--Social login end-->
+        <!--Register Form start-->
+        <div class="user_register">
+            <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
+                <div class="row">
+                    <div class="col-lg-12 form-group">
+                        @*<input type="text" placeholder="Reference Id" />*@
+                        @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
+                        @Html.ValidationMessageFor(m => m.LoginId)
+                        <label id="SponsorName"></label>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="text" placeholder="Enter Your First Name" />*@
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true" })
+
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="email" placeholder="Enter Your Last Name" />*@
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <input id="phone" type="tel" placeholder="Enter Mobile No.">
+                        @*<span id="valid-msg" class="hide">Valid</span>*@
+                        <span id="error-msg" class="hide">Invalid number</span>
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="email" placeholder="Your Email Address" />*@
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email*" })
+
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="password" placeholder="Enter Password" />*@
+                        @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password" })*@
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*"})
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="password" placeholder="Confirm Password" />*@
+                        @*@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })*@
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">
+                    <label>I accept all <a href="javascript:void(0)">Terms &amp; Use.</a></label>
+                </div>
+                @*<center>
+                    <button type="submit" class="abtn mt-0">Confirm</button>
+                </center>*@
+
+
+
+
+                <button type="submit" class="abtn mt-0" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
+                <div class="row" id="divReg" style="display: none">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <button type="button" class="abtn mt-0" onclick="return saveregistration();" id="Register">Sign Up</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
+                    </div>
+                </div>
+
+                @*<div class="forgot-password d-flex justify-content-between mt-2">
+                    <a href="/Home/Index">Back To Home</a>
+                    <a href="/Home/Login">Back To Login</a>
+                </div>*@
+
+
+
+
+
+                @*<center><a href="#" class="abtn mt-0">Register</a></center>*@
+                <div class="action_btns">
+                    <center><div class="d-flex">Already have an account ?<a href="#" class="login_modal" style="color:#ffd234"> Login</a></div></center>
+                </div>
+            </form>
+        </div>
+
+        <!--Register Form end-->
+
+
+    </div>
+</div>
+
+<!--END LOGIN-->
+@*<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>*@
+
+
+
+<script>
+    function getsponsordetails(obj) {
+        debugger;
+            $("#divload").css({ 'display': '' });
+            $(".errortext").removeClass("errortext");
+            $.ajax({
+                url: '/Home/GetSponserDetails',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { 'ReferBy': $(obj).val() },
+                success: function (response) {
+                    if (response.Result == "Yes") {
+                        $('#SponsorName').text(response.DisplayName);
+                    }
+                    else {
+
+                        $("#SponsorId").addClass('errortext');
+                        $('#SponsorName').val('');
+                        $('#SponsorId').val('');
+                        $('#SponsorId').focus();
+                        alert(response.Result);
+                    }
+                }
+            })
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+        function confirmregistration() {
+            $(".errortext").removeClass("errortext");
+            if ($('#SponsorId').val() == '') {
+                $("#SponsorId").addClass('errortext');
+                $('#SponsorId').focus();
+                return false;
+            }
+            if ($('#FirstName').val() == '') {
+                $("#FirstName").addClass('errortext');
+                $('#FirstName').focus();
+                return false;
+            }
+            if ($('#phone').val() == '') {
+                $("#phone").addClass('errortext');
+                $('#phone').focus();
+                return false;
+            }
+            if ($('#Email').val() == '') {
+                $("#Email").addClass('errortext');
+                $('#Email').focus();
+                return false;
+            }
+            if ($('#Password').val() == '') {
+                $("#Password").addClass('errortext');
+                $('#Password').focus();
+                return false;
+            }
+            if ($('#ConfirmPassword').val() == '') {
+                $("#ConfirmPassword").addClass('errortext');
+                $('#ConfirmPassword').focus();
+                return false;
+            }
+
+            //if ($('#Gender').val() == '0') {
+            //    alert("Please select Gender!");
+            //    return false;
+            //}
+
+            //if ($('#Country').val() == '') {
+            //    alert('Please select Country!')
+            //    return false;
+            //}
+
+            $("#phone").attr("disabled", "disabled");
+            $("#FirstName").attr("disabled", "disabled");
+            $("#SponsorId").attr("disabled", "disabled");
+            $("#LastName").attr("disabled", "disabled");
+            //$("#PinCode").attr("disabled", "disabled");
+            $("#Password").attr("disabled", "disabled");
+            $("#ConfirmPassword").attr("disabled", "disabled");
+            //$("#Gender").attr("disabled", "disabled");
+            //$("#Country").attr("disabled", "disabled");
+            $("#Email").attr("disabled", "disabled");
+            $('#Confirm').attr("disabled", "disabled");
+            $('#Confirm').hide();
+            $('#divReg').show();
+        }
+
+        function editregistration() {
+            $("#phone").attr("disabled", false);
+            $("#FirstName").attr("disabled", false);
+            $("#LastName").attr("disabled", false);
+            $("#SponsorId").attr("disabled", false);
+            $("#LastName").attr("disabled", false);
+            //$("#PinCode").attr("disabled", false);
+            $("#Password").attr("disabled", false);
+            $("#ConfirmPassword").attr("disabled", false);
+            //$("#Gender").attr("disabled", false);
+            $("#Email").attr("disabled", false);
+            //$("#Country").attr("disabled", false);
+            $('#Confirm').show();
+            $('#Confirm').attr("disabled", false);
+            $('#divReg').hide();
+        }
+
+        function saveregistration() {
+            $('#Register').attr("disabled", "disabled");
+            $("#divload").css({ 'display': '' });
+            var Leg = "";
+            if ($('#left').prop('checked')) {
+                Leg = "L";
+            }
+            else {
+                Leg = "R";
+            }
+            $.ajax({
+                url: "/Website/RegistrationAction",
+                Type: "Get",
+                DataType: "JSON",
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                    }
+                    else {
+                        $("#divload").css({ 'display': 'none' });
+                        alert(data.Result);
+                    }
+                }
+
+            });
+        }
+        //function getstatecity() {
+        //    $(".errortext").removeClass("errortext");
+        //    $.ajax({
+        //        url: "/Home/GetStateCity",
+        //        Type: "Get",
+        //        DataType: "JSON",
+        //        data: { PinCode: $("#PinCode").val() },
+        //        success: function (data) {
+        //            if (data.Result == "1") {
+        //                $("#State").val(data.State);
+        //                $("#City").val(data.City);
+        //            }
+        //            else {
+        //                $("#State").val('');
+        //                $("#City").val('');
+        //                $("#PinCode").val('');
+        //                $("#PinCode").addClass('errortext');
+        //                $('#PinCode').focus();
+        //                alert(data.Result);
+
+        //            }
+        //        }
+        //    });
+        //}
+        function isNumberKey(evt) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+        function validateConfPassword() {
+            var password = $('#Password').val();
+            var ConfirmPassword = $('#ConfirmPassword').val();
+            if (password != ConfirmPassword) {
+                $("#Password").addClass('errortext');
+                $("#ConfirmPassword").addClass('errortext');
+                $('#Password').val('');
+                $('#ConfirmPassword').val('');
+                alert("Password and Confirm Password are different")
+                return false;
+            }
+        }
+
+</script>
 
