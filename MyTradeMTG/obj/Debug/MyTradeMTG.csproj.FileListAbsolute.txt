@@ -570,4 +570,4 @@ D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
-E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
+D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
