@@ -45,11 +45,11 @@
                                     </div>
                                 </div>
                                 </div>
-                            <div class="mt-4">
-                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                            <div class="mt-4"> 
+                                <table id="html5-extension" class="table table-hover non-hover"  data-sortable="false" data-page-length='20'>
                                     <thead>
                                         <tr>
-                                            <th>S No.</th>
+                                            <th class="sorting_disabled" data-sortable="false">S No.</th>
                                             <th>Name</th>
                                             <th>Product Name</th>
                                             <th>Topup MTG Token/USDT</th>
@@ -70,11 +70,11 @@
                                         {
                                             if (Model.lstTopUp != null)
                                             {
-                                                int i = 1;
+                                                int i = 10;
                                                 foreach (var Item in Model.lstTopUp)
                                                 {
                                                     <tr class="text-left">
-                                                        <td>@i</td>
+                                                        <td class="sorting_disabled" data-sortable="false">@i</td>
                                                         <td>@Item.Name</td>
                                                         <td>@Item.ProductName</td>
                                                         <td>@Item.PinAmount</td>
@@ -89,7 +89,7 @@
                                                         <td>@Item.TopUpDate</td>
                                                         @*<td>@Item.Topupid</td>*@
                                                     </tr>
-                                                    i++;
+                                                    i--;
                                                 }
                                             }
                                         }

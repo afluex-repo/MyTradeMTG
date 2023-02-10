@@ -31,19 +31,19 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Package Type<span style="color: red">*</span></label>
-                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "default-select form-control" })
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Package<span style="color: red">*</span></label>
-                                    @Html.DropDownListFor(m => m.Packageid, new SelectList(ViewBag.ddlPackage, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.Packageid, new SelectList(ViewBag.ddlPackage, "Value", "Text"), new { @class = "default-select form-control" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mt-30">
                                     <input type="submit" id="btnSearch" value="Search" name="btnSearch" class="btn btn-success" />
-                                    <a href="/Master/PackageMaster" class="btn btn-primaryttttt">Add New</a>
+                                    <a href="/Master/PackageMaster" class="btn btn-primary">Add New</a>
 
 
                                 </div>
@@ -165,7 +165,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>

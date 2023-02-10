@@ -126,6 +126,10 @@
             /*color: #0a0917;*/
             color: #ffffff;
         }
+        .left_space
+        {
+            left:150px;
+        }
     </style>
 
 
@@ -203,8 +207,6 @@
                                 {
                                     <span class="text-success" style="font-size:23px">Franchise Registered : @Session["FirmName"]</span>
                                 }
-                              
-
                             </div>
                         </div>
 
@@ -2572,6 +2574,29 @@
         }
 
     </script>
-
+    <script>
+        $('.hamburger').click(function () {
+            if ($('divdash h2').hasClass('left_space'))
+            {
+                $('divdash h2').removeClass('left_space');
+            }
+            else
+            {
+                $('divdash h2').addClass('left_space');
+            }
+          
+        });
+    </script>
+    <script>
+        $('#html5-extension').find("thead tr th").removeClass("sorting_asc");
+        $('#html5-extension').find("tbody tr td").removeClass("sorting_asc");
+        $('#html5-extension').find("tbody tr td").removeClass("sorting_1");
+    var after = $('#html5-extension').DataTable({
+        "order": [[1, "asc"]],                       // sorting 2nd column
+        "columnDefs": [
+          { "orderable": false, "targets": "_all" } // Applies the option to all columns
+        ]
+    });
+    </script>
 </body>
 </html>
