@@ -379,6 +379,11 @@ namespace MyTradeMTG.Controllers
                     Obj.TopUpDate = r["TopUpDate"].ToString();
                     Obj.TopupVia = r["TopupVia"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    Obj.BasisOn = r["BasisOn"].ToString();
+                    Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
+                    Obj.Topupid = r["Topupid"].ToString();
+
+
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
@@ -458,6 +463,10 @@ namespace MyTradeMTG.Controllers
                     Obj.TopUpDate = r["TopUpDate"].ToString();
                     Obj.TopupVia = r["TopupVia"].ToString();
                     ViewBag.Total = ds11.Tables[1].Rows[0]["Total"].ToString();
+                    Obj.BasisOn = r["BasisOn"].ToString();
+                    Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
+                    Obj.Topupid = r["Topupid"].ToString();
+
                     lst1.Add(Obj);
                 }
                 newdata.lsttopupreport = lst1;
@@ -1228,10 +1237,10 @@ namespace MyTradeMTG.Controllers
             }
             else
             {
-                model.RootAgentCode = "MyTradeMTG";
+                model.RootAgentCode = "MyTrade";
                 model.PK_UserId = "1";
-                model.LoginId = "MyTradeMTG";
-                model.DisplayName = "MyTradeMTG";
+                model.LoginId = "MyTrade";
+                model.DisplayName = "MyTrade";
             }
             List<TreeMembers> lst = new List<TreeMembers>();
             List<MemberDetails> lstMember = new List<MemberDetails>();

@@ -44,7 +44,7 @@
                                             <th style="display:none">Fk_UserId_</th>
                                             <th>User Contact Address</th>
                                             <th>User Name</th>
-                                            <th>MTG Token</th>
+                                            <th>MTG </th>
                                             <th style="display:none;">BankName</th>
                                             <th style="display:none;">BranchName</th>
                                             <th style="display:none;">IFSCCode</th>
@@ -120,8 +120,8 @@
 
                                                     <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" @*style="display:none"*@ hidden />
                                                     <div class="form-group">
-                                                        <label>MTG Token<span style="color: red"></span></label>
-                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony_dd()", @style = "background:none;border:none;margin-top:-15px" })
+                                                        <label>MTG <span style="color: red"></span></label>
+                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony_dd()", @style = "background:none;border:none;margin-top:-15px" })
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4" style="display:none;">

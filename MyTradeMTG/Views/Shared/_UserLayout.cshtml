@@ -363,8 +363,8 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="/Downline/DirectList"> DownTeam Tree</a></li>
-                            <li><a href="/user/TreeTTP"> Level Tree TTP</a></li>
-                            <li><a href="/user/Tree"> Level Tree TPS</a></li>
+                            <li><a href="/user/TreeTTP"> Level Tree TR1</a></li>
+                            <li><a href="/user/Tree"> Level Tree TR2</a></li>
                             <li><a href="/Downline/AssociateTree"> Direct List</a></li>
 
                         </ul>
@@ -378,13 +378,13 @@
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="flaticon-381-notepad"></i>
-                            <span class="nav-text">TPS Reports</span>
+                            <span class="nav-text">TR2 Reports</span>
                         </a>
                         <ul aria-expanded="false">
                             <li>
-                                <a href="/Wallet/ROIWallet"> TPS Wallet</a>
+                                <a href="/Wallet/ROIWallet"> TR2 Wallet</a>
                             </li>
-                            <li><a href="/Wallet/ROIIncomeReports"> TPS Income</a></li>
+                            <li><a href="/Wallet/ROIIncomeReports"> TR2 Income</a></li>
                         </ul>
                     </li>
                     <li>
@@ -394,9 +394,9 @@
                         </a>
                         <ul aria-expanded="false">
                             <li>
-                                <a href="/Report/LevelIncomeTr1Total"> Level Bonus TTP</a>
+                                <a href="/Report/LevelIncomeTr1Total"> Level Bonus TR1</a>
                             </li>
-                            <li><a href="/Report/LevelIncomeTr2Total"> Level Bonus TPS</a></li>
+                            <li><a href="/Report/LevelIncomeTr2Total"> Level Bonus TR2</a></li>
                             <li><a href="/User/SponsorIncomeForuser"> Sponsor Bonus</a></li>
                         </ul>
                     </li>
@@ -1145,7 +1145,8 @@
             },
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
+            "pageLength": 7,
+             order: [[0, 'desc']]
         });
     </script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
@@ -1161,7 +1162,7 @@
                     show: false,
                 }
             },
-            labels: ['Active', 'InActive', 'TPS Id'],
+            labels: ['Active', 'InActive', 'TR2 Id'],
             colors: ['#d7740f', '#f10909', '#168733', ],
             series: [@ViewBag.TotalActive, @ViewBag.TotalInActive, @ViewBag.TotalBlocked],
             borderColor: '#F97300',
@@ -1192,7 +1193,7 @@
                     show: false,
                 }
             },
-            labels: ['TTP', 'TPS'],
+            labels: ['TR1', 'TR2'],
             colors: ['#d7740f', '#168733'],
             series: [@ViewBag.Tr1Business, @ViewBag.Tr2Business],
             borderColor: '#F97300',

@@ -151,7 +151,7 @@ namespace MyTradeMTG.Controllers
                     {
                         ProgressReport obj = new ProgressReport();
                         obj.Year = r["Year"].ToString();
-                        obj.Cramount = r["Cramount"].ToString();
+                        //obj.Cramount = r["Cramount"].ToString();
                         obj.Dramount = r["Dramount"].ToString();
                         lst.Add(obj);
                     }
@@ -283,15 +283,27 @@ namespace MyTradeMTG.Controllers
         public ActionResult TopUp()
         {
             Account model = new Account();
+            
             //model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
 
-            if (Session["IdActivated"].ToString() == "true")
-            {
+            //if (Session["IdActivated"].ToString() == "true")
+            //{
                 model.BankName = Session["Bank"].ToString();
                 model.BankBranch = Session["Branch"].ToString();
 
+            //}
+
+
+
+            DataSet ds23 = model.GetUserTopUpAllowDetails();
+            if (ds23 != null && ds23.Tables.Count > 0 && ds23.Tables[0].Rows.Count > 0)
+            {
+                model.IsActive = ds23.Tables[0].Rows[0]["IsActive"].ToString();
             }
+
+            
+
 
             #region PackageType Bind
 
@@ -389,15 +401,16 @@ namespace MyTradeMTG.Controllers
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             ddlProduct.Add(new SelectListItem { Text = "Select Package type", Value = "0" });
             ViewBag.ddlProduct = ddlProduct;
-
+            
             return View(model);
         }
 
-        public ActionResult GetProductList(string PackageTypeId)
+        public ActionResult GetProductList(string PackageTypeId,string LoginId)
         {
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             Account model = new Account();
             model.PackageTypeId = PackageTypeId;
+            model.LoginId = LoginId;
 
             DataSet ds = model.GetProductListForTopUp();
 
@@ -409,6 +422,10 @@ namespace MyTradeMTG.Controllers
                 }
             }
             model.ddlProduct = ddlProduct;
+
+
+           model.Status = ds.Tables[3].Rows[0]["Status"].ToString();
+
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -432,7 +449,8 @@ namespace MyTradeMTG.Controllers
         {
             try
             {
-                obj.LoginId = Session["LoginId"].ToString();
+                //obj.LoginId = Session["LoginId"].ToString();
+                
                 obj.AddedBy = Session["Pk_userId"].ToString();
                 //  obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
                 //obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/mm/yyyy");
@@ -1335,6 +1353,7 @@ namespace MyTradeMTG.Controllers
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
+                model.Count = ds1.Tables[1].Rows[0]["Count"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     Account obj = new Account();
@@ -1343,7 +1362,7 @@ namespace MyTradeMTG.Controllers
                     obj.PinAmount = r["PinAmount"].ToString();
                     obj.UsedFor = r["UsedFor"].ToString();
                     //obj.BV = r["BV"].ToString();
-                    //obj.Topupid = r["Topupid"].ToString();
+                    obj.Topupid = r["Topupid"].ToString();
                     obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
@@ -1352,6 +1371,8 @@ namespace MyTradeMTG.Controllers
                     obj.TopUpDate = r["TopUpDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
+                    obj.BasisOn = r["BasisOn"].ToString();
+                    
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -1374,6 +1395,7 @@ namespace MyTradeMTG.Controllers
             DataSet ds1 = model.GetTopUpDetails();
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
             {
+                model.Count = ds1.Tables[1].Rows[0]["Count"].ToString();
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     Account obj = new Account();
@@ -1383,7 +1405,7 @@ namespace MyTradeMTG.Controllers
                     obj.UsedFor = r["UsedFor"].ToString();
                     //obj.BV = r["BV"].ToString();
                     obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
-                    //obj.Topupid = r["Topupid"].ToString();
+                    obj.Topupid = r["Topupid"].ToString();
                     obj.IsCalculated = r["IsCalculated"].ToString();
                     obj.TransactionBy = r["TransactionBy"].ToString();
                     obj.Status = r["Status"].ToString();
@@ -1391,6 +1413,7 @@ namespace MyTradeMTG.Controllers
                     obj.TopUpDate = r["TopUpDate"].ToString();
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
+                    obj.BasisOn = r["BasisOn"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -2477,13 +2500,6 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-
-
-        public ActionResult Test()
-        {
-            return View();
-        }
-
-
+        
     }
 }

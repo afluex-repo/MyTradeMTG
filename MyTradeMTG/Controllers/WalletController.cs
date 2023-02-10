@@ -56,11 +56,11 @@ namespace MyTradeMTG.Controllers
 
             obj.Country = Session["Country"].ToString();
             obj.LoginId = Session["LoginId"].ToString();
-            if (Session["IdActivated"].ToString() == "true")
-            {
+            //if (Session["IdActivated"].ToString() == "true")
+            //{
                 obj.BankBranch = Session["Branch"].ToString();
                 obj.BankName = Session["Bank"].ToString();
-            }
+            //}
 
             #region Check Balance
             obj.FK_UserId = Session["Pk_UserId"].ToString();

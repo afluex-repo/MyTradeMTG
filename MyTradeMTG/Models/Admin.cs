@@ -173,8 +173,8 @@ namespace MyTradeMTG.Models
         public string FirmName { get; set; }
         public string AccountNo { get; set; }
         public string IsFranchise { get; set; }
+        public string IsActive { get; set; }
 
-        
 
         public DataTable bonazalist { get; set; }
         #endregion
@@ -745,7 +745,18 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
-    
+
+
+
+        public DataSet SaveUserTopUpAllow()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@IsActive", IsActive),
+                   new SqlParameter("@AddedBy", AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveUserTopUpAllow", para);
+            return ds;
+        }
         
 
     }

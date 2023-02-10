@@ -119,9 +119,9 @@
 
                     <div class="card-footer d-flex justify-content-between border-0">
                         <div class="footer-info font-w600">
-                            <span class="text-success pr-2">TTP- </span>
+                            <span class="text-success pr-2">TR1- </span>
                             <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
-                            <span class="text-danger pr-2">TPS- </span>
+                            <span class="text-danger pr-2">TR2- </span>
                             <span class="text-black">@ViewBag.LevelIncomeTr2</span><br />
                             <span class="text-danger pr-2">SB- </span>
                             <span class="text-black">@ViewBag.SponsorBonus</span><br />
@@ -464,10 +464,10 @@
                                         </div>*@
                                 </div>
                                 <div class="amount-bx">
-                                    <label>MTG Token/USDT</label>
-                                    <input type="number" class="form-control" placeholder="0">
+                                    <label>MTG/USDT</label>
+                                    <input type="text" readonly="" class="form-control" value="@ViewBag.TotalWalletAmount">
                                 </div>
-                                <a href="javascript:(0);" class="btn btn-primary d-block btn-lg text-uppercase">Send Money</a>
+                                <a href="/User/WalletTransfer" class="btn btn-primary d-block btn-lg text-uppercase">Quick Send MTG</a>
                             </div>
                         </div>
                     </div>
@@ -475,165 +475,167 @@
             </div>
             <div class="col-xl-6 col-xxl-12">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4 class="mb-0 text-black fs-20">Sell Order</h4>
-                                <div class="dropdown ms-auto">
-                                    <div class="btn-link" data-bs-toggle="dropdown">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
-                                    </div>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                    <div  style="display:none">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="mb-0 text-black fs-20">Sell Order</h4>
+                                    <div class="dropdown ms-auto">
+                                        <div class="btn-link" data-bs-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body p-3">
-                                <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
-                                    @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Dash Coin</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>*@
-                                </select>
-                                <div class="table-responsive">
-                                    <table class="table text-center bg-info-hover tr-rounded">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">Price</th>
-                                                <th class="text-center">Amount</th>
-                                                <th class="text-end">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-left">82.3</td>
-                                                <td>0.15</td>
-                                                <td class="text-end">$134,12</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">83.9</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$237,31</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">84.2</td>
-                                                <td>0.25</td>
-                                                <td class="text-end">$252,58</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">86.2</td>
-                                                <td>0.35</td>
-                                                <td class="text-end">$126,26</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">91.6</td>
-                                                <td>0.75</td>
-                                                <td class="text-end">$46,92</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">92.6</td>
-                                                <td>0.21</td>
-                                                <td class="text-end">$123,27</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">93.9</td>
-                                                <td>0.55</td>
-                                                <td class="text-end">$212,56</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">94.2</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$129,26</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body p-3">
+                                    <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
+                                        @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Dash Coin</option>
+                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
+                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>
+                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>*@
+                                    </select>
+                                    <div class="table-responsive">
+                                        <table class="table text-center bg-info-hover tr-rounded">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">Price</th>
+                                                    <th class="text-center">Amount</th>
+                                                    <th class="text-end">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">82.3</td>
+                                                    <td>0.15</td>
+                                                    <td class="text-end">$134,12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">83.9</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$237,31</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">84.2</td>
+                                                    <td>0.25</td>
+                                                    <td class="text-end">$252,58</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">86.2</td>
+                                                    <td>0.35</td>
+                                                    <td class="text-end">$126,26</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">91.6</td>
+                                                    <td>0.75</td>
+                                                    <td class="text-end">$46,92</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">92.6</td>
+                                                    <td>0.21</td>
+                                                    <td class="text-end">$123,27</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">93.9</td>
+                                                    <td>0.55</td>
+                                                    <td class="text-end">$212,56</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">94.2</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$129,26</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer border-0 pt-0 text-center">
-                                <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                <div class="card-footer border-0 pt-0 text-center">
+                                    <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4 class="mb-0 text-black fs-20">Buy Order</h4>
-                                <div class="dropdown ms-auto">
-                                    <div class="btn-link" data-bs-toggle="dropdown">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
-                                    </div>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="mb-0 text-black fs-20">Buy Order</h4>
+                                    <div class="dropdown ms-auto">
+                                        <div class="btn-link" data-bs-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body p-3">
-                                <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
-                                    @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Litecoin</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>*@
-                                </select>
-                                <div class="table-responsive">
-                                    <table class="table text-center bg-warning-hover tr-rounded">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">Price</th>
-                                                <th class="text-center">Amount</th>
-                                                <th class="text-end">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-left">82.3</td>
-                                                <td>0.15</td>
-                                                <td class="text-end">$134,12</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">83.9</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$237,31</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">84.2</td>
-                                                <td>0.25</td>
-                                                <td class="text-end">$252,58</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">86.2</td>
-                                                <td>0.35</td>
-                                                <td class="text-end">$126,26</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">91.6</td>
-                                                <td>0.75</td>
-                                                <td class="text-end">$46,92</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">92.6</td>
-                                                <td>0.21</td>
-                                                <td class="text-end">$123,27</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">93.9</td>
-                                                <td>0.55</td>
-                                                <td class="text-end">$212,56</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">94.2</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$129,26</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body p-3">
+                                    <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
+                                        @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>
+                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Litecoin</option>
+                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
+                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>*@
+                                    </select>
+                                    <div class="table-responsive">
+                                        <table class="table text-center bg-warning-hover tr-rounded">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">Price</th>
+                                                    <th class="text-center">Amount</th>
+                                                    <th class="text-end">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">82.3</td>
+                                                    <td>0.15</td>
+                                                    <td class="text-end">$134,12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">83.9</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$237,31</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">84.2</td>
+                                                    <td>0.25</td>
+                                                    <td class="text-end">$252,58</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">86.2</td>
+                                                    <td>0.35</td>
+                                                    <td class="text-end">$126,26</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">91.6</td>
+                                                    <td>0.75</td>
+                                                    <td class="text-end">$46,92</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">92.6</td>
+                                                    <td>0.21</td>
+                                                    <td class="text-end">$123,27</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">93.9</td>
+                                                    <td>0.55</td>
+                                                    <td class="text-end">$212,56</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">94.2</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$129,26</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer border-0 pt-0 text-center">
-                                <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                <div class="card-footer border-0 pt-0 text-center">
+                                    <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>

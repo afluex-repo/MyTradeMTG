@@ -35,6 +35,8 @@ namespace MyTradeMTG.Models
         public string CustomerName { get; set; }
         public List<SelectListItem> ddlcountry { get; set; }
 
+        public string Packageid { get; set; }
+
         public static string GenerateRandom()
         {
             Random r = new Random();
@@ -199,11 +201,13 @@ namespace MyTradeMTG.Models
             Random _rdm = new Random();
             return _rdm.Next(_min, _max);
         }
+
+     
         public DataSet BindProduct()
         {
             SqlParameter[] para =
             {
-                  new SqlParameter("@ProductId", Package),
+                  new SqlParameter("@PackageTypeId", PackageTypeId),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetProductList", para);
             return ds;

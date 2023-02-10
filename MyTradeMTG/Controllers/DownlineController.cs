@@ -149,8 +149,6 @@ namespace MyTradeMTG.Controllers
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
-
-
             }
             return View(model);
         }
@@ -159,7 +157,6 @@ namespace MyTradeMTG.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult DownLineListBy(Reports model)
         {
-
             List<Reports> lst = new List<Reports>();
             model.LoginId = Session["LoginId"].ToString();
             DataSet ds = model.GetDownlineList();
@@ -226,4 +223,5 @@ namespace MyTradeMTG.Controllers
         }
         #endregion
     }
+
 }
