@@ -46,12 +46,21 @@ namespace MyTradeMTG.Models
         public string CustomerId { get; set; }
         public string ROI { get; set; }
         public string Topupid { get; set; }
+        public string BasisOn { get; set; }
+        public string Count { get; set; }
+
+        public string IsActive { get; set; }
 
         public List<SelectListItem> ddlProduct { get; set; }
 
 
 
-        
+        public DataSet GetUserTopUpAllowDetails()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetUserTopUpAllowDetails");
+            return ds;
+        }
+
 
 
 
@@ -109,6 +118,7 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
 
                 new SqlParameter("@PackageTypeId", PackageTypeId),
+                new SqlParameter("@LoginId", LoginId),
 
             };
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp", para);
@@ -125,6 +135,17 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductListForTopUp", para);
             return ds;
         }
+
+
+
+
+        
+
+
+
+
+
+
 
         public string ActivationMTGToken { get; set; }
 

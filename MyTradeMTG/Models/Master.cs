@@ -55,6 +55,10 @@ namespace MyTradeMTG.Models
         public decimal ReturnPercent2 { get; set; }
         public decimal ReturnPercent3 { get; set; }
 
+        public List<SelectListItem> ddlPackage { get; set; }
+        
+
+
         #region ProductMaster
         public DataSet GetProductListForPackageList()
         {
@@ -343,7 +347,15 @@ namespace MyTradeMTG.Models
 
 
         #endregion BalanceTransfer
-
+        public DataSet BindProductList()
+        {
+            SqlParameter[] para =
+            {
+                  new SqlParameter("@PackageTypeId", PackageTypeId),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetProductList", para);
+            return ds;
+        }
 
     }
 }
