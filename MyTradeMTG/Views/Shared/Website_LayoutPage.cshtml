@@ -77,7 +77,7 @@
         </div><!--- END CONTAINER -->
     </div>
     <!-- END NAVBAR -->
-    <!--START LOGIN-->
+    @*<!--START LOGIN-->
     <div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
     top: 100px;">
         <header class="popupHeader">
@@ -86,7 +86,7 @@
         </header>
 
         <div class="popupBody">
-            <!--Social Login-->
+            <!--Social Forget start-->
             <div class="social_login forget_form">
                 <div class="">
                     <form>
@@ -105,26 +105,27 @@
                 </div>
             </div>
 
-            <!--Username & Password Login form-->
+            <!--Social Forget end-->
+            <!--Social login statrt-->
             <div class="user_login">
-                <form>
-                    <label>Email / Username</label>
-                    <input type="text" />
+                <form action="/Website/LoginAction" method="post">
+                    <label>Login Id</label>
+                   @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
                     <br />
 
                     <label>Password</label>
-                    <input type="password" />
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
                     <br />
-                    <a href="#" class="back_btn"> Forget Password ?</a>
+                    <a href="/Home/ForgetPassword" class="back_btn"> Forget Password ?</a>
                     <div class="action_btns">
                         <div class="one_half last"><a href="#" class="abtn">Login</a></div>
                     </div>
                 </form><br />
-                <center>Don't have an account? <a href="#" id="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>
+                <center>Don't have an account? <a href="/Home/Registration" id="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>
 
             </div>
-
-            <!--Register Form-->
+            <!--Social login end-->
+            <!--Register Form start-->
             <div class="user_register">
                 <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="#">
                     <div class="row">
@@ -162,14 +163,16 @@
                     <div class="action_btns">
                         <center><div class="d-flex">Already have an account ?<a href="#" class="login_modal" style="color:#ffd234"> Login</a></div></center>
                     </div>
+                </form>
             </div>
 
-            </form>
+            <!--Register Form end-->
+
 
         </div>
     </div>
-    </div>
-    <!--END LOGIN-->
+
+    <!--END LOGIN-->*@
     <!--Modal-->
     <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:100000">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -206,7 +209,7 @@
         </div>
     </div>
 
-        @RenderBody()
+    @RenderBody()
 
     <!-- START FOOTER -->
     <div class="footer">
@@ -231,7 +234,7 @@
             </div><!--- END ROW -->
         </div><!--- END CONTAINER -->
     </div>
-    <!-- END FOOTER -->	
+    <!-- END FOOTER -->
     <script src="~/MyTradeMTGWebsite/asset/js/jquery-1.12.4.min.js"></script>
     <!--Latest compiled and minified Bootstrap-->
     <script src="~/MyTradeMTGWebsite/asset/bootstrap/js/bootstrap.min.js"></script>
@@ -271,75 +274,72 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"></script>
 
     <script>
-            $('#modal').hide();
-            $('#modal_trigger').click(function()
-                {
+        $('#modal').hide();
+        $('#modal_trigger').click(function () {
             $('#modal').toggle();
-             })
-             $('#modal_sign').click(function()
-            {
-                 $('#modal').toggle();
-                })
-                 $('.modal_close').click(function()
-                {
+        })
+        $('#modal_sign').click(function () {
+            $('#modal').toggle();
+        })
+        $('.modal_close').click(function () {
 
-                $('#modal').hide();
-                })
+            $('#modal').hide();
+        })
     </script>
     <script>
 
-var telInput = $("#phone"),
-  errorMsg = $("#error-msg"),
-  validMsg = $("#valid-msg");
+        var telInput = $("#phone"),
+          errorMsg = $("#error-msg"),
+          validMsg = $("#valid-msg");
 
-// initialise plugin
-telInput.intlTelInput({
+        // initialise plugin
+        telInput.intlTelInput({
 
-    allowExtensions: true,
-    formatOnDisplay: true,
-    autoFormat: true,
-    autoHideDialCode: true,
-    autoPlaceholder: true,
-    defaultCountry: "auto",
-    ipinfoToken: "yolo",
+            allowExtensions: true,
+            formatOnDisplay: true,
+            autoFormat: true,
+            autoHideDialCode: true,
+            autoPlaceholder: true,
+            defaultCountry: "auto",
+            ipinfoToken: "yolo",
 
-    nationalMode: false,
-    numberType: "MOBILE",
-  //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-    preferredCountries: ['sa', 'ae', 'qa', 'om', 'bh', 'kw', 'ma'],
-    preventInvalidNumbers: true,
-    separateDialCode: true,
-    initialCountry: "auto",
-    geoIpLookup: function(callback) {
-  $.get("http://ipinfo.io", function() { }, "jsonp").always(function(resp) {
-    var countryCode = (resp && resp.country) ? resp.country: "";
-    callback(countryCode);
-});
-},
-    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
-});
+            nationalMode: false,
+            numberType: "MOBILE",
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            preferredCountries: ['sa', 'ae', 'qa', 'om', 'bh', 'kw', 'ma'],
+            preventInvalidNumbers: true,
+            separateDialCode: true,
+            initialCountry: "auto",
+            geoIpLookup: function (callback) {
+                $.get("http://ipinfo.io", function () { }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
+        });
 
-var reset = function() {
-  telInput.removeClass("error");
-  errorMsg.addClass("hide");
-  validMsg.addClass("hide");
-};
+        var reset = function () {
+            telInput.removeClass("error");
+            errorMsg.addClass("hide");
+            validMsg.addClass("hide");
+        };
 
-// on blur: validate
-telInput.blur(function() {
-  reset();
-  if ($.trim(telInput.val())) {
-    if (telInput.intlTelInput("isValidNumber")) {
-      validMsg.removeClass("hide");
-} else {
-      telInput.addClass("error");
-      errorMsg.removeClass("hide");
-}
-}
-});
+        // on blur: validate
+        telInput.blur(function () {
+            reset();
+            if ($.trim(telInput.val())) {
+                if (telInput.intlTelInput("isValidNumber")) {
+                    validMsg.removeClass("hide");
+                } else {
+                    telInput.addClass("error");
+                    errorMsg.removeClass("hide");
+                }
+            }
+        });
 
-// on keyup / change flag: reset
-telInput.on("keyup change", reset);
+        // on keyup / change flag: reset
+        telInput.on("keyup change", reset);
 
 
 

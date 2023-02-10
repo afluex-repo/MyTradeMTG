@@ -1060,6 +1060,7 @@
     <Content Include="Views\Admin\KumarError.cshtml" />
     <Content Include="Views\Shared\Website_LayoutPage.cshtml" />
     <Content Include="Views\Website\Index.cshtml" />
+    <Content Include="Views\Website\Registration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
