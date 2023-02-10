@@ -566,7 +566,6 @@ D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Net.Http.Formatting.xml
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.xml
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\System.Web.Http.WebHost.xml
-D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Resources.resources
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
