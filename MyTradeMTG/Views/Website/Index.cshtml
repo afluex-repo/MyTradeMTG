@@ -638,8 +638,66 @@
 
     </div>
 </div>
+<!-- Button to Open the Modal -->
+<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#confirm_registration" style="position: relative;
+    z-index: 999999999;
+}">
+    Open modal
+</a>
 
-<!--END LOGIN-->
+<!-- The Modal -->
+<div class="modal fade" id="confirm_registration">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background:#0f1b39;">
+            <!-- Modal Header -->
+            <div class="modal-header p-2">
+                <a href="/Home/index">
+                   <img src="~/UserPanel/images/logo with bg.gif" class="img-fluid" style="width:12rem" />
+                </a>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row justify-content-center h-100 align-items-center">
+                    <div class="col-md-8">
+                        <div class="authincation-content">
+                            <div class="row no-gutters">
+                                <div class="col-xl-12">
+                                    <div class="auth-form">
+                                        <h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
+                                        <h6 class="card-title text-white text-center mt-4">
+                                            For Your Registration. Your Details are as Below <br />
+                                            <span class="credential"><span class="cred-head">Login ID: </span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
+                                            <span class="credential"><span class="cred-head">Password: </span> <span class="cred-detail">@Session["Password"]</span></span>
+
+                                        </h6>
+                                        <div class="d-flex justify-content-around mt-5">
+                                            @*<div class="field-wrapper">
+                                        <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                            <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
+                                            <span style="white-space: nowrap">Go To Dashboard</span>
+                                        </a>
+                                    </div>*@
+
+                                            <div class="field-wrapper pb-3">
+                                                <a href="/Website/Index" target="_blank" class="btn btn-yellow foractivation-btn py-2 pl-4 pr-4">
+                                                    <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                                                    <span class="text-white">Add New</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });

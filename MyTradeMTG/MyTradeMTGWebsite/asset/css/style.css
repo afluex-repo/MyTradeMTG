@@ -3163,6 +3163,11 @@ padding-left:100px !important;
 padding-right: 60px !important;
 }
 
+    .btn-yellow
+    {
+        background:#daa505;
+        border-color:#daa505;
+    }
 
 /*
 * ----------------------------------------------------------------------------------------
