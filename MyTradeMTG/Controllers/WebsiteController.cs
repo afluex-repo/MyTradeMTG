@@ -222,7 +222,7 @@ namespace MyTradeMTG.Controllers
                 obj.RegistrationBy = "Web";
                 obj.PinCode = PinCode;
                 obj.Leg = null;
-                obj.Password = Crypto.Encrypt(Password);
+                obj.Password2 = Crypto.Encrypt(Password);
                 obj.Email = Email;
                 obj.Gender = Gender;
                 obj.Country = Country;
