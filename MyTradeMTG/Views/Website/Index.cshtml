@@ -530,8 +530,8 @@
                         @*<input type="submit" id="forgetpassword" class="abtn" name="forgetpassword" value="Submit" onclick="return validateform();" />*@
 
                         <button type="submit" id="forgetpassword" class="abtn" name="forgetpassword" onclick="return validateform();">Submit</button>
-                        <br />
-                        <span class="text-danger"> @TempData["Login"] </span><br />
+                        @*<br />
+                        <span class="text-danger"> @TempData["Login"] </span><br />*@
                     </div>
                 </form>
             </div>
@@ -549,12 +549,13 @@
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
                 <br />
                 <a href="/Home/ForgetPassword" class="back_btn"> Forget Password ?</a>
-                <div class="action_btns">
-                    @*<div class="one_half last"><a href="#" class="abtn">Login</a></div>*@
+                <div class="action_btns d-flex">
+                    @*<div><a href="/Home/Registration" class="abtn">Sign Up</a></div>*@
                     <button type="submit" class="abtn">Login</button>
+                    <a href="#" id="register_form" class="abtn ml-4">Sign Up</a>
                 </div>
-            </form><br />
-            <center>Don't have an account? <a href="/Website/Registration" id="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>
+            </form>
+           @* <center>Don't have an account? <a href="/Home/Registration" i="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>*@
 
         </div>
         <!--Social login end-->
@@ -566,7 +567,7 @@
                         @*<input type="text" placeholder="Reference Id" />*@
                         @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
                         @Html.ValidationMessageFor(m => m.LoginId)
-                        <label id="SponsorName"></label>
+                        <label class="ml-3" style="color:#ffd234;" id="SponsorName"></label>
                     </div>
                     <div class="col-lg-12 form-group">
                         @*<input type="text" placeholder="Enter Your First Name" />*@
@@ -579,9 +580,9 @@
 
                     </div>
                     <div class="col-lg-12 form-group">
-                        <input id="phone" type="tel" placeholder="Enter Mobile No.">
+                        <input id="phone" type="tel" placeholder="Enter Mobile No."  maxlength = "15" onkeypress = "return isNumberKey(event);">
                         @*<span id="valid-msg" class="hide">Valid</span>*@
-                        <span id="error-msg" class="hide">Invalid number</span>
+                        <span style="color:red;" id="error-msg" class="hide">Invalid number</span>
                     </div>
                     <div class="col-lg-12 form-group">
                         @*<input type="email" placeholder="Your Email Address" />*@
@@ -591,46 +592,42 @@
                     <div class="col-lg-12 form-group">
                         @*<input type="password" placeholder="Enter Password" />*@
                         @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password" })*@
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*"})
+                        @Html.PasswordFor(m => m.Password2, new { @class = "form-control", @placeholder = "Password*"})
                     </div>
                     <div class="col-lg-12 form-group">
                         @*<input type="password" placeholder="Confirm Password" />*@
                         @*@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })*@
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();" })
                     </div>
+                    <div class="col-lg-12 form-group">
+                        <input type="checkbox" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">
+                        <label>I accept all <a href="javascript:void(0)">Terms &amp; Use.</a></label>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="checkbox" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">
-                    <label>I accept all <a href="javascript:void(0)">Terms &amp; Use.</a></label>
-                </div>
+               
                 @*<center>
                     <button type="submit" class="abtn mt-0">Confirm</button>
                 </center>*@
-
-
-
-
-                <button type="submit" class="abtn mt-0" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
-                <div class="row" id="divReg" style="display: none">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" class="abtn mt-0" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
+                    </div>
+                    </div>
+                    <div class="row" id="divReg" style="display: none">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
                         <button type="button" class="abtn mt-0" onclick="return saveregistration();" id="Register">Sign Up</button>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
-                    </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
+                        </div>
                 </div>
 
                 @*<div class="forgot-password d-flex justify-content-between mt-2">
                     <a href="/Home/Index">Back To Home</a>
                     <a href="/Home/Login">Back To Login</a>
                 </div>*@
-
-
-
-
-
                 @*<center><a href="#" class="abtn mt-0">Register</a></center>*@
-                <div class="action_btns">
+                <div class="action_btns mt-2">
                     <center><div class="d-flex">Already have an account ?<a href="#" class="login_modal" style="color:#ffd234"> Login</a></div></center>
                 </div>
             </form>
@@ -643,7 +640,7 @@
 </div>
 
 <!--END LOGIN-->
-@*<script>
+<script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
     });
@@ -663,11 +660,11 @@
         border: 1px solid red !important;
         background-color: #fff0f0 !important;
     }
-</style>*@
+</style>
 
 
 
-@*<script>
+<script>
     function getsponsordetails(obj) {
         debugger;
             $("#divload").css({ 'display': '' });
@@ -723,9 +720,9 @@
                 $('#Email').focus();
                 return false;
             }
-            if ($('#Password').val() == '') {
-                $("#Password").addClass('errortext');
-                $('#Password').focus();
+            if ($('#Password2').val() == '') {
+                $("#Password2").addClass('errortext');
+                $('#Password2').focus();
                 return false;
             }
             if ($('#ConfirmPassword').val() == '') {
@@ -749,7 +746,7 @@
             $("#SponsorId").attr("disabled", "disabled");
             $("#LastName").attr("disabled", "disabled");
             //$("#PinCode").attr("disabled", "disabled");
-            $("#Password").attr("disabled", "disabled");
+            $("#Password2").attr("disabled", "disabled");
             $("#ConfirmPassword").attr("disabled", "disabled");
             //$("#Gender").attr("disabled", "disabled");
             //$("#Country").attr("disabled", "disabled");
@@ -766,7 +763,7 @@
             $("#SponsorId").attr("disabled", false);
             $("#LastName").attr("disabled", false);
             //$("#PinCode").attr("disabled", false);
-            $("#Password").attr("disabled", false);
+            $("#Password2").attr("disabled", false);
             $("#ConfirmPassword").attr("disabled", false);
             //$("#Gender").attr("disabled", false);
             $("#Email").attr("disabled", false);
@@ -790,7 +787,7 @@
                 url: "/Website/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val() },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val() },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
@@ -838,17 +835,17 @@
         }
 
         function validateConfPassword() {
-            var password = $('#Password').val();
+            var password = $('#Password2').val();
             var ConfirmPassword = $('#ConfirmPassword').val();
             if (password != ConfirmPassword) {
-                $("#Password").addClass('errortext');
+                $("#Password2").addClass('errortext');
                 $("#ConfirmPassword").addClass('errortext');
-                $('#Password').val('');
+                $('#Password2').val('');
                 $('#ConfirmPassword').val('');
                 alert("Password and Confirm Password are different")
                 return false;
             }
         }
 
-</script>*@
+</script>
 

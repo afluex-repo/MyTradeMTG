@@ -1710,13 +1710,7 @@ padding-right: 60px !important;
 
         <!-- particles.js container -->
         <div id="particles-js"></div>
-		<!-- START PRELOADER -->
-		<div class="preloader">
-			<div class="status">
-				<div class="status-mes"></div>
-			</div>
-		</div>
-		<!-- END PRELOADER -->
+		
 
 		<!-- START NAVBAR -->
 		<div id="navigation" class="fixed-top navbar-light bg-faded site-navigation">
@@ -1738,7 +1732,10 @@ padding-right: 60px !important;
 								<li><a href="index.html#faq">faq</a></li>
 								<li><a href="index.html#download">Get App</a></li>
 								<li><a href="index.html#contact">Contact Us</a></li>
-								<li><a href="#" class ="block-menu" id="modal_trigger" hre="#modal">Login</a></li>
+								<li><a class ="block-menu" i="modal_trigger" href="/Website/Index">Login</a></li>
+                                <!--<li>
+                                <a href="/Home/Registration" class ="block-menu">Sign Up</a>
+                              </li>-->
 								</ul>
 							</nav>
 							<div id="mobile_menu"></div>
@@ -1792,7 +1789,7 @@ padding-right: 60px !important;
 							<div class ="one_half last"><a href="#" class ="abtn">Login</a></div>
 						</div>
 					</form><br/>
-                    <center>Don't have an account? <a href="#" id="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>
+                    <center>Don't have an account? <a href="/Home/Registration" class="text-center" style="color:#ffd234">Sign up</a></center>
 
 				</div>  
 
