@@ -24,6 +24,7 @@ namespace MyTradeMTG.Models
         public string Email { get; set; }
         public string RegistrationBy { get; set; }
         public string Password { get; set; }
+        public string Password2 { get; set; }
         public string Pk_AdminId { get; set; }
         public string MenuId { get; set; }
         public string MenuName { get; set; }
@@ -83,7 +84,7 @@ namespace MyTradeMTG.Models
                                       new SqlParameter("@City",City),
                                       new SqlParameter("@Country",Country),
                                      new SqlParameter("@Leg",Leg),
-                                     new SqlParameter("@Password",Password)
+                                     new SqlParameter("@Password",Password2)
 
                                    };
             DataSet ds = DBHelper.ExecuteQuery("Registration", para);

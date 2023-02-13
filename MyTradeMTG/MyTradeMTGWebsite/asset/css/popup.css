@@ -118,7 +118,7 @@ a.btn_red {color: #FFF;}
 /* User Login Form */
 .user_login {display: none;}
 .user_login label {display: block; margin-bottom:5px;}
-.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:100%;border-radius: 50px; padding: 10px; border:1px solid #DDD; color:#fff;}
+.user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:100%;border-radius: 50px; padding: 10px; border:1px solid #DDD; color:#000;}
 .user_login input[type="checkbox"] {float:left; margin-right:5px;}
 .user_login input[type="checkbox"]+label {float:left;}
 .user_login input {

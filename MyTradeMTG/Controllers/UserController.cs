@@ -151,7 +151,7 @@ namespace MyTradeMTG.Controllers
                     {
                         ProgressReport obj = new ProgressReport();
                         obj.Year = r["Year"].ToString();
-                        //obj.Cramount = r["Cramount"].ToString();
+                        obj.Cramount = r["Cramount"].ToString();
                         obj.Dramount = r["Dramount"].ToString();
                         lst.Add(obj);
                     }
