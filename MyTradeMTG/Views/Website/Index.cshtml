@@ -635,8 +635,26 @@
 
         <!--Register Form end-->
 
+
     </div>
 </div>
+
+
+@*<div style="display:none">
+<span id="UserDisplayName">@Session["DisplayName"]</span>
+<span id="UserLoginId" >@Session["LoginId"]</span>
+<span id="UserPassword">@Session["Password"]</span>
+</div>*@
+
+
+
+<div style="display:none">
+    <span id="UserDisplayName"></span>
+    <span id="UserLoginId"></span>
+    <span id="UserPassword"></span>
+</div>
+
+
 <!-- Button to Open the Modal -->
 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#confirm_registration" style="position: relative;
     z-index: 999999999;
@@ -664,13 +682,22 @@
                             <div class="row no-gutters">
                                 <div class="col-xl-12">
                                     <div class="auth-form">
-                                        <h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
+
+                                        <h3 class="thank text-white text-center">Thank You <span id="UserDisplayName1"></span> </h3>
+                                        <h6 class="card-title text-white text-center mt-4">
+                                            For Your Registration. Your Details are as Below <br />
+                                            <span class="credential"><span class="cred-head">Login ID : </span> <span class="cred-detail" id="UserLoginId1"></span></span><br />
+                                            <span class="credential"><span class="cred-head">Password : </span> <span class="cred-detail" id="UserPassword1"></span></span>
+
+                                        </h6>
+
+                                        @*<h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
                                         <h6 class="card-title text-white text-center mt-4">
                                             For Your Registration. Your Details are as Below <br />
                                             <span class="credential"><span class="cred-head">Login ID: </span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
                                             <span class="credential"><span class="cred-head">Password: </span> <span class="cred-detail">@Session["Password"]</span></span>
 
-                                        </h6>
+                                        </h6>*@
                                         <div class="d-flex justify-content-around mt-5">
                                             @*<div class="field-wrapper">
                                         <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
@@ -831,6 +858,7 @@
         }
 
         function saveregistration() {
+            debugger;
             $('#Register').attr("disabled", "disabled");
             $("#divload").css({ 'display': '' });
             var Leg = "";
@@ -846,8 +874,18 @@
                 DataType: "JSON",
                 data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val() },
                 success: function (data) {
+                    debugger;
                     if (data.Result == "1") {
-                        window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
+                        @*window.location.href = '@Url.Action("ConfirmRegistration", "Home")';*@
+                         $("#UserDisplayName1").text(data.Name),
+                         $("#UserLoginId1").text(data.LoginId),
+                         $("#UserPassword1").text(data.Password),
+                        //$("#UserDisplayName1").text(UserDisplayName),
+                        //$("#UserLoginId1").text(UserLoginId),
+                        //$("#UserPassword1").text(UserPassword),
+                        $('.popupContainer').css('display', 'none');
+                        $('#modal').css('display', 'none');
+                        $("#confirm_registration").modal("show");
                     }
                     else {
                         $("#divload").css({ 'display': 'none' });
