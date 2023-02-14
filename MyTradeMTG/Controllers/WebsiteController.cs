@@ -233,6 +233,10 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+
+                        obj.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        obj.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["DisplayName"] = ds.Tables[0].Rows[0]["Name"].ToString();
