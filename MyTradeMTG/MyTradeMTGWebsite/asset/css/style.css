@@ -3168,7 +3168,10 @@ padding-right: 60px !important;
         background:#daa505;
         border-color:#daa505;
     }
-
+.card-title
+{
+    line-height:1.6;
+}
 /*
 * ----------------------------------------------------------------------------------------
 * 16.END FOOTER DESIGN
