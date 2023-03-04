@@ -34,7 +34,7 @@ namespace MyTradeMTG.Models
         public string BankBranch { get; set; }
         public string PK_RequestID { get; set; }
         public string Name { get; set; }
-        public string LoginId { get; set; }
+        //public string LoginId { get; set; }
         public string ProductName { get; set; }
         public string IsVerified { get; set; }
         public string Image { get; set; }
@@ -88,7 +88,22 @@ namespace MyTradeMTG.Models
         public string MemberTransferCharge { get; set; }
 
         public string BrokerTransferCharge { get; set; }
+        public string DocumentType { get; set; }
+        public string DocumentTypeNumber { get; set; }
         
+        public List<User> QuickSendMTGList { get; set; }
+
+        public string TransfertoName { get; set; }
+        public string MTG { get; set; }
+        public string TransferDate { get; set; }
+
+        
+
+
+
+
+
+
         #endregion
 
 
@@ -165,7 +180,10 @@ namespace MyTradeMTG.Models
                                          new SqlParameter("@PanImage",Image),
                                            new SqlParameter("@UPIID",UPIID),
 
-                                      new SqlParameter("@UpdatedBy",Fk_UserId)
+                                      new SqlParameter("@UpdatedBy",Fk_UserId),
+                                       new SqlParameter("@DocumentType",DocumentType),
+                                       new SqlParameter("@DocumentTypeNumber",DocumentTypeNumber)
+
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBankDetails", para);
             return ds;
@@ -230,8 +248,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductName");
             return ds;
         }
-
-
         public DataSet PayoutRequest()
         {
             SqlParameter[] para = {
@@ -242,8 +258,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("PayoutRequest", para);
             return ds;
         }
-
-
         public DataSet GetPayoutBalance()
         {
             SqlParameter[] para = {
@@ -252,8 +266,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPayoutBalance", para);
             return ds;
         }
-
-
         public DataSet GetPayoutRequest()
         {
             SqlParameter[] para = {
@@ -265,9 +277,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetPayoutRequest", para);
             return ds;
         }
-
-
-
         public DataSet GetRewarDetails()
         {
             SqlParameter[] para = {
@@ -284,7 +293,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetFilesDetails", para);
             return ds;
         }
-
         public DataSet GetNameDetails()
         {
             SqlParameter[] para = {
@@ -293,8 +301,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetNameDetails", para);
             return ds;
         }
-
-
         public DataSet CreateOrder()
         {
             SqlParameter[] para = {new SqlParameter("@Fk_UserId",Fk_UserId),
@@ -307,10 +313,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("ActivateUser", para);
             return ds;
         }
-
-
-
-
         public DataSet FranchiseRequest()
         {
             SqlParameter[] para = {new SqlParameter("@FirmName",FirmName),
@@ -326,13 +328,9 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("FranchiseRequest", para);
             return ds;
         }
-
         public string FirmName { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
-
-
-
         public DataSet GetUserDetailsForMTGPurchaseSell()
         {
             SqlParameter[] para = {new SqlParameter("@Pk_userId",AddedBy)
@@ -341,9 +339,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetUserDetailsForMTGPurchaseSell", para);
             return ds;
         }
-
-
-
         public DataSet FranchiseList()
         {
             SqlParameter[] para = {
@@ -352,11 +347,7 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("FranchiseRequestList", para);
             return ds;
         }
-
-
         public string Pk_FranchisetransferId { get; set; }
-        
-
         public DataSet GetSalesReport()
         {
             SqlParameter[] para = {
@@ -369,7 +360,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSalesReportforUser", para);
             return ds;
         }
-
         public DataSet GetSaleRequest()
         {
             SqlParameter[] para = {
@@ -382,8 +372,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetSalesReportforFranchise", para);
             return ds;
         }
-
-
         public DataSet SaveMTGTransferCharge()
         {
             SqlParameter[] para = {
@@ -399,7 +387,6 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveMTGTransferCharge", para);
             return ds;
         }
-
         public DataSet GetPaymentMode()
         {
 
@@ -407,10 +394,6 @@ namespace MyTradeMTG.Models
 
             return ds;
         }
-
-  
-
-
         public DataSet ApproveSaleRequest()
         {
             SqlParameter[] para = {
@@ -429,7 +412,32 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
+        public DataSet GetWalletTransfer()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@Fk_UserId",Fk_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetWalletTransfer", para);
+            return ds;
+        }
+
     }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
 
 
 

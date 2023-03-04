@@ -398,7 +398,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "Ewallet Request Approved Successfully";
+                        TempData["msg"] = "MTG Ewallet Request Approved Successfully";
                         string Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Status = ds.Tables[0].Rows[0]["Status"].ToString();
                         string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
@@ -437,7 +437,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "Ewallet Request Declined Successfully";
+                        TempData["msg"] = "MTG Ewallet Request Declined Successfully";
                         string Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         string Status = ds.Tables[0].Rows[0]["Status"].ToString();
                         string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();

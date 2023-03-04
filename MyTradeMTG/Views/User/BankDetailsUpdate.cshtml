@@ -24,7 +24,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                @*<div class="col-md-4">
                                     <div class="form-group">
                                         <label>Adhar Number</label><span style="color: red">*</span>
                                         @if (Model.AdharNo == null || Model.AdharNo == "" || Model.IsVerified == "False")
@@ -37,8 +37,50 @@
 
                                         }
                                     </div>
-                                </div>
+                                </div>*@
+
+
+
                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Document Type</label><span style="color: red">*</span>
+                                        <input type="hidden" id="DocumentType12345" name="DocumentType12345" value="@Model.DocumentType" />
+                                        @if (Model.DocumentType == null || Model.DocumentType == "" || Model.IsVerified == "False")
+                                        {
+                                            <select id="DocumentType" name="DocumentType" class = "form-control">
+                                                <option value="0">-Select-</option>
+                                                <option value="VoterCardId">Voter Card Id</option>
+                                                <option value="PassPortCardId">PassPort Card Id</option>
+                                                <option value="RashanCardId">Rashan Card Id</option>
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            <select id="DocumentType" name="DocumentType" class="form-control"  disabled="true">
+                                                <option value="0">-Select-</option>
+                                                <option value="VoterCardId">Voter Card Id</option>
+                                                <option value="PassPortCardId">PassPort Card Id</option>
+                                                <option value="RashanCardId">Rashan Card Id</option>
+                                            </select>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Document Type Number</label><span style="color: red">*</span>
+                                        @if (Model.DocumentTypeNumber == null || Model.DocumentTypeNumber == "" || Model.IsVerified == "False")
+                                        {
+                                            @Html.TextBoxFor(m => m.DocumentTypeNumber, new { @class = "form-control", @placeholder = "Document Number" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(m => m.DocumentTypeNumber, new { @class = "form-control", @placeholder = "Document Number", @readonly="true" })
+                                        }
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-4">
                                     <div class="form-group">
                                         <label>Pan Number</label><span style="color: red">*</span>
                                         @if (Model.PanNumber == null || Model.PanNumber == "" || Model.IsVerified == "False")
@@ -50,10 +92,10 @@
                                             @Html.TextBoxFor(m => m.PanNumber, new { @class = "form-control", @placeholder = "Pan Number", @readonly = "true" })
                                         }
                                     </div>
-                                </div>
+                                </div>*@
 
 
-                                <div class="col-md-4">
+                                @*<div class="col-md-4">
                                     <div class="form-group">
                                         <label>Pan Image</label><span style="color: red">*</span><br />
                                         @if (Model.Image == null || Model.Image == "" || Model.IsVerified == "False")
@@ -77,7 +119,7 @@
 
 
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>
@@ -218,28 +260,50 @@
         <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
         <script>
 
+            debugger;
+
+            if ($("#DocumentType12345").val() != 0) {
+                $("#DocumentType").val($("#DocumentType12345").val()).attr("selected", "selected");
+            }
+
+
+
+
             $(document).ready(function () {
                 $('#my-button').prop('disabled', true);
             });
-
             function validate() {
                 debugger;
-                if ($('#AdharNo').val() == '') {
-                    $("#AdharNo").addClass('errortext');
-                    $('#AdharNo').focus();
+
+                if ($('#DocumentType').val() == '0') {
+                    $("#DocumentType").addClass('errortext');
+                    $('#DocumentType').focus();
                     return false;
                 }
-                if ($('#PanNumber').val() == '') {
-                    $("#PanNumber").addClass('errortext');
-                    $('#PanNumber').focus();
+                if ($('#DocumentTypeNumber').val() == '') {
+                    $("#DocumentTypeNumber").addClass('errortext');
+                    $('#DocumentTypeNumber').focus();
                     return false;
                 }
-                if ($('#img').val() != '1') {
-                    debugger;
-                    $("#Image").addClass('errortext');
-                    $('#Image').focus();
-                    return false;
-                }
+
+
+                //if ($('#AdharNo').val() == '') {
+                //    $("#AdharNo").addClass('errortext');
+                //    $('#AdharNo').focus();
+                //    return false;
+                //}
+                //if ($('#PanNumber').val() == '') {
+                //    $("#PanNumber").addClass('errortext');
+                //    $('#PanNumber').focus();
+                //    return false;
+                //}
+                //if ($('#img').val() != '1') {
+                //    debugger;
+                //    $("#Image").addClass('errortext');
+                //    $('#Image').focus();
+                //    return false;
+                //}
+
                 if ($('#AccountNo').val() == '') {
                     $("#AccountNo").addClass('errortext');
                     $('#AccountNo').focus();
@@ -310,7 +374,6 @@
                     return false;
                 return true;
             }
-
             function validatePan() {
                 debugger;
                 var panVal = $('#PanNumber').val();

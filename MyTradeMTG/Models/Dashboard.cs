@@ -34,7 +34,9 @@ namespace MyTradeMTG.Models
         public string IFSCCode { get; set; }
         public string IsFranchise { get; set; }
 
-        
+
+        public string Addresss { get; set; }
+
         public DataSet GetAssociateDashboard()
         {
             SqlParameter[] para = { new SqlParameter("@Fk_UserId", FK_UserId), };
@@ -45,7 +47,7 @@ namespace MyTradeMTG.Models
         public DataSet GetCustomerList()
         {
             SqlParameter[] para = {
-
+                 new SqlParameter("@PK_UserId", AddedBy),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetCustomerList", para);
             return ds;

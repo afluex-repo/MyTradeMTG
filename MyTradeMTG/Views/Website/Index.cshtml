@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/Website_LayoutPage.cshtml";
 }
 
+
+
+
+
 <!-- START HOME -->
 <section id="home" class="home_bg">
     <div class="container">
@@ -531,7 +535,7 @@
 
                         <button type="submit" id="forgetpassword" class="abtn" name="forgetpassword" onclick="return validateform();">Submit</button>
                         @*<br />
-                        <span class="text-danger"> @TempData["Login"] </span><br />*@
+                            <span class="text-danger"> @TempData["Login"] </span><br />*@
                     </div>
                 </form>
             </div>
@@ -555,7 +559,7 @@
                     <a href="#" id="register_form" class="abtn ml-4">Sign Up</a>
                 </div>
             </form>
-           @* <center>Don't have an account? <a href="/Home/Registration" i="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>*@
+            @* <center>Don't have an account? <a href="/Home/Registration" i="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>*@
 
         </div>
         <!--Social login end-->
@@ -563,12 +567,22 @@
         <div class="user_register">
             <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
                 <div class="row">
-                    <div class="col-lg-12 form-group">
-                        @*<input type="text" placeholder="Reference Id" />*@
-                        @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
-                        @Html.ValidationMessageFor(m => m.LoginId)
-                        <label class="ml-3" style="color:#ffd234;" id="SponsorName"></label>
-                    </div>
+
+                    @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
+                    {
+                        <h5 class="ml-4 mb-2" style="color:#ffd234; font-size: 14px;">Congratulations ! For joining us under sponsor code : @ViewBag.SponsorId</h5>
+                        <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
+                    }
+                    else
+                    {
+                        <div class="col-lg-12 form-group">
+                            @*<input type="text" placeholder="Reference Id" />*@
+                            @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
+                            @Html.ValidationMessageFor(m => m.LoginId)
+                            <label class="ml-3" style="color:#ffd234;" id="SponsorName"></label>
+                        </div>
+                    }
+
                     <div class="col-lg-12 form-group">
                         @*<input type="text" placeholder="Enter Your First Name" />*@
                         @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true" })
@@ -580,7 +594,7 @@
 
                     </div>
                     <div class="col-lg-12 form-group">
-                        <input id="phone" type="tel" placeholder="Enter Mobile No."  maxlength = "15" onkeypress = "return isNumberKey(event);">
+                        <input id="phone" type="tel" placeholder="Enter Mobile No." maxlength="15" onkeypress="return isNumberKey(event);">
                         @*<span id="valid-msg" class="hide">Valid</span>*@
                         @*<span style="color:red;" id="error-msg" class="hide">Invalid number</span>*@
                     </div>
@@ -592,7 +606,7 @@
                     <div class="col-lg-12 form-group">
                         @*<input type="password" placeholder="Enter Password" />*@
                         @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password" })*@
-                        @Html.PasswordFor(m => m.Password2, new { @class = "form-control", @placeholder = "Password*"})
+                        @Html.PasswordFor(m => m.Password2, new { @class = "form-control", @placeholder = "Password*" })
                     </div>
                     <div class="col-lg-12 form-group">
                         @*<input type="password" placeholder="Confirm Password" />*@
@@ -604,28 +618,28 @@
                         <label>I accept all <a href="javascript:void(0)">Terms &amp; Use.</a></label>
                     </div>
                 </div>
-               
+
                 @*<center>
-                    <button type="submit" class="abtn mt-0">Confirm</button>
-                </center>*@
+                        <button type="submit" class="abtn mt-0">Confirm</button>
+                    </center>*@
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <button type="submit" class="abtn mt-0" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
                     </div>
-                    </div>
-                    <div class="row" id="divReg" style="display: none">
+                </div>
+                <div class="row" id="divReg" style="display: none">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <button type="button" class="abtn mt-0" onclick="return saveregistration();" id="Register">Sign Up</button>
                     </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
-                        </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
+                    </div>
                 </div>
 
                 @*<div class="forgot-password d-flex justify-content-between mt-2">
-                    <a href="/Home/Index">Back To Home</a>
-                    <a href="/Home/Login">Back To Login</a>
-                </div>*@
+                        <a href="/Home/Index">Back To Home</a>
+                        <a href="/Home/Login">Back To Login</a>
+                    </div>*@
                 @*<center><a href="#" class="abtn mt-0">Register</a></center>*@
                 <div class="action_btns mt-2">
                     <center><div class="d-flex">Already have an account ?<a href="#" class="login_modal" style="color:#ffd234"> Login</a></div></center>
@@ -638,10 +652,10 @@
     </div>
 </div>
 @*<div style="display:none">
-<span id="UserDisplayName">@Session["DisplayName"]</span>
-<span id="UserLoginId" >@Session["LoginId"]</span>
-<span id="UserPassword">@Session["Password"]</span>
-</div>*@
+    <span id="UserDisplayName">@Session["DisplayName"]</span>
+    <span id="UserLoginId" >@Session["LoginId"]</span>
+    <span id="UserPassword">@Session["Password"]</span>
+    </div>*@
 <div style="display:none">
     <span id="UserDisplayName"></span>
     <span id="UserLoginId"></span>
@@ -655,46 +669,61 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
                 <div class="row justify-content-center h-100 align-items-center">
                     <div class="col-md-8">
                         <div class="authincation-content">
-                            <div class="row no-gutters">
-                                <div class="col-xl-12">
-                                    <div class="auth-form">
 
-                                        <h3 class="thank text-white text-center">Thank You <span id="UserDisplayName1"></span> </h3>
-                                        <h6 class="card-title text-white text-center mt-3">
-                                            For Your Registration. Your Details are as Below <br />
-                                            <span class="credential"><span class="cred-head">Login ID : </span> <span class="cred-detail" id="UserLoginId1"></span></span><br />
-                                            <span class="credential"><span class="cred-head">Password : </span> <span class="cred-detail" id="UserPassword1"></span></span>
+                            <form role="form" id="myFormsss" method="post" name="myFormsss" class="form-horizontal contact-form">
 
-                                        </h6>
+                                <div class="row no-gutters">
+                                    <div class="col-xl-12">
+                                        <div class="auth-form">
 
-                                        @*<h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
-                                        <h6 class="card-title text-white text-center mt-4">
-                                            For Your Registration. Your Details are as Below <br />
-                                            <span class="credential"><span class="cred-head">Login ID: </span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
-                                            <span class="credential"><span class="cred-head">Password: </span> <span class="cred-detail">@Session["Password"]</span></span>
+                                            <h3 class="thank text-white text-center">Thank You <span id="UserDisplayName1"></span> </h3>
+                                            <h6 class="card-title text-white text-center mt-3">
+                                                For Your Registration. Your Details are as Below <br />
+                                                <span class="credential"><span class="cred-head">Login ID : </span> <span class="cred-detail" id="UserLoginId1"></span></span><br />
+                                                <span class="credential"><span class="cred-head">Password : </span> <span class="cred-detail" id="UserPassword1"></span></span>
 
-                                        </h6>*@
-                                        <div class="d-flex justify-content-around mt-1">
-                                            @*<div class="field-wrapper">
-                                        <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
-                                            <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
-                                            <span style="white-space: nowrap">Go To Dashboard</span>
-                                        </a>
-                                    </div>*@
+                                            </h6>
 
-                                            <div class="field-wrapper pb-3">
-                                                <a href="/Website/Index" target="_blank" class="btn btn-yellow foractivation-btn py-2 pl-4 pr-4">
-                                                    <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
-                                                    <span class="text-white">Add New</span>
-                                                </a>
+                                            @*<h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
+                                                <h6 class="card-title text-white text-center mt-4">
+                                                    For Your Registration. Your Details are as Below <br />
+                                                    <span class="credential"><span class="cred-head">Login ID: </span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
+                                                    <span class="credential"><span class="cred-head">Password: </span> <span class="cred-detail">@Session["Password"]</span></span>
+
+                                                </h6>*@
+                                            <div class="d-flex justify-content-around mt-1">
+                                                @*<div class="field-wrapper">
+                                                        <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                                            <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
+                                                            <span style="white-space: nowrap">Go To Dashboard</span>
+                                                        </a>
+                                                    </div>*@
+
+                                                <div class="field-wrapper pb-3">
+
+                                                    @*<a href="/Website/Index" target="_blank" class="btn btn-yellow foractivation-btn py-2 pl-4 pr-4">
+                                                            <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                                                            <span class="text-white">Add New</span>
+                                                        </a>*@
+
+                                                    <button onclick="return OpenRegistrationPopUp();" class="btn btn-yellow foractivation-btn py-2 pl-4 pr-4">
+                                                        <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                                                        <span class="text-white">Add New</span>
+                                                    </button>
+
+
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -725,201 +754,225 @@
     }
 </style>
 
-
-
 <script>
     function getsponsordetails(obj) {
         debugger;
-            $("#divload").css({ 'display': '' });
-            $(".errortext").removeClass("errortext");
-            $.ajax({
-                url: '/Home/GetSponserDetails',
-                type: 'GET',
-                dataType: 'JSON',
-                data: { 'ReferBy': $(obj).val() },
-                success: function (response) {
-                    if (response.Result == "Yes") {
-                        $('#SponsorName').text(response.DisplayName);
-                    }
-                    else {
-
-                        $("#SponsorId").addClass('errortext');
-                        $('#SponsorName').val('');
-                        $('#SponsorId').val('');
-                        $('#SponsorId').focus();
-                        alert(response.Result);
-                    }
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: '/Home/GetSponserDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'ReferBy': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+                    $('#SponsorName').text(response.DisplayName);
                 }
-            })
-        }
+                else {
 
-        function isNumberKey(evt) {
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            if (charCode != 46 && charCode > 31
-              && (charCode < 48 || charCode > 57))
-                return false;
-            return true;
-        }
-
-        function confirmregistration() {
-            $(".errortext").removeClass("errortext");
-            if ($('#SponsorId').val() == '') {
-                $("#SponsorId").addClass('errortext');
-                $('#SponsorId').focus();
-                return false;
-            }
-            if ($('#FirstName').val() == '') {
-                $("#FirstName").addClass('errortext');
-                $('#FirstName').focus();
-                return false;
-            }
-            if ($('#phone').val() == '') {
-                $("#phone").addClass('errortext');
-                $('#phone').focus();
-                return false;
-            }
-            if ($('#Email').val() == '') {
-                $("#Email").addClass('errortext');
-                $('#Email').focus();
-                return false;
-            }
-            if ($('#Password2').val() == '') {
-                $("#Password2").addClass('errortext');
-                $('#Password2').focus();
-                return false;
-            }
-            if ($('#ConfirmPassword').val() == '') {
-                $("#ConfirmPassword").addClass('errortext');
-                $('#ConfirmPassword').focus();
-                return false;
-            }
-
-            //if ($('#Gender').val() == '0') {
-            //    alert("Please select Gender!");
-            //    return false;
-            //}
-
-            //if ($('#Country').val() == '') {
-            //    alert('Please select Country!')
-            //    return false;
-            //}
-
-            $("#phone").attr("disabled", "disabled");
-            $("#FirstName").attr("disabled", "disabled");
-            $("#SponsorId").attr("disabled", "disabled");
-            $("#LastName").attr("disabled", "disabled");
-            //$("#PinCode").attr("disabled", "disabled");
-            $("#Password2").attr("disabled", "disabled");
-            $("#ConfirmPassword").attr("disabled", "disabled");
-            //$("#Gender").attr("disabled", "disabled");
-            //$("#Country").attr("disabled", "disabled");
-            $("#Email").attr("disabled", "disabled");
-            $('#Confirm').attr("disabled", "disabled");
-            $('#Confirm').hide();
-            $('#divReg').show();
-        }
-
-        function editregistration() {
-            $("#phone").attr("disabled", false);
-            $("#FirstName").attr("disabled", false);
-            $("#LastName").attr("disabled", false);
-            $("#SponsorId").attr("disabled", false);
-            $("#LastName").attr("disabled", false);
-            //$("#PinCode").attr("disabled", false);
-            $("#Password2").attr("disabled", false);
-            $("#ConfirmPassword").attr("disabled", false);
-            //$("#Gender").attr("disabled", false);
-            $("#Email").attr("disabled", false);
-            //$("#Country").attr("disabled", false);
-            $('#Confirm').show();
-            $('#Confirm').attr("disabled", false);
-            $('#divReg').hide();
-        }
-
-        function saveregistration() {
-            debugger;
-            $('#Register').attr("disabled", "disabled");
-            $("#divload").css({ 'display': '' });
-            var Leg = "";
-            if ($('#left').prop('checked')) {
-                Leg = "L";
-            }
-            else {
-                Leg = "R";
-            }
-            $.ajax({
-                url: "/Website/RegistrationAction",
-                Type: "Get",
-                DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val() },
-                success: function (data) {
-                    debugger;
-                    if (data.Result == "1") {
-                        @*window.location.href = '@Url.Action("ConfirmRegistration", "Home")';*@
-                         $("#UserDisplayName1").text(data.Name),
-                         $("#UserLoginId1").text(data.LoginId),
-                         $("#UserPassword1").text(data.Password),
-                        //$("#UserDisplayName1").text(UserDisplayName),
-                        //$("#UserLoginId1").text(UserLoginId),
-                        //$("#UserPassword1").text(UserPassword),
-                        $('.popupContainer').css('display', 'none');
-                        $('#modal').css('display', 'none');
-                        $("#confirm_registration").modal("show");
-                    }
-                    else {
-                        $("#divload").css({ 'display': 'none' });
-                        alert(data.Result);
-                    }
+                    $("#SponsorId").addClass('errortext');
+                    $('#SponsorName').val('');
+                    $('#SponsorId').val('');
+                    $('#SponsorId').focus();
+                    alert(response.Result);
                 }
+            }
+        })
+    }
 
-            });
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function confirmregistration() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SponsorId').val() == '') {
+            $("#SponsorId").addClass('errortext');
+            $('#SponsorId').focus();
+            return false;
         }
-        //function getstatecity() {
-        //    $(".errortext").removeClass("errortext");
-        //    $.ajax({
-        //        url: "/Home/GetStateCity",
-        //        Type: "Get",
-        //        DataType: "JSON",
-        //        data: { PinCode: $("#PinCode").val() },
-        //        success: function (data) {
-        //            if (data.Result == "1") {
-        //                $("#State").val(data.State);
-        //                $("#City").val(data.City);
-        //            }
-        //            else {
-        //                $("#State").val('');
-        //                $("#City").val('');
-        //                $("#PinCode").val('');
-        //                $("#PinCode").addClass('errortext');
-        //                $('#PinCode').focus();
-        //                alert(data.Result);
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#phone').val() == '') {
+            $("#phone").addClass('errortext');
+            $('#phone').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+        if ($('#Password2').val() == '') {
+            $("#Password2").addClass('errortext');
+            $('#Password2').focus();
+            return false;
+        }
+        if ($('#ConfirmPassword').val() == '') {
+            $("#ConfirmPassword").addClass('errortext');
+            $('#ConfirmPassword').focus();
+            return false;
+        }
 
-        //            }
-        //        }
-        //    });
+        //if ($('#Gender').val() == '0') {
+        //    alert("Please select Gender!");
+        //    return false;
         //}
-        function isNumberKey(evt) {
 
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            if (charCode != 46 && charCode > 31
-            && (charCode < 48 || charCode > 57))
-                return false;
+        //if ($('#Country').val() == '') {
+        //    alert('Please select Country!')
+        //    return false;
+        //}
 
+        $("#phone").attr("disabled", "disabled");
+        $("#FirstName").attr("disabled", "disabled");
+        $("#SponsorId").attr("disabled", "disabled");
+        $("#LastName").attr("disabled", "disabled");
+        //$("#PinCode").attr("disabled", "disabled");
+        $("#Password2").attr("disabled", "disabled");
+        $("#ConfirmPassword").attr("disabled", "disabled");
+        //$("#Gender").attr("disabled", "disabled");
+        //$("#Country").attr("disabled", "disabled");
+        $("#Email").attr("disabled", "disabled");
+        $('#Confirm').attr("disabled", "disabled");
+        $('#Confirm').hide();
+        $('#divReg').show();
+    }
+
+    function editregistration() {
+        $("#phone").attr("disabled", false);
+        $("#FirstName").attr("disabled", false);
+        $("#LastName").attr("disabled", false);
+        $("#SponsorId").attr("disabled", false);
+        $("#LastName").attr("disabled", false);
+        //$("#PinCode").attr("disabled", false);
+        $("#Password2").attr("disabled", false);
+        $("#ConfirmPassword").attr("disabled", false);
+        //$("#Gender").attr("disabled", false);
+        $("#Email").attr("disabled", false);
+        //$("#Country").attr("disabled", false);
+        $('#Confirm').show();
+        $('#Confirm').attr("disabled", false);
+        $('#divReg').hide();
+    }
+
+    function saveregistration() {
+        debugger;
+        $('#Register').attr("disabled", "disabled");
+        $("#divload").css({ 'display': '' });
+        var Leg = "";
+        if ($('#left').prop('checked')) {
+            Leg = "L";
+        }
+        else {
+            Leg = "R";
+        }
+        $.ajax({
+            url: "/Website/RegistrationAction",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val() },
+            success: function (data) {
+                debugger;
+                if (data.Result == "1") {
+                    @*window.location.href = '@Url.Action("ConfirmRegistration", "Home")';*@
+                    $("#UserDisplayName1").text(data.Name),
+                    $("#UserLoginId1").text(data.LoginId),
+                    $("#UserPassword1").text(data.Password),
+                    //$("#UserDisplayName1").text(UserDisplayName),
+                    //$("#UserLoginId1").text(UserLoginId),
+                    //$("#UserPassword1").text(UserPassword),
+                   $('.popupContainer').css('display', 'none');
+                    $('#modal').css('display', 'none');
+                    $("#confirm_registration").modal("show");
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Result);
+                }
+            }
+
+        });
+    }
+    //function getstatecity() {
+    //    $(".errortext").removeClass("errortext");
+    //    $.ajax({
+    //        url: "/Home/GetStateCity",
+    //        Type: "Get",
+    //        DataType: "JSON",
+    //        data: { PinCode: $("#PinCode").val() },
+    //        success: function (data) {
+    //            if (data.Result == "1") {
+    //                $("#State").val(data.State);
+    //                $("#City").val(data.City);
+    //            }
+    //            else {
+    //                $("#State").val('');
+    //                $("#City").val('');
+    //                $("#PinCode").val('');
+    //                $("#PinCode").addClass('errortext');
+    //                $('#PinCode').focus();
+    //                alert(data.Result);
+
+    //            }
+    //        }
+    //    });
+    //}
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+        && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function validateConfPassword() {
+        var password = $('#Password2').val();
+        var ConfirmPassword = $('#ConfirmPassword').val();
+        if (password != ConfirmPassword) {
+            $("#Password2").addClass('errortext');
+            $("#ConfirmPassword").addClass('errortext');
+            $('#Password2').val('');
+            $('#ConfirmPassword').val('');
+            alert("Password and Confirm Password are different")
+            return false;
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        var SponsorId = $("#SponsorId").val();
+        if (SponsorId != 0) {
+            $('#modal').show();
+            $(".header_title").text('Sign Up');
+            $(".user_login").hide();
+            $(".user_register").show();
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        function OpenRegistrationPopUp() {
+            debugger;
+            $('#modal').show();
+            $(".header_title").text('Sign Up');
+            $(".user_login").hide();
+            $(".user_register").show();
             return true;
         }
-
-        function validateConfPassword() {
-            var password = $('#Password2').val();
-            var ConfirmPassword = $('#ConfirmPassword').val();
-            if (password != ConfirmPassword) {
-                $("#Password2").addClass('errortext');
-                $("#ConfirmPassword").addClass('errortext');
-                $('#Password2').val('');
-                $('#ConfirmPassword').val('');
-                alert("Password and Confirm Password are different")
-                return false;
-            }
-        }
-
+    });
 </script>
+
 

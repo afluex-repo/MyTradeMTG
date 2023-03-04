@@ -8,14 +8,13 @@
 @using (Html.BeginForm("WalletTransfer", "User", FormMethod.Post, new
 { /*@id = "form1",*/ @onSubmit = "if(!confirm('Are You Sure? You want to Transfer Your MTG Token To Below Contact Address Id')){return false;}", enctype = "multipart/form-data" }))
 {
-
     <div class="content-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Direct Transfer</h4>
+                            <h4 class="card-title">Quick Send MTG</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -24,7 +23,6 @@
                                         <p class="mb-1" style="color:white;">@TempData["wallettransfer"]</p>
                                         <br />
                                         <label style="color:red">MTG /USDT Wallet Balance: @ViewBag.WalletBalance</label>
-
                                     </div>
                                 </div>
                             </div>
@@ -58,25 +56,65 @@
                                         @*@Html.HiddenFor(m => m.MemberTransferCharge,new { @value= "@ViewBag.MemberTransferCharge" })*@
                                         <input id="MemberTransferCharge" name="MemberTransferCharge" value="@Session["MemberTransferCharge"]" hidden />
                                         <input id="TransferCharge" name="TransferCharge" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
-
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="=row">
                                 <div class="col-md-12">
                                     <input class="btn btn-success pull-left" type="submit" value="Transfer" id="btnTransfer" name="btnTransfer" onclick="return validateform();" />
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Quick Send MTG List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive mt-4">
+                                    <table class="table table-bordered w-100 mb-0" id="html5-extension" data-page-length='20'>
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Date</th>
+                                                <th>Transfer To </th>
+                                                <th>MTG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.QuickSendMTGList != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var Item in Model.QuickSendMTGList)
+                                                    {
+                                                        <tr class="text-left">
+                                                            <td>
+                                                                @i
+                                                            </td>
+                                                            <td>@Item.TransferDate</td>
+                                                            <td>@Item.TransfertoName</td>
+                                                            <td>@Item.MTG</td>
+                                                        </tr>
+                                                        i++;
+                                                    }
 
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 }
 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
