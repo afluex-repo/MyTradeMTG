@@ -39,7 +39,7 @@
                                                 {
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="Address">Address </label>
+                                                            <label for="Address">Address <span style="color:red;">* </span> </label>
                                                             <input type="hidden" id="hdfAddress" value="@Model.Address" />
                                                             @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
                                                         </div>
@@ -95,34 +95,38 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                @*<div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label for="FirstName">Gender</label>
                                                         <input type="hidden" id="hdf" value="@Model.Gender">
                                                         @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control", @disabled = "disabled" })
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="phone">Mobile No</label>
                                                         <input type="text" class="form-control mb-4" id="phone" placeholder="Write your phone number here" value="@Model.MobileNo" disabled="disabled">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="email">Email</label>
                                                         <input type="text" class="form-control mb-4" id="email" placeholder="Email" value="@Model.Email" disabled="disabled">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+
+
+
+                                            </div>
+                                            <div class="row">
+
+                                          
+                                                @*<div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="email">Country</label>
                                                         <input type="text" class="form-control mb-4" id="Country" placeholder="Country" value="@Model.Country" disabled="disabled">
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 @*<div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="country">Pin Code</label>
@@ -181,6 +185,16 @@
             $("#divProfile").show();
         }
         function DisableAddress() {
+            debugger;
+            if ($('#postedFile').val() == '') {
+                alert('Please choose profile pic');
+                return false;
+            }
+            if ($('#Address').val() == '') {
+                $("#Address").addClass('errortext');
+                $('#Address').focus();
+                return false;
+            }
             $("#addr").show();
             $("#addrhide").hide();
             //$("#btn_Pin").attr("disabled", "true");
@@ -213,3 +227,9 @@
         </script>
     }
 
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: transparent !important;
+    }
+</style>

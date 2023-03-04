@@ -13,7 +13,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">MTG /USDT Request</h4>
+                            <h4 class="card-title">Buy MTG Request</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -76,13 +76,13 @@
                                 <div class="col-xl-3">
                                     <div class="example">
                                         <p class="mb-1">Payment Type<span style="color: red">*</span></p>
-                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "default-select  form-control wide", @onchange = "getpaymentTypedetails();" })
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentTypedetails();" })
                                     </div>
                                 </div>
                                 <div class="col-xl-3" id="paymentmode" style="display: none">
                                     <div class="example">
                                         <p class="mb-1"> Payment Mode<span style="color: red">*</span></p>
-                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "default-select  form-control wide", @onchange = "getpaymentdetails();" })
+                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentdetails();" })
                                     </div>
                                 </div>
 
@@ -109,17 +109,25 @@
                                 <div class="col-md-3" id="divPaymentMode" style="display: none">
                                     @*<label> Transaction Date</label> <span style="color: red">*</span>*@
                                     <span id="txndt"></span><span id="spntradate" style="color: red">*</span>
-                                    @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
+                                    @Html.TextBoxFor(m => m.DDChequeDate, new { @class= "form-control", @placeholder = "Transaction Date",@readonly=true})
                                 </div>
                                 <div class="col-md-3" id="Remarks" style="display: none">
                                     Remark
                                     @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
                                 </div>
 
-                                <div class="col-md-3 my-3" id="divQr" style="display: none">
+                                @*<div class="col-md-3 my-3" id="divQr" style="display: none">
                                     <label id="lblQr"> Scan QR </label>
                                     <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                                </div>*@
+
+
+                                <div class="col-md-3 my-3" id="divQr" style="display: none">
+                                    <label id="lblQr"> Scan QR </label>
+                                    <img src="@ViewBag.QRCodeURL" height="200" width="200" />
                                 </div>
+
+                                
 
                             </div>
 
@@ -265,8 +273,6 @@
 <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
 <script>
  
-
-
     function ConvertMony() {
         debugger;
         //if ($("#Countryid").val() == "America") {
@@ -319,11 +325,32 @@
         });
     }
 
+
     $(document).ready(function () {
-        $("#PaymentType").val("1");
+
+        $("#PaymentType").val("2");
         //$("#PaymentType").val("");
         //getpaymentTypedetails();
+
+        $("#PaymentMode").val(10);
+        $("#paymentmode").show();
+        $("#divQr").show();
+        $("#divbankname").show();
+        $("#BankName").val('');
+        $("#divtransactiono").show();
+        $("#divPaymentMode").show();
+        $("#Remarks").hide();
+        $("#lblbank").show();
+        $('#lblbank').html('UPI ID.');
+        $('#txnNo').html('Transaction ID.');
+        $('#txndt').html('Transaction Date.');
+        $("#BankName").attr("placeholder", "UPI Id");
+        $("#DDChequeNo").attr("placeholder", "Transaction No");
+        $("#DDChequeDate").attr("placeholder", "Transaction Date.");
+
     });
+
+
     function validateform() {
         debugger;
         $(".errortext").removeClass("errortext");
@@ -394,10 +421,6 @@
         return true;
     }
 
-    //jQuery.noConflict();
-    $('#DDChequeDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-    });
     
     //$(document).ready(function () {
     //    debugger;
@@ -407,6 +430,10 @@
     //    });
     //});
 
+    //jQuery.noConflict();
+    $('#DDChequeDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
     function preview_image(event, mode) {
         debugger;
         if (mode == 'Q') {
@@ -685,8 +712,8 @@
     }
 
 
-
 </script>
+
 @if (TempData["msg"] != null)
 {
     <script>
@@ -711,12 +738,14 @@
                 pos: 'top-right'
             });
         });
+
     </script>
 }
 <style>
     .errortext {
         border: 1px solid red !important;
         background-color: #fff0f0 !important;
+        color:#000 !important;
     }
 </style>
 

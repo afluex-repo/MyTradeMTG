@@ -33,9 +33,14 @@ namespace MyTradeMTG.Models
         public string Country { get; set; }
         public string CustomerId { get; set; }
         public string CustomerName { get; set; }
+
+
+
+        public string Profile { get; set; }
+
         public List<SelectListItem> ddlcountry { get; set; }
 
-        public string Packageid { get; set; }
+        //public string Packageid { get; set; }
 
         public static string GenerateRandom()
         {

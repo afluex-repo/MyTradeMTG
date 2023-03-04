@@ -15,7 +15,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Package Master</h4>
                                 <span class="text-danger">
-                                    @TempData["Package"]
+                                    @TempData["Product"]
                                 </span>
                             </div>
                         </div>
@@ -70,67 +70,60 @@
                                 <label>Return Percentage 1 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.ReturnPercent1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
-
                             @*<div class="row">*@
-                                <div class="col-md-3" id="divdramount2">
-                                    <label>Direct Count 2 <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                </div>
-                                <div class="col-md-3" id="divReturnPercent2">
-                                    <label>Return Percentage 2 <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                </div>
-
-                                <div class="col-md-3" id="divdramount3">
-                                    <label>Direct Count 3 <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                </div>
-                                <div class="col-md-3" id="divReturnPercent3">
-                                    <label>Return Percentage 3 <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.ReturnPercent3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                </div>
-
-                            @*</div>*@
-                                @*<div class="row">*@
-
-                                    <div class="col-md-3" id="divbasis" style="display:none">
-                                        <div class="form-group">
-                                            <label>Basis on <span style="color: red">*</span></label>
-                                            <select name="BasisOn" id="BasisOn" class="form-control" required" style="color:#737074;">
-                                                <option value="">---Select ---</option>
-                                                <option id="opt1" value="OneTime">OneTime</option>
-                                                <option id="opt2" value="Daily">Daily</option>
-                                                <option id="opt3" value="Monthly">Monthly</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3" id="divdays" style="display:none">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Return Days <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Days, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" id="divsponsorpercent" style="display:none">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Sponsor Income  <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.SponsorIncome, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @Maxlength = "3" })
-                                        </div>
-                                    </div>
-                                @*</div>*@
-
-
-                                @*<div class="col-md-3">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                    </div>
-                </div>
-            </div>*@
-
-
+                            <div class="col-md-3" id="divdramount2">
+                                <label>Direct Count 2 <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
+                            <div class="col-md-3" id="divReturnPercent2">
+                                <label>Return Percentage 2 <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+
+                            <div class="col-md-3" id="divdramount3">
+                                <label>Direct Count 3 <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="col-md-3" id="divReturnPercent3">
+                                <label>Return Percentage 3 <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ReturnPercent3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            @*</div>*@
+                            @*<div class="row">*@
+                            <div class="col-md-3" id="divbasis" style="display:none">
+                                <div class="form-group">
+                                    <input type="hidden" id="BasisOn123" value="@Model.BasisOn" />
+                                    <label>Basis on <span style="color: red">*</span></label>
+                                    <select name="BasisOn" id="BasisOn" class="form-control" style="color:#737074;">
+                                        <option value="">---Select ---</option>
+                                        <option id="opt1" value="OneTime">OneTime</option>
+                                        <option id="opt2" value="Daily">Daily</option>
+                                        <option id="opt3" value="Monthly">Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="divdays" style="display:none">
+                                <div class="form-group">
+                                    <label class="col-form-label">Return Days <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Days, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="divsponsorpercent" style="display:none">
+                                <div class="form-group">
+                                    <label class="col-form-label">Sponsor Income  <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.SponsorIncome, new { @class = "form-control", @onkeypress = "return isNumberKey(event)", @Maxlength = "3" })
+                                </div>
+                            </div>
+                            @*</div>*@
+                            @*<div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">IGST <span style="color: red">*</span></label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
                         <div class="row mb-2">
                             <div class="col-md-3" style="display:none" id="divfromamount">
                                 <div class="form-group">
@@ -150,7 +143,6 @@
                                     @Html.TextBoxFor(m => m.InMultipleOf, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                                 </div>
                             </div>
-
                             @*<div class="col-md-3">
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Binary Perc(%)<span style="color: red">*</span></label>
@@ -213,20 +205,18 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6">
-
-                                @if (Model.Packageid == null)
+                                @if (Model.Packageid == null || Model.Packageid == "")
                                 {
-                                    <input type="submit" id="btnSaveProduct" class="btn btn-success" name="btnSaveProduct" value="Save" onclick="return saveProduct();" />
+                                <input type="submit" id="btnSaveProduct" class="btn btn-success" name="btnSaveProduct" value="Save" onclick="return saveProduct();" />
                                 }
                                 else
                                 {
-                                    @*<input type="submit" id="btnUpdateProduct" class="btn btn-success pull-right" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" />*@
-                                    <a href="#" type="submit" id="btnUpdateProduct" class="btn btn-success" name="btnUpdateProduct" value="Update" onclick="return updateProduct();">Update</a>
+                                @*<input type="submit" id="btnUpdateProduct" class="btn btn-success pull-right" name="btnUpdateProduct" value="Update" onclick="return updateProduct();" />*@
+
+                                @Html.HiddenFor(m => m.Packageid)
+                                <a href="#" type="submit" id="btnUpdateProduct" class="btn btn-success" name="btnUpdateProduct" value="Update" onclick="return updateProduct();">Update</a>
                                 }
-
                                 <a class="btn btn-primary" href="/Master/PackageList">Back To List</a>
-
-
                             </div>
                         </div>
                         @*<div class="widget-content widget-content-area br-6">
@@ -299,6 +289,17 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
 
+    if ($('#Packageid').val() != "" || $('#Packageid').val() != null || $('#Packageid').val() != 0)
+    {
+        debugger;
+        var basison123 = $("#BasisOn123").val();
+        if($("#BasisOn123").val()!=0)
+        {
+            var basison = $("#basison").val($("#BasisOn123").val()).attr("selected", "selected");
+        }
+    }
+
+
     $(document).ready(function () {
         debugger;
         var packagetype = $("#PackageTypeId").val();
@@ -311,12 +312,15 @@
             $("#opt2").show();
             $("#opt3").show();
             $("#BasisOn").val('');
-            $("#divmtgtoken").hide();
+            $("#divmtgtoken").show();
             $("#divdays").show();
             $("#divgst").hide();
             $("#divhsn").hide();
             $("#divfinal").hide();
             $("#divsponsorpercent").show();
+
+
+            $("#divbasis").show();
 
             //$("#divdramount1").hide();
             //$("#divdramount2").hide();
@@ -357,6 +361,13 @@
             $("#divReturnPercent1").hide();
             $("#divReturnPercent2").hide();
             $("#divReturnPercent3").hide();
+
+
+            $("#divbasis").show();
+            $("#divdays").show();
+            $("#divpercent").show();
+
+
             //var ComboPackage = $("#IscomboPackage").val();
             //debugger
             //if (ComboPackage == "Yes") {
@@ -476,8 +487,7 @@
 
         }
     }
-    function CalculateFinalAmount()
-    {
+    function CalculateFinalAmount() {
         debugger;
         var productprice = $('#ProductPrice').val();
         var GST = (parseFloat($('#IGST').val()) / 100) * parseFloat($('#ProductPrice').val());
@@ -516,7 +526,7 @@
             $("#divsponsorpercent").show();
 
 
-          
+
             $("#divdramount1").show();
             $("#divdramount2").show();
             $("#divdramount3").show();
@@ -533,7 +543,7 @@
 
 
         }
-        //else if (packagetype == 1) {
+            //else if (packagetype == 1) {
         else if (packagetype == 1) {
             $("#divfromamount").show();
             $("#divtoamount").show();
@@ -569,7 +579,7 @@
             $("#divReturnPercent3").hide();
 
 
-          
+
         }
         else {
             $("#divfromamount").hide();
@@ -636,8 +646,7 @@
         debugger
         $(".errortext").removeClass("errortext");
         var IscomboPackage = 0;
-        if ($("#Iscombo").is(":checked") == true)
-        {
+        if ($("#Iscombo").is(":checked") == true) {
             IscomboPackage = "1";
         }
         else {
@@ -705,46 +714,54 @@
                 return false;
             }
 
-
-
-            if ($('#dramount1').val() == '' || $('#dramount1').val() == '0') {
-                $("#dramount1").addclass('errortext');
-                $('#dramount1').focus();
+            if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
+                $("#DrAmount1").addClass('errortext');
+                $('#DrAmount1').focus();
                 return false;
             }
 
-            if ($('#dramount2').val() == '' || $('#dramount2').val() == '0') {
-                $("#dramount2").addclass('errortext');
-                $('#dramount2').focus();
+            if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
+                $("#ReturnPercent1").addClass('errortext');
+                $('#ReturnPercent1').focus();
+                return false;
+            }
+            if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
+                $("#DrAmount2").addClass('errortext');
+                $('#DrAmount2').focus();
+                return false;
+            }
+            if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
+                $("#ReturnPercent2").addClass('errortext');
+                $('#ReturnPercent2').focus();
                 return false;
             }
 
-            if ($('#dramount3').val() == '' || $('#dramount3').val() == '0') {
-                $("#dramount3").addclass('errortext');
-                $('#dramount3').focus();
+            if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
+                $("#DrAmount3").addClass('errortext');
+                $('#DrAmount3').focus();
                 return false;
             }
 
-            if ($('#returnpercent1').val() == '' || $('#returnpercent1').val() == '0') {
-                $("#returnpercent1").addclass('errortext');
-                $('#returnpercent1').focus();
+            if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
+                $("#ReturnPercent3").addClass('errortext');
+                $('#ReturnPercent3').focus();
                 return false;
             }
 
 
-            if ($('#returnpercent2').val() == '' || $('#returnpercent2').val() == '0') {
-                $("#returnpercent2").addclass('errortext');
-                $('#returnpercent2').focus();
-                return false;
-            }
+            //if ($('#returnpercent2').val() == '' || $('#returnpercent2').val() == '0') {
+            //    $("#returnpercent2").addclass('errortext');
+            //    $('#returnpercent2').focus();
+            //    return false;
+            //}
 
-            if ($('#returnpercent3').val() == '' || $('#returnpercent3').val() == '0') {
-                $("#returnpercent3").addclass('errortext');
-                $('#returnpercent3').focus();
-                return false;
-            }
+            //if ($('#returnpercent3').val() == '' || $('#returnpercent3').val() == '0') {
+            //    $("#returnpercent3").addclass('errortext');
+            //    $('#returnpercent3').focus();
+            //    return false;
+            //}
 
-            if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0')  {
+            if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
                 $("#BasisOn").addClass('errortext');
                 $('#BasisOn').focus();
                 return false;
@@ -858,8 +875,7 @@
                 return false;
             }
 
-            if(IscomboPackage=="1")
-            {
+            if (IscomboPackage == "1") {
                 if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
                     $("#ROIPercent").addClass('errortext');
                     $('#ROIPercent').focus();
@@ -877,20 +893,24 @@
                 }
             }
         }
+
         $.ajax({
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(),DrAmount1: $('#DrAmount1').val(),DrAmount2: $('#DrAmount2').val(),DrAmount3: $('#DrAmount3').val(),ReturnPercent1: $('#ReturnPercent1').val(),ReturnPercent2: $('#ReturnPercent2').val(),ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
-                window.location.href = '@Url.Action("PackageMaster", "Master")';
-
+                @*window.location.href = '@Url.Action("PackageMaster", "Master")';*@
             }
         });
     }
 
-    function updateProduct() {
+
+
+
+    @*function updateProduct() {
+        debugger;
         $(".errortext").removeClass("errortext");
         var IscomboPackage = 0;
         if ($("#Iscombo").is(":checked") == true) {
@@ -1034,7 +1054,288 @@
 
         });
 
+    }*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function updateProduct() {
+        debugger;
+
+
+        $(".errortext").removeClass("errortext");
+        var IscomboPackage = 0;
+        if ($("#Iscombo").is(":checked") == true) {
+            IscomboPackage = "1";
+        }
+        else {
+            IscomboPackage = "0";
+        }
+
+        if ($('#PackageTypeId').val() == '0') {
+            $("#PackageTypeId").addClass('errortext');
+            $('#PackageTypeId').focus();
+            return false;
+        }
+        if ($('#ProductName').val() == '') {
+            $("#ProductName").addClass('errortext');
+            $('#ProductName').focus();
+            return false;
+        }
+        if ($('#ProductPrice').val() == '' || $('#ProductPrice').val() == '0') {
+            $("#ProductPrice").addClass('errortext');
+            $('#ProductPrice').focus();
+            return false;
+        }
+        //if ($('#IGST').val() == '') {
+        //    $("#IGST").addClass('errortext');
+        //    $('#IGST').focus();
+        //    return false;
+        //}
+        //if ($('#CGST').val() == '') {
+        //    $("#CGST").addClass('errortext');
+        //    $('#CGST').focus();
+        //    return false;
+        //}
+        //if ($('#SGST').val() == '') {
+        //    $("#SGST").addClass('errortext');
+        //    $('#SGST').focus();
+        //    return false;
+        //}
+        //if ($('#BinaryPercent').val() == '') {
+        //    $("#BinaryPercent").addClass('errortext');
+        //    $('#BinaryPercent').focus();
+        //    return false;
+        //}
+        //if ($('#BV').val() == '') {
+        //    $("#BV").addClass('errortext');
+        //    $('#BV').focus();
+        //    return false;
+        //}
+        if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
+            $("#ActivationMTGToken").addClass('errortext');
+            $('#ActivationMTGToken').focus();
+            return false;
+        }
+
+        //if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
+        //    $("#BasisOn").addClass('errortext');
+        //    $('#BasisOn').focus();
+        //    return false;
+        //}
+
+
+        if ($('#PackageTypeId').val() == '2') {
+
+            if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
+                $("#ROIPercent").addClass('errortext');
+                $('#ROIPercent').focus();
+                return false;
+            }
+            if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
+                $("#DrAmount1").addClass('errortext');
+                $('#DrAmount1').focus();
+                return false;
+            }
+
+            if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
+                $("#ReturnPercent1").addClass('errortext');
+                $('#ReturnPercent1').focus();
+                return false;
+            }
+            if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
+                $("#DrAmount2").addClass('errortext');
+                $('#DrAmount2').focus();
+                return false;
+            }
+            if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
+                $("#ReturnPercent2").addClass('errortext');
+                $('#ReturnPercent2').focus();
+                return false;
+            }
+
+            if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
+                $("#DrAmount3").addClass('errortext');
+                $('#DrAmount3').focus();
+                return false;
+            }
+
+            if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
+                $("#ReturnPercent3").addClass('errortext');
+                $('#ReturnPercent3').focus();
+                return false;
+            }
+
+            if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
+                $("#BasisOn").addClass('errortext');
+                $('#BasisOn').focus();
+                return false;
+            }
+
+            if ($('#Days').val() == '') {
+                $("#Days").addClass('errortext');
+                $('#Days').focus();
+                return false;
+            }
+
+            if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
+                return false;
+            }
+
+            if ($('#FromAmount').val() == '' || $('#FromAmount').val() == '0') {
+                $("#FromAmount").addClass('errortext');
+                $('#FromAmount').focus();
+                return false;
+            }
+            if ($('#ToAmount').val() == '' || $('#ToAmount').val() == '0') {
+                $("#ToAmount").addClass('errortext');
+                $('#ToAmount').focus();
+                return false;
+            }
+            if ($('#InMultipleOf').val() == '' || $('#InMultipleOf').val() == '0') {
+                $("#InMultipleOf").addClass('errortext');
+                $('#InMultipleOf').focus();
+                return false;
+            }
+
+
+        }
+        if ($('#PackageTypeId').val() == '1') {
+            if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
+                $("#ROIPercent").addClass('errortext');
+                $('#ROIPercent').focus();
+                return false;
+            }
+
+            //if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
+            //    $("#DrAmount1").addClass('errortext');
+            //    $('#DrAmount1').focus();
+            //    return false;
+            //}
+
+            //if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
+            //    $("#DrAmount2").addClass('errortext');
+            //    $('#DrAmount2').focus();
+            //    return false;
+            //}
+
+            //if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
+            //    $("#DrAmount3").addClass('errortext');
+            //    $('#DrAmount3').focus();
+            //    return false;
+            //}
+
+            //if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
+            //    $("#ReturnPercent1").addClass('errortext');
+            //    $('#ReturnPercent1').focus();
+            //    return false;
+            //}
+
+
+            //if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
+            //    $("#ReturnPercent2").addClass('errortext');
+            //    $('#ReturnPercent2').focus();
+            //    return false;
+            //}
+
+            //if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
+            //    $("#ReturnPercent3").addClass('errortext');
+            //    $('#ReturnPercent3').focus();
+            //    return false;
+            //}
+
+            if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
+                $("#BasisOn").addClass('errortext');
+                $('#BasisOn').focus();
+                return false;
+            }
+
+            if ($('#Days').val() == '') {
+                $("#Days").addClass('errortext');
+                $('#Days').focus();
+                return false;
+            }
+
+            if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+                $("#SponsorIncome").addClass('errortext');
+                $('#SponsorIncome').focus();
+                return false;
+            }
+
+            if ($('#FromAmount').val() == '' || $('#FromAmount').val() == '0') {
+                $("#FromAmount").addClass('errortext');
+                $('#FromAmount').focus();
+                return false;
+            }
+            if ($('#ToAmount').val() == '' || $('#ToAmount').val() == '0') {
+                $("#ToAmount").addClass('errortext');
+                $('#ToAmount').focus();
+                return false;
+            }
+            if ($('#InMultipleOf').val() == '' || $('#InMultipleOf').val() == '0') {
+                $("#InMultipleOf").addClass('errortext');
+                $('#InMultipleOf').focus();
+                return false;
+            }
+
+            if (IscomboPackage == "1") {
+                if ($('#ROIPercent').val() == '' || $('#ROIPercent').val() == '0') {
+                    $("#ROIPercent").addClass('errortext');
+                    $('#ROIPercent').focus();
+                    return false;
+                }
+                if ($('#Days').val() == '') {
+                    $("#Days").addClass('errortext');
+                    $('#Days').focus();
+                    return false;
+                }
+                if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+                    $("#SponsorIncome").addClass('errortext');
+                    $('#SponsorIncome').focus();
+                    return false;
+                }
+            }
+        }
+
+
+
+
+        $.ajax({
+            url: "/Master/UpdateProduct",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage },
+            success: function (data) {
+                //alert(data.Result);
+                window.location.href = '@Url.Action("PackageMaster", "Master")';
+            }
+
+        });
+
     }
+
+
+
+
+
+
+
 
 </script>
 

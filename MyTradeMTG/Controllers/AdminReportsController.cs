@@ -1160,10 +1160,15 @@ namespace MyTradeMTG.Controllers
             }
             else
             {
-                model.RootAgentCode = "MyTradeMTG";
+                model.RootAgentCode = "MyTrade";
                 model.PK_UserId = "1";
-                model.LoginId = "MyTradeMTG";
-                model.DisplayName = "MyTradeMTG";
+                model.LoginId = "MyTrade";
+                model.DisplayName = "MyTrade";
+
+                //model.RootAgentCode = "MyTradeMTG";
+                //model.PK_UserId = "1";
+                //model.LoginId = "MyTradeMTG";
+                //model.DisplayName = "MyTradeMTG";
             }
             List<TreeMembers> lst = new List<TreeMembers>();
             List<MemberDetails> lstMember = new List<MemberDetails>();

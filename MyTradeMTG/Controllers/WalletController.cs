@@ -94,6 +94,18 @@ namespace MyTradeMTG.Controllers
             obj.PaymentType = "Offline";
             #endregion
 
+
+
+
+            #region QR Code File
+            DataSet ds11 = obj.GetActiveQRCodeDetails();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.QRCodeURL = ds11.Tables[0].Rows[0]["QRCodeURL"].ToString();
+            }
+            #endregion
+
+
             return View(obj);
         }
 

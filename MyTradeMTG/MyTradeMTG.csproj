@@ -1404,6 +1404,8 @@
     <Content Include="Views\Shared\Website_LayoutPage.cshtml" />
     <Content Include="Views\Website\Index.cshtml" />
     <Content Include="Views\Website\Registration.cshtml" />
+    <Content Include="Views\Master\QRCodeMaster.cshtml" />
+    <Content Include="Views\Master\QRCodeList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1416,6 +1418,7 @@
     <Folder Include="Document\" />
     <Folder Include="PanUpload\" />
     <Folder Include="plugins\apex\" />
+    <Folder Include="UploadQRCodeMaster\" />
     <Folder Include="Views\API\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
