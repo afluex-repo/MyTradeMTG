@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-form-label">Package Price <span style="color: red">*</span></label>
+                                    <label class="col-form-label">Package Price(MTG) <span style="color: red">*</span></label>
                                     @Html.TextBoxFor(m => m.ProductPrice, new { @placeholder = "Package Price", @class = "form-control", @onkeypress = "return isNumberKey(event)", onchange = "return bindbvprice();" })
                                 </div>
                             </div>
@@ -289,16 +289,12 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script>
 
-    if ($('#Packageid').val() != "" || $('#Packageid').val() != null || $('#Packageid').val() != 0)
-    {
         debugger;
         var basison123 = $("#BasisOn123").val();
         if($("#BasisOn123").val()!=0)
         {
-            var basison = $("#basison").val($("#BasisOn123").val()).attr("selected", "selected");
+            var BasisOn = $("#BasisOn").val($("#BasisOn123").val()).attr("selected", "selected");
         }
-    }
-
 
     $(document).ready(function () {
         debugger;
@@ -311,7 +307,7 @@
             $("#opt1").hide();
             $("#opt2").show();
             $("#opt3").show();
-            $("#BasisOn").val('');
+            //$("#BasisOn").val('');
             $("#divmtgtoken").show();
             $("#divdays").show();
             $("#divgst").hide();
@@ -346,7 +342,7 @@
             $("#opt1").show();
             $("#opt2").hide();
             $("#opt3").hide();
-            $("#BasisOn").val('');
+            //$("#BasisOn").val('');
             $("#divmtgtoken").show();
             $("#divdays").hide();
             $("#divgst").show();
@@ -901,7 +897,8 @@
             data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage },
             success: function (data) {
                 alert(data.Result);
-                @*window.location.href = '@Url.Action("PackageMaster", "Master")';*@
+                window.location.href = '@Url.Action("PackageMaster", "Master")';
+              
             }
         });
     }
@@ -1055,20 +1052,6 @@
         });
 
     }*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

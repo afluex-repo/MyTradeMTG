@@ -27,7 +27,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body" id="divtop">
+                        @*<div class="card-body" id="divtop">*@
+                        <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-md-12">
                                     <label style="color:red">MTG /USDT Wallet Balance: @ViewBag.WalletBalance</label>
@@ -42,104 +43,137 @@
                             </div>
                             <div class="row mb-4">
 
-                                @if (Model.IsActive == "True")
-                                {
-                                    <div class="col-md-4">
-                                        <label for="LoginId">User Id</label>
-                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
-                                        @Html.HiddenFor(m => m.Name)
-                                        <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
-                                        <input type="hidden" id="Status" name="Status" value="@Model.Status" />
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="col-md-4">
-                                        <label for="LoginId">User Id</label>
-                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();", @readonly = "" })
-                                        @Html.HiddenFor(m => m.Name)
-                                        <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
-                                        <input type="hidden" id="Status" name="Status" value="@Model.Status" />
-                                    </div>
-                                 }
-
-
-
-                                    <div class="col-md-4">
-                                        <label for="Package">Package Type<span style="color:red">*</span></label>
-                                        @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="hidden" id="amt" />
-                                        <input type="hidden" id="pkg" />
-                                        <label for="Package">Package <span style="color:red">*</span></label>
-                                        @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control wide", @onchange = "return GetPackageDetails();" })
-                                        <span style="color:red;">Basis On  : <span id="BasisOn"></span></span>
-                                    </div>
+                                @*@if (Model.IsActive == "True")
+                {*@
+                                @*<div class="col-md-4">
+                                    <label for="LoginId">User Id</label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
+                                    @Html.HiddenFor(m => m.Name)
+                                    <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
+                                    <input type="hidden" id="Status" name="Status" value="@Model.Status" />
+                                </div>*@
+                                @*}
+                else
+                {*@
+                                <div class="col-md-4">
+                                    <label for="LoginId">User Id</label>
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();", @readonly = "" })
+                                    @Html.HiddenFor(m => m.Name)
+                                    <label class="pt-2" style="color:#e49d31;" id="lblName">@Session["FullName"]</label>
+                                    <input type="hidden" id="Status" name="Status" value="@Model.Status" />
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-4">
-                                        <label for="ActivationMTGToken">Activation MTG  <span style="color:red">*</span></label>
-                                        <input name="ActivationMTGToken" id="ActivationMTGToken" value="" class="form-control" readonly onchange="return GetPackageDetails();">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                        <label for="Amount">MTG /USDT <span style="color:red">*</span></label>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
-                                        <span style="color:red;font-size:small;">Min  : <span id="spfrom"></span> </span><span style="color:red;padding-left:50px;font-size:small;"> Max : <span id="spto"></span> </span><span style="color:red;padding-left:50px;font-size:small;"> In Multiple Of : <span id="spmul"></span></span>
-                                        <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
-                                        <input type="hidden" id="hdfMin" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="TotalAmount">Total<span style="color:red">*</span></label>
-                                        <input name="TotalAmount" id="TotalAmount" value="" readonly class="form-control">
-                                    </div>
-                                </div>
+                                @*}*@
 
-                                @*<div class="row mb-4">
-                                        <div class="col-md-4">
-                                            <label for="Amount">
-                                                Payment Type
-                                            </label><span style="color: red">*</span>
-                                            @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
-                                        </div>
-                                        <div class="col-md-4" id="paymentmode" style="display: none">
-                                            <label for="Mode">Mode<span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4" style="display:none" id="divPaymentMode">
-                                        <div class="col-md-3" id="divQr" style="display: none">
-                                            <label id="lblQr"> Scan QR </label>
-                                            <img src="~/assets/img/QR.jpeg" height="200" width="200" />
-                                        </div>
-                                        <div class="col-md-3" id="divbankname">
-                                            <label for="BankName" id="lblbank">Bank Name</label>
-                                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
-                                        </div>
-                                        <div class="col-md-3" id="divbankbranch">
-                                            <label for="BranchName" id="lbltbranch">Branch Name</label>
-                                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Branch Name" })
-                                        </div>
-                                        <div class="col-md-3" id="divtransactiono">
-                                            <label for="TransactionNo" id="lbltno">Transaction No</label>
-                                            @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
-                                        </div>
-                                        <div class="col-md-3" id="divtrdate">
-                                            <label for="TransactionDate" id="lbltdate">TransactionDate</label>
-                                            @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
-                                        </div>
-                                    </div>*@
-                                    <div class="col-md-4">
-                                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="button" value="Submit" onclick="return ValidateForm();" data-toggle="modal" />
-                                    </div>
-                                    @*<div class="row mb-4">
-                                            <div class="col-md-12">
-                                                <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
-                                            </div>
-                                        </div>*@
 
+
+                                <div class="col-md-4">
+                                    <label for="Package">Package Type<span style="color:red">*</span></label>
+                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
                                 </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" id="amt" />
+                                    <input type="hidden" id="pkg" />
+                                    <label for="Package">Package <span style="color:red">*</span></label>
+                                    @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control wide", @onchange = "return GetPackageDetails();" })
+                                    <span style="color:red;">Basis On  : <span id="BasisOn"></span></span>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="ActivationMTGToken">Activation MTG  <span style="color:red">*</span></label>
+                                    <input name="ActivationMTGToken" id="ActivationMTGToken" value="" class="form-control" readonly onchange="return GetPackageDetails();">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
+                                    <label for="Amount">MTG /USDT <span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return CheckAmount();" })
+                                    <span style="color:red;font-size:small;">Min  : <span id="spfrom"></span> </span><span style="color:red;padding-left:50px;font-size:small;"> Max : <span id="spto"></span> </span><span style="color:red;padding-left:50px;font-size:small;"> In Multiple Of : <span id="spmul"></span></span>
+                                    <input type="hidden" value="@ViewBag.ToAmount" id="hdfMax" />
+                                    <input type="hidden" id="hdfMin" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="TotalAmount">Total<span style="color:red">*</span></label>
+                                    @*<input name="TotalAmount" id="TotalAmount" value="" readonly class="form-control">*@
+                        <input name="TotalAmount" value="" id="TotalAmount"  class="form-control" >  
+                                </div>
+                            </div>
+
+
+                            <input type="hidden" id="Countryid" value="@Model.Country" />
+                            <div class="col-md-3" id="divusdoller" style="display:none">
+                                <div class="example">
+                                    <p class="mb-1"> In US Doller<span style="color: red"></span></p>
+                                    <label id="InUsDoller" class="pt-3 form-control"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="dvinrupees" style="display:none">
+                                <div class="example">
+                                    <p class="mb-1">Total MTG In Rupess<span style="color: red"></span></p>
+                                    <label id="result" class="pt-3 form-control"></label>
+                                    <input type="hidden" id="IndianValue" name="IndianValue" />
+                                    <input type="hidden" id="AmountOfTotal" name="AmountOfTotal"/>
+                                </div>
+                            </div>
+
+                            @*-----Convert USD TO INR Link Start-------*@
+                            <div style="display:none">
+                                <label>From:</label>
+                                <select id="from">
+                                    <option value="USD">USD</option>
+                                </select>
+                                <label>To:</label>
+                                <select id="to">
+                                    <option value="INR">INR</option>
+                                </select>
+                            </div>
+                            @*-----Convert USD TO INR Link End-------*@
+
+
+
+                            @*<div class="row mb-4">
+                <div class="col-md-4">
+                    <label for="Amount">
+                        Payment Type
+                    </label><span style="color: red">*</span>
+                    @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                </div>
+                <div class="col-md-4" id="paymentmode" style="display: none">
+                    <label for="Mode">Mode<span style="color:red">*</span></label>
+                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "return CheckPayMode();" })
+                </div>
+            </div>
+            <div class="row mb-4" style="display:none" id="divPaymentMode">
+                <div class="col-md-3" id="divQr" style="display: none">
+                    <label id="lblQr"> Scan QR </label>
+                    <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                </div>
+                <div class="col-md-3" id="divbankname">
+                    <label for="BankName" id="lblbank">Bank Name</label>
+                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name", })
+                </div>
+                <div class="col-md-3" id="divbankbranch">
+                    <label for="BranchName" id="lbltbranch">Branch Name</label>
+                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Branch Name" })
+                </div>
+                <div class="col-md-3" id="divtransactiono">
+                    <label for="TransactionNo" id="lbltno">Transaction No</label>
+                    @Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-control", @placeholder = "TransactionNo", })
+                </div>
+                <div class="col-md-3" id="divtrdate">
+                    <label for="TransactionDate" id="lbltdate">TransactionDate</label>
+                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date" })
+                </div>
+            </div>*@
+                            <div class="col-md-4">
+                                <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="button" value="Submit" onclick="return ValidateForm();" data-toggle="modal" />
+                            </div>
+                            @*<div class="row mb-4">
+                <div class="col-md-12">
+                    <span style="color:red">From Amount : @ViewBag.FromAmount </span><span style="color:red;padding-left:50px"> To Amount : @ViewBag.ToAmount </span><span style="color:red;padding-left:50px"> In Multiple Of : @ViewBag.InMultipleOf</span>
+                </div>
+            </div>*@
+
+                        </div>
                             </div>
                         </div>
                     </div>
@@ -156,24 +190,24 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <p class="modal-text">
-                                                        Hello
+                                                        @*Hello
                                                         @if (Session["Gender"] != null)
                                                         {
                                                             if (Session["Gender"].ToString() == "F")
                                                             {
 
-                                                                <span>Ms. @Session["FullName"]</span>
+                                                                <span>Hello @Session["FullName"]</span>
                                                             }
                                                             else
                                                             {
-                                                                <span>Mr.@Session["FullName"]</span>
+                                                                <span>Hello @Session["FullName"]</span>
                                                             }
-                                                        }
-                                                        else
-                                                        {
-                                                            <span>@Session["FullName"]</span>
-                                                        }
-                                                        , your <label id="lblTPS"></label> package for Rs. <label id="lblAmountsssss"></label> is being initiated for <label id="lblLoginId"></label> with ROI <label id="lblROI"></label> % <label id="lblbasisons"></label>
+                                                        }*@
+                                                        @*else
+                                                        {*@
+                                                            <span>Hello @Session["FullName"]</span>
+                                                        @*}*@
+                                                        , your <label id="lblTPS"></label> package for <label id="lblAmountsssss"></label> MTG is being initiated for <label id="lblLoginId"></label> with ROI <label id="lblROI"></label> % <label id="lblbasisons"></label>
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -192,6 +226,7 @@
                                     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
                                 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
                                 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
+
                                 <script>
                                     //$(document).ready(function () {
                                     //    $("#PaymentType").val('Online');
@@ -534,10 +569,63 @@
                                     input1 = $('[name="ActivationMTGToken"]'),
                                     input2 = $('[name="Amount"]'),
                                     input3 = $('[name="TotalAmount"]');
+
+                                    //var TotalAmountssss=  $("#TotalAmountssss").val($("#TotalAmount").val())
                                     input.change(function () {
+                                        debugger;
                                         var val1 = (isNaN(parseFloat(input1.val()))) ? 0 : parseFloat(input1.val());
                                         var val2 = (isNaN(parseFloat(input2.val()))) ? 0 : parseFloat(input2.val());
                                         input3.val(val1 + val2);
-                                    });
 
+                                        var TotalAmount = $("#TotalAmount").val();
+                                        var AmountOfTotal = $("#AmountOfTotal").val(TotalAmount);
+                                        ConvertMony();
+                                    });
                                 </script>
+<script>
+    function ConvertMony() {
+        debugger;
+        if ($("#Countryid").val() == "India") {
+            $("#dvinrupees").show();
+            $("#divusdoller").hide();
+        }
+        else {
+            $("#divusdoller").show();
+            $("#InUsDoller").text($("#AmountOfTotal").val() + "$");
+            $("#dvinrupees").hide();
+        }
+        debugger;
+
+        //const convert = document.getElementById("convert");
+        const result = document.getElementById("result");
+        const from = document.getElementById("from");
+        const to = document.getElementById("to");
+        //const amount = document.getElementById("TotalAmountssss");
+
+        const amount = document.getElementById("AmountOfTotal");
+
+        const IndianValue = document.getElementById("IndianValue");
+        //var TodaysCurrency = $('#IndianValue').val();
+        let fromCurrency = from.value;
+        let toCurrency = to.value;
+        let amt = amount.value;
+        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+        .then(response => {
+            return response.json();
+        })
+
+        .then(data => {
+            debugger;
+            let rate = data.rates[toCurrency];
+            let total = rate * amt;
+
+            //result.innerHTML = `${amt} ${fromCurrency} = ${total}
+            result.innerHTML = `${amt}$  = ${total}
+
+            ${toCurrency}`;
+            //IndianValue.innerHTML = total;
+            $("#IndianValue").val(total);
+
+        });
+    }
+</script>

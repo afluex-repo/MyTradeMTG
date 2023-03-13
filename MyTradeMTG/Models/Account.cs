@@ -10,6 +10,8 @@ namespace MyTradeMTG.Models
 {
     public class Account
     {
+
+        public string Country { get; set; }
         public string LoginId { get; set; }
         public string PackageId { get; set; }
         public string PackageTypeId { get; set; }
@@ -48,7 +50,7 @@ namespace MyTradeMTG.Models
         public string Topupid { get; set; }
         public string BasisOn { get; set; }
         public string Count { get; set; }
-
+        public string IndianValue { get; set; }
         public string IsActive { get; set; }
 
         public List<SelectListItem> ddlProduct { get; set; }
@@ -71,7 +73,9 @@ namespace MyTradeMTG.Models
                                         new SqlParameter("@AddedBy", FK_UserId),
                                         new SqlParameter("@Fk_ProductId",PackageId),
                                         new SqlParameter("@Amount", Amount),
-                                        new SqlParameter("@ActivationMTGToken", ActivationMTGToken)
+                                        new SqlParameter("@ActivationMTGToken", ActivationMTGToken),
+                                        new SqlParameter("@TodaysCurrency", IndianValue)
+
                                  };
             DataSet ds = DBHelper.ExecuteQuery("TopUp", para);
             return ds;
