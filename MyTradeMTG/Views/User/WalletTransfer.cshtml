@@ -5,9 +5,12 @@
 }
 <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
 
+
+
 @using (Html.BeginForm("WalletTransfer", "User", FormMethod.Post, new
 { /*@id = "form1",*/ @onSubmit = "if(!confirm('Are You Sure? You want to Transfer Your MTG Token To Below Contact Address Id')){return false;}", enctype = "multipart/form-data" }))
 {
+
     <div class="content-body">
         <div class="container-fluid">
             <div class="row">
@@ -23,6 +26,7 @@
                                         <p class="mb-1" style="color:white;">@TempData["wallettransfer"]</p>
                                         <br />
                                         <label style="color:red">MTG /USDT Wallet Balance: @ViewBag.WalletBalance</label>
+
                                     </div>
                                 </div>
                             </div>
@@ -56,17 +60,22 @@
                                         @*@Html.HiddenFor(m => m.MemberTransferCharge,new { @value= "@ViewBag.MemberTransferCharge" })*@
                                         <input id="MemberTransferCharge" name="MemberTransferCharge" value="@Session["MemberTransferCharge"]" hidden />
                                         <input id="TransferCharge" name="TransferCharge" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
+
                                     </div>
                                 </div>
+
                             </div>
+
                             <div class="=row">
                                 <div class="col-md-12">
                                     <input class="btn btn-success pull-left" type="submit" value="Transfer" id="btnTransfer" name="btnTransfer" onclick="return validateform();" />
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
@@ -108,13 +117,16 @@
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
 }
 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -124,6 +136,43 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
+
+
+
+
+@*@if (TempData["wallettransfer"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["wallettransfer"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+
+    </script>
+}*@
+
+
+
+
+
+
 
 <script>
 

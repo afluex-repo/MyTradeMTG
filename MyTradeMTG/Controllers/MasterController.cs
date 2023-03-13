@@ -281,13 +281,13 @@ namespace MyTradeMTG.Controllers
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
                         TempData["Package"] = "Product status updated successfully";
-                        FormName = "PackageMaster";
+                        FormName = "PackageList";
                         Controller = "Master";
                     }
                     else
                     {
                         TempData["Package"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "PackageMaster";
+                        FormName = "PackageList";
                         Controller = "Master";
                     }
                 }
@@ -295,7 +295,7 @@ namespace MyTradeMTG.Controllers
             catch (Exception ex)
             {
                 TempData["Package"] = ex.Message;
-                FormName = "PackageMaster";
+                FormName = "PackageList";
                 Controller = "Master";
             }
 
@@ -412,7 +412,7 @@ namespace MyTradeMTG.Controllers
                         obj.Result = "Package saved successfully";
                         obj.Packageid = null;
                         //TempData["Product"] = "Package saved successfully";
-
+                       
                     }
                     else
                     {
@@ -472,14 +472,14 @@ namespace MyTradeMTG.Controllers
                     }
                     else
                     {
-                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Product"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                obj.Result = ex.Message;
+                TempData["Product"] = ex.Message;
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }

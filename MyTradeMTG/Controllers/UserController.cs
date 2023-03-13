@@ -306,6 +306,8 @@ namespace MyTradeMTG.Controllers
         {
             Account model = new Account();
             
+            model.Country = Session["Country"].ToString();
+            
             //model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
 
