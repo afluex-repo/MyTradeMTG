@@ -15,12 +15,23 @@ namespace MyTradeMTG.Controllers
     public class WebsiteController : Controller
     {
         // GET: Website
-        public ActionResult Index()
+        public ActionResult Index(string Pid)
         {
+            Home model = new Home();
+            if (!string.IsNullOrEmpty(Pid))
+            {
+                model.Fk_UserId = Pid;
+                DataSet ds = model.GetMemberNameWithUserId();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.SponsorId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                }
+            }
+
             Session.Abandon();
-            return View();
+            return View(model);
         }
-        
+
         public ActionResult LoginAction(Home obj)
         {
             string FormName = "";
@@ -233,6 +244,10 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
+
+                        obj.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                        obj.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                        obj.Password = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                         Session["Pk_UserId"] = ds.Tables[0].Rows[0]["Pk_userId"].ToString();
                         Session["LoginId"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["DisplayName"] = ds.Tables[0].Rows[0]["Name"].ToString();

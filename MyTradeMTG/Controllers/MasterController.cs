@@ -68,7 +68,7 @@ namespace MyTradeMTG.Controllers
 
         public ActionResult GetPackageTypeList(string PackageTypeId)
         {
-           
+
             Master model = new Master();
             List<SelectListItem> ddlPackage = new List<SelectListItem>();
             model.PackageTypeId = PackageTypeId;
@@ -78,14 +78,14 @@ namespace MyTradeMTG.Controllers
             {
                 foreach (DataRow r in d3.Tables[0].Rows)
                 {
-                ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    ddlPackage.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
                 }
             }
             model.ddlPackage = ddlPackage;
             #endregion
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult GetProductList(string PackageTypeId)
         {
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
@@ -244,7 +244,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
-                        TempData["Package"] = "Product deleted successfully";
+                        TempData["Package"] = "Package deleted successfully";
                         FormName = "PackageList";
                         Controller = "Master";
                     }
@@ -281,13 +281,13 @@ namespace MyTradeMTG.Controllers
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
                         TempData["Package"] = "Product status updated successfully";
-                        FormName = "PackageMaster";
+                        FormName = "PackageList";
                         Controller = "Master";
                     }
                     else
                     {
                         TempData["Package"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        FormName = "PackageMaster";
+                        FormName = "PackageList";
                         Controller = "Master";
                     }
                 }
@@ -295,7 +295,7 @@ namespace MyTradeMTG.Controllers
             catch (Exception ex)
             {
                 TempData["Package"] = ex.Message;
-                FormName = "PackageMaster";
+                FormName = "PackageList";
                 Controller = "Master";
             }
 
@@ -361,6 +361,7 @@ namespace MyTradeMTG.Controllers
                         //obj.HSNCode = ds.Tables[0].Rows[0]["HSNCode"].ToString();
                         //obj.FinalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FinalAmount"]);
                         obj.SponsorIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorIncome"]);
+                        obj.BasisOn = (ds.Tables[0].Rows[0]["BasisOn"].ToString());
                     }
                 }
                 catch (Exception ex)
@@ -408,7 +409,10 @@ namespace MyTradeMTG.Controllers
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
-                        obj.Result = "Product saved successfully";
+                        obj.Result = "Package saved successfully";
+                        obj.Packageid = null;
+                        //TempData["Product"] = "Package saved successfully";
+                       
                     }
                     else
                     {
@@ -462,18 +466,20 @@ namespace MyTradeMTG.Controllers
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
-                        obj.Result = "Product updated successfully";
+                        //obj.Result = "Package updated successfully";
+
+                        TempData["Product"] = "Package updated successfully";
                     }
                     else
                     {
-                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Product"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                obj.Result = ex.Message;
+                TempData["Product"] = ex.Message;
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
@@ -970,9 +976,136 @@ namespace MyTradeMTG.Controllers
         }
 
 
+        public ActionResult QRCodeMaster()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ActionName("QRCodeMaster")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult QRCodeMaster(Master model, HttpPostedFileBase QRCodeFile)
+        {
+            try
+            {
+
+                if (QRCodeFile != null)
+                {
+                    model.QRCodeFile = "../UploadQRCodeMaster/" + Guid.NewGuid() + Path.GetExtension(QRCodeFile.FileName);
+                    QRCodeFile.SaveAs(Path.Combine(Server.MapPath(model.QRCodeFile)));
+                }
+                model.AddedBy = Session["Pk_AdminId"].ToString();
+                DataSet ds = model.SaveQRCodeMaster();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+
+                        TempData["QRCodeMaster"] = "QR Code Master Save Successfully";
+                    }
+                    else
+                    {
+                        TempData["QRCodeMaster"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["QRCodeMaster"] = ex.Message;
+            }
+            return RedirectToAction("QRCodeMaster", "Master");
+        }
+
+
+        public ActionResult QRCodeList(Master model)
+        {
+            List<Master> lst = new List<Master>();
+            DataSet ds = model.GetQRCodeList();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Master obj = new Master();
+                    obj.PK_QRCodeId = r["PK_QRCodeId"].ToString();
+                    obj.UPIId = r["UPIId"].ToString();
+                    obj.QRCodeFile = r["QRCodeURL"].ToString();
+                    obj.IsActive1 =(r["IsActive"].ToString());
+                    lst.Add(obj);
+                }
+                model.QRCodeList = lst;
+            }
+            return View(model);
+        }
 
 
 
+
+        public ActionResult ActiveQRCodeMaster(Master model,string id,string IsActive)
+        {
+            try
+            {
+                if(id!=null)
+                {
+                    model.PK_QRCodeId = id;
+                    model.IsActive1 = IsActive;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    DataSet ds = model.ActiveQRCodeMaster();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+
+                            TempData["Active"] = "Activated Successfully";
+                        }
+                        else
+                        {
+                            TempData["Active"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Active"] = ex.Message;
+            }
+            return RedirectToAction("QRCodeList", "Master");
+        }
+
+
+        public ActionResult InActiveQRCodeMaster(Master model, string id, string IsActive)
+        {
+            try
+            {
+                if (id != null)
+                {
+                    model.PK_QRCodeId = id;
+                    model.IsActive1 = IsActive;
+                    model.AddedBy = Session["Pk_AdminId"].ToString();
+                    DataSet ds = model.ActiveQRCodeMaster();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                        {
+
+                            TempData["Active"] = "InActivated Successfully";
+                        }
+                        else
+                        {
+                            TempData["Active"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Active"] = ex.Message;
+            }
+            return RedirectToAction("QRCodeList", "Master");
+        }
+
+
+        
 
 
 

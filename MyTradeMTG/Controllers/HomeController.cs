@@ -58,7 +58,8 @@ namespace MyTradeMTG.Controllers
                             var pass = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
-                                //Session["PendingStatusLogin"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
+                               Session["TeamPermanent"] = ds.Tables[0].Rows[0]["TeamPermanent"].ToString();
+                               //Session["PendingStatusLogin"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
                                 Session["FirmName"] = ds.Tables[0].Rows[0]["FirmName"].ToString();
                                 Session["IsFranchise"] = ds.Tables[0].Rows[0]["IsFranchise"].ToString();
                                 Session["Country"] = ds.Tables[0].Rows[0]["Country"].ToString();
@@ -69,6 +70,7 @@ namespace MyTradeMTG.Controllers
                                 Session["Password"] = ds.Tables[0].Rows[0]["Password"].ToString();
                                 Session["TransPassword"] = ds.Tables[0].Rows[0]["TransPassword"].ToString();
                                 Session["Profile"] = ds.Tables[0].Rows[0]["Profile"].ToString();
+                                Session["Address"] = ds.Tables[0].Rows[0]["Address"].ToString();
                                 Session["Gender"] = ds.Tables[0].Rows[0]["Sex"].ToString();
                                 Session["Branch"] = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
                                 Session["Email"] = ds.Tables[0].Rows[0]["Email"].ToString();
@@ -108,8 +110,12 @@ namespace MyTradeMTG.Controllers
                             {
                                 TempData["Login"] = "Incorrect Password";
                                 //return Redirect("/MyTradeMTGWebsite/error_page.html");
-                                FormName = "Login";
-                                Controller = "Home";
+                                //FormName = "Login";
+                                //Controller = "Home";
+
+                                FormName = "index";
+                                Controller = "Website";
+                                
                             }
                         }
                         else if (ds.Tables[0].Rows[0]["UserType"].ToString() == "Admin")
@@ -172,24 +178,31 @@ namespace MyTradeMTG.Controllers
                         {
                             TempData["Login"] = "Incorrect LoginId Or Password";
                             //return Redirect("/MyTradeMTGWebsite/error_page.html");
-                            FormName = "Login";
-                            Controller = "Home";
+                            //FormName = "Login";
+                            //Controller = "Home";
+
+                            FormName = "index";
+                            Controller = "Website";
                         }
                     }
                     else
                     {
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         //return Redirect("/MyTradeMTGWebsite/error_page.html");
-                        FormName = "Login";
-                        Controller = "Home";
+                        //FormName = "Login";
+                        //Controller = "Home";
+                        FormName = "index";
+                        Controller = "Website";
                     }
                 }
                 else
                 {
                    TempData["Login"] = "Incorrect LoginId Or Password";
                     //return Redirect("/MyTradeMTGWebsite/error_page.html");
-                    FormName = "Login";
-                    Controller = "Home";
+                    //FormName = "Login";
+                    //Controller = "Home";
+                    FormName = "index";
+                    Controller = "Website";
                     Redirect("/MyTradeMTGWebsite/index.html");
                 }
             }
@@ -197,8 +210,10 @@ namespace MyTradeMTG.Controllers
             {
                 TempData["Login"] = ex.Message;
                 //return Redirect("/MyTradeMTGWebsite/error_page.html");
-                FormName = "Login";
-                Controller = "Home";
+                //FormName = "Login";
+                //Controller = "Home";
+                FormName = "index";
+                Controller = "Website";
             }
             return RedirectToAction(FormName, Controller);
         }

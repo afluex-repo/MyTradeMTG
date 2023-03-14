@@ -5,6 +5,8 @@
 }
 <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
 
+
+
 @using (Html.BeginForm("WalletTransfer", "User", FormMethod.Post, new
 { /*@id = "form1",*/ @onSubmit = "if(!confirm('Are You Sure? You want to Transfer Your MTG Token To Below Contact Address Id')){return false;}", enctype = "multipart/form-data" }))
 {
@@ -15,7 +17,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Direct Transfer</h4>
+                            <h4 class="card-title">Quick Send MTG</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -73,6 +75,54 @@
 
                     </div>
                 </div>
+
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Quick Send MTG List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive mt-4">
+                                    <table class="table table-bordered w-100 mb-0" id="html5-extension" data-page-length='20'>
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Date</th>
+                                                <th>Transfer To </th>
+                                                <th>MTG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.QuickSendMTGList != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var Item in Model.QuickSendMTGList)
+                                                    {
+                                                        <tr class="text-left">
+                                                            <td>
+                                                                @i
+                                                            </td>
+                                                            <td>@Item.TransferDate</td>
+                                                            <td>@Item.TransfertoName</td>
+                                                            <td>@Item.MTG</td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -86,6 +136,43 @@
 <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
+
+
+
+
+@*@if (TempData["wallettransfer"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["wallettransfer"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#1abc9c',
+                pos: 'top-right'
+            });
+        });
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            Snackbar.show({
+                text: '@TempData["error"]',
+                actionTextColor: '#fff',
+                backgroundColor: '#e7515a',
+                pos: 'top-right'
+            });
+        });
+
+    </script>
+}*@
+
+
+
+
+
+
 
 <script>
 

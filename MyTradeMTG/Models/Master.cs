@@ -13,6 +13,7 @@ namespace MyTradeMTG.Models
         public List<Master> lstBonazaReward { get; set; }
         public List<Master> lstpackage { get; set; }
         public List<Master> lstbalancetransfer { get; set; }
+        public List<Master> QRCodeList { get; set; }
         public decimal BinaryPercent { get; set; }
         public decimal BV { get; set; }
         public decimal ActivationMTGToken { get; set; }
@@ -56,7 +57,11 @@ namespace MyTradeMTG.Models
         public decimal ReturnPercent3 { get; set; }
 
         public List<SelectListItem> ddlPackage { get; set; }
-        
+        public string UPIId { get; set; }
+        public string QRCodeFile { get; set; }
+        public string PK_QRCodeId { get; set; }
+        public string IsActive1 { get; set; }
+
 
 
         #region ProductMaster
@@ -356,6 +361,38 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductList", para);
             return ds;
         }
+
+
+        public DataSet SaveQRCodeMaster()
+        {
+            SqlParameter[] para =
+            {
+                  new SqlParameter("@UPIId", UPIId),
+                     new SqlParameter("@QRCodeURL", QRCodeFile),
+                        new SqlParameter("@AddedBy", AddedBy),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveQRCodeMaster", para);
+            return ds;
+        }
+
+        public DataSet GetQRCodeList()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetQRCodeList");
+            return ds;
+        }
+        public DataSet ActiveQRCodeMaster()
+        {
+            SqlParameter[] para =
+            {
+                  new SqlParameter("@PK_QRCodeId", PK_QRCodeId),
+                   new SqlParameter("@IsActive", IsActive1),
+                        new SqlParameter("@AddedBy", AddedBy),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ActiveQRCodeMaster", para);
+            return ds;
+        }
+
+        
 
     }
 }

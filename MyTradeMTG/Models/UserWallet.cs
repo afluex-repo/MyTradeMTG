@@ -185,6 +185,20 @@ namespace MyTradeMTG.Models
             return ds;
 
         }
+
+        public DataSet GetActiveQRCodeDetails()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetActiveQRCodeDetails");
+
+            return ds;
+
+        }
+
+
+        
+
+
+
     }
     public class CreateOrderResponse
     {
