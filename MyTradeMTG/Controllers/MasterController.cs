@@ -184,7 +184,9 @@ namespace MyTradeMTG.Controllers
                     obj.ReturnPercent2 = Convert.ToDecimal(r["ReturnPercent2"]);
                     obj.ReturnPercent3 = Convert.ToDecimal(r["ReturnPercent3"]);
                     obj.BasisOn = r["BasisOn"].ToString();
-
+                    obj.Package1 = r["Package1"].ToString();
+                    obj.Package2 = r["Package2"].ToString();
+                    obj.Package3 = r["Package3"].ToString();
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
@@ -324,6 +326,30 @@ namespace MyTradeMTG.Controllers
             ViewBag.ddlPackageType = ddlPackageType;
 
             #endregion
+
+
+
+
+            #region pacakge Bind For TR2
+            List<SelectListItem> ddlPackageForTR2 = new List<SelectListItem>();
+            DataSet ds11 = obj.GetProductListForTR2();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlPackageForTR2.Add(new SelectListItem { Text = "-Select-", Value = "0" });
+                    }
+                    ddlPackageForTR2.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlPackageForTR2 = ddlPackageForTR2;
+            #endregion
+            
+
             if (PackageID != null)
             {
                 try
@@ -376,7 +402,7 @@ namespace MyTradeMTG.Controllers
             return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3,string Fk_PackageId1,string Fk_PackageId2,string Fk_PackageId3)
         {
             Master obj = new Master();
             try
@@ -404,6 +430,11 @@ namespace MyTradeMTG.Controllers
                 obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 obj.SponsorIncome = Convert.ToDecimal(SponsorIncome);
                 obj.IscomboPackage = IscomboPackage;
+
+                obj.Fk_PackageId1 = Fk_PackageId1;
+                obj.Fk_PackageId2 = Fk_PackageId2;
+                obj.Fk_PackageId3 = Fk_PackageId3;
+                
                 DataSet ds = obj.SaveProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

@@ -61,8 +61,12 @@ namespace MyTradeMTG.Models
         public string QRCodeFile { get; set; }
         public string PK_QRCodeId { get; set; }
         public string IsActive1 { get; set; }
-
-
+        public string Fk_PackageId1 { get; set; }
+        public string Fk_PackageId2 { get; set; }
+        public string Fk_PackageId3 { get; set; }
+        public string Package1 { get; set; }
+        public string Package2 { get; set; }
+        public string Package3 { get; set; }
 
         #region ProductMaster
         public DataSet GetProductListForPackageList()
@@ -106,12 +110,16 @@ namespace MyTradeMTG.Models
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                  new SqlParameter("@IscomboPackage",IscomboPackage),
 
-                                    new SqlParameter("@DrAmount1",DrAmount1),
+                                 new SqlParameter("@DrAmount1",DrAmount1),
                                  new SqlParameter("@DrAmount2",DrAmount2),
                                  new SqlParameter("@DrAmount3",DrAmount3),
-                                    new SqlParameter("@ReturnPercent1",ReturnPercent1),
+                                 new SqlParameter("@ReturnPercent1",ReturnPercent1),
                                  new SqlParameter("@ReturnPercent2",ReturnPercent2),
-                                 new SqlParameter("@ReturnPercent3",ReturnPercent3)
+                                 new SqlParameter("@ReturnPercent3",ReturnPercent3),
+                                 new SqlParameter("@Fk_PackageId1",Fk_PackageId1),
+                                 new SqlParameter("@Fk_PackageId2",Fk_PackageId2),
+                                 new SqlParameter("@Fk_PackageId3",Fk_PackageId3)
+                                 
         };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
@@ -363,6 +371,13 @@ namespace MyTradeMTG.Models
         }
 
 
+        public DataSet GetProductListForTR2()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetProductListForTR2");
+            return ds;
+        }
+
+        
         public DataSet SaveQRCodeMaster()
         {
             SqlParameter[] para =
