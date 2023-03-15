@@ -66,6 +66,21 @@
                                 <label>Direct Count 1 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.DrAmount1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
+
+
+                            <div class="col-md-3" id="divPackage1">
+                                <label>Package 1 <span style="color: red"></span></label>
+                                @*@Html.TextBoxFor(m => m.Fk_PackageId1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })*@
+
+
+                       @Html.DropDownListFor(m => m.Fk_PackageId1, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
+
+
+                            </div>
+
+
+
+
                             <div class="col-md-3" id="divReturnPercent1">
                                 <label>Return Percentage 1 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.ReturnPercent1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
@@ -75,6 +90,14 @@
                                 <label>Direct Count 2 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
+
+
+                            <div class="col-md-3" id="divPackage2">
+                                <label>Package 2 <span style="color: red"></span></label>
+                                @Html.DropDownListFor(m => m.Fk_PackageId2, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
+
+                            </div>
+
                             <div class="col-md-3" id="divReturnPercent2">
                                 <label>Return Percentage 2 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
@@ -84,6 +107,12 @@
                                 <label>Direct Count 3 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
+
+                            <div class="col-md-3" id="divPackage3">
+                                <label>Package 3 <span style="color: red"></span></label>
+                                @Html.DropDownListFor(m => m.Fk_PackageId3, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+
                             <div class="col-md-3" id="divReturnPercent3">
                                 <label>Return Percentage 3 <span style="color: red">*</span></label>
                                 @Html.TextBoxFor(m => m.ReturnPercent3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
@@ -332,6 +361,13 @@
             $("#divReturnPercent1").show();
             $("#divReturnPercent2").show();
             $("#divReturnPercent3").show();
+
+
+
+            $("#divPackage1").show();
+            $("#divPackage2").show();
+            $("#divPackage3").show();
+
         }
         else if (packagetype == 1) {
             $("#divfromamount").show();
@@ -362,6 +398,12 @@
             $("#divbasis").show();
             $("#divdays").show();
             $("#divpercent").show();
+
+
+            $("#divPackage1").hide();
+            $("#divPackage2").hide();
+            $("#divPackage3").hide();
+
 
 
             //var ComboPackage = $("#IscomboPackage").val();
@@ -401,6 +443,13 @@
             $("#divReturnPercent1").hide();
             $("#divReturnPercent2").hide();
             $("#divReturnPercent3").hide();
+
+
+            $("#divPackage1").hide();
+            $("#divPackage2").hide();
+            $("#divPackage3").hide();
+
+
         }
     });
     function validate() {
@@ -530,12 +579,22 @@
             $("#divReturnPercent2").show();
             $("#divReturnPercent3").show();
 
+
+            $("#divPackage1").show();
+            $("#divPackage2").show();
+            $("#divPackage3").show();
+
             //$("#divdramount1").hide();
             //$("#divdramount2").hide();
             //$("#divdramount3").hide();
             //$("#divReturnPercent1").hide();
             //$("#divReturnPercent2").hide();
             //$("#divReturnPercent3").hide();
+
+
+
+
+
 
 
         }
@@ -574,6 +633,9 @@
             $("#divReturnPercent2").hide();
             $("#divReturnPercent3").hide();
 
+            $("#divPackage1").hide();
+            $("#divPackage2").hide();
+            $("#divPackage3").hide();
 
 
         }
@@ -605,6 +667,12 @@
             $("#divReturnPercent1").show();
             $("#divReturnPercent2").show();
             $("#divReturnPercent3").show();
+
+
+            $("#divPackage1").hide();
+            $("#divPackage2").hide();
+            $("#divPackage3").hide();
+
         }
     }
     function isNumberKey(evt) {
@@ -894,7 +962,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, Fk_PackageId1: $('#Fk_PackageId1').val(), Fk_PackageId2: $('#Fk_PackageId2').val(), Fk_PackageId3: $('#Fk_PackageId3').val() },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';

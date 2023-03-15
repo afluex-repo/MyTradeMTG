@@ -14,9 +14,13 @@
                     <div class="card-header">
                         <h4 class="card-title">User Details</h4>
                     </div>
-                    <div class="sweetalert mt-5">
+
+
+                    @*<div class="sweetalert mt-5">
                         <button class="btn btn-success btn sweet-success">Sweet Success</button>
-                    </div>
+                    </div>*@
+
+
                     <div class="card-body">
                         <label id="WalletBalance" style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
                         <div class="row">
@@ -98,6 +102,12 @@
 
                                 </tbody>
                             </table>
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -200,7 +210,6 @@
         var PercentValuesofBrokerTransferCharge = parseFloat(Percent);
         var TotalSumValuesOfBrokerTransferCharge = Amount + PercentValuesofBrokerTransferCharge;
         
-
         //var TransferCharge = ($("#TransferCharge").val(PercentValuesofBrokerTransferCharge));
 
         //if (TotalSumValuesOfBrokerTransferCharge > WalletAmount) {
@@ -209,8 +218,7 @@
         //    $('#MTGToken').focus();
         //    $("#MTGToken").val('');
         //    $("#TransferCharge").val('');
-            
-
+           
         //}
         //else if (TotalSumValuesOfBrokerTransferCharge <= WalletAmount) {
         //    //alert("Right h");
@@ -220,10 +228,6 @@
         //    $("#MTGToken").addClass('errortext');
         //    $('#MTGToken').focus();
         //}
-
-
-
-
         var MemberTransferCharge = parseFloat($("#BrokerTransferChargehtf").val());
         var Percent = Amount * parseFloat(MemberTransferCharge/ 100);
         var PercentValues = parseFloat(Percent);
@@ -252,10 +256,6 @@
             $('#MTGToken').focus();
         }
 
-
-
-
-
         //var WalletBalance = ($("#WalletBalance").text());
         //var MTGToken = parseFloat($("#MTGToken").val());
 
@@ -277,8 +277,6 @@
         //else if (TransferCharge <= WalletBalance) {
         //    alert("Right h");
         //}
-
-
     }
 
     function SaveMTGTransferCharge() {
@@ -351,5 +349,10 @@
 <!-- Datatable -->
 <script src="/UserPanel/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/UserPanel/js/plugins-init/datatables.init.js"></script>
+<script>
+    document.querySelector(".sweet-success").onclick = function () {
+        swal("Hey, Good job !!", "You clicked the button !!", "success")
+    };
+</script>
 
 

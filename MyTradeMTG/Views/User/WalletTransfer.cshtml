@@ -66,7 +66,7 @@
 
                             </div>
 
-                            <div class="=row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <input class="btn btn-success pull-left" type="submit" value="Transfer" id="btnTransfer" name="btnTransfer" onclick="return validateform();" />
                                 </div>
@@ -137,44 +137,44 @@
 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
 
-
-
-
-@*@if (TempData["wallettransfer"] != null)
+@if (TempData["wallettransfer"] != null)
 {
     <script>
         $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["wallettransfer"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#1abc9c',
-                pos: 'top-right'
-            });
-        });
+            debugger;
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Transferred  successfully !!',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
     </script>
 }
-@if (TempData["error"] != null)
-{
+    @*@if (TempData["error"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    debugger;
+                    jQuery.noConflict();
+                    swal({
+                        backdrop: true,
+                        allowOutsideClick: false,
+                        title: 'Warning!',
+                        text: '@ViewBag.Reason',
+                        type: 'warning',
+                        showCancelButton: 0,
+                        confirmButtonText: 'OK',
+                    })
+                })
+            </script>
+        }*@
+
+
     <script>
-        $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["error"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#e7515a',
-                pos: 'top-right'
-            });
-        });
-
-    </script>
-}*@
-
-
-
-
-
-
-
-<script>
 
         function CheckAmount() {
             debugger;
@@ -183,7 +183,7 @@
 
             var MemberTransferCharge = parseFloat($("#MemberTransferCharge").val());
 
-            var Percent = Amount * parseFloat(MemberTransferCharge/ 100);
+            var Percent = Amount * parseFloat(MemberTransferCharge / 100);
             var PercentValues = parseFloat(Percent);
             var TotalSumValues = Amount + PercentValues;
             //alert(sum);
@@ -197,8 +197,7 @@
             else if (TotalSumValues <= WalletAmount) {
                 //alert("Right");
             }
-            else
-            {
+            else {
                 //alert("Enter");
                 $("#Amount").addClass('errortext');
                 $('#Amount').focus();
@@ -219,111 +218,110 @@
 
         }
 
-    function GetNameDetailsforUser() {
-        debugger;
-        var LoginId = $('#LoginId').val();
-        $.ajax({
-            url: '/User/GetNameDetailsforUser', type: 'post', dataType: 'json',
-            data: { 'LoginId': LoginId },
-            success: function (data) {
-                if (data.Result == "yes") {
-                    $("#Fk_UserId").val(data.Fk_UserId);
-                    $("#Name").val(data.Name);
-                    $("#Franchise").val(data.Franchise);
-                    $("#LoginId").removeClass('errortext');
-                    $("#Name").removeClass('errortext');
+        function GetNameDetailsforUser() {
+            debugger;
+            var LoginId = $('#LoginId').val();
+            $.ajax({
+                url: '/User/GetNameDetailsforUser', type: 'post', dataType: 'json',
+                data: { 'LoginId': LoginId },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        $("#Fk_UserId").val(data.Fk_UserId);
+                        $("#Name").val(data.Name);
+                        $("#Franchise").val(data.Franchise);
+                        $("#LoginId").removeClass('errortext');
+                        $("#Name").removeClass('errortext');
+                    }
+                    var Franchise = $("#Franchise").val();
+                    if (Franchise == "1") {
+                        alert('Contact  Address Id Should not Franchiese');
+                        $("#LoginId").val('');
+                        $("#Name").val('');
+                        $("#Franchise").val('');
+                        $("#LoginId").addClass('errortext');
+                        $("#Name").addClass('errortext');
+                        $('#LoginId').focus();
+                    }
+                    else if (data.Result == "no") {
+                        alert('Invailid Contact Address Id');
+                        $("#LoginId").val('');
+                        $("#Name").val('');
+                        $("#Franchise").val('');
+                        $("#LoginId").addClass('errortext');
+                        $("#Name").addClass('errortext');
+                        $('#LoginId').focus();
+                    }
                 }
-                var Franchise = $("#Franchise").val();
-                if (Franchise == "1") {
-                    alert('Contact  Address Id Should not Franchiese');
-                    $("#LoginId").val('');
-                    $("#Name").val('');
-                    $("#Franchise").val('');
-                    $("#LoginId").addClass('errortext');
-                    $("#Name").addClass('errortext');
-                    $('#LoginId').focus();
-                }
-                else if (data.Result == "no" ) {
-                    alert('Invailid Contact Address Id');
-                    $("#LoginId").val('');
-                    $("#Name").val('');
-                    $("#Franchise").val('');
-                    $("#LoginId").addClass('errortext');
-                    $("#Name").addClass('errortext');
-                    $('#LoginId').focus();
-                }
+
+            });
+        }
+
+        function validateform() {
+            debugger;
+            $(".errortext").removeClass("errortext");
+            if ($('#LoginId').val() == '') {
+                $("#LoginId").addClass('errortext');
+                $('#LoginId').focus();
+                return false;
             }
+            if ($('#Amount').val() == '') {
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                return false;
+            }
+            else {
 
-        });
-    }
-
-    function validateform() {
-        debugger;
-        $(".errortext").removeClass("errortext");
-        if ($('#LoginId').val() == '') {
-            $("#LoginId").addClass('errortext');
-            $('#LoginId').focus();
-            return false;
+            }
+            return true;
         }
-        if ($('#Amount').val() == '') {
-            $("#Amount").addClass('errortext');
-            $('#Amount').focus();
-            return false;
+
+
+        function isNumberOrDecimal(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
         }
-        else {
 
-        }
-        return true;
-    }
+    </script>
+    <script>
 
-
-    function isNumberOrDecimal(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode != 46 && charCode > 31
-          && (charCode < 48 || charCode > 57))
-            return false;
-
-        return true;
-    }
-
-</script>
-<script>
-
-</script>
-<script>
-    debugger;
-    //Percentage of DirectTransferCharge + Entered Amount
-    var input = $('[name="MemberTransferCharge"],[name="Amount"]'),
-    input1 = $('[name="MemberTransferCharge"]'),
-    input2 = $('[name="Amount"]'),
-    input3 = $('[name="TransferCharge"]');
-
-    input.change(function () {
+    </script>
+    <script>
         debugger;
-        var val1 = isNaN(parseFloat(input1.val()).toFixed(2)) ? 0 : parseFloat(input1.val());
-        var val2 = isNaN(parseFloat(input2.val()).toFixed(2)) ? 0 : parseFloat(input2.val());
-        input3.val(parseFloat(val2.toFixed(2) * (val1.toFixed(2) / parseFloat(100).toFixed(2))).toFixed(2));
-    });
-
-</script>
-@*<script>
-        debugger;
-        var input = $('[name="TransferCharge"],[name="Amount"]'),
-       input3 = $('[name="TransferCharge"]'),
-       input4 = $('[name="Amount"]'),
-        input5 = $('[name="SumTransferandAmount"]');
+        //Percentage of DirectTransferCharge + Entered Amount
+        var input = $('[name="MemberTransferCharge"],[name="Amount"]'),
+        input1 = $('[name="MemberTransferCharge"]'),
+        input2 = $('[name="Amount"]'),
+        input3 = $('[name="TransferCharge"]');
 
         input.change(function () {
             debugger;
-            var val3 = isNaN(parseFloat(input3.val()).toFixed(2)) ? 0 : parseFloat(input3.val());
-            var val4 = isNaN(parseFloat(input4.val()).toFixed(2)) ? 0 : parseFloat(input4.val());
-            input5.val(parseFloat(val3).toFixed(2) + parseFloat(val4).toFixed(2));
+            var val1 = isNaN(parseFloat(input1.val()).toFixed(2)) ? 0 : parseFloat(input1.val());
+            var val2 = isNaN(parseFloat(input2.val()).toFixed(2)) ? 0 : parseFloat(input2.val());
+            input3.val(parseFloat(val2.toFixed(2) * (val1.toFixed(2) / parseFloat(100).toFixed(2))).toFixed(2));
         });
-    </script>*@
-<style>
-    .errortext {
-        border: 1px solid red !important;
-        background-color: #fff0f0 !important;
-    }
-</style>
 
+    </script>
+    @*<script>
+            debugger;
+            var input = $('[name="TransferCharge"],[name="Amount"]'),
+           input3 = $('[name="TransferCharge"]'),
+           input4 = $('[name="Amount"]'),
+            input5 = $('[name="SumTransferandAmount"]');
+
+            input.change(function () {
+                debugger;
+                var val3 = isNaN(parseFloat(input3.val()).toFixed(2)) ? 0 : parseFloat(input3.val());
+                var val4 = isNaN(parseFloat(input4.val()).toFixed(2)) ? 0 : parseFloat(input4.val());
+                input5.val(parseFloat(val3).toFixed(2) + parseFloat(val4).toFixed(2));
+            });
+        </script>*@
+    <style>
+        .errortext {
+            border: 1px solid red !important;
+            background-color: #fff0f0 !important;
+        }
+    </style>
