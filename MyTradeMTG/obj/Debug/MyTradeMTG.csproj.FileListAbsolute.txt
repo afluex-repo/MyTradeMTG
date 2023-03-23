@@ -455,7 +455,6 @@ F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Propertie
 F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
-F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\ApplicationInsights.config
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\csc.exe
 D:\Repository-Projects\Repository-Projects\repository\MyTradeMTG\MyTradeMTG\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -629,3 +628,5 @@ D:\Repository-Projects\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.Properties.Res
 D:\Repository-Projects\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csproj.GenerateResource.Cache
 D:\Repository-Projects\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 D:\Repository-Projects\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
+E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache

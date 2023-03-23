@@ -68,27 +68,46 @@
                                             <th>Direct Count 1</th>
                                             <th>Direct Count 2</th>
                                             <th>Direct Count 3</th>
-                                            <th>Return Percent 1</th>
+                                            @*<th>Return Percent 1</th>
                                             <th>Return Percent 2</th>
-                                            <th>Return Percent 3</th>
+                                            <th>Return Percent 3</th>*@
+
+
+                                            <th>Package 1</th>
+                                            <th>Package 2</th>
+                                            <th>Package 3</th>
+
                                         }
                                         else if (Model.PackageTypeId == "1")
                                         {
                                             <th style="display:none">Direct Count 1</th>
                                             <th style="display:none">Direct Count 2</th>
                                             <th style="display:none">Direct Count 3</th>
-                                            <th style="display:none">Return Percent 1</th>
+                                            @*<th style="display:none">Return Percent 1</th>
                                             <th style="display:none">Return Percent 2</th>
-                                            <th style="display:none">Return Percent 3</th>
+                                            <th style="display:none">Return Percent 3</th>*@
+
+                                            <th style="display:none">Package 1</th>
+                                            <th style="display:none">Package 2</th>
+                                            <th style="display:none">Package 3</th>
+
+
+
                                         }
                                         else if (Model.PackageTypeId != "1" || Model.PackageTypeId != "2")
                                         {
                                             <th>Direct Count 1</th>
                                             <th>Direct Count 2</th>
                                             <th>Direct Count 3</th>
-                                            <th>Return Percent 1</th>
+                                            @*<th>Return Percent 1</th>
                                             <th>Return Percent 2</th>
-                                            <th>Return Percent 3</th>
+                                            <th>Return Percent 3</th>*@
+
+
+                                            <th>Package 1</th>
+                                            <th>Package 2</th>
+                                            <th>Package 3</th>
+
                                         }
                                         <th>Status</th>
                                         <th>Sponsor Income</th>
@@ -128,27 +147,47 @@
                                                         <td>@Item.DrAmount1</td>
                                                         <td>@Item.DrAmount2</td>
                                                         <td>@Item.DrAmount3</td>
-                                                        <td>@Item.ReturnPercent1</td>
+                                                        @*<td>@Item.ReturnPercent1</td>
                                                         <td>@Item.ReturnPercent2</td>
-                                                        <td>@Item.ReturnPercent3</td>
+                                                        <td>@Item.ReturnPercent3</td>*@
+
+
+                                                        <td>@Item.Package1</td>
+                                                        <td>@Item.Package2</td>
+                                                            <td>@Item.Package3</td>
+
+
                                                     }
                                                     else if (Model.PackageTypeId == "1")
                                                     {
                                                         <td style="display:none">@Item.DrAmount1</td>
                                                         <td style="display:none">@Item.DrAmount2</td>
                                                         <td style="display:none">@Item.DrAmount3</td>
-                                                        <td style="display:none">@Item.ReturnPercent1</td>
+                                                        @*<td style="display:none">@Item.ReturnPercent1</td>
                                                         <td style="display:none">@Item.ReturnPercent2</td>
-                                                        <td style="display:none">@Item.ReturnPercent3</td>
+                                                        <td style="display:none">@Item.ReturnPercent3</td>*@
+
+
+
+                                                        <td style="display:none">@Item.Package1</td>
+                                                        <td style="display:none">@Item.Package2</td>
+                                                        <td style="display:none">@Item.Package3</td>
+
                                                     }
                                                     else if (Model.PackageTypeId != "1" || Model.PackageTypeId != "2")
                                                     {
                                                         <td>@Item.DrAmount1</td>
                                                         <td>@Item.DrAmount2</td>
                                                         <td>@Item.DrAmount3</td>
-                                                        <td>@Item.ReturnPercent1</td>
+                                                        @*<td>@Item.ReturnPercent1</td>
                                                         <td>@Item.ReturnPercent2</td>
-                                                        <td>@Item.ReturnPercent3</td>
+                                                        <td>@Item.ReturnPercent3</td>*@
+
+
+                                                        <td>@Item.Package1</td>
+                                                        <td>@Item.Package2</td>
+                                                        <td>@Item.Package3</td>
+
                                                     }
                                                     <td>@Item.Status</td>
                                                     <td>@Item.SponsorIncome</td>

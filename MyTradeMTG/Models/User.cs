@@ -96,11 +96,12 @@ namespace MyTradeMTG.Models
         public string TransfertoName { get; set; }
         public string MTG { get; set; }
         public string TransferDate { get; set; }
+        public string IndRupees { get; set; }
+        public string percentAmt { get; set; }
+
+
 
         
-
-
-
 
 
 
@@ -253,6 +254,8 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
                                   new SqlParameter("@LoginId",LoginId),
                                    new SqlParameter("@Amount",Amount),
+                                   new SqlParameter("@TransferChargeInRupees",IndRupees),
+                                   new SqlParameter("@TransferChargeMTG",percentAmt),
                                     new SqlParameter("@AddedBy",AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("PayoutRequest", para);
