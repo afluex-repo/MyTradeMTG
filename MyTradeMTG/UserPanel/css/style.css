@@ -2474,8 +2474,8 @@ textarea.form-control {
     border-color: #ac4cbc; }
   .btn-check:focus + .btn-success, .btn-success:focus {
     color: #000;
-    background-color: #7fd649;
-    border-color: #77d43e;
+    background-color: #9e47b1;
+    border-color: #9e47b1;
     box-shadow: 0 0 0 0.25rem rgba(88, 176, 35, 0.5); }
   .btn-check:checked + .btn-success,
   .btn-check:active + .btn-success, .btn-success:active, .btn-success.active,
@@ -35155,7 +35155,12 @@ $color_pallate_15: #ed0b4c; */
     color: #fff; }
 
 [data-theme-version="dark"] .swal2-popup {
-  background: #14112E; }
+  background: #14112E;
+  border: 1px solid #363062;
+    box-shadow: 0rem 0.3125rem 0.3125rem 0rem rgba(82, 63, 105, 0.05);
+    /*box-shadow: 0px 0px 3px gray;*/
+
+}
 
 [data-theme-version="dark"] .form-head .btn-outline-primary {
   border-color: #2a2833; }
@@ -36886,10 +36891,16 @@ svg text {
   @media only screen and (max-width: 1400px) {
     .form-control {
       height: 2.5rem; } }
-  .form-control:hover, .form-control.active {
+  .form-control.active {
     box-shadow: none;
     background: #fff;
     color:#000 !important; }
+  form-control:hover
+  {
+      box-shadow: none;
+    background: #fff;
+    color:#fff;
+  }
   .form-control:focus {
     border-color: var(--primary);
      color:#000 !important;
