@@ -2466,12 +2466,12 @@ textarea.form-control {
 
 .btn-success {
   color: #000;
-  background-color: #68CF29;
-  border-color: #68CF29; }
+  background-color: #ac4cbc;
+  border-color: #ac4cbc; }
   .btn-success:hover {
     color: #000;
-    background-color: #7fd649;
-    border-color: #77d43e; }
+    background-color: #ac4cbc;
+    border-color: #ac4cbc; }
   .btn-check:focus + .btn-success, .btn-success:focus {
     color: #000;
     background-color: #7fd649;

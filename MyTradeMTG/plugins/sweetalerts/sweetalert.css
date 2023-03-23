@@ -52,7 +52,7 @@ body.swal2-iosfix {
     overflow-y: hidden; 
 }
 .swal2-modal .swal2-title {
-    color: #3b3f5c!important;
+    color: #fff!important;
     font-size: 24px!important;
     text-align: center;
     font-weight: normal;
