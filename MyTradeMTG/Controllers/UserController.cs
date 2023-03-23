@@ -1571,6 +1571,10 @@ namespace MyTradeMTG.Controllers
             string FormName = "";
             string Controller = "";
             User model = new User();
+
+            
+            model.Country = Session["Country"].ToString();
+
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
             //DataSet ds = model.GetPayoutBalance();
@@ -2317,7 +2321,7 @@ namespace MyTradeMTG.Controllers
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
                 {
                     model.Result = "yes";
-                    TempData["SaveMTGTransferCharge"] = "Record submited successfully !!";
+                    TempData["SaveMTGTransferCharge"] = "Transferred  successfully !!";
                 }
                 else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                 {

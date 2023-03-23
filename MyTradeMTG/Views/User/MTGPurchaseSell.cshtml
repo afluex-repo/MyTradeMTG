@@ -306,7 +306,7 @@
                 data: { CustomerId: CustomerId, FirmName: FirmName, MTGToken: MTGToken, TransferCharge: TransferCharge,Fk_UserId: Fk_UserId },
                 success: function (data) {
                     if (data.Result == "yes") {
-                        alert("Transferred  successfully !!");
+                        //alert("Transferred  successfully !!");
                         window.location.reload();
                     }
                     else if (data.Result == "no") {
@@ -349,10 +349,29 @@
 <!-- Datatable -->
 <script src="/UserPanel/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/UserPanel/js/plugins-init/datatables.init.js"></script>
-<script>
-    document.querySelector(".sweet-success").onclick = function () {
-        swal("Hey, Good job !!", "You clicked the button !!", "success")
-    };
-</script>
+
+
+
+@if (TempData["SaveMTGTransferCharge"] != null)    
+{
+    <script>
+        $(document).ready(function () {
+        debugger;
+        jQuery.noConflict();
+        swal({
+            backdrop: true,
+                allowOutsideClick: false,
+                title: 'Transferred  successfully !!',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
+
+
+
+
 
 
