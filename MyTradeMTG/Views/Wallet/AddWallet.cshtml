@@ -765,13 +765,23 @@
             </script>*@
 
 
-
-
-
-
-
-
-
+@if (TempData["msg"] != null)
+{
+    <script>
+        $(document).ready(function () {
+        debugger;
+        jQuery.noConflict();
+        swal({
+            backdrop: true,
+                allowOutsideClick: false,
+                title: 'Requested Successfully.',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
 
 
 

@@ -63,7 +63,7 @@
                             </div>
 
                             <div class="col-md-3" id="divdramount1">
-                                <label>Direct Count 1 <span style="color: red">*</span></label>
+                                <label>Direct Count 1 <span style="color: red"></span></label>
                                 @Html.TextBoxFor(m => m.DrAmount1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
 
@@ -87,7 +87,7 @@
                             </div>
                             @*<div class="row">*@
                             <div class="col-md-3" id="divdramount2">
-                                <label>Direct Count 2 <span style="color: red">*</span></label>
+                                <label>Direct Count 2 <span style="color: red"></span></label>
                                 @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
 
@@ -104,7 +104,7 @@
                             </div>
 
                             <div class="col-md-3" id="divdramount3">
-                                <label>Direct Count 3 <span style="color: red">*</span></label>
+                                <label>Direct Count 3 <span style="color: red"></span></label>
                                 @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
                             </div>
 
@@ -358,9 +358,9 @@
             $("#divdramount1").show();
             $("#divdramount2").show();
             $("#divdramount3").show();
-            $("#divReturnPercent1").show();
-            $("#divReturnPercent2").show();
-            $("#divReturnPercent3").show();
+            $("#divReturnPercent1").hide();
+            $("#divReturnPercent2").hide();
+            $("#divReturnPercent3").hide();
 
 
 
@@ -575,9 +575,11 @@
             $("#divdramount1").show();
             $("#divdramount2").show();
             $("#divdramount3").show();
-            $("#divReturnPercent1").show();
-            $("#divReturnPercent2").show();
-            $("#divReturnPercent3").show();
+
+
+            $("#divReturnPercent1").hide();
+            $("#divReturnPercent2").hide();
+            $("#divReturnPercent3").hide();
 
 
             $("#divPackage1").show();
@@ -664,9 +666,9 @@
             $("#divdramount1").show();
             $("#divdramount2").show();
             $("#divdramount3").show();
-            $("#divReturnPercent1").show();
-            $("#divReturnPercent2").show();
-            $("#divReturnPercent3").show();
+            $("#divReturnPercent1").hide();
+            $("#divReturnPercent2").hide();
+            $("#divReturnPercent3").hide();
 
 
             $("#divPackage1").hide();
@@ -778,39 +780,39 @@
                 return false;
             }
 
-            if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
-                $("#DrAmount1").addClass('errortext');
-                $('#DrAmount1').focus();
-                return false;
-            }
+            //if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
+            //    $("#DrAmount1").addClass('errortext');
+            //    $('#DrAmount1').focus();
+            //    return false;
+            //}
 
-            if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
-                $("#ReturnPercent1").addClass('errortext');
-                $('#ReturnPercent1').focus();
-                return false;
-            }
-            if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
-                $("#DrAmount2").addClass('errortext');
-                $('#DrAmount2').focus();
-                return false;
-            }
-            if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
-                $("#ReturnPercent2").addClass('errortext');
-                $('#ReturnPercent2').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
+            //    $("#ReturnPercent1").addClass('errortext');
+            //    $('#ReturnPercent1').focus();
+            //    return false;
+            //}
+            //if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
+            //    $("#DrAmount2").addClass('errortext');
+            //    $('#DrAmount2').focus();
+            //    return false;
+            //}
+            //if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
+            //    $("#ReturnPercent2").addClass('errortext');
+            //    $('#ReturnPercent2').focus();
+            //    return false;
+            //}
 
-            if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
-                $("#DrAmount3").addClass('errortext');
-                $('#DrAmount3').focus();
-                return false;
-            }
+            //if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
+            //    $("#DrAmount3").addClass('errortext');
+            //    $('#DrAmount3').focus();
+            //    return false;
+            //}
 
-            if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
-                $("#ReturnPercent3").addClass('errortext');
-                $('#ReturnPercent3').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
+            //    $("#ReturnPercent3").addClass('errortext');
+            //    $('#ReturnPercent3').focus();
+            //    return false;
+            //}
 
 
             //if ($('#returnpercent2').val() == '' || $('#returnpercent2').val() == '0') {
@@ -1197,39 +1199,39 @@
                 $('#ROIPercent').focus();
                 return false;
             }
-            if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
-                $("#DrAmount1").addClass('errortext');
-                $('#DrAmount1').focus();
-                return false;
-            }
+            //if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
+            //    $("#DrAmount1").addClass('errortext');
+            //    $('#DrAmount1').focus();
+            //    return false;
+            //}
 
-            if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
-                $("#ReturnPercent1").addClass('errortext');
-                $('#ReturnPercent1').focus();
-                return false;
-            }
-            if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
-                $("#DrAmount2").addClass('errortext');
-                $('#DrAmount2').focus();
-                return false;
-            }
-            if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
-                $("#ReturnPercent2").addClass('errortext');
-                $('#ReturnPercent2').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent1').val() == '' || $('#ReturnPercent1').val() == '0') {
+            //    $("#ReturnPercent1").addClass('errortext');
+            //    $('#ReturnPercent1').focus();
+            //    return false;
+            //}
+            //if ($('#DrAmount2').val() == '' || $('#DrAmount2').val() == '0') {
+            //    $("#DrAmount2").addClass('errortext');
+            //    $('#DrAmount2').focus();
+            //    return false;
+            //}
+            //if ($('#ReturnPercent2').val() == '' || $('#ReturnPercent2').val() == '0') {
+            //    $("#ReturnPercent2").addClass('errortext');
+            //    $('#ReturnPercent2').focus();
+            //    return false;
+            //}
 
-            if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
-                $("#DrAmount3").addClass('errortext');
-                $('#DrAmount3').focus();
-                return false;
-            }
+            //if ($('#DrAmount3').val() == '' || $('#DrAmount3').val() == '0') {
+            //    $("#DrAmount3").addClass('errortext');
+            //    $('#DrAmount3').focus();
+            //    return false;
+            //}
 
-            if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
-                $("#ReturnPercent3").addClass('errortext');
-                $('#ReturnPercent3').focus();
-                return false;
-            }
+            //if ($('#ReturnPercent3').val() == '' || $('#ReturnPercent3').val() == '0') {
+            //    $("#ReturnPercent3").addClass('errortext');
+            //    $('#ReturnPercent3').focus();
+            //    return false;
+            //}
 
             if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
                 $("#BasisOn").addClass('errortext');
