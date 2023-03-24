@@ -108,15 +108,16 @@
                                     <div class="form-group">
                                         <h6 style="color:red">Processing Charge:  <label id="perAmt" style="color:red;">0</label></h6>
                                         <input type="hidden" id="percentAmt" name="percentAmt" />
+                                        <div style="display:none">
+                                            <h6 style="color:red">Transfer Charge In Rupees: <label id="Ind" style="color:red;">0</label></h6>
+                                            <input type="hidden" id="IndRupees" name="IndRupees" />
 
-                                        @*<h6 style="color:red">Transfer Charge In Rupees: <label id="Ind" style="color:red;">0</label></h6>
-                                        <input type="hidden" id="IndRupees" name="IndRupees" />
-
-                                        <h6 style="color:red">Gross MTG:  <label id="lbld" style="color:red;">0</label></h6>*@
+                                            <h6 style="color:red">Gross MTG:  <label id="lbld" style="color:red;">0</label></h6>
+                                        </div>
                                         <h6 style="color:green">
-                                            @*Gross MTG /USDT to be deducted:*@  
+                                            @*Gross MTG /USDT to be deducted:*@ 
                                             Gross MTG In Rupees:
-                                            <span id="lblf" style="color:green;">0</span>
+                                            <label id="lblf" style="color:green;">0</label>
                                         </h6>
                                     </div>
                                 </div>
@@ -125,49 +126,50 @@
                                 <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                     <thead>
                                         <tr>
+                                            
                                             <th>Sr No.</th>
-                                            <th>Narration</th>
-                                            @*<th>Login Id</th>
-                                                <th>Name</th>*@
-                                            <th>Gross MTG /USDT</th>
-                                            <th>Procesing Charges</th>
-                                            @*<th>MTG /USDT</th>*@
-                                            <th>Net INR /USDT</th>
                                             <th>Date</th>
+                                            <th>Withdrawl(MTG)</th>
+                                            <th>Processing Charge(MTG)</th>
+                                            <th>Gross(MTG)</th>
+                                            <th>Withdrawl(Rs.)</th>
+                                            <th>Processing Charge(Rs.)</th>
+                                            <th>Gross(Rs.)</th>
+                                            <th>UPI ID</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
                                             <th>Status</th>
-                                            @*<th>ROI Percentage</th>*@
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (Model != null)
-                                        {
-                                            if (Model.lstPayoutRequest != null)
-                                            {
-                                                int i = 1;
-                                                foreach (var Item in Model.lstPayoutRequest)
-                                                {
-                                                    <tr class="text-left">
-                                                        <td>@i</td>
-                                                        @*<td>@Item.PK_RequestID</td>*@
-                                                        <td>@Item.TransactionNo</td>
-                                                        @*<td>@Item.LoginId</td>
-                                                            <td>@Item.Name</td>*@
-                                                        <td>@Item.GrossAmount</td>
-                                                        <td>@Item.ProcessingFee</td>
-                                                        @*<td>@Item.TDSAmount</td>*@
-                                                        <td>@Item.Amount</td>
-                                                        <td>@Item.Date</td>
-                                                        <td>@Item.IFSCCode</td>
-                                                        <td>@Item.AccountNo</td>
-                                                        <td>@Item.Status</td>
-                                                        @*<td>@Item.ROIPercentage</td>*@
-                                                    </tr>
-                                                    i++;
-                                                }
-                                            }
-                                        }
+                                       @if (Model != null)
+                                       {
+                                           if (Model.lstPayoutRequest != null)
+                                           {
+                                               int i = 1;
+                                               foreach (var Item in Model.lstPayoutRequest)
+                                               {
+                                                <tr class="text-left">
+                                                    <td>@i</td>
+                                                    <td>@Item.Date</td>
+                                                    <td>@Item.Amount</td>
+                                                    <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                    <td>@Item.GrossAmount</td>
+                                                    <td>@Item.IndianValue</td>
+                                                    <td>@Item.TransferChargeInRupees</td>
+                                                    <td>@Item.GrossAmountRs</td>
+                                                    <td>@Item.UPIID</td>
+                                                    <td>@Item.IFSCCode</td>
+                                                    <td>@Item.AccountNo</td>
+                                                    <td>@Item.Status</td>
+
+
+                                                </tr>
+                                                   i++;
+                                               }
+                                           }
+                                       }
                                     </tbody>
                                 </table>
                             </div>
@@ -268,7 +270,7 @@
             //IndianValue.innerHTML = total;
             $("#IndianValue").val(total);
             $("#Ind").text(parseFloat(totalRupee));
-            GetFinalAmount();
+            //GetFinalAmount();
 
             var grossAmt = totalRupee + total;
             $("#lblf").text(parseFloat(grossAmt));
@@ -300,7 +302,7 @@
     function Validate() {
         debugger;
         document.getElementById("percentAmt").value = document.getElementById("perAmt").innerHTML;
-        //document.getElementById("IndRupees").value = document.getElementById("Ind").innerHTML;
+        document.getElementById("IndRupees").value = document.getElementById("Ind").innerHTML;
 
         $(".errortext").removeClass("errortext");
         if ($('#Amount').val() == '0') {
@@ -368,7 +370,7 @@
 
 
         var mtgAmt = parseFloat($("#Amount").val()) * 0.10;
-        $("#perAmt").text(parseFloat(mtgAmt) + '$');
+        $("#perAmt").text(parseFloat(mtgAmt));
 
 
         var indrupees = parseFloat($("#IndianValue").val());
