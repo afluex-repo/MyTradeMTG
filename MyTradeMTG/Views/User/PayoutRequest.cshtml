@@ -99,7 +99,7 @@
 
                                 <div class="col-lg-3 col-md-3" style="margin-top:25px">
                                     <div class="form-group">
-                                        <input class="btn btn-success pull-left" type="submit" value="Transfer To Account" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
+                                        <input class="btn btn-success pull-left" type="submit" value="Withdraw" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
                                         <input type="hidden" id="hdf" value="@Model.Status" />
                                         <input type="hidden" id="hdf1" value="@ViewBag.MenuStatus" />
                                     </div>
@@ -111,14 +111,16 @@
                                         <div style="display:none">
                                             <h6 style="color:red">Transfer Charge In Rupees: <label id="Ind" style="color:red;">0</label></h6>
                                             <input type="hidden" id="IndRupees" name="IndRupees" />
-
-                                            <h6 style="color:red">Gross MTG:  <label id="lbld" style="color:red;">0</label></h6>
                                         </div>
-                                        <h6 style="color:green">
-                                            @*Gross MTG /USDT to be deducted:*@ 
-                                            Gross MTG In Rupees:
-                                            <label id="lblf" style="color:green;">0</label>
-                                        </h6>
+                                        <h6 style="color:red">Gross MTG:  <label id="lbld" style="color:red;">0</label></h6>
+
+                                        <div style="display:none">
+                                            <h6 style="color:green">
+                                                @*Gross MTG /USDT to be deducted:*@
+                                                Gross MTG In Rupees:
+                                                <label id="lblf" style="color:green;">0</label>
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -126,20 +128,19 @@
                                 <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
                                     <thead>
                                         <tr>
-                                            
                                             <th>Sr No.</th>
                                             <th>Date</th>
-                                            <th>Withdrawl(MTG)</th>
+                                            <th>Narration</th>
+                                            <th>Net(MTG)</th>
                                             <th>Processing Charge(MTG)</th>
                                             <th>Gross(MTG)</th>
-                                            <th>Withdrawl(Rs.)</th>
-                                            <th>Processing Charge(Rs.)</th>
-                                            <th>Gross(Rs.)</th>
+                                            <th>Net(INR)</th>
+                                            <th>Processing Charge(INR)</th>
+                                            <th>Gross(INR)</th>
                                             <th>UPI ID</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
                                             <th>Status</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,6 +154,7 @@
                                                 <tr class="text-left">
                                                     <td>@i</td>
                                                     <td>@Item.Date</td>
+                                                    <td></td>
                                                     <td>@Item.Amount</td>
                                                     <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
                                                     <td>@Item.GrossAmount</td>
@@ -270,7 +272,7 @@
             //IndianValue.innerHTML = total;
             $("#IndianValue").val(total);
             $("#Ind").text(parseFloat(totalRupee));
-            //GetFinalAmount();
+            GetFinalAmount();
 
             var grossAmt = totalRupee + total;
             $("#lblf").text(parseFloat(grossAmt));
@@ -328,13 +330,13 @@
         var mtgAmount = $("Amount").val();
         var IndianValue = $('#IndianValue').val();
         //if (parseFloat($("#Amount").val()) < 1000 || parseFloat($("#Amount").val()) > 49000) {
-        if (parseFloat($("#IndianValue").val()) < 1000 || parseFloat($("#IndianValue").val()) > 49000) {
-            alert("Amount should be between or equal to  1000 and  49000");
-            $('#IndianValue').val('');
-            $("#IndianValue").addClass('errortext');
-            $('#IndianValue').focus();
-            return false;
-        }
+        //if (parseFloat($("#IndianValue").val()) < 1000 || parseFloat($("#IndianValue").val()) > 49000) {
+        //    alert("Amount should be between or equal to  1000 and  49000");
+        //    $('#IndianValue').val('');
+        //    $("#IndianValue").addClass('errortext');
+        //    $('#IndianValue').focus();
+        //    return false;
+        //}
         //var deductionAmount = parseFloat($("#Amount").val()) * 0.05 + parseFloat($("#Amount").val()) * 0.02;
 
         //var deductionAmount = parseFloat($("#Amount").val()) * 0.10;

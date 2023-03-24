@@ -77,13 +77,17 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
-                                        @*<th>Request Code</th>*@
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>MTG /USDT</th>
+                                        <th>Date</th>
+                                        <th>Narration</th>
+                                        <th>Net(MTG)</th>
+                                        <th>Processing Charge(MTG)</th>
+                                        <th>Gross(MTG)</th>
+                                        <th>Net(INR)</th>
+                                        <th>Processing Charge(INR)</th>
+                                        <th>Gross(INR)</th>
                                         <th>Payment Mode</th>
-                                        <th>Requested Date</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -97,11 +101,17 @@
                                             {
                                                 <tr class="text-left">
                                                     <td>@i</td>
-                                                    @*<td>@Item.RequestCode</td>*@
                                                     <td>@Item.LoginId</td>
-                                                    <td>@Item.DisplayName</td>
-
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.TransactionDate</td>
+                                                    <td></td>
                                                     <td>@Item.Amount</td>
+                                                    <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                    <td>@Item.GrossAmount</td>
+                                                    <td>@Item.IndianValue</td>
+                                                    <td>@Item.TransferChargeInRupees</td>
+                                                    <td>@Item.GrossAmountRs</td>
+                                                    @*<td>@Item.Amount</td>*@
                                                     <td>
                                                         <a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Item.PaymentMode');">View</a>
                                                     </td>
@@ -113,8 +123,8 @@
                                                     {
                                                     <td>@Item.PaymentMode- (@Item.BankName,@Item.BankBranch, <b>Txn No.-@Item.ChequeDDNo</b>, <b>Txn Date-</b>@Item.ChequeDDDate)</td>
                                                     }*@
-                                                    <td>@Item.TransactionDate</td>
-                                                    <td>@Item.Status</td>
+                                                    @*<td>@Item.TransactionDate</td>*@
+                                                    @*<td>@Item.Status</td>*@
                                                     @if (Item.Status == "Pending")
                                                     {
                                                         <td class="d-flex">

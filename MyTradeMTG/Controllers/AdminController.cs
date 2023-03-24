@@ -332,7 +332,7 @@ namespace MyTradeMTG.Controllers
                     obj.RequestID = r["PK_RequestID"].ToString();
                     obj.UserId = r["FK_UserId"].ToString();
                     obj.RequestCode = r["RequestCode"].ToString();
-                    obj.Amount = r["Amount"].ToString();
+                    obj.Amount = r["AMount"].ToString();
                     obj.PaymentMode = r["PaymentMode"].ToString() + "- " + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
@@ -341,8 +341,15 @@ namespace MyTradeMTG.Controllers
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
                     obj.WalletId = r["WalletId"].ToString();
+                    obj.Name = r["Name"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
-                    obj.DisplayName = r["Name"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
@@ -368,7 +375,7 @@ namespace MyTradeMTG.Controllers
                     obj.RequestID = r["PK_RequestID"].ToString();
                     obj.UserId = r["FK_UserId"].ToString();
                     obj.RequestCode = r["RequestCode"].ToString();
-                    obj.Amount = r["Amount"].ToString();
+                    obj.Amount = r["AMount"].ToString();
                     obj.PaymentMode = r["PaymentMode"].ToString() + "- " + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
@@ -377,8 +384,17 @@ namespace MyTradeMTG.Controllers
                     obj.ChequeDDNo = r["ChequeDDNo"].ToString();
                     obj.ChequeDDDate = r["ChequeDDDate"].ToString();
                     obj.WalletId = r["WalletId"].ToString();
+                    //obj.LoginId = r["LoginId"].ToString();
+                    //obj.DisplayName = r["Name"].ToString();
+                    obj.Name = r["Name"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
-                    obj.DisplayName = r["Name"].ToString();
+                    obj.GrossAmount = r["GrossAmount"].ToString();
+                    obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.TDSAmount = r["TDS"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
