@@ -1603,6 +1603,10 @@ namespace MyTradeMTG.Controllers
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     obj.TDSAmount = r["TDS"].ToString();
                     lst.Add(obj);
                 }
