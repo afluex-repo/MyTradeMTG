@@ -103,6 +103,8 @@ namespace MyTradeMTG.Models
         public string GrossAmountRs { get; set; }
 
 
+        public string Check { get; set; }
+
 
 
 

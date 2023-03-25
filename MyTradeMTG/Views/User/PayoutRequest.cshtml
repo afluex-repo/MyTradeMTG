@@ -316,7 +316,7 @@
             $("#Amount").addClass('errortext');
             $('#Amount').focus();
             return false;
-        }
+        }    
         //if (parseFloat($("#Amount").val()) < 1000) {
         //    alert("Transfer amount should not be less than 1000 Rs.");
         //    $('#Amount').val('');
@@ -449,8 +449,27 @@
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
-                title: 'Transfer To Account Initiated Successfully.',
+                //title: 'Withdrawal Initiated Successfully.',
+                title: '@TempData["msg"]',
                 type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
+@if (TempData["errormessage"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                //title: 'Withdrawal Initiated Successfully.',
+                title: '@TempData["errormessage"]',
+                type: 'warning',
                 showCancelButton: 0,
                 confirmButtonText: 'OK',
             })

@@ -1643,18 +1643,18 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["msg"] = "Transfer To Account Initiated Successfully.";
+                        TempData["msg"] = "Withdrawal Initiated Successfully.";
                     }
                     else
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["errormessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else { }
             }
             catch (Exception ex)
             {
-                TempData["msg"] = ex.Message;
+                TempData["errormessage"] = ex.Message;
             }
             return RedirectToAction("PayoutRequest", "User");
         }
