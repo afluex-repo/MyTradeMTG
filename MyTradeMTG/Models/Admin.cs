@@ -175,6 +175,9 @@ namespace MyTradeMTG.Models
         public string IsFranchise { get; set; }
         public string IsActive { get; set; }
 
+        public string GrossAmountRs { get; set; }
+        public string TransferChargeInRupees { get; set; }
+        public string IndianValue { get; set; }
 
         public DataTable bonazalist { get; set; }
         #endregion
