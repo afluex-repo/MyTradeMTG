@@ -1500,6 +1500,9 @@ namespace MyTradeMTG.Controllers
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
                     obj.TransactionDate = r["ApprovalDate"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1541,6 +1544,9 @@ namespace MyTradeMTG.Controllers
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
                     obj.TransactionDate = r["ApprovalDate"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1880,6 +1886,8 @@ namespace MyTradeMTG.Controllers
                 model.UpdatedBy = Session["Pk_AdminId"].ToString();
                 string chkselect = "";
                 int i = 0;
+                int status = 1;
+                string Date = null;
                 foreach (String str in result)
                 {
                     try
@@ -1890,13 +1898,30 @@ namespace MyTradeMTG.Controllers
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Approved";
 
-                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+                            if (status == 1)
+                            {
+                                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+
+                                Date = model.TransactionDate;
+
+                                status = 0;
+                            }
+                            else
+                            {
+                                model.TransactionDate = Date;
+                            }
+
+
+
+
                             DataSet ds = model.ApprovePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
                                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                 {
                                     TempData["msg"] = "Approved Successfully";
+
+                                    model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "MM/dd/yyyy");
 
                                     string Name = ds.Tables[0].Rows[0]["Name"].ToString();
                                     string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
