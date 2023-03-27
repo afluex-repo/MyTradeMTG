@@ -104,8 +104,7 @@ namespace MyTradeMTG.Models
 
 
         public string Check { get; set; }
-
-
+        
 
 
 

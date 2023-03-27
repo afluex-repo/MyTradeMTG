@@ -26,7 +26,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Transfer To Bank Account list</h4>
+                                <h4>Withdrawal list</h4>
                                 <span class="text-danger">
                                     @TempData["msg"]
                                 </span>
@@ -80,10 +80,14 @@
                                         <th>Narration</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Net MTG /USDT</th>
-                                        <th>Procesing Charges</th>
-                                        <th>TDS</th>
-                                        <th>Gross MTG /USDT</th>
+                                        @*<th>Net MTG /USDT</th>*@
+                                        <th>Net(MTG)</th>
+                                        <th>Procesing Charges(MTG)</th>
+                                        @*<th>TDS</th>*@
+                                        <th>Gross(MTG)</th>
+                                        <th>Net(INR)</th>
+                                        <th>Processing Charge(INR)</th>
+                                        <th>Gross(INR)</th>
                                         <th>Bank Details</th>
                                         <th class="showallbankdetails" style="display:none">Bank Name</th>
                                         <th class="showallbankdetails" style="display:none">Bank Branch</th>
@@ -110,7 +114,7 @@
                                                     {*@
                                                         <td>
 
-                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox"  />
                                                             <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
                                                             <input type="hidden" id="hdRows" name="hdRows" value="@i" />
                                                             <input type="hidden" name="Status_ @i" id="Status_ @i" value="@Item.Status" />
@@ -127,10 +131,12 @@
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
-                                                    <td>@Item.ProcessingFee</td>
-                                                    <td>@Item.TDSAmount</td>
+                                                    <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                    @*<td>@Item.TDSAmount</td>*@
                                                     <td>@Item.GrossAmount</td>
-
+                                                    <td>@Item.IndianValue</td>
+                                                    <td>@Item.TransferChargeInRupees</td>
+                                                    <td>@Item.GrossAmountRs</td>
                                                     @*<td class="showifsccode">@Item.IFSCCode</td>*@
                                                
                                                     <td>
