@@ -28,7 +28,7 @@
                         </div>
                         <div class="card-body">
                             @*<p style="color:red">Note : 2% Procecing Charges And 5% TDS Charge</p><br />*@
-                            <p style="color:red">Note : 10% Procecing Charges</p><br />
+                            <p style="color:red">Note : 10% Processing Charges</p><br />
                             <div class="row">
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
@@ -45,12 +45,11 @@
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         @*MTG /USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })*@
-
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })*@
 
 
                                         MTG /USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return ConvertMony();" })
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return ConvertMony();", @Value="" })
 
 
                                     </div>
@@ -60,11 +59,11 @@
                                 @*///////////Start///////////////*@
 
                                 @*<div class="col-xl-3 mb-3">
-                                    <div class="example">
-                                        <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()" })
-                                    </div>
-                                </div>*@
+                                        <div class="example">
+                                            <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()" })
+                                        </div>
+                                    </div>*@
 
 
                                 <input type="hidden" id="Countryid" value="@Model.Country" />
@@ -144,34 +143,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       @if (Model != null)
-                                       {
-                                           if (Model.lstPayoutRequest != null)
-                                           {
-                                               int i = 1;
-                                               foreach (var Item in Model.lstPayoutRequest)
-                                               {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td>@Item.Date</td>
-                                                    <td></td>
-                                                    <td>@Item.Amount</td>
-                                                    <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
-                                                    <td>@Item.GrossAmount</td>
-                                                    <td>@Item.IndianValue</td>
-                                                    <td>@Item.TransferChargeInRupees</td>
-                                                    <td>@Item.GrossAmountRs</td>
-                                                    <td>@Item.UPIID</td>
-                                                    <td>@Item.IFSCCode</td>
-                                                    <td>@Item.AccountNo</td>
-                                                    <td>@Item.Status</td>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstPayoutRequest != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstPayoutRequest)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+                                                        <td>@Item.Date</td>
+                                                        <td></td>
+                                                        <td>@Item.Amount</td>
+                                                        <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                        <td>@Item.GrossAmount</td>
+                                                        <td>@Item.IndianValue</td>
+                                                        <td>@Item.TransferChargeInRupees</td>
+                                                        <td>@Item.GrossAmountRs</td>
+                                                        <td>@Item.UPIID</td>
+                                                        <td>@Item.IFSCCode</td>
+                                                        <td>@Item.AccountNo</td>
+                                                        <td>@Item.Status</td>
 
 
-                                                </tr>
-                                                   i++;
-                                               }
-                                           }
-                                       }
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -190,51 +189,13 @@
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script>
 
-    //function ConvertMony() {
-    //    debugger;
-    //    if ($("#Countryid").val() == "India") {
-    //        $("#dvinrupees").show();
-    //        $("#divusdoller").hide();
-    //    }
-    //    else {
-    //        $("#divusdoller").show();
-    //        $("#InUsDoller").text($("#Amount").val() + "$");
-    //        $("#dvinrupees").hide();
-    //    }
-    //    debugger;
-    //    //const convert = document.getElementById("convert");
-    //    const result = document.getElementById("result");
-    //    const from = document.getElementById("from");
-    //    const to = document.getElementById("to");
-    //    const amount = document.getElementById("Amount");
-    //    const IndianValue = document.getElementById("IndianValue");
-    //    //var TodaysCurrency = $('#IndianValue').val();
-    //    let fromCurrency = from.value;
-    //    let toCurrency = to.value;
-    //    let amt = amount.value;
-    //    fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
-    //    .then(response => {
-    //        return response.json();
-    //    })
-    //    .then(data => {
-    //        debugger;
-    //        let rate = data.rates[toCurrency];
-    //        let total = rate * amt;
-    //        //result.innerHTML = `${amt} ${fromCurrency} = ${total}
-    //        result.innerHTML = `${amt}$  = ${total}
-    //        ${toCurrency}`;
-    //        //IndianValue.innerHTML = total;
-    //        $("#IndianValue").val(total);
-    //        GetFinalAmount();
-    //    });
-    //}
-
-
-
     function ConvertMony() {
         debugger;
-        var mtgAmt = parseFloat($("#Amount").val()) * 0.10;
-        $("#perAmt").text(parseFloat(mtgAmt));
+        var mtgAmt = (parseFloat($("#Amount").val()) * 0.10);
+
+        var newmtgAmt = parseFloat(mtgAmt).toFixed(2);
+
+        $("#perAmt").text(parseFloat(newmtgAmt));
 
         if ($("#Countryid").val() == "India") {
             $("#dvinrupees").show();
@@ -280,7 +241,7 @@
         });
 
     }
-    
+
 
 
     var f3 = flatpickr(document.getElementById('FromDate'),
@@ -316,7 +277,7 @@
             $("#Amount").addClass('errortext');
             $('#Amount').focus();
             return false;
-        }    
+        }
         //if (parseFloat($("#Amount").val()) < 1000) {
         //    alert("Transfer amount should not be less than 1000 Rs.");
         //    $('#Amount').val('');
@@ -365,14 +326,16 @@
         //    return false;
         //}
 
-        //$("#lbld").text(parseFloat(deductionAmount));
-        //var finalAmount = parseFloat($("#Amount").val()) + parseFloat(deductionAmount);
         var finalAmount = parseFloat($("#IndianValue").val()) + parseFloat(deductionAmount);
-        //$("#lblf").text(parseFloat(finalAmount));
+
 
 
         var mtgAmt = parseFloat($("#Amount").val()) * 0.10;
-        $("#perAmt").text(parseFloat(mtgAmt));
+        var newmtgAmt = parseFloat(mtgAmt).toFixed(2);
+
+        $("#perAmt").text(parseFloat(newmtgAmt));
+
+       
 
 
         var indrupees = parseFloat($("#IndianValue").val());
@@ -382,11 +345,9 @@
         var totchrg = Amt + mtgAmt
         $("#lbld").text(parseFloat(totchrg));
 
-        //var grossAmt = indrupees + totchrg;
-        //$("#lblf").text(parseFloat(grossAmt));
     }
 
-  
+
 
 </script>
 <script>
@@ -449,8 +410,7 @@
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
-                //title: 'Withdrawal Initiated Successfully.',
-                title: '@TempData["msg"]',
+                title: 'Withdrawal Initiated Successfully.',
                 type: 'success',
                 showCancelButton: 0,
                 confirmButtonText: 'OK',
@@ -467,7 +427,6 @@
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
-                //title: 'Withdrawal Initiated Successfully.',
                 title: '@TempData["errormessage"]',
                 type: 'warning',
                 showCancelButton: 0,
