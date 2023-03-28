@@ -1058,6 +1058,7 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
+
         [HttpPost]
         public ActionResult ViewProfile(Home model)
         {
