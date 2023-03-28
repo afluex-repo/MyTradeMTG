@@ -12,6 +12,7 @@
 
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
+
     <div class="content-body">
         <div class="container-fluid">
             <div class="row layout-top-spacing">
@@ -21,9 +22,9 @@
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h4>Top-Up</h4>
-                                    @*<span class="text-danger" style="color:red;">
+                                    <span class="text-danger" style="color:red;">
                                         @TempData["msg"]
-                                    </span>*@
+                                    </span>
                                 </div>
                             </div>
                         </div>
