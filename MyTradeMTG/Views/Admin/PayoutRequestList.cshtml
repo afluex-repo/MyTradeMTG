@@ -127,7 +127,7 @@
                                                         </td>
                                                     }*@
                                                     <td>@i</td>
-                                                    <td id="txnNo">@Item.TransactionNo</td>
+                                                    <td>@Item.Narration</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
@@ -340,6 +340,7 @@
     }
     jQuery.noConflict();
     $(document).ready(function () {
+        jQuery.noConflict();
         $('#ckbCheckAll').on('click', function () {
             if (this.checked) {
                 $('.checkBoxClass').each(function (index) {
@@ -437,6 +438,7 @@
 
     $(document).ready(function () {
         debugger;
+        jQuery.noConflict();
         $("#showbankdetailshdf").click(function () {
             $(".showallbankdetails").toggle();
         });

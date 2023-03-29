@@ -1568,6 +1568,7 @@ namespace MyTradeMTG.Controllers
             return View(model);
         }
         public ActionResult PayoutRequest()
+
         {
             string FormName = "";
             string Controller = "";
@@ -1612,6 +1613,7 @@ namespace MyTradeMTG.Controllers
                     obj.IndianValue = r["AmountinRs"].ToString();
                     obj.UPIID = r["UPIId"].ToString();
                     obj.TDSAmount = r["TDS"].ToString();
+                    obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayoutRequest = lst;
