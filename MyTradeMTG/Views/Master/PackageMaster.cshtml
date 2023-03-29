@@ -30,6 +30,12 @@
 
                                 </div>
                             </div>
+                            <div class="col-md-3" id="divUpgPackage">
+                                <div class="example">
+                                    @*<label class="col-form-label">Upgrade Package Detail<span style="color: red"></span></label>*@<br /><br />
+                                    <input type="checkbox" name="UpgPackage" id="UpgPackage" /><span> Is Upgrade Package</span>
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Package Name <span style="color: red">*</span></label>
@@ -62,56 +68,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3" id="divdramount1">
-                                <label>Direct Count 1 <span style="color: red"></span></label>
-                                @Html.TextBoxFor(m => m.DrAmount1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-
-                            <div class="col-md-3" id="divPackage1">
-                                <label>Package 1 <span style="color: red"></span></label>
-                                @*@Html.TextBoxFor(m => m.Fk_PackageId1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })*@
-
-
-                       @Html.DropDownListFor(m => m.Fk_PackageId1, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
-
-
-                            </div>
-
-
-
-
-                            <div class="col-md-3" id="divReturnPercent1">
-                                <label>Return Percentage 1 <span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.ReturnPercent1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-                            @*<div class="row">*@
-                            <div class="col-md-3" id="divdramount2">
-                                <label>Direct Count 2 <span style="color: red"></span></label>
-                                @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-
-                            <div class="col-md-3" id="divPackage2">
-                                <label>Package 2 <span style="color: red"></span></label>
-                                @Html.DropDownListFor(m => m.Fk_PackageId2, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
-
-                            </div>
-
-                            <div class="col-md-3" id="divReturnPercent2">
-                                <label>Return Percentage 2 <span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-                            <div class="col-md-3" id="divdramount3">
-                                <label>Direct Count 3 <span style="color: red"></span></label>
-                                @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
-                            </div>
-
-                            <div class="col-md-3" id="divPackage3">
-                                <label>Package 3 <span style="color: red"></span></label>
-                                @Html.DropDownListFor(m => m.Fk_PackageId3, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
-                            </div>
+                            
 
                             <div class="col-md-3" id="divReturnPercent3">
                                 <label>Return Percentage 3 <span style="color: red">*</span></label>
@@ -153,7 +110,7 @@
                                     </div>
                                 </div>*@
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-2" id="divUpgradePackage">
                             <div class="col-md-3" style="display:none" id="divfromamount">
                                 <div class="form-group">
                                     <label class="col-form-label">From MTG Token/USDT<span style="color: red">*</span></label>
@@ -204,7 +161,61 @@
                                         </div>
                                     </div>
                                 </div>*@
+                            <div id="lblUpgradePackage">
+                                <h6>Upgrade Package Detail</h6><hr />
+                            </div>
+                            <div class="col-md-3" id="divdramount1">
+                                <label>Direct Count 1 <span style="color: red"></span></label>
+                                @Html.TextBoxFor(m => m.DrAmount1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+
+
+                            <div class="col-md-3" id="divPackage1">
+                                <label>Package 1 <span style="color: red"></span></label>
+                                @*@Html.TextBoxFor(m => m.Fk_PackageId1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })*@
+
+
+                                @Html.DropDownListFor(m => m.Fk_PackageId1, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
+
+
+                            </div>
+
+                            <div class="col-md-3" id="divReturnPercent1">
+                                <label>Return Percentage 1 <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ReturnPercent1, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            @*<div class="row">*@
+                            <div class="col-md-3" id="divdramount2">
+                                <label>Direct Count 2 <span style="color: red"></span></label>
+                                @Html.TextBoxFor(m => m.DrAmount2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+
+
+                            <div class="col-md-3" id="divPackage2">
+                                <label>Package 2 <span style="color: red"></span></label>
+                                @Html.DropDownListFor(m => m.Fk_PackageId2, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="col-md-3" id="divReturnPercent2">
+                                <label>Return Percentage 2 <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ReturnPercent2, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+
+                            <div class="col-md-3" id="divdramount3">
+                                <label>Direct Count 3 <span style="color: red"></span></label>
+                                @Html.TextBoxFor(m => m.DrAmount3, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                            </div>
+
+                            <div class="col-md-3" id="divPackage3">
+                                <label>Package 3 <span style="color: red"></span></label>
+                                @Html.DropDownListFor(m => m.Fk_PackageId3, new SelectList(ViewBag.ddlPackageForTR2, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+
                         </div>
+                        
+
+
                         <div class="row mb-2">
                             @*<div class="col-md-3" style="display:none" id="divgst">
                                     <div class="form-group">
@@ -329,9 +340,9 @@
         debugger;
         var packagetype = $("#PackageTypeId").val();
         if (packagetype == 2) {
-            $("#divfromamount").show();
-            $("#divtoamount").show();
-            $("#divmultiple").show();
+            //$("#divfromamount").show();
+            //$("#divtoamount").show();
+            //$("#divmultiple").show();
             $("#divpercent").show();
             $("#opt1").hide();
             $("#opt2").show();
@@ -343,7 +354,7 @@
             $("#divhsn").hide();
             $("#divfinal").hide();
             $("#divsponsorpercent").show();
-
+            $("#divUpgradePackage").show();
 
             $("#divbasis").show();
 
@@ -367,6 +378,7 @@
             $("#divPackage1").show();
             $("#divPackage2").show();
             $("#divPackage3").show();
+
 
         }
         else if (packagetype == 1) {
@@ -403,7 +415,8 @@
             $("#divPackage1").hide();
             $("#divPackage2").hide();
             $("#divPackage3").hide();
-
+            $("#divUpgPackage").hide();
+            $("#divUpgradePackage").hide();
 
 
             //var ComboPackage = $("#IscomboPackage").val();
@@ -448,7 +461,8 @@
             $("#divPackage1").hide();
             $("#divPackage2").hide();
             $("#divPackage3").hide();
-
+            $("#divUpgPackage").hide();
+            $("#divUpgradePackage").hide();
 
         }
     });
@@ -521,6 +535,7 @@
 
 
     }
+    
     function bindbvprice() {
         var productprice = $('#ProductPrice').val();
         if ($('#ProductPrice').val() == '') {
@@ -585,6 +600,8 @@
             $("#divPackage1").show();
             $("#divPackage2").show();
             $("#divPackage3").show();
+            $("#divUpgPackage").show();
+            $("#divUpgradePackage").show();
 
             //$("#divdramount1").hide();
             //$("#divdramount2").hide();
@@ -592,11 +609,23 @@
             //$("#divReturnPercent1").hide();
             //$("#divReturnPercent2").hide();
             //$("#divReturnPercent3").hide();
-
-
-
-
-
+            
+            $("#UpgPackage").click(function () {
+                if ($(this).is(":checked")) {
+                    //$("#divfromamount").hide();
+                    //$("#divtoamount").hide();
+                    //$("#divmultiple").hide();
+                    //$("#lblUpgradePackage").hide();
+                    $("#divUpgradePackage").hide();
+                    
+                }
+                else {
+                    //$("#divfromamount").show();
+                    //$("#divtoamount").show();
+                    //$("#divmultiple").show();
+                    $("#divUpgradePackage").show();
+                }
+            });
 
 
         }
@@ -638,6 +667,8 @@
             $("#divPackage1").hide();
             $("#divPackage2").hide();
             $("#divPackage3").hide();
+            $("#divUpgPackage").hide();
+            $("#divUpgradePackage").hide();
 
 
         }
@@ -674,6 +705,9 @@
             $("#divPackage1").hide();
             $("#divPackage2").hide();
             $("#divPackage3").hide();
+            $("#divUpgPackage").hide();
+            $("#divUpgradePackage").hide();
+            
 
         }
     }
@@ -717,6 +751,14 @@
         }
         else {
             IscomboPackage = "0";
+        }
+
+        var IsUpgradePackage = 0;
+        if ($("#UpgPackage").is(":checked") == true) {
+            IsUpgradePackage = "1";
+        }
+        else {
+            IsUpgradePackage = "0";
         }
 
         if ($('#PackageTypeId').val() == '0') {
@@ -845,21 +887,21 @@
                 return false;
             }
 
-            if ($('#FromAmount').val() == '' || $('#FromAmount').val() == '0') {
-                $("#FromAmount").addClass('errortext');
-                $('#FromAmount').focus();
-                return false;
-            }
-            if ($('#ToAmount').val() == '' || $('#ToAmount').val() == '0') {
-                $("#ToAmount").addClass('errortext');
-                $('#ToAmount').focus();
-                return false;
-            }
-            if ($('#InMultipleOf').val() == '' || $('#InMultipleOf').val() == '0') {
-                $("#InMultipleOf").addClass('errortext');
-                $('#InMultipleOf').focus();
-                return false;
-            }
+            //if ($('#FromAmount').val() == '' || $('#FromAmount').val() == '0') {
+            //    $("#FromAmount").addClass('errortext');
+            //    $('#FromAmount').focus();
+            //    return false;
+            //}
+            //if ($('#ToAmount').val() == '' || $('#ToAmount').val() == '0') {
+            //    $("#ToAmount").addClass('errortext');
+            //    $('#ToAmount').focus();
+            //    return false;
+            //}
+            //if ($('#InMultipleOf').val() == '' || $('#InMultipleOf').val() == '0') {
+            //    $("#InMultipleOf").addClass('errortext');
+            //    $('#InMultipleOf').focus();
+            //    return false;
+            //}
 
 
         }
@@ -964,7 +1006,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, Fk_PackageId1: $('#Fk_PackageId1').val(), Fk_PackageId2: $('#Fk_PackageId2').val(), Fk_PackageId3: $('#Fk_PackageId3').val() },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, Fk_PackageId1: $('#Fk_PackageId1').val(), Fk_PackageId2: $('#Fk_PackageId2').val(), Fk_PackageId3: $('#Fk_PackageId3').val(), IsUpgradePackage: IsUpgradePackage },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -1137,6 +1179,14 @@
         }
         else {
             IscomboPackage = "0";
+        }
+
+        var IsUpgradePackage = 0;
+        if ($("#UpgPackage").is(":checked") == true) {
+            IsUpgradePackage = "1";
+        }
+        else {
+            IsUpgradePackage = "0";
         }
 
         if ($('#PackageTypeId').val() == '0') {

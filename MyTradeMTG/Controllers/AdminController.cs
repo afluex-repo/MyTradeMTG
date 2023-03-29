@@ -1503,6 +1503,7 @@ namespace MyTradeMTG.Controllers
                     obj.IndianValue = r["AmountinRs"].ToString();
                     obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
                     obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1547,6 +1548,7 @@ namespace MyTradeMTG.Controllers
                     obj.IndianValue = r["AmountinRs"].ToString();
                     obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
                     obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
