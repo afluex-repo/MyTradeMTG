@@ -68,6 +68,8 @@ namespace MyTradeMTG.Models
         public string Package2 { get; set; }
         public string Package3 { get; set; }
 
+        public string UpgPackage { get; set; }
+
         #region ProductMaster
         public DataSet GetProductListForPackageList()
         {
@@ -118,7 +120,8 @@ namespace MyTradeMTG.Models
                                  new SqlParameter("@ReturnPercent3",ReturnPercent3),
                                  new SqlParameter("@Fk_PackageId1",Fk_PackageId1),
                                  new SqlParameter("@Fk_PackageId2",Fk_PackageId2),
-                                 new SqlParameter("@Fk_PackageId3",Fk_PackageId3)
+                                 new SqlParameter("@Fk_PackageId3",Fk_PackageId3),
+                                 new SqlParameter("@IsUpgradePackage",UpgPackage)
                                  
         };
 
