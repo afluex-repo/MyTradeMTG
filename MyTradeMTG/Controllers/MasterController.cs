@@ -188,6 +188,7 @@ namespace MyTradeMTG.Controllers
                     obj.Package1 = r["Package1"].ToString();
                     obj.Package2 = r["Package2"].ToString();
                     obj.Package3 = r["Package3"].ToString();
+                    obj.UpgPackage = r["IsUpgradePackage"].ToString();
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
@@ -389,6 +390,7 @@ namespace MyTradeMTG.Controllers
                         //obj.FinalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["FinalAmount"]);
                         obj.SponsorIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorIncome"]);
                         obj.BasisOn = (ds.Tables[0].Rows[0]["BasisOn"].ToString());
+                        obj.UpgPackage= ds.Tables[0].Rows[0]["IsUpgradePackage"].ToString();
                     }
                 }
                 catch (Exception ex)
