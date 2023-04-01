@@ -340,6 +340,7 @@
     }
     jQuery.noConflict();
     $(document).ready(function () {
+        jQuery.noConflict();
         $('#ckbCheckAll').on('click', function () {
             if (this.checked) {
                 $('.checkBoxClass').each(function (index) {
