@@ -444,7 +444,7 @@ namespace MyTradeMTG.Controllers
                     {
                         obj.Result = "Package saved successfully";
                         obj.Packageid = null;
-                        //TempData["Product"] = "Package saved successfully";
+                        TempData["Product"] = "Package saved successfully";
                        
                     }
                     else
