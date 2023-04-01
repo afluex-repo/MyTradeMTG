@@ -1472,6 +1472,7 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult PayoutRequestList()
+
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
