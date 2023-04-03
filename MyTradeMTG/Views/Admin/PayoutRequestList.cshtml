@@ -178,7 +178,7 @@
                                     @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
 
 
-                                    <a href="javascript:void(0)" id="showbankdetailshdf" class="btn btn-success btn-sm">Show / Hide  Bank Details</a>
+                                    <a style="width:180px;" href="javascript:void(0)" id="showbankdetailshdf" class="btn btn-success btn-sm">Show / Hide  Bank Details</a>
                                 </div>
                             </div>
                         </div>
@@ -260,9 +260,8 @@
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
 <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-
 <script>
     if ($("#st").val() != 0) {
         $("#Status").val($("#st").val()).attr("selected", "selected");
@@ -437,11 +436,11 @@
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
 
-    jQuery(document).ready(function () {
+    $(document).ready(function () {
         debugger;
-        jQuery.noConflict();
-        jQuery("#showbankdetailshdf").click(function () {
-            jQuery(".showallbankdetails").toggle();
+        //jQuery.noConflict();
+        $("#showbankdetailshdf").click(function () {
+            $(".showallbankdetails").toggle();
         });
     });
 
