@@ -51,7 +51,6 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("Registration", para);
             return ds;
         }
-
     }
     #endregion
     #region Sponsor
@@ -255,7 +254,6 @@ namespace MyTrade.Models
     }
     public class Tree1
     {
-
         public string SponsorId { get; set; }
         public string Fk_ParentId { get; set; }
         public string TeamPermanent { get; set; }
