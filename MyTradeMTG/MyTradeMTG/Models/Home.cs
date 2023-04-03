@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using MyTrade.Models;
+
 namespace MyTrade.Models
 {
     public class Home : Common
@@ -157,13 +158,10 @@ namespace MyTrade.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@LoginId", LoginId),
-
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetUserName", para);
-
             return ds;
         }
-
         public DataSet GetInActiveUser()
         {
             SqlParameter[] para = {
@@ -208,8 +206,6 @@ namespace MyTrade.Models
 
             return ds;
         }
-
-
         public DataSet ForgetPassword()
         {
             SqlParameter[] para =
@@ -289,8 +285,7 @@ namespace MyTrade.Models
         {
             DataSet ds = DBHelper.ExecuteQuery("[GetPaymentTypeForUser]");
             return ds;
-        }
-        
+        }        
         public DataSet OTPVerified()
         {
             SqlParameter[] para = { new SqlParameter("@OtpVerify", OtpVerify)
@@ -298,13 +293,10 @@ namespace MyTrade.Models
             DataSet ds = DBHelper.ExecuteQuery("OTPVerified", para);
             return ds;
         }
-
         public DataSet CalculateSponsorIncome()
         {
             DataSet ds = DBHelper.ExecuteQuery("CalculateSponsorIncome");
             return ds;
         }
-
-
     }
 }
