@@ -1,5 +1,5 @@
 document.write(`
-
+    
 <!-- START FOOTER -->
 		<div class="footer">
 			<div class="container">		
@@ -23,7 +23,8 @@ document.write(`
 				</div><!--- END ROW -->					
 			</div><!--- END CONTAINER -->
 		</div>
-		<!-- END FOOTER -->	
+		<!--END FOOTER-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         			<script src="asset/js/jquery-1.12.4.min.js"></script>
 		<!--Latest compiled and minified Bootstrap-->
 			<script src="asset/bootstrap/js/bootstrap.min.js"></script>
@@ -61,7 +62,12 @@ document.write(`
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"></script>
-
+    <script>
+    $(document).ready(function () {
+    debugger;
+    $("#my").modal('show');
+});
+    </script>
             <script>
             $('#modal').hide();
             $('#modal_trigger').click(function()
@@ -133,7 +139,11 @@ telInput.blur(function() {
 // on keyup / change flag: reset
 telInput.on("keyup change", reset);
 
-
+ 
 
             </script>
+
+             <script>
+       
+    </script>
 `);

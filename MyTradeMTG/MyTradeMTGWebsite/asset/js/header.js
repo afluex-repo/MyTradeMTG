@@ -1877,4 +1877,25 @@ you to remove them.</p>
 </div>
 
 
+<div id="my" class ="modal fade" role="dialog">
+        <div class ="modal-dialog modal-lg">
+            <div class ="modal-content" style="top:50px;">
+                <div class ="modal-header">
+                    <button type="button" class ="close" data-dismiss="modal">&times; </button>
+                    <h4 class ="modal-title"></h4>
+                </div>
+                <div class ="modal-body">
+                    <div class ="row">
+                        <div class ="col-md-12">
+                            <div class ="newyear">
+                                <img style="width:100%" src="/MyTradeMTGWebsite/asset/img/wbg.gif" class ="img-responsive" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
 `);
