@@ -98,10 +98,14 @@ namespace MyTradeMTG.Models
         public string TransferDate { get; set; }
         public string IndRupees { get; set; }
         public string percentAmt { get; set; }
+        public string IndianValue { get; set; }
+        public string TransferChargeInRupees { get; set; }
+        public string GrossAmountRs { get; set; }
 
 
-
+        public string Narration { get; set; }
         
+
 
 
 
@@ -255,6 +259,7 @@ namespace MyTradeMTG.Models
                                   new SqlParameter("@LoginId",LoginId),
                                    new SqlParameter("@Amount",Amount),
                                    new SqlParameter("@TransferChargeInRupees",IndRupees),
+                                    new SqlParameter("@AmountinRs",IndianValue),
                                    new SqlParameter("@TransferChargeMTG",percentAmt),
                                     new SqlParameter("@AddedBy",AddedBy)
             };

@@ -25,10 +25,10 @@ namespace MyTradeMTG.Controllers
         {
             Dashboard obj = new Dashboard();
             List<Dashboard> lstinvestment = new List<Dashboard>();
-            
+
             obj.Profile = Session["Profile"].ToString();
             //obj.Addresss = Session["Address"].ToString();
-            
+
             obj.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = obj.GetAssociateDashboard();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
@@ -63,10 +63,10 @@ namespace MyTradeMTG.Controllers
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
                 ViewBag.TotalCrAmount = ds.Tables[7].Rows[0]["TotalCrAmount"].ToString();
                 ViewBag.TotalDrAmount = ds.Tables[7].Rows[0]["TotalDrAmount"].ToString();
-                
+
                 ViewBag.Address = ds.Tables[8].Rows[0]["Address"].ToString();
                 ViewBag.ProfilePic = ds.Tables[8].Rows[0]["ProfilePic"].ToString();
-                
+
                 //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
                 //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
 
@@ -126,7 +126,7 @@ namespace MyTradeMTG.Controllers
             //}
 
 
-     
+
             obj.AddedBy = Session["Pk_userId"].ToString();
             DataSet ds2 = obj.GetCustomerList();
             if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
@@ -134,8 +134,8 @@ namespace MyTradeMTG.Controllers
                 ViewBag.ProfilePic = ds2.Tables[0].Rows[0]["ProfilePic"].ToString();
                 ViewBag.CustomerId = ds2.Tables[0].Rows[0]["CustomerId"].ToString();
                 ViewBag.CustomerName = ds2.Tables[0].Rows[0]["CustomerName"].ToString();
-              
-               
+
+
             }
 
 
@@ -173,7 +173,7 @@ namespace MyTradeMTG.Controllers
                     {
                         ProgressReport obj = new ProgressReport();
                         obj.Year = r["Year"].ToString();
-                        obj.Cramount = r["Cramount"].ToString();
+                        obj.Cramount = r["CrAmount"].ToString();
                         obj.Dramount = r["Dramount"].ToString();
                         lst.Add(obj);
                     }
@@ -305,16 +305,16 @@ namespace MyTradeMTG.Controllers
         public ActionResult TopUp()
         {
             Account model = new Account();
-            
+
             model.Country = Session["Country"].ToString();
-            
+
             //model.LoginId = Session["CustomerId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
 
             //if (Session["IdActivated"].ToString() == "true")
             //{
-                model.BankName = Session["Bank"].ToString();
-                model.BankBranch = Session["Branch"].ToString();
+            model.BankName = Session["Bank"].ToString();
+            model.BankBranch = Session["Branch"].ToString();
 
             //}
 
@@ -326,7 +326,7 @@ namespace MyTradeMTG.Controllers
                 model.IsActive = ds23.Tables[0].Rows[0]["IsActive"].ToString();
             }
 
-            
+
 
 
             #region PackageType Bind
@@ -425,11 +425,11 @@ namespace MyTradeMTG.Controllers
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             ddlProduct.Add(new SelectListItem { Text = "Select Package type", Value = "0" });
             ViewBag.ddlProduct = ddlProduct;
-            
+
             return View(model);
         }
 
-        public ActionResult GetProductList(string PackageTypeId,string LoginId)
+        public ActionResult GetProductList(string PackageTypeId, string LoginId)
         {
             List<SelectListItem> ddlProduct = new List<SelectListItem>();
             Account model = new Account();
@@ -448,7 +448,7 @@ namespace MyTradeMTG.Controllers
             model.ddlProduct = ddlProduct;
 
 
-           model.Status = ds.Tables[3].Rows[0]["Status"].ToString();
+            model.Status = ds.Tables[3].Rows[0]["Status"].ToString();
 
 
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -474,7 +474,7 @@ namespace MyTradeMTG.Controllers
             try
             {
                 //obj.LoginId = Session["LoginId"].ToString();
-                
+
                 obj.AddedBy = Session["Pk_userId"].ToString();
                 //  obj.TopUpDate = string.IsNullOrEmpty(obj.TopUpDate) ? null : Common.ConvertToSystemDate(obj.TopUpDate, "dd/mm/yyyy");
                 //obj.TransactionDate = string.IsNullOrEmpty(obj.TransactionDate) ? null : Common.ConvertToSystemDate(obj.TransactionDate, "dd/mm/yyyy");
@@ -1058,6 +1058,7 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
+
         [HttpPost]
         public ActionResult ViewProfile(Home model)
         {
@@ -1399,7 +1400,7 @@ namespace MyTradeMTG.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
                     obj.BasisOn = r["BasisOn"].ToString();
-                    
+
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -1567,13 +1568,17 @@ namespace MyTradeMTG.Controllers
             return View(model);
         }
         public ActionResult PayoutRequest()
+
         {
             string FormName = "";
             string Controller = "";
             User model = new User();
 
-            
+           
+
+
             model.Country = Session["Country"].ToString();
+
 
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
@@ -1603,7 +1608,12 @@ namespace MyTradeMTG.Controllers
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.UPIID = r["UPIId"].ToString();
                     obj.TDSAmount = r["TDS"].ToString();
+                    obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
                 }
                 model.lstPayoutRequest = lst;
@@ -1639,11 +1649,11 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["msg"] = "Transfer To Account Initiated Successfully.";
+                        TempData["msg"] = "Withdrawal Initiated Successfully.";
                     }
                     else
                     {
-                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["errormessage"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else { }
@@ -2311,10 +2321,10 @@ namespace MyTradeMTG.Controllers
             model.MTGToken = MTGToken;
             model.TransferCharge = TransferCharge;
             model.AddedBy = Session["PK_UserId"].ToString();
-            
+
             //DataSet ds2 = model.FranchiseList();
             //model.FK_FranchiseUserId = Session["PK_UserId"].ToString();
-            
+
             DataSet ds = model.SaveMTGTransferCharge();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2472,7 +2482,7 @@ namespace MyTradeMTG.Controllers
         //        model.AddedBy = Session["PK_UserId"].ToString();
         //        model.Status = Status;
         //        //model.Documenturl = documenturl;
-                
+
         //        if (files != null)
         //        {
 
@@ -2480,7 +2490,7 @@ namespace MyTradeMTG.Controllers
         //            files.SaveAs(Path.Combine(Server.MapPath(model.Documenturl)));
         //        }
 
-                
+
 
         //        DataSet ds = model.ApproveSaleRequest();
         //        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2505,17 +2515,17 @@ namespace MyTradeMTG.Controllers
         //    catch (Exception ex)
         //    {
         //        TempData["msg"] = ex.Message;
-                
+
         //    }
         //    return Json(model, JsonRequestBehavior.AllowGet);
         //}
-        
+
         [HttpPost]
         public ActionResult ApproveSaleRequest(User model, HttpPostedFileBase files)
         {
             try
             {
-             model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
                 if (files != null)
                 {
                     model.Documenturl = "/Document/" + Guid.NewGuid() + Path.GetExtension(files.FileName);
@@ -2550,6 +2560,6 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        
+
     }
 }

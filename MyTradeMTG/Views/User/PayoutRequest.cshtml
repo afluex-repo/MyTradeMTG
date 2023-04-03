@@ -28,7 +28,7 @@
                         </div>
                         <div class="card-body">
                             @*<p style="color:red">Note : 2% Procecing Charges And 5% TDS Charge</p><br />*@
-                            <p style="color:red">Note : 10% Procecing Charges</p><br />
+                            <p style="color:red">Note : 10% Processing Charges</p><br />
                             <div class="row">
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
@@ -45,12 +45,11 @@
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         @*MTG /USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })*@
-
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })*@
 
 
                                         MTG /USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return ConvertMony();" })
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return ConvertMony();", @Value="" })
 
 
                                     </div>
@@ -60,11 +59,11 @@
                                 @*///////////Start///////////////*@
 
                                 @*<div class="col-xl-3 mb-3">
-                                    <div class="example">
-                                        <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()" })
-                                    </div>
-                                </div>*@
+                                        <div class="example">
+                                            <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()" })
+                                        </div>
+                                    </div>*@
 
 
                                 <input type="hidden" id="Countryid" value="@Model.Country" />
@@ -99,25 +98,28 @@
 
                                 <div class="col-lg-3 col-md-3" style="margin-top:25px">
                                     <div class="form-group">
-                                        <input class="btn btn-success pull-left" type="submit" value="Transfer To Account" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
+                                        <input class="btn btn-success pull-left" type="submit" value="Withdraw" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
                                         <input type="hidden" id="hdf" value="@Model.Status" />
                                         <input type="hidden" id="hdf1" value="@ViewBag.MenuStatus" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top:28px">
                                     <div class="form-group">
-                                        <h6 style="color:red">MTG Transfer Charge:  <label id="perAmt" style="color:red;">0</label></h6>
+                                        <h6 style="color:red">Processing Charge:  <label id="perAmt" style="color:red;">0</label></h6>
                                         <input type="hidden" id="percentAmt" name="percentAmt" />
-
-                                        <h6 style="color:red">Transfer Charge In Rupees: <label id="Ind" style="color:red;">0</label></h6>
-                                        <input type="hidden" id="IndRupees" name="IndRupees" />
-
+                                        <div style="display:none">
+                                            <h6 style="color:red">Transfer Charge In Rupees: <label id="Ind" style="color:red;">0</label></h6>
+                                            <input type="hidden" id="IndRupees" name="IndRupees" />
+                                        </div>
                                         <h6 style="color:red">Gross MTG:  <label id="lbld" style="color:red;">0</label></h6>
-                                        <h6 style="color:green">
-                                            @*Gross MTG /USDT to be deducted:*@  
-                                            Gross MTG In Rupees:
-                                            <span id="lblf" style="color:green;">0</span>
-                                        </h6>
+
+                                        <div style="display:none">
+                                            <h6 style="color:green">
+                                                @*Gross MTG /USDT to be deducted:*@
+                                                Gross MTG In Rupees:
+                                                <label id="lblf" style="color:green;">0</label>
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -126,18 +128,18 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
-                                            <th>Narration</th>
-                                            @*<th>Login Id</th>
-                                                <th>Name</th>*@
-                                            <th>Gross MTG /USDT</th>
-                                            <th>Procesing Charges</th>
-                                            <th>MTG /USDT</th>
-                                            <th>Net MTG /USDT</th>
                                             <th>Date</th>
+                                            <th>Narration</th>
+                                            <th>Net(MTG)</th>
+                                            <th>Processing Charge(MTG)</th>
+                                            <th>Gross(MTG)</th>
+                                            <th>Net(INR)</th>
+                                            <th>Processing Charge(INR)</th>
+                                            <th>Gross(INR)</th>
+                                            <th>UPI ID</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
                                             <th>Status</th>
-                                            @*<th>ROI Percentage</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,19 +152,20 @@
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
-                                                        @*<td>@Item.PK_RequestID</td>*@
-                                                        <td>@Item.TransactionNo</td>
-                                                        @*<td>@Item.LoginId</td>
-                                                            <td>@Item.Name</td>*@
-                                                        <td>@Item.GrossAmount</td>
-                                                        <td>@Item.ProcessingFee</td>
-                                                        <td>@Item.TDSAmount</td>
-                                                        <td>@Item.Amount</td>
                                                         <td>@Item.Date</td>
+                                                        <td>@Item.Narration</td>
+                                                        <td>@Item.Amount</td>
+                                                        <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                        <td>@Item.GrossAmount</td>
+                                                        <td>@Item.IndianValue</td>
+                                                        <td>@Item.TransferChargeInRupees</td>
+                                                        <td>@Item.GrossAmountRs</td>
+                                                        <td>@Item.UPIID</td>
                                                         <td>@Item.IFSCCode</td>
                                                         <td>@Item.AccountNo</td>
                                                         <td>@Item.Status</td>
-                                                        @*<td>@Item.ROIPercentage</td>*@
+
+
                                                     </tr>
                                                     i++;
                                                 }
@@ -186,51 +189,13 @@
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script>
 
-    //function ConvertMony() {
-    //    debugger;
-    //    if ($("#Countryid").val() == "India") {
-    //        $("#dvinrupees").show();
-    //        $("#divusdoller").hide();
-    //    }
-    //    else {
-    //        $("#divusdoller").show();
-    //        $("#InUsDoller").text($("#Amount").val() + "$");
-    //        $("#dvinrupees").hide();
-    //    }
-    //    debugger;
-    //    //const convert = document.getElementById("convert");
-    //    const result = document.getElementById("result");
-    //    const from = document.getElementById("from");
-    //    const to = document.getElementById("to");
-    //    const amount = document.getElementById("Amount");
-    //    const IndianValue = document.getElementById("IndianValue");
-    //    //var TodaysCurrency = $('#IndianValue').val();
-    //    let fromCurrency = from.value;
-    //    let toCurrency = to.value;
-    //    let amt = amount.value;
-    //    fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
-    //    .then(response => {
-    //        return response.json();
-    //    })
-    //    .then(data => {
-    //        debugger;
-    //        let rate = data.rates[toCurrency];
-    //        let total = rate * amt;
-    //        //result.innerHTML = `${amt} ${fromCurrency} = ${total}
-    //        result.innerHTML = `${amt}$  = ${total}
-    //        ${toCurrency}`;
-    //        //IndianValue.innerHTML = total;
-    //        $("#IndianValue").val(total);
-    //        GetFinalAmount();
-    //    });
-    //}
-
-
-
     function ConvertMony() {
         debugger;
-        var mtgAmt = parseFloat($("#Amount").val()) * 0.10;
-        $("#perAmt").text(parseFloat(mtgAmt));
+        var mtgAmt = (parseFloat($("#Amount").val()) * 0.10);
+
+        var newmtgAmt = parseFloat(mtgAmt).toFixed(2);
+
+        $("#perAmt").text(parseFloat(newmtgAmt));
 
         if ($("#Countryid").val() == "India") {
             $("#dvinrupees").show();
@@ -270,13 +235,13 @@
             $("#Ind").text(parseFloat(totalRupee));
             GetFinalAmount();
 
-            var grossAmt = totalRupee + mtgAmt;
+            var grossAmt = totalRupee + total;
             $("#lblf").text(parseFloat(grossAmt));
 
         });
 
     }
-    
+
 
 
     var f3 = flatpickr(document.getElementById('FromDate'),
@@ -326,13 +291,13 @@
         var mtgAmount = $("Amount").val();
         var IndianValue = $('#IndianValue').val();
         //if (parseFloat($("#Amount").val()) < 1000 || parseFloat($("#Amount").val()) > 49000) {
-        if (parseFloat($("#IndianValue").val()) < 1000 || parseFloat($("#IndianValue").val()) > 49000) {
-            alert("Amount should be between or equal to  1000 and  49000");
-            $('#IndianValue').val('');
-            $("#IndianValue").addClass('errortext');
-            $('#IndianValue').focus();
-            return false;
-        }
+        //if (parseFloat($("#IndianValue").val()) < 1000 || parseFloat($("#IndianValue").val()) > 49000) {
+        //    alert("Amount should be between or equal to  1000 and  49000");
+        //    $('#IndianValue').val('');
+        //    $("#IndianValue").addClass('errortext');
+        //    $('#IndianValue').focus();
+        //    return false;
+        //}
         //var deductionAmount = parseFloat($("#Amount").val()) * 0.05 + parseFloat($("#Amount").val()) * 0.02;
 
         //var deductionAmount = parseFloat($("#Amount").val()) * 0.10;
@@ -361,14 +326,16 @@
         //    return false;
         //}
 
-        //$("#lbld").text(parseFloat(deductionAmount));
-        //var finalAmount = parseFloat($("#Amount").val()) + parseFloat(deductionAmount);
         var finalAmount = parseFloat($("#IndianValue").val()) + parseFloat(deductionAmount);
-        //$("#lblf").text(parseFloat(finalAmount));
+
 
 
         var mtgAmt = parseFloat($("#Amount").val()) * 0.10;
-        $("#perAmt").text(parseFloat(mtgAmt));
+        var newmtgAmt = parseFloat(mtgAmt).toFixed(2);
+
+        $("#perAmt").text(parseFloat(newmtgAmt));
+
+       
 
 
         var indrupees = parseFloat($("#IndianValue").val());
@@ -378,11 +345,9 @@
         var totchrg = Amt + mtgAmt
         $("#lbld").text(parseFloat(totchrg));
 
-        //var grossAmt = indrupees + totchrg;
-        //$("#lblf").text(parseFloat(grossAmt));
     }
 
-  
+
 
 </script>
 <script>
@@ -445,8 +410,25 @@
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
-                title: 'Transfer To Account Initiated Successfully.',
+                title: 'Withdrawal Initiated Successfully.',
                 type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
+@if (TempData["errormessage"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: '@TempData["errormessage"]',
+                type: 'warning',
                 showCancelButton: 0,
                 confirmButtonText: 'OK',
             })

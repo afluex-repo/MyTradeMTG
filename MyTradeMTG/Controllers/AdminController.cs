@@ -137,7 +137,7 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("Generate_EPin", "Admin");
         }
-        public ActionResult UnUsedPin(string Fk_UserId,string Fk_ProductId)
+        public ActionResult UnUsedPin(string Fk_UserId, string Fk_ProductId)
         {
             Admin obj = new Admin();
             List<Admin> lst = new List<Admin>();
@@ -216,7 +216,7 @@ namespace MyTradeMTG.Controllers
             if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
             {
                 obj.Amount = ds.Tables[0].Rows[0]["ProductPrice"].ToString();
-                obj.BV= ds.Tables[0].Rows[0]["BV"].ToString();
+                obj.BV = ds.Tables[0].Rows[0]["BV"].ToString();
                 obj.FinalAmount = ds.Tables[0].Rows[0]["FinalAmount"].ToString();
 
             }
@@ -649,6 +649,8 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("EPinRequestList", "Admin");
         }
+
+
         public ActionResult ROIWalletForAdmin()
         {
             Admin model = new Admin();
@@ -1163,24 +1165,24 @@ namespace MyTradeMTG.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["msg"] = "Distribute payment successfully";
-                            foreach (DataRow r  in ds.Tables[0].Rows)
+                        foreach (DataRow r in ds.Tables[0].Rows)
+                        {
+                            string Name = r["Username"].ToString();
+                            string Amount = r["NetAmount"].ToString();
+                            string Mobile = r["Mobile"].ToString();
+                            string PayoutNo = r["PayoutNo"].ToString();
+                            string ClossingDate = r["ClosingDate"].ToString();
+                            string TempId = "1707166036854019761";
+                            string str = BLSMS.Payout(Name, Amount, PayoutNo, ClossingDate);
+                            try
                             {
-                                string Name = r["Username"].ToString();
-                                string Amount = r["NetAmount"].ToString();
-                                 string Mobile = r["Mobile"].ToString();
-                                 string PayoutNo = r["PayoutNo"].ToString();
-                                 string ClossingDate = r["ClosingDate"].ToString();
-                                string TempId = "1707166036854019761";
-                                string str = BLSMS.Payout(Name, Amount,PayoutNo,ClossingDate);
-                                try
-                                {
-                                    BLSMS.SendSMS(Mobile, str, TempId);
-                                }
-                                catch
-                                {
-                              }
+                                BLSMS.SendSMS(Mobile, str, TempId);
+                            }
+                            catch
+                            {
                             }
                         }
+                    }
                     else
                     {
                         TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -1470,6 +1472,7 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult PayoutRequestList()
+
         {
             Admin model = new Admin();
             List<Admin> lst = new List<Admin>();
@@ -1498,6 +1501,10 @@ namespace MyTradeMTG.Controllers
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
                     obj.TransactionDate = r["ApprovalDate"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1539,6 +1546,10 @@ namespace MyTradeMTG.Controllers
                     obj.GrossAmount = r["GrossAmount"].ToString();
                     obj.ProcessingFee = r["DeductionCharges"].ToString();
                     obj.TransactionDate = r["ApprovalDate"].ToString();
+                    obj.IndianValue = r["AmountinRs"].ToString();
+                    obj.TransferChargeInRupees = r["TransferChargeInRupees"].ToString();
+                    obj.GrossAmountRs = r["GrossAmountRs"].ToString();
+                    obj.Narration = r["Narration"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -1878,6 +1889,8 @@ namespace MyTradeMTG.Controllers
                 model.UpdatedBy = Session["Pk_AdminId"].ToString();
                 string chkselect = "";
                 int i = 0;
+                int status = 1;
+                string Date = null;
                 foreach (String str in result)
                 {
                     try
@@ -1888,19 +1901,36 @@ namespace MyTradeMTG.Controllers
                             model.PK_RequestID = Request["PK_RequestID_ " + str].ToString();
                             model.Status = "Approved";
 
-                            model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+                            if (status == 1)
+                            {
+                                model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "dd/MM/yyyy");
+
+                                Date = model.TransactionDate;
+
+                                status = 0;
+                            }
+                            else
+                            {
+                                model.TransactionDate = Date;
+                            }
+
+
+
+
                             DataSet ds = model.ApprovePayoutRequest();
                             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                             {
                                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                                 {
                                     TempData["msg"] = "Approved Successfully";
-                                    
+
+                                    model.TransactionDate = string.IsNullOrEmpty(model.TransactionDate) ? null : Common.ConvertToSystemDate(model.TransactionDate, "MM/dd/yyyy");
+
                                     string Name = ds.Tables[0].Rows[0]["Name"].ToString();
                                     string Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                                     string Status = ds.Tables[0].Rows[0]["Status"].ToString();
                                     string TempId = "1707166036849325252";
-                                    string Message = "Dear "+ Name + ", Your Payout request has been "+ Status + ". MY TRADE";
+                                    string Message = "Dear " + Name + ", Your Payout request has been " + Status + ". MY TRADE";
                                     try
                                     {
                                         BLSMS.SendSMS(Mobile, Message, TempId);
@@ -2576,7 +2606,7 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-        public ActionResult ViewGenerateEpinDetails(string Fk_UserId,string Fk_ProductId)
+        public ActionResult ViewGenerateEpinDetails(string Fk_UserId, string Fk_ProductId)
         {
             Admin obj = new Admin();
             List<Admin> lst = new List<Admin>();
@@ -2722,10 +2752,10 @@ namespace MyTradeMTG.Controllers
         #region
         public ActionResult DistributedTPSDetails()
         {
-          
+
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
-        
+
             DataSet ds = model.TPSPayoutDetail();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2747,7 +2777,7 @@ namespace MyTradeMTG.Controllers
                 model.lstPayout = lst;
                 ViewBag.BusinessAmount = double.Parse(ds.Tables[0].Compute("sum(BusinessAmount)", "").ToString()).ToString("n2");
                 ViewBag.Amount = double.Parse(ds.Tables[0].Compute("sum(Amount)", "").ToString()).ToString("n2");
-               
+
             }
             int count = 0;
             List<SelectListItem> ddlPayout = new List<SelectListItem>();
@@ -2770,7 +2800,7 @@ namespace MyTradeMTG.Controllers
         {
 
             List<Admin> lst = new List<Admin>();
-          
+
             DataSet ds = model.TPSPayoutDetail();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2811,12 +2841,12 @@ namespace MyTradeMTG.Controllers
         }
         #endregion
 
-        
+
         public ActionResult SponsorIncome(string loginid)
         {
             List<Admin> lst = new List<Admin>();
             Admin model = new Admin();
-            if (loginid != "" || loginid !=null)
+            if (loginid != "" || loginid != null)
             {
                 model.LoginId = loginid;
             }
@@ -2965,7 +2995,7 @@ namespace MyTradeMTG.Controllers
                     obj.LoginId = r["Loginid"].ToString();
                     obj.Name = r["Name"].ToString();
                     obj.CustomerId = r["CustomerAddressId"].ToString();
-                  
+
                     lst.Add(obj);
                 }
                 model.lstFranchiseRequest = lst;
