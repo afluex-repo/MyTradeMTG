@@ -775,6 +775,7 @@
     function saveProduct() {
         debugger
         $(".errortext").removeClass("errortext");
+
         var IscomboPackage = 0;
         if ($("#Iscombo").is(":checked") == true) {
             IscomboPackage = "1";
@@ -831,14 +832,16 @@
         //    $('#BV').focus();
         //    return false;
         //}
-
-        //if ($('#activationmtgtoken').val() == '' || $('#activationmtgtoken').val() == '0') {
-        //    $("#activationmtgtoken").addclass('errortext');
-        //    $('#activationmtgtoken').focus();
-        //    return false;
-        //}
-       
-
+        
+        if (IsUpgradePackage == '0' || IsUpgradePackage == '')
+        {
+            if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
+                $("#ActivationMTGToken").addClass('errortext');
+                $('#ActivationMTGToken').focus();
+                return false;
+            }
+        }
+        
         //if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
         //    $("#BasisOn").addClass('errortext');
         //    $('#BasisOn').focus();
@@ -852,7 +855,7 @@
                 $('#ROIPercent').focus();
                 return false;
             }
-
+            
             //if ($('#DrAmount1').val() == '' || $('#DrAmount1').val() == '0') {
             //    $("#DrAmount1").addClass('errortext');
             //    $('#DrAmount1').focus();
@@ -1262,10 +1265,12 @@
         //    $('#BV').focus();
         //    return false;
         //}
-        if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
-            $("#ActivationMTGToken").addClass('errortext');
-            $('#ActivationMTGToken').focus();
-            return false;
+        if (IsUpgradePackage == '0' || IsUpgradePackage == '') {
+            if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
+                $("#ActivationMTGToken").addClass('errortext');
+                $('#ActivationMTGToken').focus();
+                return false;
+            }
         }
 
         //if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
