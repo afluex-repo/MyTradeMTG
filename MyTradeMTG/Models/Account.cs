@@ -48,6 +48,9 @@ namespace MyTradeMTG.Models
         public string CustomerId { get; set; }
         public string ROI { get; set; }
         public string Topupid { get; set; }
+        public string TopUpIdRandom { get; set; }
+
+        
         public string BasisOn { get; set; }
         public string Count { get; set; }
         public string IndianValue { get; set; }
