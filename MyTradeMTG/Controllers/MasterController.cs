@@ -306,6 +306,7 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction(FormName, Controller);
         }
         public ActionResult PackageMaster(string PackageID)
+
         {
             Master obj = new Master();
             #region pacakgeTpe Bind
@@ -444,20 +445,20 @@ namespace MyTradeMTG.Controllers
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
-                        obj.Result = "Package saved successfully";
+                        //obj.Result = "Package saved successfully";
                         obj.Packageid = null;
                         TempData["Product"] = "Package saved successfully";
                        
                     }
                     else
                     {
-                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Product"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                obj.Result = ex.Message;
+                TempData["Product"] = ex.Message;
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
