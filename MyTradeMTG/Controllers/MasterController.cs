@@ -445,20 +445,20 @@ namespace MyTradeMTG.Controllers
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
-                        //obj.Result = "Package saved successfully";
+                        obj.Result = "Package saved successfully";
                         obj.Packageid = null;
-                        TempData["Product"] = "Package saved successfully";
+                        //TempData["Product"] = "Package saved successfully";
                        
                     }
                     else
                     {
-                        TempData["Product"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["Product"] = ex.Message;
+                obj.Result = ex.Message;
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
@@ -503,20 +503,20 @@ namespace MyTradeMTG.Controllers
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
-                        //obj.Result = "Package updated successfully";
+                        obj.Result = "Package updated successfully";
 
-                        TempData["Product"] = "Package updated successfully";
+                        //TempData["Product"] = "Package updated successfully";
                     }
                     else
                     {
-                        TempData["Product"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
 
             }
             catch (Exception ex)
             {
-                TempData["Product"] = ex.Message;
+                obj.Result = ex.Message;
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
