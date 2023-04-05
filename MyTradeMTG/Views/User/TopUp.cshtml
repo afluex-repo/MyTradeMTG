@@ -22,9 +22,9 @@
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h4>Top-Up</h4>
-                                    <span class="text-danger" style="color:red;">
+                                    @*<span class="text-danger" style="color:red;">
                                         @TempData["msg"]
-                                    </span>
+                                    </span>*@
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-md-12">
-                                    <label style="color:red">MTG /USDT Wallet Balance: @ViewBag.WalletBalance</label>
+                                    <label style="color:red">MTG /USDT Balance: @ViewBag.WalletBalance</label>
 
                                     @if (ViewBag.WalletBalance == "0")
                                     {
@@ -208,7 +208,7 @@
                                 {*@
                             <span>Hello @Session["FullName"]</span>
                             @*}*@
-                            , your <label id="lblTPS"></label> package for <label id="lblAmountsssss"></label> MTG is being initiated for <label id="lblLoginId"></label> with ROI <label id="lblROI"></label> % <label id="lblbasisons"></label>
+                            , your <label id="lblTPS"></label> package for <label id="lblAmountsssss"></label> MTG is being initiated for <label id="lblLoginId"></label> with Bonus <label id="lblROI"></label> % <label id="lblbasisons"></label>
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -239,11 +239,12 @@
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
-                title: 'Top-Up Done successfully !!',
+                title: '@TempData["msg"]',
                 type: 'success',
                 showCancelButton: 0,
                 confirmButtonText: 'OK',
             })
+
         })
     </script>
 }

@@ -54,8 +54,9 @@ namespace MyTradeMTG.Models
         public string TodaysCurrency { get; set; }
         public string IndianValue { get; set; }
         public string result { get; set; }
+        public string TopUpIdRandom { get; set; }
 
-        
+
 
         public DataSet GetMemberDetails()
         {
