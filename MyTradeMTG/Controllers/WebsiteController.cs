@@ -67,6 +67,9 @@ namespace MyTradeMTG.Controllers
                                 Session["Bank"] = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 Session["UserActivationTopUp"] = ds.Tables[0].Rows[0]["UserActivationTopUp"].ToString();
+                                Session["CurrencyName"] = ds.Tables[0].Rows[0]["CurrencyName"].ToString();
+                                Session["CurrencySymbol"] = ds.Tables[0].Rows[0]["CurrencySymbol"].ToString();
+                                Session["ISOcode"] = ds.Tables[0].Rows[0]["ISOcode"].ToString();
                                 DataSet ds1 = obj.GetFranchisedetails(Session["Pk_UserId"].ToString());
                                 if (ds1 != null && ds1.Tables[0].Rows.Count > 0)
                                 {
@@ -220,7 +223,7 @@ namespace MyTradeMTG.Controllers
             }
             return View();
         }
-        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City, string Country)
+        public ActionResult RegistrationAction(string SponsorId, string FirstName, string LastName, string MobileNo, string PinCode, string Leg, string Password, string Email, string Gender, string State, string City, string CountryCode, string Country)
         {
 
             Home obj = new Home();
@@ -236,6 +239,7 @@ namespace MyTradeMTG.Controllers
                 obj.Password2 = Crypto.Encrypt(Password);
                 obj.Email = Email;
                 obj.Gender = Gender;
+                obj.CountryCode = CountryCode;
                 obj.Country = Country;
                 obj.State = State;
                 obj.City = City;

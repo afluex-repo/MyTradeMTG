@@ -83,7 +83,8 @@ namespace MyTradeMTG.Models
                                      new SqlParameter("@State",State),
                                       new SqlParameter("@City",City),
                                       new SqlParameter("@Country",Country),
-                                     new SqlParameter("@Leg",Leg),
+                                        new SqlParameter("@CountryCode",CountryCode),
+                                                        new SqlParameter("@Leg",Leg),
                                      new SqlParameter("@Password",Password2)
 
                                    };
