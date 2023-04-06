@@ -58,12 +58,15 @@ namespace MyTradeMTG.Controllers
             obj.LoginId = Session["LoginId"].ToString();
             //if (Session["IdActivated"].ToString() == "true")
             //{
-                obj.BankBranch = Session["Branch"].ToString();
+            obj.BankBranch = Session["Branch"].ToString();
                 obj.BankName = Session["Bank"].ToString();
             //}
 
             #region Check Balance
             obj.FK_UserId = Session["Pk_UserId"].ToString();
+            obj.CurrencyName = Session["CurrencyName"].ToString();
+            obj.CurrencySymbol = Session["CurrencySymbol"].ToString();
+            obj.ISOcode = Session["ISOcode"].ToString();
             DataSet ds = obj.GetWalletBalance();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {

@@ -78,6 +78,9 @@ namespace MyTradeMTG.Controllers
                                 Session["Bank"] = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 Session["UserActivationTopUp"] = ds.Tables[0].Rows[0]["UserActivationTopUp"].ToString();
+                                Session["CurrencyName"] = ds.Tables[0].Rows[0]["CurrencyName"].ToString();
+                                Session["CurrencySymbol"] = ds.Tables[0].Rows[0]["CurrencySymbol"].ToString();
+                                Session["ISOcode"] = ds.Tables[0].Rows[0]["ISOcode"].ToString();
                                 DataSet ds1 = obj.GetFranchisedetails(Session["Pk_UserId"].ToString());
                                  if(ds1!=null && ds1.Tables[0].Rows.Count>0)
                                 {

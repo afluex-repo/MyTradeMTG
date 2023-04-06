@@ -55,6 +55,10 @@ namespace MyTradeMTG.Models
         public string IndianValue { get; set; }
         public string result { get; set; }
         public string TopUpIdRandom { get; set; }
+        public string CurrencyName { get; set; }
+        public string CurrencySymbol { get; set; }
+        public string ISOcode { get; set; }
+
 
 
 
