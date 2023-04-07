@@ -10,6 +10,7 @@ namespace MyTradeMTG.Models
 {
     public class UserWallet
     {
+        public string PackageTypeName { get; set; }
         public string Country { get; set; }
         public string LoginId { get; set; }
         public string Amount { get; set; }

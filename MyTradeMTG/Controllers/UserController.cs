@@ -1401,6 +1401,9 @@ namespace MyTradeMTG.Controllers
                     obj.PackageDays = r["PackageDays"].ToString();
                     obj.BasisOn = r["BasisOn"].ToString();
                     obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
+                    obj.PackageTypeName = r["PackageTypeName"].ToString();
+
+                    
 
                     lst.Add(obj);
                 }
@@ -1444,6 +1447,7 @@ namespace MyTradeMTG.Controllers
                     obj.PackageDays = r["PackageDays"].ToString();
                     obj.BasisOn = r["BasisOn"].ToString();
                     obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
+                    obj.PackageTypeName = r["PackageTypeName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
