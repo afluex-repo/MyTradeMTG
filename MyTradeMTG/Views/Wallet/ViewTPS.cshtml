@@ -14,14 +14,22 @@
          border:5px solid #e0bc72;
          border-radius:30px;
     }
-    .dataTables_wrapper input[type="search"]
-    {
-        background:#f7f7f7 !important;
-    }
     .table thead th,.text_color
     {
         color:#000;
         font-size:1rem;
+    }
+    /*.table
+    {
+        border:1px solid #000
+    }*/
+    .table > :not(caption) > * > *
+    {
+        border:none
+    }
+    @@media print
+    {
+        
     }
 </style>
 @using (Html.BeginForm("ViewTPS", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -43,19 +51,19 @@
                                     <img src="~/MyTradeMTGWebsite/asset/img/wbg.gif" class="img-fluid" style="width:12rem" />
                                 </div>
                                 <div class="col-sm-4">  
-                                    <a href="#" class="btn btn-info btn-sm" style="float:right" onclick="window.print()"><i class="fa fa-download"></i> Download</a>
+                                    <a href="#" class="btn btn-info btn-sm" style="float:right" onclick="printIt('printableDiv')"><i class="fa fa-download"></i> Download</a>
                                     @*<a href="/User/TopUpList" class="btn btn-info btn-sm" style="float:right">Back</a>*@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body p-3">
+                        <div class="card-body p-3" id="printableDiv">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h6 class="text-dark"><span class="text_color">Total MTG to be received </span>: @ViewBag.TotalAmount</h6>
                                     <h6 class="text-dark"><span class="text_color">Total MTG received</span> : @ViewBag.ReceivedAmount</h6>
                                     <h6 class="text-dark"><span class="text_color">Balance MTG to be received</span> : @ViewBag.BalanceAmount</h6>
                                 </div>
-                                <table i="html5-extension" class="table non-hover pt-2" style="width:100%" data-page-length='20'>
+                                <table i="html5-extension" class="table non-hover pt-2" style="width:100%;border:1px solid #000" data-page-length='20'>
                                     <thead>
                                         <tr>
                                             <th>S No.</th>
@@ -94,20 +102,17 @@
         </div>
     </div>
 }
-
-@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-
-<script>
-    $('#FromDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-    });
-    $('#ToDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-    });
-</script>*@
-
+<script type="text/javascript">
+function printIt(divID) {
+    var divContent = document.getElementById(divID);
+    var WinPrint = window.open('', '', 'width=1200,height=600');
+    WinPrint.document.write(divContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+    WinPrint.close();
+}
+</script>
 
 
 
