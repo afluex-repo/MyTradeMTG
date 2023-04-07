@@ -64,6 +64,8 @@
                                             <th>View</th>
                                             <th>Date</th>
                                             @*<th>TopUp Id</th>*@
+
+                                            <th style="display:none">PackageTypeName</th>
                                         </tr>
                                     </thead>
                                     <tbody class="sorting_desc">
@@ -89,9 +91,14 @@
                                                         <td>@Item.Status</td>
                                                         <td>@Item.ROIPercentage %</td>
                                                         <td>@Item.BasisOn</td>
-                                                        <td><a class="btn btn-info btn-sm" href="/Wallet/ViewTPS?InvId=@Item.InvestmentId">@Item.PackageDays</a></td>
+         <td><a class="btn btn-info btn-sm" href="/Wallet/ViewTPS?InvId=@Item.InvestmentId&&PackageTypeName=@Item.PackageTypeName">@Item.PackageDays</a></td>
                                                         <td>@Item.TopUpDate</td>
                                                         @*<td>@Item.Topupid</td>*@
+                                                        <td style="display:none">@Item.PackageTypeName</td>
+
+                                                        
+
+
                                                     </tr>
                                                     i--;
                                                     //i--;
