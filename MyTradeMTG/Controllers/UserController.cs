@@ -1054,6 +1054,7 @@ namespace MyTradeMTG.Controllers
                     model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                     model.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                    model.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
                 }
             }
             return View(model);
@@ -1090,7 +1091,7 @@ namespace MyTradeMTG.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return RedirectToAction("UserDashBoard", "User");
+            return RedirectToAction("ViewProfile", "User");
         }
         public ActionResult GetMemberDetails(string LoginId)
         {
@@ -1590,7 +1591,9 @@ namespace MyTradeMTG.Controllers
             model.Fk_UserId = Session["Pk_userId"].ToString();
             //DataSet ds = model.GetPayoutBalance();
             //model.PayoutBalance = ds.Tables[0].Rows[0]["Balance"].ToString();
-
+            //model.CurrencyName = Session["CurrencyName"].ToString();
+            //model.CurrencySymbol = Session["CurrencySymbol"].ToString();
+            //model.ISOcode = Session["ISOcode"].ToString();
             List<User> lst = new List<User>();
             model.State = model.State == "0" ? null : model.State;
             model.LoginId = model.LoginId == "" ? null : model.LoginId;

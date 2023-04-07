@@ -67,14 +67,14 @@
 
 
                                 <input type="hidden" id="Countryid" value="@Model.Country" />
-                                <div class="col-xl-3 mb-3" id="divusdoller" style="display:none">
+                                @*<div class="col-xl-3 mb-3" id="divusdoller" style="display:none">
                                     <div class="example">
                                         <p class="mb-1"> In US Doller<span style="color: red"></span></p>
                                         <label id="InUsDoller" class="pt-3 form-control"></label>
                                     </div>
-                                </div>
+                                </div>*@
 
-                                <div class="col-xl-3 mb-3" id="dvinrupees" style="display:none">
+                                <div class="col-xl-3 mb-3" id="dvinrupees" @*style="display:none"*@>
                                     <div class="example">
                                         <p class="mb-1"> In Rupess<span style="color: red"></span></p>
                                         <label id="result" class="pt-3 form-control"></label>
@@ -133,9 +133,9 @@
                                             <th>Net(MTG)</th>
                                             <th>Processing Charge(MTG)</th>
                                             <th>Gross(MTG)</th>
-                                            <th>Net(INR)</th>
-                                            <th>Processing Charge(INR)</th>
-                                            <th>Gross(INR)</th>
+                                            <th>Net</th>
+                                            <th>Processing Charge</th>
+                                            <th>Gross</th>
                                             <th>UPI ID</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
@@ -188,18 +188,18 @@
 @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script>
-    $(document).ready(function () {
-        if ($("#Countryid").val() == "India") {
-            $("#dvinrupees").show();
-            $("#divusdoller").hide();
+    //$(document).ready(function () {
+    //    if ($("#Countryid").val() == "India") {
+    //        $("#dvinrupees").show();
+    //        $("#divusdoller").hide();
 
-        }
-        else {
-            $("#divusdoller").show();
-            $("#dvinrupees").hide();
+    //    }
+    //    else {
+    //        $("#divusdoller").show();
+    //        $("#dvinrupees").hide();
 
-        }
-    })
+    //    }
+    //})
     function ConvertMony() {
         debugger;
         var mtgAmt = (parseFloat($("#Amount").val()) * 0.10);
@@ -208,15 +208,15 @@
 
         $("#perAmt").text(parseFloat(newmtgAmt));
 
-        if ($("#Countryid").val() == "India") {
-            $("#dvinrupees").show();
-            $("#divusdoller").hide();
-        }
-        else {
-            $("#divusdoller").show();
-            $("#InUsDoller").text($("#Amount").val() + "$");
-            $("#dvinrupees").hide();
-        }
+        //if ($("#Countryid").val() == "India") {
+        //    $("#dvinrupees").show();
+        //    $("#divusdoller").hide();
+        //}
+        //else {
+        //    $("#divusdoller").show();
+        //    $("#InUsDoller").text($("#Amount").val() + "$");
+        //    $("#dvinrupees").hide();
+        //}
         debugger;
         //const convert = document.getElementById("convert");
         const result = document.getElementById("result");
