@@ -413,10 +413,11 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-        public ActionResult ViewTPS(string InvId)
+        public ActionResult ViewTPS(string InvId,string PackageTypeName)
         {
             UserWallet model = new UserWallet();
             model.Pk_InvestmentId = InvId;
+            ViewBag.PackageTypeName = PackageTypeName;
             List<UserWallet> lst = new List<UserWallet>();
             model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.GetROIDetails();

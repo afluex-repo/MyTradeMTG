@@ -50,7 +50,9 @@ namespace MyTradeMTG.Models
         public string Topupid { get; set; }
         public string TopUpIdRandom { get; set; }
 
+        public string PackageTypeName { get; set; }
         
+
         public string BasisOn { get; set; }
         public string Count { get; set; }
         public string IndianValue { get; set; }

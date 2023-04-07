@@ -72,7 +72,7 @@
                                         <div class="col-xl-3">
                                             <div class="example">
                                                     <p class="mb-1">Payment Type <span style="color: red">*</span></p>
-                                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control wide", @onKeyPress = "getpaymentTypedetails();" })
+                                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentTypedetails();" })
                                             </div>
                                         </div>
                                         <div class="col-xl-3" id="paymentmode" style="display: none">
