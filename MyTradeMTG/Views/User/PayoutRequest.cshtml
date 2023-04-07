@@ -49,7 +49,7 @@
 
 
                                         MTG /USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return ConvertMony();", @Value="" })
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onInput = "return ConvertMony();", @Value="" })
 
 
                                     </div>
@@ -188,7 +188,18 @@
 @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script>
+    $(document).ready(function () {
+        if ($("#Countryid").val() == "India") {
+            $("#dvinrupees").show();
+            $("#divusdoller").hide();
 
+        }
+        else {
+            $("#divusdoller").show();
+            $("#dvinrupees").hide();
+
+        }
+    })
     function ConvertMony() {
         debugger;
         var mtgAmt = (parseFloat($("#Amount").val()) * 0.10);
