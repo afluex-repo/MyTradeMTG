@@ -91,7 +91,15 @@
                                                         <td>@Item.Status</td>
                                                         <td>@Item.ROIPercentage %</td>
                                                         <td>@Item.BasisOn</td>
-         <td><a class="btn btn-info btn-sm" href="/Wallet/ViewTPS?InvId=@Item.InvestmentId&&PackageTypeName=@Item.PackageTypeName">@Item.PackageDays</a></td>
+                                                        <td>@if (Item.BasisOn == "OneTime")
+                                                        {
+                                                            <a class="btn btn-info btn-sm" href="/Wallet/ViewTPS?InvId=@Item.InvestmentId&&PackageTypeName=@Item.PackageTypeName">@Item.PackageDays days</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="btn btn-info btn-sm" href="/Wallet/ViewTPS?InvId=@Item.InvestmentId&&PackageTypeName=@Item.PackageTypeName">@Item.PackageDays</a>
+                                                        }
+                                                        </td>
                                                         <td>@Item.TopUpDate</td>
                                                         @*<td>@Item.Topupid</td>*@
                                                         <td style="display:none">@Item.PackageTypeName</td>

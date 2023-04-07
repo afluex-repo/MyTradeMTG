@@ -29,7 +29,7 @@
     <div class="content-body">
         <div class="container-fluid">
             <div class="row layout-top-spacing">
-                <div class="col-lg-12 col-12 layout-spacing">
+                <div class="col-lg-12 col-12 layout-spacing" id="printdiv">
                     <div class="card">
                         <div class="card-header p-3">
                             <div class="row" style="width:100%">
@@ -43,7 +43,7 @@
                                     <img src="~/MyTradeMTGWebsite/asset/img/wbg.gif" class="img-fluid" style="width:12rem" />
                                 </div>
                                 <div class="col-sm-4">  
-                                    <a href="#" class="btn btn-info btn-sm" style="float:right" onclick="window.print()"><i class="fa fa-download"></i> Download</a>
+                                    <a href="#" class="btn btn-info btn-sm" style="float:right" onclick="PrintDivViewTPS()"><i class="fa fa-download"></i> Download</a>
                                     @*<a href="/User/TopUpList" class="btn btn-info btn-sm" style="float:right">Back</a>*@
                                 </div>
                             </div>
@@ -106,7 +106,21 @@
         dateFormat: 'dd/mm/yy',
     });
 </script>*@
-
+<script>
+    function PrintDivViewTPS() {
+        
+        var divContents = document.getElementById("printdiv").innerHTML;
+        var printWindow = window.open('', '', 'height=1000,width=1000');
+        printWindow.document.write(divContents);
+        
+        printWindow.document.close();
+        printWindow.document.title = "http://localhost:53408/Wallet/ViewTPS?InvId=49&&PackageTypeName=TR-???"
+        printWindow.focus()
+        printWindow.print();
+        printWindow.close();
+        return true;
+    }
+</script>
 
 
 
