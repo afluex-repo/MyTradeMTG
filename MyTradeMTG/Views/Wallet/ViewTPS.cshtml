@@ -34,7 +34,7 @@
                         <div class="card-header p-3">
                             <div class="row" style="width:100%">
                                 <div class="col-sm-4">
-                                    <h4 class="text-dark">View TR2</h4>
+                                    <h4 class="text-dark">View @ViewBag.PackageTypeName</h4>
                                     <span class="text-danger">
                                         @TempData["ROIIncome"]
                                     </span>
@@ -43,7 +43,7 @@
                                     <img src="~/MyTradeMTGWebsite/asset/img/wbg.gif" class="img-fluid" style="width:12rem" />
                                 </div>
                                 <div class="col-sm-4">  
-                                    <a href="#" class="btn btn-info btn-sm" style="float:right"><i class="fa fa-download"></i> Download</a>
+                                    <a href="#" class="btn btn-info btn-sm" style="float:right" onclick="window.print()"><i class="fa fa-download"></i> Download</a>
                                     @*<a href="/User/TopUpList" class="btn btn-info btn-sm" style="float:right">Back</a>*@
                                 </div>
                             </div>
