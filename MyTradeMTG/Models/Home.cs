@@ -214,8 +214,10 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
                                       new SqlParameter("@FK_UserId", Fk_UserId),
                                       new SqlParameter("@ProfilePic", ProfilePic),
-                                      //new SqlParameter("@AadharNo", AdharNo),
-                                      //new SqlParameter("@PanNo", PanNo),
+                                      new SqlParameter("@FirstName", FirstName),
+                                      new SqlParameter("@LastName", LastName),
+                                      new SqlParameter("@MobileNo", MobileNo),
+                                      new SqlParameter("@Email", Email),
                                       new SqlParameter("@Address", Address),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);

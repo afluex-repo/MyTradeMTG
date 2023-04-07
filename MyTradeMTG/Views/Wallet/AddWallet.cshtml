@@ -5,8 +5,7 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
-<link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+
         @using (Html.BeginForm("AddWallet", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
         {
             <div class="content-body">
@@ -15,7 +14,7 @@
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Buy MTG Request</h4>
+                                    <h4 class="card-title">Buy MTG</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -267,14 +266,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
         <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
         <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
-<script src="~/plugins/flatpickr/flatpickr.js"></script>
-<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+
         <script>
 
-            var f3 = flatpickr(document.getElementById('DDChequeDate'),
-      {
-          dateFormat: 'd/m/Y'
-      });
             
             function ConvertMony() {
                 debugger;

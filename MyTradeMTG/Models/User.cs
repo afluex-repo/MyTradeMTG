@@ -104,7 +104,9 @@ namespace MyTradeMTG.Models
 
 
         public string Narration { get; set; }
-        
+        public string CurrencyName { get; set; }
+        public string CurrencySymbol { get; set; }
+        public string ISOcode { get; set; }
 
 
 
