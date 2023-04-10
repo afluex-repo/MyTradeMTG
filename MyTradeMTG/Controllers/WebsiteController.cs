@@ -49,6 +49,10 @@ namespace MyTradeMTG.Controllers
                             var pass = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
+
+
+                                Session["IsFill"] = ds.Tables[0].Rows[0]["IsFill"].ToString();
+
                                 //Session["PendingStatusLogin"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
                                 Session["FirmName"] = ds.Tables[0].Rows[0]["FirmName"].ToString();
                                 Session["IsFranchise"] = ds.Tables[0].Rows[0]["IsFranchise"].ToString();

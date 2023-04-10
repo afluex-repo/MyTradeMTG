@@ -23,7 +23,7 @@
                     <h4><span style="color:black;font-size:larger">@TempData["msg"]</span></h4>
                 </div>
                 <div class="modal-footer pt-0">
-                    <a href="/User/UserDashBoard" style="background-color:black" class="btn btn-dark btn-sm">Go to DashBoard</a>
+                    <a href="/User/UserDashBoard" style="background-color:black" class="btn btn-dark btn-sm">OK</a>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
                                         </span>
                                         <div class="row">
                                             <div class="col-md-11 mx-auto">
-                                                @if (Model.ProfilePic != "")
+                                                @if (Model.Address == null || Model.Address == "")
                                                 {
                                                     <div class="row">
                                                         <div class="col-sm-6">
@@ -179,6 +179,7 @@
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="FirstName">First Name</label>
+                                                                @*@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name", disabled = "disabled" })*@
                                                                 <input type="text" class="form-control mb-4" id="FirstName" placeholder="First Name" value="@Model.FirstName" disabled="disabled">
                                                             </div>
                                                         </div>
