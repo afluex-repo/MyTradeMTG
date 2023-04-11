@@ -5,10 +5,6 @@
 }
 
 <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
-@*<link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-    <link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />*@
 
 @using (Html.BeginForm("TopUp", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
@@ -238,7 +234,7 @@
     <script>
         $(document).ready(function () {
             debugger;
-            jQuery.noConflict();
+            
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
