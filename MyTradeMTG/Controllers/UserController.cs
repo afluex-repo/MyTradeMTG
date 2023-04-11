@@ -1013,6 +1013,10 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
+
+
+                        Session["IsFill"] = ds.Tables[0].Rows[0]["IsFill"].ToString();
+
                         TempData["msg"] = "KYC Details Updated Successfully";
                     }
                     else
@@ -1574,19 +1578,15 @@ namespace MyTradeMTG.Controllers
             #endregion
             return View(model);
         }
-        public ActionResult PayoutRequest()
-
+        public ActionResult PayoutRequest()    
         {
             string FormName = "";
             string Controller = "";
             User model = new User();
 
-           
-
-
+            Session["IsFill"] = Session["IsFill"].ToString();
             model.Country = Session["Country"].ToString();
-
-
+            
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
             //DataSet ds = model.GetPayoutBalance();
@@ -1630,6 +1630,7 @@ namespace MyTradeMTG.Controllers
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
             {
                 model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
+                //ViewBag.IsFill = ds1.Tables[1].Rows[0]["IsFill"].ToString();
             }
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[2].Rows.Count > 0)
             {
@@ -1653,6 +1654,7 @@ namespace MyTradeMTG.Controllers
             try
             {
                 model.AddedBy = Session["Pk_userId"].ToString();
+                Session["IsFill"] = Session["IsFill"].ToString();
                 DataSet ds = model.PayoutRequest();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

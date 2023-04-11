@@ -19,8 +19,8 @@
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h4>Top-Up</h4>
                                     @*<span class="text-danger" style="color:red;">
-                                        @TempData["msg"]
-                                    </span>*@
+                                            @TempData["msg"]
+                                        </span>*@
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,10 @@
     </div>
 }
 
-<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+@*<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>*@
 @*<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
 @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
@@ -244,93 +247,137 @@
         })
     </script>
 }
-@*@if (TempData["error"] != null)
-{
+    @*@if (TempData["error"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    debugger;
+                    jQuery.noConflict();
+                    swal({
+                        backdrop: true,
+                        allowOutsideClick: false,
+                        title: '@TempData["error"]',
+                        type: 'wrong',
+                        showCancelButton: 0,
+                        confirmButtonText: 'OK',
+                    })
+                })
+            </script>
+        }*@
+
+
+
+
+
+
+
+
+
     <script>
-        $(document).ready(function () {
-            debugger;
-            jQuery.noConflict();
-            swal({
-                backdrop: true,
-                allowOutsideClick: false,
-                title: '@TempData["error"]',
-                type: 'wrong',
-                showCancelButton: 0,
-                confirmButtonText: 'OK',
-            })
-        })
-    </script>
-}*@
-
-
-
-
-
-
-
-
-
-<script>
-    //$(document).ready(function () {
-    //    $("#PaymentType").val('Online');
-    //});
-    //$(function () {
-    //    var $j = jQuery.noConflict();
-    //    $("#TopUpDate").datepicker({
-    //        dateFormat: 'dd/mm/yy',
-    //    });
-    //    $("#TransactionDate").datepicker({
-    //        dateFormat: 'dd/mm/yy',
-    //    });
-    //});
-    //function getpaymentTypedetails() {
-    //    debugger;
-    //    if ($('#PaymentType').val() == 'Offline') {
-    //        $("#paymentmode").show();
-    //    }
-    //    else if ($('#PaymentType').val() == 'Online') {
-    //        $("#paymentmode").hide();
-    //        $("#divPaymentMode").hide();
-    //        $("#BankName").val('');
-    //        $("#BankBranch").val('');
-    //        $("#TransactionNo").val('');
-    //        $("#TransactionDate").val('');
-    //    }
-    //}
-    function isNumberKey(evt) {
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode != 46 && charCode > 31
-          && (charCode < 48 || charCode > 57))
-            return false;
-        return true;
-    }
-
-    function CheckAmount() {
-        debugger;
-        var Amount = $("#Amount").val();
-        var WalletBalance = $("#WalletAmount").val();
-        //alert($("#hdfMax").val());
-        if (Amount == "0") {
-            Snackbar.show({
-                text: "Amount should not be zero !!",
-                actionTextColor: '#fff',
-                backgroundColor: '#e7515a',
-                pos: 'top-right'
-            });
-            $("#Amount").addClass('errortext');
-            $('#Amount').focus();
-            $("#Amount").val('');
-            return false;
+        //$(document).ready(function () {
+        //    $("#PaymentType").val('Online');
+        //});
+        //$(function () {
+        //    var $j = jQuery.noConflict();
+        //    $("#TopUpDate").datepicker({
+        //        dateFormat: 'dd/mm/yy',
+        //    });
+        //    $("#TransactionDate").datepicker({
+        //        dateFormat: 'dd/mm/yy',
+        //    });
+        //});
+        //function getpaymentTypedetails() {
+        //    debugger;
+        //    if ($('#PaymentType').val() == 'Offline') {
+        //        $("#paymentmode").show();
+        //    }
+        //    else if ($('#PaymentType').val() == 'Online') {
+        //        $("#paymentmode").hide();
+        //        $("#divPaymentMode").hide();
+        //        $("#BankName").val('');
+        //        $("#BankBranch").val('');
+        //        $("#TransactionNo").val('');
+        //        $("#TransactionDate").val('');
+        //    }
+        //}
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
         }
-        else {
-            if (Amount != null && Amount != "" && Amount != "0") {
 
-                var inmultipleof = $("#spmul").text();
+        function CheckAmount() {
+            debugger;
+            var ActivationMTGToken = $("#ActivationMTGToken").val();
+            var Amount = $("#Amount").val();
+            var WalletBalance = $("#WalletAmount").val();
+            //alert($("#hdfMax").val());
+            if (Amount == "0") {
+                Snackbar.show({
+                    text: "Amount should not be zero !!",
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                $("#Amount").val('');
+                return false;
+            }
+            else {
 
-                if (parseInt(Amount) % parseInt(inmultipleof) == 0) {
-                    if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
+                ////////////////////////////////////////////////////////////////////////////////////////////////
+                if (Amount != null && Amount != "" && Amount != "0") {
+                    var inmultipleof = $("#spmul").text();
+                    //if (parseInt(Amount) % parseInt(inmultipleof) == 0) {
+
+                    if (parseInt(Amount)  % parseInt(inmultipleof) == 0) {
+                        if (parseInt(Amount) > parseInt($("#hdfMax").val())) {
+                            Snackbar.show({
+                                text: "MTG should not be greater than max MTG",
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a',
+                                pos: 'top-right'
+                            });
+                            $("#Amount").addClass('errortext');
+                            $('#Amount').focus();
+                            $("#Amount").val('');
+                            return false;
+                        }
+                        else
+
+                            if (parseInt(Amount) > parseInt(WalletBalance)) {
+                                Snackbar.show({
+                                    text: "Insufficient MTG Balance",
+                                    actionTextColor: '#fff',
+                                    backgroundColor: '#e7515a',
+                                    pos: 'top-right'
+                                });
+                                $("#Amount").addClass('errortext');
+                                $('#Amount').focus();
+                                $("#Amount").val('');
+                                return false;
+                            }
+                            else if (parseInt(Amount) < parseInt($("#hdfMin").val())) {
+                                Snackbar.show({
+                                    text: "MTG should not be less than min MTG",
+                                    actionTextColor: '#fff',
+                                    backgroundColor: '#e7515a',
+                                    pos: 'top-right'
+                                });
+                                $("#Amount").addClass('errortext');
+                                $('#Amount').focus();
+                                $("#Amount").val('');
+                                return false;
+                            }
+                            else {
+                            }
+                    }
+                    else {
                         Snackbar.show({
-                            text: "MTG should not be greater than max MTG",
+                            text: "Invalid MTG, MTG Should be in Multiple as required. ",
                             actionTextColor: '#fff',
                             backgroundColor: '#e7515a',
                             pos: 'top-right'
@@ -340,221 +387,180 @@
                         $("#Amount").val('');
                         return false;
                     }
-                    else
-
-                        if (parseInt(Amount) > parseInt(WalletBalance)) {
-                            Snackbar.show({
-                                text: "Insufficient MTG Balance",
-                                actionTextColor: '#fff',
-                                backgroundColor: '#e7515a',
-                                pos: 'top-right'
-                            });
-                            $("#Amount").addClass('errortext');
-                            $('#Amount').focus();
-                            $("#Amount").val('');
-                            return false;
-                        }
-                        else if (parseInt(Amount) < parseInt($("#hdfMin").val())) {
-                            Snackbar.show({
-                                text: "MTG should not be less than min MTG",
-                                actionTextColor: '#fff',
-                                backgroundColor: '#e7515a',
-                                pos: 'top-right'
-                            });
-                            $("#Amount").addClass('errortext');
-                            $('#Amount').focus();
-                            $("#Amount").val('');
-                            return false;
-                        }
-                        else {
-                        }
                 }
-                else {
-                    Snackbar.show({
-                        text: "Invalid MTG, MTG Should be in Multiple as required. ",
-                        actionTextColor: '#fff',
-                        backgroundColor: '#e7515a',
-                        pos: 'top-right'
-                    });
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    $("#Amount").val('');
-                    return false;
-                }
+                return true;
             }
-            return true;
-        }
-    }
-
-    function ValidateForm() {
-        debugger;
-        jQuery.noConflict();
-        $('#exampleModal').modal('hide');
-        $(".errortext").removeClass("errortext");
-        if ($('#PackageId').val() == '0') {
-            $("#PackageId").addClass('errortext');
-            $('#PackageId').focus();
-            return false;
-        }
-        else if ($('#Amount').val() == '') {
-            $("#Amount").addClass('errortext');
-            $('#Amount').focus();
-            return false;
-        }
-        else {
-            SetAmountandPackage();
-            return true;
         }
 
-    }
-    function SetAmountandPackage() {
-        debugger;
-        jQuery.noConflict();
-        var Amount = ($("#Amount").val());
-        var BasisOn = $("#BasisOn").text();
-        $('#exampleModal').modal('show');
-        $("#lblAmount").text($("#TotalAmount").val());
-        $("#lblLoginId").text($("#LoginId").val());
-        $("#lblTPS").text($("#PackageId :selected").text());
-        $("#lblAmountsssss").text(Amount);
-        $("#lblbasisons").text(BasisOn);
-    }
-    //function CheckPayMode() {
-    //    debugger;
-    //    if ($('#PaymentMode').val() != '1' && $('#PaymentMode').val() != "10") {
-    //        $('#lbltno').html('Transaction No.');
-    //        $('#lbltdate').html('Transaction Date');
-    //        $('#lblbank').html('Bank Name');
-    //        $("#divtrdate").show();
-    //        $("#divPaymentMode").show();
-    //        $("#divtransactiono").show();
-    //        $("#divbankname").show();
-    //        $("#divbankbranch").show();
-    //        $("#divQr").hide();
-    //        $("#BankName").attr("placeholder", "Bank Name");
-    //        $("#TransactionNo").attr("placeholder", "Transaction No.");
-    //        $("#TransactionDate").attr("placeholder", "Transaction Date");
-    //    }
-    //    else if ($('#PaymentMode').val() == "10") {
-    //        $('#lbltno').html('Transaction Id');
-    //        $('#lbltdate').html('Transaction Date');
-    //        $('#lblbank').html('UPI Id');
-    //        $("#BankName").val('');
-    //        $("#BankBranch").val('');
-    //        $("#divtrdate").show();
-    //        $("#divPaymentMode").show();
-    //        $("#divtransactiono").show();
-    //        $("#divbankname").show();
-    //        $("#divQr").show();
-    //        $("#divbankbranch").hide();
-    //        $("#BankName").attr("placeholder", "UPI Id");
-    //        $("#TransactionNo").attr("placeholder", "Transaction Id");
-    //        $("#TransactionDate").attr("placeholder", "Transaction Date");
-    //    }
-    //    else {
-    //        $("#divPaymentMode").hide();
-    //        $("#divtransactiono").hide();
-    //        $("#divbankname").hide();
-    //        $("#divbankbranch").hide();
-    //        $("#divtrdate").hide();
-    //        $("#divQr").hide();
-    //    }
-
-    //}
-
-    function GetNameDetails() {
-        debugger;
-        var LoginId = $('#LoginId').val();
-        $.ajax({
-            url: '/User/GetNameDetails', type: 'post', dataType: 'json',
-            data: { 'LoginId': LoginId },
-            success: function (data) {
-                if (data.Result == "yes") {
-                    $("#Fk_UserId").val(data.Fk_UserId);
-                    $("#Name").val(data.Name);
-                    $("#lblName").text($("#Name").val());
-                    $("#LoginId").removeClass('errortext');
-                    $("#Name").removeClass('errortext');
-                }
-                else if (data.Result == "no") {
-                    alert('Invailid LoginId');
-                    $("#LoginId").val('');
-                    $("#Name").val('');
-                    $("#LoginId").addClass('errortext');
-                    $("#Name").addClass('errortext');
-                    $('#LoginId').focus();
-                }
+        function ValidateForm() {
+            debugger;
+            jQuery.noConflict();
+            $('#exampleModal').modal('hide');
+            $(".errortext").removeClass("errortext");
+            if ($('#PackageId').val() == '0') {
+                $("#PackageId").addClass('errortext');
+                $('#PackageId').focus();
+                return false;
             }
-        });
-    }
+            else if ($('#Amount').val() == '') {
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                return false;
+            }
+            else {
+                SetAmountandPackage();
+                return true;
+            }
 
+        }
+        function SetAmountandPackage() {
+            debugger;
+            jQuery.noConflict();
+            var Amount = ($("#Amount").val());
+            var BasisOn = $("#BasisOn").text();
+            $('#exampleModal').modal('show');
+            $("#lblAmount").text($("#TotalAmount").val());
+            $("#lblLoginId").text($("#LoginId").val());
+            $("#lblTPS").text($("#PackageId :selected").text());
+            $("#lblAmountsssss").text(Amount);
+            $("#lblbasisons").text(BasisOn);
+        }
+        //function CheckPayMode() {
+        //    debugger;
+        //    if ($('#PaymentMode').val() != '1' && $('#PaymentMode').val() != "10") {
+        //        $('#lbltno').html('Transaction No.');
+        //        $('#lbltdate').html('Transaction Date');
+        //        $('#lblbank').html('Bank Name');
+        //        $("#divtrdate").show();
+        //        $("#divPaymentMode").show();
+        //        $("#divtransactiono").show();
+        //        $("#divbankname").show();
+        //        $("#divbankbranch").show();
+        //        $("#divQr").hide();
+        //        $("#BankName").attr("placeholder", "Bank Name");
+        //        $("#TransactionNo").attr("placeholder", "Transaction No.");
+        //        $("#TransactionDate").attr("placeholder", "Transaction Date");
+        //    }
+        //    else if ($('#PaymentMode').val() == "10") {
+        //        $('#lbltno').html('Transaction Id');
+        //        $('#lbltdate').html('Transaction Date');
+        //        $('#lblbank').html('UPI Id');
+        //        $("#BankName").val('');
+        //        $("#BankBranch").val('');
+        //        $("#divtrdate").show();
+        //        $("#divPaymentMode").show();
+        //        $("#divtransactiono").show();
+        //        $("#divbankname").show();
+        //        $("#divQr").show();
+        //        $("#divbankbranch").hide();
+        //        $("#BankName").attr("placeholder", "UPI Id");
+        //        $("#TransactionNo").attr("placeholder", "Transaction Id");
+        //        $("#TransactionDate").attr("placeholder", "Transaction Date");
+        //    }
+        //    else {
+        //        $("#divPaymentMode").hide();
+        //        $("#divtransactiono").hide();
+        //        $("#divbankname").hide();
+        //        $("#divbankbranch").hide();
+        //        $("#divtrdate").hide();
+        //        $("#divQr").hide();
+        //    }
 
-    function GetPackageDetails() {
-        debugger;
-        $.ajax({
-            url: '/User/GetPackageDetails', type: 'post', dataType: 'json',
-            data: { 'PackageId': $("#PackageId").val() },
-            success: function (data) {
-                debugger;
-                if (data.Result == "yes") {
-                    $("#Amount").val('');
-                    $("#spfrom").text(data.FromAmount);
-                    $("#spto").text(data.ToAmount);
-                    $("#spmul").text(data.InMultipleOf);
-                    $("#hdfMax").val(data.ToAmount);
-                    $("#hdfMin").val(data.FromAmount);
-                    $("#lblROI").text(data.ROIPercent);
-                    $("#ActivationMTGToken").val(data.ActivationMTGToken);
-                    $("#BasisOn").text(data.BasisOn);
+        //}
 
-                    var status = $("#Status").val();
-
-                    if (status == "1") {
-                        $("#ActivationMTGToken").val('0');
+        function GetNameDetails() {
+            debugger;
+            var LoginId = $('#LoginId').val();
+            $.ajax({
+                url: '/User/GetNameDetails', type: 'post', dataType: 'json',
+                data: { 'LoginId': LoginId },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        $("#Fk_UserId").val(data.Fk_UserId);
+                        $("#Name").val(data.Name);
+                        $("#lblName").text($("#Name").val());
+                        $("#LoginId").removeClass('errortext');
+                        $("#Name").removeClass('errortext');
                     }
+                    else if (data.Result == "no") {
+                        alert('Invailid LoginId');
+                        $("#LoginId").val('');
+                        $("#Name").val('');
+                        $("#LoginId").addClass('errortext');
+                        $("#Name").addClass('errortext');
+                        $('#LoginId').focus();
+                    }
+                }
+            });
+        }
 
+
+        function GetPackageDetails() {
+            debugger;
+            $.ajax({
+                url: '/User/GetPackageDetails', type: 'post', dataType: 'json',
+                data: { 'PackageId': $("#PackageId").val() },
+                success: function (data) {
+                    debugger;
+                    if (data.Result == "yes") {
+                        $("#Amount").val('');
+                        $("#spfrom").text(data.FromAmount);
+                        $("#spto").text(data.ToAmount);
+                        $("#spmul").text(data.InMultipleOf);
+                        $("#hdfMax").val(data.ToAmount);
+                        $("#hdfMin").val(data.FromAmount);
+                        $("#lblROI").text(data.ROIPercent);
+                        $("#ActivationMTGToken").val(data.ActivationMTGToken);
+                        $("#BasisOn").text(data.BasisOn);
+
+                        var status = $("#Status").val();
+
+                        if (status == "1") {
+                            $("#ActivationMTGToken").val('0');
+                        }
+
+                    }
+                    else {
+                        $("#PackageId").val('0')
+                    }
                 }
-                else {
-                    $("#PackageId").val('0')
-                }
-            }
-        });
+            });
+        }
+
+    </script>
+
+    @*@if (TempData["msg"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                swal({
+                    text: '@TempData["msg"]',
+                    title: 'Success',
+                    type: 'success',
+                    padding: '2em'
+                })
+            });
+        </script>
+    }*@
+    @if (TempData["error"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["error"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+            });
+        </script>
     }
 
-</script>
-
-@if (TempData["msg"] != null)
-{
     <script>
         $(document).ready(function () {
-            swal({
-                text: '@TempData["msg"]',
-                title: 'Success',
-                type: 'success',
-                padding: '2em'
-            })
-        });
-    </script>
-}
-@if (TempData["error"] != null)
-{
-    <script>
-        $(document).ready(function () {
-            Snackbar.show({
-                text: '@TempData["error"]',
-                actionTextColor: '#fff',
-                backgroundColor: '#e7515a',
-                pos: 'top-right'
-            });
-        });
-    </script>
-}
-
-<script>
-    $(document).ready(function () {
-        debugger;
-        if ($("#hdf").val() == "InActive") {
-            @*jQuery.noConflict();
+            debugger;
+            if ($("#hdf").val() == "InActive") {
+                @*jQuery.noConflict();
                                             $("#divtop").hide();
                                             swal({
                                                 backdrop: true,
@@ -570,114 +576,105 @@
                                                 }
                                             })*@
 
-            //window.alert("Your KYC is not updated. Please update your KYC first.")
-            //window.location = '/User/BankDetailsUpdate';
-        }
-        else {
-            //die();
-            $("#divtop").show();
-        }
-    })
-</script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script>
-    function ChangePackagetype() {
-        debugger;
-        $("#divload").css({ 'display': '' });
-        var PackageTypeId = $('#PackageTypeId').val();
-        var LoginId = $('#LoginId').val();
-        $.ajax({
-            url: '/User/GetProductList', type: 'post', dataType: 'json',
-            //GetProductListForTopUp
-            data: { 'PackageTypeId': PackageTypeId, 'LoginId': LoginId },
-            success: function (data) {
-                $("#Status").val(data.Status);
-                $("#divload").css({ 'display': 'none' });
-                $("#PackageId").html(""); // clear before appending new list
-                $("#PackageId").empty();
-                $("#PackageId").append(
-                      $('<option></option>').val(0).html('Select Package Type'));
-                $.each(data.ddlProduct, function (index, PackagetypeCount) {
-                    $("#PackageId").append(
-                          $('<option></option>').val(PackagetypeCount.Value).html(PackagetypeCount.Text));
-                });
-
+                //window.alert("Your KYC is not updated. Please update your KYC first.")
+                //window.location = '/User/BankDetailsUpdate';
             }
-
-        });
-    }
-
-    var input = $('[name="ActivationMTGToken"],[name="Amount"]'),
-    input1 = $('[name="ActivationMTGToken"]'),
-    input2 = $('[name="Amount"]'),
-    input3 = $('[name="TotalAmount"]');
-
-    //var TotalAmountssss=  $("#TotalAmountssss").val($("#TotalAmount").val())
-    input.change(function () {
-        debugger;
-        var val1 = (isNaN(parseFloat(input1.val()))) ? 0 : parseFloat(input1.val());
-        var val2 = (isNaN(parseFloat(input2.val()))) ? 0 : parseFloat(input2.val());
-        input3.val(val1 + val2);
-
-        var TotalAmount = $("#TotalAmount").val();
-        var AmountOfTotal = $("#AmountOfTotal").val(TotalAmount);
-        ConvertMony();
-    });
-</script>
-<script>
-    function ConvertMony() {
-        debugger;
-        if ($("#Countryid").val() == "India") {
-            $("#dvinrupees").show();
-            $("#divusdoller").hide();
-        }
-        else {
-            $("#divusdoller").show();
-            $("#InUsDoller").text($("#AmountOfTotal").val() + "$");
-            $("#dvinrupees").hide();
-        }
-        debugger;
-
-        //const convert = document.getElementById("convert");
-        const result = document.getElementById("result");
-        const from = document.getElementById("from");
-        const to = document.getElementById("to");
-        //const amount = document.getElementById("TotalAmountssss");
-
-        const amount = document.getElementById("AmountOfTotal");
-
-        const IndianValue = document.getElementById("IndianValue");
-        //var TodaysCurrency = $('#IndianValue').val();
-        let fromCurrency = from.value;
-        let toCurrency = to.value;
-        let amt = amount.value;
-        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
-        .then(response => {
-            return response.json();
+            else {
+                //die();
+                $("#divtop").show();
+            }
         })
+    </script>
 
-        .then(data => {
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>*@
+    <script>
+        function ChangePackagetype() {
             debugger;
-            let rate = data.rates[toCurrency];
-            let total = rate * amt;
+            $("#divload").css({ 'display': '' });
+            var PackageTypeId = $('#PackageTypeId').val();
+            var LoginId = $('#LoginId').val();
+            $.ajax({
+                url: '/User/GetProductList', type: 'post', dataType: 'json',
+                //GetProductListForTopUp
+                data: { 'PackageTypeId': PackageTypeId, 'LoginId': LoginId },
+                success: function (data) {
+                    $("#Status").val(data.Status);
+                    $("#divload").css({ 'display': 'none' });
+                    $("#PackageId").html(""); // clear before appending new list
+                    $("#PackageId").empty();
+                    $("#PackageId").append(
+                          $('<option></option>').val(0).html('Select Package Type'));
+                    $.each(data.ddlProduct, function (index, PackagetypeCount) {
+                        $("#PackageId").append(
+                              $('<option></option>').val(PackagetypeCount.Value).html(PackagetypeCount.Text));
+                    });
 
-            //result.innerHTML = `${amt} ${fromCurrency} = ${total}
-            result.innerHTML = `${amt}$  = ${total}
+                }
+
+            });
+        }
+
+        var input = $('[name="ActivationMTGToken"],[name="Amount"]'),
+        input1 = $('[name="ActivationMTGToken"]'),
+        input2 = $('[name="Amount"]'),
+        input3 = $('[name="TotalAmount"]');
+
+        //var TotalAmountssss=  $("#TotalAmountssss").val($("#TotalAmount").val())
+        input.change(function () {
+            debugger;
+            var val1 = (isNaN(parseFloat(input1.val()))) ? 0 : parseFloat(input1.val());
+            var val2 = (isNaN(parseFloat(input2.val()))) ? 0 : parseFloat(input2.val());
+            input3.val(val1 + val2);
+
+            var TotalAmount = $("#TotalAmount").val();
+            var AmountOfTotal = $("#AmountOfTotal").val(TotalAmount);
+            ConvertMony();
+        });
+    </script>
+    <script>
+        function ConvertMony() {
+            debugger;
+            if ($("#Countryid").val() == "India") {
+                $("#dvinrupees").show();
+                $("#divusdoller").hide();
+            }
+            else {
+                $("#divusdoller").show();
+                $("#InUsDoller").text($("#AmountOfTotal").val() + "$");
+                $("#dvinrupees").hide();
+            }
+            debugger;
+
+            //const convert = document.getElementById("convert");
+            const result = document.getElementById("result");
+            const from = document.getElementById("from");
+            const to = document.getElementById("to");
+            //const amount = document.getElementById("TotalAmountssss");
+
+            const amount = document.getElementById("AmountOfTotal");
+
+            const IndianValue = document.getElementById("IndianValue");
+            //var TodaysCurrency = $('#IndianValue').val();
+            let fromCurrency = from.value;
+            let toCurrency = to.value;
+            let amt = amount.value;
+            fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+            .then(response => {
+                return response.json();
+            })
+
+            .then(data => {
+                debugger;
+                let rate = data.rates[toCurrency];
+                let total = rate * amt;
+
+                //result.innerHTML = `${amt} ${fromCurrency} = ${total}
+                result.innerHTML = `${amt}$  = ${total}
 
             ${toCurrency}`;
-            //IndianValue.innerHTML = total;
-            $("#IndianValue").val(total);
+                //IndianValue.innerHTML = total;
+                $("#IndianValue").val(total);
 
-        });
-    }
-</script>
-
-
-
-
-
-
-
-
-
+            });
+        }
+    </script>
