@@ -30,10 +30,7 @@
                             @*<p style="color:red">Note : 2% Procecing Charges And 5% TDS Charge</p><br />*@
                             <p style="color:red">Note : 10% Processing Charges</p><br />
                             <div class="row">
-                                @*<input type="hidden" id="IsFill123" value="@Model.IsFill">*@
-
-                                @*<input type="hidden" id="IsFill123" value="@Session["IsFill"]">*@
-
+                               
                                 <input type="hidden" id="IsFill123" value="@Session["IsFill"]">
 
 
@@ -88,6 +85,7 @@
                                         <input type="hidden" id="IndianValue" name="IndianValue" />
                                     </div>
                                 </div>
+
                                 @*-----Convert USD TO INR Link Start-------*@
                                 <div style="display:none">
                                     <label>From:</label>
@@ -101,6 +99,7 @@
                                 </div>
                                 @*-----Convert USD TO INR Link End-------*@
                                 @*///////////End///////////////*@
+
 
 
                                 <div class="col-lg-3 col-md-3" style="margin-top:25px">
@@ -172,8 +171,6 @@
                                                         <td>@Item.IFSCCode</td>
                                                         <td>@Item.AccountNo</td>
                                                         <td>@Item.Status</td>
-
-
                                                     </tr>
                                                     i++;
                                                 }
@@ -216,6 +213,8 @@
 
         $("#perAmt").text(parseFloat(newmtgAmt));
 
+
+        
         //if ($("#Countryid").val() == "India") {
         //    $("#dvinrupees").show();
         //    $("#divusdoller").hide();
@@ -302,6 +301,15 @@
         //    $('#Amount').val('');
         //    return false;
         //}
+        var PayoutBalnace = $("#PayoutBalance").val();
+        var MTGAmount = parseFloat($("#Amount").val()) + parseFloat($("#perAmt").text());
+        if (PayoutBalnace <= MTGAmount) {
+            alert("Insufficent Balance !!")
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            $("#Amount").val('');
+            return false;
+        }
         return true;
     }
 
@@ -364,6 +372,7 @@
         var totchrg = Amt + mtgAmt
         $("#lbld").text(parseFloat(totchrg));
 
+       
     }
 
 
