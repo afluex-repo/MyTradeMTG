@@ -13,19 +13,15 @@
     <link rel="icon" type="image/x-icon" href="~/assets/img/favicon.ico" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/plugins.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/pages/error/style-maintanence.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/MyTradeWebsite1/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite1/assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite1/assets/css/style.css">
+    <link href="/UserPanel/css/style.css" rel="stylesheet">
     <!-- END GLOBAL MANDATORY STYLES -->
     <style>
-        .card {
-            background-image: linear-gradient(#adbaed, #e1e3ed);
-            padding: 40px 20px;
-            width: 500px;
-        }
-
         .card-title {
             font-weight: 600;
+            font-size:18px;
         }
 
         .maintanence-hero-img img {
@@ -58,54 +54,65 @@
             align-items: center;
             margin-top: 8px;
         }
-        .cred-detail{
-            color: #910f10;
+
+        .cred-detail {
+            color: #fbd363;
         }
         h1.thank {
-    font-weight: 600;
-    font-size: 50px;
-}
+            font-weight: 600;
+            font-size: 50px;
+        }
     </style>
 </head>
-<body class="maintanence text-center">
+<body class="vh-100 demo-wrap">
+    <div class="authincation h-100 demo-content">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-8">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <div class="text-center mb-3">
+                                        <a href="/Home/index">
+                                            <img src="~/UserPanel/images/logo with bg.gif" class="img-fluid" styl="width:12rem" />
+                                        </a>
+                                    </div>
+                                            <h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
+                                            <h6 class="card-title text-white text-center mt-4">
+                                                For Your Registration. Your Details are as Below <br />
+                                                <span class="credential"><span class="cred-head">Login ID: </span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
+                                                <span class="credential"><span class="cred-head">Password: </span> <span class="cred-detail">@Session["Password"]</span></span>
 
-    <div class="container-fluid maintanence-content">
+                                            </h6>
+                                            <div class="d-flex justify-content-around mt-5">
+                                                @*<div class="field-wrapper">
+                                                    <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                                        <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
+                                                        <span style="white-space: nowrap">Go To Dashboard</span>
+                                                    </a>
+                                                </div>*@
 
-        <div class="card">
-            <div class="maintanence-hero-img">
-                <img alt="logo" src="~/assets/img/tradelogo.png">
-            </div>
-            <div class="card-body my-2">
-                <h1 class="thank">Thank You @Session["DisplayName"]</h1>
-                <h6 class="card-title my-2">For Your Registration. Your Details are as Below <br />
-                    <span class="credential"><span class="cred-head">Login ID:</span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
-                    <span class="credential"><span class="cred-head">Password:</span> <span class="cred-detail">@Session["Password"]</span></span>
-                
-                </h6>
-                <div class="d-flex justify-content-around mt-5">
-                    <div class="field-wrapper">
-                        <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
-                            <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
-                            <span style="white-space: nowrap">Go To Dashboard</span>
-                        </a>
-                    </div>
-
-                    <div class="field-wrapper">
-                        <a href="/Home/Registration" target="_blank" class="btn btn-info foractivation-btn py-2">
-                            <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
-                            <span style="white-space: nowrap">Add New</span>
-                        </a>
+                                                <div class="field-wrapper">
+                                                    <a href="/Website/Index" target="_blank" class="btn btn-info foractivation-btn py-2">
+                                                        <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                                                        <span style="white-space: nowrap">Add New</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
-    <script src="~/bootstrap/js/popper.min.js"></script>
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
+                            <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+                            <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+                            <script src="~/bootstrap/js/popper.min.js"></script>
+                            <script src="~/bootstrap/js/bootstrap.min.js"></script>
+                            <!-- END GLOBAL MANDATORY SCRIPTS -->
 </body>
 
 </html>

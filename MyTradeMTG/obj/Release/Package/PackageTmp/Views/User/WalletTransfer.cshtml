@@ -5,6 +5,8 @@
 }
 <link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
 
+
+
 @using (Html.BeginForm("WalletTransfer", "User", FormMethod.Post, new
 { /*@id = "form1",*/ @onSubmit = "if(!confirm('Are You Sure? You want to Transfer Your MTG Token To Below Contact Address Id')){return false;}", enctype = "multipart/form-data" }))
 {
@@ -15,7 +17,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Direct Transfer</h4>
+                            <h4 class="card-title">Quick Send MTG</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -23,7 +25,7 @@
                                     <div class="col-md-12">
                                         <p class="mb-1" style="color:white;">@TempData["wallettransfer"]</p>
                                         <br />
-                                        <label style="color:red">MTG Token/USDT Wallet Balance: @ViewBag.WalletBalance</label>
+                                        <label style="color:red">MTG /USDT Wallet Balance: @ViewBag.WalletBalance</label>
 
                                     </div>
                                 </div>
@@ -46,8 +48,8 @@
                                 <div class="col-xl-3 mb-3">
                                     <div class="example">
                                         <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
-                                        <p class="mb-1"> MTG Token/USDT<span style="color: red">*</span></p>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return CheckAmount();" })
+                                        <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return CheckAmount();" })
                                         @*<input id="SumTransferandAmount" name="SumTransferandAmount" readonly class="form-control" style="background:none;border:none;font-size:x-small" />*@
                                     </div>
                                 </div>
@@ -64,7 +66,7 @@
 
                             </div>
 
-                            <div class="=row">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <input class="btn btn-success pull-left" type="submit" value="Transfer" id="btnTransfer" name="btnTransfer" onclick="return validateform();" />
                                 </div>
@@ -73,6 +75,54 @@
 
                     </div>
                 </div>
+
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Quick Send MTG List</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive mt-4">
+                                    <table class="table table-bordered w-100 mb-0" id="html5-extension" data-page-length='20'>
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Date</th>
+                                                <th>Transfer To </th>
+                                                <th>MTG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.QuickSendMTGList != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var Item in Model.QuickSendMTGList)
+                                                    {
+                                                        <tr class="text-left">
+                                                            <td>
+                                                                @i
+                                                            </td>
+                                                            <td>@Item.TransferDate</td>
+                                                            <td>@Item.TransfertoName</td>
+                                                            <td>@Item.MTG</td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -87,7 +137,44 @@
 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
 
-<script>
+@if (TempData["wallettransfer"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Transferred  successfully !!',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
+    @*@if (TempData["error"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    debugger;
+                    jQuery.noConflict();
+                    swal({
+                        backdrop: true,
+                        allowOutsideClick: false,
+                        title: 'Warning!',
+                        text: '@ViewBag.Reason',
+                        type: 'warning',
+                        showCancelButton: 0,
+                        confirmButtonText: 'OK',
+                    })
+                })
+            </script>
+        }*@
+
+
+    <script>
 
         function CheckAmount() {
             debugger;
@@ -96,7 +183,7 @@
 
             var MemberTransferCharge = parseFloat($("#MemberTransferCharge").val());
 
-            var Percent = Amount * parseFloat(MemberTransferCharge/ 100);
+            var Percent = Amount * parseFloat(MemberTransferCharge / 100);
             var PercentValues = parseFloat(Percent);
             var TotalSumValues = Amount + PercentValues;
             //alert(sum);
@@ -110,8 +197,7 @@
             else if (TotalSumValues <= WalletAmount) {
                 //alert("Right");
             }
-            else
-            {
+            else {
                 //alert("Enter");
                 $("#Amount").addClass('errortext');
                 $('#Amount').focus();
@@ -132,111 +218,110 @@
 
         }
 
-    function GetNameDetailsforUser() {
-        debugger;
-        var LoginId = $('#LoginId').val();
-        $.ajax({
-            url: '/User/GetNameDetailsforUser', type: 'post', dataType: 'json',
-            data: { 'LoginId': LoginId },
-            success: function (data) {
-                if (data.Result == "yes") {
-                    $("#Fk_UserId").val(data.Fk_UserId);
-                    $("#Name").val(data.Name);
-                    $("#Franchise").val(data.Franchise);
-                    $("#LoginId").removeClass('errortext');
-                    $("#Name").removeClass('errortext');
+        function GetNameDetailsforUser() {
+            debugger;
+            var LoginId = $('#LoginId').val();
+            $.ajax({
+                url: '/User/GetNameDetailsforUser', type: 'post', dataType: 'json',
+                data: { 'LoginId': LoginId },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        $("#Fk_UserId").val(data.Fk_UserId);
+                        $("#Name").val(data.Name);
+                        $("#Franchise").val(data.Franchise);
+                        $("#LoginId").removeClass('errortext');
+                        $("#Name").removeClass('errortext');
+                    }
+                    var Franchise = $("#Franchise").val();
+                    if (Franchise == "1") {
+                        alert('Contact  Address Id Should not Franchiese');
+                        $("#LoginId").val('');
+                        $("#Name").val('');
+                        $("#Franchise").val('');
+                        $("#LoginId").addClass('errortext');
+                        $("#Name").addClass('errortext');
+                        $('#LoginId').focus();
+                    }
+                    else if (data.Result == "no") {
+                        alert('Invailid Contact Address Id');
+                        $("#LoginId").val('');
+                        $("#Name").val('');
+                        $("#Franchise").val('');
+                        $("#LoginId").addClass('errortext');
+                        $("#Name").addClass('errortext');
+                        $('#LoginId').focus();
+                    }
                 }
-                var Franchise = $("#Franchise").val();
-                if (Franchise == "1") {
-                    alert('Contact  Address Id Should not Franchiese');
-                    $("#LoginId").val('');
-                    $("#Name").val('');
-                    $("#Franchise").val('');
-                    $("#LoginId").addClass('errortext');
-                    $("#Name").addClass('errortext');
-                    $('#LoginId').focus();
-                }
-                else if (data.Result == "no" ) {
-                    alert('Invailid Contact Address Id');
-                    $("#LoginId").val('');
-                    $("#Name").val('');
-                    $("#Franchise").val('');
-                    $("#LoginId").addClass('errortext');
-                    $("#Name").addClass('errortext');
-                    $('#LoginId').focus();
-                }
+
+            });
+        }
+
+        function validateform() {
+            debugger;
+            $(".errortext").removeClass("errortext");
+            if ($('#LoginId').val() == '') {
+                $("#LoginId").addClass('errortext');
+                $('#LoginId').focus();
+                return false;
             }
+            if ($('#Amount').val() == '') {
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                return false;
+            }
+            else {
 
-        });
-    }
-
-    function validateform() {
-        debugger;
-        $(".errortext").removeClass("errortext");
-        if ($('#LoginId').val() == '') {
-            $("#LoginId").addClass('errortext');
-            $('#LoginId').focus();
-            return false;
+            }
+            return true;
         }
-        if ($('#Amount').val() == '') {
-            $("#Amount").addClass('errortext');
-            $('#Amount').focus();
-            return false;
+
+
+        function isNumberOrDecimal(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
         }
-        else {
 
-        }
-        return true;
-    }
+    </script>
+    <script>
 
-
-    function isNumberOrDecimal(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode != 46 && charCode > 31
-          && (charCode < 48 || charCode > 57))
-            return false;
-
-        return true;
-    }
-
-</script>
-<script>
-
-</script>
-<script>
-    debugger;
-    //Percentage of DirectTransferCharge + Entered Amount
-    var input = $('[name="MemberTransferCharge"],[name="Amount"]'),
-    input1 = $('[name="MemberTransferCharge"]'),
-    input2 = $('[name="Amount"]'),
-    input3 = $('[name="TransferCharge"]');
-
-    input.change(function () {
+    </script>
+    <script>
         debugger;
-        var val1 = isNaN(parseFloat(input1.val()).toFixed(2)) ? 0 : parseFloat(input1.val());
-        var val2 = isNaN(parseFloat(input2.val()).toFixed(2)) ? 0 : parseFloat(input2.val());
-        input3.val(parseFloat(val2.toFixed(2) * (val1.toFixed(2) / parseFloat(100).toFixed(2))).toFixed(2));
-    });
-
-</script>
-@*<script>
-        debugger;
-        var input = $('[name="TransferCharge"],[name="Amount"]'),
-       input3 = $('[name="TransferCharge"]'),
-       input4 = $('[name="Amount"]'),
-        input5 = $('[name="SumTransferandAmount"]');
+        //Percentage of DirectTransferCharge + Entered Amount
+        var input = $('[name="MemberTransferCharge"],[name="Amount"]'),
+        input1 = $('[name="MemberTransferCharge"]'),
+        input2 = $('[name="Amount"]'),
+        input3 = $('[name="TransferCharge"]');
 
         input.change(function () {
             debugger;
-            var val3 = isNaN(parseFloat(input3.val()).toFixed(2)) ? 0 : parseFloat(input3.val());
-            var val4 = isNaN(parseFloat(input4.val()).toFixed(2)) ? 0 : parseFloat(input4.val());
-            input5.val(parseFloat(val3).toFixed(2) + parseFloat(val4).toFixed(2));
+            var val1 = isNaN(parseFloat(input1.val()).toFixed(2)) ? 0 : parseFloat(input1.val());
+            var val2 = isNaN(parseFloat(input2.val()).toFixed(2)) ? 0 : parseFloat(input2.val());
+            input3.val(parseFloat(val2.toFixed(2) * (val1.toFixed(2) / parseFloat(100).toFixed(2))).toFixed(2));
         });
-    </script>*@
-<style>
-    .errortext {
-        border: 1px solid red !important;
-        background-color: #fff0f0 !important;
-    }
-</style>
 
+    </script>
+    @*<script>
+            debugger;
+            var input = $('[name="TransferCharge"],[name="Amount"]'),
+           input3 = $('[name="TransferCharge"]'),
+           input4 = $('[name="Amount"]'),
+            input5 = $('[name="SumTransferandAmount"]');
+
+            input.change(function () {
+                debugger;
+                var val3 = isNaN(parseFloat(input3.val()).toFixed(2)) ? 0 : parseFloat(input3.val());
+                var val4 = isNaN(parseFloat(input4.val()).toFixed(2)) ? 0 : parseFloat(input4.val());
+                input5.val(parseFloat(val3).toFixed(2) + parseFloat(val4).toFixed(2));
+            });
+        </script>*@
+    <style>
+        .errortext {
+            border: 1px solid red !important;
+            background-color: #fff0f0 !important;
+        }
+    </style>

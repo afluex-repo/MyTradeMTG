@@ -34,7 +34,7 @@ function getUrlParams(dParam)
 	
 	dezSettingsOptions = {
 		typography: "poppins",
-			version: "light",
+			version: "dark",
 			layout: "vertical",
 			primary: "color_1",
 			headerBg: "color_1",

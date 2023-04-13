@@ -7,163 +7,270 @@
 
 <link rel="stylesheet" type="text/css" href="~/plugins/dropify/dropify.min.css">
 <link href="~/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
-<div class="content-body">
-    <div class="container-fluid">
-    <div class="layout-px-spacing">
-        <div class="account-settings-container">
-            <div class="account-content">
-                <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing" id="divProfile">
-                            <form id="general-info" class="section general-info" action="/User/ViewProfile" method="Post" enctype="multipart/form-data">
-                                <div class="info">
-                                    <h6 class="">Update Profile</h6>
-                                    <br />
-                                    <p style="color:#4cff00;">@TempData["msg"]</p>
-                                    <div class="row">
-                                        <div class="col-xl-2 col-lg-12 col-md-4">
-                                            <div class="upload mt-4 pr-md-4">
-                                                @if (Model.ProfilePic != "")
+
+@if (TempData["msg"] !=null)
+{
+    <div class="modal fade md" id="myModalProfile" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <!-- Modal content-->
+            <div class="modal-content" style="background-color:#c9a32e;">
+                <div class="modal-header" style="border:none">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body py-0 mt-3" style="color: black">
+                    <h4><span style="color:black;font-size:larger">@TempData["msg"]</span></h4>
+                </div>
+                <div class="modal-footer pt-0">
+                    <a href="/User/UserDashBoard" style="background-color:black" class="btn btn-dark btn-sm">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        $("#myModalProfile").modal('show');
+    });
+</script>
+<script>
+    $('.close').click(function () {
+        window.location.href = '@Url.Action("UserDashBoard", "User")';
+
+    })
+</script>
+@using (Html.BeginForm("ViewProfile", "User", FormMethod.Post, new { @id = "form", @enctype = "multipart/form-data" }))
+{
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="layout-px-spacing">
+                <div class="account-settings-container">
+                    <div class="account-content">
+                        <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing" id="divProfile">
+                                    <div id="general-info" class="section general-info" >
+                                    <div class="info">
+                                        <h6 class="">Update Profile</h6>
+                                        <br />
+                                        @*<p style="color:#4cff00;">@TempData["msg"]</p>*@
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-12 col-md-4">
+                                                <div class="upload mt-4 pr-md-4">
+                                                    @if (Model.ProfilePic != "")
+                                                    {
+                                                        <input type="file" id="postedFile" class="dropify" onchange="readURL(this)" data-default-file="@Model.ProfilePic" data-max-file-size="2M" name="postedFile" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="file" id="postedFile" class="dropify" onchange="readURL(this)" data-default-file="~/assets/img/usericon.jpg" data-max-file-size="2M" name="postedFile" />
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+                                                <div class="row">
+                                                    @if (Model.Address == null || Model.Address == "")
+                                                    {
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="Address">Address <span style="color:red;">* </span> </label>
+                                                                <input type="hidden" id="hdfAddress" value="@Model.Address" />
+                                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <br />
+                                                            <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Update" onclick="return DisableAddress();" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                    <div id="contact" class="section contact">
+                                    <div class="info">
+                                        <h5 class="">View Profile</h5><span class="text-danger text-left">
+                                            @TempData["UserProfile"]
+
+                                        </span>
+                                        <div class="row">
+                                            <div class="col-md-11 mx-auto">
+                                                @if (Model.Address == null || Model.Address == "")
                                                 {
-                                                    <input type="file" id="postedFile" class="dropify" onchange="readURL(this)" data-default-file="@Model.ProfilePic" data-max-file-size="2M" name="postedFile" />
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="SponosorId">Sponosor Id</label>
+                                                                <input type="text" class="form-control mb-4" id="SponosorId" placeholder="Sponsor Id" value="@Model.SponsorId" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="SponosorName">Sponsor Name</label>
+                                                                <input type="text" class="form-control mb-4" id="SponosorName" placeholder="Sponsor Name" value="@Model.SponsorName" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="FirstName">First Name</label>
+                                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                                                                @*<input type="text" class="form-control mb-4" id="FirstName" placeholder="First Name" value="@Model.FirstName" >*@
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastName">Last Name</label>
+                                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                                @*<input type="text" class="form-control mb-4" id="LastName" placeholder="Last Name" value="@Model.LastName">*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        @*<div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="FirstName">Gender</label>
+                                                                    <input type="hidden" id="hdf" value="@Model.Gender">
+                                                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control", @disabled = "disabled" })
+                                                                </div>
+                                                            </div>*@
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="phone">Mobile No</label>
+                                                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
+                                                                @*<input type="text" class="form-control mb-4" id="MobileNo" placeholder="Write your phone number here" value="@Model.MobileNo">*@
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="email">Email</label>
+                                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                                @*<input type="text" class="form-control mb-4" id="Email" placeholder="Email" value="@Model.Email" >*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 }
                                                 else
                                                 {
-                                                    <input type="file" id="postedFile" class="dropify" onchange="readURL(this)" data-default-file="~/assets/img/usericon.jpg" data-max-file-size="2M" name="postedFile" />
-                                                }
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
-                                            <div class="row">
-                                                @if (Model.Address == null || Model.Address == "")
-                                                {
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="Address">Address </label>
-                                                            <input type="hidden" id="hdfAddress" value="@Model.Address" />
-                                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="SponosorId">Sponosor Id</label>
+                                                                <input type="text" class="form-control mb-4" id="SponosorId" placeholder="Sponsor Id" value="@Model.SponsorId" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="SponosorName">Sponsor Name</label>
+                                                                <input type="text" class="form-control mb-4" id="SponosorName" placeholder="Sponsor Name" value="@Model.SponsorName" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="FirstName">First Name</label>
+                                                                @*@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name", disabled = "disabled" })*@
+                                                                <input type="text" class="form-control mb-4" id="FirstName" placeholder="First Name" value="@Model.FirstName" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="LastName">Last Name</label>
+                                                                <input type="text" class="form-control mb-4" id="LastName" placeholder="Last Name" value="@Model.LastName" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        @*<div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="FirstName">Gender</label>
+                                                                    <input type="hidden" id="hdf" value="@Model.Gender">
+                                                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control", @disabled = "disabled" })
+                                                                </div>
+                                                            </div>*@
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="phone">Mobile No</label>
+                                                                <input type="text" class="form-control mb-4" id="MobileNo" placeholder="Write your phone number here" value="@Model.MobileNo" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="email">Email</label>
+                                                                <input type="text" class="form-control mb-4" id="Email" placeholder="Email" value="@Model.Email" disabled="disabled">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 }
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <br />
-                                                        <input class="btn btn-success" name="btn_Pin" id="btn_Pin" type="submit" value="Update" onclick="return DisableAddress();" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                            <form id="contact" class="section contact">
-                                <div class="info">
-                                    <h5 class="">View Profile</h5><span class="text-danger text-left">
-                                        @TempData["UserProfile"]
-                                    
-                                    </span>
-                                    <div class="row">
-                                        <div class="col-md-11 mx-auto">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="SponosorId">Sponosor Id</label>
-                                                        <input type="text" class="form-control mb-4" id="SponosorId" placeholder="Sponsor Id" value="@Model.SponsorId" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="SponosorName">Sponsor Name</label>
-                                                        <input type="text" class="form-control mb-4" id="SponosorName" placeholder="Sponsor Name" value="@Model.SponsorName" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="FirstName">First Name</label>
-                                                        <input type="text" class="form-control mb-4" id="FirstName" placeholder="First Name" value="@Model.FirstName" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="LastName">Last Name</label>
-                                                        <input type="text" class="form-control mb-4" id="LastName" placeholder="Last Name" value="@Model.LastName" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="FirstName">Gender</label>
-                                                        <input type="hidden" id="hdf" value="@Model.Gender">
-                                                        @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.Gender, "Value", "Text"), "-Select-", new { @class = "form-control", @disabled = "disabled" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="phone">Mobile No</label>
-                                                        <input type="text" class="form-control mb-4" id="phone" placeholder="Write your phone number here" value="@Model.MobileNo" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="email">Email</label>
-                                                        <input type="text" class="form-control mb-4" id="email" placeholder="Email" value="@Model.Email" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="email">Country</label>
-                                                        <input type="text" class="form-control mb-4" id="Country" placeholder="Country" value="@Model.Country" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                                @*<div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="country">Pin Code</label>
-                                                        <input type="text" class="form-control mb-4" id="email" placeholder="Pin Code" value="@Model.PinCode" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="address">State</label>
-                                                        <input type="text" class="form-control mb-4" id="address" placeholder="State" value="@Model.State" disabled="disabled">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="location">City</label>
-                                                        <input type="text" class="form-control mb-4" id="location" placeholder="City" value="@Model.City" disabled="disabled">
-                                                    </div>
-                                                </div>*@
-                                                @if (Model.Address != null && Model.Address != "")
-                                                {
-                                                    <div class="col-md-12" id="addr">
-                                                        <div class="form-group">
-                                                            <label for="Address">Address</label>
-                                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", disabled = "disabled" })
+                                                <div class="row">
+
+
+                                                    @*<div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="email">Country</label>
+                                                                <input type="text" class="form-control mb-4" id="Country" placeholder="Country" value="@Model.Country" disabled="disabled">
+                                                            </div>
+                                                        </div>*@
+                                                    @*<div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="country">Pin Code</label>
+                                                                <input type="text" class="form-control mb-4" id="email" placeholder="Pin Code" value="@Model.PinCode" disabled="disabled">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                }
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="address">State</label>
+                                                                <input type="text" class="form-control mb-4" id="address" placeholder="State" value="@Model.State" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="location">City</label>
+                                                                <input type="text" class="form-control mb-4" id="location" placeholder="City" value="@Model.City" disabled="disabled">
+                                                            </div>
+                                                        </div>*@
+                                                    @if (Model.Address != null && Model.Address != "")
+                                                    {
+                                                        <div class="col-md-6" id="addr">
+                                                            <div class="form-group">
+                                                                <label>Contact Address</label>
+                                                                <input type="text" class="form-control mb-4" id="CustomerId" placeholder="Email" value="@Model.CustomerId" disabled="disabled">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" id="addr">
+                                                            <div class="form-group">
+                                                                <label for="Address">Address</label>
+                                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", disabled = "disabled" })
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
+                                        @*<a class="btn btn-primary" href="javascript:void(0)" onclick="OpenProfile();">Edit Profile</a>*@
                                     </div>
-                                    @*<a class="btn btn-primary" href="javascript:void(0)" onclick="OpenProfile();">Edit Profile</a>*@
+                                    </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
-    </div>
+}
+
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->
@@ -181,12 +288,22 @@
             $("#divProfile").show();
         }
         function DisableAddress() {
+            debugger;
+            if ($('#postedFile').val() == '') {
+                alert('Please choose profile pic');
+                return false;
+            }
+            if ($('#Address').val() == '') {
+                $("#Address").addClass('errortext');
+                $('#Address').focus();
+                return false;
+            }
             $("#addr").show();
             $("#addrhide").hide();
             //$("#btn_Pin").attr("disabled", "true");
         }
     </script>
-    @if (TempData["msg"] != null)
+    @*@if (TempData["msg"] != null)
     {
         <script>
             $(document).ready(function () {
@@ -198,7 +315,7 @@
                 });
             });
         </script>
-    }
+    }*@
     @if (TempData["error"] != null)
     {
         <script>
@@ -212,4 +329,11 @@
             });
         </script>
     }
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: transparent !important;
+    }
+</style>
 

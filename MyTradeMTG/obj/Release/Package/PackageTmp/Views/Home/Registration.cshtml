@@ -9,37 +9,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My Trade || User Registration</title>
-    <link rel="icon" type="image/png" href="~/MyTradeMTGWebsite/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="~/MyTradeWebsite1/assets/img/favicon.png">
     <!-- Links of CSS files -->
-    <link rel="stylesheet" href="~/MyTradeMTGWebsite/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/MyTradeMTGWebsite/assets/css/nice-select.css">
-    <link rel="stylesheet" href="~/MyTradeMTGWebsite/assets/css/style.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite1/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite1/assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/MyTradeWebsite1/assets/css/style.css">
     <link href="/UserPanel/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
 
     <style>
-        .errortext {
-            border: 2px solid red !important;
-            background-color: #ffd3c6 !important;
-        }
-
-        @@media only screen and (max-width: 991px) {
-            #formdiv {
-                display: flex;
-                flex-direction: row;
+            .errortext {
+                border: 2px solid red !important;
+                background-color: #ffd3c6 !important;
             }
-        }
 
-        @@media only screen and (max-width: 991px) {
-            .logo a img {
-                background-color: transparent;
-                border-radius: 8px;
+            @@media only screen and (max-width: 991px) {
+                #formdiv {
+                    display: flex;
+                    flex-direction: row;
+                }
             }
-        }
-        .list
-        {
-            max-height:150px;
-            overflow-y:scroll !important;
-        }
+
+            @@media only screen and (max-width: 991px) {
+                .logo a img {
+                    background-color: transparent;
+                    border-radius: 8px;
+                }
+            }
+            .list
+            {
+                max-height:150px;
+                overflow-y:scroll !important;
+            }
+            .modal_heading
+            {
+                color:#fbd363;
+                font-size:20px;
+                font-weight:bold;
+            }
     </style>
 </head>
 
@@ -52,6 +59,7 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
+
                                     <div class="text-center mb-3">
                                         <a href="/Home/index">
                                             <img src="~/UserPanel/images/logo with bg.gif" class="img-fluid" styl="width:12rem" />
@@ -70,47 +78,54 @@
                                             {
                                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                                     <div class="form-group">
-                                                        @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
+                                                        @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Reference Id*" })
                                                         @Html.ValidationMessageFor(m => m.LoginId)
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        @Html.TextBoxFor(m => m.SponsorName, new { @class = "form-control", @Disabled = "true", @placeholder = "Sponsor Name" })
+                                                    <div class="form-group" style="border:1px solid #363062;border-radius:0.5rem;padding:12px;">
+                                                        <h4 style="margin-left:7px" class="text-white"><span>Reference Name: </span> <span style="display:none;" id="GetSponsorName"></span></h4>
+                                                        @*<label style="display:none;color:#ff9900" id="GetSponsorName"></label>*@
+                                                        @*@html.textboxfor(m => m.sponsorname, new { @class = "form-control", @disabled = "true", @placeholder = "sponsor name" })*@
                                                     </div>
                                                 </div>
                                             }
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true" })
+                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter Your First Name*", @required = "true" })
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter Your Last Name" })
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No*", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                                    <input id="phone" type="tel" placeholder="Enter Mobile No." class="form-control"  maxlength = "15" onkeypress = "return isNumberKey(event);" >
+                                                    @*<span id="valid-msg" class="hide">Valid</span>*@
+                                                    <span style="color:red;" id="error-msg" class="hide">Invalid number</span>
+                                                   @*@Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No*", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })*@
+                                               
+                                                       </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter Your Email Address*" })
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email*" })
+                                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter Password*", @type = "Password" })
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password" })
+                                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Enter Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6">
-                                                <div class="form-group">
-                                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 15px;">
+                                            <!--<div class="col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 15px;">
                                                 <div class="form-group">
                                                     <select name="Gender" id="Gender" class="form-select" required">
                                                         <option value="0">-Select Gender-</option>
@@ -140,12 +155,13 @@
                                                 <div class="form-group">
                                                     @Html.DropDownListFor(m => m.Country, new SelectList(ViewBag.ddlcountry, "Text", "Value"), new { @class = "form-select", @required = "true" })
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <div class="form-group" style="text-align: start;">
-
-                                                    <input type="checkbox" value="Yes" name="wp-comment-cookies-consent" id="wp-comment-cookies-consent">
-                                                    <label for="wp-comment-cookies-consent">I accept all <a href="javascript:void(0)">Terms & Conditions. </a></label>
+                                                <div class="form-group">
+                                                    <input type="checkbox" class="mt-1" data-bs-toggle="modal" data-bs-target="#GFG" />
+                                                    <label>I accept all <a href="#" data-bs-toggle="modal" data-bs-target="#GFG">Terms &amp; Use.</a></label>
+                                                    <!--<input type="checkbox" value="Yes" name="wp-comment-cookies-consent" id="wp-comment-cookies-consent">
+                                                    <label for="wp-comment-cookies-consent">I accept all <a href="javascript:void(0)">Terms & Conditions. </a></label>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -160,7 +176,7 @@
                                         </div>
 
                                         <div class="forgot-password d-flex justify-content-between mt-2">
-                                            <a href="/Home/Index">Back To Home</a>
+                                            <a href="/Website/Index">Back To Home</a>
                                             <a href="/Home/Login">Back To Login</a>
                                         </div>
 
@@ -173,6 +189,8 @@
             </div>
         </div>
     </div>
+
+
     <!-- Required vendors -->
     <script src="/UserPanel/vendor/global/global.min.js"></script>
 
@@ -200,7 +218,7 @@
                             <div class="d-table-cell">
                                 <div class="signup-form">
                                     <div class="logo">
-                                        <a href="/Home/index"><img src="~/MyTradeMTGWebsite/assets/img/logo.png" alt="image" width="150px"></a>
+                                        <a href="/Home/index"><img src="~/MyTradeWebsite1/assets/img/logo.png" alt="image" width="150px"></a>
                                         <h6 class="logo-tagline">One Step Towards Success</h6>
                                     </div>
                                     <h3>Registration</h3>
@@ -323,23 +341,66 @@
                     </div>
                 </div>
             </div>
-        </section>*@
+        </section></body>
+    *@
     <!-- End Login Area -->
+
+
+    <div class="container">
+        <div class="modal fade" id="GFG">
+            <div class="modal-dialog  modal-lg modal-dialog-scrollable">
+                <div class="modal-content" style="background:#05031a;">
+                    <div class="modal-header">
+                        <h4 class="modal-title modal_heading" id="GFGLabel"> Terms & Use</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span class="fa fa-window-close"></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal_heading">Visiting the Website</h4>
+                        <p class="text-white">These terms and conditions, including the privacy statement provided by this website (collectively, the "Terms and Conditions"), govern your use of this website.By accessing and using this website, you agree to comply with these Terms and Conditions.</p>
+                        <p class="text-white">The copyright of this website and all text, graphics, images, software and any other materials on this website belongs to  MY TRADE GLOBAL(" MTG Club") or its licensor.Except as permitted by the MY TRADE Product Disclosure Statement ("PDS"), the materials on this website are for your personal and non-commercial use only.</p>
+                        <h4 class="mt-1 modal_heading">Entire Agreement</h4>
+                        <p class="text-white">These Terms and Conditions (and, if applicable, MY TRADE GLOBAL contain the entire agreement between you and us regarding your access to and use of the website.MY TRADE GLOBAL may change these Terms and Conditions at any time by posting an updated version of these Terms and Conditions on this website.You are responsible for reviewing these terms and conditions from time to time, and if your use of the website after any changes have been published on the website constitutes your consent to such changes.</p>
+                        <h4 class="mt-1 modal_heading">Third Party Materials and Websites</h4>
+                        <p class="text-white">
+                            This website may contain materials produced by third parties or links to other websites.These materials and websites are provided by third parties and are not under the direct control of MY TRADE GLOBAL and MY TRADE GLOBAL shall not be responsible for the operation or content of any third-party materials or other websites (whether or not linked to this website).You agree that if you install any link from other websites to this website without a prior written consent from MY TRADE GLOBAL, MY TRADE GLOBAL has the right to request
+                            you to remove them.
+                        </p>
+                        <p class="text-white">Although MY TRADE GLOBAL updates this website periodically, there is no guarantee that the information or materials contained in the website are up-to-date or accurate, or that the products or services available through the Website are available or useful.Materials displayed on this website may be changed by MY TRADE GLOBAL at any time without notice.</p>
+                        <p class="text-white">Except as provided above with respect to the services contained herein, this website and all software and other materials on the website are provided on an "present" and "as available" basis without warranty of accuracy, timeliness or completeness.To the maximum extent permitted by law, all representations and warranties, whether express, implied, statutory or otherwise, including, without limitation, any warranties or conditions of or relating to accuracy, timeliness, merchantability, satisfactory quality or fitness for a particular or any purpose, are excluded.</p>
+                        <h4 class="mt-1 modal_heading">Right of Recovery</h4>
+                        <p class="text-white">You agree to indemnify, to defend and maintain MY TRADE GLOBAL, its parent companies, subsidiaries, affiliates, managers and employees of any violation of the terms and conditions by you for the loss caused by negligence, or use the web sites, damage, claim or demand, including by any third party or by MY TRADE GLOBAL, its parents, subsidiaries, affiliates, managers and employees due to your violation of the terms and conditions or use the website negligence resulting reasonable legal fees.</p>
+                        <h4 class="mt-1 modal_heading">Your Personal Data</h4>
+                        <p class="text-white">If you register to become a customer of MY TRADE GLOBAL, in addition to any responsibilities you may have, you agree to ensure that all information you provide to MY TRADE GLOBAL is complete and accurate to the best of your knowledge and belief.You agree to notify MY TRADE GLOBAL immediately about any changes to any of the details you have provided to ensure that MY TRADE GLOBAL 's records are up-to-date and correct.</p>
+                        <p class="text-white">The personal data you provide to MY TRADE GLOBAL will only be used by MY TRADE GLOBAL in accordance with its Privacy Policy and privacy and data protection laws.</p>
+                        <hr/>
+                       
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary mt-0" data-bs-dismiss="modal">I Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Links of JS files -->
-    <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/meanmenu.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/nice-select.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/slick.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/magnific-popup.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/appear.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/odometer.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/owl.carousel.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/parallax.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/wow.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/form-validator.min.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/contact-form-script.js"></script>
-    <script src="~/MyTradeMTGWebsite/assets/js/main.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/jquery.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/meanmenu.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/nice-select.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/slick.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/magnific-popup.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/appear.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/odometer.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/owl.carousel.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/parallax.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/wow.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/form-validator.min.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/contact-form-script.js"></script>
+    <script src="~/MyTradeWebsite1/assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"></script>
     <script>
         function getsponsordetails(obj) {
             $("#divload").css({ 'display': '' });
@@ -351,12 +412,14 @@
                 data: { 'ReferBy': $(obj).val() },
                 success: function (response) {
                     if (response.Result == "Yes") {
-                        $('#SponsorName').val(response.DisplayName);
+                        $('#GetSponsorName').text(response.DisplayName);
+                        $('#GetSponsorName').show();
+
                     }
                     else {
 
                         $("#SponsorId").addClass('errortext');
-                        $('#SponsorName').val('');
+                        $('#GetSponsorName').val('');
                         $('#SponsorId').val('');
                         $('#SponsorId').focus();
                         alert(response.Result);
@@ -374,6 +437,7 @@
         }
 
         function confirmregistration() {
+            debugger;
             $(".errortext").removeClass("errortext");
             if ($('#SponsorId').val() == '') {
                 $("#SponsorId").addClass('errortext');
@@ -385,9 +449,9 @@
                 $('#FirstName').focus();
                 return false;
             }
-            if ($('#MobileNo').val() == '') {
-                $("#MobileNo").addClass('errortext');
-                $('#MobileNo').focus();
+            if ($('#phone').val() == '') {
+                $("#phone").addClass('errortext');
+                $('#phone').focus();
                 return false;
             }
             if ($('#Email').val() == '') {
@@ -406,17 +470,17 @@
                 return false;
             }
 
-            if ($('#Gender').val() == '0') {
-                alert("Please select Gender!");
-                return false;
-            }
+            //if ($('#Gender').val() == '0') {
+            //    alert("Please select Gender!");
+            //    return false;
+            //}
 
-            if ($('#Country').val() == '') {
-                alert('Please select Country!')
-                return false;
-            }
+            //if ($('#Country').val() == '') {
+            //    alert('Please select Country!')
+            //    return false;
+            //}
 
-            $("#MobileNo").attr("disabled", "disabled");
+            $("#phone").attr("disabled", "disabled");
             $("#FirstName").attr("disabled", "disabled");
             $("#SponsorId").attr("disabled", "disabled");
             $("#LastName").attr("disabled", "disabled");
@@ -432,7 +496,7 @@
         }
 
         function editregistration() {
-            $("#MobileNo").attr("disabled", false);
+            $("#phone").attr("disabled", false);
             $("#FirstName").attr("disabled", false);
             $("#LastName").attr("disabled", false);
             $("#SponsorId").attr("disabled", false);
@@ -462,7 +526,7 @@
                 url: "/Home/RegistrationAction",
                 Type: "Get",
                 DataType: "JSON",
-                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#MobileNo").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val(), Country: $("#Country :selected").val() },
+                data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), PinCode: $("#PinCode").val(), Leg: Leg, Password: $("#Password").val(), Email: $("#Email").val(), Gender: $("#Gender :selected").val(), State: $("#State").val(), City: $("#City").val(), Country: $("#Country :selected").val() },
                 success: function (data) {
                     if (data.Result == "1") {
                         window.location.href = '@Url.Action("ConfirmRegistration", "Home")';
@@ -523,6 +587,63 @@
         }
 
     </script>
+    <script>
 
+var telInput = $("#phone"),
+  errorMsg = $("#error-msg"),
+  validMsg = $("#valid-msg");
+
+// initialise plugin
+telInput.intlTelInput({
+
+    allowExtensions: true,
+    formatOnDisplay: true,
+    autoFormat: true,
+    autoHideDialCode: true,
+    autoPlaceholder: true,
+    defaultCountry: "auto",
+    ipinfoToken: "yolo",
+
+    nationalMode: false,
+    numberType: "MOBILE",
+  //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+    preferredCountries: ['sa', 'ae', 'qa', 'om', 'bh', 'kw', 'ma'],
+    preventInvalidNumbers: true,
+    separateDialCode: true,
+    initialCountry: "auto",
+    geoIpLookup: function(callback) {
+  $.get("http://ipinfo.io", function() { }, "jsonp").always(function(resp) {
+    var countryCode = (resp && resp.country) ? resp.country: "";
+    callback(countryCode);
+});
+},
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
+});
+
+var reset = function() {
+  telInput.removeClass("error");
+  errorMsg.addClass("hide");
+  validMsg.addClass("hide");
+};
+
+// on blur: validate
+telInput.blur(function() {
+  reset();
+  if ($.trim(telInput.val())) {
+    if (telInput.intlTelInput("isValidNumber")) {
+      validMsg.removeClass("hide");
+} else {
+      telInput.addClass("error");
+      errorMsg.removeClass("hide");
+}
+}
+});
+
+// on keyup / change flag: reset
+telInput.on("keyup change", reset);
+
+
+
+    </script>
 </body>
 </html>
