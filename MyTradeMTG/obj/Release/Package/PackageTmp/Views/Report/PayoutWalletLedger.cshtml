@@ -45,13 +45,13 @@
                                 </div>
                             </div>
                             <div class="row mt-4">
-                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                                <table id="html5-extension" class="table table-hover non-hover" data-sortable="false" data-page-length='20'>
                                     <thead>
                                         <tr>
-                                            <th>Sr No.</th>
+                                            <th class="sorting_disabled" data-sortable="false" >Sr No.</th>
                                             <th>Narration</th>
-                                            <th>Cr. MTG Token/USDT</th>
-                                            <th>Dr. MTG Token/USDT</th>
+                                            <th>Cr. MTG /USDT</th>
+                                            <th>Dr. MTG /USDT</th>
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
@@ -60,17 +60,17 @@
                                         {
                                             if (Model.lst != null)
                                             {
-                                                int i = 1;
+                                                int i = 43;
                                                 foreach (var Item in Model.lst)
                                                 {
                                                     <tr class="text-left">
-                                                        <td>@i</td>
+                                                        <td class="sorting_disabled" data-sortable="false" >@i</td>
                                                         <td>@Item.Narration</td>
                                                         <td>@Item.CrAmount</td>
                                                         <td>@Item.DrAmount</td>
                                                         <td>@Item.TransactionDate</td>
                                                     </tr>
-                                                    i++;
+                                                    i--;
                                                 }
                                             }
                                         }
@@ -94,4 +94,6 @@
                 //   mode: "range"
             });
         </script>
+
+
 

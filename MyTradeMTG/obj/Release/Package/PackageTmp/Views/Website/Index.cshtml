@@ -1,0 +1,1142 @@
+﻿@model MyTradeMTG.Models.Home
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Website_LayoutPage.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
+      crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" crossorigin="anonymous"></script>
+
+<style>
+    .iti__country-name{
+        color:#000000;
+    }
+</style>
+
+<!-- START HOME -->
+<section id="home" class="home_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                <div class="hero-text">
+                    <h2><span class="text-yellow">Choose WISE</span> INVESTMENTS over<span class="text-yellow"> everything else now!</span></h2>
+                    <p>
+                        Switch to The MY TRADE forex trading platform with high investment experience!
+                        Unlike Others forex only providers, we allows our client to gain exposure to multiple capital
+                        markets, thus allowing investors to develop a diverse portfolio from a single integrated account.
+                    </p>
+                    <div class="home_btn">
+                        <a id="modal_sign" href="#modal" class="btn_one wow bounceIn" data-wow-delay=".6s">Get Started</a>
+                        <a href="#about" class="btn_two wow bounceIn" data-wow-delay=".8s">learn More</a>
+                    </div>
+                </div>
+            </div><!--- END COL -->
+            <div class="col-lg-6 col-sm-12 col-xs-12 text-center">
+                <div class="hero-text-img">
+                    <img src="~/MyTradeMTGWebsite/asset/img/coin-banner.png" class="item-bounce" alt="" />
+                </div>
+            </div><!--- END COL -->
+        </div><!--- END ROW -->
+    </div><!--- END CONTAINER -->
+</section>
+<!-- END  HOME -->
+<div class="partner-logo payment_section">
+    <div class="container-fluid">
+        <div class="section-title payment-title text-center">
+            <h2>PAYMENT METHOD</h2>
+            <span></span>
+        </div>
+        <div class="row partner-bg">
+            <div class="col-lg-12">
+                <ul class="d-lg-flex justify-content-around partner_img">
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_1.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_2.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_3.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_4.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_5.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_6.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_7.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_8.png" alt="image">
+                    </li>
+                    <li class="partner-logo_bg">
+                        <img src="~/MyTradeMTGWebsite/asset/img/partner/logo_9.png" alt="image">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- START ABOUT -->
+<section id="about" class="about_area section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>About Us</h2>
+            <span></span>
+            <p>My Trade is a brand new-generation, multi-asset broking with whom you may alternate in foreign exchange & commodities markets, indices & stocks.</p>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                <div class="single_about">
+                    <span class="ti-stats-up"></span>
+                    <h4>Trade Solution</h4>
+                    <p>MY TRADE is a software that trades automatically on your account. They run inside your forex terminal and can be attached to any currency pair. Using advanced calculations they open and manage forex trades along with SL and TP updated right away according to its own advanced FOREX strategy. No experience is required and setup is simple.</p>
+                    <p>WE PROVIDE 24 HOURS SUPPORT.</p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="single_about">
+                    <span class="ti-money"></span>
+                    <h4>MTG Coin</h4>
+                    <p>MTG coin is the most trending utility token! It has dealt with the major issues of distinguishing between utility tokens and normal tokens very well.</p>
+                    <p>By putting across all the points and properties of basic utility tokens and compiling them all into the most profitable results of the world, My Trade has simplified the whole utility MTG coin scenario for you.</p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="single_about">
+                    <span class="ti-shopping-cart"></span>
+                    <h4>Buy Or Sell Orders</h4>
+                    <h6>MTG  Price Live Data</h6>
+                    <p>The value of one MTG  token will be equal to the value of one USDT</p>
+                    <p>Buy-Sell is a MTG and non-custodial ecosystem that brings services such as aggregated decentralized and synthetic asset swap, governance, staking, farming, lending, and borrowing through a MTG membership mechanism.</p>
+                </div>
+            </div><!-- END COL -->
+        </div><!-- END ROW -->
+    </div><!-- END CONTAINER -->
+</section>
+<!-- END ABOUT -->
+<!-- START TOKEN -->
+<section id="forex" class="token_area section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>FOREX MARKET</h2>
+            <span></span>
+            <p>
+                In April 2019, trade in FX market hit a6.6 trillion a day, up from a5.1 trillion three years earlier.
+                FX derivatives riding growth, particularly in FX swaps, outpaced spot trading growth.
+            </p>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                <div class="single_about">
+                    <span class="ti-stats-up"></span>
+                    <h4>What is Forex Trading ?</h4>
+                    <p>The process of buying and selling currencies is forex trading. With a daily turnover of a5 trillion, this is the biggest stock market in the world and it includes many individuals and many currencies. You exchange 'coin pairs' because you still purchase one currency using another currency.</p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="single_about">
+                    <span class="ti-exchange-vertical"></span>
+                    <h4>What is Forex Market ?</h4>
+                    <p>A global online network where traders buy and sell currencies is the foreign exchange market. It is the world's oldest and most liquid stock exchange. Demand and supply describe the exchange rate gaps that, in essence, decide the earnings of traders.</p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="single_about">
+                    <span class="ti-money"></span>
+                    <h4>Why Forex Traders loose money ?</h4>
+                    <p>Their aim is to be successful and get payouts as people reach the foreign exchange market. And in certain situations, by having a certain structure they may adopt and having the market working in their favour, they continue to be efficient. Sadly, however, an ordinary Forex Trader is set to fail because trading is a zero-sum game where another group fails while one group of traders succeeds.</p>
+                </div>
+            </div><!-- END COL -->
+        </div><!-- END ROW --><!-- END ROW -->
+    </div><!-- END CONTAINER -->
+</section>
+<!-- END TOKEN -->
+<!-- START LIVE MARKET -->
+<!-- START LIVE MARKET -->
+<section class="pgone_live_market section-padding in-cirro-3">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Live prices on popular markets</h2>
+            <span></span>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="tradingview-widget"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END LIVE MARKET -->
+<!-- END LIVE MARKET -->
+<!-- START TOKEN IMAGE AREA -->
+<section class="token_img_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp text-center" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="token-img mb-3">
+                    <h4>Token Distribution</h4>
+                    <img src="~/MyTradeMTGWebsite/asset/img/chart-01.png" class="img-fluid" alt="" />
+                </div>
+            </div><!--- END COL -->
+            <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInUp text-center" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="fund-img mb-3">
+                    <h4>Fund Distribution</h4>
+                    <img src="~/MyTradeMTGWebsite/asset/img/chart-02.png" class="img-fluid" alt="" />
+                </div>
+            </div><!--- END COL -->
+        </div><!--- END ROW -->
+    </div><!--- END CONTAINER -->
+</section>
+<!-- END TOKEN IMAGE AREA -->
+<!-- START ROADMAP -->
+<section id="business" class="roadmap_area section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>BUSINESS DESK</h2>
+            <span></span>
+            <p>
+                Those who know the difference between spending and investing get success in business.
+                Never depend on one income, do trade to make another option of income.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div id="roadmap-slider" class="owl-carousel">
+                    <div class="timeline h-100">
+                        <div class="timeline-content">
+                            <div class="timeline-year">
+                                <span>TR-1</span>
+                            </div>
+                            <div class="inner-content">
+                                <h3 class="roadmap_title">V.I.P</h3>
+                                <h3><b>200%</b><span class="package_name"> Package</span></h3>
+                                <p class="roadmap_description">
+                                    Min. Trade      -    50 MTG
+                                </p>
+                                <p class="roadmap_description">Max. Trade   -  5000 MTG</p><br />
+                                <p class="roadmap_description">Duration   - 200 Days</p>
+                                <a class="btn_one mt-4" href="#">Activate Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="timeline h-100">
+                        <div class="timeline-content">
+                            <div class="timeline-year">
+                                <span>TR-2</span>
+                            </div>
+                            <div class="inner-content">
+                                <h3 class="roadmap_title">SMART</h3>
+                                <h3><b>0.5%</b> <span class="package_name">Package</span></h3>
+                                <p class="roadmap_description">
+                                    Min. Trade      -    100 MTG
+                                </p>
+                                <p class="roadmap_description">Max. Trade   -  10000 MTG</p>
+                                <p class="roadmap_description">Duration   - 600 Days</p>
+                                <a class="btn_one mt-4" href="#">Activate Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline h-100">
+                        <div class="timeline-content">
+                            <div class="timeline-year">
+                                <span>TR-2</span>
+                            </div>
+                            <div class="inner-content">
+                                <h3 class="roadmap_title">SMART PLUS</h3>
+                                <h3><b>1%</b> <span class="package_name">Package</span></h3>
+                                <p class="roadmap_description">
+                                    Min. Trade   -  100 MTG
+                                </p>
+                                <p class="roadmap_description">Max. Trade   -  10000 MTG</p>
+                                <p class="roadmap_description">Duration   - 300 Days</p>
+                                <a class="btn_one mt-4" href="#">Booster Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline h-100">
+                        <div class="timeline-content">
+                            <div class="timeline-year">
+                                <span>TR-2</span>
+                            </div>
+                            <div class="inner-content">
+                                <h3 class="roadmap_title">ULTRA SMART</h3>
+                                <h3><b>2%</b> <span class="package_name">Package</span></h3>
+                                <p class="roadmap_description">
+                                    Min. Trade   -  100 MTG
+                                </p>
+                                <p class="roadmap_description">Max. Trade   -  10000 MTG</p>
+                                <p class="roadmap_description">Duration   - 100 Days</p>
+                                <a class="btn_one mt-4" href="#">Booster Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- END COL -->
+        </div><!-- END ROW -->
+    </div><!-- END CONTAINER -->
+</section>
+<!-- END ROADMAP -->
+<!-- START DOWNLOAD APP -->
+<section id="download" class="download_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-sm-12 col-xs-12 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                <div class="download_app">
+                    <h1>Now Available On</h1>
+                    <p>You can find all the thing you need to payout.</p>
+                    <div class="download_btn">
+                        <a href="#" class="google_btn"><img src="~/MyTradeMTGWebsite/asset/img/google-play-logo.png" alt="google-play-logo" /></a>
+                        <a href="#" class="app_btn"><img src="~/MyTradeMTGWebsite/asset/img/app-store-logo.png" alt="app-store-logo" /></a>
+                    </div>
+                </div>
+            </div><!-- END COL -->
+        </div><!-- END ROW -->
+    </div><!-- END CONTAINER -->
+</section>
+<!-- END DOWNLOAD APP -->
+<!-- START FAQ -->
+<section id="faq" class="faq1-area">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Frequently Asked Questions</h2>
+            <span></span>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="tab-pane fade show active" id="development" role="tabpanel">
+                    <div class="faq_tab" id="accordion_1">
+                        <div class="card active">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Who can become a member of the MY Trade?</button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion_1">
+                                <div class="card-body">
+                                    Anyone who has crossed the age of 18 can become a member of the system.
+                                </div>
+                            </div>
+                        </div><!-- END CARD  -->
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Which e-currencies do you accept?</button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_1">
+                                <div class="card-body">
+                                    We accept only US dollar, Euro, INR, USDT Coin etc.
+                                </div>
+                            </div>
+                        </div><!-- END CARD  -->
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">What is the minimum and maximum trade amount on mytrade.global?</button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion_1">
+                                <div class="card-body">
+                                    You can trade on minimum amount on MTG Coin 50 MTG, and maximum 5000 MTG.
+                                </div>
+                            </div>
+                        </div><!-- END CARD  -->
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">How can check my account details?</button>
+                                </h5>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion_1">
+                                <div class="card-body">
+                                    You can check your details at any time by logging into your personal account.
+                                </div>
+                            </div>
+                        </div><!-- END CARD  -->
+                        <div class="card">
+                            <div class="card-header" id="headingFive">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">How do I open my mytrade.global account?</button>
+                                </h5>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion_1">
+                                <div class="card-body">
+                                    It's quite easy and convenient. go to top right corner of our webpage press , fill in the sign up page and then press "Register".
+                                </div>
+                            </div>
+                        </div><!-- END CARD  -->
+                    </div>
+                </div>
+            </div><!-- END COL  -->
+        </div><!--END  ROW  -->
+    </div><!-- END CONTAINER  -->
+</section>
+<!-- END FAQ -->
+
+<section class="about_area section-padding mb-5">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Why Choose Us?</h2>
+            <span></span>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-3 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                <div class="single_about">
+                    <span> <img src="~/MyTradeMTGWebsite/asset/img/partner/feature_1.png" alt="icon-image" style="height:50px;" /></span>
+                    <h4>We are certified organisation</h4>
+                    <p>
+                        our exchange provides, have more than 10 years of forex
+                        trading experience and are at low risk of losing money.
+                    </p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-3 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+                <div class="single_about">
+                    <span><img src="~/MyTradeMTGWebsite/asset/img/partner/feature_2.png" alt="icon-image" style="height:50px;" /></span>
+                    <h4>Our global services</h4>
+
+                    <p>
+                        Our clients come from every comer of global. So far, our range of work
+                        continues to expand.
+                    </p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-3 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="single_about">
+                    <span><img src="~/MyTradeMTGWebsite/asset/img/partner/feature_3.png" alt="icon-image" style="height:50px;" /></span>
+                    <h4>100% security</h4>
+                    <p>
+                        We have spent years perfecting our technology to provide protection
+                        that you can trust in an unpredictable world riddled with breaches of security
+                    </p>
+                </div>
+            </div><!-- END COL -->
+            <div class="col-lg-3 col-sm-4 col-xs-12 wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="single_about">
+                    <span><img src="~/MyTradeMTGWebsite/asset/img/partner/feature_4.png" alt="icon-image" style="height:50px;" /></span>
+                    <h4>24/7 customer support</h4>
+                    <p>
+                        We have a committed support staff operating 24/7 for you.
+                    </p>
+                </div>
+            </div><!-- END COL -->
+        </div><!-- END ROW -->
+    </div><!-- END CONTAINER -->
+</section>
+
+<!-- ADDRESS -->
+<div class="address section-padding" id="contact">
+    <div class="container">
+        <div class="section-title text-center text-uppercase">
+            <h3><strong>Contact Us</strong></h3>
+            <span></span>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp mt-3" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+
+                <h4><strong>Got A Question?</strong></h4>
+                <p>If you have any doubt about our business plans, policies or any other question, please write us and we'll get in touch as soon as possible. Thank You!</p>
+                <!--<div class="address_br"><span class="ti-mobile"></span></div>
+                <h4>Phone</h4>
+                <p><a href="tel:9170 5019 3183" class="text-white">+91 70 5019 3183</a></p>-->
+
+            </div><!--- END COL -->
+            <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp text-center" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+                <div class="single_address h-100">
+                    <div class="address_br"><span class="ti-email"></span></div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:info@mytrade.global" class="text-white">info@mytrade.global</a></p>
+                </div>
+            </div><!--- END COL -->
+            <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp text-center" data-wow-duration="1s" data-wow-delay="0.4s" data-wow-offset="0">
+                <div class="single_address h-100">
+                    <div class="address_br"><span class="ti-location-pin"></span></div>
+                    <h4>Address</h4>
+                    <p>8 Stamford Road, City Hall, 178882 Singapore,</p>
+                </div>
+            </div><!--- END COL -->
+        </div><!--- END ROW -->
+    </div><!--- END CONTAINER -->
+</div>
+<!-- END ADDRESS -->
+<!-- START CONTACT -->
+<section class="contact_us section-padding">
+    <div class="container">
+        <div class="row contact_us_bg">
+            <div class="col-lg-7 col-sm-12 col-xs-12">
+                <div class="contact">
+                    <h4>How can we help you?</h4>
+                    <p>Drop us a message for any query</p>
+                    <form class="form" name="enq" method="post" action="https://bestwpware.com/html/tf/coincap-demo/coincap/contact.php" onsubmit="return validation();">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Name" required="required">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required="required">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <input type="number" name="number" class="form-control" placeholder="Phone No." required="required">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button type="submit" value="Send message" name="submit" id="submitButton" class="btn_one" title="Submit Your Message!">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- END COL  -->
+            <div class="col-lg-5 col-sm-12 col-xs-12">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8019635440123!2d103.85131891479644!3d1.293282462114724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19a68764237f%3A0xf32fa2fffc1d7b8c!2sHotel%20Swiss%C3%B4tel%20The%20Stamford!5e0!3m2!1sen!2sin!4v1674816804100!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div><!-- END COL  -->
+        </div><!-- END ROW -->
+    </div><!-- END CONTAINER -->
+</section>
+
+
+<!--START LOGIN-->
+<div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
+    top: 100px;">
+    <header class="popupHeader">
+        <span class="header_title">Login</span>
+        <span class="modal_close"><i class="fa fa-times"></i></span>
+    </header>
+
+    <div class="popupBody">
+        <!--Social Forget start-->
+        <div class="social_login forget_form">
+            <div class="">
+                <form action="/Website/ForgetPasswordAction" method="post">
+                    <label>Login Id</label>
+
+                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginId" })
+                    <br />
+
+                    <label>Mobile No.</label>
+                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No" })
+                    <br />
+                    <div class="action_btns">
+                        <div>Already have an account ?<a href="#" class="login_modal"> Login</a></div>
+                        @*<div class="one_half last" style="width:85%"><a href="#" class="abtn" style="width:85%">Forget Password</a></div>*@
+
+
+                        @*<input type="submit" id="forgetpassword" class="abtn" name="forgetpassword" value="Submit" onclick="return validateform();" />*@
+
+                        <button type="submit" id="forgetpassword" class="abtn" name="forgetpassword" onclick="return validateform();">Submit</button>
+                        @*<br />
+                            <span class="text-danger"> @TempData["Login"] </span><br />*@
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Social Forget end-->
+        <!--Social login statrt-->
+        <div class="user_login">
+            <form action="/Website/LoginAction" method="post">
+                <label>Login Id</label>
+                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @required = "required" })
+                <br />
+
+                <label>Password</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @required = "required" })
+                <br />
+                <a href="/Home/ForgetPassword" class="back_btn"> Forget Password ?</a>
+                <div class="action_btns d-flex">
+                    @*<div><a href="/Home/Registration" class="abtn">Sign Up</a></div>*@
+                    <button type="submit" class="abtn">Login</button>
+                    <a href="#" id="register_form" class="abtn ml-4">Sign Up</a>
+                </div>
+            </form>
+        </div>
+        <!--Social login end-->
+
+
+        <!--Social errorpage statrt-->
+        <div class="error_page" style="display:none">
+            <form>
+                <div class="col-sm-12">
+                    <h4 style="color:#ff0000">Incorrect Login Id or Password </h4>
+                    <hr />
+                </div>
+                <div class="col-sm-12">
+                    <center>
+                        Already have an account ?<a href="#" style="color:#ffd234" onclick="return ToLogin()">Login</a>
+                    </center>
+                </div>
+                <div class="col-sm-12">
+                    <br />
+                    <center>
+                       Not have an account ?<a href="#" style="color:#ffd234" onclick="return ToSignup()">Sign-Up</a>
+                    </center>
+                </div>
+            </form>
+        </div>
+        <!--Social errorpage end-->
+
+
+
+
+        <!--Register Form start-->
+        <div class="user_register">
+            <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
+                <div class="row">
+
+                    @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
+                    {
+                        <h5 class="ml-4 mb-2" style="color:#ffd234; font-size: 14px;">Congratulations ! For joining us under sponsor code : @ViewBag.SponsorId</h5>
+                        <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
+                    }
+                    else
+                    {
+                        <div class="col-lg-12 form-group">
+                            @*<input type="text" placeholder="Reference Id" />*@
+                            @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
+                            @Html.ValidationMessageFor(m => m.LoginId)
+                            <label class="ml-3" style="color:#ffd234;" id="SponsorName"></label>
+                        </div>
+                    }
+
+                    <div class="col-lg-12 form-group">
+                        @*<input type="text" placeholder="Enter Your First Name" />*@
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true", @onkeypress = "return onlyAlphabets(event,this);" })
+
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="email" placeholder="Enter Your Last Name" />*@
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name", @onkeypress = "return onlyAlphabets(event,this);" })
+
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input id="phone" type="tel" placeholder="Enter Mobile No." maxlength="15" onkeypress="return isNumberKey(event);">*@
+
+                        <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
+                               placeholder="Phone Number" />
+                        <input id="country" type="hidden" name="country">
+                        <div style="display:none;">
+                            <span id="country1"></span>
+                        </div>
+                        
+
+
+                        @*<span id="valid-msg" class="hide">Valid</span>*@
+                        @*<span style="color:red;" id="error-msg" class="hide">Invalid number</span>*@
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="email" placeholder="Your Email Address" />*@
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email*", @Onchange = "checkEmail();" })
+
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="password" placeholder="Enter Password" />*@
+                        @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password*", @type = "Password" })*@
+                        @Html.PasswordFor(m => m.Password2, new { @class = "form-control", @placeholder = "Password*" })
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        @*<input type="password" placeholder="Confirm Password" />*@
+                        @*@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();", @type = "Password" })*@
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();" })
+                    </div>
+                    <div class="col-lg-12 form-group">
+                        <input type="checkbox" class="mt-1" id="checkboxvalue123" data-toggle="modal" data-target="#exampleModalScrollable">
+                        <label>I accept all <a href="javascript:void(0)" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">Terms &amp; Use.</a></label>
+                    </div>
+                </div>
+
+                @*<center>
+                        <button type="submit" class="abtn mt-0">Confirm</button>
+                    </center>*@
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" class="abtn mt-0" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
+                    </div>
+                </div>
+                <div class="row" id="divReg" style="display: none">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <button type="button" class="abtn mt-0" onclick="return saveregistration();" id="Register">Sign Up</button>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
+                    </div>
+                </div>
+
+                @*<div class="forgot-password d-flex justify-content-between mt-2">
+                        <a href="/Home/Index">Back To Home</a>
+                        <a href="/Home/Login">Back To Login</a>
+                    </div>*@
+                @*<center><a href="#" class="abtn mt-0">Register</a></center>*@
+                <div class="action_btns mt-2">
+                    <center><div class="d-flex">Already have an account ?<a href="#" class="login_modal" style="color:#ffd234"> Login</a></div></center>
+                </div>
+            </form>
+        </div>
+
+        <!--Register Form end-->
+
+    </div>
+</div>
+@*<div style="display:none">
+    <span id="UserDisplayName">@Session["DisplayName"]</span>
+    <span id="UserLoginId" >@Session["LoginId"]</span>
+    <span id="UserPassword">@Session["Password"]</span>
+    </div>*@
+<div style="display:none">
+    <span id="UserDisplayName"></span>
+    <span id="UserLoginId"></span>
+    <span id="UserPassword"></span>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="confirm_registration">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background:#0f1b39;">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                <div class="row justify-content-center h-100 align-items-center">
+                    <div class="col-md-8">
+                        <div class="authincation-content">
+
+                            <form role="form" id="myFormsss" method="post" name="myFormsss" class="form-horizontal contact-form">
+
+                                <div class="row no-gutters">
+                                    <div class="col-xl-12">
+                                        <div class="auth-form">
+
+                                            <h3 class="thank text-white text-center">Thank You <span id="UserDisplayName1"></span> </h3>
+                                            <h6 class="card-title text-white text-center mt-3">
+                                                For Your Registration. Your Details are as Below <br />
+                                                <span class="credential"><span class="cred-head">Login ID : </span> <span class="cred-detail" id="UserLoginId1"></span></span><br />
+                                                <span class="credential"><span class="cred-head">Password : </span> <span class="cred-detail" id="UserPassword1"></span></span>
+
+                                            </h6>
+
+                                            @*<h2 class="thank text-white text-center">Thank You @Session["DisplayName"]</h2>
+                                                <h6 class="card-title text-white text-center mt-4">
+                                                    For Your Registration. Your Details are as Below <br />
+                                                    <span class="credential"><span class="cred-head">Login ID: </span> <span class="cred-detail">@Session["LoginId"]</span></span><br />
+                                                    <span class="credential"><span class="cred-head">Password: </span> <span class="cred-detail">@Session["Password"]</span></span>
+
+                                                </h6>*@
+                                            <div class="d-flex justify-content-around mt-1">
+                                                @*<div class="field-wrapper">
+                                                        <a href="/Home/CompleteRegistration" class="mr-2 btn btn-primary chaining-modals foractivation-btn py-2">
+                                                            <div class="img-design"><img src="~/assets/img/dash.png" style="width:50px" /></div> <br />
+                                                            <span style="white-space: nowrap">Go To Dashboard</span>
+                                                        </a>
+                                                    </div>*@
+
+                                                <div class="field-wrapper pb-3">
+
+                                                    @*<a href="/Website/Index" target="_blank" class="btn btn-yellow foractivation-btn py-2 pl-4 pr-4">
+                                                            <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                                                            <span class="text-white">Add New</span>
+                                                        </a>*@
+
+                                                    <button onclick="return OpenRegistrationPopUp();" class="btn btn-yellow foractivation-btn py-2 pl-4 pr-4">
+                                                        <div class="img-design"><img src="~/assets/img/addnew.png" style="width:50px" /></div> <br />
+                                                        <span class="text-white">Add New</span>
+                                                    </button>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#MobileNo').val() == '') {
+            $("#MobileNo").addClass('errortext');
+            $('#MobileNo').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: transparent !important;
+    }
+</style>
+
+<script>
+    function getsponsordetails(obj) {
+        debugger;
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        $.ajax({
+            url: '/Home/GetSponserDetails',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { 'ReferBy': $(obj).val() },
+            success: function (response) {
+                if (response.Result == "Yes") {
+                    $('#SponsorName').text(response.DisplayName);
+                }
+                else {
+
+                    $("#SponsorId").addClass('errortext');
+                    $('#SponsorName').val('');
+                    $('#SponsorId').val('');
+                    $('#SponsorId').focus();
+                    alert(response.Result);
+                }
+            }
+        })
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function confirmregistration() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SponsorId').val() == '') {
+            $("#SponsorId").addClass('errortext');
+            $('#SponsorId').focus();
+            return false;
+        }
+        if ($('#FirstName').val() == '') {
+            $("#FirstName").addClass('errortext');
+            $('#FirstName').focus();
+            return false;
+        }
+        if ($('#phone1').val() == '') {
+            $("#phone1").addClass('errortext');
+            $('#phone1').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+        if ($('#Password2').val() == '') {
+            $("#Password2").addClass('errortext');
+            $('#Password2').focus();
+            return false;
+        }
+        if ($('#ConfirmPassword').val() == '') {
+            $("#ConfirmPassword").addClass('errortext');
+            $('#ConfirmPassword').focus();
+            return false;
+        }
+
+        //if ($('#Gender').val() == '0') {
+        //    alert("Please select Gender!");
+        //    return false;
+        //}
+
+        //if ($('#Country').val() == '') {
+        //    alert('Please select Country!')
+        //    return false;
+        //}
+
+        $("#phone1").attr("disabled", "disabled");
+        $("#FirstName").attr("disabled", "disabled");
+        $("#SponsorId").attr("disabled", "disabled");
+        $("#LastName").attr("disabled", "disabled");
+        //$("#PinCode").attr("disabled", "disabled");
+        $("#Password2").attr("disabled", "disabled");
+        $("#ConfirmPassword").attr("disabled", "disabled");
+        //$("#Gender").attr("disabled", "disabled");
+        //$("#Country").attr("disabled", "disabled");
+        $("#Email").attr("disabled", "disabled");
+        $('#Confirm').attr("disabled", "disabled");
+        $('#Confirm').hide();
+        $('#divReg').show();
+    }
+
+    function editregistration() {
+        $("#phone1").attr("disabled", false);
+        $("#FirstName").attr("disabled", false);
+        $("#LastName").attr("disabled", false);
+        $("#SponsorId").attr("disabled", false);
+        $("#LastName").attr("disabled", false);
+        //$("#PinCode").attr("disabled", false);
+        $("#Password2").attr("disabled", false);
+        $("#ConfirmPassword").attr("disabled", false);
+        //$("#Gender").attr("disabled", false);
+        $("#Email").attr("disabled", false);
+        //$("#Country").attr("disabled", false);
+        $('#Confirm').show();
+        $('#Confirm').attr("disabled", false);
+        $('#divReg').hide();
+    }
+
+    function saveregistration() {
+        debugger;
+        var CountryCode = $(".iti__selected-dial-code").text();
+
+        country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
+
+        var Country = $("#country1").text();
+
+        $('#Register').attr("disabled", "disabled");
+        $("#divload").css({ 'display': '' });
+        var Leg = "";
+        if ($('#left').prop('checked')) {
+            Leg = "L";
+        }
+        else {
+            Leg = "R";
+        }
+        $.ajax({
+            url: "/Website/RegistrationAction",
+            Type: "Get",
+            DataType: "JSON",
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone1").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val(), CountryCode: CountryCode, Country: Country },
+            success: function (data) {
+                debugger;
+                if (data.Result == "1") {
+                    $("#UserDisplayName1").text(data.Name),
+                    $("#UserLoginId1").text(data.LoginId),
+                    $("#UserPassword1").text(data.Password),
+                    //$("#UserDisplayName1").text(UserDisplayName),
+                    //$("#UserLoginId1").text(UserLoginId),
+                    //$("#UserPassword1").text(UserPassword),
+                   $('.popupContainer').css('display', 'none');
+                    $('#modal').css('display', 'none');
+                    $("#confirm_registration").modal("show");
+                    @*window.location.href = '@Url.Action("Index", "Website")';*@
+
+                    $("#phone1").val("");
+                    $("#FirstName").val("");
+                    $("#LastName").val("");
+                    $("#SponsorId").val("");
+                    $("#LastName").val("");
+                    $("#Password2").val("");
+                    $("#ConfirmPassword").val("");
+                    $("#Email").val("");
+                    $("#SponsorName").text("");
+                    $('#checkboxvalue123').prop('checked', false);
+                    $("#confirm_registration").modal("show");
+                    $("#phone1").attr("disabled", false);
+                    $("#FirstName").attr("disabled", false);
+                    $("#LastName").attr("disabled", false);
+                    $("#SponsorId").attr("disabled", false);
+                    $("#LastName").attr("disabled", false);
+                    $("#Password2").attr("disabled", false);
+                    $("#ConfirmPassword").attr("disabled", false);
+                    $("#Email").attr("disabled", false);
+                    $('#Confirm').show();
+                    $('#Confirm').attr("disabled", false);
+                    $('#divReg').hide();
+                    $('#Register').attr("disabled", false);
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Result);
+                }
+            }
+
+        });
+    }
+
+
+
+    //function getstatecity() {
+    //    $(".errortext").removeClass("errortext");
+    //    $.ajax({
+    //        url: "/Home/GetStateCity",
+    //        Type: "Get",
+    //        DataType: "JSON",
+    //        data: { PinCode: $("#PinCode").val() },
+    //        success: function (data) {
+    //            if (data.Result == "1") {
+    //                $("#State").val(data.State);
+    //                $("#City").val(data.City);
+    //            }
+    //            else {
+    //                $("#State").val('');
+    //                $("#City").val('');
+    //                $("#PinCode").val('');
+    //                $("#PinCode").addClass('errortext');
+    //                $('#PinCode').focus();
+    //                alert(data.Result);
+
+    //            }
+    //        }
+    //    });
+    //}
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+        && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function validateConfPassword() {
+        var password = $('#Password2').val();
+        var ConfirmPassword = $('#ConfirmPassword').val();
+        if (password != ConfirmPassword) {
+            $("#Password2").addClass('errortext');
+            $("#ConfirmPassword").addClass('errortext');
+            $('#Password2').val('');
+            $('#ConfirmPassword').val('');
+            alert("Password and Confirm Password are different")
+            return false;
+        }
+    }
+    function checkEmail() {
+        debugger;
+
+        if (($("#Email").val() != "")) {
+            if ($("#Email").val()) {
+
+                var email = document.getElementById('Email');
+                var filter = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+                if (!filter.test($("#Email").val())) {
+                    alert('Please provide a valid email address');
+                    $("#Email").val('');
+                    $("#Email").focus();
+                    return false;
+                }
+            }
+        }
+    }
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        debugger;
+        var SponsorId = $("#SponsorId").val();
+        if (SponsorId != 0) {
+            $('#modal').show();
+            $(".header_title").text('Sign Up');
+            $(".user_login").hide();
+            $(".error_page").hide();
+            $(".user_register").show();
+        }
+    });
+    function ToLogin() {
+        $(".user_login").show();
+        $(".header_title").text('Login');
+        $(".error_page").hide();
+        $(".user_register").hide();
+    }
+    function ToSignup() {
+        $(".user_register").show();
+        $(".header_title").text('Sign Up');
+        $(".user_login").hide();
+        $(".error_page").hide();
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        function OpenRegistrationPopUp() {
+            debugger;
+            $('#modal').show();
+            $(".header_title").text('Sign Up');
+            $(".user_login").hide();
+            $(".error_page").hide();
+            $(".user_register").show();
+            return true;
+        }
+    });
+</script>
+
+
+@if (TempData["Login"] != null)
+{
+    <script>
+    $(document).ready(function () {
+            debugger;
+            $('#modal').show();
+            $(".header_title").text('Error Page');
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".error_page").show();
+            return true;
+        });
+    </script>
+}
+
+
+
+<script>
+    var input = document.querySelector("#phone1");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        customPlaceholder: function (
+            selectedCountryPlaceholder,
+            selectedCountryData
+        ) {
+            return "e.g. " + selectedCountryPlaceholder;
+        },
+    });
+
+    var iti = window.intlTelInputGlobals.getInstance(input);
+
+    input.addEventListener('input', function() {
+      var countryName = iti.getSelectedCountryData().name;
+      document.getElementById('country').value = countryName;
+    });
+</script>

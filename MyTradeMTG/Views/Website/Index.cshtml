@@ -10,13 +10,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
       crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" crossorigin="anonymous"></script>
-
-<style>
-    .iti__country-name{
-        color:#000000;
-    }
-</style>
-
 <!-- START HOME -->
 <section id="home" class="home_bg">
     <div class="container">
@@ -514,7 +507,7 @@
 
 
 <!--START LOGIN-->
-<div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
+<div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 1100;left: 50%;margin-left: -165px;
     top: 100px;">
     <header class="popupHeader">
         <span class="header_title">Login</span>
@@ -567,10 +560,35 @@
                     <a href="#" id="register_form" class="abtn ml-4">Sign Up</a>
                 </div>
             </form>
-            @* <center>Don't have an account? <a href="/Home/Registration" i="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>*@
-
         </div>
         <!--Social login end-->
+
+
+        <!--Social errorpage statrt-->
+        <div class="error_page" style="display:none">
+            <form>
+                <div class="col-sm-12">
+                    <h4 style="color:#ff0000">Incorrect Login Id or Password </h4>
+                    <hr />
+                </div>
+                <div class="col-sm-12">
+                    <center>
+                        Already have an account ?<a href="#" style="color:#ffd234" onclick="return ToLogin()">Login</a>
+                    </center>
+                </div>
+                <div class="col-sm-12">
+                    <br />
+                    <center>
+                       Not have an account ?<a href="#" style="color:#ffd234" onclick="return ToSignup()">Sign-Up</a>
+                    </center>
+                </div>
+            </form>
+        </div>
+        <!--Social errorpage end-->
+
+
+
+
         <!--Register Form start-->
         <div class="user_register">
             <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
@@ -1046,9 +1064,22 @@
             $('#modal').show();
             $(".header_title").text('Sign Up');
             $(".user_login").hide();
+            $(".error_page").hide();
             $(".user_register").show();
         }
     });
+    function ToLogin() {
+        $(".user_login").show();
+        $(".header_title").text('Login');
+        $(".error_page").hide();
+        $(".user_register").hide();
+    }
+    function ToSignup() {
+        $(".user_register").show();
+        $(".header_title").text('Sign Up');
+        $(".user_login").hide();
+        $(".error_page").hide();
+    }
 </script>
 
 <script>
@@ -1058,11 +1089,29 @@
             $('#modal').show();
             $(".header_title").text('Sign Up');
             $(".user_login").hide();
+            $(".error_page").hide();
             $(".user_register").show();
             return true;
         }
     });
 </script>
+
+
+@if (TempData["Login"] != null)
+{
+    <script>
+    $(document).ready(function () {
+            debugger;
+            $('#modal').show();
+            $(".header_title").text('Error Page');
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".error_page").show();
+            return true;
+        });
+    </script>
+}
+
 
 
 <script>
