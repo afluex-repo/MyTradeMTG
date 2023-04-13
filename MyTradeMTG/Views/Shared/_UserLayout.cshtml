@@ -198,9 +198,7 @@
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
-                                @*@if (Session["Gender"] != null)
-                                {*@
-                                    @if (Session["Profile"].ToString() != "")
+                                    @if(Session["Profile"].ToString() != "")
                                     {
                                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                                             <img src="@Session["Profile"]" width="20" alt="@Session["FullName"]">
@@ -209,19 +207,17 @@
                                                 <small>(@Session["LoginId"])</small>
                                             </div>
                                         </a>
-                                        @*<h6 style="color:black;margin-top:10px">Hello Mrs. @Session["FullName"] (@Session["LoginId"])</h6>*@
                                     }
                                     else
                                     {
                                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
-                                            <img src="/assets/img/usericon.jpg" width="20" alt="@Session["FullName"]">
+                                            <img src="~/assets/img/usericon.jpg" width="20" alt="@Session["FullName"]">
                                             <div class="header-info">
                                                 <span>Hello  @Session["FullName"]</span>
                                                 <small>(@Session["LoginId"])</small>
                                             </div>
                                         </a>
                                     }
-                                    @*//}*@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="/User/ViewProfile" class="dropdown-item ai-icon">
                                         <i class="flaticon-381-user-7 text-success"></i>

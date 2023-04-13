@@ -19,19 +19,24 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <h4>Transfer To Bank Account</h4>
+                                    <h4>Withdrawal</h4>
                                     <span class="text-danger">
-                                        @TempData["msg"]
+                                        @*@TempData["msg"]*@
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <p style="color:red">Note : 2% Procecing Charges And 5% TDS Charge</p><br />
+                            @*<p style="color:red">Note : 2% Procecing Charges And 5% TDS Charge</p><br />*@
+                            <p style="color:red">Note : 10% Processing Charges</p><br />
                             <div class="row">
+                               
+                                <input type="hidden" id="IsFill123" value="@Session["IsFill"]">
+
+
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
-                                        MTG Token/USDT Balance <span style="color: red">*</span>
+                                        MTG /USDT Balance <span style="color: red">*</span>
                                         @Html.TextBoxFor(m => m.PayoutBalance, new { @class = "form-control", @Readonly = "true" })
                                     </div>
                                 </div>
@@ -43,23 +48,85 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
-                                        MTG Token/USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })
+                                        @*MTG /USDT<span style="color: red">*</span>
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return GetFinalAmount();" })*@
+
+
+                                        MTG /USDT<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onInput = "return ConvertMony();", @Value = "" })
+
+
                                     </div>
                                 </div>
+
+                                @*GetFinalAmount();*@
+                                @*///////////Start///////////////*@
+
+                                @*<div class="col-xl-3 mb-3">
+                                        <div class="example">
+                                            <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()" })
+                                        </div>
+                                    </div>*@
+
+
+                                <input type="hidden" id="Countryid" value="@Model.Country" />
+                                @*<div class="col-xl-3 mb-3" id="divusdoller" style="display:none">
+                                        <div class="example">
+                                            <p class="mb-1"> In US Doller<span style="color: red"></span></p>
+                                            <label id="InUsDoller" class="pt-3 form-control"></label>
+                                        </div>
+                                    </div>*@
+
+                                <div class="col-xl-3 mb-3" id="dvinrupees" @*style="display:none"*@>
+                                    <div class="example">
+                                        <p class="mb-1"> In Rupess<span style="color: red"></span></p>
+                                        <label id="result" class="pt-3 form-control"></label>
+                                        <input type="hidden" id="IndianValue" name="IndianValue" />
+                                    </div>
+                                </div>
+
+                                @*-----Convert USD TO INR Link Start-------*@
+                                <div style="display:none">
+                                    <label>From:</label>
+                                    <select id="from">
+                                        <option value="USD">USD</option>
+                                    </select>
+                                    <label>To:</label>
+                                    <select id="to">
+                                        <option value="INR">INR</option>
+                                    </select>
+                                </div>
+                                @*-----Convert USD TO INR Link End-------*@
+                                @*///////////End///////////////*@
+
+
+
                                 <div class="col-lg-3 col-md-3" style="margin-top:25px">
                                     <div class="form-group">
-                                        <input class="btn btn-success pull-left" type="submit" value="Transfer To Account" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
+                                        <input class="btn btn-success pull-left" type="submit" value="Withdraw" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
                                         <input type="hidden" id="hdf" value="@Model.Status" />
                                         <input type="hidden" id="hdf1" value="@ViewBag.MenuStatus" />
+                                        @*<input type="hidden" id="IsFill" value="@Model.IsFill" />*@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top:28px">
                                     <div class="form-group">
-                                        <h6 style="color:red">Total Charges:  <label id="lbld" style="color:red;">0</label></h6><br />
-                                        <h6 style="color:green">
-                                            Gross MTG Token/USDT to be deducted:  <span id="lblf" style="color:green;">0</span>
-                                        </h6>
+                                        <h6 style="color:red">Processing Charge:  <label id="perAmt" style="color:red;">0</label></h6>
+                                        <input type="hidden" id="percentAmt" name="percentAmt" />
+                                        <div style="display:none">
+                                            <h6 style="color:red">Transfer Charge In Rupees: <label id="Ind" style="color:red;">0</label></h6>
+                                            <input type="hidden" id="IndRupees" name="IndRupees" />
+                                        </div>
+                                        <h6 style="color:red">Gross MTG:  <label id="lbld" style="color:red;">0</label></h6>
+
+                                        <div style="display:none">
+                                            <h6 style="color:green">
+                                                @*Gross MTG /USDT to be deducted:*@
+                                                Gross MTG In Rupees:
+                                                <label id="lblf" style="color:green;">0</label>
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -68,18 +135,18 @@
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
-                                            <th>Narration</th>
-                                            @*<th>Login Id</th>
-                        <th>Name</th>*@
-                                            <th>Gross MTG Token/USDT</th>
-                                            <th>Procesing Charges</th>
-                                            <th>TDS MTG Token/USDT</th>
-                                            <th>Net MTG Token/USDT</th>
                                             <th>Date</th>
+                                            <th>Narration</th>
+                                            <th>Net(MTG)</th>
+                                            <th>Processing Charge(MTG)</th>
+                                            <th>Gross(MTG)</th>
+                                            <th>Net(INR)</th>
+                                            @*<th>Processing Charge(INR)</th>
+                                                <th>Gross(INR)</th>*@
+                                            <th>UPI ID</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
                                             <th>Status</th>
-                                            @*<th>ROI Percentage</th>*@
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,19 +159,18 @@
                                                 {
                                                     <tr class="text-left">
                                                         <td>@i</td>
-                                                        @*<td>@Item.PK_RequestID</td>*@
-                                                        <td>@Item.TransactionNo</td>
-                                                        @*<td>@Item.LoginId</td>
-                                    <td>@Item.Name</td>*@
-                                                        <td>@Item.GrossAmount</td>
-                                                        <td>@Item.ProcessingFee</td>
-                                                        <td>@Item.TDSAmount</td>
-                                                        <td>@Item.Amount</td>
                                                         <td>@Item.Date</td>
+                                                        <td>@Item.Narration</td>
+                                                        <td>@Item.Amount</td>
+                                                        <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                        <td>@Item.GrossAmount</td>
+                                                        <td>@Item.IndianValue</td>
+                                                        @*<td>@Item.TransferChargeInRupees</td>
+                                                            <td>@Item.GrossAmountRs</td>*@
+                                                        <td>@Item.UPIID</td>
                                                         <td>@Item.IFSCCode</td>
                                                         <td>@Item.AccountNo</td>
                                                         <td>@Item.Status</td>
-                                                        @*<td>@Item.ROIPercentage</td>*@
                                                     </tr>
                                                     i++;
                                                 }
@@ -118,112 +184,225 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+}
+
+<script src="~/plugins/flatpickr/flatpickr.js"></script>
+<script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+@*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
+<script>
+    //$(document).ready(function () {
+    //    if ($("#Countryid").val() == "India") {
+    //        $("#dvinrupees").show();
+    //        $("#divusdoller").hide();
+
+    //    }
+    //    else {
+    //        $("#divusdoller").show();
+    //        $("#dvinrupees").hide();
+
+    //    }
+    //})
+    function ConvertMony() {
+        debugger;
+        var mtgAmt = (parseFloat($("#Amount").val()) * 0.10);
+
+        var newmtgAmt = parseFloat(mtgAmt).toFixed(2);
+
+        $("#perAmt").text(parseFloat(newmtgAmt));
+
+
+        
+        //if ($("#Countryid").val() == "India") {
+        //    $("#dvinrupees").show();
+        //    $("#divusdoller").hide();
+        //}
+        //else {
+        //    $("#divusdoller").show();
+        //    $("#InUsDoller").text($("#Amount").val() + "$");
+        //    $("#dvinrupees").hide();
+        //}
+        debugger;
+        //const convert = document.getElementById("convert");
+        const result = document.getElementById("result");
+        const from = document.getElementById("from");
+        const to = document.getElementById("to");
+        const amount = document.getElementById("Amount");
+        const Rupee = parseFloat($("#Amount").val()) * 0.10;
+        const IndianValue = document.getElementById("IndianValue");
+        //var TodaysCurrency = $('#IndianValue').val();
+        let fromCurrency = from.value;
+        let toCurrency = to.value;
+        let amt = amount.value;
+        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            debugger;
+            let rate = data.rates[toCurrency];
+            let total = rate * amt;
+            let totalRupee = rate * Rupee;
+            //result.innerHTML = `${amt} ${fromCurrency} = ${total}
+            result.innerHTML = `${amt}$  = ${total}
+            ${toCurrency}`;
+            //IndianValue.innerHTML = total;
+            $("#IndianValue").val(total);
+            $("#Ind").text(parseFloat(totalRupee));
+            GetFinalAmount();
+
+            var grossAmt = totalRupee + total;
+            $("#lblf").text(parseFloat(grossAmt));
+
+        });
+
+    }
+
+
+
+    var f3 = flatpickr(document.getElementById('FromDate'),
+        {
+            // mode: "range"
+        });
+    var f3 = flatpickr(document.getElementById('ToDate'),
+        {
+            // mode: "range"
+        });
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function Validate() {
+        debugger;
+        document.getElementById("percentAmt").value = document.getElementById("perAmt").innerHTML;
+        document.getElementById("IndRupees").value = document.getElementById("Ind").innerHTML;
+
+        $(".errortext").removeClass("errortext");
+        if ($('#Amount').val() == '0') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
         }
+        if ($('#Amount').val() == '') {
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            return false;
+        }
+        //if (parseFloat($("#Amount").val()) < 1000) {
+        //    alert("Transfer amount should not be less than 1000 Rs.");
+        //    $('#Amount').val('');
+        //    return false;
+        //}
+        var PayoutBalnace = $("#PayoutBalance").val();
+        var MTGAmount = parseFloat($("#Amount").val()) + parseFloat($("#perAmt").text());
+        if (PayoutBalnace <= MTGAmount) {
+            alert("Insufficent Balance !!")
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            $("#Amount").val('');
+            return false;
+        }
+        return true;
+    }
 
-        <script src="~/plugins/flatpickr/flatpickr.js"></script>
-        <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
-        <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
-        <script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
-        <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>
-        <script>
-            var f3 = flatpickr(document.getElementById('FromDate'),
-                {
-                    // mode: "range"
-                });
-            var f3 = flatpickr(document.getElementById('ToDate'),
-                {
-                    // mode: "range"
-                });
+    function GetFinalAmount() {
+        debugger;
+        var mtgAmount = $("Amount").val();
+        var IndianValue = $('#IndianValue').val();
+        //if (parseFloat($("#Amount").val()) < 1000 || parseFloat($("#Amount").val()) > 49000) {
+        //if (parseFloat($("#IndianValue").val()) < 1000 || parseFloat($("#IndianValue").val()) > 49000) {
+        //    alert("Amount should be between or equal to  1000 and  49000");
+        //    $('#IndianValue').val('');
+        //    $("#IndianValue").addClass('errortext');
+        //    $('#IndianValue').focus();
+        //    return false;
+        //}
+        //var deductionAmount = parseFloat($("#Amount").val()) * 0.05 + parseFloat($("#Amount").val()) * 0.02;
 
-            function isNumberKey(evt) {
-                var charCode = (evt.which) ? evt.which : event.keyCode;
-                if (charCode != 46 && charCode > 31
-                  && (charCode < 48 || charCode > 57))
-                    return false;
+        //var deductionAmount = parseFloat($("#Amount").val()) * 0.10;
 
-                return true;
-            }
+        var deductionAmount = parseFloat($("#IndianValue").val()) * 0.10;
 
-            function Validate() {
-                debugger;
-                $(".errortext").removeClass("errortext");
-                if ($('#Amount').val() == '0') {
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    return false;
+        //if (parseFloat($("#Amount").val()) < 1000) {
+        //    alert("Amount should be in multiple of 1000 Rs.");
+        //    $('#Amount').val('');
+        //    return false;
+        //    //deductionAmount = 10;
+        //}
+        //if (parseFloat(deductionAmount) < 10)
+        //{
+        //    deductionAmount = 10;
+        //}
+        //if (parseInt($("#Amount").val()) % 100 != 0) {
+
+
+
+        //if (parseInt($("#IndianValue").val()) % 100 != 0) {
+
+        //    alert("Amount should be in multiple of 1000 Rs.");
+        //    //$('#Amount').val('');
+        //    $('#IndianValue').val('');
+        //    return false;
+        //}
+
+        var finalAmount = parseFloat($("#IndianValue").val()) + parseFloat(deductionAmount);
+
+
+
+        var mtgAmt = parseFloat($("#Amount").val()) * 0.10;
+        var newmtgAmt = parseFloat(mtgAmt).toFixed(2);
+
+        $("#perAmt").text(parseFloat(newmtgAmt));
+
+
+
+
+        var indrupees = parseFloat($("#IndianValue").val());
+        $("#IndAmt").text(parseFloat(indrupees));
+
+        var Amt = parseFloat($("#Amount").val());
+        var totchrg = Amt + mtgAmt
+        $("#lbld").text(parseFloat(totchrg));
+    }
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#IsFill123").val() == "False") {
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: 'Your KYC is not updated. Please update your KYC first',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/BankDetailsUpdate';
                 }
-                if ($('#Amount').val() == '') {
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    return false;
-                }
-                if (parseFloat($("#Amount").val()) < 1000) {
-                    alert("Transfer amount should not be less than 1000 Rs.");
-                    $('#Amount').val('');
-                    return false;
-                }
-                return true;
-            }
+            })
 
-            function GetFinalAmount() {
-                debugger;
-                if (parseFloat($("#Amount").val()) < 1000 || parseFloat($("#Amount").val()) > 49000) {
-                    alert("Amount should be between or equal to  1000 and  49000");
-                    $('#Amount').val('');
-                    $("#Amount").addClass('errortext');
-                    $('#Amount').focus();
-                    return false;
-                }
-                var deductionAmount = parseFloat($("#Amount").val()) * 0.05 + parseFloat($("#Amount").val()) * 0.02;
-                //if (parseFloat($("#Amount").val()) < 1000) {
-                //    alert("Amount should be in multiple of 1000 Rs.");
-                //    $('#Amount').val('');
-                //    return false;
-                //    //deductionAmount = 10;
-                //}
-                //if (parseFloat(deductionAmount) < 10)
-                //{
-                //    deductionAmount = 10;
-                //}
-                if (parseInt($("#Amount").val()) % 100 != 0) {
-                    alert("Amount should be in multiple of 1000 Rs.");
-                    $('#Amount').val('');
-                    return false;
-                }
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
 
-                $("#lbld").text(parseFloat(deductionAmount));
-                var finalAmount = parseFloat($("#Amount").val()) + parseFloat(deductionAmount);
-                $("#lblf").text(parseFloat(finalAmount));
-            }
-        </script>
-        <script>
-            $(document).ready(function () {
-                debugger;
-                if ($("#hdf").val() != "Approved") {
-                    jQuery.noConflict();
-                    swal({
-                        backdrop: true,
-                        allowOutsideClick: false,
-                        title: 'Warning!',
-                        text: 'Your KYC is not updated. Please update your KYC first',
-                        type: 'warning',
-                        showCancelButton: 0,
-                        confirmButtonText: 'OK',
-                    }).then(function (e) {
-                        if (e.value) {
-                            window.location = '/User/BankDetailsUpdate';
-                        }
-                    })
-
-                    //window.alert("Your KYC is not updated. Please update your KYC first.")
-                    //window.location = '/User/BankDetailsUpdate';
-                }
-                else {
-
-                }
-                if ($("#hdf1").val() == "InActive") {
-                    jQuery.noConflict();
+        }
+        if ($("#IsFill123").val() == "True") {
+            @*jQuery.noConflict();
                     swal({
                         backdrop: true,
                         allowOutsideClick: false,
@@ -236,18 +415,51 @@
                         if (e.value) {
                             window.location = '/User/BankDetailsUpdate';
                         }
-                    })
+                    })*@
 
-                    //window.alert("Your KYC is not updated. Please update your KYC first.")
-                    //window.location = '/User/BankDetailsUpdate';
-                }
-                else {
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
 
-                }
+        }
+    })
+</script>
+
+
+
+
+@if (TempData["msg"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Withdrawal Initiated Successfully.',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
             })
-        </script>
-
-
-
-
+        })
+    </script>
+}
+@if (TempData["errormessage"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: '@TempData["errormessage"]',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
 

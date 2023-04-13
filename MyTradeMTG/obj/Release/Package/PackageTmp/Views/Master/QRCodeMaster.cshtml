@@ -1,0 +1,75 @@
+﻿@model MyTradeMTG.Models.Master
+
+@{
+    ViewBag.Title = "QRCodeMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("QRCodeMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid">
+        <div class="row layout-top-spacing">
+            <div class="col-lg-12 col-12 layout-spacing">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4>QR Code Master</h4>
+                                <span class="text-danger" style="margin-left: 13px;">
+                                    @TempData["QRCodeMaster"]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-form-label">UPI Id<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.UPIId, new { @placeholder = "UPI Id", @class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="col-form-label">File Upload<span style="color: red">*</span></label>
+                                  <input type="file" id="QRCodeFile" name="QRCodeFile" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt-2">
+                                <input type="submit" id="btnSave" class="btn btn-success" name="btnSave" value="Save" onclick="return validate();" />   
+                                <a href="/master/QRCodeList" class="btn btn-primary">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+<script>
+    function validate() {
+        if ($('#UPIId').val() == '') {
+            $("#UPIId").addClass('errortext');
+            $('#UPIId').focus();
+            return false;
+        }
+        if ($('#QRCodeFile').val() == '') {
+            $("#QRCodeFile").addClass('errortext');
+            $('#QRCodeFile').focus();
+            return false;
+        }
+    }
+
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+        color: black;
+    }
+</style>

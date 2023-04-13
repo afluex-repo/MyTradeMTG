@@ -1,4 +1,4 @@
-﻿@model MyTradeMTG.Models.Dashboard
+﻿F@model MyTradeMTG.Models.Dashboard
 
 @{
     ViewBag.Title = "UserDashBoard";
@@ -14,9 +14,10 @@
     }
 
     divdash > h2 {
-        margin-left: 357px;
-        margin-top: 26px;
+        /*margin-left: 357px;*/
+        /*margin-top: 26px;*/
         position: fixed;
+        top: 25px;
         float: inherit;
         z-index: 30;
     }
@@ -24,7 +25,7 @@
     @@media only screen and (max-width: 768px) {
         divdash > h2 {
             margin-left: 140px;
-            margin-top: 26px;
+            top: 25px;
             position: fixed;
             float: inherit;
             z-index: 30;
@@ -32,11 +33,10 @@
     }
 </style>
 
-<divdash>
-    <h2>Dashboard</h2>
-</divdash>
-
 <div class="content-body">
+    <divdash>
+        <h2>Dashboard</h2>
+    </divdash>
     <!-- row -->
     <div class="container-fluid">
         <div class="row">
@@ -119,9 +119,9 @@
 
                     <div class="card-footer d-flex justify-content-between border-0">
                         <div class="footer-info font-w600">
-                            <span class="text-success pr-2">TTP- </span>
+                            <span class="text-success pr-2">TR1- </span>
                             <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
-                            <span class="text-danger pr-2">TPS- </span>
+                            <span class="text-danger pr-2">TR2- </span>
                             <span class="text-black">@ViewBag.LevelIncomeTr2</span><br />
                             <span class="text-danger pr-2">SB- </span>
                             <span class="text-black">@ViewBag.SponsorBonus</span><br />
@@ -137,7 +137,7 @@
                 <div class="card overflow-hidden">
                     <div class="card-header align-items-start border-0 pb-0">
                         <div class="me-auto">
-                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total MTG Wallet @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin5" height="47" />*@</p>
+                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Return MTG Wallet @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin5" height="47" />*@</p>
                             <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalTPSAmountTobeReceived</h3>
                         </div>
                     </div>
@@ -404,7 +404,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
-                            <div class="card-header d-sm-flex d-block pb-0 border-0">
+                            <div class="card-header d-sm-flex d-block pb-0 border-0" style="display:none !important;">
                                 <div>
                                     <h4 class="fs-20 text-black">Quick Transfer</h4>
                                     @*<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>*@
@@ -420,20 +420,40 @@
                                     <h4 class="text-black fs-20 mb-0">Recent Contacts</h4>
                                     <a href="javascript:void(0);" class="btn-link">View more</a>
                                 </div>
+
+                                <div class="items">
+                                    <div class="text-center">
+                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                        <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                        <b style="font-size:small;">Contact Address<br /></b>
+                                        <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
+                                    </div>
+                                </div>
+
+
                                 <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
-                                    @foreach (var item in Model.lstCustomer)
-                                    {
-                                        int i = 0;
-                                        <div class="items">
-                                            <div class="text-center">
-                                                <img class="mb-3 rounded" src="@item.ProfilePic" alt="">
-                                                <h6 class="text-black mb-0">@item.CustomerName</h6>
-                                                <b style="font-size:small;">MTG CA<br /></b>
-                                                <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
+                                    @*@foreach (var item in Model.lstCustomer)
+                                        {
+                                            int i = 0;
+                                            <div class="items">
+                                                <div class="text-center">
+                                                    <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
+                                                    <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                    <b style="font-size:small;">MTG CA<br /></b>
+                                                    <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        i++;
-                                    }
+                                            i++;
+                                        }*@
+
+
+
+
+
+
+
+
+
                                     @*<div class="items">
                                             <div class="text-center">
                                                 <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
@@ -464,10 +484,10 @@
                                         </div>*@
                                 </div>
                                 <div class="amount-bx">
-                                    <label>MTG Token/USDT</label>
-                                    <input type="number" class="form-control" placeholder="0">
+                                    <label>MTG/USDT</label>
+                                    <input type="text" readonly="" class="form-control" value="@ViewBag.TotalWalletAmount">
                                 </div>
-                                <a href="javascript:(0);" class="btn btn-primary d-block btn-lg text-uppercase">Send Money</a>
+                                <a href="/User/WalletTransfer" class="btn btn-primary d-block btn-lg text-uppercase">Quick Send</a>
                             </div>
                         </div>
                     </div>
@@ -475,184 +495,186 @@
             </div>
             <div class="col-xl-6 col-xxl-12">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4 class="mb-0 text-black fs-20">Sell Order</h4>
-                                <div class="dropdown ms-auto">
-                                    <div class="btn-link" data-bs-toggle="dropdown">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
-                                    </div>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                    <div style="display:none">
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="mb-0 text-black fs-20">Sell Order</h4>
+                                    <div class="dropdown ms-auto">
+                                        <div class="btn-link" data-bs-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body p-3">
-                                <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
-                                    @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Dash Coin</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>*@
-                                </select>
-                                <div class="table-responsive">
-                                    <table class="table text-center bg-info-hover tr-rounded">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">Price</th>
-                                                <th class="text-center">Amount</th>
-                                                <th class="text-end">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-left">82.3</td>
-                                                <td>0.15</td>
-                                                <td class="text-end">$134,12</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">83.9</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$237,31</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">84.2</td>
-                                                <td>0.25</td>
-                                                <td class="text-end">$252,58</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">86.2</td>
-                                                <td>0.35</td>
-                                                <td class="text-end">$126,26</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">91.6</td>
-                                                <td>0.75</td>
-                                                <td class="text-end">$46,92</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">92.6</td>
-                                                <td>0.21</td>
-                                                <td class="text-end">$123,27</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">93.9</td>
-                                                <td>0.55</td>
-                                                <td class="text-end">$212,56</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">94.2</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$129,26</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body p-3">
+                                    <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
+                                        @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Dash Coin</option>
+                                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
+                                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>
+                                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>*@
+                                    </select>
+                                    <div class="table-responsive">
+                                        <table class="table text-center bg-info-hover tr-rounded">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">Price</th>
+                                                    <th class="text-center">Amount</th>
+                                                    <th class="text-end">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">82.3</td>
+                                                    <td>0.15</td>
+                                                    <td class="text-end">$134,12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">83.9</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$237,31</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">84.2</td>
+                                                    <td>0.25</td>
+                                                    <td class="text-end">$252,58</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">86.2</td>
+                                                    <td>0.35</td>
+                                                    <td class="text-end">$126,26</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">91.6</td>
+                                                    <td>0.75</td>
+                                                    <td class="text-end">$46,92</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">92.6</td>
+                                                    <td>0.21</td>
+                                                    <td class="text-end">$123,27</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">93.9</td>
+                                                    <td>0.55</td>
+                                                    <td class="text-end">$212,56</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">94.2</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$129,26</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer border-0 pt-0 text-center">
-                                <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                <div class="card-footer border-0 pt-0 text-center">
+                                    <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4 class="mb-0 text-black fs-20">Buy Order</h4>
-                                <div class="dropdown ms-auto">
-                                    <div class="btn-link" data-bs-toggle="dropdown">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
-                                    </div>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header border-0 pb-0">
+                                    <h4 class="mb-0 text-black fs-20">Buy Order</h4>
+                                    <div class="dropdown ms-auto">
+                                        <div class="btn-link" data-bs-toggle="dropdown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Delete</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body p-3">
-                                <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
-                                    <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
-                                    @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Litecoin</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
-                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>*@
-                                </select>
-                                <div class="table-responsive">
-                                    <table class="table text-center bg-warning-hover tr-rounded">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">Price</th>
-                                                <th class="text-center">Amount</th>
-                                                <th class="text-end">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-left">82.3</td>
-                                                <td>0.15</td>
-                                                <td class="text-end">$134,12</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">83.9</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$237,31</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">84.2</td>
-                                                <td>0.25</td>
-                                                <td class="text-end">$252,58</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">86.2</td>
-                                                <td>0.35</td>
-                                                <td class="text-end">$126,26</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">91.6</td>
-                                                <td>0.75</td>
-                                                <td class="text-end">$46,92</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">92.6</td>
-                                                <td>0.21</td>
-                                                <td class="text-end">$123,27</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">93.9</td>
-                                                <td>0.55</td>
-                                                <td class="text-end">$212,56</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left">94.2</td>
-                                                <td>0.18</td>
-                                                <td class="text-end">$129,26</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="card-body p-3">
+                                    <select class="form-control custom-image-select-2 image-select mt-3 mt-sm-0">
+                                        <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">MTG Token/USDT</option>
+                                        @*<option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Bitcoin</option>
+                                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Litecoin</option>
+                                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ripple</option>
+                                            <option data-thumbnail="/UserPanel/images/MtgCoinPng.png">Ethereum</option>*@
+                                    </select>
+                                    <div class="table-responsive">
+                                        <table class="table text-center bg-warning-hover tr-rounded">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">Price</th>
+                                                    <th class="text-center">Amount</th>
+                                                    <th class="text-end">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">82.3</td>
+                                                    <td>0.15</td>
+                                                    <td class="text-end">$134,12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">83.9</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$237,31</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">84.2</td>
+                                                    <td>0.25</td>
+                                                    <td class="text-end">$252,58</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">86.2</td>
+                                                    <td>0.35</td>
+                                                    <td class="text-end">$126,26</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">91.6</td>
+                                                    <td>0.75</td>
+                                                    <td class="text-end">$46,92</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">92.6</td>
+                                                    <td>0.21</td>
+                                                    <td class="text-end">$123,27</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">93.9</td>
+                                                    <td>0.55</td>
+                                                    <td class="text-end">$212,56</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">94.2</td>
+                                                    <td>0.18</td>
+                                                    <td class="text-end">$129,26</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer border-0 pt-0 text-center">
-                                <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                <div class="card-footer border-0 pt-0 text-center">
+                                    <a href="#" class="btn btn-link">Show more <i class="fa fa-caret-right ms-2 scale-2"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
 
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card overflow-hidden">
-                            <div class="card-header align-items-start border-0 pb-0">
-                                <div class="widget widget-chart-two">
-                                    <div class="widget-heading">
-                                        <p class="UserDetailsss">User Details</p>
-                                    </div>
-                                    <div class="widget-content1">
-                                        <div id="chart-user" class=""></div>
+                    @*<div class="col-xl-4 col-sm-6">
+                            <div class="card overflow-hidden">
+                                <div class="card-header align-items-start border-0 pb-0">
+                                    <div class="widget widget-chart-two">
+                                        <div class="widget-heading">
+                                            <p class="UserDetailsss">User Details</p>
+                                        </div>
+                                        <div class="widget-content1">
+                                            <div id="chart-user" class=""></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
 
 
                     @if (ViewBag.TotalBusiness != "0.00")
@@ -693,84 +715,54 @@
 
 
 
-
-
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="card overflow-hidden">
-                            <div class="card-header align-items-start border-0 pb-0">
-                                <div class="widget widget-chart-two ">
-                                    <div class="widget-heading">
-                                        <h5 class="">Rewards</h5>
-                                    </div>
-                                    <div class="widget-content1">
-                                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-
-                                            <div class="carousel-inner">
-                                                @if (Model != null)
-                                                {
-                                                    if (Model.lstReward != null)
-                                                    {
-                                                        for (int i = 0; i < 1; i++)
-                                                        {
-
-                                                            <div class="carousel-item active" style="padding: 0px 10px;">
-                                                                @*<div class="widget-heading mb-3">
-                                                                        <h5 class="">@Model.lstReward[i].Title</h5>
-                                                                        <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
-                                                                    </div>*@
-                                                                <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;">
-                                                                @*<div class="carousel-caption">
-                                                                        <h5>@Model.lstReward[i].Title</h5>
-                                                                    </div>*@
-                                                            </div>
-                                                        }
-                                                    }
-                                                }
-                                                @if (Model != null)
-                                                {
-                                                    if (Model.lstReward != null)
-                                                    {
-                                                        for (int i = 1; i < Model.lstReward.Count; i++)
-                                                        {
-
-                                                            <div class="carousel-item" style="padding:0px 10px">
-                                                                @*<div class="widget-heading">
-                                                                        <h5>@Model.lstReward[i].Title</h5>
-                                                                        <p class="UserDetailsssTitle">@Model.lstReward[i].Title</p>
-                                                                    </div>*@
-                                                                <img class="d-block w-100 img-height" src="@Model.lstReward[i].Image" alt="First slide" style="border-radius: 10px;width:100%">
-                                                                @*<div class="carousel-caption">
-                                                                        <h5>@Model.lstReward[i].Title</h5>
-                                                                    </div>*@
-                                                            </div>
-                                                        }
-                                                    }
-                                                }
-                                                @*<div class="carousel-item active">
-                                                        <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Second slide">
-                                                        <div class="carousel-caption d-none d-sm-block">
-                                                            <h5>Second slide</h5>
-                                                            <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img class="d-block w-100 img-height" src="~/MyTradeMTGWebsite/assets/img/4.jpg" alt="Third slide">
-                                                        <div class="carousel-caption d-none d-sm-block">
-                                                            <h5>Third slide</h5>
-                                                            <p>Lorem ipsum dolor sit amet, dolore magna aliqua.</p>
-                                                        </div>
-                                                    </div>*@
-                                            </div>
-                                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
+                    <div class="col-xl-8">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <h4 class="card-intro-title mb-4">Rewards</h4>
+                                <div class="bootstrap-carousel">
+                                    <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-indicators">
+                                            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                         </div>
+                                        <div class="carousel-inner">
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstReward != null)
+                                                {
+                                                    for (int i = 0; i < 1; i++)
+                                                    {
+                                                        <div class="carousel-item active">
+                                                            <img class="d-block w-100" src="@Model.lstReward[i].Image" style="height:300px" alt="First slide">
+                                                        </div>
+
+                                                    }
+                                                }
+                                            }
+
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstReward != null)
+                                                {
+                                                    for (int i = 1; i < Model.lstReward.Count; i++)
+                                                    {
+
+                                                        <div class="carousel-item">
+                                                            <img class="d-block w-100" src="@Model.lstReward[i].Image" style="height:300px" alt="Second slide">
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -797,11 +789,19 @@
                         @if (Session["LoginId"].ToString() != "")
                         {
                             //var link = Session["Pk_UserId"].ToString();
-                            <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
-                            <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
-                            <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
-                            <span class="s-icon"><a href="https://www.instagram.com/?url=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
-                            <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+                            @*<span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://MyTradeMTG.co.in//Website/index?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://MyTradeMTG.co.in//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://MyTradeMTG.co.in//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://www.instagram.com/?url=http://MyTradeMTG.co.in//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                                <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://MyTradeMTG.co.in//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>*@
+
+
+                            <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://demo4.afluex.com/Website/index?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://demo4.afluex.com//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://demo4.afluex.com//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://www.instagram.com/?url=http://demo4.afluex.com//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                            <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://demo4.afluex.com//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+
                         }
                     </div>
                 </div>
@@ -810,165 +810,199 @@
     </div>
 </div>
 
-
-
-@*------------------------AddFranchise PopUp Start----------------------------------------------------*@
-
-@*<div class="modal fade md" id="myModalAddFranchise" role="dialog" style="display: none;padding-top:100px;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width:150%">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>
-                &nbsp;&nbsp;&nbsp;<span style="color:red;">@TempData["FranchiseRequest"]</span>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            Firm Name<span style="color: red">*</span>
-                            <input type="text" id="FirmName" name="FormName" class="form-control" placeholder="Firm Name" onkeypress="return onlyAlphabets();" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            Email<span style="color: red"></span>
-                            <input type="text" id="Email" name="Email" class="form-control" placeholder="Email" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            Mobile<span style="color: red">*</span>
-                            <input type="text" id="Mobile" name="Mobile" class="form-control" placeholder="Mobile" maxlength="10" onkeypress="return isNumberKey(event);" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            Bank Name<span style="color: red"></span>
-                            <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            Bank Branch<span style="color: red"></span>
-                            <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            Account No.<span style="color: red"></span>
-                            <input type="text" id="AccountNo" name="AccountNo" class="form-control" placeholder="Account No" onkeypress="return isNumberKey(event);" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            IFSC Code<span style="color: red"></span>
-                            <input type="text" id="IFSCCode" name="IFSCCode" class="form-control" placeholder="IFSC Code" />
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            Address<span style="color: red"></span>
-                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address", })
-                        </div>
-                    </div>
-
+@if (ViewBag.ProfilePic == "/assets/img/usericon.jpg" || ViewBag.Address == "" || ViewBag.Address == null)
+{
+    <div class="modal fade md" id="myModalProfile" role="dialog" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <!-- Modal content-->
+            <div class="modal-content" style="background-color:#c9a32e;">
+                <div class="modal-header" style="border:none">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>
-                <button type="submit" class="btn btn-primary btn-sm" onclick="return FranchiseRequest();">Save</button>
+                <div class="modal-body py-0 mt-3" style="color: black">
+                    <h4><span style="color:black;font-size:larger">Please update your profile.</span></h4>
+                </div>
+                <div class="modal-footer pt-0">
+                    <a href="/User/ViewProfile" style="background-color:black" class="btn btn-dark btn-sm">Update Profile</a>
+                </div>
             </div>
         </div>
     </div>
-</div>*@
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        $("#myModalProfile").modal('show');
+    });
+</script>
+<script>
+    $('.close').click(function () {
+        $('#myModalProfile').modal('hide');
+
+    })
+</script>
+@*------------------------AddFranchise PopUp Start----------------------------------------------------*@
+
+@*<div class="modal fade md" id="myModalAddFranchise" role="dialog" style="display: none;padding-top:100px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:150%">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>
+                    &nbsp;&nbsp;&nbsp;<span style="color:red;">@TempData["FranchiseRequest"]</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Firm Name<span style="color: red">*</span>
+                                <input type="text" id="FirmName" name="FormName" class="form-control" placeholder="Firm Name" onkeypress="return onlyAlphabets();" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Email<span style="color: red"></span>
+                                <input type="text" id="Email" name="Email" class="form-control" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Mobile<span style="color: red">*</span>
+                                <input type="text" id="Mobile" name="Mobile" class="form-control" placeholder="Mobile" maxlength="10" onkeypress="return isNumberKey(event);" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Bank Name<span style="color: red"></span>
+                                <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Bank Branch<span style="color: red"></span>
+                                <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                Account No.<span style="color: red"></span>
+                                <input type="text" id="AccountNo" name="AccountNo" class="form-control" placeholder="Account No" onkeypress="return isNumberKey(event);" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                IFSC Code<span style="color: red"></span>
+                                <input type="text" id="IFSCCode" name="IFSCCode" class="form-control" placeholder="IFSC Code" />
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                Address<span style="color: red"></span>
+                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address", })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="return FranchiseRequest();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
 
 
 @*------------------------AddFranchise PopUp end----------------------------------------------------*@
 
 @*<script>
-    function FranchiseRequest() {
-        debugger;
-        if($("#FirmName").val() == "") {
-            $("#FirmName").addClass('errortextfor');
-            $("#FirmName").focus();
-            return false;
-        }
-        else if($("#Email").val() == "") {
-            $("#Email").addClass('errortextfor');
-            $("#Email").focus();
-            return false;
-        }
-        else if($("#Mobile").val() == "") {
-            $("#Mobile").addClass('errortextfor');
-            $("#Mobile").focus();
-            return false;
-        }
-        else {
-            $.ajax({
-                url: '/User/FranchiseRequest',
-                type: 'Post',
-                dataType: 'json',
-                data: { "FirmName": $("#FirmName").val(), "Email": $("#Email").val(), "Mobile": $("#Mobile").val(), "BankName": $("#BankName").val(), "BranchName": $("#BranchName").val(), "AccountNo": $("#AccountNo").val(), "IFSCCode": $("#IFSCCode").val(), "Address": $("#Address").val() },
-                success: function (data) {
-                    if (data.Result == "yes") {
-                        $("#myModalAddFranchise").modal('show');
-                        alert('Franchise requested submited !!');
-                        window.location.reload();
-                    }
-                    else {
-                        alert(data.Result);
-                    }
-                }
-            });
-
-        }
-    }
-
-
-</script>
-<script>
-
-
-
-    function onlyAlphabets(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            }
-            else if (e) {
-                var charCode = e.which;
-            }
-            else { return true; }
-            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
-                return true;
-            else
+        function FranchiseRequest() {
+            debugger;
+            if ($("#FirmName").val() == "") {
+                $("#FirmName").addClass('errortextfor');
+                $("#FirmName").focus();
                 return false;
+            }
+            else if ($("#Email").val() == "") {
+                $("#Email").addClass('errortextfor');
+                $("#Email").focus();
+                return false;
+            }
+            else if ($("#Mobile").val() == "") {
+                $("#Mobile").addClass('errortextfor');
+                $("#Mobile").focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    url: '/User/FranchiseRequest',
+                    type: 'Post',
+                    dataType: 'json',
+                    data: { "FirmName": $("#FirmName").val(), "Email": $("#Email").val(), "Mobile": $("#Mobile").val(), "BankName": $("#BankName").val(), "BranchName": $("#BranchName").val(), "AccountNo": $("#AccountNo").val(), "IFSCCode": $("#IFSCCode").val(), "Address": $("#Address").val() },
+                    success: function (data) {
+                        if (data.Result == "yes") {
+                            $("#myModalAddFranchise").modal('show');
+                            alert('Franchise requested submited !!');
+                            window.location.reload();
+                        }
+                        else {
+                            alert(data.Result);
+                        }
+                    }
+                });
+
+            }
         }
-        catch (err) {
-            alert(err.Description);
+
+
+    </script>
+    <script>
+
+
+
+        function onlyAlphabets(e, t) {
+            try {
+                if (window.event) {
+                    var charCode = window.event.keyCode;
+                }
+                else if (e) {
+                    var charCode = e.which;
+                }
+                else { return true; }
+                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
+                    return true;
+                else
+                    return false;
+            }
+            catch (err) {
+                alert(err.Description);
+            }
         }
-    }
 
 
-    function isNumberKey(evt) {
+        function isNumberKey(evt) {
 
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode != 46 && charCode > 31
-          && (charCode < 48 || charCode > 57))
-            return false;
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+              && (charCode < 48 || charCode > 57))
+                return false;
 
-        return true;
-    }
-</script>
-<style>
-    .errortextfor {
-        border: 1px solid red !important;
-        /*background-color: #fff0f0 !important;*/
-    }
-</style>*@
+            return true;
+        }
+    </script>
+
+
+    <style>
+        .errortextfor {
+            border: 1px solid red !important;
+            /*background-color: #fff0f0 !important;*/
+        }
+    </style>*@
 
 
 
