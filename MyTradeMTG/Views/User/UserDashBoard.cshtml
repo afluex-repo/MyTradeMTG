@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="col-lg-2 border-radius m-3">
-                    <div class="counting" data-count="0">0</div>
+                    <div class="counting" data-count="12">0</div>
                     <h5>Year</h5>
                 </div>
             </div>
@@ -1476,12 +1476,16 @@
                 // number count for stats, using jQuery animate
 
                 $('.counting').each(function () {
+                    
                     var $this = $(this),
                         countTo = $this.attr('data-count');
+
 
                     $({ countNum: $this.text() }).animate({
                         countNum: countTo
                     },
+                   
+
 
                     {
 
@@ -1494,10 +1498,7 @@
                             $this.text(this.countNum);
                             //alert('finished');
                         }
-
                     });
-
-
                 });
             </script>
 
