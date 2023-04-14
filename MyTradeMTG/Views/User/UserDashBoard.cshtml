@@ -33,7 +33,6 @@
     }
 .countdown {
   display: flex;
-  padding-top:20px;
   padding-bottom:50px;
   justify-content:center
 }
@@ -41,8 +40,8 @@
 .countdown div {
   position: relative;
   width: 100px;
-  height: 100px;
-  line-height: 100px;
+  height: 75px;
+  /*line-height: 100px;*/
   text-align: center;
   color: #fff;
   margin: 0 15px;
@@ -89,11 +88,20 @@
     </divdash>
     <!-- row -->
     <div class="container-fluid">
-        @if (ViewBag.timerstatus == "1")
-        {
+        @*@if (ViewBag.timerstatus == "0")
+        {*@ 
+         
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
+                        <div class="card-header border-none">
+                        <div class="text-center offset-lg-3">
+                            <h4>
+                                Please complete your direct joining beforen countdown end to upgrade <br/>your package without
+                                paying any extra MTG.
+                            </h4>
+                        </div>
+                            </div>
                         <div class="countdown">
                             <div id="day">na</div>
                             <div id="hour">na</div>
@@ -101,9 +109,9 @@
                             <div id="second">na</div>
                         </div>
                     </div>
-                </div>
             </div>
-        }
+        </div>
+        @*}*@
                 
             <!-- end cont stats -->
 
@@ -1532,10 +1540,6 @@
    
  
     function newYear() {
-        
-        debugger;
-
-       
         
         var countDate = new Date(nextDate(1)).getTime();
 
