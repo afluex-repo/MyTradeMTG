@@ -88,20 +88,20 @@
     </divdash>
     <!-- row -->
     <div class="container-fluid">
-        @*@if (ViewBag.timerstatus == "0")
-        {*@ 
+       @if (ViewBag.timerstatus == "1")
+        {
          
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header border-none">
-                        <div class="text-center offset-lg-3">
-                            <h4>
-                                Please complete your direct joining beforen countdown end to upgrade <br/>your package without
-                                paying any extra MTG.
-                            </h4>
-                        </div>
+                            <div class="text-center offset-lg-3">
+                                <h4>
+                                    Please complete your direct joining before countdown end to upgrade <br/>your package without
+                                    paying any extra MTG.
+                                </h4>
                             </div>
+                        </div>
                         <div class="countdown">
                             <div id="day">na</div>
                             <div id="hour">na</div>
@@ -109,9 +109,9 @@
                             <div id="second">na</div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
-        @*}*@
+        }
                 
             <!-- end cont stats -->
 
@@ -121,7 +121,7 @@
                                 <div class="card-header align-items-start border-0 pb-0">
 
                                     <div class="me-auto">
-                                        <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Business@*<img src="~/UserPanel/images/MtgCoinPng1.png" class="mtgcoin1" height="47" />*@</p>
+                                        <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Business@*<img src="~/UserPanel/images/MtgCoinPng1.png" class="mtgcoin1" height="47" />*@</p>
 
                                         <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalBusiness</h3>
                                     </div>
@@ -144,7 +144,7 @@
                             <div class="card overflow-hidden">
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="me-auto">
-                                        <p class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Direct @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin2" height="47" />*@</p>
+                                        <p class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Total Direct @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin2" height="47" />*@</p>
                                         <h3 class="text-black mb-0 font-w600"> @ViewBag.TotalDirect</h3>
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@
                             <div class="card overflow-hidden">
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="me-auto">
-                                        <p class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Team @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin3" height="47" />*@</p>
+                                        <p class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Total Team @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin3" height="47" />*@</p>
                                         <h3 class="text-black mb-0 font-w600"> @ViewBag.TotalTeam</h3>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                             <div class="card overflow-hidden">
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="me-auto">
-                                        <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Return MTG Wallet @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin5" height="47" />*@</p>
+                                        <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Trade Bonus@*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin5" height="47" />*@</p>
                                         <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalTPSAmountTobeReceived</h3>
                                     </div>
                                 </div>
@@ -235,13 +235,13 @@
                             <div class="card overflow-hidden">
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="me-auto">
-                                        <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total MTG Token/USDT @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin6" height="47" />*@</p>
+                                        <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Payout @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin6" height="47" />*@</p>
                                         <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalAmount</h3>
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between border-0">
                                     <div class="footer-info font-w600">
-                                        <span class="text-success pr-2">Payout- </span>
+                                        <span class="text-success pr-2">Bonus- </span>
                                         <span class="text-black"> @ViewBag.TotalPayoutWallet</span><br />
                                         <span class="text-danger pr-2">Reward- </span>
                                         <span class="text-black">00.00</span>
@@ -279,8 +279,8 @@
                             <div class="card overflow-hidden">
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="me-auto">
-                                        <a href="/Wallet/WalletLedgerList" class="btn btn-info btn-block py-1">
-                                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>MTG Wallet Balance</p>
+                                        <a href="/Wallet/WalletLedgerList" class="btn btn-block py-1">
+                                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Balance</p>
                                             <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalWalletAmount</h3>
                                         </a>
 
