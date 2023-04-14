@@ -31,20 +31,55 @@
             z-index: 30;
         }
     }
-  .stats {
-	display: flex;
-    text-align:center;
-    align-items:center;
-	justify-content: center;
+.countdown {
+  display: flex;
+  padding-top:20px;
+  padding-bottom:50px;
+  justify-content:center
 }
-  .border-radius
-  {
-      padding-top:15px;
-      border:1px solid #fff;
-      border-radius:50%;
-      height:90px;
-      width:90px;
-  }
+
+.countdown div {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  color: #fff;
+  margin: 0 15px;
+  font-size: 2.1em;
+  font-weight: 500;
+}
+
+.countdown div:before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: #ffce00;
+  color: #333;
+  font-size: 0.5em;
+  line-height: 35px;
+  font-weight: 300;
+}
+
+.countdown div#day:before {
+  content: "Days";
+}
+
+.countdown div#hour:before {
+  content: "Hours";
+}
+
+.countdown div#minute:before {
+  content: "Minutes";
+}
+
+.countdown div#second:before {
+  content: "Seconds";
+}
+
 /*/ end count stats /*/
 </style>
 
@@ -54,27 +89,22 @@
     </divdash>
     <!-- row -->
     <div class="container-fluid">
-        <div class="card">
+        @if (ViewBag.timerstatus == "1")
+        {
             <div class="row">
-                <div class="stats">
-                <div class="col-lg-2 border-radius m-3">
-                    <div class="counting" data-count="20">0</div>
-                    <h5>Days</h5>
-                </div>
-
-                <div class="col-lg-2 border-radius m-3">
-                    <div class="counting" data-count="2">0</div>
-                    <h5>Months</h5>
-                </div>
-
-                <div class="col-lg-2 border-radius m-3">
-                    <div class="counting" data-count="12">0</div>
-                    <h5>Year</h5>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="countdown">
+                            <div id="day">na</div>
+                            <div id="hour">na</div>
+                            <div id="minute">na</div>
+                            <div id="second">na</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-           </div>
-         </div>
-
+        }
+                
             <!-- end cont stats -->
 
                     <div class="row">
@@ -1472,35 +1502,71 @@
                 <script src="~/plugins/apex/custom-apexcharts.js"></script>*@
             @*<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>*@
 
-            <script>
-                // number count for stats, using jQuery animate
+<script>
 
-                $('.counting').each(function () {
-                    
-                    var $this = $(this),
-                        countTo = $this.attr('data-count');
+    debugger
 
 
-                    $({ countNum: $this.text() }).animate({
-                        countNum: countTo
-                    },
-                   
+    function getMonthName(monthNumber) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
 
+        return date.toLocaleString('en-US', { month: 'long' });
+    }
 
-                    {
+ 
 
-                        duration: 3000,
-                        easing: 'linear',
-                        step: function () {
-                            $this.text(Math.floor(this.countNum));
-                        },
-                        complete: function () {
-                            $this.text(this.countNum);
-                            //alert('finished');
-                        }
-                    });
-                });
-            </script>
+    function nextDate(dayIndex) {
+        var today = new Date();
+        today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1);
+
+       
+        var day = today.getDate();
+        var month = today.getMonth()+1;
+        var year = today.getFullYear();
+
+        var newdate = day + '-' + getMonthName(month) + '-' + year;
+
+        return newdate;
+    }
+   
+ 
+    function newYear() {
+        
+        debugger;
+
+       
+        
+        var countDate = new Date(nextDate(1)).getTime();
+
+        
+
+        //var days = [1, 7, 6, 5, 4, 3, 2];
+        //var d = new Date();
+        var now = new Date().getTime();
+        gap = countDate - now;
+
+        var second = 1000;
+        var minute = second * 60;
+        var hour = minute * 60;
+        var day = hour * 24;
+
+        var d = Math.floor(gap / day);
+        var h = Math.floor((gap % day) / hour);
+        var m = Math.floor((gap % hour) / minute);
+        var s = Math.floor((gap % minute) / second);
+
+        document.getElementById("day").innerText = d;
+        document.getElementById("hour").innerText = h;
+        document.getElementById("minute").innerText = m;
+        document.getElementById("second").innerText = s;
+    }
+
+    setInterval(function () {
+      newYear();
+    }, 1000);
+
+</script>
 
 
 

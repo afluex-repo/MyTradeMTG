@@ -66,7 +66,7 @@ namespace MyTradeMTG.Controllers
 
                 ViewBag.Address = ds.Tables[8].Rows[0]["Address"].ToString();
                 ViewBag.ProfilePic = ds.Tables[8].Rows[0]["ProfilePic"].ToString();
-
+                ViewBag.timerstatus = ds.Tables[8].Rows[0]["timerstatus"].ToString();
                 //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
                 //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
 
