@@ -305,6 +305,7 @@
                                 </div>
                             </div>
                         </div>
+                       
 
                         <div class="col-xl-6 col-xxl-12">
                             <div class="card">
@@ -1523,12 +1524,11 @@
     function nextDate(dayIndex) {
         debugger;
         var today = new Date();
-        today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1);
+        today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1 + 7);
         var day = today.getDate();
         var month = today.getMonth()+1;
         var year = today.getFullYear();
-        //var newdate = day + '-' + getMonthName(month) + '-' + year;
-        var secondmonday = day + 7 + '-' + getMonthName(month) + '-' + year;
+        var secondmonday = day + '-' + getMonthName(month) + '-' + year;
         return secondmonday;
     }
    
@@ -1554,9 +1554,9 @@
         document.getElementById("second").innerText = s;
     }
 
-    setInterval(function () {
-      newYear();
-    }, 1000);
+        setInterval(function () {
+          newYear();
+        }, 1000);
 
 </script>
 
