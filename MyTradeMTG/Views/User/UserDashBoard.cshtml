@@ -227,7 +227,7 @@
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="widgetChart5" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:25px;"></canvas>
+                                    <canvas id="widgetChart5" class="max-h80 mt-auto chartjs-render-monitor" style="display: block; width: 267px; height: 80px;" width="267" height="80"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +249,7 @@
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="widgetChart6" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:25px;"></canvas>
+                                    <canvas id="widgetChart6" class="max-h80 chartjs-render-monitor"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -301,7 +301,24 @@
                                     </div>*@
                                 <div class="card-body p-0">
                                     <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;margin-top:85px;"></canvas>
+                                    <canvas id="widgetChart7" class="max-h80 chartjs-render-monitor" style="margin-top:60px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="card overflow-hidden">
+                                <div class="card-header align-items-start border-0 pb-0">
+                                    <div class="me-auto">
+                                        <a href="/Wallet/WalletLedgerList" class="btn btn-block py-1">
+                                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Balance</p>
+                                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> </h3>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:60px;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -885,7 +902,7 @@
                     </div>
                 </div>
             </div>
-    </div>
+ 
 
             @if (ViewBag.ProfilePic == "/assets/img/usericon.jpg" || ViewBag.Address == "" || ViewBag.Address == null)
             {
@@ -911,7 +928,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
             <script>
                 $(document).ready(function () {
-                    debugger;
+                  
                     $("#myModalProfile").modal('show');
                 });
             </script>
@@ -1512,7 +1529,7 @@
 
 <script>
 
-    debugger;
+
     function getMonthName(monthNumber) {
         const date = new Date();
         date.setMonth(monthNumber - 1);
@@ -1521,7 +1538,7 @@
 
 
     function nextDate(dayIndex) {
-        debugger;
+
         var today = new Date();
         today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1);
         var day = today.getDate();
