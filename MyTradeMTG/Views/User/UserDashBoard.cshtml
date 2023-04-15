@@ -1512,41 +1512,29 @@
 
 <script>
 
-    debugger
-
-
+    debugger;
     function getMonthName(monthNumber) {
         const date = new Date();
         date.setMonth(monthNumber - 1);
-
         return date.toLocaleString('en-US', { month: 'long' });
     }
 
- 
 
     function nextDate(dayIndex) {
+        debugger;
         var today = new Date();
         today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1);
-
-       
         var day = today.getDate();
         var month = today.getMonth()+1;
         var year = today.getFullYear();
-
-        var newdate = day + '-' + getMonthName(month) + '-' + year;
-
-        return newdate;
+        //var newdate = day + '-' + getMonthName(month) + '-' + year;
+        var secondmonday = day + 7 + '-' + getMonthName(month) + '-' + year;
+        return secondmonday;
     }
    
  
     function newYear() {
-        
         var countDate = new Date(nextDate(1)).getTime();
-
-        
-
-        //var days = [1, 7, 6, 5, 4, 3, 2];
-        //var d = new Date();
         var now = new Date().getTime();
         gap = countDate - now;
 
