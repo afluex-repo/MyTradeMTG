@@ -10,6 +10,7 @@ namespace MyTradeMTG.Models
 {
     public class UserWallet
     {
+        public string PackageTypeName { get; set; }
         public string Country { get; set; }
         public string LoginId { get; set; }
         public string Amount { get; set; }
@@ -54,8 +55,13 @@ namespace MyTradeMTG.Models
         public string TodaysCurrency { get; set; }
         public string IndianValue { get; set; }
         public string result { get; set; }
+        public string TopUpIdRandom { get; set; }
+        public string CurrencyName { get; set; }
+        public string CurrencySymbol { get; set; }
+        public string ISOcode { get; set; }
 
-        
+
+
 
         public DataSet GetMemberDetails()
         {

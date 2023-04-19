@@ -30,6 +30,10 @@
                             @*<p style="color:red">Note : 2% Procecing Charges And 5% TDS Charge</p><br />*@
                             <p style="color:red">Note : 10% Processing Charges</p><br />
                             <div class="row">
+                               
+                                <input type="hidden" id="IsFill123" value="@Session["IsFill"]">
+
+
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         MTG /USDT Balance <span style="color: red">*</span>
@@ -49,7 +53,7 @@
 
 
                                         MTG /USDT<span style="color: red">*</span>
-                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onchange = "return ConvertMony();", @Value="" })
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberKey(event);", @onInput = "return ConvertMony();", @Value = "" })
 
 
                                     </div>
@@ -67,20 +71,21 @@
 
 
                                 <input type="hidden" id="Countryid" value="@Model.Country" />
-                                <div class="col-xl-3 mb-3" id="divusdoller" style="display:none">
-                                    <div class="example">
-                                        <p class="mb-1"> In US Doller<span style="color: red"></span></p>
-                                        <label id="InUsDoller" class="pt-3 form-control"></label>
-                                    </div>
-                                </div>
+                                @*<div class="col-xl-3 mb-3" id="divusdoller" style="display:none">
+                                        <div class="example">
+                                            <p class="mb-1"> In US Doller<span style="color: red"></span></p>
+                                            <label id="InUsDoller" class="pt-3 form-control"></label>
+                                        </div>
+                                    </div>*@
 
-                                <div class="col-xl-3 mb-3" id="dvinrupees" style="display:none">
+                                <div class="col-xl-3 mb-3" id="dvinrupees" @*style="display:none"*@>
                                     <div class="example">
                                         <p class="mb-1"> In Rupess<span style="color: red"></span></p>
                                         <label id="result" class="pt-3 form-control"></label>
                                         <input type="hidden" id="IndianValue" name="IndianValue" />
                                     </div>
                                 </div>
+
                                 @*-----Convert USD TO INR Link Start-------*@
                                 <div style="display:none">
                                     <label>From:</label>
@@ -96,11 +101,13 @@
                                 @*///////////End///////////////*@
 
 
+
                                 <div class="col-lg-3 col-md-3" style="margin-top:25px">
                                     <div class="form-group">
                                         <input class="btn btn-success pull-left" type="submit" value="Withdraw" id="PayoutRequest" name="PayoutRequest" onclick="return Validate()" />
                                         <input type="hidden" id="hdf" value="@Model.Status" />
                                         <input type="hidden" id="hdf1" value="@ViewBag.MenuStatus" />
+                                        @*<input type="hidden" id="IsFill" value="@Model.IsFill" />*@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6" style="margin-top:28px">
@@ -134,8 +141,8 @@
                                             <th>Processing Charge(MTG)</th>
                                             <th>Gross(MTG)</th>
                                             <th>Net(INR)</th>
-                                            <th>Processing Charge(INR)</th>
-                                            <th>Gross(INR)</th>
+                                            @*<th>Processing Charge(INR)</th>
+                                                <th>Gross(INR)</th>*@
                                             <th>UPI ID</th>
                                             <th>IFSC Code</th>
                                             <th>Account No</th>
@@ -158,14 +165,12 @@
                                                         <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
                                                         <td>@Item.GrossAmount</td>
                                                         <td>@Item.IndianValue</td>
-                                                        <td>@Item.TransferChargeInRupees</td>
-                                                        <td>@Item.GrossAmountRs</td>
+                                                        @*<td>@Item.TransferChargeInRupees</td>
+                                                            <td>@Item.GrossAmountRs</td>*@
                                                         <td>@Item.UPIID</td>
                                                         <td>@Item.IFSCCode</td>
                                                         <td>@Item.AccountNo</td>
                                                         <td>@Item.Status</td>
-
-
                                                     </tr>
                                                     i++;
                                                 }
@@ -188,7 +193,18 @@
 @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script>
+    //$(document).ready(function () {
+    //    if ($("#Countryid").val() == "India") {
+    //        $("#dvinrupees").show();
+    //        $("#divusdoller").hide();
 
+    //    }
+    //    else {
+    //        $("#divusdoller").show();
+    //        $("#dvinrupees").hide();
+
+    //    }
+    //})
     function ConvertMony() {
         debugger;
         var mtgAmt = (parseFloat($("#Amount").val()) * 0.10);
@@ -197,15 +213,17 @@
 
         $("#perAmt").text(parseFloat(newmtgAmt));
 
-        if ($("#Countryid").val() == "India") {
-            $("#dvinrupees").show();
-            $("#divusdoller").hide();
-        }
-        else {
-            $("#divusdoller").show();
-            $("#InUsDoller").text($("#Amount").val() + "$");
-            $("#dvinrupees").hide();
-        }
+
+        
+        //if ($("#Countryid").val() == "India") {
+        //    $("#dvinrupees").show();
+        //    $("#divusdoller").hide();
+        //}
+        //else {
+        //    $("#divusdoller").show();
+        //    $("#InUsDoller").text($("#Amount").val() + "$");
+        //    $("#dvinrupees").hide();
+        //}
         debugger;
         //const convert = document.getElementById("convert");
         const result = document.getElementById("result");
@@ -283,6 +301,15 @@
         //    $('#Amount').val('');
         //    return false;
         //}
+        var PayoutBalnace = $("#PayoutBalance").val();
+        var MTGAmount = parseFloat($("#Amount").val()) + parseFloat($("#perAmt").text());
+        if (PayoutBalnace <= MTGAmount) {
+            alert("Insufficent Balance !!")
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            $("#Amount").val('');
+            return false;
+        }
         return true;
     }
 
@@ -335,7 +362,7 @@
 
         $("#perAmt").text(parseFloat(newmtgAmt));
 
-       
+
 
 
         var indrupees = parseFloat($("#IndianValue").val());
@@ -344,7 +371,6 @@
         var Amt = parseFloat($("#Amount").val());
         var totchrg = Amt + mtgAmt
         $("#lbld").text(parseFloat(totchrg));
-
     }
 
 
@@ -353,29 +379,29 @@
 <script>
     $(document).ready(function () {
         debugger;
-        //if ($("#hdf").val() != "Approved") {
-        //jQuery.noConflict();
-        //swal({
-        //    backdrop: true,
-        //    allowOutsideClick: false,
-        //    title: 'Warning!',
-        //    text: 'Your KYC is not updated. Please update your KYC first',
-        //    type: 'warning',
-        //    showCancelButton: 0,
-        //    confirmButtonText: 'OK',
-        //}).then(function (e) {
-        //    if (e.value) {
-        //        window.location = '/User/BankDetailsUpdate';
-        //    }
-        //})
+        if ($("#IsFill123").val() == "False") {
+            jQuery.noConflict();
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: 'Warning!',
+                text: 'Your KYC is not updated. Please update your KYC first',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            }).then(function (e) {
+                if (e.value) {
+                    window.location = '/User/BankDetailsUpdate';
+                }
+            })
 
-        //window.alert("Your KYC is not updated. Please update your KYC first.")
-        //window.location = '/User/BankDetailsUpdate';
-        //}
-        //else {
+            //window.alert("Your KYC is not updated. Please update your KYC first.")
+            //window.location = '/User/BankDetailsUpdate';
+        }
+        else {
 
-        //}
-        if ($("#hdf1").val() == "InActive") {
+        }
+        if ($("#IsFill123").val() == "True") {
             @*jQuery.noConflict();
                     swal({
                         backdrop: true,
@@ -401,6 +427,8 @@
 </script>
 
 
+
+
 @if (TempData["msg"] != null)
 {
     <script>
@@ -423,7 +451,6 @@
     <script>
         $(document).ready(function () {
             debugger;
-            jQuery.noConflict();
             swal({
                 backdrop: true,
                 allowOutsideClick: false,

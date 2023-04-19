@@ -13,86 +13,70 @@
     }
 </style>
 
-    <style>
+<style>
+    header /* delet it */ {
+        height: 100vh;
+        background-color: #444444;
+        font-family: roboto;
+    }
 
-        header /* delet it */
-{
-    height:100vh;
-    background-color:#444444;
-    font-family:roboto;
-}
+    #demo h1 /* delet it */ {
+        text-align: center;
+        color: #888;
+        padding-bottom: 5px;
+    }
 
-#demo h1 /* delet it */
-{
-    text-align:center;
-    color:#888;
-    padding-bottom:5px;
-}
+    #demo p /* delet it */ {
+        text-align: center;
+        color: #777;
+        padding-bottom: 15px;
+        font-size: 21px;
+        letter-spacing: 1px;
+    }
 
-#demo p /* delet it */
-{
-    text-align:center;
-    color:#777;
-    padding-bottom:15px;
-    font-size:21px;
-    letter-spacing:1px;
-}
+    #demo .row /* delet it */ {
+        padding-top: 20vh;
+        padding-bottom: 40px;
+    }
 
-#demo .row /* delet it */
-{
-    padding-top:20vh;
-    padding-bottom:40px;
-}
+    #demo img {
+        box-shadow: 1px 1px 5px #000;
+        max-height: 15em; /* delet it */
+    }
 
-#demo img
-{
-    box-shadow:1px 1px 5px #000;
-    max-height:15em; /* delet it */
-}
-
-#demo img:hover
-{
-    transition:all 0.6s; /* Change Speed */
-    -ms-transform: scale(2, 2); /* IE 9 */
-    -webkit-transform: scale(2, 2); /* Safari */
-    transform: scale(2, 2); /* Change Size */
-    overflow:visible;
-    z-index:1 !important; /* you can change it, but better let this in default */
-}
+        #demo img:hover {
+            transition: all 0.6s; /* Change Speed */
+            -ms-transform: scale(2, 2); /* IE 9 */
+            -webkit-transform: scale(2, 2); /* Safari */
+            transform: scale(2, 2); /* Change Size */
+            overflow: visible;
+            z-index: 1 !important; /* you can change it, but better let this in default */
+        }
 
 
-#demo .item-1:hover
-{
-    -ms-transform: translate(100px); /* IE 9 */
-    -webkit-transform: translate(100px); /* Safari */
-    transform: translate(100px); /* Change Offset */
-    z-index:2; /* you can change it, but better let this in default */
-}
+    #demo .item-1:hover {
+        -ms-transform: translate(100px); /* IE 9 */
+        -webkit-transform: translate(100px); /* Safari */
+        transform: translate(100px); /* Change Offset */
+        z-index: 2; /* you can change it, but better let this in default */
+    }
 
-#demo .item-2:hover
-{
-    z-index:2; /* you can change it, but better let this in default */
-}
+    #demo .item-2:hover {
+        z-index: 2; /* you can change it, but better let this in default */
+    }
 
-#demo .item-3:hover
-{
-    -ms-transform: translate(-100); /* IE 9 */
-    -webkit-transform: translate(-100px); /* Safari */
-    transform: translate(-100px); /* Change Offset */
-    z-index:2; /* you can change it, but better let this in default */
-}
+    #demo .item-3:hover {
+        -ms-transform: translate(-100); /* IE 9 */
+        -webkit-transform: translate(-100px); /* Safari */
+        transform: translate(-100px); /* Change Offset */
+        z-index: 2; /* you can change it, but better let this in default */
+    }
 
 
-.modal:nth-of-type(even) {
-    z-index: 1052 !important;
-}
-
-
-    </style>
-
-
-
-
+    .modal:nth-of-type(even) {
+        z-index: 1052 !important;
+    }
+</style>
 
 
 @using (Html.BeginForm("SalesReportsForAdmin", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -182,14 +166,9 @@
                                                 int i = 1;
                                                 foreach (var Item in Model.lstsalesreports)
                                                 {
-
                                                     @*<div class="img1">
-                                    <img src="@Item.DocumentUrl" height="100" />
-                                </div>*@
-
-
-
-
+                                                            <img src="@Item.DocumentUrl" height="100" />
+                                                        </div>*@
                                                     <tr class="text-left">
                                                         <td>@i</td>
                                                         <td id="UserContactAddress_@Item.Pk_FranchisetransferId">@Item.UserContactAddress</td>
@@ -212,20 +191,11 @@
                                                         <td style="display:none" id="TransactionDate_@Item.Pk_FranchisetransferId">@Item.TransactionDate</td>
                                                         @*<td style="display:none" id="DocumentUrl_@Item.Pk_FranchisetransferId"><img src="@Item.DocumentUrl" height="100" /></td>*@
 
-
-
                                                         <td style="display:none"><img src="@Item.DocumentUrl" class="preview" id="DocumentUrl_@Item.Pk_FranchisetransferId" height="100" /></td>
 
-
-
-
                                                         <td>
-                                                            @if (Item.Status == "InProcess")
-                                                            {
-                                                                @*<a href="/AdminReports/ViewReports?Id=@Item.Pk_FranchisetransferId" class="btn btn-success btn-block py-0 px-0">View</a>*@
-                                                                @*<a href="javascript:void(0)" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)" class="btn btn-success btn-block py-2 px-0">View</a>*@
-                                                                <a data-toggle="modal" href="#myModalApproRejectFranchise" class="btn btn-success btn-block py-2 px-0" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)">View</a>
-                                                            }
+                                                            <a data-toggle="modal" href="#myModalApproRejectFranchise" class="btn btn-danger btn-block py-2 px-0" onclick="return OpenPopupForApproReject(@Item.Pk_FranchisetransferId)">View</a>
+
                                                         </td>
                                                     </tr>
                                                     i++;
@@ -250,7 +220,7 @@
         <div class="modal-dialog modal-lg" role="document">
 
             @*<div class="modal-dialog modal-lg" role="document">*@
-                @*<div class="modal-content" style="width:150%">*@
+            @*<div class="modal-content" style="width:150%">*@
             <div class="modal-content">
                 <div class="modal-header">
                     @*<h5 class="modal-title" id="EditModalLabel">Franchise Request</h5>*@
@@ -341,15 +311,15 @@
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <button type="button" onclick="return close_modal()" id="modal2" class="close"><span aria-hidden="true">&times;</span></button>
-                                            @*<h4 class="modal-title" id="myModalLabel">Image preview</h4>*@
-                                        </div>
+                                                <button type="button" onclick="return close_modal()" id="modal2" class="close"><span aria-hidden="true">&times;</span></button>
+                                                @*<h4 class="modal-title" id="myModalLabel">Image preview</h4>*@
+                                            </div>
                                             <div class="modal-body py-0 px-0 h-100" style="min-height:500px">
                                                 <img src="" id="imagepreview" style="min-height:500px;width:100%">
                                             </div>
                                             @*<div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>*@
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -358,47 +328,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="display:none" id="DivApprovedandRejectButton">
                     <button type="submit" class="btn btn-success btn-sm" onclick="return ApproveRequest(Pk_FranchitraferId);">Approve</button>
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return RejectRequest();">Reject</button>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
     @*------------------------ApproReject PopUp end----------------------------------------------------*@
-
-
-    <!----- modal  -->
-
     
-
-
 }
-
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
 <link href="~/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
-
 <script>
-    
-    function close_modal()
-    {
+    function close_modal() {
         $('#imagemodal').modal('hide');
     }
-
-    function ViewzoomImage()
-    {
+    function ViewzoomImage() {
         debugger;
         $('#imagepreview').attr('src', $('#imgCategory').attr('src')); // here asign the image to the modal when the user click the enlarge link
         $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
     }
 </script>
 <script>
-
     $(document).ready(function () {
-       
-
+        debugger;
         if ($("#hdf").val() != 0) {
             $("#Status").val($("#hdf").val()).attr("selected", "selected");
         }
@@ -430,8 +386,8 @@
         var TransactionDate_ = $("#TransactionDate_" + Id).text();
         var Status_ = $("#Status_" + Id).text();
         var DocumentUrl_ = $('#DocumentUrl_' + Id).prop('src');
-
         var Pk_FranchitraferId = $("#Pk_FranchitraferId").text(Pk_FranchisetransferId_);
+
         $("#UserContactAddress").text(UserContactAddress_);
         $("#UserName").text(UserName_);
         $("#FranchiseeContactAddress").text(FranchiseeContactAddress_);
@@ -448,11 +404,18 @@
         $('#myModalApproRejectFranchise').find('[id*=imgCategory]').attr('src', DocumentUrl_);
         jQuery.noConflict();
         $("#myModalApproRejectFranchise").modal('show');
+        if (Status_ == "InProcess") {
+            $("#DivApprovedandRejectButton").show();
+        }
+        else {
+            $("#DivApprovedandRejectButton").hide();
+        }
     }
     function closeModal() {
         jQuery.noConflict();
         $("#myModalApproRejectFranchise").hide();
     }
+
     function ApproveRequest(Pk_FranchitraferId) {
         debugger;
         var Pk_FranchitraferId = $('#Pk_FranchitraferId').text();

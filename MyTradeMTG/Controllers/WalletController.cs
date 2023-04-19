@@ -58,12 +58,15 @@ namespace MyTradeMTG.Controllers
             obj.LoginId = Session["LoginId"].ToString();
             //if (Session["IdActivated"].ToString() == "true")
             //{
-                obj.BankBranch = Session["Branch"].ToString();
+            obj.BankBranch = Session["Branch"].ToString();
                 obj.BankName = Session["Bank"].ToString();
             //}
 
             #region Check Balance
             obj.FK_UserId = Session["Pk_UserId"].ToString();
+            obj.CurrencyName = Session["CurrencyName"].ToString();
+            obj.CurrencySymbol = Session["CurrencySymbol"].ToString();
+            obj.ISOcode = Session["ISOcode"].ToString();
             DataSet ds = obj.GetWalletBalance();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -410,10 +413,11 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
-        public ActionResult ViewTPS(string InvId)
+        public ActionResult ViewTPS(string InvId,string PackageTypeName)
         {
             UserWallet model = new UserWallet();
             model.Pk_InvestmentId = InvId;
+            ViewBag.PackageTypeName = PackageTypeName;
             List<UserWallet> lst = new List<UserWallet>();
             model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.GetROIDetails();
@@ -426,6 +430,7 @@ namespace MyTradeMTG.Controllers
                     obj.ROI = r["ROI"].ToString();
                     obj.Date = r["ROIDate"].ToString();
                     obj.Status = r["Status"].ToString();
+                    obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
                     lst.Add(obj);
                 }
                 model.lstROI = lst;

@@ -198,9 +198,7 @@
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
-                                @*@if (Session["Gender"] != null)
-                                {*@
-                                    @if (Session["Profile"].ToString() != "")
+                                    @if(Session["Profile"].ToString() != "")
                                     {
                                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                                             <img src="@Session["Profile"]" width="20" alt="@Session["FullName"]">
@@ -209,19 +207,17 @@
                                                 <small>(@Session["LoginId"])</small>
                                             </div>
                                         </a>
-                                        @*<h6 style="color:black;margin-top:10px">Hello Mrs. @Session["FullName"] (@Session["LoginId"])</h6>*@
                                     }
                                     else
                                     {
                                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
-                                            <img src="/assets/img/usericon.jpg" width="20" alt="@Session["FullName"]">
+                                            <img src="~/assets/img/usericon.jpg" width="20" alt="@Session["FullName"]">
                                             <div class="header-info">
                                                 <span>Hello  @Session["FullName"]</span>
                                                 <small>(@Session["LoginId"])</small>
                                             </div>
                                         </a>
                                     }
-                                    @*//}*@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="/User/ViewProfile" class="dropdown-item ai-icon">
                                         <i class="flaticon-381-user-7 text-success"></i>
@@ -284,15 +280,15 @@
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-wallet"></i>
-                            <span class="nav-text">MTG Wallet</span>
+                            <span class="nav-text">MTG Reports</span>
                         </a>
                         <ul aria-expanded="false">
                             @*@if (Session["IdActivated"] != null)
                                 {
                                     if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                     {*@
-                            <li><a href="/Wallet/AddWallet">Buy MTG Request</a></li>
-                            <li><a href="/Wallet/WalletList">Buy MTG Request List</a></li>
+                            <li><a href="/Wallet/AddWallet">Buy MTG </a></li>
+                            <li><a href="/Wallet/WalletList">Buy MTG List</a></li>
                             <li><a href="/Wallet/WalletLedgerList">MTG Ledger</a></li>
                             <li><a href="/User/WalletTransfer">Quick Send MTG</a></li>
 
@@ -1001,10 +997,11 @@
     <!-- Required vendors -->
     <script src="/UserPanel/vendor/global/global.min.js"></script>
     <script src="/UserPanel/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="/UserPanel/js/custom.min.js"></script>
-    <script src="/UserPanel/vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="/UserPanel/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="/UserPanel/js/plugins-init/sweetalert.init.js"></script>
+    <script src="/UserPanel/js/custom.min.js"></script>
+    <script src="/UserPanel/vendor/chart.js/Chart.bundle.min.js"></script>
+    
     <!-- Chart piety plugin files -->
     <script src="/UserPanel/vendor/peity/jquery.peity.min.js"></script>
 

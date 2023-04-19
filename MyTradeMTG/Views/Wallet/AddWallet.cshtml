@@ -4,6 +4,8 @@
     ViewBag.Title = "AddWallet";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+
+
         @using (Html.BeginForm("AddWallet", "Wallet", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
         {
             <div class="content-body">
@@ -12,7 +14,7 @@
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Buy MTG Request</h4>
+                                    <h4 class="card-title">Buy MTG</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -31,34 +33,28 @@
                                         <div class="col-xl-3 mb-3">
                                             <div class="example">
                                                 <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
-                                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony()" })
+                                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onInput = "return ConvertMony()" })
                                             </div>
                                         </div>
                                         <input type="hidden" id="Countryid" value="@Model.Country" />
-                                        <div class="col-xl-3 mb-3" id="divusdoller" style="display:none">
+                                        @*<div class="col-xl-3 mb-3" >
                                             <div class="example">
-                                                <p class="mb-1"> In US Doller<span style="color: red"></span></p>
+                                                <p class="mb-1"> @Model.CurrencyName<span style="color: red"></span></p>
                                                 <label id="InUsDoller" class="pt-3 form-control"></label>
                                             </div>
-                                        </div>
+                                        </div>*@
 
-                                        <div class="col-xl-3 mb-3" id="dvinrupees" style="display:none">
+                                        <div class="col-xl-3 mb-3" >
                                             <div class="example">
-                                                <p class="mb-1"> In Rupess<span style="color: red"></span></p>
+                                                <p class="mb-1"> @Model.CurrencyName<span style="color: red"></span></p>
                                                 <label id="result" class="pt-3 form-control"></label>
-
-                                                @*<input type="hidden" id="IndianValue" name="IndianValue" value="@ViewBag.IndianValue" />*@
-
 
                                                 <input type="hidden" id="IndianValue" name="IndianValue" />
 
-
                                             </div>
-
-
                                         </div>
 
-                                        @*-----Convert USD TO INR Link Start-------*@
+                                        @*-----Convert USD TO Many Amount Link Start-------*@
                                         <div style="display:none">
                                             <label>From:</label>
                                             <select id="from">
@@ -66,21 +62,21 @@
                                             </select>
                                             <label>To:</label>
                                             <select id="to">
-                                                <option value="INR">INR</option>
+                                                <option value="@Model.ISOcode">@Model.ISOcode</option>
                                             </select>
                                         </div>
-                                        @*-----Convert USD TO INR Link End-------*@
+                                        @*-----Convert USD TO Many Amount Link End-------*@
 
 
                                         <div class="col-xl-3">
                                             <div class="example">
-                                                <p class="mb-1">Payment Type<span style="color: red">*</span></p>
-                                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentTypedetails();" })
+                                                    <p class="mb-1">Payment Type <span style="color: red">*</span></p>
+                                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control wide", @onchange = "return  getpaymentTypedetails();" })
                                             </div>
                                         </div>
                                         <div class="col-xl-3" id="paymentmode" style="display: none">
                                             <div class="example">
-                                                <p class="mb-1"> Payment Mode<span style="color: red">*</span></p>
+                                                    <p class="mb-1">Payment Mode (@Model.CurrencySymbol @Model.ISOcode)<span style="color: red">*</span>
                                                 @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentdetails();" })
                                             </div>
                                         </div>
@@ -270,29 +266,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
         <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
         <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
+
         <script>
 
+            
             function ConvertMony() {
                 debugger;
-                //if ($("#Countryid").val() == "America") {
-                //    $("#divusdoller").show();
-                //    $("#InUsDoller").text($("#Amount").val()+"$");
-                //    $("#dvinrupees").hide();
-                //}
-                //else {
-                //    $("#dvinrupees").show();
-                //    $("#divusdoller").hide();
-                //}
-
-                if ($("#Countryid").val() == "India") {
-                    $("#dvinrupees").show();
-                    $("#divusdoller").hide();
-                }
-                else {
-                    $("#divusdoller").show();
-                    $("#InUsDoller").text($("#Amount").val() + "$");
-                    $("#dvinrupees").hide();
-                }
+                
+               
                 debugger;
                 //const convert = document.getElementById("convert");
                 const result = document.getElementById("result");
@@ -308,7 +289,7 @@
                 .then(response => {
                     return response.json();
                 })
-
+                
                 .then(data => {
                     debugger;
                     let rate = data.rates[toCurrency];
@@ -429,7 +410,7 @@
             //    });
             //});
 
-            //jQuery.noConflict();
+            jQuery.noConflict();
             $('#DDChequeDate').datepicker({
                 dateFormat: 'dd/mm/yy',
             });
@@ -648,7 +629,6 @@
                     $("#divbankname").hide();
                     $("#divbankbranch").hide();
                 }
-
             }
 
             //////////////////////////////////

@@ -66,7 +66,8 @@ namespace MyTradeMTG.Controllers
 
                 ViewBag.Address = ds.Tables[8].Rows[0]["Address"].ToString();
                 ViewBag.ProfilePic = ds.Tables[8].Rows[0]["ProfilePic"].ToString();
-
+                ViewBag.timerstatus = ds.Tables[8].Rows[0]["timerstatus"].ToString();
+                ViewBag.TOPUpDate = ds.Tables[0].Rows[0]["TOPUpDate"].ToString();
                 //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
                 //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
 
@@ -1013,6 +1014,10 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
+
+
+                        Session["IsFill"] = ds.Tables[0].Rows[0]["IsFill"].ToString();
+
                         TempData["msg"] = "KYC Details Updated Successfully";
                     }
                     else
@@ -1054,6 +1059,7 @@ namespace MyTradeMTG.Controllers
                     model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                     model.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                    model.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
                 }
             }
             return View(model);
@@ -1090,7 +1096,7 @@ namespace MyTradeMTG.Controllers
             {
                 TempData["error"] = ex.Message;
             }
-            return RedirectToAction("UserDashBoard", "User");
+            return RedirectToAction("ViewProfile", "User");
         }
         public ActionResult GetMemberDetails(string LoginId)
         {
@@ -1400,6 +1406,10 @@ namespace MyTradeMTG.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
                     obj.BasisOn = r["BasisOn"].ToString();
+                    obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
+                    obj.PackageTypeName = r["PackageTypeName"].ToString();
+
+                    
 
                     lst.Add(obj);
                 }
@@ -1442,6 +1452,8 @@ namespace MyTradeMTG.Controllers
                     obj.ProductName = r["ProductName"].ToString();
                     obj.PackageDays = r["PackageDays"].ToString();
                     obj.BasisOn = r["BasisOn"].ToString();
+                    obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
+                    obj.PackageTypeName = r["PackageTypeName"].ToString();
                     lst.Add(obj);
                 }
                 model.lstTopUp = lst;
@@ -1567,24 +1579,22 @@ namespace MyTradeMTG.Controllers
             #endregion
             return View(model);
         }
-        public ActionResult PayoutRequest()
-
+        public ActionResult PayoutRequest()    
         {
             string FormName = "";
             string Controller = "";
             User model = new User();
 
-           
-
-
+            Session["IsFill"] = Session["IsFill"].ToString();
             model.Country = Session["Country"].ToString();
-
-
+            
             model.LoginId = Session["LoginId"].ToString();
             model.Fk_UserId = Session["Pk_userId"].ToString();
             //DataSet ds = model.GetPayoutBalance();
             //model.PayoutBalance = ds.Tables[0].Rows[0]["Balance"].ToString();
-
+            //model.CurrencyName = Session["CurrencyName"].ToString();
+            //model.CurrencySymbol = Session["CurrencySymbol"].ToString();
+            //model.ISOcode = Session["ISOcode"].ToString();
             List<User> lst = new List<User>();
             model.State = model.State == "0" ? null : model.State;
             model.LoginId = model.LoginId == "" ? null : model.LoginId;
@@ -1621,6 +1631,7 @@ namespace MyTradeMTG.Controllers
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[1].Rows.Count > 0)
             {
                 model.Status = ds1.Tables[1].Rows[0]["PanStatus"].ToString();
+                //ViewBag.IsFill = ds1.Tables[1].Rows[0]["IsFill"].ToString();
             }
             if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[2].Rows.Count > 0)
             {
@@ -1644,6 +1655,7 @@ namespace MyTradeMTG.Controllers
             try
             {
                 model.AddedBy = Session["Pk_userId"].ToString();
+                Session["IsFill"] = Session["IsFill"].ToString();
                 DataSet ds = model.PayoutRequest();
                 if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
                 {

@@ -58,7 +58,11 @@ namespace MyTradeMTG.Controllers
                             var pass = Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString());
                             if (obj.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                             {
-                               Session["TeamPermanent"] = ds.Tables[0].Rows[0]["TeamPermanent"].ToString();
+
+                                
+
+                               Session["IsFill"] = ds.Tables[0].Rows[0]["IsFill"].ToString();
+                                Session["TeamPermanent"] = ds.Tables[0].Rows[0]["TeamPermanent"].ToString();
                                //Session["PendingStatusLogin"] = ds.Tables[0].Rows[0]["PendingStatus"].ToString();
                                 Session["FirmName"] = ds.Tables[0].Rows[0]["FirmName"].ToString();
                                 Session["IsFranchise"] = ds.Tables[0].Rows[0]["IsFranchise"].ToString();
@@ -78,6 +82,9 @@ namespace MyTradeMTG.Controllers
                                 Session["Bank"] = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
                                 Session["Status"] = ds.Tables[0].Rows[0]["Status"].ToString();
                                 Session["UserActivationTopUp"] = ds.Tables[0].Rows[0]["UserActivationTopUp"].ToString();
+                                Session["CurrencyName"] = ds.Tables[0].Rows[0]["CurrencyName"].ToString();
+                                Session["CurrencySymbol"] = ds.Tables[0].Rows[0]["CurrencySymbol"].ToString();
+                                Session["ISOcode"] = ds.Tables[0].Rows[0]["ISOcode"].ToString();
                                 DataSet ds1 = obj.GetFranchisedetails(Session["Pk_UserId"].ToString());
                                  if(ds1!=null && ds1.Tables[0].Rows.Count>0)
                                 {

@@ -26,7 +26,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Transfer To Bank Account list</h4>
+                                <h4>Withdrawal list</h4>
                                 <span class="text-danger">
                                     @TempData["msg"]
                                 </span>
@@ -80,10 +80,14 @@
                                         <th>Narration</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>Net MTG Token/USDT</th>
-                                        <th>Procesing Charges</th>
-                                        <th>TDS</th>
-                                        <th>Gross MTG Token/USDT</th>
+                                        @*<th>Net MTG /USDT</th>*@
+                                        <th>Net(MTG)</th>
+                                        <th>Procesing Charges(MTG)</th>
+                                        @*<th>TDS</th>*@
+                                        <th>Gross(MTG)</th>
+                                        <th>Net(INR)</th>
+                                        <th>Processing Charge(INR)</th>
+                                        <th>Gross(INR)</th>
                                         <th>Bank Details</th>
                                         <th class="showallbankdetails" style="display:none">Bank Name</th>
                                         <th class="showallbankdetails" style="display:none">Bank Branch</th>
@@ -110,7 +114,7 @@
                                                     {*@
                                                         <td>
 
-                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox"  />
                                                             <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
                                                             <input type="hidden" id="hdRows" name="hdRows" value="@i" />
                                                             <input type="hidden" name="Status_ @i" id="Status_ @i" value="@Item.Status" />
@@ -123,14 +127,16 @@
                                                         </td>
                                                     }*@
                                                     <td>@i</td>
-                                                    <td id="txnNo">@Item.TransactionNo</td>
+                                                    <td>@Item.Narration</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
                                                     <td><inpu type="hidden" value="@Item.Amount" id="Amount_@i"></inpu>@Item.Amount</td>
-                                                    <td>@Item.ProcessingFee</td>
-                                                    <td>@Item.TDSAmount</td>
+                                                    <td>@Item.TDSAmount (@Item.ProcessingFee)</td>
+                                                    @*<td>@Item.TDSAmount</td>*@
                                                     <td>@Item.GrossAmount</td>
-
+                                                    <td>@Item.IndianValue</td>
+                                                    <td>@Item.TransferChargeInRupees</td>
+                                                    <td>@Item.GrossAmountRs</td>
                                                     @*<td class="showifsccode">@Item.IFSCCode</td>*@
                                                
                                                     <td>
@@ -170,9 +176,7 @@
 
                                     <a style="width:120px;" href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup('@Model.PK_RequestID');">Submit</a>
                                     @*<a href="/Admin/DeclineKYCUpdateDeatilsOfUser" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to decline this request  ?') ">Decline</a>*@
-
-
-                                    <a style="width:180px;" href="javascript:void(0)" id="showbankdetailshdf" class="btn btn-success btn-sm">Show / Hide  Bank Details</a>
+                                    <a style="width:180px;" href="javascript:void(0)" id="showbankdetailshdf" class="btn btn-success btn-sm" onclick="return showbankdetailshdf123();">Show / Hide  Bank Details</a>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +185,6 @@
             </div>
         </div>
     </div>
-
     @Html.HiddenFor(m => m.PK_RequestID)
     <div class="modal fade md" id="myModal" role="dialog" style="display: none;padding-top:100px;">
         <div class="modal-dialog">
@@ -221,8 +224,6 @@
             </div>
         </div>
     </div>
-
-
     @Html.HiddenFor(m => m.RequestID)
     <div class="modal fade md" id="myModal1" role="dialog" style="display: none;padding-top:100px;">
         <div class="modal-dialog">
@@ -249,7 +250,6 @@
         </div>
     </div>
 }
-
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
 <script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
@@ -272,7 +272,6 @@
     $('#TransactionDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
-
     const today = new Date();
     const yyyy = today.getFullYear();
     let mm = today.getMonth() + 1; // Months start at 0!
@@ -289,12 +288,9 @@
         if (charCode != 46 && charCode > 31
           && (charCode < 48 || charCode > 57))
             return false;
-
         return true;
     }
-
     function Validate() {
-     
         $(".errortext").removeClass("errortext");
         if ($('#LoginId').val() == '') {
             $("#LoginId").addClass('errortext');
@@ -310,7 +306,6 @@
             //    $('#GetDetails').removeAttr('disabled');
             //}
         });
-
     }
     //$('#IsDownline').click(function () {
     //    if ($(this).attr('checked') == false) {
@@ -357,7 +352,6 @@
         });
     });
     jQuery.noConflict();
-
     $('.checkBoxClass').on('click', function () {
         var Amount1 = 0;
         $("table > tbody > tr").each(function () {
@@ -373,8 +367,6 @@
         }
         //$("#lblPins").text($("input[type='checkbox']:checked", $("#html5-extension").dataTable().fnGetNodes()).length);
     });
-
-
     //$('#IsDownline').click(function () {
     //    if ($(this).is(':checked')) {
     //        $('#IsDownline').attr("disabled", "false");
@@ -416,7 +408,6 @@
     //    return false;
     //}
     //}
-
     function openPopup1(PaymentMode) {
         debugger;
         jQuery.noConflict();
@@ -428,15 +419,18 @@
         $("#myModal1").modal('hide');
         //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
-
     $(document).ready(function () {
-        debugger;
-        $("#showbankdetailshdf").click(function () {
-            $(".showallbankdetails").toggle();
-        });
+        //jQuery.noConflict();
+        $.noConflict(true);
+        //$("#showbankdetailshdf").click(function () {
+        //    $(".showallbankdetails").toggle();
+        //});
     });
-
-    
+    function showbankdetailshdf123() {
+        debugger;
+        jQuery.noConflict();
+        $(".showallbankdetails").toggle();
+    }
 </script>
 
 

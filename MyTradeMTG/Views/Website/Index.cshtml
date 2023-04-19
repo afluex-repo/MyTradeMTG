@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/Website_LayoutPage.cshtml";
 }
 
-
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"
+        crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
+      crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" crossorigin="anonymous"></script>
 <!-- START HOME -->
 <section id="home" class="home_bg">
     <div class="container">
@@ -79,6 +80,7 @@
 </div>
 
 <!-- START ABOUT -->
+ <!-- START ABOUT -->
 <section id="about" class="about_area section-padding">
     <div class="container">
         <div class="section-title text-center">
@@ -116,7 +118,8 @@
     </div><!-- END CONTAINER -->
 </section>
 <!-- END ABOUT -->
-<!-- START TOKEN -->
+<!-- END ABOUT -->
+ <!-- START TOKEN -->
 <section id="forex" class="token_area section-padding">
     <div class="container">
         <div class="section-title text-center">
@@ -506,7 +509,7 @@
 
 
 <!--START LOGIN-->
-<div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
+<div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 1100;left: 50%;margin-left: -165px;
     top: 100px;">
     <header class="popupHeader">
         <span class="header_title">Login</span>
@@ -559,10 +562,35 @@
                     <a href="#" id="register_form" class="abtn ml-4">Sign Up</a>
                 </div>
             </form>
-            @* <center>Don't have an account? <a href="/Home/Registration" i="register_form" class="text-center" style="color:#ffd234">Sign up</a></center>*@
-
         </div>
         <!--Social login end-->
+
+
+        <!--Social errorpage statrt-->
+        <div class="error_page" style="display:none">
+            <form>
+                <div class="col-sm-12">
+                    <h4 style="color:#ff0000">Incorrect Login Id or Password </h4>
+                    <hr />
+                </div>
+                <div class="col-sm-12">
+                    <center>
+                        Already have an account ?<a href="#" style="color:#ffd234" onclick="return ToLogin()">Login</a>
+                    </center>
+                </div>
+                <div class="col-sm-12">
+                    <br />
+                    <center>
+                       Not have an account ?<a href="#" style="color:#ffd234" onclick="return ToSignup()">Sign-Up</a>
+                    </center>
+                </div>
+            </form>
+        </div>
+        <!--Social errorpage end-->
+
+
+
+
         <!--Register Form start-->
         <div class="user_register">
             <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
@@ -594,7 +622,17 @@
 
                     </div>
                     <div class="col-lg-12 form-group">
-                        <input id="phone" type="tel" placeholder="Enter Mobile No." maxlength="15" onkeypress="return isNumberKey(event);">
+                        @*<input id="phone" type="tel" placeholder="Enter Mobile No." maxlength="15" onkeypress="return isNumberKey(event);">*@
+
+                        <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
+                               placeholder="Phone Number" />
+                        <input id="country" type="hidden" name="country">
+                        <div style="display:none;">
+                            <span id="country1"></span>
+                        </div>
+                        
+
+
                         @*<span id="valid-msg" class="hide">Valid</span>*@
                         @*<span style="color:red;" id="error-msg" class="hide">Invalid number</span>*@
                     </div>
@@ -614,8 +652,8 @@
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();" })
                     </div>
                     <div class="col-lg-12 form-group">
-                        <input type="checkbox" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">
-                        <label>I accept all <a href="javascript:void(0)">Terms &amp; Use.</a></label>
+                        <input type="checkbox" class="mt-1" id="checkboxvalue123" data-toggle="modal" data-target="#exampleModalScrollable">
+                        <label>I accept all <a href="javascript:void(0)" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">Terms &amp; Use.</a></label>
                     </div>
                 </div>
 
@@ -800,9 +838,9 @@
             $('#FirstName').focus();
             return false;
         }
-        if ($('#phone').val() == '') {
-            $("#phone").addClass('errortext');
-            $('#phone').focus();
+        if ($('#phone1').val() == '') {
+            $("#phone1").addClass('errortext');
+            $('#phone1').focus();
             return false;
         }
         if ($('#Email').val() == '') {
@@ -831,7 +869,7 @@
         //    return false;
         //}
 
-        $("#phone").attr("disabled", "disabled");
+        $("#phone1").attr("disabled", "disabled");
         $("#FirstName").attr("disabled", "disabled");
         $("#SponsorId").attr("disabled", "disabled");
         $("#LastName").attr("disabled", "disabled");
@@ -847,7 +885,7 @@
     }
 
     function editregistration() {
-        $("#phone").attr("disabled", false);
+        $("#phone1").attr("disabled", false);
         $("#FirstName").attr("disabled", false);
         $("#LastName").attr("disabled", false);
         $("#SponsorId").attr("disabled", false);
@@ -865,6 +903,12 @@
 
     function saveregistration() {
         debugger;
+        var CountryCode = $(".iti__selected-dial-code").text();
+
+        country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
+
+        var Country = $("#country1").text();
+
         $('#Register').attr("disabled", "disabled");
         $("#divload").css({ 'display': '' });
         var Leg = "";
@@ -878,11 +922,10 @@
             url: "/Website/RegistrationAction",
             Type: "Get",
             DataType: "JSON",
-            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val() },
+            data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone1").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val(), CountryCode: CountryCode, Country: Country },
             success: function (data) {
                 debugger;
                 if (data.Result == "1") {
-                    @*window.location.href = '@Url.Action("ConfirmRegistration", "Home")';*@
                     $("#UserDisplayName1").text(data.Name),
                     $("#UserLoginId1").text(data.LoginId),
                     $("#UserPassword1").text(data.Password),
@@ -892,6 +935,31 @@
                    $('.popupContainer').css('display', 'none');
                     $('#modal').css('display', 'none');
                     $("#confirm_registration").modal("show");
+                    @*window.location.href = '@Url.Action("Index", "Website")';*@
+
+                    $("#phone1").val("");
+                    $("#FirstName").val("");
+                    $("#LastName").val("");
+                    $("#SponsorId").val("");
+                    $("#LastName").val("");
+                    $("#Password2").val("");
+                    $("#ConfirmPassword").val("");
+                    $("#Email").val("");
+                    $("#SponsorName").text("");
+                    $('#checkboxvalue123').prop('checked', false);
+                    $("#confirm_registration").modal("show");
+                    $("#phone1").attr("disabled", false);
+                    $("#FirstName").attr("disabled", false);
+                    $("#LastName").attr("disabled", false);
+                    $("#SponsorId").attr("disabled", false);
+                    $("#LastName").attr("disabled", false);
+                    $("#Password2").attr("disabled", false);
+                    $("#ConfirmPassword").attr("disabled", false);
+                    $("#Email").attr("disabled", false);
+                    $('#Confirm').show();
+                    $('#Confirm').attr("disabled", false);
+                    $('#divReg').hide();
+                    $('#Register').attr("disabled", false);
                 }
                 else {
                     $("#divload").css({ 'display': 'none' });
@@ -901,6 +969,9 @@
 
         });
     }
+
+
+
     //function getstatecity() {
     //    $(".errortext").removeClass("errortext");
     //    $.ajax({
@@ -965,26 +1036,28 @@
             }
         }
     }
-   function onlyAlphabets(e, t) {
-            try {
-                if (window.event) {
-                    var charCode = window.event.keyCode;
-                }
-                else if (e) {
-                    var charCode = e.which;
-                }
-                else { return true; }
-                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
-                    return true;
-                else
-                    return false;
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
             }
-            catch (err) {
-                alert(err.Description);
+            else if (e) {
+                var charCode = e.which;
             }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
         }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
 <script>
     $(document).ready(function () {
         debugger;
@@ -993,9 +1066,22 @@
             $('#modal').show();
             $(".header_title").text('Sign Up');
             $(".user_login").hide();
+            $(".error_page").hide();
             $(".user_register").show();
         }
     });
+    function ToLogin() {
+        $(".user_login").show();
+        $(".header_title").text('Login');
+        $(".error_page").hide();
+        $(".user_register").hide();
+    }
+    function ToSignup() {
+        $(".user_register").show();
+        $(".header_title").text('Sign Up');
+        $(".user_login").hide();
+        $(".error_page").hide();
+    }
 </script>
 
 <script>
@@ -1005,6 +1091,7 @@
             $('#modal').show();
             $(".header_title").text('Sign Up');
             $(".user_login").hide();
+            $(".error_page").hide();
             $(".user_register").show();
             return true;
         }
@@ -1012,3 +1099,39 @@
 </script>
 
 
+@if (TempData["Login"] != null)
+{
+    <script>
+    $(document).ready(function () {
+            debugger;
+            $('#modal').show();
+            $(".header_title").text('Error Page');
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".error_page").show();
+            return true;
+        });
+    </script>
+}
+
+
+
+<script>
+    var input = document.querySelector("#phone1");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        customPlaceholder: function (
+            selectedCountryPlaceholder,
+            selectedCountryData
+        ) {
+            return "e.g. " + selectedCountryPlaceholder;
+        },
+    });
+
+    var iti = window.intlTelInputGlobals.getInstance(input);
+
+    input.addEventListener('input', function() {
+      var countryName = iti.getSelectedCountryData().name;
+      document.getElementById('country').value = countryName;
+    });
+</script>

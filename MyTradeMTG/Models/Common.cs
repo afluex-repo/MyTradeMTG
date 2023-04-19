@@ -31,6 +31,8 @@ namespace MyTradeMTG.Models
         public string ProfilePic { get; set; }
         public string TransactionType { get; set; }
         public string Country { get; set; }
+        public string CountryCode { get; set; }
+        
         public string CustomerId { get; set; }
         public string CustomerName { get; set; }
 

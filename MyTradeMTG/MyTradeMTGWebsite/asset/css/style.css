@@ -3172,6 +3172,33 @@ padding-right: 60px !important;
 {
     line-height:1.6;
 }
+
+.iti__country-name{
+        color:#000000;
+    }
+   
+    @media(max-width:768px)
+    {
+       #modal
+       {
+           z-index: 10 !important;
+       } 
+        .iti__country-list
+    {
+        z-index:30 !important;
+    }
+    }
+    @media (max-width: 500px)
+    {
+.iti__country-list {
+    white-space: normal !important;
+}
+ .iti__country-list
+    {
+        z-index:30 !important;
+    }
+}
+
 /*
 * ----------------------------------------------------------------------------------------
 * 16.END FOOTER DESIGN

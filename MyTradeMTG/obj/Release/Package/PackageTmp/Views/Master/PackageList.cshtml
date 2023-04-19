@@ -7,7 +7,7 @@
     .btn-primaryttttt {
         border-color: #363062;
         background-color: #363062;
-         color:white;
+        color: white;
     }
 </style>
 @using (Html.BeginForm("PackageList", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
@@ -30,13 +30,13 @@
                         <div class="row mb-2">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-form-label">Package Type<span style="color: red">*</span></label>
-                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control" })
+                                    <label class="col-form-label">Package Type<span style="color: red"></span></label>
+                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return onPackageTypeChange();" })
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="col-form-label">Package<span style="color: red">*</span></label>
+                                    <label class="col-form-label">Package<span style="color: red"></span></label>
                                     @Html.DropDownListFor(m => m.Packageid, new SelectList(ViewBag.ddlPackage, "Value", "Text"), new { @class = "form-control" })
                                 </div>
                             </div>
@@ -44,12 +44,8 @@
                                 <div class="form-group mt-30">
                                     <input type="submit" id="btnSearch" value="Search" name="btnSearch" class="btn btn-success" />
                                     <a href="/Master/PackageMaster" class="btn btn-primaryttttt">Add New</a>
-
-
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
@@ -58,45 +54,64 @@
                                         <th>S No.</th>
                                         <th>Package Type</th>
                                         <th>Package Name</th>
-                                        <th>Package Price</th>
+                                        <th>Package Price(MTG)</th>
                                         @*<th>BV</th>*@
                                         <th>Activation MTG Token</th>
                                         <th>Percentage</th>
+                                        <th>Basis On</th>
                                         <th>Days</th>
                                         <th>From Amount</th>
                                         <th>To Amount</th>
                                         <th>In Multiple Of</th>
                                         @if (Model.PackageTypeId == "2")
                                         {
-                                            @*<th>Percentage</th>
-                                                <th>Days</th>
-                                                <th>From Amount</th>
-                                                <th>To Amount</th>
-                                                <th>In Multiple Of</th>*@
-
                                             <th>Direct Count 1</th>
                                             <th>Direct Count 2</th>
                                             <th>Direct Count 3</th>
-                                            <th>Return Percent 1</th>
+                                            @*<th>Return Percent 1</th>
                                             <th>Return Percent 2</th>
-                                            <th>Return Percent 3</th>
+                                            <th>Return Percent 3</th>*@
 
 
+                                            <th>Package 1</th>
+                                            <th>Package 2</th>
+                                            <th>Package 3</th>
 
                                         }
-                                        @if (Model.PackageTypeId == "1")
+                                        else if (Model.PackageTypeId == "1")
                                         {
-                                            @*<th>Direct Count 1</th>
-                                                <th>Direct Count 2</th>
-                                                <th>Direct Count 3</th>
-                                                <th>Return Percent 1</th>
-                                                <th>Return Percent 2</th>
-                                                <th>Return Percent 3</th>*@
-                                        }
+                                            <th style="display:none">Direct Count 1</th>
+                                            <th style="display:none">Direct Count 2</th>
+                                            <th style="display:none">Direct Count 3</th>
+                                            @*<th style="display:none">Return Percent 1</th>
+                                            <th style="display:none">Return Percent 2</th>
+                                            <th style="display:none">Return Percent 3</th>*@
 
+                                            <th style="display:none">Package 1</th>
+                                            <th style="display:none">Package 2</th>
+                                            <th style="display:none">Package 3</th>
+
+
+
+                                        }
+                                        else if (Model.PackageTypeId != "1" || Model.PackageTypeId != "2")
+                                        {
+                                            <th>Direct Count 1</th>
+                                            <th>Direct Count 2</th>
+                                            <th>Direct Count 3</th>
+                                            @*<th>Return Percent 1</th>
+                                            <th>Return Percent 2</th>
+                                            <th>Return Percent 3</th>*@
+
+
+                                            <th>Package 1</th>
+                                            <th>Package 2</th>
+                                            <th>Package 3</th>
+
+                                        }
                                         <th>Status</th>
                                         <th>Sponsor Income</th>
-                                        @*<th>Is Combo Package</th>*@
+                                        <th>Is Upgrade Package</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -116,6 +131,7 @@
                                                     @*<td>@Item.BV</td>*@
                                                     <td>@Item.ActivationMTGToken</td>
                                                     <td>@Item.ROIPercent</td>
+                                                    <td>@Item.BasisOn</td>
                                                     <td>@Item.Days</td>
                                                     <td>@Item.FromAmount</td>
                                                     <td>@Item.ToAmount</td>
@@ -127,37 +143,62 @@
                                                             <td>@Item.FromAmount</td>
                                                             <td>@Item.ToAmount</td>
                                                             <td>@Item.InMultipleOf</td>*@
+
                                                         <td>@Item.DrAmount1</td>
                                                         <td>@Item.DrAmount2</td>
-                                                            <td>@Item.DrAmount3</td>
-                                                            <td>@Item.ReturnPercent1</td>
-                                                            <td>@Item.ReturnPercent2</td>
-                                                            <td>@Item.ReturnPercent3</td>
+                                                        <td>@Item.DrAmount3</td>
+                                                        @*<td>@Item.ReturnPercent1</td>
+                                                        <td>@Item.ReturnPercent2</td>
+                                                        <td>@Item.ReturnPercent3</td>*@
+
+
+                                                        <td>@Item.Package1</td>
+                                                        <td>@Item.Package2</td>
+                                                            <td>@Item.Package3</td>
 
 
                                                     }
-                                                    @if (Model.PackageTypeId == "1")
+                                                    else if (Model.PackageTypeId == "1")
                                                     {
-                                                        @*<td>@Item.DrAmount1</td>
-                                                            <td>@Item.DrAmount2</td>
-                                                            <td>@Item.DrAmount3</td>
-                                                            <td>@Item.ReturnPercent1</td>
-                                                            <td>@Item.ReturnPercent2</td>
-                                                            <td>@Item.ReturnPercent3</td>*@
+                                                        <td style="display:none">@Item.DrAmount1</td>
+                                                        <td style="display:none">@Item.DrAmount2</td>
+                                                        <td style="display:none">@Item.DrAmount3</td>
+                                                        @*<td style="display:none">@Item.ReturnPercent1</td>
+                                                        <td style="display:none">@Item.ReturnPercent2</td>
+                                                        <td style="display:none">@Item.ReturnPercent3</td>*@
+
+
+
+                                                        <td style="display:none">@Item.Package1</td>
+                                                        <td style="display:none">@Item.Package2</td>
+                                                        <td style="display:none">@Item.Package3</td>
+
+                                                    }
+                                                    else if (Model.PackageTypeId != "1" || Model.PackageTypeId != "2")
+                                                    {
+                                                        <td>@Item.DrAmount1</td>
+                                                        <td>@Item.DrAmount2</td>
+                                                        <td>@Item.DrAmount3</td>
+                                                        @*<td>@Item.ReturnPercent1</td>
+                                                        <td>@Item.ReturnPercent2</td>
+                                                        <td>@Item.ReturnPercent3</td>*@
+
+
+                                                        <td>@Item.Package1</td>
+                                                        <td>@Item.Package2</td>
+                                                        <td>@Item.Package3</td>
 
                                                     }
                                                     <td>@Item.Status</td>
-                                                    <td>@Item.SponsorIncome</td>
-                                                    @*<td>@Item.IscomboPackage</td>*@
+                                                    <td>@Item.SponsorIncome%</td>
+                                                    <td>@Item.UpgPackage</td>
                                                     <td class="d-flex">
                                                         <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-xxs m-1">Edit</a>
                                                         <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-xxs m-1" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>
-                                                       <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=true" class="btn btn-success btn-xxs m-1" onclick="return confirm('Are you sure you want to activate this Package?');" name="btnactive">Active</a>
+                                                        <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=true" class="btn btn-success btn-xxs m-1" onclick="return confirm('Are you sure you want to activate this Package?');" name="btnactive">Active</a>
                                                         <a href="/Master/ActivateDeactivatePackage?id=@Item.Packageid&IsActive=false" class="btn btn-dark btn-xxs m-1" onclick="return confirm('Are you sure you want to de-activate this Package?');" name="btndeactive">De-Active</a>
                                                     </td>
-
                                                 </tr>
-
                                                 i++;
                                             }
                                         }
@@ -165,11 +206,29 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
-
+<script>
+    function onPackageTypeChange() {
+        debugger;
+        var PackageTypeId = $('#PackageTypeId').val();
+        $.ajax({
+            url: '/Master/GetPackageTypeList', type: 'post', dataType: 'json',
+            data: { 'PackageTypeId': PackageTypeId },
+            success: function (result) {
+                $("#Packageid").html(""); // clear before appending new list
+                $("#Packageid").empty();
+                $("#Packageid").append(
+                      $('<option></option>').val(0).html('--Select--'));
+                $.each(result.ddlPackage, function (index, item) {
+                    $("#Packageid").append(
+                          $('<option></option>').val(item.Value).html(item.Text));
+                });
+            }
+        });
+    }
+</script>

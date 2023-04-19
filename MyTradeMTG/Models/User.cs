@@ -11,6 +11,7 @@ namespace MyTradeMTG.Models
     public class User : Common
     {
         #region property
+        public string IsFill { get; set; }
         public string EPin { get; set; }
         public string PinStatus { get; set; }
         public string Password { get; set; }
@@ -104,7 +105,9 @@ namespace MyTradeMTG.Models
 
 
         public string Narration { get; set; }
-        
+        public string CurrencyName { get; set; }
+        public string CurrencySymbol { get; set; }
+        public string ISOcode { get; set; }
 
 
 
