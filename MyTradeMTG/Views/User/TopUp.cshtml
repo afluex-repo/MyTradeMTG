@@ -668,12 +668,16 @@
                 let rate = data.rates[toCurrency];
                 let total = rate * amt;
 
+                var TotalMtgRS = parseFloat(total).toFixed(2);
+
                 //result.innerHTML = `${amt} ${fromCurrency} = ${total}
-                result.innerHTML = `${amt}$  = ${total}
+
+                result.innerHTML = `${amt}$  = ${TotalMtgRS}
+                
 
             ${toCurrency}`;
                 //IndianValue.innerHTML = total;
-                $("#IndianValue").val(total);
+                $("#IndianValue").val(TotalMtgRS);
 
             });
         }
