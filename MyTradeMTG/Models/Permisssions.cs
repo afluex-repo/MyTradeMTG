@@ -43,6 +43,7 @@ namespace MyTradeMTG.Models
         }
         public DataSet SavePermisssion()
         {
+
             SqlParameter[] para = {
                                       new SqlParameter("@UserTypeFormPermisssion", UserTypeFormPermisssion),
                                       new SqlParameter("@CreatedBy", CreatedBy),
