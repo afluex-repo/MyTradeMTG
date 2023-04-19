@@ -261,6 +261,7 @@ namespace MyTradeMTG.Models
 
             return ds;
 
+
         }
         public DataSet BindFormTypeMaster()
         {
