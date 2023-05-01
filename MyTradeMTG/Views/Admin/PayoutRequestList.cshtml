@@ -94,7 +94,7 @@
                                         <th class="showallbankdetails" style="display:none">Account No.</th>
                                         <th class="showallbankdetails" style="display:none">IFSC Code</th>
                                         <th class="showallbankdetails" style="display:none">UPIID</th>
-                                     
+
                                         <th>Status</th>
                                         <th>Requested Date</th>
                                         <th style="white-space: break-spaces;">Approved/ Declined Date</th>
@@ -111,21 +111,21 @@
                                                 <tr class="text-left">
 
                                                     @*@if (Item.Status == "Pending")
-                                                    {*@
-                                                        <td>
+                                                        {*@
+                                                    <td>
 
-                                                            <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox"  />
-                                                            <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
-                                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                                            <input type="hidden" name="Status_ @i" id="Status_ @i" value="@Item.Status" />
-                                                        </td>
+                                                        <input class="checkBoxClass" name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" />
+                                                        <input type="hidden" name="PK_RequestID_ @i" id="PK_RequestID_ @i" value="@Item.PK_RequestID" />
+                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                        <input type="hidden" name="Status_ @i" id="Status_ @i" value="@Item.Status" />
+                                                    </td>
                                                     @*}
-                                                    else
-                                                    {
-                                                        <td>
-                                                            <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
-                                                        </td>
-                                                    }*@
+                                                        else
+                                                        {
+                                                            <td>
+                                                                <input class="checkBoxClass1" type="checkbox" disabled="disabled" />
+                                                            </td>
+                                                        }*@
                                                     <td>@i</td>
                                                     <td>@Item.Narration</td>
                                                     <td>@Item.LoginId</td>
@@ -138,7 +138,7 @@
                                                     <td>@Item.TransferChargeInRupees</td>
                                                     <td>@Item.GrossAmountRs</td>
                                                     @*<td class="showifsccode">@Item.IFSCCode</td>*@
-                                               
+
                                                     <td>
                                                         <a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="openPopup1('@Item.PaymentMode');">View</a>
                                                     </td>
