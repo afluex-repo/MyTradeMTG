@@ -775,7 +775,7 @@
 
                                 @if (ViewBag.TotalBusiness != "0.00")
                                 {
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="card overflow-hidden">
                                             <div class="card-header align-items-start border-0 pb-0">
                                                 <div class="widget widget-chart-two" style="background-color:#14112e;border:#14112e 1px solid">
@@ -792,7 +792,7 @@
                                 }
                                 else
                                 {
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 mt-3">
                                         <div class="card overflow-hidden">
                                             <div class="card-header align-items-start border-0 pb-0">
                                                 <div class="widget widget-chart-two">
@@ -1541,7 +1541,6 @@
 
 
     function nextDate(dayIndex) {
-        debugger;
         var today = new Date('@ViewBag.TOPUpDate');
         //var today = new Date("Apr 02, 2023 16:37:52");
         today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1 + 7);
