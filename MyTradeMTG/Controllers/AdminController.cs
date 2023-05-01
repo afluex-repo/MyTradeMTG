@@ -2378,7 +2378,6 @@ namespace MyTradeMTG.Controllers
             {
                 if (BannerImage != null)
                 {
-
                     model.BannerImage = "/BannerImage/" + Guid.NewGuid() + Path.GetExtension(BannerImage.FileName);
                     BannerImage.SaveAs(Path.Combine(Server.MapPath(model.BannerImage)));
                 }

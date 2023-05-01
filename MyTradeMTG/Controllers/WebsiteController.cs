@@ -479,13 +479,7 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction("Index", "Website");
         }
 
-
-
-
-
-
-
-
+        
 
     }
 }
