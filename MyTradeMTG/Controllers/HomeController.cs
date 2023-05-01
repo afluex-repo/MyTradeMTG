@@ -772,7 +772,19 @@ namespace MyTradeMTG.Controllers
             return View();
         }
 
-
-
+        public ActionResult ShareLinkRegistration(string Pid)
+        {
+            Home model = new Home();
+            if (!string.IsNullOrEmpty(Pid))
+            {
+                model.Fk_UserId = Pid;
+                DataSet ds = model.GetMemberNameWithUserId();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewBag.SponsorId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                }
+            }
+            return View(model);
+        }
     }
 }
