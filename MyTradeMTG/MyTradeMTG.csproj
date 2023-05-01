@@ -1248,6 +1248,7 @@
     <Content Include="Views\Website\Registration.cshtml" />
     <Content Include="Views\Master\QRCodeMaster.cshtml" />
     <Content Include="Views\Master\QRCodeList.cshtml" />
+    <Content Include="Views\Home\ShareLinkRegistration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
