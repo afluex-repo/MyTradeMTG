@@ -110,21 +110,21 @@ namespace MyTradeMTG.Controllers
                 obj.lstReward = lst;
             }
 
-            //List<Dashboard> lst2 = new List<Dashboard>();
-            //obj.AddedBy = Session["Pk_userId"].ToString();
-            //DataSet ds2 = obj.GetCustomerList();
-            //if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
-            //{
-            //    foreach (DataRow r in ds2.Tables[0].Rows)
-            //    {
-            //        Dashboard obj1 = new Dashboard();
-            //        obj1.ProfilePic = r["ProfilePic"].ToString();
-            //        obj1.CustomerId = r["CustomerId"].ToString();
-            //        obj1.CustomerName = r["CustomerName"].ToString();
-            //        lst2.Add(obj1);
-            //    }
-            //    obj.lstCustomer = lst2;
-            //}
+            List<Dashboard> lst2 = new List<Dashboard>();
+            obj.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds22 = obj.GetCustomerList();
+            if (ds22 != null && ds22.Tables.Count > 0 && ds22.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds22.Tables[0].Rows)
+                {
+                    Dashboard obj1 = new Dashboard();
+                    obj1.ProfilePic = r["ProfilePic"].ToString();
+                    obj1.CustomerId = r["CustomerId"].ToString();
+                    obj1.CustomerName = r["CustomerName"].ToString();
+                    lst2.Add(obj1);
+                }
+                obj.lstCustomer = lst2;
+            }
 
 
 
@@ -135,8 +135,6 @@ namespace MyTradeMTG.Controllers
                 ViewBag.ProfilePic = ds2.Tables[0].Rows[0]["ProfilePic"].ToString();
                 ViewBag.CustomerId = ds2.Tables[0].Rows[0]["CustomerId"].ToString();
                 ViewBag.CustomerName = ds2.Tables[0].Rows[0]["CustomerName"].ToString();
-
-
             }
 
 

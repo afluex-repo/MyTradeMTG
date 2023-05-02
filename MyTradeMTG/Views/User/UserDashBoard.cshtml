@@ -536,30 +536,33 @@
                                                 <a href="javascript:void(0);" class="btn-link">View more</a>
                                             </div>
 
-                                            <div class="items">
-                                                <div class="text-center">
-                                                    <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
-                                                    <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
-                                                    <b style="font-size:small;">Contact Address<br /></b>
-                                                    <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
+                                            @if (Model.lstCustomer == null )
+                                            {
+                                                <div class="items">
+                                                    <div class="text-center">
+                                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                                        <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                                        <b style="font-size:small; display:none;" >Contact Address<br /></b>
+                                                        <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-
-                                            <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
-                                                @*@foreach (var item in Model.lstCustomer)
+                                            }
+                                            else
+                                            {
+                                                <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
+                                                    @foreach (var item in Model.lstCustomer)
                                                     {
                                                         int i = 0;
                                                         <div class="items">
                                                             <div class="text-center">
                                                                 <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
                                                                 <h6 class="text-black mb-0">@item.CustomerName</h6>
-                                                                <b style="font-size:small;">MTG CA<br /></b>
-                                                                <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
+                                                                <b style="font-size:small;">Contact Address<br /></b>
+                                                                <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
                                                             </div>
                                                         </div>
                                                         i++;
-                                                    }*@
+                                                    }
 
 
 
@@ -569,35 +572,39 @@
 
 
 
-                                                @*<div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">Cindy</h5>
-                                                            <span class="fs-12">cindyss</span>
+                                                    @*<div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">Cindy</h5>
+                                                                <span class="fs-12">cindyss</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">David</h5>
-                                                            <span class="fs-12">davidxc</span>
+                                                        <div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">David</h5>
+                                                                <span class="fs-12">davidxc</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">Martha</h5>
-                                                            <span class="fs-12">marthaa</span>
+                                                        <div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">Martha</h5>
+                                                                <span class="fs-12">marthaa</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">Olivia</h5>
-                                                            <span class="fs-12">oliv62</span>
-                                                        </div>
-                                                    </div>*@
-                                            </div>
+                                                        <div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">Olivia</h5>
+                                                                <span class="fs-12">oliv62</span>
+                                                            </div>
+                                                        </div>*@
+                                                </div>
+
+                                            }
+
+
                                             <div class="amount-bx">
                                                 <label>MTG/USDT</label>
                                                 <input type="text" readonly="" class="form-control" value="@ViewBag.TotalWalletAmount">
@@ -794,7 +801,7 @@
 
                                 @if (ViewBag.TotalBusiness != "0.00")
                                 {
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="card overflow-hidden">
                                             <div class="card-header align-items-start border-0 pb-0">
                                                 <div class="widget widget-chart-two" style="background-color:#14112e;border:#14112e 1px solid">
@@ -803,15 +810,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="widget-content1">
-                                                <div id="chart-user2" class=""></div>
+                                            <div class="card-body p-0">
+                                                <div class="widget-content1">
+                                                    <div id="chart-user2" class=""></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 }
                                 else
                                 {
-                                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 mt-3">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 mt-3">
                                         <div class="card overflow-hidden">
                                             <div class="card-header align-items-start border-0 pb-0">
                                                 <div class="widget widget-chart-two">
@@ -964,17 +973,15 @@
 <script>
     $(document).ready(function () {
 
-        //const convert = document.getElementById("convert");
         const result = document.getElementById("result");
         const result1 = document.getElementById("result1");
         const from = document.getElementById("from");
         const to = document.getElementById("to");
-        //const amount = document.getElementById("TotalAmountssss");
 
         const amount = document.getElementById("SelfBusinessMTG");
 
         const IndianValue = document.getElementById("IndianValue");
-        //var TodaysCurrency = $('#IndianValue').val();
+
         let fromCurrency = from.value;
         let toCurrency = to.value;
         let amt = amount.value;
@@ -990,10 +997,11 @@
 
             var TotalMtgRS = parseFloat(total).toFixed(2);
 
-            
+            // Currency Statistics ( IN USD)--------
 
             result.innerHTML = `${amt} $ ${fromCurrency}`;
 
+            // Currency Statistics (In Rupees)--------
             result1.innerHTML = `${TotalMtgRS} ₹ ${toCurrency}`;
             
 
@@ -1601,7 +1609,6 @@
 
 
     function nextDate(dayIndex) {
-        debugger;
         var today = new Date('@ViewBag.TOPUpDate');
         //var today = new Date("Apr 02, 2023 16:37:52");
         today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1 + 7);
