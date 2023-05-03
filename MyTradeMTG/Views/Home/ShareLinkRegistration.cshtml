@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
-                                       placeholder="Phone Number" />
+                                       placeholder="Mobile Number" onkeypress="OpenCountryList()"  />
                                 <input id="country" type="hidden" name="country">
                                 <div style="display:none;">
                                     <span id="country1"></span>
@@ -433,6 +433,7 @@
             alert(err.Description);
         }
     }
+    
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"
         crossorigin="anonymous"></script>
