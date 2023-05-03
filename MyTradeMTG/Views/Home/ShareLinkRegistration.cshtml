@@ -31,11 +31,12 @@
                     <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
                         <div class="row">
                             <div class="card-title">
+                                <img src="/MyTradeMTGWebsite/asset/img/wbg.gif" alt="" />
                                 <h3>Sign Up</h3>
                             </div>
                             @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
                             {
-                                <h5 class="ml-4 mb-2" style="color:#ffd234; font-size: 14px;">Congratulations ! For joining us under sponsor code : @ViewBag.SponsorId</h5>
+                                <h5 class="ml-4 mb-2" style="color:#004eff; font-size: 14px;">Congratulations ! For joining us under sponsor code :@ViewBag.SponsorName (@ViewBag.SponsorId)</h5>
                                 <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
                             }
                             else
