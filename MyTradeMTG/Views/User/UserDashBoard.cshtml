@@ -429,7 +429,7 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-xxl-12">
-                            <div class="card">
+                            <div class="card pb-5">
                                 <div class="card-header d-sm-flex d-block pb-0 border-0">
                                     <div>
                                         <h4 class="fs-20 text-black">Currency Statistics</h4>
@@ -518,9 +518,14 @@
                                                     <div class="col-md-4">
                                                         <label>From</label>
                                                         <input type="hidden" id="PerAmtnt" name="PerAmtnt" value="1" />
-                                                        <select id="from1" class="form-control">
+                                                        <select id="from1" class="form-control" onchange="return CurrencyStatictics()">
                                                             <option value="0">Select USD</option>
                                                             <option value="USD">USD</option>
+                                                            <option value="INR">INR</option>
+                                                            <option value="AFN">AFN</option>
+                                                            <option value="BDT">BDT</option>
+                                                            <option value="PKR">PKR</option>
+                                                            <option value="LKR">LKR</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4">
@@ -1057,13 +1062,11 @@
                 $("#from1").addClass('errortext');
                 $("#to1").addClass('errortext');
                 $("#to1").val('0');
-                alert("From currency code must be filled out");
+                alert("From currency code must be select out");
                 return false;
             }
             else if (to1 == "0") {
-                $("#from1").addClass('errortext');
-                $("#to1").addClass('errortext');
-                alert("To currency code must be filled out");
+                alert("To currency code must be select out");
                 return false;
             }
             
@@ -1090,7 +1093,7 @@
 
             var TotalMtgRS = parseFloat(total).toFixed(2);
 
-            result2.innerHTML = `${amt}$  = ${TotalMtgRS} ${toCurrency}`;
+            result2.innerHTML = `${amt} ${fromCurrency}  = ${TotalMtgRS} ${toCurrency}`;
 
 
 
