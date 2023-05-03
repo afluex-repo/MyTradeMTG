@@ -782,6 +782,7 @@ namespace MyTradeMTG.Controllers
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     ViewBag.SponsorId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    ViewBag.SponsorName = ds.Tables[0].Rows[0]["Name"].ToString();
                 }
             }
             return View(model);
