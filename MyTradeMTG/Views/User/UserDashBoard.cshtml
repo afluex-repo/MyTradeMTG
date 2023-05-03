@@ -92,6 +92,7 @@
     <div class="container-fluid">
        @if (ViewBag.timerstatus == "1")
         {
+         
             <div class="row">
                 <div class="col-lg-12" id="countdownRemove">
                     <div class="card">
@@ -452,14 +453,32 @@
                                             <label class="form-check-label" for="customCheck9">
                                                 <span class="d-block text-black font-w500">MTGToken/USDT</span>
                                                 <span class="fs-12">MTG</span>
+                                                <span id="result" class="d-block text-black font-w500"></span>
+                                                <input type="hidden" id="SelfBusinessMTG" name="SelfBusinessMTG" value="@ViewBag.SelfBusiness" />
+                                                
                                             </label>
                                         </div>
+                                        @*-----Convert USD TO INR Link Start-------*@
+                                        <div style="display:none">
+                                            <label>From:</label>
+                                            <select id="from">
+                                                <option value="USD">USD</option>
+                                            </select>
+                                            <label>To:</label>
+                                            <select id="to">
+                                                <option value="INR">INR</option>
+                                            </select>
+                                        </div>
+                                        @*-----Convert USD TO INR Link End-------*@
+
 
                                         <div class="form-check custom-checkbox me-5 mb-2">
                                             <input type="checkbox" class="form-check-input" id="customCheck9">
                                             <label class="form-check-label" for="customCheck9">
                                                 <span class="d-block text-black font-w500">Rupees</span>
                                                 <span class="fs-12">Rupees</span>
+                                                <span id="result1" class="d-block text-black font-w500"></span>
+                                                <input type="hidden" id="IndianValue" name="IndianValue" />
                                             </label>
                                         </div>
                                         @*<div class="form-check custom-checkbox me-5 mb-2">
@@ -517,30 +536,33 @@
                                                 <a href="javascript:void(0);" class="btn-link">View more</a>
                                             </div>
 
-                                            <div class="items">
-                                                <div class="text-center">
-                                                    <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
-                                                    <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
-                                                    <b style="font-size:small;">Contact Address<br /></b>
-                                                    <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
+                                            @if (Model.lstCustomer == null )
+                                            {
+                                                <div class="items">
+                                                    <div class="text-center">
+                                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                                        <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                                        <b style="font-size:small; display:none;" >Contact Address<br /></b>
+                                                        <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-
-                                            <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
-                                                @*@foreach (var item in Model.lstCustomer)
+                                            }
+                                            else
+                                            {
+                                                <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
+                                                    @foreach (var item in Model.lstCustomer)
                                                     {
                                                         int i = 0;
                                                         <div class="items">
                                                             <div class="text-center">
                                                                 <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
                                                                 <h6 class="text-black mb-0">@item.CustomerName</h6>
-                                                                <b style="font-size:small;">MTG CA<br /></b>
-                                                                <span style="font-weight:bold;font-size:0.8rem;">(@item.CustomerId)</span>
+                                                                <b style="font-size:small;">Contact Address<br /></b>
+                                                                <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
                                                             </div>
                                                         </div>
                                                         i++;
-                                                    }*@
+                                                    }
 
 
 
@@ -550,35 +572,39 @@
 
 
 
-                                                @*<div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">Cindy</h5>
-                                                            <span class="fs-12">cindyss</span>
+                                                    @*<div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">Cindy</h5>
+                                                                <span class="fs-12">cindyss</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">David</h5>
-                                                            <span class="fs-12">davidxc</span>
+                                                        <div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">David</h5>
+                                                                <span class="fs-12">davidxc</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">Martha</h5>
-                                                            <span class="fs-12">marthaa</span>
+                                                        <div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">Martha</h5>
+                                                                <span class="fs-12">marthaa</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="items">
-                                                        <div class="text-center">
-                                                            <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                            <h5 class="text-black mb-0">Olivia</h5>
-                                                            <span class="fs-12">oliv62</span>
-                                                        </div>
-                                                    </div>*@
-                                            </div>
+                                                        <div class="items">
+                                                            <div class="text-center">
+                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
+                                                                <h5 class="text-black mb-0">Olivia</h5>
+                                                                <span class="fs-12">oliv62</span>
+                                                            </div>
+                                                        </div>*@
+                                                </div>
+
+                                            }
+
+
                                             <div class="amount-bx">
                                                 <label>MTG/USDT</label>
                                                 <input type="text" readonly="" class="form-control" value="@ViewBag.TotalWalletAmount">
@@ -784,7 +810,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-body p-0">
+                                            <div class="card-body p-1">
                                                 <div class="widget-content1">
                                                     <div id="chart-user2" class=""></div>
                                                 </div>
@@ -894,11 +920,11 @@
                                             <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://MyTradeMTG.co.in//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>*@
 
 
-                                        <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://Mytrade.global/Website/index?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
+                                        <span class="s-icon"><a href="mailto:?subject= Referral Link &amp;body=http://Mytrade.global//Home/ShareLinkRegistration?Pid=@Session["Pk_UserId"].ToString(). Thanks." target="_blank" style="background:#871505"><i class="fa fa-envelope fa-lg"></i></a></span>
                                         <span class="s-icon"><a href="https://api.whatsapp.com/send?text=http://Mytrade.global//Home/ShareLinkRegistration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#42f560" data-action="share/whatsapp/share"><i class="fa fa-whatsapp fa-lg"></i></a></span>
-                                        <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://Mytrade.global//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
-                                        <span class="s-icon"><a href="https://www.instagram.com/?url=http://Mytrade.global//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
-                                        <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://Mytrade.global//Website/index?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
+                                        <span class="s-icon"><a href="https://www.facebook.com/sharer.php?u=http://Mytrade.global//Home/ShareLinkRegistration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#4267B2"><i class="fa fa-facebook fa-lg"></i></a></span>
+                                        <span class="s-icon"><a href="https://www.instagram.com/?url=http://Mytrade.global//Home/ShareLinkRegistration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#E1306C"><i class="fa fa-instagram fa-lg"></i></a></span>
+                                        <span class="s-icon"><a href="https://twitter.com/intent/tweet?text=http://Mytrade.global//Home/ShareLinkRegistration?Pid=@Session["Pk_UserId"].ToString()" target="_blank" style="background:#1DA1F2"><i class="fa fa-twitter fa-lg"></i></a></span>
 
                                     }
                                 </div>
@@ -943,6 +969,46 @@
 
                 })
             </script>
+
+<script>
+    $(document).ready(function () {
+
+        const result = document.getElementById("result");
+        const result1 = document.getElementById("result1");
+        const from = document.getElementById("from");
+        const to = document.getElementById("to");
+
+        const amount = document.getElementById("SelfBusinessMTG");
+
+        const IndianValue = document.getElementById("IndianValue");
+
+        let fromCurrency = from.value;
+        let toCurrency = to.value;
+        let amt = amount.value;
+        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+        .then(response => {
+            return response.json();
+        })
+
+        .then(data => {
+            debugger;
+            let rate = data.rates[toCurrency];
+            let total = rate * amt;
+
+            var TotalMtgRS = parseFloat(total).toFixed(2);
+
+            // Currency Statistics ( IN USD)--------
+
+            result.innerHTML = `${amt} $ ${fromCurrency}`;
+
+            // Currency Statistics (In Rupees)--------
+            result1.innerHTML = `${TotalMtgRS} ₹ ${toCurrency}`;
+            
+
+        });
+    });
+</script>
+
             @*------------------------AddFranchise PopUp Start----------------------------------------------------*@
 
             @*<div class="modal fade md" id="myModalAddFranchise" role="dialog" style="display: none;padding-top:100px;">
@@ -1598,6 +1664,7 @@
         //}, 1000);
 
 </script>
+
 
 
 
