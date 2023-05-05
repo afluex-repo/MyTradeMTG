@@ -54,7 +54,7 @@
                                         <div class="col-lg-12 form-group">
                                             @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
                                             @Html.ValidationMessageFor(m => m.LoginId)
-                                            <label class="ml-3" style="color:#ffd234;" id="SponsorName"></label>
+                                            <label class="ml-3" style="color:#004eff;" id="SponsorName"></label>
                                         </div>
                                 }
 
@@ -68,11 +68,10 @@
                                     </div>
                                     <div class="col-lg-12 form-group">
                                         <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
-                                               placeholder="Mobile Number" />
+                                               placeholder="Mobile Number" onkeypress="onKeyCoutry()" />
                                         <input id="country" type="hidden" name="country">
-                                        <div style="display:none;">
-                                            <span id="country1"></span>
-                                        </div>
+                                        <span style="color:#004eff" id="country1"></span>
+                                        
                                     </div>
                                     <div class="col-lg-12 form-group">
                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email*", @Onchange = "checkEmail();" })
@@ -249,6 +248,12 @@
         })
     }
 
+    
+        debugger;
+        function onKeyCoutry() {
+            country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
+        }
+
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -300,6 +305,8 @@
         $('#Confirm').attr("disabled", "disabled");
         $('#Confirm').hide();
         $('#divReg').show();
+
+        //country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
     }
 
     function editregistration() {

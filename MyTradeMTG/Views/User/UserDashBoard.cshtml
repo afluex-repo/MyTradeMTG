@@ -1,4 +1,4 @@
-﻿F@model MyTradeMTG.Models.Dashboard
+﻿@model MyTradeMTG.Models.Dashboard
 
 @{
     ViewBag.Title = "UserDashBoard";
@@ -202,7 +202,7 @@
                                         <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
                                         <span class="text-danger pr-2">TR2- </span>
                                         <span class="text-black">@ViewBag.LevelIncomeTr2</span><br />
-                                        <span class="text-danger pr-2">SB- </span>
+                                        <span class="text-danger pr-2">Bet(SB)- </span>
                                         <span class="text-black">@ViewBag.SponsorBonus</span><br />
                                     </div>
                                 </div>
@@ -313,10 +313,9 @@
                             <div class="card overflow-hidden">
                                 <div class="card-header align-items-start border-0 pb-0">
                                     <div class="me-auto">
-                                        <a href="#" class="btn btn-block py-1">
-                                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Balance</p>
-                                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> </h3>
-                                        </a>
+                                            <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Cash Out</p>
+                                            <h3 class="text-black mb-0 font-w600"></h3>
+                                      
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
@@ -425,6 +424,7 @@
                                             </div>
                                             <div id="chartBarRunning3" class="bar-chart"></div>
                                         </div>*@
+                                    
                                 </div>
                             </div>
                         </div>
@@ -454,8 +454,7 @@
                                                 <span class="d-block text-black font-w500">MTGToken/USDT</span>
                                                 <span class="fs-12">MTG</span>
                                                 <span id="result" class="d-block text-black font-w500"></span>
-                                                <input type="hidden" id="SelfBusinessMTG" name="SelfBusinessMTG" value="@ViewBag.SelfBusiness" />
-                                                
+                                                <input type="hidden" id="SelfBusinessMTG" name="SelfBusinessMTG" value="1" />
                                             </label>
                                         </div>
                                         @*-----Convert USD TO INR Link Start-------*@
@@ -518,7 +517,7 @@
                                                     <div class="col-md-4">
                                                         <label>From</label>
                                                         <input type="hidden" id="PerAmtnt" name="PerAmtnt" value="1" />
-                                                        <select id="from1" class="form-control" onchange="return CurrencyStatictics()">
+                                                        @*<select id="from1" class="form-control" onchange="return CurrencyStatictics()">
                                                             <option value="0">Select USD</option>
                                                             <option value="USD">USD</option>
                                                             <option value="INR">INR</option>
@@ -526,12 +525,13 @@
                                                             <option value="BDT">BDT</option>
                                                             <option value="PKR">PKR</option>
                                                             <option value="LKR">LKR</option>
-                                                        </select>
+                                                        </select>*@
+                                                        @Html.DropDownListFor(m => m.from1, new SelectList(ViewBag.ddlCurrencyISoCode, "Value", "Text"), new { @class = "form-control", onchange = "return CurrencyStatictics()" })
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>To</label>
                                                         <input type="hidden" id="IndianValue22" name="IndianValue22" />
-                                                        <select id="to1" onchange="return CurrencyStatictics()" class="form-control">
+                                                        @*<select id="to1" onchange="return CurrencyStatictics()" class="form-control">
                                                             <option value="0">Select Currency Code</option>
                                                             <option value="USD">USD</option>
                                                             <option value="INR">INR</option>s
@@ -539,7 +539,8 @@
                                                             <option value="BDT">BDT</option>
                                                             <option value="PKR">PKR</option>
                                                             <option value="LKR">LKR</option>
-                                                        </select>
+                                                        </select>*@
+                                                        @Html.DropDownListFor(m => m.to1, new SelectList(ViewBag.ddlCurrencyISoCode, "Value", "Text"), new { @class = "form-control", onchange = "return CurrencyStatictics()" })
                                                     </div>
                                                     <div class="col-md-4">
                                                             <span id="result2" class="d-block text-black font-w500"></span>
@@ -573,26 +574,21 @@
                                                 <h4 class="text-black fs-20 mb-0">Recent Contacts</h4>
                                                 <a href="javascript:void(0);" class="btn-link">View more</a>
                                             </div>
-
-                                            @if (Model.lstCustomer == null )
-                                            {
-                                                <div class="items">
-                                                    <div class="text-center">
-                                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
-                                                        <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
-                                                        <b style="font-size:small; display:none;" >Contact Address<br /></b>
-                                                        <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
-                                                    </div>
+                                            @*<div class="items">
+                                                <div class="text-center">
+                                                    <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                                    <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                                    <b style="font-size:small; display:none;">Contact Address<br /></b>
+                                                    <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
                                                 </div>
-                                            }
-                                            else
-                                            {
+                                            </div>*@
                                                 <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
+                                                    
                                                     @foreach (var item in Model.lstCustomer)
                                                     {
                                                         int i = 0;
                                                         <div class="items">
-                                                            <div class="text-center">
+                                                            <div class="text-center" id="forsearchcontact">
                                                                 <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
                                                                 <h6 class="text-black mb-0">@item.CustomerName</h6>
                                                                 <b style="font-size:small;">Contact Address<br /></b>
@@ -601,15 +597,8 @@
                                                         </div>
                                                         i++;
                                                     }
-
-
-
-
-
-
-
-
-
+                                                    @*<img src="~/UploadFile/60cd7ff8-4b09-4b8e-b87a-470c88f6541f.png" />*@
+                                                  
                                                     @*<div class="items">
                                                             <div class="text-center">
                                                                 <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
@@ -639,8 +628,6 @@
                                                             </div>
                                                         </div>*@
                                                 </div>
-
-                                            }
 
 
                                             <div class="amount-bx">
@@ -896,6 +883,7 @@
                                                                 for (int i = 0; i < 1; i++)
                                                                 {
                                                                     <div class="carousel-item active">
+                                                                        <label>@Model.lstReward[i].Title</label>
                                                                         <img class="d-block w-100" src="@Model.lstReward[i].Image" style="height:300px" alt="First slide">
                                                                     </div>
 
@@ -911,6 +899,7 @@
                                                                 {
 
                                                                     <div class="carousel-item">
+                                                                        <label>@Model.lstReward[i].Title</label>
                                                                         <img class="d-block w-100" src="@Model.lstReward[i].Image" style="height:300px" alt="Second slide">
                                                                     </div>
                                                                 }
@@ -973,7 +962,7 @@
             </div>
  
 
-            @if (ViewBag.ProfilePic == "/assets/img/usericon.jpg" || ViewBag.Address == "" || ViewBag.Address == null)
+            @if (ViewBag.Address == "" || ViewBag.Address == null )
             {
                 <div class="modal fade md" id="myModalProfile" role="dialog" style="display: none;">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1759,6 +1748,8 @@
         //}, 1000);
 
 </script>
+
+
 
 
 
