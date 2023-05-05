@@ -10,6 +10,7 @@ namespace MyTradeMTG.Models
 {
     public class Common
     {
+        public List<SelectListItem> ddlCurrencyISoCode { get; set; }
         public string AddedBy { get; set; }
         public string UpdatedBy { get; set; }
         public string ReferBy { get; set; }
@@ -290,7 +291,13 @@ namespace MyTradeMTG.Models
             return ds;
 
         }
+        public DataSet GetCurrencyISOCode()
+        {
+           
+            DataSet ds = DBHelper.ExecuteQuery("GetCurrencyISOCode");
+            return ds;
 
+        }
 
 
         public static List<SelectListItem> BindCountry()

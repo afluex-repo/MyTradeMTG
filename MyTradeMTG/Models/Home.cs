@@ -9,6 +9,7 @@ namespace MyTradeMTG.Models
 {
     public class Home : Common
     {
+        public string IsUpdated { get; set; }
         public List<Home> lstMenu { get; set; }
         public List<Home> lstBannerImage { get; set; }
         public List<Home> lstsubmenu { get; set; }

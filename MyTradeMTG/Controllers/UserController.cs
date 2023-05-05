@@ -135,9 +135,29 @@ namespace MyTradeMTG.Controllers
                 ViewBag.ProfilePic = ds2.Tables[0].Rows[0]["ProfilePic"].ToString();
                 ViewBag.CustomerId = ds2.Tables[0].Rows[0]["CustomerId"].ToString();
                 ViewBag.CustomerName = ds2.Tables[0].Rows[0]["CustomerName"].ToString();
+                //ViewBag.IsUpdated = ds2.Tables[0].Rows[0]["IsUpdated"].ToString();
             }
 
+            #region GetCurrencyISoCode Bind
 
+            Common objCIC = new Common();
+            List<SelectListItem> ddlCurrencyISoCode = new List<SelectListItem>();
+            DataSet dsCIC = objCIC.GetCurrencyISOCode();
+            if (dsCIC != null && dsCIC.Tables.Count > 0 && dsCIC.Tables[0].Rows.Count > 0)
+            {
+                int count = 0;
+                foreach (DataRow r in dsCIC.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlCurrencyISoCode.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlCurrencyISoCode.Add(new SelectListItem { Text = r["ISOCodeSymbol"].ToString(), Value = r["ISOcode"].ToString() });
+                    count++;
+                }
+            }
+            ViewBag.ddlCurrencyISoCode = ddlCurrencyISoCode;
+            #endregion
 
 
 
@@ -1058,6 +1078,7 @@ namespace MyTradeMTG.Controllers
                     model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                     model.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                     model.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                    model.IsUpdated = ds.Tables[0].Rows[0]["IsUpdated"].ToString();
                 }
             }
             return View(model);
