@@ -1020,6 +1020,7 @@
     <script src="/UserPanel/js/deznav-init.js"></script>
     @*<script src="/UserPanel/js/demo.js"></script>*@
 
+
     <script>
         jQuery(document).ready(function () {
             setTimeout(function () {
@@ -1782,7 +1783,7 @@
                 ///////////////////////////////////////////////////////////////////////////
 
                 var chartBarRunning = function () {
-                    //debugger;
+                    debugger;
                     $.ajax({
                         url: "/User/GetchartBarRunning",
                         type: "GET",
@@ -2485,7 +2486,7 @@
                         widgetChart7();
                         widgetChart8();
                         chartBarRunning();
-                        //chartBarRunning2();
+                        chartBarRunning2();
                         //chartBarRunning3();
                         lineChart();
                     },

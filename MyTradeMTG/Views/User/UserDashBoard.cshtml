@@ -117,7 +117,6 @@
         }
                 
             <!-- end cont stats -->
-
                     <div class="row">
                         <div class="col-xl-3 col-sm-6">
                             <div class="card overflow-hidden">
@@ -320,7 +319,7 @@
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:60px;"></canvas>
+                                    <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:96px;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -386,6 +385,7 @@
                                                     <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
                                                 </div>*@
                                         </div>
+                                        <div id="chartBarRunning2" class="bar-chart"></div>
                                         <div id="chartBarRunning" class="bar-chart"></div>
                                     </div>
                                     @*<div class="tab-pane fade" id="Week">
@@ -572,68 +572,79 @@
                                         <div class="card-body">
                                             <div class="d-flex mb-3 justify-content-between align-items-center">
                                                 <h4 class="text-black fs-20 mb-0">Recent Contacts</h4>
+                                                <div class="input-group search-area d-xl-inline-flex d-none ms-auto mr-13">
+                                                    <div class="input-group-append">
+                                                        <button class="input-group-text"><i class="flaticon-381-search-2"></i></button>
+                                                    </div>
+                                                    <input type="text" id="FirstName" name="FirstName" class="form-control" placeholder="Search here...">
+                                                </div>
                                                 <a href="javascript:void(0);" class="btn-link">View more</a>
                                             </div>
-                                          @if (Model.lstCustomer != null)
-                                          {
-                                                <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
-                                                        @foreach (var item in Model.lstCustomer)
-                                                        {
-                                                            int i = 0;
-                                                            <div class="items">
-                                                                <div class="text-center" id="forsearchcontact">
-                                                                    <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
-                                                                    <h6 class="text-black mb-0">@item.CustomerName</h6>
-                                                                    <b style="font-size:small;">Contact Address<br /></b>
-                                                                    <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
-                                                                </div>
-                                                            </div>
-                                                            i++;
-                                                        }
-                                                        @*<img src="~/UploadFile/60cd7ff8-4b09-4b8e-b87a-470c88f6541f.png" />*@
+                                            @*<div class="items">
+                                                <div class="text-center">
+                                                    <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                                    <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                                    <b style="font-size:small; display:none;">Contact Address<br /></b>
+                                                    <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
+                                                </div>
+                                            </div>*@
 
-                                                        @*<div class="items">
-                                                                <div class="text-center">
-                                                                    <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                    <h5 class="text-black mb-0">Cindy</h5>
-                                                                    <span class="fs-12">cindyss</span>
-                                                                </div>
-                                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <marquee onmouseleave="start()" onmouseover="stop()">
+                                                    <ul class="d-flex">
+                                                        @if (Model.lstCustomer != null)
+                                                        {
+                                                            foreach (var item in Model.lstCustomer)
+                                                            {
+                                                                int i = 0;
+                                                                <li>
+                                                                    <div class="card overflow-hidden">
+                                                                        <div class="card-body d-flex align-items-center">
+                                                                            <div class="text-center">
+                                                                                <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
+                                                                                <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                                                <b style="font-size:small;">Contact Address<br /></b>
+                                                                                <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                i++;
+                                                            }
+                                                        }
+                                                        else
+                                                        {
                                                             <div class="items">
                                                                 <div class="text-center">
-                                                                    <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                    <h5 class="text-black mb-0">David</h5>
-                                                                    <span class="fs-12">davidxc</span>
+                                                                    <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                                                    <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                                                    <b style="font-size:small; display:none;">Contact Address<br /></b>
+                                                                    <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="items">
-                                                                <div class="text-center">
-                                                                    <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                    <h5 class="text-black mb-0">Martha</h5>
-                                                                    <span class="fs-12">marthaa</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="items">
-                                                                <div class="text-center">
-                                                                    <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                    <h5 class="text-black mb-0">Olivia</h5>
-                                                                    <span class="fs-12">oliv62</span>
-                                                                </div>
-                                                            </div>*@
+                                                        }
+                                                    </ul>
+                                                </marquee>
+                                            </div>
+                                                @*<div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
                                                     
-                                                </div>
-                                          }
-                                          else
-                                          {
-                                            <div class="items">
-                                                    <div class="text-center">
-                                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
-                                                        <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
-                                                        <b style="font-size:small;">Contact Address<br /></b>
-                                                        <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
-                                                    </div>
-                                                </div>
-                                          }
+                                                    @foreach (var item in Model.lstCustomer)
+                                                    {
+                                                        int i = 0;
+                                                        <div class="items">
+                                                            <div class="text-center" id="forsearchcontact">
+                                                                <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
+                                                                <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                                <b style="font-size:small;">Contact Address<br /></b>
+                                                                <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
+                                                            </div>
+                                                        </div>
+                                                        i++;
+                                                    }
+                                                    @*<img src="~/UploadFile/60cd7ff8-4b09-4b8e-b87a-470c88f6541f.png" />*
+                                                  
+                                                </div>*@
 
 
                                             <div class="amount-bx">
@@ -1754,8 +1765,29 @@
         //}, 1000);
 
 </script>
+@*<script>
+    function saveregistration() {
+        debugger;
+        var FirstName = $("#FirstName").val();
+        $.ajax({
+            url: "/User/SearchRecentContacts",
+            Type: "Post",
+            DataType: "JSON",
+            data: { FirstName: FirstName},
+            success: function (data) {
+                debugger;
+                if (data.Result == "1") {
+                   
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Result);
+                }
+            }
 
-
+        });
+    }
+</script>*@
 
 
 
