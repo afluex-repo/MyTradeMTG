@@ -117,7 +117,6 @@
         }
                 
             <!-- end cont stats -->
-
                     <div class="row">
                         <div class="col-xl-3 col-sm-6">
                             <div class="card overflow-hidden">
@@ -386,6 +385,7 @@
                                                     <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
                                                 </div>*@
                                         </div>
+                                        <div id="chartBarRunning2" class="bar-chart"></div>
                                         <div id="chartBarRunning" class="bar-chart"></div>
                                     </div>
                                     @*<div class="tab-pane fade" id="Week">
@@ -572,6 +572,12 @@
                                         <div class="card-body">
                                             <div class="d-flex mb-3 justify-content-between align-items-center">
                                                 <h4 class="text-black fs-20 mb-0">Recent Contacts</h4>
+                                                <div class="input-group search-area d-xl-inline-flex d-none ms-auto mr-13">
+                                                    <div class="input-group-append">
+                                                        <button class="input-group-text"><i class="flaticon-381-search-2"></i></button>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Search here...">
+                                                </div>
                                                 <a href="javascript:void(0);" class="btn-link">View more</a>
                                             </div>
                                             @*<div class="items">
@@ -582,7 +588,39 @@
                                                     <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
                                                 </div>
                                             </div>*@
-                                                <div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
+
+
+                                            <div class="col-xl-12">
+                                                <marquee onmouseleave="start()" onmouseover="stop()">
+                                                    <ul class="d-flex">
+                                                        <li>
+                                                            <div class="card overflow-hidden">
+                                                                <div class="card-body d-flex align-items-center">
+                                                                    <div class="text-center" id="forsearchcontact">
+                                                                        <img class="mb-3 rounded" src="https://kripton.dexignzone.com/xhtml/images/profile/pic1.jpg" alt="" height="150">
+                                                                        <h6 class="text-black mb-0"></h6>
+                                                                        <b style="font-size:small;">Contact Address<br /></b>
+                                                                        <span style="font-weight:bold;font-size:0.8rem;">bd</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="card overflow-hidden">
+                                                                <div class="card-body d-flex align-items-center">
+                                                                    <div class="text-center" id="forsearchcontact">
+                                                                        <img class="mb-3 rounded" src="https://kripton.dexignzone.com/xhtml/images/profile/pic1.jpg" alt="" height="150">
+                                                                        <h6 class="text-black mb-0"></h6>
+                                                                        <b style="font-size:small;">Contact Address<br /></b>
+                                                                        <span style="font-weight:bold;font-size:0.8rem;">bd</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </marquee>
+                                            </div>
+                                                @*<div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
                                                     
                                                     @foreach (var item in Model.lstCustomer)
                                                     {
@@ -597,37 +635,9 @@
                                                         </div>
                                                         i++;
                                                     }
-                                                    @*<img src="~/UploadFile/60cd7ff8-4b09-4b8e-b87a-470c88f6541f.png" />*@
+                                                    @*<img src="~/UploadFile/60cd7ff8-4b09-4b8e-b87a-470c88f6541f.png" />*
                                                   
-                                                    @*<div class="items">
-                                                            <div class="text-center">
-                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                <h5 class="text-black mb-0">Cindy</h5>
-                                                                <span class="fs-12">cindyss</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="items">
-                                                            <div class="text-center">
-                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                <h5 class="text-black mb-0">David</h5>
-                                                                <span class="fs-12">davidxc</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="items">
-                                                            <div class="text-center">
-                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                <h5 class="text-black mb-0">Martha</h5>
-                                                                <span class="fs-12">marthaa</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="items">
-                                                            <div class="text-center">
-                                                                <img class="mb-3 rounded" src="~/UserPanel/images/MtgCoinPng.png" alt="">
-                                                                <h5 class="text-black mb-0">Olivia</h5>
-                                                                <span class="fs-12">oliv62</span>
-                                                            </div>
-                                                        </div>*@
-                                                </div>
+                                                </div>*@
 
 
                                             <div class="amount-bx">
@@ -1748,7 +1758,6 @@
         //}, 1000);
 
 </script>
-
 
 
 
