@@ -19,6 +19,7 @@ namespace MyTradeMTG.Models
         public string Message { get; set; }
         public string MessageTitle { get; set; }
         public string Pk_MessageId { get; set; }
+        public string FirstName { get; set; }
 
 
         public string Image { get; set; }
@@ -50,6 +51,7 @@ namespace MyTradeMTG.Models
         {
             SqlParameter[] para = {
                  new SqlParameter("@PK_UserId", AddedBy),
+                 new SqlParameter("@CustomerName", FirstName),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetCustomerList", para);
             return ds;

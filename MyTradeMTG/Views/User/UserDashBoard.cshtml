@@ -319,7 +319,7 @@
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:60px;"></canvas>
+                                    <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:96px;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -576,7 +576,7 @@
                                                     <div class="input-group-append">
                                                         <button class="input-group-text"><i class="flaticon-381-search-2"></i></button>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Search here...">
+                                                    <input type="text" id="FirstName" name="FirstName" class="form-control" placeholder="Search here...">
                                                 </div>
                                                 <a href="javascript:void(0);" class="btn-link">View more</a>
                                             </div>
@@ -593,30 +593,37 @@
                                             <div class="col-xl-12">
                                                 <marquee onmouseleave="start()" onmouseover="stop()">
                                                     <ul class="d-flex">
-                                                        <li>
-                                                            <div class="card overflow-hidden">
-                                                                <div class="card-body d-flex align-items-center">
-                                                                    <div class="text-center" id="forsearchcontact">
-                                                                        <img class="mb-3 rounded" src="https://kripton.dexignzone.com/xhtml/images/profile/pic1.jpg" alt="" height="150">
-                                                                        <h6 class="text-black mb-0"></h6>
-                                                                        <b style="font-size:small;">Contact Address<br /></b>
-                                                                        <span style="font-weight:bold;font-size:0.8rem;">bd</span>
+                                                        @if (Model.lstCustomer != null)
+                                                        {
+                                                            foreach (var item in Model.lstCustomer)
+                                                            {
+                                                                int i = 0;
+                                                                <li>
+                                                                    <div class="card overflow-hidden">
+                                                                        <div class="card-body d-flex align-items-center">
+                                                                            <div class="text-center">
+                                                                                <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
+                                                                                <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                                                <b style="font-size:small;">Contact Address<br /></b>
+                                                                                <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
+                                                                </li>
+                                                                i++;
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="items">
+                                                                <div class="text-center">
+                                                                    <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
+                                                                    <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
+                                                                    <b style="font-size:small; display:none;">Contact Address<br /></b>
+                                                                    <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
                                                                 </div>
                                                             </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="card overflow-hidden">
-                                                                <div class="card-body d-flex align-items-center">
-                                                                    <div class="text-center" id="forsearchcontact">
-                                                                        <img class="mb-3 rounded" src="https://kripton.dexignzone.com/xhtml/images/profile/pic1.jpg" alt="" height="150">
-                                                                        <h6 class="text-black mb-0"></h6>
-                                                                        <b style="font-size:small;">Contact Address<br /></b>
-                                                                        <span style="font-weight:bold;font-size:0.8rem;">bd</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                        }
                                                     </ul>
                                                 </marquee>
                                             </div>
@@ -1758,7 +1765,29 @@
         //}, 1000);
 
 </script>
+@*<script>
+    function saveregistration() {
+        debugger;
+        var FirstName = $("#FirstName").val();
+        $.ajax({
+            url: "/User/SearchRecentContacts",
+            Type: "Post",
+            DataType: "JSON",
+            data: { FirstName: FirstName},
+            success: function (data) {
+                debugger;
+                if (data.Result == "1") {
+                   
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    alert(data.Result);
+                }
+            }
 
+        });
+    }
+</script>*@
 
 
 
