@@ -9,7 +9,8 @@ namespace MyTradeMTG.Models
 {
     public class Dashboard : Common
     {
-
+        public string from1 { get; set; }
+        public string to1 { get; set; }
         public string cssclass { get; set; }
         public List<Dashboard> lstmessages { get; set; }
         public string FK_UserId { get; set; }
@@ -33,6 +34,7 @@ namespace MyTradeMTG.Models
         public string AccountNo { get; set; }
         public string IFSCCode { get; set; }
         public string IsFranchise { get; set; }
+
 
 
         public string Addresss { get; set; }

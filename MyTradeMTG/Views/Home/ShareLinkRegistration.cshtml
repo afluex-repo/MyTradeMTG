@@ -23,6 +23,10 @@
         html, body {
             height: 100%;
         }
+        .h-120
+        {
+            min-height:110vh
+        }
     </style>
 </head>
 <body>
@@ -30,79 +34,84 @@
     {
         <div class="container h-100">
             <div class="row h-100">
-                <div class="col-md-4 col-sm-12 offset-lg-4 card h-100 mb-0">
-                    <!--Register Form start-->
-                    <div class="user_register card-body">
-                        <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
-                            <div class="row">
-                                <div class="card-title text-center">
-                                    <img src="/MyTradeMTGWebsite/asset/img/wbg.gif" alt="" />
-                                    <h3>Sign Up</h3>
-                                </div>
-                                @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
+                <div class="col-md-4 col-sm-12 offset-lg-4 h-120 mb-0">
+                    <div class="card h-120">
+                        <!--Register Form start-->
+                        <div class="user_register card-body">
+                            <form role="form" id="myForm" method="post" name="myForm" class="form-horizontal contact-form" action="/Website/RegistrationAction">
+                                <div class="row">
+                                    <div class="card-title text-center">
+                                        <img src="/MyTradeMTGWebsite/asset/img/wbg.gif" class="img-fluid" alt="" />
+                                        <h3>Sign Up</h3>
+                                    </div>
+                                    @if (ViewBag.SponsorId != null && ViewBag.SponsorId != "")
                                 {
-                                    <h5 class="ml-4 mb-2" style="color:#004eff; font-size: 14px;">Congratulations ! For joining us under sponsor code :@ViewBag.SponsorName (@ViewBag.SponsorId)</h5>
-                                    <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
+                                        <h5 class="mb-2" style="color:#004eff; font-size: 14px;">Congratulations ! For joining us under sponsor code :@ViewBag.SponsorName (@ViewBag.SponsorId)</h5>
+                                        <input type="hidden" value="@ViewBag.SponsorId" id="SponsorId" name="SponsorId" />
                                 }
                                 else
                                 {
-                                    <div class="col-lg-12 form-group">
-                                        @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
-                                        @Html.ValidationMessageFor(m => m.LoginId)
-                                        <label class="ml-3" style="color:#ffd234;" id="SponsorName"></label>
-                                    </div>
+                                        <div class="col-lg-12 form-group">
+                                            @Html.TextBoxFor(m => m.SponsorId, new { @class = "form-control", @onchange = "getsponsordetails(this);", @required = true, @placeholder = "Sponsor Id*" })
+                                            @Html.ValidationMessageFor(m => m.LoginId)
+                                            <label class="ml-3" style="color:#004eff;" id="SponsorName"></label>
+                                        </div>
                                 }
 
-                                <div class="col-lg-12 form-group">
-                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true", @onkeypress = "return onlyAlphabets(event,this);" })
+                                    <div class="col-lg-12 form-group">
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name*", @required = "true", @onkeypress = "return onlyAlphabets(event,this);" })
 
-                                </div>
-                                <div class="col-lg-12 form-group">
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name", @onkeypress = "return onlyAlphabets(event,this);" })
+                                    </div>
+                                    <div class="col-lg-12 form-group">
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name", @onkeypress = "return onlyAlphabets(event,this);" })
 
-                                </div>
-                                <div class="col-lg-12 form-group">
-                                    <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
-                                           placeholder="Mobile Number" />
-                                    <input id="country" type="hidden" name="country">
-                                    <div style="display:none;">
-                                        <span id="country1"></span>
+                                    </div>
+                                    <div class="col-lg-12 form-group">
+                                        <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
+                                               placeholder="Mobile Number" onkeypress="onKeyCoutry()" />
+                                        <input id="country" type="hidden" name="country">
+                                        <span style="color:#004eff" id="country1"></span>
+                                        
+                                    </div>
+                                    <div class="col-lg-12 form-group">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email*", @Onchange = "checkEmail();" })
+
+                                    </div>
+                                    <div class="col-lg-12 form-group">
+                                        @Html.PasswordFor(m => m.Password2, new { @class = "form-control", @placeholder = "Password*" })
+                                    </div>
+                                    <div class="col-lg-12 form-group">
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();" })
+                                    </div>
+                                    <div class="col-lg-12 form-group">
+                                        <input type="checkbox" class="mt-1" id="checkboxvalue123" data-toggle="modal" data-target="#exampleModalScrollable">
+                                        <label>I accept all <a href="javascript:void(0)" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">Terms &amp; Use.</a></label>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 form-group">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email*", @Onchange = "checkEmail();" })
-
+                                <div class="row text-center">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <button type="submit" class="btn btn-success btn-sm" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
+                                    </div>
+                                    <div class="row" id="divReg" style="display: none">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 col-5">
+                                            <button type="button" class="btn btn-success btn-sm" onclick="return saveregistration();" id="Register">Sign Up</button>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 col-3">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="return editregistration();" id="Edit">Edit</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="action_btns mt-3 text-center mb-3 ">
+                                            <center><i class="fa fa-home"></i> Back to <a href="/Website/Index" class="text-dark"><strong> home</strong></a></center>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-12 form-group">
-                                    @Html.PasswordFor(m => m.Password2, new { @class = "form-control", @placeholder = "Password*" })
-                                </div>
-                                <div class="col-lg-12 form-group">
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password*", @onblur = "return validateConfPassword();" })
-                                </div>
-                                <div class="col-lg-12 form-group">
-                                    <input type="checkbox" class="mt-1" id="checkboxvalue123" data-toggle="modal" data-target="#exampleModalScrollable">
-                                    <label>I accept all <a href="javascript:void(0)" class="mt-1" data-toggle="modal" data-target="#exampleModalScrollable">Terms &amp; Use.</a></label>
-                                </div>
-                            </div>
-                            <div class="row text-center">
-                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
-                                </div>
-                            </div>
-                            <div class="row" id="divReg" style="display: none">
-                                <div class="col-sm-6 col-md-6 col-lg-6 col-3">
-                                    <button type="button" class="btn btn-success btn-sm" onclick="return saveregistration();" id="Register">Sign Up</button>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6 col-3">
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="return editregistration();" id="Edit">Edit</button>
-                                </div>
-                            </div>
-                            <div class="action_btns mt-3 text-center mb-3 ">
-                                <center><i class="fa fa-home"></i> Back to <a href="/Website/Index" class="text-dark"><strong> home</strong></a></center>
-                            </div>
-                        </form>
+                             
+                                
+                            </form>
+                        </div>
+                        <!--Register Form end-->
                     </div>
-                    <!--Register Form end-->
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -239,6 +248,12 @@
         })
     }
 
+    
+        debugger;
+        function onKeyCoutry() {
+            country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
+        }
+
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -290,6 +305,8 @@
         $('#Confirm').attr("disabled", "disabled");
         $('#Confirm').hide();
         $('#divReg').show();
+
+        //country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
     }
 
     function editregistration() {
