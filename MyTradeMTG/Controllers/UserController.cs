@@ -516,34 +516,34 @@ namespace MyTradeMTG.Controllers
                         catch
                         {
                         }
-                        //if (obj.Email != null)
-                        //{
-                        //    string mailbody = "";
-                        //    try
-                        //    {
-                        //        mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
-                        //        System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
-                        //        {
-                        //            Host = "smtp.gmail.com",
-                        //            Port = 587,
-                        //            EnableSsl = true,
-                        //            DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                        //            UseDefaultCredentials = true,
-                        //            Credentials = new NetworkCredential("coustomer.MyTradeMTG@gmail.com", "MyTradeMTG@2022")
-                        //        };
-                        //        using (var message = new MailMessage("coustomer.MyTradeMTG@gmail.com", obj.Email)
-                        //        {
-                        //            IsBodyHtml = true,
-                        //            Subject = "TopUp",
-                        //            Body = mailbody
-                        //        })
-                        //            smtp.Send(message);
-                        //    }
-                        //    catch (Exception ex)
-                        //    {
+                        if (obj.Email != null)
+                        {
+                            string mailbody = "";
+                            try
+                            {
+                                mailbody = "Dear  " + obj.Name + ", <br/> Your Top-Up Done successfully..";
+                                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                                {
+                                    Host = "smtp.gmail.com",
+                                    Port = 587,
+                                    EnableSsl = true,
+                                    DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                                    UseDefaultCredentials = true,
+                                    Credentials = new NetworkCredential("coustomer.MyTradeMTG@gmail.com", "MyTradeMTG@2022")
+                                };
+                                using (var message = new MailMessage("coustomer.MyTradeMTG@gmail.com", obj.Email)
+                                {
+                                    IsBodyHtml = true,
+                                    Subject = "TopUp",
+                                    Body = mailbody
+                                })
+                                    smtp.Send(message);
+                            }
+                            catch (Exception ex)
+                            {
 
-                        //    }
-                        //}
+                            }
+                        }
                         TempData["msg"] = "Top-Up Done successfully";
                     }
                     else
