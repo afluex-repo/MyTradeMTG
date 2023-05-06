@@ -118,7 +118,7 @@ namespace MyTradeMTG.Controllers
                 foreach (DataRow r in ds22.Tables[0].Rows)
                 {
                     Dashboard obj1 = new Dashboard();
-                    obj1.ProfilePic = r["ProfilePic"].ToString();
+                    //obj1.ProfilePic = r["ProfilePic"].ToString();
                     obj1.CustomerId = r["CustomerId"].ToString();
                     obj1.CustomerName = r["CustomerName"].ToString();
                     obj1.FirstName = r["FirstName"].ToString();
