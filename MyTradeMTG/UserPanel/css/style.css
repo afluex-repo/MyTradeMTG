@@ -9555,7 +9555,7 @@ svg.pulse-svg {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border: 0;
-    height: 3.5rem; }
+    height: 2.5rem; }
     .search-area .input-group-append .input-group-text i {
       font-size: 22px; }
   .search-area .form-control {
@@ -9566,7 +9566,10 @@ svg.pulse-svg {
   @media only screen and (max-width: 1400px) {
     .search-area .input-group-append .input-group-text {
       height: 41px; } }
-
+  .search_bar
+  {
+      height:2.5rem !important;
+  }
 [data-container="boxed"] .search-area {
   display: none !important; }
 
@@ -48987,7 +48990,10 @@ $color_pallate_15: #ed0b4c; */
     {
         margin-right:13px;
     }
-
+    .mr-25
+    {
+         margin-right:25px;
+    }
     .float_button{
 	position:fixed;
 	width:60px;
