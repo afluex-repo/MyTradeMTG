@@ -51,7 +51,6 @@ namespace MyTradeMTG.Models
         {
             SqlParameter[] para = {
                  new SqlParameter("@PK_UserId", AddedBy),
-                 new SqlParameter("@CustomerName", FirstName),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetCustomerList", para);
             return ds;
