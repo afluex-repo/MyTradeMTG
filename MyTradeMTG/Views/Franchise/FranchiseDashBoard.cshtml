@@ -1,0 +1,43 @@
+﻿@model MyTradeMTG.Models.Dashboard
+
+@{
+    ViewBag.Title = "FranchiseDashBoard";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+<style>
+     .form-control.custom-image-select-1 {
+        height: 50px;
+    }
+
+    divdash > h2 {
+        /*margin-left: 357px;*/
+        /*margin-top: 26px;*/
+        position: fixed;
+        top: 25px;
+        float: inherit;
+        z-index: 30;
+    }
+
+    @@media only screen and (max-width: 768px) {
+        divdash > h2 {
+            margin-left: 140px;
+            top: 25px;
+            position: fixed;
+            float: inherit;
+            z-index: 30;
+        }
+    }
+</style>
+<div class="content-body">
+    <divdash>
+        <h2>Franchise Dashboard</h2>
+    </divdash>
+    <!-- row -->
+    <div class="container-fluid">
+        <!-- end cont stats -->
+        <div class="row">
+          
+        </div>
+    </div>
+</div>
+

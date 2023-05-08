@@ -24,7 +24,8 @@
     <link href="/UserPanel/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/UserPanel/vendor/chartist/css/chartist.min.css">
     <link href="/UserPanel/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="/UserPanel/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @*<link href="/UserPanel/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">*@
     <link href="/UserPanel/css/style.css" rel="stylesheet">
     <link href="/UserPanel/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/UserPanel/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
@@ -191,7 +192,7 @@
                                 {
                                     <span class="text-success" style="font-size:23px">Franchise Registered : @Session["FirmName"]</span>
                                 }
-                                <a href="javascript:void(0)" class="btn btn-info btn-sm">Switch to Franchise Pannel</a>
+                                <a href="/Franchise/FranchiseDashBoard" class="btn btn-info btn-sm">Switch to Franchise Pannel</a>
 
 
                             </div>
@@ -461,7 +462,10 @@
                 <p><strong>My Trade User Dashboard</strong> © 2022 All Rights Reserved.</p>
             </div>
         </div>
-
+        <a href="#" class="float_button" target="_blank">
+        @*<i class="fa fa-whatsapp my-float"></i>*@
+        <svg viewBox="0 0 32 32" fill="#fff"><path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z" fill-rule="evenodd"></path></svg>
+        </a>
     </div>
 
 
@@ -2390,12 +2394,74 @@
             return true;
         }
     </script>
+    <script>
+        (function () {
+            "use strict";
+
+            var carousels = function () {
+                $(".owl-carousel1").owlCarousel({
+                    loop: true,
+                    center: true,
+                    margin: 0,
+                    mouseDrag: false,
+                    responsiveClass: true,
+
+                    responsive: {
+                        0: {
+                            items: 1,
+                            nav: false
+                        },
+                        680: {
+                            items: 2,
+                            nav: false,
+                            loop: false
+                        },
+                        1000: {
+                            items: 3,
+                            nav: true
+                        }
+                    }
+                });
+            };
+
+            (function ($) {
+                carousels();
+            })(jQuery);
+        })();
+
+
+
+    </script>
     <style>
         .errortextfor {
             border: 1px solid red !important;
             /*background-color: #fff0f0 !important;*/
         }
     </style>
-
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: true,
+            mouseDrag:false,
+            navText: [
+              "<i class='fa fa-caret-left'></i>",
+              "<i class='fa fa-caret-right'></i>"
+            ],
+            autoplay: true,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
 </body>
 </html>

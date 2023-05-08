@@ -9,7 +9,7 @@ namespace MyTradeMTG.Models
 {
     public class Dashboard : Common
     {
-        public string ProfilePicture { get; set; }
+        
         public string from1 { get; set; }
         public string to1 { get; set; }
         public string cssclass { get; set; }
@@ -21,7 +21,7 @@ namespace MyTradeMTG.Models
         public string MessageTitle { get; set; }
         public string Pk_MessageId { get; set; }
         public string FirstName { get; set; }
-
+        public string ProfilePicture{ get; set; }
 
         public string Image { get; set; }
         public string Title { get; set; }

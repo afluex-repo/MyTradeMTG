@@ -918,6 +918,8 @@
     <Compile Include="Controllers\AdminReportsController.cs" />
     <Compile Include="Controllers\DownlineController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
+    <Compile Include="Controllers\FranchiseBaseController.cs" />
+    <Compile Include="Controllers\FranchiseController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\PermisssionsController.cs" />
@@ -1249,6 +1251,8 @@
     <Content Include="Views\Master\QRCodeMaster.cshtml" />
     <Content Include="Views\Master\QRCodeList.cshtml" />
     <Content Include="Views\Home\ShareLinkRegistration.cshtml" />
+    <Content Include="Views\Shared\_FranchiseLayout.cshtml" />
+    <Content Include="Views\Franchise\FranchiseDashBoard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1263,6 +1267,7 @@
     <Folder Include="plugins\apex\" />
     <Folder Include="UploadQRCodeMaster\" />
     <Folder Include="Views\API\" />
+    <Folder Include="Views\FranchiseBase\" />
     <Folder Include="Views\WebAPI\" />
   </ItemGroup>
   <ItemGroup>

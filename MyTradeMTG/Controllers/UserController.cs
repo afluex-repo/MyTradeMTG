@@ -132,7 +132,7 @@ namespace MyTradeMTG.Controllers
             DataSet ds2 = obj.GetCustomerList();
             if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
             {
-                ViewBag.ProfilePicture = ds2.Tables[0].Rows[0]["ProfilePicture"].ToString();
+                ViewBag.ProfilePic = ds2.Tables[0].Rows[0]["ProfilePicture"].ToString();
                 ViewBag.CustomerId = ds2.Tables[0].Rows[0]["CustomerId"].ToString();
                 ViewBag.CustomerName = ds2.Tables[0].Rows[0]["CustomerName"].ToString();
                 //ViewBag.IsUpdated = ds2.Tables[0].Rows[0]["IsUpdated"].ToString();

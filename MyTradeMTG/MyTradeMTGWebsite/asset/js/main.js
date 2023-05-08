@@ -20,7 +20,7 @@ Version      : 1.0
 			label: '',
 			duration: 1000,
 			easingOpen: "easeOutBounce", //available with jQuery UI
-			prependTo:'#mobile_menu',
+			//prependTo:'#mobile_menu',
 			closeOnClick: true,
 			easingClose:"swing", 
 			easingOpen:"swing", 

@@ -81,6 +81,39 @@
                 content: "Seconds";
             }
 
+    .carousel-wrap {
+        margin: 30px auto;
+        padding: 0 2%;
+        width: 100%;
+        position: relative;
+    }
+
+    /* fix blank or flashing items on carousel */
+    .owl-carousel .item {
+        position: relative;
+        z-index: 100;
+        -webkit-backface-visibility: hidden;
+    }
+
+    /* end fix */
+    .owl-nav > div {
+        margin-top: -26px;
+        position: absolute;
+        top: 50%;
+        color: #cdcbcd;
+    }
+
+    .owl-nav i {
+        font-size: 40px;
+    }
+
+    .owl-nav .owl-prev {
+        left: -30px;
+    }
+
+    .owl-nav .owl-next {
+        right: -30px;
+    }
 
     /*/ end count stats /*/
 </style>
@@ -389,7 +422,7 @@
                                     </div>*@
                             </div>
                             <div id="chartBarRunning" class="bar-chart"></div>
-                            @*<div id="chartBarRunning2" class="bar-chart"></div>*@
+                            <div id="chartBarRunning2" class="bar-chart"></div>
 
                         </div>
                         @*<div class="tab-pane fade" id="Week">
@@ -521,29 +554,13 @@
                                         <div class="col-md-4">
                                             <label>From Currency Code</label>
                                             <input type="hidden" id="PerAmtnt" name="PerAmtnt" value="1" />
-                                            @*<select id="from1" class="form-control" onchange="return CurrencyStatictics()">
-                                                    <option value="0">Select USD</option>
-                                                    <option value="USD">USD</option>
-                                                    <option value="INR">INR</option>
-                                                    <option value="AFN">AFN</option>
-                                                    <option value="BDT">BDT</option>
-                                                    <option value="PKR">PKR</option>
-                                                    <option value="LKR">LKR</option>
-                                                </select>*@
+                                           
                                             @Html.DropDownListFor(m => m.from1, new SelectList(ViewBag.ddlCurrencyISoCode, "Value", "Text"), new { @class = "form-control", onchange = "return CurrencyStatictics()" })
                                         </div>
                                         <div class="col-md-4">
                                             <label>To Currency Code</label>
                                             <input type="hidden" id="IndianValue22" name="IndianValue22" />
-                                            @*<select id="to1" onchange="return CurrencyStatictics()" class="form-control">
-                                                    <option value="0">Select Currency Code</option>
-                                                    <option value="USD">USD</option>
-                                                    <option value="INR">INR</option>s
-                                                    <option value="AFN">AFN</option>
-                                                    <option value="BDT">BDT</option>
-                                                    <option value="PKR">PKR</option>
-                                                    <option value="LKR">LKR</option>
-                                                </select>*@
+                                            
                                             @Html.DropDownListFor(m => m.to1, new SelectList(ViewBag.ddlCurrencyISoCode, "Value", "Text"), new { @class = "form-control", onchange = "return CurrencyStatictics()" })
                                         </div>
                                         <div class="col-md-4">
@@ -595,7 +612,26 @@
 
 
                                 <div class="col-xl-12">
-                                    <marquee onmouseleave="start()" onmouseover="stop()">
+                                    <div class="carousel-wrap">
+                                        <div class="owl-carousel">
+                                            @if (Model.lstCustomer != null)
+                                            {
+                                                foreach (var item in Model.lstCustomer)
+                                                {
+                                                    int i = 0;
+                                                    <div class="item text-center">
+                                                        <img class="mb-3 rounded" src="@item.ProfilePicture" alt="" height="180">
+                                                        <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                        <b style="font-size:small;">Contact Address<br /></b>
+                                                        <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
+
+                                                    </div>
+                                                    i++;
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    @*<marquee onmouseleave="start()" onmouseover="stop()">
                                         <ul class="d-flex">
                                             @if (Model.lstCustomer != null)
                                             {
@@ -606,7 +642,7 @@
                                                         <div class="card overflow-hidden">
                                                             <div class="card-body d-flex align-items-center">
                                                                 <div class="text-center">
-                                                                    <img class="mb-3 rounded" src="@item.ProfilePicture" alt="" height="150">
+                                                                    <img class="mb-3 rounded" src="@item.ProfilePic" alt="" height="150">
                                                                     <h6 class="text-black mb-0">@item.CustomerName</h6>
                                                                     <b style="font-size:small;">Contact Address<br /></b>
                                                                     <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
@@ -621,7 +657,7 @@
                                             {
                                                 <div class="items">
                                                     <div class="text-center">
-                                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePicture" alt="" height="150">
+                                                        <img class="mb-3 rounded" src="@ViewBag.ProfilePic" alt="" height="150">
                                                         <h6 class="text-black mb-0">@ViewBag.CustomerName</h6>
                                                         <b style="font-size:small; display:none;">Contact Address<br /></b>
                                                         <span style="font-weight:bold;font-size:0.8rem;">@ViewBag.CustomerId</span>
@@ -629,7 +665,7 @@
                                                 </div>
                                             }
                                         </ul>
-                                    </marquee>
+                                    </marquee>*@
                                 </div>
                                 @*<div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
 
@@ -983,7 +1019,7 @@
 </div>
 
 
-@if (ViewBag.ProfilePic == "/assets/img/usericon.jpg" || ViewBag.Address == "" || ViewBag.Address == null)
+@if (ViewBag.Address == "" || ViewBag.Address == null)
 {
     <div class="modal fade md" id="myModalProfile" role="dialog" style="display: none;">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1006,16 +1042,16 @@
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
-                $(document).ready(function () {
+    $(document).ready(function () {
 
-                    $("#myModalProfile").modal('show');
-                });
+        $("#myModalProfile").modal('show');
+    });
 </script>
 <script>
-                $('.close').click(function () {
-                    $('#myModalProfile').modal('hide');
+    $('.close').click(function () {
+        $('#myModalProfile').modal('hide');
 
-                })
+    })
 </script>
 <style>
     .errortext {
@@ -1063,22 +1099,22 @@
         });
     });
 
-        debugger;
-        function CurrencyStatictics() {
-            var from1 = document.getElementById("from1").value;
-            var to1 = document.getElementById("to1").value;
+    debugger;
+    function CurrencyStatictics() {
+        var from1 = document.getElementById("from1").value;
+        var to1 = document.getElementById("to1").value;
 
-            if (from1 == "0") {
-                $("#from1").addClass('errortext');
-                $("#to1").addClass('errortext');
-                $("#to1").val('0');
-                alert("From currency code must be select out");
-                return false;
-            }
-            else if (to1 == "0") {
-                alert("To currency code must be select out");
-                return false;
-            }
+        if (from1 == "0") {
+            $("#from1").addClass('errortext');
+            $("#to1").addClass('errortext');
+            $("#to1").val('0');
+            alert("From currency code must be select out");
+            return false;
+        }
+        else if (to1 == "0") {
+            alert("To currency code must be select out");
+            return false;
+        }
 
         const result2 = document.getElementById("result2");
         const from = document.getElementById("from1");
@@ -1109,7 +1145,7 @@
 
         });
 
-        }
+    }
 
 
 </script>
@@ -1718,7 +1754,7 @@
         //var today = new Date("Apr 02, 2023 16:37:52");
         today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1 + 7);
         var day = today.getDate();
-        var month = today.getMonth()+1;
+        var month = today.getMonth() + 1;
         var year = today.getFullYear();
         var secondmonday = day + '-' + getMonthName(month) + '-' + year;
         return secondmonday;
@@ -1726,7 +1762,7 @@
 
 
 
-    var myfunc = setInterval(function() {
+    var myfunc = setInterval(function () {
         var countDate = new Date(nextDate(1)).getTime();
         var now = new Date().getTime();
         var gap = countDate - now;
@@ -1764,9 +1800,9 @@
     }, 1000);
 
 
-        //setInterval(function () {
-        //  newYear();
-        //}, 1000);
+    //setInterval(function () {
+    //  newYear();
+    //}, 1000);
 
 </script>
 @*<script>
