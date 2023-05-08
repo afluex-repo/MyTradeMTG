@@ -200,20 +200,21 @@
                                                         }
                                                        
                                                     </td>
-                                                    <td>
-                                                        @if (Item.WithdrawalStatus == "False")
-                                                        {
-                                                            <a href="/AdminReports/StopWithdrawal?Fk_UserId=@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to Stop WithDrawal this User ?')">
-                                                                Stop WithDrawal
-                                                            </a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="/AdminReports/StartWithdrawal?Fk_UserId=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to Start WithDrawal this User ?')">
-                                                                Start WithDrawal
-                                                            </a>
-                                                        }
-                                                    </td>
+                                                     <td>
+                                                              @*@if (Item.WithdrawalStatus == "False")
+                                                              {*@
+                                                                <a href="/AdminReports/StopWithdrawal?Fk_UserId=@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to Stop WithDrawal this User ?')">
+                                                                    Stop WithDrawal
+                                                                </a>
+                                                              @*}
+                                                              else
+                                                              {
+                                                                <a href="/AdminReports/StartWithdrawal?Fk_UserId=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to Start WithDrawal this User ?')">
+                                                                    Start WithDrawal
+                                                                </a>
+                                                              }*@
+                                                     </td>
+
                                                     @*<td>
                                                             <a href="/AdminProfile/WelcomeLetter?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
                                                                 Print

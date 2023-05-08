@@ -9,6 +9,7 @@ namespace MyTradeMTG.Models
 {
     public class Dashboard : Common
     {
+        
         public string from1 { get; set; }
         public string to1 { get; set; }
         public string cssclass { get; set; }
