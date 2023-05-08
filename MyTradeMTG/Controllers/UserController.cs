@@ -118,7 +118,7 @@ namespace MyTradeMTG.Controllers
                 foreach (DataRow r in ds22.Tables[0].Rows)
                 {
                     Dashboard obj1 = new Dashboard();
-                    //obj1.ProfilePic = r["ProfilePic"].ToString();
+                    obj1.ProfilePicture = r["ProfilePicture"].ToString();
                     obj1.CustomerId = r["CustomerId"].ToString();
                     obj1.CustomerName = r["CustomerName"].ToString();
                     lst2.Add(obj1);
@@ -132,7 +132,7 @@ namespace MyTradeMTG.Controllers
             DataSet ds2 = obj.GetCustomerList();
             if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
             {
-                ViewBag.ProfilePic = ds2.Tables[0].Rows[0]["ProfilePic"].ToString();
+                ViewBag.ProfilePic = ds2.Tables[0].Rows[0]["ProfilePicture"].ToString();
                 ViewBag.CustomerId = ds2.Tables[0].Rows[0]["CustomerId"].ToString();
                 ViewBag.CustomerName = ds2.Tables[0].Rows[0]["CustomerName"].ToString();
                 //ViewBag.IsUpdated = ds2.Tables[0].Rows[0]["IsUpdated"].ToString();

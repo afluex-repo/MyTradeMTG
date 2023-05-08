@@ -20,7 +20,7 @@ namespace MyTradeMTG.Models
         public string MessageTitle { get; set; }
         public string Pk_MessageId { get; set; }
         public string FirstName { get; set; }
-
+        public string ProfilePicture{ get; set; }
 
         public string Image { get; set; }
         public string Title { get; set; }
