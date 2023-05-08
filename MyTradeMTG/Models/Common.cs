@@ -112,6 +112,7 @@ namespace MyTradeMTG.Models
         {
             List<SelectListItem> AssociateStatus = new List<SelectListItem>();
             AssociateStatus.Add(new SelectListItem { Text = "All", Value = null });
+            AssociateStatus.Add(new SelectListItem { Text = "Is Blocked", Value = "1" });
             AssociateStatus.Add(new SelectListItem { Text = "Active", Value = "O" });
             AssociateStatus.Add(new SelectListItem { Text = "Inactive", Value = "T" });
             AssociateStatus.Add(new SelectListItem { Text = "TopUp ID", Value = "P" });
