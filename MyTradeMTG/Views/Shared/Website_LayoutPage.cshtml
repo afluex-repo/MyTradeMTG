@@ -32,8 +32,13 @@
     <!--Popup CSS-->
     <link rel="stylesheet" href="~/MyTradeMTGWebsite/asset/css/popup.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
-
-
+    <style>
+        .slicknav_nav
+        {
+            display:none
+        }
+    </style>
+   
 </head>
 <body data-spy="scroll" data-offset="80">
 
@@ -74,7 +79,23 @@
                               </li>*@
                             </ul>
                         </nav>
-                        <div id="mobile_menu"></div>
+                        <div id="mobile_menu">
+                            <div class="slicknav_menu">
+                                <a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn" style="outline: none;"><span class="slicknav_menutxt"></span><span class="slicknav_icon slicknav_no-text"><span class="slicknav_nav_icon icofont-navigation-menu"></span></span></a><nav class="slicknav_nav" aria-hidden="false" role="menu">
+                                    <ul>
+                                        <li><a href="/Website/Index" role="menuitem">Home</a></li>
+                                        <li><a href="#about" role="menuitem">About</a></li>
+                                        <li><a href="#forex" role="menuitem">Forex</a></li>
+                                        <li><a href="#business" role="menuitem">Business</a></li>
+                                        <li><a href="#faq" role="menuitem">faq</a></li>
+                                        <li><a href="#download" role="menuitem">Get App</a></li>
+                                        <li><a href="#contact" role="menuitem">Contact Us</a></li>
+                                        <li><a href="#" class="block-menu" id="modal_trigger">Login</a></li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div><!--- END Col -->
             </div><!--- END ROW -->
@@ -349,8 +370,11 @@
         // on keyup / change flag: reset
         telInput.on("keyup change", reset);
 
-
-
+    </script>
+    <script>
+        $('#mobile_menu').click(function () {
+            $('.slicknav_nav').toggle(300);
+        })
     </script>
 </body>
 </html>
