@@ -45,7 +45,7 @@ namespace MyTradeMTG.Controllers
                     obj.Email = (r["Email"].ToString());
                     obj.SponsorId = (r["SponsorId"].ToString());
                     obj.SponsorName = (r["SponsorName"].ToString());
-                    obj.isBlocked = (r["isBlocked"].ToString());
+                    obj.isBlocked = (r["IsBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
                     obj.ActivationMode = r["ActivationMode"].ToString();
@@ -90,7 +90,7 @@ namespace MyTradeMTG.Controllers
                     obj.Email = (r["Email"].ToString());
                     obj.SponsorId = (r["SponsorId"].ToString());
                     obj.SponsorName = (r["SponsorName"].ToString());
-                    obj.isBlocked = (r["isBlocked"].ToString());
+                    obj.isBlocked = (r["IsBlocked"].ToString());
                     obj.Status = r["MemberStatus"].ToString();
                     obj.MemberStatus = r["MemberStatus"].ToString();
                     obj.ActivationMode = r["ActivationMode"].ToString();
@@ -753,7 +753,6 @@ namespace MyTradeMTG.Controllers
                     ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
                     ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
                     model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
-                    ViewBag.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     ViewBag.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     ViewBag.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
                     ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
@@ -772,6 +771,8 @@ namespace MyTradeMTG.Controllers
                     ViewBag.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                     ViewBag.UPI = ds.Tables[0].Rows[0]["UPIID"].ToString();
                     ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.DocumentType = ds.Tables[0].Rows[0]["DocumentType"].ToString();
+                    ViewBag.DocumentTypeNumber = ds.Tables[0].Rows[0]["DocumentTypeNumber"].ToString();
                 }
             }
             return View(model);

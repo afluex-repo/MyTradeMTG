@@ -85,16 +85,24 @@
                     <div class="widget-content widget-content-area">
                         <h3 class="">KYC Details</h3>
                         <div class="timeline-alter">
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Bank Name</p>
+                            @if (ViewBag.BankName != "")
+                            {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Bank Name</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.BankName</p>
+                                    </div>
                                 </div>
-                                <div class="t-dot">
-                                </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.BankName</p>
-                                </div>
-                            </div>
+                            }
+                           
+                            
+
+                            @if (ViewBag.BranchName != "")
+                            {
                             <div class="item-timeline">
                                 <div class="t-meta-date">
                                     <p class="">Branch Name</p>
@@ -105,69 +113,100 @@
                                     <p>@ViewBag.BranchName</p>
                                 </div>
                             </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Account Number</p>
+                            }
+                           
+
+                          @if (ViewBag.AccountNo != "")
+                          {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Account Number</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.AccountNo</p>
+                                    </div>
                                 </div>
-                                <div class="t-dot">
+                          }
+                          
+                           @if (ViewBag.IFSCCode != "")
+                           {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">IFSC Code</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.IFSCCode</p>
+                                    </div>
                                 </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.AccountNo</p>
+                           }
+                          
+
+                             @if (ViewBag.UPI != "")
+                             {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">UPI Id</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.UPI</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">IFSC Code</p>
+                             }
+                            
+
+                         @if (ViewBag.NomineeName != "")
+                         {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Nominee Name</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.NomineeName</p>
+                                    </div>
                                 </div>
-                                <div class="t-dot">
+                         }
+                        
+
+                               @if (ViewBag.NomineeAge != "")
+                               {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Nominee Age</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.NomineeAge</p>
+                                    </div>
                                 </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.IFSCCode</p>
+                               }
+                             
+
+
+                           @if (ViewBag.NomineeRelation != "")
+                           {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Nominee Relation</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.NomineeRelation</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">UPI Id</p>
-                                </div>
-                                <div class="t-dot">
-                                </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.UPI</p>
-                                </div>
-                            </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Nominee Name</p>
-                                </div>
-                                <div class="t-dot">
-                                </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.NomineeName</p>
-                                </div>
-                            </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Nominee Age</p>
-                                </div>
-                                <div class="t-dot">
-                                </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.NomineeAge</p>
-                                </div>
-                            </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Nominee Relation</p>
-                                </div>
-                                <div class="t-dot">
-                                </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.NomineeRelation</p>
-                                </div>
-                            </div>
+                           }
                         </div>
                         <div class="timeline-alter">
-                            <div class="item-timeline">
+                            @*<div class="item-timeline">
                                 <div class="t-meta-date">
                                     <p class="">State</p>
                                 </div>
@@ -206,18 +245,35 @@
                                 <div class="t-text">
                                     <p>@ViewBag.Address</p>
                                 </div>
-                            </div>
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Adhar Number</p>
+                            </div>*@
+                            @if (ViewBag.DocumentType != "")
+                            {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Document Type</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.DocumentType</p>
+                                    </div>
                                 </div>
-                                <div class="t-dot">
+                            }
+                            @if (ViewBag.DocumentTypeNumber != "")
+                            {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Document Type Number</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <p>@ViewBag.DocumentTypeNumber</p>
+                                    </div>
                                 </div>
-                                <div class="t-text">
-                                    <p>@ViewBag.AdharNo</p>
-                                </div>
-                            </div>
-
+                            }
+                           @*@if (ViewBag.PanNo != "")
+                           {
                             <div class="item-timeline">
                                 <div class="t-meta-date">
                                     <p class="">Pan Number</p>
@@ -228,21 +284,29 @@
                                     <p>@ViewBag.PanNo</p>
                                 </div>
                             </div>
+                           }
+                          
+                           }*@
 
-                            <div class="item-timeline">
-                                <div class="t-meta-date">
-                                    <p class="">Pan Image</p>
+                            @*@if (ViewBag.PanImage != "/images/noimage.jpg")
+                            {
+                                <div class="item-timeline">
+                                    <div class="t-meta-date">
+                                        <p class="">Pan Image</p>
+                                    </div>
+                                    <div class="t-dot">
+                                    </div>
+                                    <div class="t-text">
+                                        <a href="@ViewBag.PanImage" download>
+                                            <img id="PanImage" src="@ViewBag.PanImage" height="50" width="120" onchange="loadFile_adhar(event)" />
+                                            <i class="fa fa-download" style="font-size:33px;color:#4361ee">
+                                            </i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="t-dot">
-                                </div>
-                                <div class="t-text">
-                                    <a href="@ViewBag.PanImage" download>
-                                        <img id="PanImage" src="@ViewBag.PanImage" height="50" width="120" onchange="loadFile_adhar(event)" />
-                                        <i class="fa fa-download" style="font-size:33px;color:#4361ee">
-                                        </i>
-                                    </a>
-                                </div>
-                            </div>
+                            }*@
+                     
+
                         </div>
                     </div>
                 </div>

@@ -552,29 +552,13 @@
                                         <div class="col-md-4">
                                             <label>From Currency Code</label>
                                             <input type="hidden" id="PerAmtnt" name="PerAmtnt" value="1" />
-                                            @*<select id="from1" class="form-control" onchange="return CurrencyStatictics()">
-                                                    <option value="0">Select USD</option>
-                                                    <option value="USD">USD</option>
-                                                    <option value="INR">INR</option>
-                                                    <option value="AFN">AFN</option>
-                                                    <option value="BDT">BDT</option>
-                                                    <option value="PKR">PKR</option>
-                                                    <option value="LKR">LKR</option>
-                                                </select>*@
+                                           
                                             @Html.DropDownListFor(m => m.from1, new SelectList(ViewBag.ddlCurrencyISoCode, "Value", "Text"), new { @class = "form-control", onchange = "return CurrencyStatictics()" })
                                         </div>
                                         <div class="col-md-4">
                                             <label>To Currency Code</label>
                                             <input type="hidden" id="IndianValue22" name="IndianValue22" />
-                                            @*<select id="to1" onchange="return CurrencyStatictics()" class="form-control">
-                                                    <option value="0">Select Currency Code</option>
-                                                    <option value="USD">USD</option>
-                                                    <option value="INR">INR</option>s
-                                                    <option value="AFN">AFN</option>
-                                                    <option value="BDT">BDT</option>
-                                                    <option value="PKR">PKR</option>
-                                                    <option value="LKR">LKR</option>
-                                                </select>*@
+                                            
                                             @Html.DropDownListFor(m => m.to1, new SelectList(ViewBag.ddlCurrencyISoCode, "Value", "Text"), new { @class = "form-control", onchange = "return CurrencyStatictics()" })
                                         </div>
                                         <div class="col-md-4">
