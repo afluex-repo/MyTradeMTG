@@ -102,9 +102,13 @@ margin-bottom:30px;
 
 
 }
-
-
-
+@media(min-width:1000px)
+{
+    .slicknav_menu
+    {
+        display:none
+    }
+}
 
 
 
