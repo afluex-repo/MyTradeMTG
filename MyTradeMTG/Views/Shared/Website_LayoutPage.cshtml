@@ -88,7 +88,7 @@
                                         <li><a href="#faq" role="menuitem">faq</a></li>
                                         <li><a href="#download" role="menuitem">Get App</a></li>
                                         <li><a href="#contact" role="menuitem">Contact Us</a></li>
-                                        <li><a href="#" class="block-menu" data-toggle="modal" data-target="#modal">Login</a></li>
+                                        <li><a href="#" class="block-menu" id="login_btn" role="menuitem" data-toggle="modal" data-target="#modal">Login</a></li>
 
                                     </ul>
                                 </nav>
@@ -375,6 +375,13 @@
         $('#mobile_menu').click(function () {
             $('.slicknav_nav').toggle(300);
         })
+
+        $('.modal_close').click(function()
+        {
+            $('.modal-backdrop.show').css("display", "none");
+            $('body').css("overflow-y", "scroll");
+        })
+        
     </script>
 </body>
 </html>
