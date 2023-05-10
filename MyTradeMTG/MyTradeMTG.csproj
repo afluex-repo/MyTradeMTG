@@ -1253,6 +1253,7 @@
     <Content Include="Views\Home\ShareLinkRegistration.cshtml" />
     <Content Include="Views\Shared\_FranchiseLayout.cshtml" />
     <Content Include="Views\Franchise\FranchiseDashBoard.cshtml" />
+    <Content Include="Views\Admin\UserTopUpAllow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
