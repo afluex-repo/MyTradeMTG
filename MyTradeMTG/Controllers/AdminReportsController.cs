@@ -150,7 +150,7 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["BlockUnblock"] = "User Blocked";
+                        TempData["BlockUnblock"] = "User UnBlocked";
                         FormName = "AssociateList";
                         Controller = "AdminReports";
                     }
