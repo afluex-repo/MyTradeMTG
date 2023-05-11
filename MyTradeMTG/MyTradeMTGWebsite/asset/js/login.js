@@ -1,15 +1,9 @@
-
-/*
-Author       : theme_ocean
-Template Name: Icocoin - Bitcoin & Cryptocurrency ICO Landing Page HTML Template
-Version      : 1.0
-*/
 (function($) {
     'use strict';
 	
     jQuery(document).on('ready', function(){
 
-        $("#modal_trigger").leanModal({top : 100, overlay : 0.6, closeButton: ".modal_close" });
+        $(".modal_trigger").leanModal({top : 100, overlay : 0.6, closeButton: ".modal_close" });
 
         $(function () {
             $(".user_login").show();
@@ -26,9 +20,6 @@ Version      : 1.0
             $("#register_form").click(function(){
                 $(".social_login").hide();
                 $(".user_register").show();
-                //$(".popupContainer").css("height", "600px");
-                //$(".popupContainer").css("overflow-y", "scroll");
-                //$(".popupContainer").css("margin-left", "-300px");
                 $(".user_login").hide();
                 $(".header_title").text('Sign Up');
                 return false;
@@ -37,8 +28,6 @@ Version      : 1.0
             // Calling Register Form
             $(".login_modal").click(function () {
                 $(".user_login").show();
-                //$(".popupContainer").css("width", "330px");
-                //$(".popupContainer").css("margin-left", "-165px");
                 $(".social_login").hide();
                 $(".user_register").hide();
                 $(".header_title").text('Login');
@@ -51,17 +40,11 @@ Version      : 1.0
                 $(".user_login").hide();
                 $(".user_register").hide();
                 $(".social_login").show();
-                //$(".popupContainer").css("width", "330px");
-                //$(".popupContainer").css("margin-left", "-165px");
                 $(".header_title").text('Forget Password');
                 return false;
             });
-
         })	
-		
     }); 	
-	
-	
 				
 })(jQuery);
 

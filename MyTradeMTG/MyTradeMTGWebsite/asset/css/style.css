@@ -1482,6 +1482,13 @@ display: inline-block;
     }
 }
 
+.form-control:disabled
+{
+    color:#000 !important;
+}
+
+
+
 /*
 * ----------------------------------------------------------------------------------------
 * 16.END FOOTER DESIGN
