@@ -71,7 +71,7 @@
                                 <li><a href="#faq">faq</a></li>
                                 <li><a href="#download">Get App</a></li>
                                 <li><a href="#contact">Contact Us</a></li>
-                                <li><a href="#" class="block-menu" id="modal_trigger" hre="#modal">Login</a></li>
+                                <li><a class="block-menu modal_trigger" href="#modal" onclick="return ToLogin()">Login</a></li>
                               @*<li>
                                 <a href="/Home/Registration" class="block-menu">Sign Up</a>
                               </li>*@
@@ -79,7 +79,13 @@
                         </nav>
                         <div id="mobile_menu">
                             <div class="slicknav_menu">
-                                <a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn" style="outline: none;"><span class="slicknav_menutxt"></span><span class="slicknav_icon slicknav_no-text"><span class="slicknav_nav_icon icofont-navigation-menu"></span></span></a><nav class="slicknav_nav" aria-hidden="false" role="menu">
+                                <a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn">
+                                <span class="slicknav_menutxt"></span>
+                                <span class="slicknav_icon slicknav_no-text">
+                                    <span class="slicknav_nav_icon icofont-navigation-menu"></span>
+                                    </span>
+                                </a>
+                                <nav class="slicknav_nav" aria-hidden="false" role="menu">
                                     <ul>
                                         <li><a href="/Website/Index" role="menuitem">Home</a></li>
                                         <li><a href="#about" role="menuitem">About</a></li>
@@ -88,8 +94,7 @@
                                         <li><a href="#faq" role="menuitem">faq</a></li>
                                         <li><a href="#download" role="menuitem">Get App</a></li>
                                         <li><a href="#contact" role="menuitem">Contact Us</a></li>
-                                        <li><a href="#" class="block-menu" id="login_btn" role="menuitem" data-toggle="modal" data-target="#modal">Login</a></li>
-
+                                        <li><a class="block-menu modal_trigger" href="#modal" onclick="return ToLogin()">Login</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -99,6 +104,7 @@
             </div><!--- END ROW -->
         </div><!--- END CONTAINER -->
     </div>
+
     <!-- END NAVBAR -->
     @*<!--START LOGIN-->
     <div id="modal" class="popupContainer" style="position:fixed;z-index:2;opacity: 1;z-index: 11000;left: 50%;margin-left: -165px;
@@ -304,7 +310,7 @@
 
     <script>
         $('#modal').hide();
-        $('#modal_trigger').click(function () {
+        $('.modal_trigger').click(function () {
             $('#modal').toggle();
         })
         $('#modal_sign').click(function () {
@@ -375,13 +381,7 @@
         $('#mobile_menu').click(function () {
             $('.slicknav_nav').toggle(300);
         })
-
-        $('.modal_close').click(function()
-        {
-            $('.modal-backdrop.show').css("display", "none");
-            $('body').css("overflow-y", "scroll");
-        })
-        
+       
     </script>
 </body>
 </html>

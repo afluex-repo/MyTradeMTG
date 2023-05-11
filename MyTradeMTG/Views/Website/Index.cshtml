@@ -23,7 +23,7 @@
                         markets, thus allowing investors to develop a diverse portfolio from a single integrated account.
                     </p>
                     <div class="home_btn">
-                        <a id="modal_sign" href="#modal" class="btn_one wow bounceIn" data-wow-delay=".6s">Get Started</a>
+                        <a href="#modal" id="sign" class="btn_one wow bounceIn modal_trigger" onclick="return ToLogin()" data-wow-delay=".6s">Get Started</a>
                         <a href="#about" class="btn_two wow bounceIn" data-wow-delay=".8s">learn More</a>
                     </div>
                 </div>
@@ -666,10 +666,10 @@
                     </div>
                 </div>
                 <div class="row" id="divReg" style="display: none">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-5">
                         <button type="button" class="abtn mt-0" onclick="return saveregistration();" id="Register">Sign Up</button>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-3">
                         <button type="button" class="abtn mt-0" onclick="return editregistration();" id="Edit">Edit</button>
                     </div>
                 </div>
@@ -684,7 +684,6 @@
                 </div>
             </form>
         </div>
-
         <!--Register Form end-->
 
     </div>
@@ -794,7 +793,6 @@
 
 <script>
     function getsponsordetails(obj) {
-        debugger;
         $("#divload").css({ 'display': '' });
         $(".errortext").removeClass("errortext");
         $.ajax({
@@ -902,7 +900,6 @@
     }
 
     function saveregistration() {
-        debugger;
         var CountryCode = $(".iti__selected-dial-code").text();
 
         country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
@@ -924,7 +921,6 @@
             DataType: "JSON",
             data: { SponsorId: $("#SponsorId").val(), FirstName: $("#FirstName").val(), LastName: $("#LastName").val(), MobileNo: $("#phone1").val(), Leg: Leg, Password: $("#Password2").val(), Email: $("#Email").val(), CountryCode: CountryCode, Country: Country },
             success: function (data) {
-                debugger;
                 if (data.Result == "1") {
                     $("#UserDisplayName1").text(data.Name),
                     $("#UserLoginId1").text(data.LoginId),
@@ -1019,8 +1015,6 @@
         }
     }
     function checkEmail() {
-        debugger;
-
         if (($("#Email").val() != "")) {
             if ($("#Email").val()) {
 
@@ -1060,13 +1054,13 @@
 
 <script>
     $(document).ready(function () {
-        debugger;
         var SponsorId = $("#SponsorId").val();
         if (SponsorId != 0) {
             $('#modal').show();
             $(".header_title").text('Sign Up');
             $(".user_login").hide();
             $(".error_page").hide();
+            $(".forget_form").hide();
             $(".user_register").show();
         }
     });
@@ -1074,12 +1068,14 @@
         $(".user_login").show();
         $(".header_title").text('Login');
         $(".error_page").hide();
+        $(".forget_form").hide();
         $(".user_register").hide();
     }
     function ToSignup() {
         $(".user_register").show();
         $(".header_title").text('Sign Up');
         $(".user_login").hide();
+        $(".forget_form").hide();
         $(".error_page").hide();
     }
 </script>
@@ -1087,7 +1083,6 @@
 <script>
     $(document).ready(function () {
         function OpenRegistrationPopUp() {
-            debugger;
             $('#modal').show();
             $(".header_title").text('Sign Up');
             $(".user_login").hide();
@@ -1103,7 +1098,6 @@
 {
     <script>
     $(document).ready(function () {
-            debugger;
             $('#modal').show();
             $(".header_title").text('Error Page');
             $(".user_login").hide();
