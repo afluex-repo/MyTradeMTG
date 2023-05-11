@@ -625,11 +625,10 @@
                         @*<input id="phone" type="tel" placeholder="Enter Mobile No." maxlength="15" onkeypress="return isNumberKey(event);">*@
 
                         <input name="phone1" type="text" class="form-control mb-2 inptFielsd" id="phone1"
-                               placeholder="Phone Number" />
+                               placeholder="Phone Number"  onkeyPress="onKeyCoutry()" />
                         <input id="country" type="hidden" name="country">
-                        <div style="display:none;">
-                            <span id="country1"></span>
-                        </div>
+                        <span style="color:#ffffff" id="country1"></span>
+                        
                         
 
 
@@ -660,7 +659,7 @@
                 @*<center>
                         <button type="submit" class="abtn mt-0">Confirm</button>
                     </center>*@
-                <div class="row">
+                <div>
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <button type="submit" class="abtn mt-0" onclick="return confirmregistration();" id="Confirm" value="Confirm">Confirm</button>
                     </div>
@@ -773,6 +772,8 @@
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
+
+        
     });
     function validateform() {
         $(".errortext").removeClass("errortext");
@@ -818,6 +819,10 @@
         })
     }
 
+    debugger;
+    function onKeyCoutry() {
+        country1.innerHTML = country.value.replace(/ *\([^)]*\) */g, "");
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
