@@ -35,10 +35,10 @@
                                 @*<div class="col-lg-3 col-md-3">*@
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label>
+                                        @*<label>
                                             Payout No.
-                                        </label>
-                                        @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "default-select wide form-control" })
+                                        </label>*@
+                                        @*@Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.Payout, "Value", "Text"), "-Select-", new { @class = "default-select wide form-control" })*@
                                         <input type="hidden" id="hdf" value="@Model.PayoutNo" />
                                         @*@Html.TextBoxFor(m => m.PayoutNo, new { @class = "form-control", @Placeholder = "Payout No" })*@
                                     </div>
