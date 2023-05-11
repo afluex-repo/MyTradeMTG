@@ -133,6 +133,7 @@ namespace MyTradeMTG.Models
         public string ActivationMTGToken { get; set; }
 
         public string Topupid { get; set; }
+        public Boolean IsBlock { get; set; }
 
 
 
@@ -164,6 +165,7 @@ namespace MyTradeMTG.Models
                                      new SqlParameter("@MemberStatus",MemberStatus),
                                            new SqlParameter("@Mobile",MobileNo),
                                              new SqlParameter("@ActivateBy",ActivationMode),
+                                            
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
