@@ -410,14 +410,13 @@
     //}
     function openPopup1(PaymentMode) {
         debugger;
-        jQuery.noConflict();
         $("#myModal1").modal('show');
         $("#txtPayment").text(PaymentMode);
     }
     function closeModal() {
         jQuery.noConflict();
         $("#myModal1").modal('hide');
-        //$('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
+        $('body').removeClass().removeAttr('style'); $('.modal-backdrop').remove();
     }
     $(document).ready(function () {
         //jQuery.noConflict();
