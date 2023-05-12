@@ -365,6 +365,7 @@ namespace MyTradeMTG.Controllers
                     ddlPackageType.Add(new SelectListItem { Text = r["PackageTypeName"].ToString(), Value = r["Pk_PackageTypeId"].ToString() });
                     count++;
                 }
+
             }
             ViewBag.ddlPackageType = ddlPackageType;
             #endregion
@@ -2232,8 +2233,10 @@ namespace MyTradeMTG.Controllers
                 {
                     User obj1 = new User();
                     obj1.TransferDate = r["TransferDate"].ToString();
+                    obj1.TransferFromName = r["TransferFromName"].ToString();
                     obj1.TransfertoName = r["TransfertoName"].ToString();
                     obj1.MTG = r["MTG"].ToString();
+                    obj1.LoginId = r["loginid"].ToString();
                     lst.Add(obj1);
                 }
                 model.QuickSendMTGList = lst;

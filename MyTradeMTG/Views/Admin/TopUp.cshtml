@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <span style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.TotalWalletAmount</span>
+                            <span style="color:red;">MTG Token/USDT Balance : @ViewBag.TotalWalletAmount</span>
                         </div>
                     </div>
 
@@ -169,7 +169,8 @@
         var Amount = $("#Amount").val();
         var WalletBalance = $("#WalletAmount").val();
         if (Amount != null && Amount != "" && Amount != "0") {
-            if (parseInt(Amount) % 1000 == 0) {
+            var inmultipleof = $("#spmul").text();
+            if (parseInt(Amount) % parseInt(inmultipleof) == 0) {
                 if (parseInt(Amount) > parseInt(WalletBalance)) {
                     Snackbar.show({
                         text: "Insufficient Amount",
@@ -326,7 +327,7 @@
                 debugger;
                 if (data.Result == "yes") {
                     $("#Name").val(data.Name);
-                    $("#lblName").text($("#Name").val()+'(Wallet Balance : '+data.Amount+')');
+                    $("#lblName").text($("#Name").val());
                     $("#LoginId").removeClass('errortext');
                     $("#Name").removeClass('errortext');
 
