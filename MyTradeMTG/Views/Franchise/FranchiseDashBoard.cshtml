@@ -1,9 +1,10 @@
-﻿@model MyTradeMTG.Models.Dashboard
+﻿@model MyTradeMTG.Models.Franchise
 
 @{
     ViewBag.Title = "FranchiseDashBoard";
     Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
 }
+<link href="~/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
 <style>
      .form-control.custom-image-select-1 {
         height: 50px;
@@ -36,7 +37,63 @@
     <div class="container-fluid">
         <!-- end cont stats -->
         <div class="row">
-          
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <h4 class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Sale Request(MTG)</h4>
+
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalSaleRequest</h3>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart" class="max-h80 mt-auto chartjs-render-monitor" style="display: block; width: 267px; height: 80px;" width="267" height="80"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <h4 class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Total Approve(MTG)</h4>
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalApproved</h3>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart2" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <h4 class="mb-2 fs-13"><i class="fa fa-caret-down scale5 me-2 text-danger" aria-hidden="true"></i>Total Rejected(MTG)</h4>
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalRejected</h3>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart3" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card overflow-hidden">
+                    <div class="card-header align-items-start border-0 pb-0">
+                        <div class="me-auto">
+                            <h4 class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Pending(MTG)@*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin4" height="47" />*@</h4>
+                            <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalPending</h3>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                        <canvas id="widgetChart4" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
