@@ -1,0 +1,766 @@
+﻿@model MyTradeMTG.Models.UserWallet
+
+@{
+    ViewBag.Title = "AddWallet";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddWallet", "Franchise", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Buy MTG</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label style="color:red">MTG /USDT Balance: @ViewBag.WalletBalance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span style="color:#1e9f58">@TempData["msg"]</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-3 mb-3">
+                                    <div class="example">
+                                        <p class="mb-1">User Id<span style="color: red">*</span></p>
+                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);", @Readonly = "true" })
+                                        @*<input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015">*@
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 mb-3">
+                                    <div class="example">
+                                        <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
+                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG Token/USDT", @onkeypress = "return isNumberOrDecimal(event);", @onInput = "return ConvertMony()" })
+                                    </div>
+                                </div>
+                                <input type="hidden" id="Countryid" value="@Model.Country" />
+                                @*<div class="col-xl-3 mb-3" >
+                                        <div class="example">
+                                            <p class="mb-1"> @Model.CurrencyName<span style="color: red"></span></p>
+                                            <label id="InUsDoller" class="pt-3 form-control"></label>
+                                        </div>
+                                    </div>*@
+
+                                <div class="col-xl-3 mb-3">
+                                    <div class="example">
+                                        <p class="mb-1"> @Model.CurrencyName<span style="color: red"></span></p>
+                                        <label id="result" class="pt-3 form-control"></label>
+
+                                        <input type="hidden" id="IndianValue" name="IndianValue" />
+
+                                    </div>
+                                </div>
+
+                                @*-----Convert USD TO Many Amount Link Start-------*@
+                                <div style="display:none">
+                                    <label>From:</label>
+                                    <select id="from">
+                                        <option value="USD">USD</option>
+                                    </select>
+                                    <label>To:</label>
+                                    <select id="to">
+                                        <option value="@Model.ISOcode">@Model.ISOcode</option>
+                                    </select>
+                                </div>
+                                @*-----Convert USD TO Many Amount Link End-------*@
+
+
+                                <div class="col-xl-3">
+                                    <div class="example">
+                                        <p class="mb-1">Payment Type <span style="color: red">*</span></p>
+                                        @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control wide", @onchange = "return  getpaymentTypedetails();" })
+                                    </div>
+                                </div>
+                                <div class="col-xl-3" id="paymentmode" style="display: none">
+                                    <div class="example">
+                                        <p class="mb-1">
+                                            Payment Mode (@Model.CurrencySymbol @Model.ISOcode)<span style="color: red">*</span>
+                                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentdetails();" })
+                                    </div>
+                                </div>
+
+
+
+
+                                @*<div class="col-md-3" id="bankname" style="display: none">*@
+                                <div class="col-md-3" id="divbankname" style="display: none">
+                                    <label id="lblbank"></label><span style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                </div>
+                                @*<div class="col-md-3 form-it" id="bankbranch" style="display: none">*@
+                                <div class="col-md-3" id="divbankbranch" style="display: none">
+                                    <label>  Branch <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                </div>
+                                @*<div class="col-md-3 form-it" id="chequeno" style="display: none">*@
+                                <div class="col-md-3" id="divtransactiono" style="display: none">
+                                    @*<label id="lbltno"> Transaction No</label> <span style="color: red">*</span>*@
+                                    <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.DDChequeNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                </div>
+                                @*<div class="col-md-3 form-it" id="chequdate" style="display: none">*@
+                                <div class="col-md-3" id="divPaymentMode" style="display: none">
+                                    @*<label> Transaction Date</label> <span style="color: red">*</span>*@
+                                    <span id="txndt"></span><span id="spntradate" style="color: red">*</span>
+                                    @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
+                                </div>
+                                <div class="col-md-3" id="Remarks" style="display: none">
+                                    Remark
+                                    @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
+                                </div>
+
+                                @*<div class="col-md-3 my-3" id="divQr" style="display: none">
+                                        <label id="lblQr"> Scan QR </label>
+                                        <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                                    </div>*@
+
+
+                                <div class="col-md-3 my-3" id="divQr" style="display: none">
+                                    <label id="lblQr"> Scan QR </label>
+                                    <img src="@ViewBag.QRCodeURL" height="200" width="200" />
+                                </div>
+
+
+
+                            </div>
+
+
+
+                            @*<div class="row mb-4">
+                                    <div class="col-md-3" id="divQr" style="display: none">
+                                        <label id="lblQr"> Scan QR </label>
+                                        <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                                    </div>
+                                    <div class="col-md-3" id="divbankname" style="display: none">
+                                        <label id="lblbank"></label><span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                    </div>
+                                    <div class="col-md-3" id="divbankbranch" style="display: none">
+                                        <label>  Branch <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                    </div>
+                                    <div class="col-md-3" id="divtransactiono" style="display: none">
+
+                                        <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.DDChequeNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                    </div>
+
+                                    <div class="col-md-3" id="divPaymentMode" style="display: none">
+
+                                        <span id="txndt"></span><span id="spntradate" style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
+                                    </div>
+                                    <div class="col-md-3" id="Remarks" style="display: none">
+                                        Remark
+                                        @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
+                                    </div>
+
+                                </div>*@
+
+                            <div class="col-md-12">
+                                <input class="btn btn-success pull-left" type="submit" value="Submit" id="Save" name="Save" onclick="return validateform();" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="row layout-top-spacing">
+                    <div class="col-lg-12 col-12 layout-spacing">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <h4>Wallet Request</h4>
+                                        @*<span class="text-danger">
+                                                @TempData["Wallet"]
+                                            </span>*
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label style="color:red">Wallet Balance: @ViewBag.WalletBalance</label>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                Id<span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "getmembername(this);", @Readonly = "true" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                Amount<span style="color: red">*</span>
+                                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberOrDecimal(event);" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                Payment Type<span style="color: red">*</span>
+                                                @Html.DropDownListFor(m => m.PaymentType, new SelectList(ViewBag.ddlpaymentType, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentTypedetails();" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" id="paymentmode" style="display: none">
+                                        Payment Mode<span style="color: red">*</span>
+                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentdetails();" })
+                                    </div>
+                                </div>
+                                @*<div class="row mb-4" id="divPaymentMode">*
+                                <div class="row mb-4">
+                                    <div class="col-md-3" id="divQr" style="display: none">
+                                        <label id="lblQr"> Scan QR </label>
+                                        <img src="~/assets/img/QR.jpeg" height="200" width="200" />
+                                    </div>
+                                    @*<div class="col-md-3" id="bankname" style="display: none">*
+                                    <div class="col-md-3" id="divbankname" style="display: none">
+                                        <label id="lblbank"></label><span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                    </div>
+                                    @*<div class="col-md-3 form-it" id="bankbranch" style="display: none">*
+                                    <div class="col-md-3" id="divbankbranch" style="display: none">
+                                        <label>  Branch <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                    </div>
+                                    @*<div class="col-md-3 form-it" id="chequeno" style="display: none">*
+                                    <div class="col-md-3" id="divtransactiono" style="display: none">
+                                        @*<label id="lbltno"> Transaction No</label> <span style="color: red">*</span>*
+                                        <span id="txnNo"></span> <span id="spntrannumber" style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.DDChequeNo, new { @class = "form-control", @placeholder = "Transaction No" })
+                                    </div>
+                                    @*<div class="col-md-3 form-it" id="chequdate" style="display: none">*
+                                    <div class="col-md-3" id="divPaymentMode" style="display: none">
+                                        @*<label> Transaction Date</label> <span style="color: red">*</span>*
+                                        <span id="txndt"></span><span id="spntradate" style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
+                                    </div>
+                                    <div class="col-md-3" id="Remarks" style="display: none">
+                                        Remark
+                                        @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", @Placeholder = "Remark" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <br />
+                                    <input class="btn btn-success pull-left" type="submit" value="Submit" id="Save" name="Save" onclick="return validateform();" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script src="~/MyTradeMTGWebsite/assets/js/jquery.min.js"></script>
+
+<script>
+
+
+            function ConvertMony() {
+                debugger;
+
+
+                debugger;
+                //const convert = document.getElementById("convert");
+                const result = document.getElementById("result");
+                const from = document.getElementById("from");
+                const to = document.getElementById("to");
+                const amount = document.getElementById("Amount");
+                const IndianValue = document.getElementById("IndianValue");
+                //var TodaysCurrency = $('#IndianValue').val();
+                let fromCurrency = from.value;
+                let toCurrency = to.value;
+                let amt = amount.value;
+                fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+                .then(response => {
+                    return response.json();
+                })
+
+                .then(data => {
+                    debugger;
+                    let rate = data.rates[toCurrency];
+                    let total = rate * amt;
+
+                    //result.innerHTML = `${amt} ${fromCurrency} = ${total}
+                    result.innerHTML = `${amt}$  = ${total}
+
+            ${toCurrency}`;
+                    //IndianValue.innerHTML = total;
+                    $("#IndianValue").val(total);
+
+                });
+            }
+
+
+            $(document).ready(function () {
+
+                $("#PaymentType").val("2");
+                //$("#PaymentType").val("");
+                //getpaymentTypedetails();
+
+                $("#PaymentMode").val(10);
+                $("#paymentmode").show();
+                $("#divQr").show();
+                $("#divbankname").show();
+                $("#BankName").val('');
+                $("#divtransactiono").show();
+                $("#divPaymentMode").show();
+                $("#Remarks").hide();
+                $("#lblbank").show();
+                $('#lblbank').html('UPI ID.');
+                $('#txnNo').html('Transaction ID.');
+                $('#txndt').html('Transaction Date.');
+                $("#BankName").attr("placeholder", "UPI Id");
+                $("#DDChequeNo").attr("placeholder", "Transaction No");
+                $("#DDChequeDate").attr("placeholder", "Transaction Date.");
+
+            });
+
+
+            function validateform() {
+                debugger;
+                $(".errortext").removeClass("errortext");
+                if ($('#LoginId').val() == '') {
+                    $("#LoginId").addClass('errortext');
+                    $('#LoginId').focus();
+                    return false;
+                }
+                if ($('#Amount').val() == '') {
+                    $("#Amount").addClass('errortext');
+                    $('#Amount').focus();
+                    return false;
+                }
+                if ($('#PaymentType').val() == '') {
+                    $("#PaymentType").addClass('errortext');
+                    $('#PaymentType').focus();
+                    return false;
+                }
+                if ($('#PaymentType').val() == "2") {
+                    if ($('#PaymentMode').val() == '') {
+                        $("#PaymentMode").addClass('errortext');
+                        $('#PaymentMode').focus();
+                        return false;
+                    }
+                    if (($("#PaymentMode option:selected").text()) != 'Cash' && ($("#PaymentMode option:selected").text()) != "UPI") {
+                        if ($('#BankName').val() == '') {
+                            $("#BankName").addClass('errortext');
+                            $('#BankName').focus();
+                            return false;
+                        }
+                        if ($('#DDChequeNo').val() == '') {
+                            $("#DDChequeNo").addClass('errortext');
+                            $('#DDChequeNo').focus();
+                            return false;
+                        }
+                        if ($('#DDChequeDate').val() == '') {
+                            $("#DDChequeDate").addClass('errortext');
+                            $('#DDChequeDate').focus();
+                            return false;
+                        }
+                        if ($('#BankBranch').val() == '') {
+                            $("#BankBranch").addClass('errortext');
+                            $('#BankBranch').focus();
+                            return false;
+                        }
+                    }
+                    else if ($("#PaymentMode option:selected").text() == "UPI") {
+                        if ($('#BankName').val() == '') {
+                            $("#BankName").addClass('errortext');
+                            $('#BankName').focus();
+                            return false;
+                        }
+                        if ($('#DDChequeNo').val() == '') {
+                            $("#DDChequeNo").addClass('errortext');
+                            $('#DDChequeNo').focus();
+                            return false;
+                        }
+                        if ($('#DDChequeDate').val() == '') {
+                            $("#DDChequeDate").addClass('errortext');
+                            $('#DDChequeDate').focus();
+                            return false;
+                        }
+                    }
+                    else {
+
+                    }
+                }
+                return true;
+            }
+
+
+            //$(document).ready(function () {
+            //    debugger;
+            //    jQuery.noConflict();
+            //    $('#DDChequeDate').datepicker({
+            //        dateFormat: 'dd/mm/yy',
+            //    });
+            //});
+
+            jQuery.noConflict();
+            $('#DDChequeDate').datepicker({
+                dateFormat: 'dd/mm/yy',
+            });
+            function preview_image(event, mode) {
+                debugger;
+                if (mode == 'Q') {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        debugger;
+                        var output = document.getElementById('output_image3');
+                        output.src = reader.result;
+                    }
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+            }
+
+            function getmembername() {
+                debugger;
+                var LoginId = $('#LoginId').val();
+                $.ajax({
+                    url: '/Wallet/GetMemberName',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { LoginId: LoginId },
+                    success: function (data) {
+                        debugger;
+                        if (data.Result == "Yes") {
+                            $('#txtname').html(data.DisplayName);
+
+                            divname.style.display = "block";
+                        } else {
+                            iziToast.error({
+                                title: "",
+                                message: "Invalid Sponser Id",
+                                position: "topRight",
+                            });
+                            //alert("Invalid Sponser Id");
+                            $('#txtname').html("");
+                            $('#LoginId').val("");
+
+                        }
+                    }
+                });
+            }
+
+            //divQr
+            //divbankname
+            //divbankbranch
+            //divtransactiono
+            //divPaymentMode
+            //Remarks
+
+            //lblbank
+
+            function getpaymentTypedetails() {
+                debugger;
+                if ($('#PaymentType').val() == '2') {
+
+                    $("#PaymentMode").val(10);
+                    $("#paymentmode").show();
+                    $("#divQr").show();
+                    $("#divbankname").show();
+                    $("#BankName").val('');
+                    $("#divtransactiono").show();
+                    $("#divPaymentMode").show();
+                    $("#Remarks").hide();
+                    $("#lblbank").show();
+                    $('#lblbank').html('UPI ID.');
+                    $('#txnNo').html('Transaction ID.');
+                    $('#txndt').html('Transaction Date.');
+                    $("#BankName").attr("placeholder", "UPI Id");
+                    $("#DDChequeNo").attr("placeholder", "Transaction No");
+                    $("#DDChequeDate").attr("placeholder", "Transaction Date.");
+                }
+                else if ($('#PaymentType').val() == '1') {
+                    $("#paymentmode").hide();
+                    $("#divPaymentModee").hide();
+                    $("#divQr").hide();
+                    $("#divbankname").hide();
+                    $("#divtransactiono").hide();
+                    $("#divPaymentMode").hide();
+                    $("#lblbank").hide();
+                    $("#Remarks").hide();
+                    $("#divbankbranch").hide();
+
+
+                }
+            }
+
+            //////////////////////////////////
+
+            function getpaymentdetails() {
+                debugger;
+                if ($('#PaymentMode').val() == "") {
+                    $("#divPaymentMode").hide();
+                    $("#divtransactiono").hide();
+                    $("#divbankname").hide();
+                    $("#divbankbranch").hide();
+                    $("#Remarks").hide();
+                    $("#divQr").hide();
+                }
+                else if ($('#PaymentMode').val() == '1') {
+                    $("#divPaymentMode").hide();
+                    $("#divtransactiono").hide();
+                    $("#divbankname").hide();
+                    $("#divbankbranch").hide();
+                    $("#Remarks").show();
+                    $("#divQr").hide();
+                }
+                else if ($('#PaymentMode').val() == '2') {
+
+                    $("#divPaymentMode").show();
+                    $("#divtransactiono").show();
+                    $("#divbankname").show();
+                    $("#divbankbranch").show();
+                    $("#Remarks").hide();
+                    $("#divQr").hide();
+                    $('#lblbank').html('Bank Name.');
+                    $('#txnNo').html('Cheque No.');
+                    $('#txndt').html('Cheque Date');
+                    $("#BankName").attr("placeholder", "Bank Name");
+                    $("#DDChequeNo").attr("placeholder", "Cheque No.");
+                    $("#DDChequeDate").attr("placeholder", "Cheque Date");
+                }
+                else if ($('#PaymentMode').val() == '3') {
+                    $("#divPaymentMode").show();
+                    $("#divtransactiono").show();
+                    $("#divbankname").show();
+                    $("#divbankbranch").show();
+                    $("#Remarks").hide();
+                    $("#divQr").hide();
+                    $('#lblbank').html('Bank Name.');
+                    $('#txndt').html('Transaction Date');
+                    $('#txnNo').text('Transaction No.');
+                    $("#BankName").attr("placeholder", "Bank Name");
+                    $("#DDChequeNo").attr("placeholder", "Transaction No.");
+                    $("#DDChequeDate").attr("placeholder", "Transaction Date");
+
+                }
+                else if ($('#PaymentMode').val() == '4') {
+                    $("#divPaymentMode").show();
+                    $("#divtransactiono").show();
+                    $("#divbankname").show();
+                    $("#divbankbranch").show();
+                    $("#Remarks").hide();
+                    $("#divQr").hide();
+                    $('#lblbank').html('Bank Name.');
+                    $('#txndt').html('DD Issue Date');
+                    $('#txnNo').text('DD No.');
+                    $("#lblbank").attr("placeholder", "Bank Name");
+                    $("#DDChequeNo").attr("placeholder", "DD No.");
+                    $("#DDChequeDate").attr("placeholder", "DD Issue Date");
+                    //$('#Fk_BankId').val('0');
+                    //$('#Fk_BankId').attr('disabled', false);
+                }
+                else if ($('#PaymentMode').val() == '5') {
+                    $("#divPaymentMode").show();
+                    $("#divtransactiono").show();
+                    $("#divbankname").show();
+                    $("#divbankbranch").show();
+                    $("#Remarks").hide();
+                    $("#divQr").hide();
+                    $('#lblbank').html('Bank Name.');
+                    $('#txndt').html('Transaction Date');
+                    $('#txnNo').text('Transaction No.');
+                    $("#lblbank").attr("placeholder", "Bank Name");
+                    $("#DDChequeNo").attr("placeholder", "Transaction No.");
+                    $("#DDChequeDate").attr("placeholder", "Transaction Date");
+                    //$('#Fk_BankId').val('0');
+                    //$('#Fk_BankId').attr('disabled', false);
+                }
+                else if ($('#PaymentMode').val() == '6') {
+                    $("#divPaymentMode").show();
+                    $("#divtransactiono").show();
+                    $("#divbankname").show();
+                    $("#divbankbranch").show();
+                    $("#Remarks").hide();
+                    $("#divQr").hide();
+                    $('#lblbank').html('Bank Name.');
+                    $('#txndt').html('Transaction Date');
+                    $('#txnNo').text('Transaction No.');
+                    $("#lblbank").attr("placeholder", "Bank Name");
+                    $("#DDChequeNo").attr("placeholder", "Transaction No.");
+                    $("#DDChequeDate").attr("placeholder", "Transaction Date");
+                    //$('#Fk_BankId').val('0');
+                    //$('#Fk_BankId').attr('disabled', false);
+                }
+                else if ($('#PaymentMode').val() == '10') {
+                    $("#spntrannumber").show();
+                    //$('#txnNo').text('UPI ID');
+                    $("#divPaymentMode").hide();
+                    $("#divtransactiono").show();
+                    $("#divbankname").hide();
+                    $("#divbankbranch").hide();
+                    $("#divPaymentMode").hide();
+                    $("#Remarks").hide();
+                    $("#divQr").show();
+                    $("#divbankname").show();
+                    $("#BankName").val('');
+                    $("#divPaymentMode").show();
+                    $("#divtransactiono").show();
+                    $('#lblbank').html('UPI ID.');
+                    $('#txnNo').text('Transaction ID.');
+                    $('#txndt').html('Transaction Date.');
+                    $("#BankName").attr("placeholder", "UPI ID");
+                    $("#DDChequeNo").attr("placeholder", "Transaction ID");
+                    $("#DDChequeDate").attr("placeholder", "Transaction Date.");
+                    //$('#Fk_BankId').val('0');
+                    //$('#Fk_BankId').attr('disabled', false);
+                }
+                else {
+                    $('#Fk_BankId').attr('disabled', false);
+                    $('#Fk_BankId').val('0');
+                    $("#divPaymentModee").hide();
+                    $("#divtransactiono").hide();
+                    $("#divbankname").hide();
+                    $("#divbankbranch").hide();
+                }
+            }
+
+            //////////////////////////////////
+
+
+            //function getpaymentdetails_s() {
+            //    debugger;
+            //    var paymentmode = ($("#PaymentMode option:selected").text());
+            //    if (paymentmode == "Cash") {
+            //        $("#bankname").hide();
+            //        $("#bankbranch").hide();
+            //        $("#chequeno").hide();
+            //        $("#chequdate").hide();
+            //        $("#divQr").hide();
+            //        $("#Remarks").show();
+            //    }
+            //    else if (paymentmode == "UPI") {
+            //        $("#divPaymentMode").show();
+            //        $('#lbltno').html('Transaction Id');
+            //        $('#lblbank').html('UPI Id');
+            //        $("#bankname").show();
+            //        $("#BankName").val('');
+            //        $("#BankBranch").val('');
+            //        $("#bankbranch").hide();
+            //        $("#chequeno").show();
+            //        $("#divQr").show();
+            //        $("#chequdate").show();
+            //        $("#Remarks").hide();
+            //        $("#PaymentMode").val(10);
+            //        $("#BankName").attr("placeholder", "UPI Id");
+            //        $("#DDChequeNo").attr("placeholder", "Transaction Id");
+            //        $("#DDChequeDate").attr("placeholder", "Transaction Date");
+            //    }
+            //    else {
+            //        $("#divPaymentMode").show();
+            //        $("#bankname").show();
+            //        $("#bankbranch").show();
+            //        $("#divQr").hide();
+            //        $("#chequeno").show();
+            //        $("#chequdate").show();
+            //        $("#Remarks").hide();
+            //        $("#PaymentMode").val(10);
+            //        $('#lbltno').html('Transaction No');
+            //        $('#lblbank').html('Bank Name');
+            //        $('#lbltno').html('Transaction No');
+            //        $('#lblbank').html('Bank Name');
+            //        $("#BankName").attr("placeholder", "Bank Name");
+            //        $("#DDChequeNo").attr("placeholder", "Transaction No");
+            //        $("#DDChequeDate").attr("placeholder", "Transaction Date");
+            //    }
+            //}
+
+            function isNumberOrDecimal(evt) {
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode != 46 && charCode > 31
+                  && (charCode < 48 || charCode > 57))
+                    return false;
+
+                return true;
+            }
+
+
+</script>
+
+@if (TempData["msg"] != null)
+{
+    <script>
+                $(document).ready(function () {
+                    Snackbar.show({
+                        text: '@TempData["msg"]',
+                        actionTextColor: '#fff',
+                        backgroundColor: '#1abc9c',
+                        pos: 'top-right'
+                    });
+                });
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+                $(document).ready(function () {
+                    Snackbar.show({
+                        text: '@TempData["error"]',
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-right'
+                    });
+                });
+
+    </script>
+}
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+        color: #000 !important;
+    }
+</style>
+
+@*<script>
+        var myHeaders = new Headers();
+        myHeaders.append("apikey", "OJYFezpazEnNXADFqcXvoFGQWhoEmlPo");
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow',
+            headers: myHeaders
+        };
+
+        fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=INR&base=USD", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+    </script>*@
+
+
+@if (TempData["msg"] != null)
+{
+    <script>
+        $(document).ready(function () {
+        debugger;
+        jQuery.noConflict();
+        swal({
+            backdrop: true,
+                allowOutsideClick: false,
+                title: 'Requested Successfully.',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+        })
+    </script>
+}
+
+

@@ -1,0 +1,666 @@
+﻿@model MyTradeMTG.Models.User
+
+@{
+    ViewBag.Title = "SaleRequest";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("SaleRequest", "Franchise", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row layout-top-spacing">
+                <div class="col-lg-12 col-12 layout-spacing">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Sale Request</h4>
+                        </div>
+                        <div class="card-body">
+                            @*<div class="row">
+
+                                    <div class="col-md-3">
+                                        From Date
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = true })
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        To Date
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = true })
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group"><br />
+                                            <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="btnSearch" />
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                            <div class="table-responsive">
+                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='10'>
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th style="display:none">Pk_UserId_</th>
+                                            <th style="display:none">Fk_UserId_</th>
+                                            <th>User Contact Address</th>
+                                            <th>User Name</th>
+                                            <th>MTG </th>
+                                            <th style="display:none;">BankName</th>
+                                            <th style="display:none;">BranchName</th>
+                                            <th style="display:none;">IFSCCode</th>
+                                            <th style="display:none;">AccountNo</th>
+                                            <th style="display:none;">UPIID_</th>
+                                            <th style="display:none;">Transfer Charge</th>
+                                            <th>Sale Request Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstSaleRequest != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstSaleRequest)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+                                                        <td style="display:none" id="Pk_FranchisetransferId_@i">@Item.Pk_FranchisetransferId</td>
+                                                        <td style="display:none" id="Fk_UserId_@i">@Item.Fk_UserId</td>
+                                                        <td id="CustomerId_@i">@Item.UserContactAddressId</td>
+                                                        <td id="UserName_@i">@Item.UserName</td>
+                                                        <td id="MTGToken_@i">@Item.MTGToken</td>
+                                                        <td style="display:none" id="BankName_@i">@Item.BankName</td>
+                                                        <td style="display:none" id="BranchName_@i">@Item.BranchName</td>
+                                                        <td style="display:none" id="IFSCCode_@i">@Item.IFSCCode</td>
+                                                        <td style="display:none" id="AccountNo_@i">@Item.AccountNo</td>
+                                                        <td style="display:none" id="UPIID_@i">@Item.UPIID</td>
+
+
+                                                        <td style="display:none;" id="TransferCharge_@i">@Item.TransferCharge</td>
+                                                        <td>@Item.SalesDate</td>
+                                                        <td>@Item.Status</td>
+
+                                                        @if (Item.Status == "Pending")
+                                                        {
+                                                            <td><a href="javascript:void(0)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModalsalerquest" onclick="return GetFranchiseDetails(@i)" style="width:168px;">Accept Sale Request</a></td>
+                                                        }
+
+
+
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal fade md" id="myModalsalerquest" role="dialog" style="display: none;padding-top:100px;">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content" style="width:150%">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="EditModalLabel">Accept Sale Request</h5>
+                                            &nbsp;&nbsp;&nbsp;<span style="color:red;">@*@TempData["FranchiseRequest"]*@</span>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                <span class="close_icon">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+
+                                                    <input id="Pk_FranchisetransferId" name="Pk_FranchisetransferId" class="form-control" type="text" @*style="display:none"*@ hidden />
+                                                    <input id="Fk_UserIdddd" name="Fk_UserIdddd" class="form-control" type="text" @*style="display:none"*@ hidden />
+
+                                                    <input id="CustomerId" name="CustomerId" class="form-control" type="text" @*style="display:none"*@ hidden />
+
+                                                    <input id="UserName" name="UserName" class="form-control" type="text" @*style="display:none"*@ hidden />
+
+                                                    <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" @*style="display:none"*@ hidden />
+                                                    <div class="form-group">
+                                                        <label>MTG <span style="color: red"></span></label>
+                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony_dd()", @style = "background:none;border:none;margin-top:-15px" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" style="display:none;">
+                                                    <div class="form-group">
+                                                        In US Doller<span style="color: red"></span>
+                                                        <label id="InUsDoller" class="pt-3 form-control"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        In Rupess<span style="color: red"></span>
+                                                        <label id="result" class="pt-3 form-control" style="background:none;border:none;margin-top:-15px"></label>
+
+                                                        @*<input type="hidden" id="IndianValue" name="IndianValue" value="@ViewBag.IndianValue" />*@
+
+
+                                                        <input type="hidden" id="IndianValue" name="IndianValue" />
+                                                    </div>
+                                                </div>
+                                                @*-----Convert USD TO INR Link Start-------*@
+                                                <div style="display:none">
+                                                    <label>From:</label>
+                                                    <select id="from">
+                                                        <option value="USD">USD</option>
+                                                    </select>
+                                                    <label>To:</label>
+                                                    <select id="to">
+                                                        <option value="INR">INR</option>
+                                                    </select>
+                                                </div>
+                                                @*-----Convert USD TO INR Link End-------*@
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Bank Name</label>
+                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Branch Name</label>
+                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Account No.</label>
+                                                        <input type="text" id="AccountNo" name="AccountNo" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label> IFSC Code</label>
+                                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @readonly = true, @style = "background:none;border:none;margin-top:-15px" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>UPI Id</label>
+                                                        <input type="text" id="UPI" name="UPI" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="paymentmode">
+                                                    <div class="example">
+                                                        Payment Mode<span style="color: red">*</span>
+                                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control wide", @onchange = "getpaymentdetails();", @style = "color:#828690" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="divbankname">
+                                                    <div class="form-group">
+                                                        <span id="lblbnkname"><span style="color: red">*</span></span>
+
+                                                        <input type="text" id="BankName" name="BankName" class="form-control" placeholder="Bank Name" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="divbankbranch">
+                                                    <div class="form-group">
+                                                        <span id="lblbranchname"><span style="color: red">*</span></span>
+                                                        <input type="text" id="BranchName" name="BranchName" class="form-control" placeholder="Branch Name" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="divtransactiono">
+                                                    <div class="form-group">
+                                                        <span id="lbltransaction"><span style="color: red">*</span></span>
+                                                        <input type="text" id="Transaction" name="Transaction" class="form-control" placeholder="Transaction Id" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="divtransactiondate">
+                                                    <div class="form-group">
+                                                        Transaction Date<span style="color: red">*</span>
+                                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @placeholder = "Transaction Date", @readonly = true })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="divDocument" style="display:none;">
+                                                    <div class="form-group">
+                                                        Attach Document<span style="color: red">*</span>
+                                                        <input type="file" name="Documenturl" id="Documenturl" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            @*<button class="btn btn-danger btn-sm" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Cancel</button>*@
+                                            @*<button type="submit" class="btn btn-primary btn-sm" onclick="return SaveSaleRequest();">Save</button>*@
+                                            <input type="submit" class="btn btn-primary btn-sm" onclick="return ApproveSaleRequest();" id="btnapprove" value="Approve" />
+                                            <input type="submit" id="btnReject" name="btnReject" class="btn btn-danger btn-sm" onclick="return RejectSaleRequest();" value="Rejected" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="Amounttttss" />
+}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<script>
+
+
+    function ConvertMony() {
+        debugger;
+        var Amounttttss = $("#Amounttttss").val();
+        if ($("#Countryid").val() == "India") {
+            $("#dvinrupees").show();
+            $("#divusdoller").hide();
+        }
+        else {
+            $("#divusdoller").show();
+            $("#InUsDoller").text($("#Amounttttss").val() + "$");
+            //$("#InUsDoller").text($("#MTGToken_" + i).text());
+            $("#dvinrupees").hide();
+        }
+        debugger;
+        //const convert = document.getElementById("convert");
+        const result = document.getElementById("result");
+        const from = document.getElementById("from");
+        const to = document.getElementById("to");
+        //const amount = document.getElementById("Amount");
+        const amount = document.getElementById("Amounttttss");
+        const IndianValue = document.getElementById("IndianValue");
+        //var TodaysCurrency = $('#IndianValue').val();
+        let fromCurrency = from.value;
+        let toCurrency = to.value;
+        let amt = amount.value;
+        fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+        .then(response => {
+            return response.json();
+        })
+
+        .then(data => {
+            debugger;
+            let rate = data.rates[toCurrency];
+            let total = rate * amt;
+
+            //result.innerHTML = `${amt} ${fromCurrency} = ${total}
+            result.innerHTML = `${amt}$  = ${total}
+
+            ${toCurrency}`;
+            //IndianValue.innerHTML = total;
+            $("#IndianValue").val(total);
+
+        });
+    }
+
+
+    function GetFranchiseDetails(i) {
+        debugger;
+        var Fk_UserId = $("#Fk_UserId_" + i).text();
+        var Amount = $("#MTGToken_" + i).text();
+        var Amounttttss = $("#Amounttttss").val(Amount);
+        var BankName = $("#BankName_" + i).text();
+        var BranchName = $("#BranchName_" + i).text();
+        var IFSCCode = $("#IFSCCode_" + i).text();
+        var AccountNo = $("#AccountNo_" + i).text();
+        var UPI = $("#UPIID_" + i).text();
+        var CustomerId = $("#CustomerId_" + i).text();
+        var UserName = $("#UserName_" + i).text();
+        var TransferCharge = $("#TransferCharge_" + i).text();
+        var Pk_FranchisetransferId = $("#Pk_FranchisetransferId_" + i).text();
+        ConvertMony();
+
+        $("#Fk_UserIdddd").val(Fk_UserId);
+        $("#Pk_FranchisetransferId").val(Pk_FranchisetransferId);
+        $("#Amount").val(Amount);
+        $("#Bank_Name").val(BankName);
+        $("#Branch_Name").val(BranchName);
+        $("#IFSCCode").val(IFSCCode);
+        $("#AccountNo").val(AccountNo);
+        $("#UPI").val(UPI);
+        $("#CustomerId").val(CustomerId);
+        $("#UserName").val(UserName);
+        $("#TransferCharge").val(TransferCharge);
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        "placeholder", "UPI ID"
+        jQuery('option[value="0"]').attr("Selected", "Selected");
+        jQuery('option[value="3"]').removeAttr("Selected", "Selected");
+        jQuery('#PaymentMode').children('option[value="1"]').hide();
+        jQuery('#PaymentMode').children('option[value="2"]').hide();
+        jQuery('#PaymentMode').children('option[value="4"]').hide();
+
+        $("#divbankname").hide();
+        $("#divbankbranch").hide();
+        $("#divtransactiono").hide();
+        $("#divtransactiondate").hide();
+        $("#divDocument").hide();
+
+    });
+
+</script>
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+
+
+    function getpaymentdetails() {
+        debugger;
+        if ($('#PaymentMode').val() == "0") {
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divtransactiono").hide();
+            $("#divtransactiondate").hide();
+            $("#divDocument").hide();
+
+        }
+
+        else if ($('#PaymentMode').val() == '3') {
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divtransactiono").show();
+            $("#divtransactiondate").show();
+            $("#divDocument").show();
+            $('#lblbnkname').text('Bank Name');
+            $('#lblbranchname').text('Branch Name');
+            $('#lbltransaction').text('Transaction No.');
+        }
+
+        else if ($('#PaymentMode').val() == '5') {
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divtransactiono").show();
+            $("#divtransactiondate").show();
+            $("#divDocument").show();
+            $('#lbltransaction').text('Bank Name');
+            $('#lblbranchname').text('Branch Name');
+            $('#lbltransaction').text('Transaction No.');
+
+        }
+        else if ($('#PaymentMode').val() == '6') {
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+            $("#divtransactiono").show();
+            $("#divtransactiondate").show();
+            $("#divDocument").show();
+            $('#lblbnkname').text('Bank Name');
+            $('#lblbranchname').text('Branch Name');
+            $('#lbltransaction').text('Transaction No.');
+
+        }
+        else if ($('#PaymentMode').val() == '10') {
+            $("#divbankname").show();
+            $("#divbankbranch").hide();
+            $("#divtransactiono").show();
+            $("#divtransactiondate").show();
+            $("#divDocument").show();
+            $('#lblbnkname').text('UPI ID');
+            $('#lbltransaction').text('Transaction ID');
+            $("#BankName").attr("placeholder", "UPI ID");
+        }
+        else {
+            //$('#Fk_BankId').attr('disabled', false);
+            //$('#Fk_BankId').val('0');
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+            $("#divtransactiono").hide();
+            $("#divtransactiondate").hide();
+            $("#divDocument").hide();
+        }
+
+    }
+
+    //function ApproveSaleRequest() {
+    //    debugger;
+
+    //    var files = $("#Documenturl").get(0).files;
+
+    //    var PaymentMode = $("#PaymentMode").val();
+    //    var BankName = $("#BankName").val();
+    //    var BranchName = $("#BranchName").val();
+    //    var Transaction = $("#Transaction").val();
+    //    var TransactionDate = $("#TransactionDate").val();
+    //    var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
+    //    //var documenturl = $("#documenturl").val();
+
+    //    var Status = $("#btnapprove").val();
+
+    //    if ($("#PaymentMode").val() == "0") {
+    //        $("#PaymentMode").addClass('errortext');
+    //        $('#PaymentMode').focus();
+    //        $("#PaymentMode").val('');
+    //        return false;
+    //    }
+
+    //    if ($("#BankName").val() == "") {
+    //        $("#BankName").addClass('errortext');
+    //        $('#BankName').focus();
+    //        $("#BankName").val('');
+    //        return false;
+    //    }
+
+    //    if ($("#BranchName").val() == "") {
+    //        $("#BranchName").addClass('errortext');
+    //        $('#BranchName').focus();
+    //        $("#BranchName").val('');
+    //        return false;
+    //    }
+    //    if ($("#Trasaction").val() == "") {
+    //        $("#Trasaction").addClass('errortext');
+    //        $('#Trasaction').focus();
+    //        $("#Trasaction").val('');
+    //        return false;
+    //    }
+
+    //    if ($("#TransactionDate").val() == "") {
+    //        $("#TransactionDate").addClass('errortext');
+    //        $('#TransactionDate').focus();
+    //        $("#TransactionDate").val('');
+    //        return false;
+    //    }
+
+    //    //if ($("#documenturl").val() == "") {
+    //    //    $("#documenturl").addClass('errortext');
+    //    //    $('#documenturl').focus();
+    //    //    $("#documenturl").val('');
+    //    //    return false;
+    //    //}
+    //    else {
+    //        $.ajax({
+
+    //            url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
+    //            data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, files: files },
+
+    //            success: function (data) {
+    //                if (data.Result == "yes") {
+    //                    alert("Sale Request Appproved Successfully !!");
+    //                    window.location.reload();
+    //                }
+    //                else if (data.Result == "no") {
+    //                    alert("Some occured error.");
+    //                }
+    //                else {
+    //                    alert("Some occured error.");
+    //                }
+    //            }
+    //        });
+    //    }
+    //}
+
+    function ApproveSaleRequest() {
+        debugger;
+        var PaymentMode = $("#PaymentMode").val();
+        var BankName = $("#BankName").val();
+        var BranchName = $("#BranchName").val();
+        var Transaction = $("#Transaction").val();
+        var TransactionDate = $("#TransactionDate").val();
+        var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
+        var Status = $("#btnapprove").val();
+        var fileUpload = $("#Documenturl").get(0);
+        var files = fileUpload.files;
+        var formData = new FormData();
+        formData.append("Pk_FranchisetransferId", $("#Pk_FranchisetransferId").val());
+        formData.append("PaymentMode", $("#PaymentMode").val());
+        formData.append("BankName", $("#BankName").val());
+        formData.append("BranchName", $("#BranchName").val());
+        formData.append("TransactionNo", $("#Transaction").val());
+        formData.append("TransactionDate", $("#TransactionDate").val());
+        formData.append("files", files[0]);
+        formData.append("Status", Status);
+
+        if ($("#PaymentMode").val() == "0") {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            $("#PaymentMode").val('');
+            return false;
+        }
+
+        if ($("#BankName").val() == "") {
+            $("#BankName").addClass('errortext');
+            $('#BankName').focus();
+            $("#BankName").val('');
+            return false;
+        }
+
+        //if ($("#BranchName").val() == "") {
+        //    $("#BranchName").addClass('errortext');
+        //    $('#BranchName').focus();
+        //    $("#BranchName").val('');
+        //    return false;
+        //}
+        if ($("#Trasaction").val() == "") {
+            $("#Trasaction").addClass('errortext');
+            $('#Trasaction').focus();
+            $("#Trasaction").val('');
+            return false;
+        }
+
+        if ($("#TransactionDate").val() == "") {
+            $("#TransactionDate").addClass('errortext');
+            $('#TransactionDate').focus();
+            $("#TransactionDate").val('');
+            return false;
+        }
+
+            //if ($("#documenturl").val() == "") {
+            //    $("#documenturl").addClass('errortext');
+            //    $('#documenturl').focus();
+            //    $("#documenturl").val('');
+            //    return false;
+            //}
+        else {
+            $.ajax({
+                url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Sale Request Appproved Successfully !!");
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        alert("Some occured error.");
+                    }
+                    else {
+                        alert("Some occured error.");
+                    }
+                }
+            });
+        }
+    }
+
+
+
+
+
+    function RejectSaleRequest() {
+        debugger;
+
+        var PaymentMode = $("#PaymentMode").val();
+        var BankName = $("#BankName").val();
+        var BranchName = $("#BranchName").val();
+        var Transaction = $("#Transaction").val();
+        var TransactionDate = $("#TransactionDate").val();
+        var Pk_FranchisetransferId = $("#Pk_FranchisetransferId").val();
+        var documenturl = $("#documenturl").val();
+
+        var Status = 'Rejected';
+
+
+            $.ajax({
+                url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
+                data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, documenturl: documenturl },
+                success: function (data) {
+                    if (data.Result == "yes") {
+                        alert("Sale Request Rejected Successfully !!");
+                        window.location.reload();
+                    }
+                    else if (data.Result == "no") {
+                        alert("Some occured error.");
+                    }
+                    else {
+                        alert("Some occured error.");
+                    }
+                }
+            });
+
+    }
+
+
+</script>
+
+<script>
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+

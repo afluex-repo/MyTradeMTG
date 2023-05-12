@@ -65,7 +65,8 @@
 
                                 <div class="col-md-4">
                                     <label for="Package">Package Type<span style="color:red">*</span></label>
-                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();" })
+                                    @Html.DropDownListFor(m => m.PackageTypeId, new SelectList(ViewBag.ddlPackageType, "Value", "Text"), new { @class = "form-control", @onchange = "return ChangePackagetype();"})
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="amt" />

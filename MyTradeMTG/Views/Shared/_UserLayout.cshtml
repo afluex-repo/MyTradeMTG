@@ -1807,21 +1807,22 @@
                                 PaidCramount.push(t[i].Cramount);
                                 PaidDramount.push(t[i].Dramount);
                                 debugger;
-                                var x = AllYear;
+                                var xs = AllYear;
                                 var yb = parseFloat(PaidCramount);
                                 var ys = parseFloat(PaidDramount);
+                                var x="";
                                 var chartBarRunningOptions = {
                                     series: [{
                                         name: 'Buy',
                                         data: [{
-                                            x: x,
+                                            x: xs,
                                             y: [ys, yb]
                                         }]
                                     },
                                     {
                                         name: 'Sell',
                                         data: [{
-                                            x: x,
+                                            x: xs,
                                             y: [ys, yb]
                                         }]
                                     }
@@ -1831,7 +1832,7 @@
                                         height: 370,
 
                                         toolbar: {
-                                            show: false,
+                                            show: false, //download chart if true
                                         },
                                     },
                                     plotOptions: {
@@ -1886,7 +1887,7 @@
                                             },
                                         },
                                         crosshairs: {
-                                            show: false,
+                                            show: true,
                                         }
                                     },
                                     yaxis: {
@@ -1941,10 +1942,11 @@
                                         }
                                     }]
                                 };
-                            }
+                                
+                            
                             debugger;
                             var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
-
+                                }
                             chartBarRunningObject.render();
 
                         },

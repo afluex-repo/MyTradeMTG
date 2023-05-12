@@ -458,22 +458,22 @@ namespace MyTradeMTG.Controllers
                         //        smtp.Send(mail);
                         //    }
                         //}
-                        TempData["Login"] = "password sent successfully.";
+                        TempData["PassMag"] = "Password sent successfully.";
                     }
 
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["PassErrMag"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else
                 {
-                    TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["PassErrMag"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["Login"] = ex.Message;
+                TempData["PassErrMag"] = ex.Message;
             }
             //return RedirectToAction("Login", "Home");
             return RedirectToAction("Index", "Website");

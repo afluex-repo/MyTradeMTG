@@ -327,19 +327,17 @@
 
                             </div>
                         </div>
-                        @*<div class="card-footer d-flex justify-content-between border-0">
-                                <div class="footer-info font-w600 d-flex">
-                                    <div class="">
-                                        <a href="~/Coming.html" class="btn btn-danger btn-sm mr-2"> Recharge</a>
-                                    </div>
-                                    <div class="ms-1">
-                                        <a href="~/Coming.html" class="btn btn-secondary btn-sm"> Bill Payment</a>
-                                    </div>
-                                </div>
-                            </div>*@
+                        <div class="card-footer d-flex justify-content-between border-0">
+                            <div class="footer-info font-w600">
+                                <span class="text-success pr-2">BUY- </span>
+                                <span class="text-black">@ViewBag.TotalCrAmount</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-danger pr-2">SELL- </span>
+                                <span class="text-black">@ViewBag.TotalDrAmount</span>
+                            </div>
+                        </div>
                         <div class="card-body p-0">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="widgetChart7" class="max-h80 chartjs-render-monitor" style="margin-top:60px;"></canvas>
+                            <canvas id="widgetChart7" class="max-h80 chartjs-render-monitor" style="margin-top:15px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -361,20 +359,20 @@
                 </div>
 
 
-                <div class="col-xl-6 col-xxl-12">
+                @*<div class="col-xl-6 col-xxl-12">
                     <div class="card">
                         <div class="card-header d-block d-sm-flex border-0">
                             <div>
                                 <h4 class="fs-20 text-black">Market Overview</h4>
-                                @*<p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>*@
+                                <p class="mb-0 fs-12">Lorem ipsum dolor sit amet, consectetur</p>
                             </div>
                             <div class="card-action card-tabs mt-3 mt-sm-0">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    @*<li class="nav-item">
+                                    <li class="nav-item">
                                             <a class="nav-link" data-bs-toggle="tab" href="#Week" role="tab">
                                                 Week
                                             </a>
-                                        </li>*@
+                                        </li>
 
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#Month" role="tab">
@@ -390,16 +388,16 @@
 
 
 
-                                    @*<li class="nav-item">
+                                    <li class="nav-item">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#Month" role="tab">
                                                 Month
                                             </a>
-                                        </li>*@
-                                    @*<li class="nav-item">
+                                        </li>
+                                    <li class="nav-item">
                                             <a class="nav-link" data-bs-toggle="tab" href="#Year" role="tab">
                                                 Year
                                             </a>
-                                        </li>*@
+                                        </li>
                                 </ul>
                             </div>
                         </div>
@@ -417,15 +415,15 @@
                                             <span class="text-black pe-3"><img src="~/UserPanel/images/mtg.png" /> &nbsp;@ViewBag.TotalDrAmount </span>
                                         </div>
                                     </div>
-                                    @*<div class="col-6 text-end">
+                                    <div class="col-6 text-end">
                                             <a href="javascript:void(0);" class="btn btn-primary light btn-rounded"><i class="las la-download scale5 me-2"></i>Get Report</a>
-                                        </div>*@
+                                        </div>
                                 </div>
                                 <div id="chartBarRunning" class="bar-chart"></div>
                                 <div id="chartBarRunning2" class="bar-chart"></div>
 
                             </div>
-                            @*<div class="tab-pane fade" id="Week">
+                            <div class="tab-pane fade" id="Week">
                                     <div class="row">
                                         <div class="d-flex col-6 align-items-center">
                                             <div class="fs-18 font-w600 me-3">
@@ -442,8 +440,8 @@
                                         </div>
                                     </div>
                                     <div id="chartBarRunning2" class="bar-chart"></div>
-                                </div>*@
-                            @*<div class="tab-pane fade" id="Year">
+                                </div>
+                            <div class="tab-pane fade" id="Year">
                                     <div class="row">
                                         <div class="d-flex col-6 align-items-center">
                                             <div class="fs-18 font-w600 me-3">
@@ -460,11 +458,11 @@
                                         </div>
                                     </div>
                                     <div id="chartBarRunning3" class="bar-chart"></div>
-                                </div>*@
+                                </div>
 
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-xl-6 col-xxl-12">
                     <div class="card pb-5">
                         <div class="card-header d-sm-flex d-block pb-0 border-0">
