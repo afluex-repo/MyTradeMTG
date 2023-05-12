@@ -89,7 +89,8 @@
                                             <tr>
                                                 <th>Sr No.</th>
                                                 <th>Date</th>
-                                                <th>Transfer To </th>
+                                                <th>Transfer From</th>
+                                                <th>Transfer To</th>
                                                 <th>MTG</th>
                                             </tr>
                                         </thead>
@@ -106,6 +107,7 @@
                                                                 @i
                                                             </td>
                                                             <td>@Item.TransferDate</td>
+                                                            <td>@Item.TransferFromName (@Item.LoginId)</td>
                                                             <td>@Item.TransfertoName</td>
                                                             <td>@Item.MTG</td>
                                                         </tr>

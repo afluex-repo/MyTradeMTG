@@ -225,25 +225,25 @@
                         <div class="card-header align-items-start border-0 pb-0">
                             <div class="me-auto">
                                 <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Total Bonus @*<img src="~/UserPanel/images/MtgCoinPng.png" class="mtgcoin4" height="47" />*@</p>
-                                <h3 class="text-black mb-0 font-w600">@ViewBag.TotalIncome</h3>
+                                <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalIncome</h3>
                             </div>
                         </div>
 
                         <div class="card-footer d-flex justify-content-between border-0">
                             <div class="footer-info font-w600">
-                                <span class="text-success pr-2">TR1- </span>
-                                <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
-                                <span class="text-danger pr-2">TR2- </span>
-                                <span class="text-black">@ViewBag.LevelIncomeTr2</span><br />
+                                @*<span class="text-success pr-2">TR1- </span>
+                                <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;*@
+                                <span class="text-success pr-2">TR2- </span>
+                                <span class="text-black">@ViewBag.LevelIncomeTr2</span>&nbsp;&nbsp;&nbsp;
                                 <span class="text-danger pr-2">SB- </span>
-                                <span class="text-black">@ViewBag.SponsorBonus</span>&nbsp;&nbsp;&nbsp;
-                                <span class="text-danger pr-2">Bet- </span>
-                                <span class="text-black">0.00</span><br />
+                                <span class="text-black">@ViewBag.SponsorBonus</span>
+                                @*<span class="text-danger pr-2">Bet- </span>
+                                <span class="text-black">0.00</span><br />*@
                             </div>
                         </div>
                         <div class="card-body p-0">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="widgetChart4" class="max-h80 mt-auto chartjs-render-monitor" width="267" height="80" style="display: block; width: 267px; height: 80px;"></canvas>
+                            <canvas id="widgetChart4" class="max-h80 chartjs-render-monitor" style="margin-top:23px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -351,9 +351,17 @@
 
                             </div>
                         </div>
+                        <div class="card-footer d-flex justify-content-between border-0">
+                            <div class="footer-info font-w600">
+                                <span class="text-success pr-2">TR1- </span>
+                                <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-danger pr-2">Bet- </span>
+                                <span class="text-black">0.00</span><br />
+                            </div>
+                        </div>
                         <div class="card-body p-0">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:96px;"></canvas>
+                            <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:54px;"></canvas>
                         </div>
                     </div>
                 </div>

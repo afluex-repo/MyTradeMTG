@@ -56,6 +56,7 @@ namespace MyTradeMTG.Models
         public string Pk_userId { get; set; }
         public string Status { get; set; }
         public string ROIPercentage { get; set; }
+        public string TransferFromName { get; set; }
 
 
         public List<User> lstBReports { get; set; }
