@@ -469,6 +469,7 @@ namespace MyTradeMTG.Controllers
                     obj.LoginId = r["LoginId"].ToString();
                     obj.DisplayName = r["Name"].ToString();
                     obj.Remark = r["Remark"].ToString();
+                    obj.TodaysCurrency = r["TodaysCurrency"].ToString();
                     lst.Add(obj);
                 }
                 model.lstWallet = lst;
@@ -479,6 +480,7 @@ namespace MyTradeMTG.Controllers
         {
             UserWallet model = new UserWallet();
             List<UserWallet> lst = new List<UserWallet>();
+            model.CurrencyName = Session["CurrencyName"].ToString();
             model.FK_UserId = Session["Pk_UserId"].ToString();
             DataSet ds = model.GetEWalletDetails();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

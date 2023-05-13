@@ -1259,6 +1259,7 @@
     <Content Include="Views\Franchise\AddWallet.cshtml" />
     <Content Include="Views\Franchise\WalletList.cshtml" />
     <Content Include="Views\Franchise\SaleRequest.cshtml" />
+    <Content Include="Views\User\RecentContact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,62 @@
+﻿@model MyTradeMTG.Models.Dashboard
+
+@{
+    ViewBag.Title = "RecentContact";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@using (Html.BeginForm("RecentContact", "User", FormMethod.Post, new { @id = "recentcontact" }))
+{
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row layout-top-spacing">
+                <div class="col-lg-12 col-12 layout-spacing">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <h4>Recent Contacts</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Profile</th>
+                                        <th>Name</th>
+                                        <th>Contact Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstCustomer != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.lstCustomer)
+                                            {
+
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td><img class="mb-1 rounded" src="@item.ProfilePicture" alt="" height="60"></td>
+                                                    <td>@item.CustomerName (@item.LoginId)</td>
+                                                    <td>@item.CustomerId</td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

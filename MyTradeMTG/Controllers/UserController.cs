@@ -121,6 +121,7 @@ namespace MyTradeMTG.Controllers
                     obj1.ProfilePicture = r["ProfilePicture"].ToString();
                     obj1.CustomerId = r["CustomerId"].ToString();
                     obj1.CustomerName = r["CustomerName"].ToString();
+                    obj1.LoginId = r["LoginId"].ToString();
                     lst2.Add(obj1);
                 }
                 obj.lstCustomer = lst2;
@@ -177,7 +178,27 @@ namespace MyTradeMTG.Controllers
 
             return View(obj);
         }
-        
+        public ActionResult RecentContact()
+        {
+            Dashboard obj = new Dashboard();
+            List<Dashboard> lst2 = new List<Dashboard>();
+            obj.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds = obj.GetCustomerList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Dashboard obj1 = new Dashboard();
+                    obj1.ProfilePicture = r["ProfilePicture"].ToString();
+                    obj1.CustomerId = r["CustomerId"].ToString();
+                    obj1.CustomerName = r["CustomerName"].ToString();
+                    obj1.LoginId = r["LoginId"].ToString();
+                    lst2.Add(obj1);
+                }
+                obj.lstCustomer = lst2;
+            }
+            return View(obj);
+        }
         public JsonResult GetchartBarRunning()
         {
             ProgressReport model = new ProgressReport();

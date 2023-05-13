@@ -23,9 +23,9 @@
     }
 
 
-    .user-profile .widget-content-area .user-info-list ul.contacts-block svg {
+    /*.user-profile .widget-content-area .user-info-list ul.contacts-block svg {
         color: #484040 !important;
-    }
+    }*/
 
     .outline-badge-primary {
         cursor: pointer;
@@ -37,16 +37,16 @@
     }
 
     .user-profile .widget-content-area .user-info-list ul.contacts-block li {
-        color: #484040 !important;
+        color: #b3b3b3 !important;
     }
 
-    .table > tbody > tr > td {
+    /*.table > tbody > tr > td {
         color: #484040 !important;
-    }
+    }*/
 
-    p {
+    /*p {
         color: #484040 !important;
-    }
+    }*/
 
     @@media(max-width: 991px) {
         #divMember .layout-spacing {
@@ -80,7 +80,7 @@
                                     {
                                         <img src="~/assets/img/usericon.jpg" alt="avatar" height="100" width="100" style="border:5px solid @Model.Color">
                                     }
-                                    <p class="" style="color:#484040">@Model.DisplayName (@Model.LoginId)</p>
+                                    <p >@Model.DisplayName (@Model.LoginId)</p>
                                     @Html.HiddenFor(m => m.PK_UserId)
                                 </div>
                             </div>

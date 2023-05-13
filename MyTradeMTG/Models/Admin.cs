@@ -178,7 +178,8 @@ namespace MyTradeMTG.Models
         public string GrossAmountRs { get; set; }
         public string TransferChargeInRupees { get; set; }
         public string IndianValue { get; set; }
-
+        public string TodaysCurrency { get; set; }
+        public string CurrencyName { get; set; }
         public DataTable bonazalist { get; set; }
         #endregion
         #region PinGenerated
