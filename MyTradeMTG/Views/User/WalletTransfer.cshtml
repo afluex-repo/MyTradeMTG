@@ -50,6 +50,7 @@
                                         <input type="hidden" id="WalletAmount" value="@ViewBag.WalletBalance" />
                                         <p class="mb-1"> MTG /USDT<span style="color: red">*</span></p>
                                         @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return CheckAmount();" })
+                                        <span style="color:red;font-size:small;">Min  : 10</span>
                                         @*<input id="SumTransferandAmount" name="SumTransferandAmount" readonly class="form-control" style="background:none;border:none;font-size:x-small" />*@
                                     </div>
                                 </div>
@@ -89,8 +90,9 @@
                                             <tr>
                                                 <th>Sr No.</th>
                                                 <th>Date</th>
-                                                <th>Transfer From</th>
+                                                <th>Contact Address</th>
                                                 <th>Transfer To</th>
+                                                <th>Transfer Charge</th>
                                                 <th>MTG</th>
                                             </tr>
                                         </thead>
@@ -107,8 +109,9 @@
                                                                 @i
                                                             </td>
                                                             <td>@Item.TransferDate</td>
-                                                            <td>@Item.TransferFromName (@Item.LoginId)</td>
-                                                            <td>@Item.TransfertoName</td>
+                                                            <td>@Item.CustomerId</td>
+                                                            <td>@Item.TransfertoName (@Item.LoginId)</td>
+                                                            <td>@Session["MemberTransferCharge"]</td>
                                                             <td>@Item.MTG</td>
                                                         </tr>
                                                         i++;
@@ -156,7 +159,7 @@
         })
     </script>
 }
-    @*@if (TempData["error"] != null)
+    @if (TempData["wallettransfererror"] != null)
         {
             <script>
                 $(document).ready(function () {
@@ -166,14 +169,14 @@
                         backdrop: true,
                         allowOutsideClick: false,
                         title: 'Warning!',
-                        text: '@ViewBag.Reason',
+                        text: '@TempData["wallettransfererror"]',
                         type: 'warning',
                         showCancelButton: 0,
                         confirmButtonText: 'OK',
                     })
                 })
             </script>
-        }*@
+        }
 
 
     <script>
@@ -191,7 +194,7 @@
             //alert(sum);
 
             if (TotalSumValues > WalletAmount) {
-                alert("MTG Token Should not be Greater Than MTG Wallet Balance");
+                alert("MTG Token Should not be Greater Than MTG Balance");
                 $("#Amount").addClass('errortext');
                 $('#Amount').focus();
                 $("#Amount").val('');
@@ -205,9 +208,9 @@
                 $('#Amount').focus();
             }
 
-            if (Amount == "0") {
+            if (Amount < "10") {
                 Snackbar.show({
-                    text: "MTG Token should not be zero !!",
+                    text: "MTG Token should not be Less Than min MTG !!",
                     actionTextColor: '#fff',
                     backgroundColor: '#e7515a',
                     pos: 'top-right'

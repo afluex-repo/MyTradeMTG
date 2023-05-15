@@ -333,7 +333,7 @@ namespace MyTradeMTG.Controllers
                     obj.UserId = r["FK_UserId"].ToString();
                     obj.RequestCode = r["RequestCode"].ToString();
                     obj.Amount = r["Amount"].ToString();
-                    obj.PaymentMode = r["PaymentMode"].ToString() + "- " + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
+                    obj.PaymentMode = r["PaymentMode"].ToString() + "- " +"Amount:" +r["TodaysCurrency"].ToString() + "," + r["BankName"].ToString() + "," + r["BankBranch"].ToString() + ",Txn No. -" + r["ChequeDDNo"].ToString() + ",Txn Date- " + r["ChequeDDDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.BankName = r["BankName"].ToString();
                     obj.TransactionDate = r["RequestedDate"].ToString();

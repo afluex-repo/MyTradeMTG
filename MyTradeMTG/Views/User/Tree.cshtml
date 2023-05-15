@@ -23,9 +23,9 @@
     }
 
 
-    .user-profile .widget-content-area .user-info-list ul.contacts-block svg {
+    /*.user-profile .widget-content-area .user-info-list ul.contacts-block svg {
         color: #484040 !important;
-    }
+    }*/
 
     .outline-badge-primary {
         cursor: pointer;
@@ -36,15 +36,14 @@
         box-shadow:none !important;
     }
     .user-profile .widget-content-area .user-info-list ul.contacts-block li {
-    color: #484040 !important;
+    color: #b3b3b3 !important;
 }
+
     .table > tbody > tr > td {
    
-    color: #484040 !important;
+    /*color: #484040 !important;*/
 }
-    p {
-    color:#484040 !important;
-}
+  
     @@media(max-width: 991px) {
          #divMember .layout-spacing{
              width:50% !important;
@@ -78,7 +77,7 @@
                                     {
                                         <img src="~/assets/img/usericon.jpg" alt="avatar" height="100" width="100" style="border:5px solid @Model.Color">
                                     }
-                                    <p class="" style="color:#484040">@Model.DisplayName (@Model.LoginId)</p>
+                                    <p>@Model.DisplayName (@Model.LoginId)</p>
                                     @Html.HiddenFor(m => m.PK_UserId)
                                 </div>
                             </div>
@@ -93,17 +92,23 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Sponsor: @Model.SponsorName
                                             </li>
                                             <li class="contacts-block__item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Self MTG : @Model.SelfBV
+                                            </li>
+                                            @*<li class="contacts-block__item">
                                                 <i class="fa fa-inr" style="margin-right:16px; margin-left: 4px; font-size: 18px;"></i> Self MTG : @Model.SelfBV
-                                            </li>
+                                            </li>*@
                                             <li class="contacts-block__item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Team MTG : @Model.TeamBV
+                                            </li>
+                                            @*<li class="contacts-block__item">
                                                 <i class="fa fa-inr" style="margin-right:16px; margin-left: 4px; font-size: 18px;"></i> Team MTG : @Model.TeamBV
-                                            </li>
-                                            <li class="contacts-block__item">
+                                            </li>*@
+                                            @*<li class="contacts-block__item">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Self MTG: @Model.SelfBVDollar
                                             </li>
                                             <li class="contacts-block__item">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Team MTG: @Model.TeamBVDollar
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </div>
                                 </div>

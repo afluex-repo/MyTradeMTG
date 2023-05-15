@@ -234,7 +234,7 @@
                                 @*<span class="text-success pr-2">TR1- </span>
                                 <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;*@
                                 <span class="text-success pr-2">TR2- </span>
-                                <span class="text-black">@ViewBag.LevelIncomeTr2</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-black">@ViewBag.LevelIncomeTr2</span><br />
                                 <span class="text-danger pr-2">SB- </span>
                                 <span class="text-black">@ViewBag.SponsorBonus</span>
                                 @*<span class="text-danger pr-2">Bet- </span>
@@ -243,7 +243,7 @@
                         </div>
                         <div class="card-body p-0">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="widgetChart4" class="max-h80 chartjs-render-monitor" style="margin-top:23px;"></canvas>
+                            <canvas id="widgetChart4" class="max-h80 chartjs-render-monitor" style="margin-top:0px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -317,7 +317,7 @@
                     <div class="card overflow-hidden">
                         <div class="card-header align-items-start border-0 pb-0">
                             <div class="me-auto">
-                                <a href="/Wallet/WalletLedgerList" class="btn btn-block py-1">
+                                <a href="/Wallet/WalletLedgerList" class="btn btn-block py-0">
                                     <p class="mb-2 fs-13"><i class="fa fa-caret-up scale5 me-2 text-success" aria-hidden="true"></i>Balance</p>
                                     <h3 class="text-black mb-0 font-w600"><img src="~/UserPanel/images/mtg.png" /> @ViewBag.TotalWalletAmount</h3>
                                 </a>
@@ -330,14 +330,14 @@
                         <div class="card-footer d-flex justify-content-between border-0">
                             <div class="footer-info font-w600">
                                 <span class="text-success pr-2">BUY- </span>
-                                <span class="text-black">@ViewBag.TotalCrAmount</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-black">@ViewBag.TotalCrAmount</span><br />
                                 <span class="text-danger pr-2">SELL- </span>
                                 <span class="text-black">@ViewBag.TotalDrAmount</span>
                             </div>
                         </div>
                         <div class="card-body p-0">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="widgetChart7" class="max-h80 chartjs-render-monitor" style="margin-top:15px;"></canvas>
+                            <canvas id="widgetChart7" class="max-h80 chartjs-render-monitor" style="margin-top:0px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -354,14 +354,14 @@
                         <div class="card-footer d-flex justify-content-between border-0">
                             <div class="footer-info font-w600">
                                 <span class="text-success pr-2">TR1- </span>
-                                <span class="text-black">@ViewBag.LevelIncomeTr1</span>&nbsp;&nbsp;&nbsp;
+                                <span class="text-black">@ViewBag.LevelIncomeTr1</span><br />
                                 <span class="text-danger pr-2">Bet- </span>
                                 <span class="text-black">0.00</span><br />
                             </div>
                         </div>
                         <div class="card-body p-0">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:54px;"></canvas>
+                            <canvas id="widgetChart8" class="max-h80 chartjs-render-monitor" style="margin-top:32px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -611,7 +611,7 @@
                                             
                                
                                         
-                                        <a href="javascript:void(0);" class="btn-link">View more</a>
+                                        <a href="/User/RecentContact" class="btn-link">View more</a>
                                     </div>
                                     @*<div class="items">
                                             <div class="text-center">
@@ -628,17 +628,21 @@
                                             <div class="owl-carousel">
                                                 @if (Model.lstCustomer != null)
                                                 {
+                                                    int i = 0;
                                                     foreach (var item in Model.lstCustomer)
                                                     {
-                                                        int i = 0;
-                                                        <div class="item text-center">
-                                                            <img class="mb-3 rounded" src="@item.ProfilePicture" alt="" height="180">
-                                                            <h6 class="text-black mb-0">@item.CustomerName</h6>
-                                                            <b style="font-size:small;">Contact Address<br /></b>
-                                                            <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
+                                                        if (i < 20)
+                                                        {
+                                                            <div class="item text-center">
+                                                                <img class="mb-3 rounded" src="@item.ProfilePicture" alt="" height="180">
+                                                                <h6 class="text-black mb-0">@item.CustomerName</h6>
+                                                                <b style="font-size:small;">Contact Address<br /></b>
+                                                                <span style="font-weight:bold;font-size:0.8rem;">@item.CustomerId</span>
 
-                                                        </div>
-                                                        i++;
+                                                            </div>
+                                                            i++;
+                                                        }
+
                                                     }
                                                 }
                                             </div>
