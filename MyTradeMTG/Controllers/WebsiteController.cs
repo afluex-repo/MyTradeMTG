@@ -442,38 +442,38 @@ namespace MyTradeMTG.Controllers
                         catch
                         {
                         }
-                        //string signature = " &nbsp;&nbsp;&nbsp; Dear  " + model.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + model.Password;
+                        string signature = " &nbsp;&nbsp;&nbsp; Dear  " + model.Name + ",<br/>&nbsp;&nbsp;&nbsp; Your Password Is : " + model.Password;
 
-                        //using (MailMessage mail = new MailMessage())
-                        //{
-                        //    mail.From = new MailAddress("email@gmail.com");
-                        //    mail.To.Add(model.Email);
-                        //    mail.Subject = "Forget Password";
-                        //    mail.Body = signature;
-                        //    mail.IsBodyHtml = true;
-                        //    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
-                        //    {
-                        //        smtp.Credentials = new NetworkCredential("coustomer.MyTradeMTG@gmail.com", "MyTradeMTG@2022");
-                        //        smtp.EnableSsl = true;
-                        //        smtp.Send(mail);
-                        //    }
-                        //}
-                        TempData["Login"] = "password sent successfully.";
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("email@gmail.com");
+                            mail.To.Add(model.Email);
+                            mail.Subject = "Forget Password";
+                            mail.Body = signature;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("coustomer.MyTradeMTG@gmail.com", "MyTradeMTG@2022");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
+                            }
+                        }
+                        TempData["PassMag"] = "Password sent successfully.";
                     }
 
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["PassErrMag"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
                 else
                 {
-                    TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["PassErrMag"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                TempData["Login"] = ex.Message;
+                TempData["PassErrMag"] = ex.Message;
             }
             //return RedirectToAction("Login", "Home");
             return RedirectToAction("Index", "Website");

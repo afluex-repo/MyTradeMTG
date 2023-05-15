@@ -699,6 +699,7 @@
     <Content Include="UserPanel\images\card\1.png" />
     <Content Include="UserPanel\images\card\2.png" />
     <Content Include="UserPanel\images\card\3.png" />
+    <Content Include="UserPanel\images\chat.png" />
     <Content Include="UserPanel\images\contacts\1.jpg" />
     <Content Include="UserPanel\images\contacts\2.jpg" />
     <Content Include="UserPanel\images\contacts\3.jpg" />
@@ -966,6 +967,7 @@
     <Compile Include="Models\Errors\GatewayError.cs" />
     <Compile Include="Models\Errors\ServerError.cs" />
     <Compile Include="Models\Errors\SignatureVerificationError.cs" />
+    <Compile Include="Models\Franchise.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\HttpMethod.cs" />
     <Compile Include="Models\Master.cs" />
@@ -1254,6 +1256,10 @@
     <Content Include="Views\Shared\_FranchiseLayout.cshtml" />
     <Content Include="Views\Franchise\FranchiseDashBoard.cshtml" />
     <Content Include="Views\Admin\UserTopUpAllow.cshtml" />
+    <Content Include="Views\Franchise\AddWallet.cshtml" />
+    <Content Include="Views\Franchise\WalletList.cshtml" />
+    <Content Include="Views\Franchise\SaleRequest.cshtml" />
+    <Content Include="Views\User\RecentContact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -92,8 +92,25 @@
                             <i class="flaticon-381-networking"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
+                    </li>                    
+                    <li>
+                        <a class="ai-icon" href="/Franchise/AddWallet" aria-expanded="false">
+                            <i class="flaticon-381-notepad"></i>
+                            <span class="nav-text">Buy MTG</span>
+                        </a>
                     </li>
-                   
+                    <li>
+                        <a class="ai-icon" href="/Franchise/WalletList" aria-expanded="false">
+                            <i class="flaticon-381-notepad"></i>
+                            <span class="nav-text">Buy MTG List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ai-icon" href="/Franchise/SaleRequest" aria-expanded="false">
+                            <i class="flaticon-381-notepad"></i>
+                            <span class="nav-text">Sale Request</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="copyright">
                     <p><strong>My Trade User Dashboard</strong> © 2022 All Rights Reserved.</p>
@@ -104,10 +121,10 @@
 
            Sidebar end
         ***********************************-->
-        <div class="content-body">
+        
 
             @RenderBody()
-        </div>
+        
         <!--**********************************
             Footer start
         ***********************************-->
@@ -118,87 +135,7 @@
         </div>
     </div>
 
-    <!--  BEGIN NAVBAR  -->
-    @*<div class="header-container fixed-top">
-        <header class="header navbar navbar-expand-sm">
-            <ul class="navbar-item theme-brand flex-row  text-center">
-                <li class="nav-item theme-logo">
-                    <a href="/Admin/AdminDashboard">
-                        <img src="~/MyTradeMTGWebsite/assets/img/logo.png" class="navbar-logo" alt="logo" />
-
-                    </a>
-                    <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
-                </li>
-                <li class="nav-item theme-text">
-                    @*<a href="/User/UserDashboard" class="nav-link">MY TRADE</a>*@
-    @*</li>
-        </ul>*@
-    @*<ul class="navbar-item flex-row ml-md-0 ml-auto">
-            <li class="nav-item align-self-center search-animated">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search toggle-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <form class="form-inline search-full form-inline search" role="search">
-                    <div class="search-bar">
-                        <input type="text" class="form-control search-form-control  ml-lg-auto" placeholder="Search...">
-                    </div>
-                </form>
-            </li>
-        </ul>*@
-    @*<ul class="navbar-item flex-row ml-md-auto">
-                    <li class="nav-item dropdown user-profile-dropdown">
-                        <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <img src="~/assets/img/tradelogo.png" alt="@Session["FullName"]">
-                        </a>
-                        <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                            <div class="">
-                                <div class="dropdown-item">
-                                    <a class="" href="/Admin/ChangePassword"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg> Change Password</a>
-                                </div>
-                                <div class="dropdown-item">
-                                    <a class="" href="/Home/Login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </header>
-        </div>*@
-    <!--  END NAVBAR  -->
-    <!--  BEGIN NAVBAR  -->
-    @*<div class="sub-header-container">
-            <header class="header navbar navbar-expand-sm">
-
-
-            </header>
-        </div>*@
-    <!--  END NAVBAR  -->
-    <!--  BEGIN MAIN CONTAINER  -->
-    @*<div class="main-container" id="container">
-            <div class="overlay"></div>
-            <div class="search-overlay"></div>
-
-            <!--  BEGIN SIDEBAR  -->
-            <div class="sidebar-wrapper sidebar-theme">
-
-                <nav id="sidebar">
-                    <div class="shadow-bottom"></div>
-                    @{
-                        Html.RenderAction("Menu", "Home", new { area = "" });
-                    }
-
-                </nav>
-
-            </div>
-            <div id="content" class="main-content">
-                @RenderBody();
-                <div class="footer-wrapper">
-                    <div class="footer-section f-section-1">
-                        <p class="">Copyright © 2021 <a target="_blank" href="http://demo5.afluex.com/">My Trade</a></p>
-                    </div>
-
-                </div>
-            </div>
-        </div> *@
+    
     <!-- END MAIN CONTAINER -->
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
@@ -237,19 +174,7 @@
             App.init();
         });
     </script>
-    @*<script src="~/plugins/highlight/highlight.pack.js"></script>
-        <script src="~/assets/js/custom.js"></script>
-        <script src="~/assets/js/scrollspyNav.js"></script>*@
-
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
-    @*<script src="~/assets/js/scrollspyNav.js"></script>*@
-    @*<script src="~/plugins/table/datatable/datatables.js"></script>*@
-    <!-- NOTE TO ~/Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
-    @*<script src="~/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>*@
-
+   
 
     <script>
 		jQuery(document).ready(function(){
@@ -260,73 +185,7 @@
 
 		});
     </script>
-    @*<script src="/plugins/apex/apexcharts.min.js"></script>
-        <script src="/plugins/apex/custom-apexcharts.js"></script>*@
-    @*<script>
-        // Donut Chart
-        var donutChart = {
-            chart: {
-                height: 300,
-                type: 'donut',
-                toolbar: {
-                    show: false,
-                }
-            },
-            labels: ['Active', 'InActive', 'Blocked'],
-            colors: ['#4361ee', '#f10909', '#0e0e0e', ],
-            series: [190, 16, 3],
-            borderColor: '#F97300',
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        }
-
-        var donut = new ApexCharts(
-            document.querySelector("#AssociateDetails"),
-            donutChart
-        );
-
-        donut.render();
-        var payoutChart = {
-            chart: {
-                height: 300,
-                type: 'donut',
-                toolbar: {
-                    show: false,
-                }
-            },
-            colors: ['#385830', '#f10909'],
-            labels: ['TTP', 'TPS'],
-            series: [77608.00, 317000.00],
-
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 250
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        }
-
-        var donut = new ApexCharts(
-            document.querySelector("#PayoutDetails"),
-            payoutChart
-        );
-
-        donut.render();
-        </script>*@
+  
 
     <script>
         $('#html5-extension').DataTable( {

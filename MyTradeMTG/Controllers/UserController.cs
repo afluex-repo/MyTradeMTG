@@ -121,6 +121,7 @@ namespace MyTradeMTG.Controllers
                     obj1.ProfilePicture = r["ProfilePicture"].ToString();
                     obj1.CustomerId = r["CustomerId"].ToString();
                     obj1.CustomerName = r["CustomerName"].ToString();
+                    obj1.LoginId = r["LoginId"].ToString();
                     lst2.Add(obj1);
                 }
                 obj.lstCustomer = lst2;
@@ -177,7 +178,27 @@ namespace MyTradeMTG.Controllers
 
             return View(obj);
         }
-        
+        public ActionResult RecentContact()
+        {
+            Dashboard obj = new Dashboard();
+            List<Dashboard> lst2 = new List<Dashboard>();
+            obj.AddedBy = Session["Pk_userId"].ToString();
+            DataSet ds = obj.GetCustomerList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Dashboard obj1 = new Dashboard();
+                    obj1.ProfilePicture = r["ProfilePicture"].ToString();
+                    obj1.CustomerId = r["CustomerId"].ToString();
+                    obj1.CustomerName = r["CustomerName"].ToString();
+                    obj1.LoginId = r["LoginId"].ToString();
+                    lst2.Add(obj1);
+                }
+                obj.lstCustomer = lst2;
+            }
+            return View(obj);
+        }
         public JsonResult GetchartBarRunning()
         {
             ProgressReport model = new ProgressReport();
@@ -365,6 +386,7 @@ namespace MyTradeMTG.Controllers
                     ddlPackageType.Add(new SelectListItem { Text = r["PackageTypeName"].ToString(), Value = r["Pk_PackageTypeId"].ToString() });
                     count++;
                 }
+
             }
             ViewBag.ddlPackageType = ddlPackageType;
             #endregion
@@ -2232,8 +2254,11 @@ namespace MyTradeMTG.Controllers
                 {
                     User obj1 = new User();
                     obj1.TransferDate = r["TransferDate"].ToString();
+                    obj1.TransferFromName = r["TransferFromName"].ToString();
                     obj1.TransfertoName = r["TransfertoName"].ToString();
                     obj1.MTG = r["MTG"].ToString();
+                    obj1.LoginId = r["loginid"].ToString();
+                    obj1.CustomerId = r["CustomerId"].ToString();
                     lst.Add(obj1);
                 }
                 model.QuickSendMTGList = lst;
@@ -2258,13 +2283,13 @@ namespace MyTradeMTG.Controllers
                     }
                     else
                     {
-                        TempData["wallettransfer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["wallettransfererror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["wallettransfer"] = ex.Message;
+                TempData["wallettransfererror"] = ex.Message;
             }
             return RedirectToAction("WalletTransfer", "User");
         }

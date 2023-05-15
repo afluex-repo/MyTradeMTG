@@ -520,6 +520,8 @@
         <!--Social Forget start-->
         <div class="social_login forget_form">
             <div class="">
+                <span style="color:#4cff00">@TempData["PassMag"]</span>
+                <span style="color:#ff0000 !important">@TempData["PassErrMag"]</span>
                 <form action="/Website/ForgetPasswordAction" method="post">
                     <label>Login Id</label>
 
@@ -587,8 +589,6 @@
             </form>
         </div>
         <!--Social errorpage(Incorrect Login Id or Password) end-->
-
-
 
 
         <!--Register Form start-->
@@ -1108,6 +1108,32 @@
             $(".user_login").hide();
             $(".user_register").hide();
             $(".error_page").show();
+            return true;
+        });
+    </script>
+}
+@if (TempData["PassMag"] != null)
+{
+    <script>
+    $(document).ready(function () {
+            $('#modal').show();
+            $(".header_title").text('Forget Password');
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".forget_form").show();
+            return true;
+        });
+    </script>
+}
+@if (TempData["PassErrMag"] != null)
+{
+    <script>
+    $(document).ready(function () {
+            $('#modal').show();
+            $(".header_title").text('Forget Password');
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".forget_form").show();
             return true;
         });
     </script>
