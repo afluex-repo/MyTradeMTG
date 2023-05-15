@@ -197,6 +197,7 @@
     <Content Include="assets\css\widgets\modules-widgets.css" />
     <Content Include="assets\img\addnew.png" />
     <Content Include="assets\img\dash.png" />
+    <Content Include="assets\img\MtgCoinPng %281%29.png" />
     <Content Include="assets\img\payment.png" />
     <Content Include="assets\img\pin.png" />
     <Content Include="assets\img\QR.jpeg" />
