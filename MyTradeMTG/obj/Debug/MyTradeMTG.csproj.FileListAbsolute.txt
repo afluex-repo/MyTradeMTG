@@ -629,3 +629,4 @@ F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.dll
 F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.pdb
 E:\MyTradeMTGUpDatedCodeBySudhakarSharma\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
 D:\Repository-Projects\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
+F:\Sarfraz Ahmad\repository\MyTradeMTG\MyTradeMTG\obj\Debug\MyTradeMTG.csprojResolveAssemblyReference.cache
