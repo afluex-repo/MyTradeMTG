@@ -2258,6 +2258,7 @@ namespace MyTradeMTG.Controllers
                     obj1.TransfertoName = r["TransfertoName"].ToString();
                     obj1.MTG = r["MTG"].ToString();
                     obj1.LoginId = r["loginid"].ToString();
+                    obj1.CustomerId = r["CustomerId"].ToString();
                     lst.Add(obj1);
                 }
                 model.QuickSendMTGList = lst;
@@ -2282,13 +2283,13 @@ namespace MyTradeMTG.Controllers
                     }
                     else
                     {
-                        TempData["wallettransfer"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["wallettransfererror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["wallettransfer"] = ex.Message;
+                TempData["wallettransfererror"] = ex.Message;
             }
             return RedirectToAction("WalletTransfer", "User");
         }
