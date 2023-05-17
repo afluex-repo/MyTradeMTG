@@ -309,5 +309,9 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
+        public ActionResult PayoutLedger()
+        {
+            return View();
+        }
     }
 }

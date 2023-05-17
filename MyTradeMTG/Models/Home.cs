@@ -9,6 +9,15 @@ namespace MyTradeMTG.Models
 {
     public class Home : Common
     {
+        public string NomineeName { get; set; }
+        public string IFSCCode { get; set; }
+        public string NomineeRelation { get; set; }
+        public string DocumentType { get; set; }
+        public string DocumentTypeNumber { get; set; }
+        public string MemberBankName { get; set; }
+        public string MemberBranch { get; set; }
+        public string MemberAccNo { get; set; }
+        public string UPIID { get; set; }
         public string IsUpdated { get; set; }
         public List<Home> lstMenu { get; set; }
         public List<Home> lstBannerImage { get; set; }
@@ -321,7 +330,30 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("CalculateSponsorIncome");
             return ds;
         }
+        public DataSet UpdateProfileInfo()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                      new SqlParameter("@ProfilePic", ProfilePic),
+                                      new SqlParameter("@FirstName", FirstName),
+                                      new SqlParameter("@LastName", LastName),
+                                      new SqlParameter("@MobileNo", MobileNo),
+                                      new SqlParameter("@Email", Email),
+                                      new SqlParameter("@NomineeName", NomineeName),
+                                      new SqlParameter("@NomineeRelation", NomineeRelation),
+                                      new SqlParameter("@DocumentType", DocumentType),
+                                      new SqlParameter("@DocumentTypeNumber", DocumentTypeNumber),
+                                      new SqlParameter("@UPIID", UPIID),
+                                      new SqlParameter("@MemberBankName", MemberBankName),
+                                      new SqlParameter("@MemberBranch", MemberBranch),
+                                      new SqlParameter("@MemberAccNo", MemberAccNo),
+                                      new SqlParameter("@Address", Address),
+                                      new SqlParameter("@IFSCCode", IFSCCode),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfileInfo", para);
 
+            return ds;
+        }
 
     }
 }
