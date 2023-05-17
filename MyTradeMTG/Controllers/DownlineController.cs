@@ -17,8 +17,8 @@ namespace MyTradeMTG.Controllers
 
         public ActionResult DirectList(string Ids)
         {
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
+            List<SelectListItem> DownTeamStatus = Common.DownTeamStatus();
+            ViewBag.ddlStatus = DownTeamStatus;
             List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
 
@@ -113,16 +113,16 @@ namespace MyTradeMTG.Controllers
                 model.lstassociate = lst;
                 model.Ids = Ids;
             }
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
+            List<SelectListItem> DownTeamStatus = Common.DownTeamStatus();
+            ViewBag.ddlStatus = DownTeamStatus;
             List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
             return View(model);
         }
         public ActionResult DownLineList()
         {
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
+            List<SelectListItem> DownTeamStatus = Common.DownTeamStatus();
+            ViewBag.ddlStatus = DownTeamStatus;
             List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
 
@@ -178,8 +178,8 @@ namespace MyTradeMTG.Controllers
                 }
                 model.lstassociate = lst;
             }
-            List<SelectListItem> AssociateStatus = Common.AssociateStatus();
-            ViewBag.ddlStatus = AssociateStatus;
+            List<SelectListItem> DownTeamStatus = Common.DownTeamStatus();
+            ViewBag.ddlStatus = DownTeamStatus;
             List<SelectListItem> Leg = Common.LegType();
             ViewBag.ddlleg = Leg;
             return View(model);

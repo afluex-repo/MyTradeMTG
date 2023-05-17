@@ -118,6 +118,14 @@ namespace MyTradeMTG.Models
             AssociateStatus.Add(new SelectListItem { Text = "TopUp ID", Value = "P" });
             return AssociateStatus;
         }
+        public static List<SelectListItem> DownTeamStatus()
+        {
+            List<SelectListItem> DownTeamStatus = new List<SelectListItem>();
+            DownTeamStatus.Add(new SelectListItem { Text = "All", Value = null });
+            DownTeamStatus.Add(new SelectListItem { Text = "Active", Value = "P" });
+            DownTeamStatus.Add(new SelectListItem { Text = "Inactive", Value = "T" });
+            return DownTeamStatus;
+        }
         public static List<SelectListItem> LegType()
         {
             List<SelectListItem> LegType = new List<SelectListItem>();

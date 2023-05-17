@@ -197,6 +197,7 @@
     <Content Include="assets\css\widgets\modules-widgets.css" />
     <Content Include="assets\img\addnew.png" />
     <Content Include="assets\img\dash.png" />
+    <Content Include="assets\img\MtgCoinPng %281%29.png" />
     <Content Include="assets\img\payment.png" />
     <Content Include="assets\img\pin.png" />
     <Content Include="assets\img\QR.jpeg" />
@@ -1260,6 +1261,8 @@
     <Content Include="Views\Franchise\WalletList.cshtml" />
     <Content Include="Views\Franchise\SaleRequest.cshtml" />
     <Content Include="Views\User\RecentContact.cshtml" />
+    <Content Include="Views\Report\PayoutLedger.cshtml" />
+    <Content Include="Views\User\ProfileInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
