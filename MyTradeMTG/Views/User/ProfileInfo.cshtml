@@ -1,0 +1,197 @@
+﻿@model MyTradeMTG.Models.Home
+
+@{
+    ViewBag.Title = "ProfileInfo";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/plugins/dropify/dropify.min.css">
+<link href="~/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm("ProfileInfo", "User", FormMethod.Post, new { @id = "forms", @enctype = "multipart/form-data" }))
+{
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="layout-px-spacing">
+                <div class="account-settings-container">
+                    <div class="account-content">
+                        <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing" id="divProfile">
+                                    <div id="general-info" class="section general-info">
+                                        <div class="info">
+                                            <h6 class="">Profile Info</h6>
+                                            <br />
+                                            <p style="color:#4cff00;">@TempData["msg"]</p>
+                                            <p style="color:red">@TempData["error"]</p>
+                                            <div class="row">
+                                                <div class="col-xl-2 col-lg-12 col-md-4">
+                                                    <div class="upload mt-4 pr-md-4">
+                                                        @if (Model.ProfilePic != "")
+                                                        {
+                                                            <input type="file" id="postedFile" class="dropify" onchange="readURL(this)" data-default-file="@Model.ProfilePic" data-max-file-size="2M" name="postedFile" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="file" id="postedFile" class="dropify" onchange="readURL(this)" data-default-file="~/assets/img/usericon.jpg" data-max-file-size="2M" name="postedFile" />
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+                                                    <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="FirstName">First Name</label>
+                                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                                                                </div>
+                                                            </div>
+                                                        <div class="col-md-3">
+                                                            <label for="LastName">Last Name</label>
+                                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="phone">Mobile No</label>
+                                                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="email">Email</label>
+                                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label>Contact Address</label>
+                                                            <input type="text" class="form-control mb-4" id="CustomerId" placeholder="Email" value="@Model.CustomerId" disabled="disabled">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label>Nominee Name</label>
+                                                            @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @placeholder = "NomineeName" })
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label>Nominee Relation</label>
+                                                            @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "NomineeRelation" })
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label>Document Type</label>
+                                                            <input type="hidden" id="DocumentType12345" name="DocumentType12345" value="@Model.DocumentType" />
+                                                            <select id="DocumentType" name="DocumentType" class="form-control">
+                                                                <option value="0">-Select-</option>
+                                                                <option value="VoterCardId">Voter Card Id</option>
+                                                                <option value="PassPortCardId">PassPort Card Id</option>
+                                                                <option value="RashanCardId">Rashan Card Id</option>
+                                                                <option value="PanCardNo">Pan Card No</option>
+                                                                <option value="AdharCardNo">Adhar Card No</option>
+                                                                <option value="GasPassbookNo">Gas Passbook No</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                              <label>DocumentTypeNumber</label>
+                                                    @Html.TextBoxFor(m => m.DocumentTypeNumber, new { @class = "form-control", @placeholder = "Document Type Number" }) 
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label>UPI ID</label>
+                                                            @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPIID" })
+                                                        </div>
+                                                        @if (Model.MemberBankName == null)
+                                                        {
+                                                            <div class="col-md-3">
+                                                                <label>Bank Name</label>
+                                                                @Html.TextBoxFor(m => m.MemberBankName, new { @class = "form-control", @placeholder = "Bank Name" })
+                                                            </div>
+                                                        }
+                                                        @if (Model.MemberBranch == null)
+                                                        {
+                                                            <div class="col-md-3">
+                                                                <label>Bank Branch</label>
+                                                                @Html.TextBoxFor(m => m.MemberBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
+                                                            </div>
+                                                        }
+                                                        @if (Model.MemberBranch == null)
+                                                        {
+                                                            <div class="col-md-3">
+                                                                <label>Account No</label>
+                                                                @Html.TextBoxFor(m => m.MemberAccNo, new { @class = "form-control", @placeholder = "Account No" })
+                                                            </div>
+                                                        }
+                                                        @if (Model.IFSCCode == null)
+                                                        {
+                                                            <div class="col-md-3">
+                                                                <label>IFSC Code</label>
+                                                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "Account No" })
+                                                            </div>
+                                                        }
+                                                        <div class="col-md-3">
+                                                            <label>Address</label>
+                                                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <br />
+                                                                <input class="btn btn-success" name="btnProfileInfo" id="btnProfileInfo" type="submit" value="Edit Profile"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+
+<script src="~/plugins/dropify/dropify.min.js"></script>
+<script src="~/plugins/blockui/jquery.blockUI.min.js"></script>
+<!-- <script src="plugins/tagInput/tags-input.js"></script> -->
+<script src="~/assets/js/users/account-settings.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+            if ($("#DocumentType12345").val() != 0) {
+                $("#DocumentType").val($("#DocumentType12345").val()).attr("selected", "selected");
+            }
+
+    });
+
+</script>
+@if (TempData["error"] != null)
+{
+    <script>
+            $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["error"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+            });
+    </script>
+}
+@if (TempData["msg"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["msg"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#1abc9c',
+                    pos: 'top-right'
+                });
+            });
+        </script>
+    }
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: transparent !important;
+    }
+</style>
+
+
+

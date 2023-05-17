@@ -654,7 +654,7 @@ namespace MyTradeMTG.Controllers
                     model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
                     model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
                     model.Gender = ds.Tables[0].Rows[0]["Sex"].ToString();
-                    model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
+                    //model.AdharNo = ds.Tables[0].Rows[0]["AdharNumber"].ToString();
                     model.PanNo = ds.Tables[0].Rows[0]["PanNumber"].ToString();
                     model.PinCode = ds.Tables[0].Rows[0]["PinCode"].ToString();
                     model.State = ds.Tables[0].Rows[0]["State"].ToString();

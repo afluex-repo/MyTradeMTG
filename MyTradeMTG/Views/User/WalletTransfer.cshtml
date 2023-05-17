@@ -60,7 +60,8 @@
                                         @*<label id="TransferCharge"></label>*@
                                         @*@Html.HiddenFor(m => m.MemberTransferCharge,new { @value= "@ViewBag.MemberTransferCharge" })*@
                                         <input id="MemberTransferCharge" name="MemberTransferCharge" value="@Session["MemberTransferCharge"]" hidden />
-                                        <input id="TransferCharge" name="TransferCharge" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
+                                        <input type="hidden"id="TransferCharge" name="TransferCharge" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
+                                        <input id="TransferCharge1" name="TransferCharge1" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
 
                                     </div>
                                 </div>
@@ -92,8 +93,9 @@
                                                 <th>Date</th>
                                                 <th>Contact Address</th>
                                                 <th>Transfer To</th>
+                                                <th>Net MTG</th>
                                                 <th>Transfer Charge</th>
-                                                <th>MTG</th>
+                                                <th>Total MTG</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -111,6 +113,7 @@
                                                             <td>@Item.TransferDate</td>
                                                             <td>@Item.CustomerId</td>
                                                             <td>@Item.TransfertoName (@Item.LoginId)</td>
+                                                            <td>@Item.MTG</td>
                                                             <td>@Session["MemberTransferCharge"]</td>
                                                             <td>@Item.MTG</td>
                                                         </tr>
@@ -192,6 +195,8 @@
             var PercentValues = parseFloat(Percent);
             var TotalSumValues = Amount + PercentValues;
             //alert(sum);
+            document.getElementById("TransferCharge1").value = TotalSumValues;
+            
 
             if (TotalSumValues > WalletAmount) {
                 alert("MTG Token Should not be Greater Than MTG Balance");

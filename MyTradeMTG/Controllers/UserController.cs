@@ -2615,7 +2615,70 @@ namespace MyTradeMTG.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
+        public ActionResult ProfileInfo()
+        {
+            Home model = new Home();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    model.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    model.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    model.SponsorId = ds.Tables[0].Rows[0]["SponsorId"].ToString();
+                    model.SponsorName = ds.Tables[0].Rows[0]["SponsorName"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    model.Country = ds.Tables[0].Rows[0]["Country"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    model.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                    model.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                    model.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
+                    model.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                    model.DocumentType = ds.Tables[0].Rows[0]["DocumentType"].ToString();
+                    model.DocumentTypeNumber = ds.Tables[0].Rows[0]["DocumentTypeNumber"].ToString();
+                    model.MemberAccNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
+                    model.MemberBranch = ds.Tables[0].Rows[0]["MemberBranch"].ToString();
+                    model.MemberBankName = ds.Tables[0].Rows[0]["MemberBankName"].ToString();
+                    model.UPIID = ds.Tables[0].Rows[0]["UPIID"].ToString();
+                    model.IsUpdated = ds.Tables[0].Rows[0]["IsUpdated"].ToString();
+                    model.IFSCCode = ds.Tables[0].Rows[0]["IFSCcode"].ToString();
+                }
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ProfileInfo(Home model)
+        {
+            try
+            {
+                if (model.postedFile != null)
+                {
+                    model.ProfilePic = "/ProfilePicture/" + Guid.NewGuid() + Path.GetExtension(model.postedFile.FileName);
+                    model.postedFile.SaveAs(Path.Combine(Server.MapPath(model.ProfilePic)));
+                }
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                DataSet ds = model.UpdateProfileInfo();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Profile information has been Updated Successfully";
+                        Session["Profile"] = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
+                    }
+                    else
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return RedirectToAction("ProfileInfo", "User");
+        }
     }
 }

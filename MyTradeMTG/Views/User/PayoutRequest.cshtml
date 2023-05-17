@@ -34,12 +34,12 @@
                                 <input type="hidden" id="IsFill123" value="@Session["IsFill"]">
 
 
-                                @*<div class="col-lg-3 col-md-3">
+                                <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         MTG /USDT Balance <span style="color: red">*</span>
                                         @Html.TextBoxFor(m => m.PayoutBalance, new { @class = "form-control", @Readonly = "true" })
                                     </div>
-                                </div>*@
+                                </div>
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         Login Id <span style="color: red">*</span>
@@ -301,15 +301,15 @@
         //    $('#Amount').val('');
         //    return false;
         //}
-        //var PayoutBalnace = $("#PayoutBalance").val();
-        //var MTGAmount = parseFloat($("#Amount").val()) + parseFloat($("#perAmt").text());
-        //if (PayoutBalnace <= MTGAmount) {
-        //    alert("Insufficent Balance !!")
-        //    $("#Amount").addClass('errortext');
-        //    $('#Amount').focus();
-        //    $("#Amount").val('');
-        //    return false;
-        //}
+        var PayoutBalnace = $("#PayoutBalance").val();
+        var MTGAmount = parseFloat($("#Amount").val()) + parseFloat($("#perAmt").text());
+        if (PayoutBalnace <= MTGAmount) {
+            alert("Insufficent Balance !!")
+            $("#Amount").addClass('errortext');
+            $('#Amount').focus();
+            $("#Amount").val('');
+            return false;
+        }
         return true;
     }
 
