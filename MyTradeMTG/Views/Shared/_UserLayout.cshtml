@@ -13,14 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="" />
     <meta property="og:title" content="" />
-    <meta property="og:description" content="Kripton : Crypto Admin Dashboard" />
+    <meta property="og:description" content="" />
     <meta property="og:image" content="social-image.png" />
     <meta name="format-detection" content="telephone=no">
     <title>User Dashboard</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="~/MyTradeMTGWebsite/asset/img/MtgCoinPng.png">
-
-
     <link href="/UserPanel/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/UserPanel/vendor/chartist/css/chartist.min.css">
     <link href="/UserPanel/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
@@ -31,6 +29,7 @@
     <link href="/UserPanel/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    
     <style>
         .errortext {
             border: 2px solid red !important;
@@ -200,6 +199,63 @@
                         </div>
 
                         <ul class="navbar-nav header-right">
+                            <li class="nav-item dropdown notification_dropdown">
+                                <a class="nav-link  ai-icon" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="flaticon-381-ring"></i>
+                                    <div class="pulse-css"></div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div id="DZ_W_Notification1" class="widget-media dz-scroll p-3" style="height:380px;width:300px">
+                                        <ul class="timeline">
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media me-2">
+                                                        <img alt="image" width="50" src="~/assets/img/tradelogo.png">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Dr sultads Send you Photo</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media me-2 media-info">
+                                                        KG
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Resport created successfully</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media me-2 media-success">
+                                                        <i class="fa fa-home"></i>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Reminder : Treatment Time!</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media me-2">
+                                                        <img alt="image" width="50" src="~/assets/img/tradelogo.png">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Dr sultads Send you Photo</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="all-notification ms-3" href="#">See all notifications <i class="ti-arrow-right"></i></a>
+                                </div>
+                            </li>
                             <li class="nav-item dropdown header-profile">
                                 @if (Session["Profile"].ToString() != "")
                                 {
@@ -259,6 +315,7 @@
 
                                 </div>
                             </li>
+
                         </ul>
 
                     </div>
@@ -483,532 +540,8 @@
         </a>
     </div>
 
+    <a href="https://support.w3itexperts.com" target="_blank" class="DZ-bt-support-now DZ-theme-btn"><svg id="Capa_1" enable-background="new 0 0 512 512" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg"><g><path d="m483.637 213.16c-10.222-6.317-21.601-7.603-31.637-6.615v-10.545c0-107.799-88.214-196-196-196-107.799 0-196 88.214-196 196v10.545c-10.036-.989-21.416.298-31.637 6.615-18.821 11.632-28.363 36.139-28.363 72.84 0 36.762 9.56 61.399 28.415 73.228 9.366 5.876 20.304 7.917 31.585 6.947v10.825c0 8.284 6.716 15 15 15h60c8.284 0 15-6.716 15-15v-181c0-8.284-6.716-15-15-15h-44.315c7.608-84.529 78.839-151 165.315-151s157.707 66.471 165.315 151h-44.315c-8.284 0-15 6.716-15 15v181c0 8.284 6.716 15 15 15h45v15c0 24.813-20.187 45-45 45h-48.58c-6.192-17.458-22.865-30-42.42-30h-30c-24.813 0-45 20.187-45 45s20.187 45 45 45h30c19.555 0 36.228-12.542 42.42-30h48.58c41.355 0 75-33.645 75-75 0-18.271 0-28.969 0-40.826 11.282.97 22.221-1.072 31.585-6.947 18.855-11.828 28.415-36.465 28.415-73.227 0-36.701-9.542-61.208-28.363-72.84zm-423.637 122.821c-4.786.833-10.768.891-15.642-2.167-9.259-5.808-14.358-22.789-14.358-47.814 0-24.785 4.985-41.569 14.036-47.259 4.894-3.077 11.06-2.858 15.964-1.89zm60-124.981v151h-30v-151zm166 271h-30c-8.271 0-15-6.729-15-15s6.729-15 15-15h30c8.271 0 15 6.729 15 15s-6.729 15-15 15zm136-120h-30v-151h30zm45.749-28.253c-4.848 3.095-10.896 3.035-15.749 2.194v-99.089c4.904-.968 11.069-1.187 15.964 1.89 9.051 5.689 14.036 22.473 14.036 47.258 0 24.923-5.062 41.88-14.251 47.747z"></path></g></svg><span>Support</span></a>
 
-
-    <!--**********************************
-    Main wrapper end
-    ***********************************-->
-    <!-- BEGIN LOADER --
-    <div id = "load_screen" >
-        < div class="loader">
-            <div class="loader-content">
-                <div class="spinner-grow align-self-center"></div>
-            </div>
-        </div>
-    </div>
-    <!--  END LOADER -->
-    <!--  BEGIN NAVBAR  --
-    <div class="header-container fixed-top">
-        <header class="header navbar navbar-expand-sm">
-            <ul class="navbar-item theme-brand flex-row text-center">
-                <li class="nav-item theme-logo">
-
-                    <a href = "/user/UserDashboard" >
-                        < img src="~/MyTradeMTGWebsite/assets/img/logo.png" class="navbar-logo" alt="logo" />
-                    </a>
-                    <a href = "javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns = "http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1 = "3" y1="12" x2="21" y2="12"></line><line x1 = "3" y1="6" x2="21" y2="6"></line><line x1 = "3" y1="18" x2="21" y2="18"></line></svg></a>
-                </li>
-                <li class="nav-item theme-text">
-                        <a href = "/User/UserDashboard" class="nav-link">MY TRADE</a>
-                    </li>
-            </ul>
-            @*<ul class="navbar-item flex-row ml-md-0 ml-auto">
-                    <li class="nav-item align-self-center search-animated">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search toggle-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <form class="form-inline search-full form-inline search" role="search">
-                            <div class="search-bar">
-                                <input type="text" class="form-control search-form-control  ml-lg-auto" placeholder="Search...">
-                            </div>
-                        </form>
-                    </li>
-                </ul>*@
-            <ul class="navbar-item flex-row ml-md-auto">
-                <li class="nav-item dropdown user-profile-dropdown d-none d-sm-block">
-                    @if (Session["Gender"] != null)
-                    {
-                        if (Session["Gender"].ToString() == "F")
-                        {
-
-                            <h6 style="color:black;margin-top:10px">Hello Mrs. @Session["FullName"] (@Session["LoginId"])</h6>
-                        }
-                        else
-                        {
-                            <h6 style="color:black;margin-top:10px">Hello Mr. @Session["FullName"] (@Session["LoginId"])</h6>
-                        }
-                    }
-
-                </li>
-                <li class="nav-item dropdown user-profile-dropdown">
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        @if (Session["Profile"].ToString() != "")
-                        {
-                            <img src="@Session["Profile"]" alt="@Session["FullName"]" height="60px" width="60px">
-                        }
-                        else
-                        {
-                            <img src="/assets/img/usericon.jpg" alt="@Session["FullName"]" height="60px" width="60px">
-                        }
-                    </a>
-                    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                        <div class="">
-                            <div class="dropdown-item  d-block d-sm-none">
-                                <div class="trade-name">
-                                    @if (Session["Gender"] != null)
-                                    {
-                                        if (Session["Gender"].ToString() == "F")
-                                        {
-
-                                            <h6 style="color:black;margin-top:10px">Hello Mrs. @Session["FullName"] (@Session["LoginId"])</h6>
-                                        }
-                                        else
-                                        {
-                                            <h6 style="color:black;margin-top:10px">Hello Mr. @Session["FullName"] (@Session["LoginId"])</h6>
-                                        }
-                                    }
-
-                                </div>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="/User/ViewProfile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>  Profile</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="/User/BankDetailsUpdate"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> KYC Details</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="/User/ChangePasswordForUser"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg> Change Password</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>Share Link</a>
-                            </div>
-                            <div class="dropdown-item">
-                                <a class="" href="/Home/Login"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </header>
-    </div>
-    <!--  END NAVBAR  -->
-    <!--  BEGIN NAVBAR  -->
-    @*<div class="sub-header-container">
-            <header class="header navbar navbar-expand-sm">
-                <div class="alert alert-icon-right alert-light-red navbar-nav flex-row ml-auto mr-4" role="alert">
-                    <strong><a target="_blank" style="font-size: 14px;color:red;word-wrap:break-word" href="http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()">http://MyTradeMTG.co.in//Home/Registration?Pid=@Session["Pk_UserId"].ToString()</a></strong>
-
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>
-                </div>
-            </header>
-        </div>*@
-    <!--  END NAVBAR  -->
-    <!--  BEGIN MAIN CONTAINER  --
-    <div class="main-container" id="container">
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
-        <!--  BEGIN SIDEBAR  --
-        <div class="sidebar-wrapper sidebar-theme">
-
-            <nav id="sidebar">
-                @*<div class="shadow-bottom"></div>*@
-                <ul class="list-unstyled menu-categories" id="accordionExample">
-                    <li class="menu">
-                        <a href="/user/UserDashboard" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                <span>Dashboard</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="#Wallet" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-folder-open"></i>
-                                <span>My Trade Wallet</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Wallet" data-parent="#accordionExample">
-                            @*@if (Session["IdActivated"] != null)
-                            {
-                                if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {*@
-                                    <li>
-                                        <a href="/Wallet/AddWallet">Wallet Request</a>
-                                    </li>
-                                    <li>
-                                        <a href="/Wallet/WalletList">Wallet Request List</a>
-                                    </li>
-                                    <li>
-                                        <a href="/Wallet/WalletLedgerList">Wallet Ledger</a>
-                                    </li>
-                                    @*<li>
-                                            <a href="/User/PayoutRequest">Transfer to Account</a>
-                                        </li>*@
-                                    @*//}
-                                    //else
-                                    //{
-                                    //    }*@
-                                @*}*@
-
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Pin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-thumb-tack"></i>
-                                <span>Pin Management</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Pin" data-parent="#accordionExample">
-                            @*@if (Session["IdActivated"] != null)
-                            {
-                                if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {*@
-                                    <li>
-                                        <a href="/User/EPinRequest">Generate E-Pin</a>
-                                    </li>
-                                @*}
-                            }*@
-                            <li>
-                                <a href="/User/PinList">Pin List</a>
-                            </li>
-                            <li>
-                                <a href="/User/PinTransferReport">Transfer Report</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Account" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                @*<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>*@
-                                <i class="fa fa-address-book"></i>
-                                <span>Account</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Account" data-parent="#accordionExample">
-                            @*@if (Session["IdActivated"] != null)
-                            {
-                                if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                {*@
-                                    @*//if (Session["TopUp"] != null)
-                                    //{
-                                    //    if (Session["TopUp"].ToString() == "False")
-                                    //    {*@
-                                    <li>
-                                        <a href="/user/Topup">Topup</a>
-                                    </li>
-                                    @*//    }
-                                    //}*@
-                                    <li>
-                                        <a href="/user/TopUpList">Topup List</a>
-                                    </li>
-                                    <li>
-                                        <a href="/User/PayoutRequest">Transfer To Bank</a>
-                                    </li>
-                                @*}
-                                else
-                                {
-
-                                }
-                            }*@
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Team" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                @*<i class="fa fa-outdent"></i>*@
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                <span>Level Reports</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Team" data-parent="#accordionExample">
-                            @*<li>
-                                    <a href="/user/BinaryTree">Binary Tree</a>
-                                </li>*@
-                            @*<li>
-                                    <a href="/Downline/DownLineList">Downline</a>
-                                </li>*@
-                            <li>
-                                <a href="/Downline/DirectList">DownTeam Tree</a>
-                            </li>
-                            <li>
-                                <a href="/user/TreeTTP">Level Tree TTP</a>
-                            </li>
-                            <li>
-                                <a href="/user/Tree">Level Tree TPS</a>
-                            </li>
-
-                            <li>
-                                <a href="/Downline/AssociateTree">Direct List</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Business" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-users"></i>
-                                <span>Business Reports</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Business" data-parent="#accordionExample">
-                            <li>
-                                <a href="/user/BusinessReportsForUser">Business Report</a>
-                            </li>
-                            @*<li>
-                                    <a href="/Downline/DownLineList">Downline</a>
-                                </li>*@
-                            @*<li>
-                                    <a href="/Downline/DirectList">DownTeam Tree</a>
-                                </li>
-                                <li>
-                                    <a href="/user/TreeTTP">Level Tree TTP</a>
-                                </li>
-                                <li>
-                                    <a href="/user/Tree">Level Tree TPS</a>
-                                </li>
-
-                                <li>
-                                    <a href="/Downline/AssociateTree">Direct List</a>
-                                </li>*@
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#ROI" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-money"></i>
-                                <span>TPS Reports</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="ROI" data-parent="#accordionExample">
-
-                            <li>
-                                <a href="/Wallet/ROIWallet">TPS Wallet</a>
-                            </li>
-                            <li>
-                                <a href="/Wallet/ROIIncomeReports">TPS Income</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#LevelBonus" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-cubes"></i>
-                                <span>Bonus Report</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="LevelBonus" data-parent="#accordionExample">
-                            <li>
-                                <a href="/Report/LevelIncomeTr1Total">Level Bonus TTP</a>
-                            </li>
-                            <li>
-                                <a href="/Report/LevelIncomeTr2Total">Level Bonus TPS</a>
-                            </li>
-                            <li>
-                                <a href="/User/SponsorIncomeForuser">Sponsor Bonus</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Payout" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-cc-paypal"></i>
-                                <span>Payout</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Payout" data-parent="#accordionExample">
-                            <li>
-                                <a href="/Report/PayoutWalletLedger">Payout Wallet</a>
-                            </li>
-                            <li>
-                                <a href="/Report/PayoutDetail">Payout Detail</a>
-                            </li>
-                            @*<li>
-                                <a href="/User/SponsorIncomeForuser">Sponsor Bonus</a>
-                            </li>*@
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Rewards" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-trophy"></i>
-                                <span>Rewards & Club</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Rewards" data-parent="#accordionExample">
-                            @*<li>
-                                <a href="/User/userreward">User Award</a>
-                            </li>*@
-                            <li>
-                                <a href="/User/userreward">Trade Rewards</a>
-                            </li>
-                            <li>
-                                <a href="/User/RoyaltyClub">Royalty Club</a>
-                            </li>
-                            <li>
-                                <a href="~/Coming.html"> Team Club</a>
-                            </li>
-                            <li>
-                                <a href="~/Coming.html">Member Award</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Forex" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-bar-chart"></i>
-                                <span>My Trade FX</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Forex" data-parent="#accordionExample">
-
-                            <li>
-                                <a href="https://fbs.partners?ibl=49471&ibp=27409756" target="_blank">Self trading Account</a>
-                            </li>
-                            <li>
-                                <a href="~/Coming.html">Auto Trading Account</a>
-                            </li>
-                            <li>
-                                <a href="~/Coming.html">Forex Business Partner</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="#Download" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <i class="fa fa-download"></i>
-                                <span>Download</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="Download" data-parent="#accordionExample">
-                            <li>
-                                <a href="/User/Download">Download</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                            <a href="#Setting" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                    <span>Setting</span>
-                                </div>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </div>
-                            </a>
-                            <ul class="collapse submenu list-unstyled" id="Setting" data-parent="#accordionExample">
-
-                                <li>
-                                    <a href="/User/ViewProfile">View Profile</a>
-                                </li>
-                                <li>
-                                    <a href="/User/BankDetailsUpdate">Bank Details</a>
-                                </li>
-                                <li>
-                                    <a href="/User/ChangePasswordForUser">Change Password</a>
-                                </li>
-                            </ul>
-                        </li>*
-                    @*<li class="menu">
-                            <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                                    <span>Apps</span>
-                                </div>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </div>
-                            </a>
-                            <ul class="collapse submenu list-unstyled" id="app" data-parent="#accordionExample">
-                                <li>
-                                    <a href="apps_chat.html"> Chat </a>
-                                </li>
-                                <li>
-                                    <a href="apps_mailbox.html"> Mailbox  </a>
-                                </li>
-                                <li>
-                                    <a href="apps_todoList.html"> Todo List </a>
-                                </li>
-                                <li>
-                                    <a href="apps_notes.html"> Notes </a>
-                                </li>
-                                <li>
-                                    <a href="apps_scrumboard.html">Scrumboard</a>
-                                </li>
-                                <li>
-                                    <a href="apps_contacts.html"> Contacts </a>
-                                </li>
-                                <li>
-                                    <a href="#appInvoice" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Invoice <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
-                                    <ul class="collapse list-unstyled sub-submenu" id="appInvoice" data-parent="#app">
-                                        <li>
-                                            <a href="apps_invoice-list.html"> List </a>
-                                        </li>
-                                        <li>
-                                            <a href="apps_invoice-preview.html"> Preview </a>
-                                        </li>
-                                        <li>
-                                            <a href="apps_invoice-add.html"> Add </a>
-                                        </li>
-                                        <li>
-                                            <a href="apps_invoice-edit.html"> Edit </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="apps_calendar.html"> Calendar </a>
-                                </li>
-                            </ul>
-                        </li>*
-                </ul>
-            </nav>
-        </div>
-        <div id="content" class="main-content p-1">
-            @*<div class="card">
-                <div class="card-body">*
-            @RenderBody()
-            @*</div>
-                </div>*@
-
-            <div class="footer-wrapper fixed-bottom">
-                <div class="footer-section f-section-1">
-                    <p class="">Copyright © 2021 <a target="_blank" href="http://demo5.afluex.com/">MY TRADE</a></p>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <!-- END MAIN CONTAINER -->
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/bootstrap/js/popper.min.js"></script>

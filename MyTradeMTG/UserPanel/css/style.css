@@ -9416,7 +9416,7 @@ svg.pulse-svg {
     padding: 0;
     display: flex;
     align-items: center;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
     padding-left: 30px;
     border-left: 1px solid #EEEEEE; }
     .header-right .header-profile > a.nav-link i {
@@ -48999,7 +48999,7 @@ $color_pallate_15: #ed0b4c; */
 	width:60px;
 	height:60px;
 	bottom:40px;
-	right:30px;
+	right:10px;
 	background-color:#25d366;
 	color:#FFF;
 	border-radius:50px;
@@ -49008,3 +49008,75 @@ $color_pallate_15: #ed0b4c; */
 	box-shadow: 2px 2px 3px #999;
   z-index:100;
 }
+
+/* support icon css */
+
+ .DZ-theme-btn {
+            background-color: #fff;
+            border-radius: 40px;
+            bottom: 10px;
+            color: #fff;
+            display: table;
+            height: 50px;
+            right: 10px;
+            min-width: 50px;
+            position: fixed;
+            text-align: center;
+            z-index: 99999;
+        }
+
+            .DZ-theme-btn i {
+                font-size: 22px;
+                line-height: 50px;
+            }
+
+            .DZ-theme-btn.DZ-bt-support-now {
+                background: #1ebbf0;
+                background: -moz-linear-gradient(45deg,#1ebbf0 8%,#39dfaa 100%);
+                background: -webkit-linear-gradient(45deg,#1ebbf0 8%,#39dfaa 100%);
+                background: linear-gradient(45deg,#1ebbf0 8%,#39dfaa 100%);
+                bottom: 105px;
+            }
+
+
+            .DZ-theme-btn:hover {
+                color: #fff;
+                padding: 0 20px;
+            }
+
+            .DZ-theme-btn span {
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 16px;
+                letter-spacing: -15px;
+                opacity: 0;
+                line-height: 50px;
+                -webkit-transition: all 1s;
+                -ms-transition: all 1s;
+                transition: all 1s;
+                text-transform: uppercase;
+            }
+
+            .DZ-theme-btn:hover span {
+                opacity: 1;
+                letter-spacing: 1px;
+                padding-left: 10px;
+            }
+
+
+        [dir|="rtl"] .DZ-theme-btn, [dir|="rtl"] .at-expanding-share-button[data-position=bottom-left] {
+            right: 10px;
+            left: auto;
+        }
+
+        .DZ-theme-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .DZ-theme-btn svg {
+                fill: #fff;
+                width: 26px;
+                height: 26px;
+            }
