@@ -3089,11 +3089,16 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction("FranchiseRequestList", "Admin");
         }
 
-
-
+        
         public ActionResult UserTopUpAllow()
         {
-            return View();
+           Admin model = new Admin();
+           DataSet ds = model.GetUserTopUpAllowDetails();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                model.IsActive = ds.Tables[0].Rows[0]["IsActive"].ToString();
+            }
+            return View(model);
         }
 
         [HttpPost]

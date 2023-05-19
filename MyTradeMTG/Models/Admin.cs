@@ -750,7 +750,11 @@ namespace MyTradeMTG.Models
         }
 
 
-
+        public DataSet GetUserTopUpAllowDetails()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetUserTopUpAllowDetails");
+            return ds;
+        }
 
         public DataSet SaveUserTopUpAllow()
         {

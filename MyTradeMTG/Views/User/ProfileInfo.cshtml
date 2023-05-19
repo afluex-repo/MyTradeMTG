@@ -19,10 +19,9 @@
                                     <div id="general-info" class="section general-info">
                                         <div class="info">
                                             <h6 class="">Profile Info</h6>
-                                            <br />
-                                            <p style="color:#4cff00;">@TempData["msg"]</p>
-                                            <p style="color:red">@TempData["error"]</p>
-                                            <div class="row">
+                                            @*<p style="color:#4cff00;">@TempData["msg"]</p>
+                <p style="color:red">@TempData["error"]</p>*@
+                                            <div class="row" id="DivHideForSandOTP">
                                                 <div class="col-xl-2 col-lg-12 col-md-4">
                                                     <div class="upload mt-4 pr-md-4">
                                                         @if (Model.ProfilePic != "")
@@ -37,95 +36,125 @@
                                                 </div>
                                                 <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
                                                     <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label for="FirstName">First Name</label>
-                                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
-                                                                </div>
+                                                        <u><h6>Profile Details</h6></u>
+                                                        <span style="color:#0bd37c">@TempData["OtpVerify"]</span>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="FirstName">First Name</label>
+                                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name", @disabled = "disabled" })
                                                             </div>
-                                                        <div class="col-md-3">
+                                                        </div>
+                                                        <div class="col-md-4">
                                                             <label for="LastName">Last Name</label>
-                                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name", @disabled = "disabled" })
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <label for="phone">Mobile No</label>
-                                                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No" })
+                                                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Mobile No", @disabled = "disabled" })
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <label for="email">Email</label>
-                                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @disabled = "disabled" })
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <label>Contact Address</label>
                                                             <input type="text" class="form-control mb-4" id="CustomerId" placeholder="Email" value="@Model.CustomerId" disabled="disabled">
                                                         </div>
+                                                        <div class="col-md-4">
+                                                            <label>Address</label>
+                                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address", @disabled = "disabled" })
+                                                        </div>
+                                                        <u><h6 class="">Account Details</h6></u>
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label>Document Type</label>
+                                                                    <input type="hidden" id="DocumentType12345" name="DocumentType12345" value="@Model.DocumentType" />
+                                                                    <select id="DocumentType" name="DocumentType" class="form-control" disabled="disabled">
+                                                                        <option value="0">-Select-</option>
+                                                                        <option value="VoterCardId">Voter Card Id</option>
+                                                                        <option value="PassPortCardId">PassPort Card Id</option>
+                                                                        <option value="RashanCardId">Rashan Card Id</option>
+                                                                        <option value="PanCardNo">Pan Card No</option>
+                                                                        <option value="AdharCardNo">Adhar Card No</option>
+                                                                        <option value="GasPassbookNo">Gas Passbook No</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label>DocumentTypeNumber</label>
+                                                                        @Html.TextBoxFor(m => m.DocumentTypeNumber, new { @class = "form-control", @placeholder = "Document Type Number", @disabled = "disabled" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-md-3">
-                                                            <label>Nominee Name</label>
-                                                            @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @placeholder = "NomineeName" })
+                                                            <div class="form-group">
+                                                                <label>Nominee Name</label>
+                                                                @Html.TextBoxFor(m => m.NomineeName, new { @class = "form-control", @placeholder = "NomineeName", @disabled = "disabled" })
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label>Nominee Relation</label>
-                                                            @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "NomineeRelation" })
+                                                            @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @placeholder = "NomineeRelation", @disabled = "disabled" })
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label>Document Type</label>
-                                                            <input type="hidden" id="DocumentType12345" name="DocumentType12345" value="@Model.DocumentType" />
-                                                            <select id="DocumentType" name="DocumentType" class="form-control">
-                                                                <option value="0">-Select-</option>
-                                                                <option value="VoterCardId">Voter Card Id</option>
-                                                                <option value="PassPortCardId">PassPort Card Id</option>
-                                                                <option value="RashanCardId">Rashan Card Id</option>
-                                                                <option value="PanCardNo">Pan Card No</option>
-                                                                <option value="AdharCardNo">Adhar Card No</option>
-                                                                <option value="GasPassbookNo">Gas Passbook No</option>
-                                                            </select>
+                                                            <label>Nominee Age</label>
+                                                            @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @placeholder = "NomineeAge", @disabled = "disabled" })
                                                         </div>
-                                                        <div class="col-md-3">
-                                                              <label>DocumentTypeNumber</label>
-                                                    @Html.TextBoxFor(m => m.DocumentTypeNumber, new { @class = "form-control", @placeholder = "Document Type Number" }) 
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label>IFSC Code</label>
+                                                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "IFSC Code", @disabled = "disabled" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label>Bank Name</label>
+                                                                    @Html.TextBoxFor(m => m.MemberBankName, new { @class = "form-control", @placeholder = "Bank Name", @disabled = "disabled" })
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label>Bank Branch</label>
+                                                                    @Html.TextBoxFor(m => m.MemberBranch, new { @class = "form-control", @placeholder = "Bank Branch", @disabled = "disabled" })
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label>Account No</label>
+                                                                    @Html.TextBoxFor(m => m.MemberAccNo, new { @class = "form-control", @placeholder = "Account No", @disabled = "disabled" })
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            <label>UPI ID</label>
-                                                            @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPIID" })
-                                                        </div>
-                                                        @if (Model.MemberBankName == null)
-                                                        {
-                                                            <div class="col-md-3">
-                                                                <label>Bank Name</label>
-                                                                @Html.TextBoxFor(m => m.MemberBankName, new { @class = "form-control", @placeholder = "Bank Name" })
-                                                            </div>
-                                                        }
-                                                        @if (Model.MemberBranch == null)
-                                                        {
-                                                            <div class="col-md-3">
-                                                                <label>Bank Branch</label>
-                                                                @Html.TextBoxFor(m => m.MemberBranch, new { @class = "form-control", @placeholder = "Bank Branch" })
-                                                            </div>
-                                                        }
-                                                        @if (Model.MemberBranch == null)
-                                                        {
-                                                            <div class="col-md-3">
-                                                                <label>Account No</label>
-                                                                @Html.TextBoxFor(m => m.MemberAccNo, new { @class = "form-control", @placeholder = "Account No" })
-                                                            </div>
-                                                        }
-                                                        @if (Model.IFSCCode == null)
-                                                        {
-                                                            <div class="col-md-3">
-                                                                <label>IFSC Code</label>
-                                                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @placeholder = "Account No" })
-                                                            </div>
-                                                        }
-                                                        <div class="col-md-3">
-                                                            <label>Address</label>
-                                                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
-                                                        </div>
-                                                        <div class="col-md-6">
+
+                                                        <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <br />
-                                                                <input class="btn btn-success" name="btnProfileInfo" id="btnProfileInfo" type="submit" value="Edit Profile"/>
+                                                                <label>UPI ID</label>
+                                                                @Html.TextBoxFor(m => m.UPIID, new { @class = "form-control", @placeholder = "UPIID", @disabled = "disabled" })
+                                                                </div>
                                                             </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-12 col-lg-12 col-md-4" id="otpdiv">
+                                                    <span>One-Time Password(OTP) send on your Mobile number- @ViewBag.MobileNo, then Edit your Profile Information.</span>
+                                                </div>
+                                                <div class="col-xl-3 col-lg-4 col-md-4 offset-lg-2" id="otpdiv1">
+                                                    <label>OTP Verification</label>
+                                                    @Html.TextBoxFor(m => m.OtpVerify, new { @class = "form-control", @placeholder = "OTP" })
+                                                    <span class="error" style="display:none;color:red">Please fill OTP !</span>
+
+                                                </div>
+                                                </div>
+                                            <div class="row">
+                                                <div class="col-xl-2 col-lg-12 col-md-4 offset-lg-2">
+                                                    <div class="form-group">
+                                                        <br />
+                                                        <button type="button" class="btn btn-info" name="btnProfileInfo" id="btnProfileInfo" onclick="return editprofileinfo();">Edit Profile</button>
+                                                        <div class="col-md-3" id="SandOTPbutton">
+                                                            <input type="submit" class="btn btn-success" id="btnSandOTP" name="btnSandOTP" value="Send OTP" />
+
                                                         </div>
+                                                        <input class="btn btn-success" name="btnProfilesubmit" id="btnProfilesubmit" value="Update" type="submit" onclick="return OTPValidateVerify()" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,42 +179,105 @@
 <script src="~/plugins/blockui/jquery.blockUI.min.js"></script>
 <!-- <script src="plugins/tagInput/tags-input.js"></script> -->
 <script src="~/assets/js/users/account-settings.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         debugger;
-            if ($("#DocumentType12345").val() != 0) {
-                $("#DocumentType").val($("#DocumentType12345").val()).attr("selected", "selected");
-            }
+        if ($("#DocumentType12345").val() != 0) {
+            $("#DocumentType").val($("#DocumentType12345").val()).attr("selected", "selected");
+        }
+        $('#btnProfilesubmit').hide();
+        $('#SandOTPbutton').hide();
+        $('#otpdiv').hide();
+        $('#otpdiv1').hide();
 
+        
     });
-
+    function editprofileinfo() {
+        $('#DivHideForSandOTP').hide();
+        $('#btnProfileInfo').hide();
+        $('#btnProfilesubmit').hide();
+        $('#otpdiv').show();
+        $('#otpdiv1').hide();
+        $('#SandOTPbutton').show();
+    };
+    function OTPValidateVerify() {
+        debugger;
+        $(".errortext").removeClass("errortext");
+        if ($('#OtpVerify').val() == '') {
+            $("#OtpVerify").addClass('errortext');
+            $('#OtpVerify').focus();
+            $('#OtpVerify').siblings('span.error').css('visibility', 'visible');
+            $('.error').show();
+            return false;
+        }
+    }
 </script>
-@if (TempData["error"] != null)
+
+@if (TempData["OtpVerify"] != null)
 {
     <script>
-            $(document).ready(function () {
-                Snackbar.show({
-                    text: '@TempData["error"]',
-                    actionTextColor: '#fff',
-                    backgroundColor: '#e7515a',
-                    pos: 'top-right'
-                });
-            });
+        $(document).ready(function () {
+            debugger;
+            $("#MobileNo").attr("disabled", false);
+            $("#Email").attr("disabled", false);
+            $("#Address").attr("disabled", false);
+            $("#NomineeName").attr("disabled", false);
+            $("#NomineeRelation").attr("disabled", false);
+            $("#NomineeAge").attr("disabled", false);
+            $("#DocumentType").attr("disabled", false);
+            $("#DocumentTypeNumber").attr("disabled", false);
+            $("#UPIID").attr("disabled", false);
+            $('#MemberBankName').attr("disabled", false);
+            $('#MemberBranch').attr("disabled", false);
+            $('#MemberAccNo').attr("disabled", false);
+            $('#IFSCCode').attr("disabled", false);
+            $('#btnProfileInfo').hide();
+            $('#btnProfilesubmit').show();
+            $('#otpdiv').hide();
+            $('#otpdiv1').show();
+            $('#SandOTPbutton').hide();
+
+        });
     </script>
 }
 @if (TempData["msg"] != null)
-    {
-        <script>
-            $(document).ready(function () {
-                Snackbar.show({
-                    text: '@TempData["msg"]',
-                    actionTextColor: '#fff',
-                    backgroundColor: '#1abc9c',
-                    pos: 'top-right'
-                });
-            });
-        </script>
-    }
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: '@TempData["msg"]',
+                type: 'success',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+
+        })
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            debugger;
+
+            swal({
+                backdrop: true,
+                allowOutsideClick: false,
+                title: '@TempData["error"]',
+                type: 'warning',
+                showCancelButton: 0,
+                confirmButtonText: 'OK',
+            })
+
+        })
+    </script>
+}
 <style>
     .errortext {
         border: 1px solid red !important;

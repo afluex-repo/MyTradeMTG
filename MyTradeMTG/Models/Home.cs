@@ -10,6 +10,7 @@ namespace MyTradeMTG.Models
     public class Home : Common
     {
         public string NomineeName { get; set; }
+        public string NomineeAge { get; set; }
         public string IFSCCode { get; set; }
         public string NomineeRelation { get; set; }
         public string DocumentType { get; set; }
@@ -341,6 +342,7 @@ namespace MyTradeMTG.Models
                                       new SqlParameter("@Email", Email),
                                       new SqlParameter("@NomineeName", NomineeName),
                                       new SqlParameter("@NomineeRelation", NomineeRelation),
+                                       new SqlParameter("@NomineeAge", NomineeAge),
                                       new SqlParameter("@DocumentType", DocumentType),
                                       new SqlParameter("@DocumentTypeNumber", DocumentTypeNumber),
                                       new SqlParameter("@UPIID", UPIID),
@@ -349,8 +351,19 @@ namespace MyTradeMTG.Models
                                       new SqlParameter("@MemberAccNo", MemberAccNo),
                                       new SqlParameter("@Address", Address),
                                       new SqlParameter("@IFSCCode", IFSCCode),
+                                       new SqlParameter("@OTPVerify", OtpVerify),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("UpdateProfileInfo", para);
+
+            return ds;
+        }
+        public DataSet SandOTP()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                       new SqlParameter("@OTPVerify", OtpVerify),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SandOTP", para);
 
             return ds;
         }
