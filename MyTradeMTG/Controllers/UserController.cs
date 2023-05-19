@@ -2620,6 +2620,12 @@ namespace MyTradeMTG.Controllers
             Home model = new Home();
             model.Fk_UserId = Session["Pk_userId"].ToString();
             model.LoginId = Session["LoginId"].ToString();
+            var MobileNumber = Session["Contact"].ToString();
+            var firstDigits = MobileNumber.Substring(0, 2);
+            var lastDigits = MobileNumber.Substring(MobileNumber.Length - 4, 4);
+            var requiredMask = new String('X', MobileNumber.Length - firstDigits.Length - lastDigits.Length);
+            var maskedString = string.Concat(firstDigits, requiredMask, lastDigits);
+            ViewBag.MobileNo = maskedString;
             DataSet ds = model.UserProfile();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -2637,6 +2643,7 @@ namespace MyTradeMTG.Controllers
                     model.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
                     model.NomineeName = ds.Tables[0].Rows[0]["NomineeName"].ToString();
                     model.NomineeRelation = ds.Tables[0].Rows[0]["NomineeRelation"].ToString();
+                    model.NomineeAge = ds.Tables[0].Rows[0]["NomineeAge"].ToString();
                     model.DocumentType = ds.Tables[0].Rows[0]["DocumentType"].ToString();
                     model.DocumentTypeNumber = ds.Tables[0].Rows[0]["DocumentTypeNumber"].ToString();
                     model.MemberAccNo = ds.Tables[0].Rows[0]["MemberAccNo"].ToString();
@@ -2650,8 +2657,12 @@ namespace MyTradeMTG.Controllers
             return View(model);
         }
         [HttpPost]
+        [ActionName("ProfileInfo")]
+        [OnAction(ButtonName = "btnProfilesubmit")]
         public ActionResult ProfileInfo(Home model)
         {
+            string FormName = "";
+            string Controller = "";
             try
             {
                 if (model.postedFile != null)
@@ -2665,20 +2676,75 @@ namespace MyTradeMTG.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["msg"] = "Profile information has been Updated Successfully";
+                        TempData["msg"] = "Updated Successfully !!";
+                        FormName = "ProfileInfo";
+                        Controller = "User";
                         Session["Profile"] = ds.Tables[1].Rows[0]["ProfilePic"].ToString();
                     }
                     else
                     {
                         TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "ProfileInfo";
+                        Controller = "User";
                     }
                 }
             }
             catch (Exception ex)
             {
                 TempData["error"] = ex.Message;
+                FormName = "ProfileInfo";
+                Controller = "User";
             }
-            return RedirectToAction("ProfileInfo", "User");
+            return RedirectToAction(FormName, Controller);
+        }
+        [HttpPost]
+        [ActionName("ProfileInfo")]
+        [OnAction(ButtonName = "btnSandOTP")]
+        public ActionResult SandOTP(Home model)
+        {
+            try
+            {
+                model.Fk_UserId = Session["Pk_userId"].ToString();
+                Random random = new Random();
+                string OTPGet = random.Next(1000, 9999).ToString();
+                model.OtpVerify = OTPGet;
+                DataSet ds = model.SandOTP();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                        string Name = ds.Tables[1].Rows[0]["Name"].ToString();
+                        string LoginId = ds.Tables[1].Rows[0]["LoginId"].ToString();
+                        string Mobile = ds.Tables[1].Rows[0]["Mobile"].ToString();
+                        string OtpVerify = ds.Tables[1].Rows[0]["OTPVerify"].ToString();
+                        string TempId = "1707166036874698573";
+                        string str = "Dear " + Name + ", Your OTP " + OtpVerify + " for profile edited " + ". MYTRADE";
+                        try
+                        {
+                            BLSMS.SendSMS(Mobile, str, TempId);
+                        }
+                        catch
+                        {
+
+                        }
+                        TempData["OtpVerify"] = "One-Time Password(OTP) has been sent successfully on registered mobile number.";
+                    }
+                    else
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return RedirectToAction("ProfileInfo","User");
         }
     }
 }
