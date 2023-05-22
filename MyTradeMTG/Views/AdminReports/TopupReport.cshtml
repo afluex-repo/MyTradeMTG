@@ -94,6 +94,7 @@
                                         <th>Date</th>
                                         @*<th>Topup Via</th>*@
                                         <th>Delete</th>
+                                        <th>Hold/Unhold TPS</th>
                                         @*<th>Action</th>*@
                                         @*<th>Upgradation Date</th>
                                             <th>Payment Mode</th>
@@ -129,6 +130,21 @@
                                                     @*<td>@Item.TopupVia</td>*@
                                                     @*<td><a class="btn btn-info btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>*@
                                                     <td><a class="btn btn-danger btn-sm" href="/AdminReports/DeleteTopUp?Id=@Item.Pk_investmentId">Delete</a></td>
+                                                    <td>
+                                                        @if (Item.IsHoldTPS == "False")
+                                                        {
+                                                            <a href="/AdminReports/HoldTPS?FK_UserID=@Item.Fk_UserId" class="btn btn-success btn-sm" onclick="return confirm('Sure you want to TPS HOLD this User ?')">
+                                                                Hold TPS
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="/AdminReports/UnHoldTPS?FK_UserID=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Sure you want to TPS UNHOLD this User ?')">
+                                                                UnHold TPS
+                                                            </a>
+                                                        }
+
+                                                    </td>
                                                     @*<td>@Item.UpgradtionDate</td>
                                                         <td>@Item.PaymentMode</td>
                                                             <td>@Item.Description</td>
