@@ -174,18 +174,22 @@ namespace MyTradeMTG.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[6].Rows.Count > 0)
             {
                 Session["TopUp"] = ds.Tables[6].Rows[0]["IsActive"].ToString();
+                Session["TopUpReason"] = ds.Tables[6].Rows[0]["Reason"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[7].Rows.Count > 0)
             {
                 Session["Withdrawal"] = ds.Tables[7].Rows[0]["IsActive"].ToString();
+                Session["WithdrawalReason"] = ds.Tables[7].Rows[0]["Reason"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[8].Rows.Count > 0)
             {
                 Session["BUYMTG"] = ds.Tables[8].Rows[0]["IsActive"].ToString();
+                Session["BUYMTGReason"] = ds.Tables[8].Rows[0]["Reason"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[9].Rows.Count > 0)
             {
                 Session["QuickSendMTG"] = ds.Tables[9].Rows[0]["IsActive"].ToString();
+                Session["QuickSendMTGReason"] = ds.Tables[9].Rows[0]["Reason"].ToString();
             }
 
             return View(obj);
