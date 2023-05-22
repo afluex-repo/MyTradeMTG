@@ -26,7 +26,7 @@ namespace MyTradeMTG.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 model.Result = "yes";
-                model.BannerImage = "https://MyTradeMTG.co.in/" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
+                model.BannerImage = "http://www.mytrade.global/" + ds.Tables[0].Rows[0]["BannerImage"].ToString();
             }
             else
             {
@@ -85,6 +85,7 @@ namespace MyTradeMTG.Controllers
                                 Session["CurrencyName"] = ds.Tables[0].Rows[0]["CurrencyName"].ToString();
                                 Session["CurrencySymbol"] = ds.Tables[0].Rows[0]["CurrencySymbol"].ToString();
                                 Session["ISOcode"] = ds.Tables[0].Rows[0]["ISOcode"].ToString();
+                                Session["IsActive"] = ds.Tables[1].Rows[0]["IsActive"].ToString();
                                 DataSet ds1 = obj.GetFranchisedetails(Session["Pk_UserId"].ToString());
                                  if(ds1!=null && ds1.Tables[0].Rows.Count>0)
                                 {

@@ -15,7 +15,7 @@
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h4>Package Master</h4>
                                 @*<span class="text-danger">
-                                    @TempData["Product"]
+                                    @Model.Result
                                 </span>*@
                             </div>
                         </div>
@@ -1048,7 +1048,7 @@
             DataType: "JSON",
             data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, Fk_PackageId1: $('#Fk_PackageId1').val(), Fk_PackageId2: $('#Fk_PackageId2').val(), Fk_PackageId3: $('#Fk_PackageId3').val(), IsUpgradePackage: IsUpgradePackage },
             success: function (data) {
-                alert(data.Result)
+                alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
 
             }
@@ -1469,7 +1469,7 @@
             DataType: "JSON",
             data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, IsUpgradePackage: IsUpgradePackage },
             success: function (data) {
-                alert(data.Result) 
+                alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
             }
 

@@ -253,7 +253,7 @@ namespace MyTradeMTG.Controllers
 
                 TempData["BlockUnblock"] = ex.Message;
             }
-            return RedirectToAction("AssociateList", "AdminReports");
+            return RedirectToAction("TopupReport", "AdminReports");
         }
         public ActionResult UnHoldTPS(string Fk_UserId)
         {
@@ -282,7 +282,7 @@ namespace MyTradeMTG.Controllers
 
                 TempData["BlockUnblock"] = ex.Message;
             }
-            return RedirectToAction("AssociateList", "AdminReports");
+            return RedirectToAction("TopupReport", "AdminReports");
         }
         public ActionResult StopWithdrawal(string Fk_UserId)
         {
@@ -382,7 +382,7 @@ namespace MyTradeMTG.Controllers
                     Obj.BasisOn = r["BasisOn"].ToString();
                     Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
                     Obj.Topupid = r["Topupid"].ToString();
-
+                    Obj.IsHoldTPS = r["IsTPSHold"].ToString();
 
                     lst1.Add(Obj);
                 }

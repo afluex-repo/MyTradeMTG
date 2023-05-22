@@ -135,6 +135,17 @@ namespace MyTradeMTG
 
 
         }
-        
+        static public string ProfileInfoedited(string Name, string OtpVerify)
+        {
+
+            string Message = ConfigurationSettings.AppSettings["ProfileInfoedited"].ToString();
+            
+            Message = Message.Replace("[Name]", Name);
+            Message = Message.Replace("[OtpVerify]", OtpVerify);
+            return Message;
+
+
+        }
+
     }
 }

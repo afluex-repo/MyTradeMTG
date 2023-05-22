@@ -10,7 +10,7 @@ namespace MyTradeMTG.Models
 {
     public class Account
     {
-
+        public string Reason { get; set; }
         public string Country { get; set; }
         public string LoginId { get; set; }
         public string PackageId { get; set; }

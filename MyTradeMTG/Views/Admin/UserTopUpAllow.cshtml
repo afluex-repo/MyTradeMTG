@@ -26,8 +26,13 @@
                         <div class="row">
                             <label>User TopUp Allow</label>
                             <div class="col-md-3">
-                                <input type="radio" id="IsActive1" name="IsActive" value="0"/>&nbsp;&nbsp;Self&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="radio" id="IsActive1" name="IsActive" value="1"/>&nbsp;&nbsp;All
+                                @Html.RadioButtonFor(m => m.IsActive, false) &nbsp;&nbsp;Self
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                @Html.RadioButtonFor(m => m.IsActive, true) &nbsp;&nbsp;All
+
+                                @*<input type="radio" id="IsActive1" name="IsActive" value="0"/>&nbsp;&nbsp;Self&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" id="IsActive1" name="IsActive" value="1"/>&nbsp;&nbsp;All*@
                             </div>
                             <div class="col-md-3">
                                     <input class="btn btn-success" type="submit" value="Update" id="btnSubmit" name="Update" />                        
