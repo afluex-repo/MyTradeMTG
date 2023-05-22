@@ -61,12 +61,12 @@ namespace MyTradeMTG.Controllers
                 ViewBag.Status = ds.Tables[2].Rows[0]["Status"].ToString();
                 ViewBag.SponsorBonus = ds.Tables[0].Rows[0]["SponsorBonus"].ToString();
                 ViewBag.TotalAmount = Convert.ToDecimal(ds.Tables[0].Rows[0]["TotalPayoutWalletAmount"]) + 0;
-                ViewBag.TotalCrAmount = ds.Tables[7].Rows[0]["TotalCrAmount"].ToString();
-                ViewBag.TotalDrAmount = ds.Tables[7].Rows[0]["TotalDrAmount"].ToString();
+                ViewBag.TotalCrAmount = ds.Tables[10].Rows[0]["TotalCrAmount"].ToString();
+                ViewBag.TotalDrAmount = ds.Tables[10].Rows[0]["TotalDrAmount"].ToString();
 
-                ViewBag.Address = ds.Tables[8].Rows[0]["Address"].ToString();
-                ViewBag.ProfilePic = ds.Tables[8].Rows[0]["ProfilePic"].ToString();
-                ViewBag.timerstatus = ds.Tables[8].Rows[0]["timerstatus"].ToString();
+                ViewBag.Address = ds.Tables[11].Rows[0]["Address"].ToString();
+                ViewBag.ProfilePic = ds.Tables[11].Rows[0]["ProfilePic"].ToString();
+                ViewBag.timerstatus = ds.Tables[11].Rows[0]["timerstatus"].ToString();
                 ViewBag.TOPUpDate = ds.Tables[0].Rows[0]["TOPUpDate"].ToString();
                 //ViewBag.CustomerId = ds.Tables[2].Rows[0]["CustomerId"].ToString();
                 //ViewBag.CustomerName = ds.Tables[2].Rows[0]["CustomerName"].ToString();
@@ -174,6 +174,18 @@ namespace MyTradeMTG.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[6].Rows.Count > 0)
             {
                 Session["TopUp"] = ds.Tables[6].Rows[0]["IsActive"].ToString();
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[7].Rows.Count > 0)
+            {
+                Session["Withdrawal"] = ds.Tables[7].Rows[0]["IsActive"].ToString();
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[8].Rows.Count > 0)
+            {
+                Session["BUYMTG"] = ds.Tables[8].Rows[0]["IsActive"].ToString();
+            }
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[9].Rows.Count > 0)
+            {
+                Session["QuickSendMTG"] = ds.Tables[9].Rows[0]["IsActive"].ToString();
             }
 
             return View(obj);
@@ -345,11 +357,16 @@ namespace MyTradeMTG.Controllers
         public ActionResult TopUp()
         {
             Account model = new Account();
-
             model.Country = Session["Country"].ToString();
-
             //model.LoginId = Session["CustomerId"].ToString();
-            model.LoginId = Session["LoginId"].ToString();
+            model.IsActive = Session["IsActive"].ToString();
+            if (model.IsActive == "False")
+            {
+                model.LoginId = Session["LoginId"].ToString();
+                model.Name = Session["FullName"].ToString();
+            }
+           
+
 
             //if (Session["IdActivated"].ToString() == "true")
             //{
@@ -360,11 +377,11 @@ namespace MyTradeMTG.Controllers
 
 
 
-            DataSet ds23 = model.GetUserTopUpAllowDetails();
-            if (ds23 != null && ds23.Tables.Count > 0 && ds23.Tables[0].Rows.Count > 0)
-            {
-                model.IsActive = ds23.Tables[0].Rows[0]["IsActive"].ToString();
-            }
+            //DataSet ds23 = model.GetUserTopUpAllowDetails();
+            //if (ds23 != null && ds23.Tables.Count > 0 && ds23.Tables[0].Rows.Count > 0)
+            //{
+            //    model.IsActive = ds23.Tables[0].Rows[0]["IsActive"].ToString();
+            //}
 
 
 
@@ -2683,7 +2700,7 @@ namespace MyTradeMTG.Controllers
                     }
                     else
                     {
-                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["OTPError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         FormName = "ProfileInfo";
                         Controller = "User";
                     }
@@ -2691,7 +2708,7 @@ namespace MyTradeMTG.Controllers
             }
             catch (Exception ex)
             {
-                TempData["error"] = ex.Message;
+                TempData["OTPError"] = ex.Message;
                 FormName = "ProfileInfo";
                 Controller = "User";
             }
@@ -2745,6 +2762,40 @@ namespace MyTradeMTG.Controllers
                 TempData["error"] = ex.Message;
             }
             return RedirectToAction("ProfileInfo","User");
+        }
+        [HttpPost]
+        public ActionResult GetOTPForVerify(string OtpVerify,string FK_UserID)
+        {
+            Home model = new Home();
+            model.OtpVerify = OtpVerify;
+            model.Fk_UserId = FK_UserID;
+            DataSet ds = model.GetOTPForVerify();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    model.Result = "yes";
+                    model.Message = "OTP has been verified !";
+
+                }
+                else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                {
+                    model.Result = "no";
+                    model.Message1 = "OTP does not match !";
+
+
+                }
+                else
+                {
+                    model.Result = "no";
+                    model.Message1 = "OTP does not match !";
+                }
+            }
+            else
+            {
+                model.Message1= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

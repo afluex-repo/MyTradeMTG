@@ -9,6 +9,7 @@ namespace MyTradeMTG.Models
 {
     public class Home : Common
     {
+        public string Message1 { get; set; }
         public string NomineeName { get; set; }
         public string NomineeAge { get; set; }
         public string IFSCCode { get; set; }
@@ -364,6 +365,16 @@ namespace MyTradeMTG.Models
                                        new SqlParameter("@OTPVerify", OtpVerify),
                                   };
             DataSet ds = DBHelper.ExecuteQuery("SandOTP", para);
+
+            return ds;
+        }
+        public DataSet GetOTPForVerify()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@OtpVerify", OtpVerify),
+                                      new SqlParameter("@FK_UserID", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetOTPForVerify", para);
 
             return ds;
         }

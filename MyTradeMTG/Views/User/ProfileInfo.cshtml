@@ -140,9 +140,12 @@
                                                 </div>
                                                 <div class="col-xl-3 col-lg-4 col-md-4 offset-lg-2" id="otpdiv1">
                                                     <label>OTP Verification</label>
-                                                    @Html.TextBoxFor(m => m.OtpVerify, new { @class = "form-control", @placeholder = "OTP" })
-                                                    <span class="error" style="display:none;color:red">Please fill OTP !</span>
-
+                                                    <input hidden id="loginids" name="loginids" value="@Model.Fk_UserId" />
+                                                    @Html.TextBoxFor(m => m.OtpVerify, new { @class = "form-control", @placeholder = "OTP" ,@onchange= "return GetOTPForVerify();",@autocomplete="off" })
+                                                    <span class="error" style="display:none;color:red">Please fill OTP !</span> 
+                                                    <span  style="color:#0bd37c" class="otperror"></span>
+                                                    <span style="color:#ff0000" class="otperrors"></span>
+                                                    
                                                 </div>
                                                 </div>
                                             <div class="row">
@@ -214,6 +217,36 @@
         }
     }
 </script>
+<script>
+    function GetOTPForVerify() {
+        debugger;
+        var OtpVerify = $('#OtpVerify').val();
+        var FK_UserID = $('#loginids').val();
+        $.ajax({
+            url: '/User/GetOTPForVerify', type: 'post', dataType: 'json',
+            data: { 'OtpVerify': OtpVerify, 'FK_UserID': FK_UserID },
+            success: function (data) {
+                debugger;
+                if (data.Result == "yes") {
+                    $(".otperror").text(data.Message);
+                    $(".otperrors").text('');
+                    $(".error").text('');
+                }
+                else {
+                    $("#divload").css({ 'display': 'none' });
+                    $("#OtpVerify").val('');
+                    $("#OtpVerify").addClass('errortext');
+                    $("#OtpVerify").focus();
+                    $(".otperrors").text(data.Message1);
+                    $(".error").text('');
+
+                    
+                }
+            }
+
+        });
+    }
+</script>
 
 @if (TempData["OtpVerify"] != null)
 {
@@ -242,6 +275,38 @@
         });
     </script>
 }
+
+
+@*@if (TempData["OTPError"] != null)
+{
+    <script>
+       
+           $(document).ready(function () {
+            debugger;
+            $("#MobileNo").attr("disabled", false);
+            $("#Email").attr("disabled", false);
+            $("#Address").attr("disabled", false);
+            $("#NomineeName").attr("disabled", false);
+            $("#NomineeRelation").attr("disabled", false);
+            $("#NomineeAge").attr("disabled", false);
+            $("#DocumentType").attr("disabled", false);
+            $("#DocumentTypeNumber").attr("disabled", false);
+            $("#UPIID").attr("disabled", false);
+            $('#MemberBankName').attr("disabled", false);
+            $('#MemberBranch').attr("disabled", false);
+            $('#MemberAccNo').attr("disabled", false);
+            $('#IFSCCode').attr("disabled", false);
+            $('#btnProfileInfo').hide();
+            $('#btnProfilesubmit').show();
+            $('#otpdiv').hide();
+            $('#otpdiv1').show();
+            $('#SandOTPbutton').hide();
+
+        });
+    </script>
+}*@
+
+
 @if (TempData["msg"] != null)
 {
     <script>
@@ -260,7 +325,7 @@
         })
     </script>
 }
-@if (TempData["error"] != null)
+@*@if (TempData["error"] != null)
 {
     <script>
         $(document).ready(function () {
@@ -277,7 +342,11 @@
 
         })
     </script>
-}
+}*@
+
+
+
+
 <style>
     .errortext {
         border: 1px solid red !important;

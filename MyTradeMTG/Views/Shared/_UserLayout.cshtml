@@ -359,24 +359,40 @@
                                 {
                                     if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                     {*@
-                            <li><a href="/Wallet/AddWallet">Buy MTG </a></li>
-                            <li><a href="/Wallet/WalletList">Buy MTG List</a></li>
-                            <li><a href="/Wallet/WalletLedgerList">MTG Ledger</a></li>
-                            <li><a href="/User/WalletTransfer">Quick Send MTG</a></li>
-
-
-
-                            @if (Session["Franchisestatus"].ToString() == "Approved")
+                            @if (Session["BUYMTG"] != null)
                             {
-                                <li><a href="/User/SaleRequest">Sale Request</a></li>
+                                if (Session["BUYMTG"].ToString() == "False")
+                                {
+                                    <li><a href="/Wallet/AddWallet">Buy MTG </a></li>
+                                }
                             }
                             else
                             {
-                                <li><a href="/User/MTGPurchaseSell">MTG Sell</a></li>
-                                <li><a href="/User/SalesReport">Sell Report</a></li>
+                                <li><a href="javascript:void(0)"> Buy MTG<button type="button" class="btn btn-primary btn-xxs">Coming Soon</button></a></li>
                             }
-                            @*}
-                                }*@
+                            <li><a href="/Wallet/WalletList">Buy MTG List</a></li>
+                            <li><a href="/Wallet/WalletLedgerList">MTG Ledger</a></li>
+                            @if (Session["QuickSendMTG"] != null)
+                            {
+                                if (Session["QuickSendMTG"].ToString() == "False")
+                                {
+                                    <li><a href="/User/WalletTransfer">Quick Send MTG</a></li>
+                                }
+                            }
+                            else
+                            {
+                                <li><a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="Coming Soon"> Quick Send MTG</a></li>
+                            }
+                            
+                            @if (Session["Franchisestatus"].ToString() == "Approved")
+                            {
+                            <li><a href="/User/SaleRequest">Sale Request</a></li>
+                            }
+                            else
+                            {
+                            <li><a href="/User/MTGPurchaseSell">MTG Sell</a></li>
+                            <li><a href="/User/SalesReport">Sell Report</a></li>
+                            }
                         </ul>
                     </li>
                     @*<li>
@@ -406,20 +422,38 @@
                             @*@if (Session["IdActivated"] != null)
                                 {
                                     if (Convert.ToBoolean(Session["IdActivated"]) == true)
-                                    {
+                                    {*@
 
-                                        if (Session["TopUp"] != null)
+                                        @if (Session["TopUp"] != null)
                                         {
                                             if (Session["TopUp"].ToString() == "False")
-                                            {*@
-                            <li><a href="/user/Topup"> Topup </a></li>
-
-                            @*}
-                                }*@
+                                            {
+                                                <li><a href="/user/Topup"> Topup </a></li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li><a href="javascript:void(0)"> Topup<button type="button" class="btn btn-primary btn-xxs">Coming Soon</button></a></li>
+                                        }
                             <li><a href="/user/TopUpList"> Topup List </a></li>
-                            <li><a href="/User/PayoutRequest">Withdrawal</a></li>
-                            @*}
-                                    else
+                            @if(Session["Withdrawal"] != null)
+                            {
+                                if (Session["Withdrawal"].ToString() == "False")
+                                {
+                                    <li><a href ="/User/PayoutRequest">Withdrawal</a></li>
+
+                                }
+                            }
+                            else
+                            {
+                                <li><a href="javascript:void(0)">Withdrawal<button type="button" class="btn btn-primary btn-xxs">Coming Soon</button></a></li>
+                            }
+                                        @*}*@
+                                        
+
+
+                            @*}*@
+                                    @*lse
                                     {
 
                                     }
