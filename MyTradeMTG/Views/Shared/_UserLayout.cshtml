@@ -114,6 +114,13 @@
             /*color: #0a0917;*/
             color: #ffffff;
         }
+        .coming_soon_txt
+        {
+            display:none ;
+        }
+        .deznav .metismenu li a:hover .coming_soon_txt{
+         display:block !important   
+        }
     </style>
 
 
@@ -368,7 +375,7 @@
                             }
                             else
                             {
-                                <li><a href="javascript:void(0)"> Buy MTG<button type="button" class="btn btn-primary btn-xxs">Coming Soon</button></a></li>
+                                <li><a href="javascript:void(0)"> Buy MTG<span class="btn btn-primary btn-xxs coming_soon_txt mt-1">Coming Soon</span></a></li>
                             }
                             <li><a href="/Wallet/WalletList">Buy MTG List</a></li>
                             <li><a href="/Wallet/WalletLedgerList">MTG Ledger</a></li>
@@ -381,7 +388,7 @@
                             }
                             else
                             {
-                                <li><a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="Comming Soon"> Quick Send MTG</a></li>
+                                <li><a href="javascript:void(0)"> Quick Send MTG</a></li>
                             }
                             
                             @if (Session["Franchisestatus"].ToString() == "Approved")
