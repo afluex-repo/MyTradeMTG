@@ -1,0 +1,73 @@
+﻿@model MyTradeMTG.Models.Home
+
+@{
+    ViewBag.Title = "WelcomeLetter";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/plugins/dropify/dropify.min.css">
+<link href="~/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm("WelcomeLetter", "User", FormMethod.Post, new { @id = "form", @enctype = "multipart/form-data" }))
+{
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="layout-px-spacing">
+                <div class="account-settings-container">
+                    <div class="account-content">
+                        <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing" id="divProfile">
+                                    <div id="general-info" class="section general-info">
+                                        <div class="info">
+                                            <h6 class="">Welcome Letter</h6>
+                                            <div class="row">
+                                                <div class="col-xl-12 col-lg-12 col-md-4">
+                                                    <div class="mt-4 pr-md-4">
+                                                        <p>User ID : @Model.LoginId</p>
+                                                        <p>Contact Address : @ViewBag.CustomerId</p>
+                                                        <p>Name : @Session["FullName"]</p>
+                                                        <p>Address : @ViewBag.Address</p>
+                                                        <p>Mobile No : @ViewBag.MobileNo </p>
+                                                        <p>Date of Activation : @ViewBag.PermanentDate</p>
+                                                        <p>Package : @ViewBag.PackageTypeName (@ViewBag.ProductName)</p><span></span> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 col-lg-12 col-md-4">
+                                                    <div class="mt-4 pr-md-4">
+                                                        <p>Dear <u style="color:red">@Session["FullName"],</u></p>
+                                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Congratulations on Your Decision To Come with us
+                                                           You are now a part of the opportunity of the Year. MYTRADE.GLOBAL
+                                                           is an exciting "People Business". A business, that has the poten9al, to
+                                                           turn your dreams, into reality. As you build your business, you will
+                                                           establish lifelong friendships and develop support systems
+                                                           unparalleled in any other business. We pledge our best efforts to
+                                                           provide the levels of continuing support necessary to ensure that
+                                                           your business is a total success. You are in this business for yourself,
+                                                           not by yourself. We have developed an effective and proven progress
+                                                           plan to help you launch a profitable business of your own. We are
+                                                           confident that you will receive gratification from your involvement
+                                                           with MYTRADE.GLOBAL and we wish you every Success! Please note
+                                                           we are providing you an opportunity to earn money which is
+                                                           optional, your earnings will depend directly in the amount of efforts
+                                                           you put to develop your business.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 " align="right">
+                                                    @*<div class="mt-4 pr-md-4">*@
+                                                        <label>Thanking You !</label><br />
+                                                        <label>My Trade Global</label>
+                                                    @*</div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

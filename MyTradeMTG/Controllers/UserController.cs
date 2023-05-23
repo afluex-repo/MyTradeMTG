@@ -174,18 +174,22 @@ namespace MyTradeMTG.Controllers
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[6].Rows.Count > 0)
             {
                 Session["TopUp"] = ds.Tables[6].Rows[0]["IsActive"].ToString();
+                Session["TopUpReason"] = ds.Tables[6].Rows[0]["Reason"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[7].Rows.Count > 0)
             {
                 Session["Withdrawal"] = ds.Tables[7].Rows[0]["IsActive"].ToString();
+                Session["WithdrawalReason"] = ds.Tables[7].Rows[0]["Reason"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[8].Rows.Count > 0)
             {
                 Session["BUYMTG"] = ds.Tables[8].Rows[0]["IsActive"].ToString();
+                Session["BUYMTGReason"] = ds.Tables[8].Rows[0]["Reason"].ToString();
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[9].Rows.Count > 0)
             {
                 Session["QuickSendMTG"] = ds.Tables[9].Rows[0]["IsActive"].ToString();
+                Session["QuickSendMTGReason"] = ds.Tables[9].Rows[0]["Reason"].ToString();
             }
 
             return View(obj);
@@ -2796,6 +2800,28 @@ namespace MyTradeMTG.Controllers
                 model.Message1= ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult WelcomeLetter()
+        {
+            Home model = new Home();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                    ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
+                    ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
+                    ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                }
+            }
+            return View(model);
         }
     }
 }
