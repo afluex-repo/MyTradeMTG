@@ -60,7 +60,7 @@
                                         @*<label id="TransferCharge"></label>*@
                                         @*@Html.HiddenFor(m => m.MemberTransferCharge,new { @value= "@ViewBag.MemberTransferCharge" })*@
                                         <input id="MemberTransferCharge" name="MemberTransferCharge" value="@Session["MemberTransferCharge"]" hidden />
-                                        <input type="hidden"id="TransferCharge" name="TransferCharge" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
+                                        <input type="hidden" id="TransferCharge" name="TransferCharge" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
                                         <input id="TransferCharge1" name="TransferCharge1" readonly class="form-control" style="background:none;border:none;font-size:x-large" />
 
                                     </div>
@@ -114,8 +114,8 @@
                                                             <td>@Item.CustomerId</td>
                                                             <td>@Item.TransfertoName (@Item.LoginId)</td>
                                                             <td>@Item.MTG</td>
-                                                            <td>@Session["MemberTransferCharge"]</td>
-                                                            <td>@Item.MTG</td>
+                                                            <td>@Item.TransferCharge</td>
+                                                            <td>@Item.TotalMTG</td>
                                                         </tr>
                                                         i++;
                                                     }
