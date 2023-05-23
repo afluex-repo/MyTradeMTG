@@ -1263,6 +1263,7 @@
     <Content Include="Views\User\RecentContact.cshtml" />
     <Content Include="Views\Report\PayoutLedger.cshtml" />
     <Content Include="Views\User\ProfileInfo.cshtml" />
+    <Content Include="Views\User\WelcomeLetter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

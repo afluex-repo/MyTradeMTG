@@ -2801,5 +2801,27 @@ namespace MyTradeMTG.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult WelcomeLetter()
+        {
+            Home model = new Home();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                    ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
+                    ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
+                    ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                }
+            }
+            return View(model);
+        }
     }
 }
