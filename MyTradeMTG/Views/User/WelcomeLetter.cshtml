@@ -16,11 +16,14 @@
                     <div class="account-content">
                         <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing" id="divProfile">
+                                <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing" id="printableDiv1">
                                     <div id="general-info" class="section general-info">
                                         <div class="info">
-                                            <h6 class="">Welcome Letter</h6>
                                             <div class="row">
+                                                <h6 class="">Welcome Letter</h6>
+                                            <div class="col-sm-12">
+                                                <a href="#" class="btn btn-info btn-sm" style="float:right" onclick="printIt('printableDiv1')"><i class="fa fa-download"></i> Download</a>
+                                            </div>
                                                 <div class="col-xl-12 col-lg-12 col-md-4">
                                                     <div class="mt-4 pr-md-4">
                                                         <p>User ID : @Model.LoginId</p>
@@ -37,7 +40,7 @@
                                                         <p>Dear <u style="color:red">@Session["FullName"],</u></p>
                                                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Congratulations on Your Decision To Come with us
                                                            You are now a part of the opportunity of the Year. MYTRADE.GLOBAL
-                                                           is an exciting "People Business". A business, that has the poten9al, to
+                                                           is an exciting "People Business". A business, that has the potential, to
                                                            turn your dreams, into reality. As you build your business, you will
                                                            establish lifelong friendships and develop support systems
                                                            unparalleled in any other business. We pledge our best efforts to
@@ -71,3 +74,14 @@
     </div>
 }
 
+<script type="text/javascript">
+function printIt(divID) {
+    var divContent = document.getElementById(divID);
+    var WinPrint = window.open('', '', 'width=1200,height=600');
+    WinPrint.document.write(divContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+    WinPrint.close();
+}
+</script>
