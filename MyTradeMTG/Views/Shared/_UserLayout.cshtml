@@ -197,7 +197,7 @@
                                 else if (Session["Franchisestatus"].ToString() == "Approved")
                                 {
                                     <span class="text-success" style="font-size:23px">Franchise Registered : @Session["FirmName"]</span>
-                                    <a href="#" class="btn btn-info btn-sm">Switch to Franchise Pannel</a>
+                                    <a href="/Franchise/FranchiseDashBoard" class="btn btn-info btn-sm">Switch to Franchise Pannel</a>
                                 }
                                
 
@@ -350,7 +350,7 @@
                             <span class="nav-text">My Profile</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Welcome Letter</a></li>
+                            <li><a href="/User/WelcomeLetter">Welcome Letter</a></li>
                             <li><a href="/User/ViewProfile">View Profile</a></li>
                             <li><a href="/User/BankDetailsUpdate">KYC Details</a></li>
                             <li><a href="/User/ProfileInfo">Profile Info</a></li>
@@ -367,30 +367,27 @@
                                 {
                                     if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                     {*@
-                            @if (Session["BUYMTG"] != null)
-                            {
-                                if (Session["BUYMTG"].ToString() == "False")
+                            
+                                @if (Session["BUYMTG"].ToString() == "False")
                                 {
                                     <li><a href="/Wallet/AddWallet">Buy MTG </a></li>
                                 }
-                            }
-                            else
-                            {
-                                <li><a href="javascript:void(0)"> Buy MTG<span class="btn btn-primary btn-xxs coming_soon_txt mt-1">Coming Soon</span></a></li>
-                            }
+                            
+                                else
+                                {
+                                    <li><a href="javascript:void(0)"> Buy MTG<span class="btn btn-primary btn-xxs coming_soon_txt mt-1">@Session["BUYMTGReason"]</span></a></li>
+                                }
                             <li><a href="/Wallet/WalletList">Buy MTG List</a></li>
                             <li><a href="/Wallet/WalletLedgerList">MTG Ledger</a></li>
-                            @if (Session["QuickSendMTG"] != null)
-                            {
-                                if (Session["QuickSendMTG"].ToString() == "False")
+                            
+                                @if (Session["QuickSendMTG"].ToString() == "False")
                                 {
                                     <li><a href="/User/WalletTransfer">Quick Send MTG</a></li>
                                 }
-                            }
-                            else
-                            {
-                                <li><a href="javascript:void(0)"> Quick Send MTG</a></li>
-                            }
+                                else
+                                {
+                                    <li><a href="javascript:void(0)"> Quick Send MTG<span class="btn btn-primary btn-xxs    coming_soon_txt mt-1">@Session["QuickSendMTGReason"]</span></a></li>
+                                }
                             
                             @if (Session["Franchisestatus"].ToString() == "Approved")
                             {
@@ -432,30 +429,28 @@
                                     if (Convert.ToBoolean(Session["IdActivated"]) == true)
                                     {*@
 
-                                        @if (Session["TopUp"] != null)
-                                        {
-                                            if (Session["TopUp"].ToString() == "False")
+                                       
+                                            @if (Session["TopUp"].ToString() == "False")
                                             {
                                                 <li><a href="/user/Topup"> Topup </a></li>
                                             }
-                                        }
-                                        else
-                                        {
-                                            <li><a href="javascript:void(0)"> Topup<button type="button" class="btn btn-primary btn-xxs">Coming Soon</button></a></li>
-                                        }
+                                        
+                                            else
+                                            {
+                                                <li><a href="javascript:void(0)"> Topup<span class="btn btn-primary btn-xxs coming_soon_txt mt-1">@Session["TopUpReason"]</span></a></li>
+                                            }
                             <li><a href="/user/TopUpList"> Topup List </a></li>
-                            @if(Session["Withdrawal"] != null)
-                            {
-                                if (Session["Withdrawal"].ToString() == "False")
+                            
+                                @if (Session["Withdrawal"].ToString() == "False")
                                 {
                                     <li><a href ="/User/PayoutRequest">Withdrawal</a></li>
 
                                 }
-                            }
-                            else
-                            {
-                                <li><a href="javascript:void(0)">Withdrawal<button type="button" class="btn btn-primary btn-xxs">Coming Soon</button></a></li>
-                            }
+                            
+                                else
+                                {
+                                    <li><a href="javascript:void(0)">Withdrawal<span class="btn btn-primary btn-xxs     coming_soon_txt mt-1">@Session["WithdrawalReason"]</span></a></li>
+                                }
                                         @*}*@
                                         
 
@@ -1391,7 +1386,7 @@
                             var PaidDramount = [];
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
-                            for (var i = 0; i < t.length; i++) {
+                                for (var i = 0; i < t.length; i++) {
                                 AllYear.push(t[i].Year);
                                 PaidCramount.push(t[i].Cramount);
                                 PaidDramount.push(t[i].Dramount);
@@ -1465,7 +1460,7 @@
                                         borderColor: '#eee',
                                     },
                                     xaxis: {
-                                        categories: x,
+                                        categories: xs,
                                         labels: {
                                             style: {
                                                 colors: '#787878',
@@ -1521,7 +1516,7 @@
                                                 height: 250,
                                             },
                                             xaxis: {
-                                                categories: x,
+                                                categories: xs,
                                                 labels: {
                                                     style: {
                                                         fontSize: '10px',
@@ -1532,7 +1527,7 @@
                                     }]
                                 };
                                 
-                            
+                           
                             debugger;
                             var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
                                 }

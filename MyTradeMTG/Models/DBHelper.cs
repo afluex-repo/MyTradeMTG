@@ -18,7 +18,7 @@ namespace MyTradeMTG.Models
             {
                 //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradeglobaldb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
 
-                connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
+                 connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
 
             }
             catch (Exception ex)
