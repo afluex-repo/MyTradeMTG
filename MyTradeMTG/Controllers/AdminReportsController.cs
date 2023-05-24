@@ -51,6 +51,7 @@ namespace MyTradeMTG.Controllers
                     obj.ActivationMode = r["ActivationMode"].ToString();
                     obj.IsHoldTPS = r["IsTPSHold"].ToString();
                     obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
+                    obj.PermanentDate = r["PermanentDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
