@@ -210,26 +210,24 @@
                                     var ya = parseFloat(TotalApproved);
                                     var yr = parseFloat(TotalRejected);
                                     var yp = parseFloat(TotalPending);
-                                    i++;
+                                    Morris.Bar({
+                                        element: 'morris_bar',
+                                        data: [{
+                                            y: xs,
+                                            a: ya,
+                                            b: yr,
+                                            c: yp
+                                        }],
 
-                        Morris.Bar({
-                            element: 'morris_bar',
-                            data: [{
-                                y: xs,
-                                a: ya,
-                                b: yr,
-                                c: yp
-                            }],
-
-                            xkey: 'y',
-                            ykeys: ['a', 'b', 'c'],
-                            labels: ['Total Approve(MTG)', 'Total Rejected(MTG)', 'Total Pending(MTG)'],
-                            barColors: ['#363062', '#D8B9C3', '#ff9f00'],
-                            hideHover: 'auto',
-                            gridLineColor: 'transparent',
-                            resize: true,
-                            barSizeRatio: 0.25,
-                        });
+                                        xkey: 'y',
+                                        ykeys: ['a', 'b', 'c'],
+                                        labels: ['Total Approve(MTG)', 'Total Rejected(MTG)', 'Total Pending(MTG)'],
+                                        barColors: ['#363062', '#D8B9C3', '#ff9f00'],
+                                        hideHover: 'auto',
+                                        gridLineColor: 'transparent',
+                                        resize: true,
+                                        barSizeRatio: 0.25,
+                                    });
                                 }
                             }
                         })
