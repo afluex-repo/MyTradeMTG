@@ -183,54 +183,56 @@
           
                 var barChart = function () {
                     if (jQuery('#morris_bar').length > 0) {
-                        //bar chart
+                        debugger;
+                        $.ajax({
+                            url: "/Franchise/GetChartFranchiseSaleRequest",
+                            type: "GET",
+                            dataType: 'JSON',
+                            data: JSON.stringify(),
+                            contentType: 'application/json;',
+                            success: function (d) {
+                                debugger;
+                                var TotalSaleRequest = [];
+                                var TotalApproved = [];
+                                var TotalRejected = [];
+                                var TotalPending = [];
+                                var AllYear = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    AllYear.push(t[i].Year);
+                                    TotalSaleRequest.push(t[i].TotalSaleRequest);
+                                    TotalApproved.push(t[i].TotalApproved);
+                                    TotalRejected.push(t[i].TotalRejected);
+                                    TotalPending.push(t[i].TotalPending);
+                                    debugger;
+                                    var xs = AllYear;
+                                    var ys = parseFloat(TotalSaleRequest);
+                                    var ya = parseFloat(TotalApproved);
+                                    var yr = parseFloat(TotalRejected);
+                                    var yp = parseFloat(TotalPending);
+                                    i++;
+
                         Morris.Bar({
                             element: 'morris_bar',
                             data: [{
-                                y: '2006',
-                                a: 100,
-                                b: 90,
-                                c: 60
-                            }, {
-                                y: '2007',
-                                a: 75,
-                                b: 65,
-                                c: 40
-                            }, {
-                                y: '2008',
-                                a: 50,
-                                b: 40,
-                                c: 30
-                            }, {
-                                y: '2009',
-                                a: 75,
-                                b: 65,
-                                c: 40
-                            }, {
-                                y: '2010',
-                                a: 50,
-                                b: 40,
-                                c: 30
-                            }, {
-                                y: '2011',
-                                a: 75,
-                                b: 65,
-                                c: 40
-                            }, {
-                                y: '2012',
-                                a: 100,
-                                b: 90,
-                                c: 40
+                                y: xs,
+                                a: ya,
+                                b: yr,
+                                c: yp
                             }],
+
                             xkey: 'y',
                             ykeys: ['a', 'b', 'c'],
-                            labels: ['A', 'B', 'C'],
+                            labels: ['Total Approve(MTG)', 'Total Rejected(MTG)', 'Total Pending(MTG)'],
                             barColors: ['#363062', '#D8B9C3', '#ff9f00'],
                             hideHover: 'auto',
                             gridLineColor: 'transparent',
                             resize: true,
                             barSizeRatio: 0.25,
                         });
+                                }
+                            }
+                        })
                     }
                 }
 

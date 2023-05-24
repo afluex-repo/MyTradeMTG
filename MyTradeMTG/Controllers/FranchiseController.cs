@@ -27,6 +27,35 @@ namespace MyTradeMTG.Controllers
             }
             return View(obj);
         }
+        public JsonResult GetChartFranchiseSaleRequest()
+        {
+            ProgressReport model = new ProgressReport();
+            try
+            {
+                List<ProgressReport> lst = new List<ProgressReport>();
+                DataSet ds = model.GetChartFranchiseSaleRequest();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ProgressReport obj = new ProgressReport();
+                        obj.Year = r["Year"].ToString();
+                        obj.TotalSaleRequest = r["TotalSaleRequest"].ToString();
+                        obj.TotalApproved = r["TotalApproved"].ToString();
+                        obj.TotalRejected = r["TotalRejected"].ToString();
+                        obj.TotalPending = r["TotalPending"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstSaleRequestMTG = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return Json(model.lstSaleRequestMTG, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult AddWallet()
         {
             UserWallet obj = new UserWallet();
