@@ -11,6 +11,7 @@ namespace MyTradeMTG.Models
     public class User : Common
     {
         #region property
+        public string TotalMTG { get; set; }
         public string IsFill { get; set; }
         public string EPin { get; set; }
         public string PinStatus { get; set; }
@@ -122,7 +123,8 @@ namespace MyTradeMTG.Models
             SqlParameter[] para = {
                  new SqlParameter("@Fk_UserId",Fk_UserId),
                 new SqlParameter("@Amount",Amount),
-                 new SqlParameter("@AddedBy",AddedBy)
+                 new SqlParameter("@AddedBy",AddedBy),
+                 new SqlParameter("@TransferCharge",TransferCharge)
             };
             DataSet ds = DBHelper.ExecuteQuery("SaveWalletTransfer", para);
             return ds;

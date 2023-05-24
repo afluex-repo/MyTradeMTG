@@ -2280,6 +2280,8 @@ namespace MyTradeMTG.Controllers
                     obj1.MTG = r["MTG"].ToString();
                     obj1.LoginId = r["loginid"].ToString();
                     obj1.CustomerId = r["CustomerId"].ToString();
+                    obj1.TransferCharge = r["TransferCharge"].ToString();
+                    obj1.TotalMTG = r["TotalMTG"].ToString();
                     lst.Add(obj1);
                 }
                 model.QuickSendMTGList = lst;
