@@ -364,11 +364,11 @@ namespace MyTradeMTG.Controllers
             model.Country = Session["Country"].ToString();
             //model.LoginId = Session["CustomerId"].ToString();
             model.IsActive = Session["IsActive"].ToString();
-            if (model.IsActive == "False")
-            {
+            //if (model.IsActive == "False")
+            //{
                 model.LoginId = Session["LoginId"].ToString();
                 model.Name = Session["FullName"].ToString();
-            }
+            //}
            
 
 
