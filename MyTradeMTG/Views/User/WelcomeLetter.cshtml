@@ -591,29 +591,21 @@ hr {
   }
 }
 
-/*--------------------------------------------------------------
-  Will apply only print window
-----------------------------------------------------------------*/
 
 [data-theme-version="dark"] {
     background: #f5f6fa;
     color: #828690;
 }
-/*# sourceMappingURL=style.css.map */
 </style>
 @using (Html.BeginForm("WelcomeLetter", "User", FormMethod.Post, new { @id = "form", @enctype = "multipart/form-data" }))
-{
-
-
-   
-
+{  
     <div class="content-body">
         <div class="container-fluid">
             <div class="layout-px-spacing">
 
                 <div class="tm_container">
                     <div class="tm_invoice_wrap">
-                        <div class="tm_invoice tm_style1 tm_type1" id="printableDiv1">
+                        <div class="tm_invoice tm_style1 tm_type1" id="tblReg">
                             <div class="tm_invoice_in">
                                 <div class="tm_invoice_head tm_top_head tm_mb15 tm_align_center">
                                     <div class="tm_invoice_left">
@@ -664,26 +656,53 @@ hr {
                                     </p>
                                     <label>Thanking You !</label><br />
                                     <label>My Trade Global</label>
-                                  
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-info btn-sm mt-3" style="float:right" id="print_btn" onclick="printIt('printableDiv1')"><i class="fa fa-download"></i> Download</a>
+                        <a href="#" class="btn btn-info btn-sm mt-3" style="float:right" onclick="return printData()"><i class="fa fa-download"></i> Download</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
-
+<script>
+    function printData() {
+        var divToPrint = document.getElementById('tblReg');
+        debugger;
+        newWin = window.open("");
+       var htmlToPrint = '' +
+      '<style type="text/css">' +
+      'table th, table td {' +
+      'border:1px solid red;' +
+      'padding;0.5em;' +
+      '}' +
+       'table{' +
+      'background-color:lightgrey;' +
+      '}' +
+      '</style>';
+        // newWin.document.write(htmlToPrint);
+       alert(htmlToPrint);
+        htmlToPrint += divToPrint.outerHTML;
+       // newWin.document.write(divToPrint.outerHTML);
+        newWin.document.write(htmlToPrint);
+        newWin.print();
+        newWin.close();
+    }
+</script>
 <script type="text/javascript">
-function printIt(divID) {
+@*function printIt(divID) {
     var divContent = document.getElementById(divID);
-    var WinPrint = window.open('', '', 'width=1200,height=600');
-    WinPrint.document.write(divContent.innerHTML);
+     var WinPrint = window.open('', '', 'width=1200,height=600');
+    var  htmlToPrint = '' +
+     '<style type="text/css">' +
+     '.tm_f40{' + 'background-color: lightblue;' +'}' +
+     '</style>';
+    htmlToPrint += divContent.outerHTML;
+    WinPrint.document.write(htmlToPrint);
     WinPrint.document.close();
     WinPrint.focus();
     WinPrint.print();
     WinPrint.close();
-}
+}*@
 </script>

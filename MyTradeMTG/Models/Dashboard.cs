@@ -100,13 +100,17 @@ namespace MyTradeMTG.Models
 
     public class ProgressReport
     {
-
+        public string TotalSaleRequest { get; set; }
+        public string TotalApproved { get; set; }
+        public string TotalRejected { get; set; }
+        public string TotalPending { get; set; }
         public string FK_UserId { get; set; }
         public string Year { get; set; }
         public string TotalBusiness { get; set; }
         public string Cramount { get; set; }
         public string Dramount { get; set; }
         public List<ProgressReport> lstCoin { get; set; }
+        public List<ProgressReport> lstSaleRequestMTG { get; set; }
         public DataSet GetAssociateDashboard()
         {
             SqlParameter[] para = {
@@ -125,7 +129,11 @@ namespace MyTradeMTG.Models
             return ds;
         }
 
-
+        public DataSet GetChartFranchiseSaleRequest()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetChartFranchiseSaleRequest");
+            return ds;
+        }
 
 
 
