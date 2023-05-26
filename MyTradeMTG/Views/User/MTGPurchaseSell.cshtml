@@ -91,6 +91,8 @@
                                                     <td style="display:none" id="Fk_UserId_@i">@Item.Fk_UserId</td>
                                                     <td id="CustomerId_@i">@Item.CustomerId</td>
                                                     <td id="FirmName_@i">@Item.FirmName</td>
+                                                    <td style="display:none" id="Email_@i">@Item.Email</td>
+                                                    <td style="display:none" id="Address_@i">@Item.Address</td>
                                                 </tr>
                                                 i++;
                                             }
@@ -134,6 +136,7 @@
                     <label id="WalletBalance" style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
 
                     <input id="Fk_UserIdddd" name="Fk_UserIdddd" class="form-control" type="text" style="display:none" />
+                    
 
 
                 </div>
@@ -141,14 +144,27 @@
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1">Contact Address Id<span style="color: red">*</span></p>
-                        
-                        <input id="CustomerId" name="CustomerId" class="form-control" type="text" readonly="true" />
+                        @*<input id="CustomerId" name="CustomerId" class="form-control" type="text" readonly="true" />*@
+                        <label id="CustomerId" name="CustomerId"></label>
                     </div>
                 </div>
                 <div class="col-xl-6 mb-3">
                     <div class="example">
-                        <p class="mb-1"> Name<span style="color: red">*</span></p>
-                        <input id="FirmName" name="FirmName" class="form-control" type="text" readonly="true" />
+                        <p class="mb-1">Firm Name<span style="color: red">*</span></p>
+                        @*<input id="FirmName" name="FirmName" class="form-control" type="text" readonly="true" />*@
+                        <label id="FirmName" name="FirmName"></label>
+                    </div>
+                </div>
+                <div class="col-xl-6 mb-3">
+                    <div class="example">
+                        <p class="mb-1">Address<span style="color: red">*</span></p>
+                        <label id="Address" name="Address"></label>
+                    </div>
+                </div>
+                <div class="col-xl-6 mb-3">
+                    <div class="example">
+                        <p class="mb-1">Email<span style="color: red">*</span></p>
+                        <label id="Email" name="Email"></label>
                     </div>
                 </div>
                 <div class="col-xl-6 mb-3">
@@ -156,6 +172,8 @@
                         <input type="hidden" id="WalletAmounteee" value="@ViewBag.WalletBalance" />
                         <p class="mb-1"> MTG Token<span style="color: red">*</span></p>
                         <input id="MTGToken" name="MTGToken" class="form-control" type="text" onchange="return OnchangeMTGTokenGetTransferCharge()" />
+                        <input type="hidden" id="MinMTGSell" value="@ViewBag.MinMTGSell" />
+                        <label style="color: red" id="MinMTGSell2"></label>
                     </div>
                 </div>
                 <div class="col-xl-6 mb-3">
@@ -182,10 +200,16 @@
         var Fk_UserId = $("#Fk_UserId_" + i).text();
         var CustomerId = $("#CustomerId_" + i).text();
         var FirmName = $("#FirmName_" + i).text();
+        var Email = $("#Email_" + i).text();
+        var Address = $("#Address_" + i).text();
 
         $("#Fk_UserIdddd").val(Fk_UserId);
-        $("#CustomerId").val(CustomerId);
-        $("#FirmName").val(FirmName);
+        $("#CustomerId").text(CustomerId);
+        $("#FirmName").text(FirmName);
+        $("#Email").text(Email);
+        $("#Address").text(Address);
+        var MinMTGSell1 = "Min MTG Sell: "+parseFloat($("#MinMTGSell").val());
+        $("#MinMTGSell2").text(MinMTGSell1);
 
         var WalletAmount = $("#WalletAmounteee").val();
         var Amount = parseFloat($("#MTGToken").val());
@@ -203,6 +227,8 @@
         debugger;
         var WalletAmount = $("#WalletAmounteee").val();
         var Amount = parseFloat($("#MTGToken").val());
+        var MinMTGSell = parseFloat($("#MinMTGSell").val());
+    
 
 
         var BrokerTransferChargehtf = parseFloat($("#BrokerTransferChargehtf").val());
@@ -239,7 +265,18 @@
         //var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
         $("#TransferCharge").attr("readonly", true);
 
-
+        if(Amount <= MinMTGSell){
+            alert("Minimum MTG should be less than or equal from MTG Token.");
+            $("#MTGToken").addClass('errortext');
+            $('#MTGToken').focus();
+            $("#MTGToken").val('');
+            $("#TransferCharge").val('');
+        }
+        else
+        {
+            $("#MTGToken").addClass('errortext');
+            $('#MTGToken').focus();
+        }
         if (TotalSumValues > WalletAmount) {
             alert("Transfer charge should be less than or equal from wallet balance.");
             $("#MTGToken").addClass('errortext');
@@ -255,7 +292,7 @@
             $("#MTGToken").addClass('errortext');
             $('#MTGToken').focus();
         }
-
+        
         //var WalletBalance = ($("#WalletBalance").text());
         //var MTGToken = parseFloat($("#MTGToken").val());
 

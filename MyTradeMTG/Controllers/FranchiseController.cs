@@ -314,6 +314,81 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
+        public ActionResult WalletTransfer()
+        {
+            Common objcomm = new Common();
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds = objcomm.GetWalletBalance();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds.Tables[0].Rows[0]["Amount"].ToString();
+            }
+            #endregion
+
+
+            #region GetDirectPayment
+            DataSet ds1 = objcomm.GetWalletTransferCharge();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                Session["MemberTransferCharge"] = ds1.Tables[0].Rows[0]["MemberTransferCharge"].ToString();
+            }
+            #endregion
+
+
+
+            User model = new User();
+            List<User> lst = new List<User>();
+            model.Fk_UserId = Session["PK_UserId"].ToString();
+            DataSet ds11 = model.GetWalletTransfer();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    User obj1 = new User();
+                    obj1.TransferDate = r["TransferDate"].ToString();
+                    obj1.TransferFromName = r["TransferFromName"].ToString();
+                    obj1.TransfertoName = r["TransfertoName"].ToString();
+                    obj1.MTG = r["MTG"].ToString();
+                    obj1.LoginId = r["loginid"].ToString();
+                    obj1.CustomerId = r["CustomerId"].ToString();
+                    obj1.TransferCharge = r["TransferCharge"].ToString();
+                    obj1.TotalMTG = r["TotalMTG"].ToString();
+                    lst.Add(obj1);
+                }
+                model.QuickSendMTGList = lst;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("WalletTransfer")]
+        [OnAction(ButtonName = "btnTransfer")]
+        public ActionResult WalletTransfer(User model)
+        {
+            try
+            {
+                model.AddedBy = Session["PK_UserId"].ToString();
+                DataSet ds = model.SaveWalletTransferBalance();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["wallettransfer"] = "Transferred  successfully";
+                    }
+                    else
+                    {
+                        TempData["wallettransfererror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["wallettransfererror"] = ex.Message;
+            }
+            return RedirectToAction("WalletTransfer", "Franchise");
+        }
+
 
 
     }

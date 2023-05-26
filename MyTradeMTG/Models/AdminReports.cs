@@ -9,6 +9,8 @@ namespace MyTradeMTG.Models
 {
     public class AdminReports : Common
     {
+        public string Count { get; set; }
+        public string TopupIDRandom { get; set; }
         public List<AdminReports> lstBonazaReward { get; set; }
         public List<AdminReports> lstTDSReport { get; set; }
         public List<AdminReports> lsttopupreport { get; set; }
@@ -490,6 +492,15 @@ namespace MyTradeMTG.Models
                    new SqlParameter("@AddedBy", AddedBy)
             };
             DataSet ds = DBHelper.ExecuteQuery("ApproveRequest", para);
+            return ds;
+        }
+        public DataSet UserProfile()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@FK_UserId", Fk_UserId),
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UserProfile", para);
+
             return ds;
         }
 

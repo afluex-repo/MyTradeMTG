@@ -1264,6 +1264,9 @@
     <Content Include="Views\Report\PayoutLedger.cshtml" />
     <Content Include="Views\User\ProfileInfo.cshtml" />
     <Content Include="Views\User\WelcomeLetter.cshtml" />
+    <Content Include="Views\User\PrintWelcomeLetter.cshtml" />
+    <Content Include="Views\AdminReports\PrintWelcomeLetter.cshtml" />
+    <Content Include="Views\Franchise\WalletTransfer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
