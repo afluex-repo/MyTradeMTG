@@ -92,20 +92,26 @@
                     </li>                    
                     <li>
                         <a class="ai-icon" href="/Franchise/AddWallet" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
+                            <i class="fas fa-wallet"></i>
                             <span class="nav-text">Buy MTG</span>
                         </a>
                     </li>
                     <li>
                         <a class="ai-icon" href="/Franchise/WalletList" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
+                            <i class="flaticon-381-list"></i>
                             <span class="nav-text">Buy MTG List</span>
                         </a>
                     </li>
                     <li>
                         <a class="ai-icon" href="/Franchise/SaleRequest" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
+                            <i class="flaticon-381-receive"></i>
                             <span class="nav-text">Sale Request</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ai-icon" href="/Franchise/WalletTransfer" aria-expanded="false">
+                            <i class="flaticon-381-notebook-4"></i>
+                            <span class="nav-text">Quick Send MTG</span>
                         </a>
                     </li>
                 </ul>
@@ -206,14 +212,14 @@
                                     TotalPending.push(t[i].TotalPending);
                                     debugger;
                                     var xs = AllYear;
-                                    var ys = parseFloat(TotalSaleRequest);
+                                    var ys = 'Total Sale Request(MTG)- '+parseFloat(TotalSaleRequest);
                                     var ya = parseFloat(TotalApproved);
                                     var yr = parseFloat(TotalRejected);
                                     var yp = parseFloat(TotalPending);
                                     Morris.Bar({
                                         element: 'morris_bar',
                                         data: [{
-                                            y: xs,
+                                            y: ys,
                                             a: ya,
                                             b: yr,
                                             c: yp
@@ -226,7 +232,7 @@
                                         hideHover: 'auto',
                                         gridLineColor: 'transparent',
                                         resize: true,
-                                        barSizeRatio: 0.25,
+                                        barSizeRatio: 0.45,
                                     });
                                 }
                             }

@@ -1079,7 +1079,7 @@ namespace MyTradeMTG.Controllers
 
                         Session["IsFill"] = ds.Tables[0].Rows[0]["IsFill"].ToString();
 
-                        TempData["msg"] = "KYC Details Updated Successfully";
+                        TempData["msg"] = "KYC Details Updated Successfully and Your KYC has been verified !";
                     }
                     else
                     {
@@ -2345,6 +2345,7 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult MTGPurchaseSell()
+
         {
             User model = new User();
             model.AddedBy = Session["PK_UserId"].ToString();
@@ -2357,6 +2358,8 @@ namespace MyTradeMTG.Controllers
                 ViewBag.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                 ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 ViewBag.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                ViewBag.MinMTGSell = ds.Tables[1].Rows[0]["MinMTGSell"].ToString();
+
             }
             Common objcomm = new Common();
             #region Check Balance
@@ -2378,6 +2381,8 @@ namespace MyTradeMTG.Controllers
                     obj.Fk_UserId = r["Fk_UserId"].ToString();
                     obj.FirmName = r["FirmName"].ToString();
                     obj.CustomerId = r["CustomerAddressId"].ToString();
+                    obj.Email = r["Email"].ToString();
+                    obj.Address = r["Address"].ToString();
                     lst.Add(obj);
                 }
                 model.lstFranchise = lst;
@@ -2410,7 +2415,7 @@ namespace MyTradeMTG.Controllers
                 if (ds.Tables[0].Rows[0][0].ToString() == "1")
                 {
                     model.Result = "yes";
-                    TempData["SaveMTGTransferCharge"] = "Transferred  successfully !!";
+                    TempData["SaveMTGTransferCharge"] = "MTG sell initiated successfully !!";
                 }
                 else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                 {
@@ -2804,6 +2809,28 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult WelcomeLetter()
+        {
+            Home model = new Home();
+            model.Fk_UserId = Session["Pk_userId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                    ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
+                    ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
+                    ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                }
+            }
+            return View(model);
+        }
+        public ActionResult PrintWelcomeLetter()
         {
             Home model = new Home();
             model.Fk_UserId = Session["Pk_userId"].ToString();

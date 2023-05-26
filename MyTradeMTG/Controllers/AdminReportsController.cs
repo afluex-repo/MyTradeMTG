@@ -353,6 +353,7 @@ namespace MyTradeMTG.Controllers
 
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
             {
+                //newdata.Count = ds11.Tables[1].Rows[0]["Count"].ToString();
                 foreach (DataRow r in ds11.Tables[0].Rows)
                 {
                     AdminReports Obj = new AdminReports();
@@ -384,6 +385,7 @@ namespace MyTradeMTG.Controllers
                     Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
                     Obj.Topupid = r["Topupid"].ToString();
                     Obj.IsHoldTPS = r["IsTPSHold"].ToString();
+                    Obj.TopupIDRandom = r["TopUpIdRandom"].ToString();
 
                     lst1.Add(Obj);
                 }
@@ -467,6 +469,7 @@ namespace MyTradeMTG.Controllers
                     Obj.BasisOn = r["BasisOn"].ToString();
                     Obj.ActivationMTGToken = r["ActivationMTGToken"].ToString();
                     Obj.Topupid = r["Topupid"].ToString();
+                    Obj.TopupIDRandom = r["TopUpIdRandom"].ToString();
 
                     lst1.Add(Obj);
                 }
@@ -1934,7 +1937,28 @@ namespace MyTradeMTG.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult PrintWelcomeLetter(string Fk_UserId)
+        {
+            AdminReports model = new AdminReports();
+            model.Fk_UserId = Fk_UserId;
+            DataSet ds = model.UserProfile();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    ViewBag.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+                    ViewBag.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.CustomerId = ds.Tables[0].Rows[0]["CustomerId"].ToString();
+                    ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
+                    ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
+                    ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                }
+            }
+            return View(model);
+        }
 
     }
 }

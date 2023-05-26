@@ -28,9 +28,9 @@
                                     <label>Status</label>
                                     <input type="hidden" id="IsVeri" value="@Model.IsVerified" />
                                     <select id="IsVerified" name="IsVerified" class="default-select wide form-control">
-                                        <option value="">-Select-</option>
+                                        <option value="0">-Select-</option>
                                         <option value="1">Verified</option>
-                                        <option value="0">Pending</option>
+                                        @*<option value="0">Pending</option>*@
                                     </select>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                                         <a href="/AdminReports/ViewProfile?Id=@Item.Fk_UserId" class="btn btn-info btn-sm">View</a>
                                                     </td>
                                                     <td>@Item.Status</td>
-                                                    @if (Item.IsVerified == "False" && Item.Status!="Declined")
+                                                    @*@if (Item.IsVerified == "False" && Item.Status!="Declined")
                                                     {
                                                         <td class="d-flex">
                                                             <a href="/AdminReports/ViewProfileVeriFy?Id=@Item.Fk_UserId" name="Verify" id="Verify" class="m-1 btn btn-success">Verify</a>
@@ -109,11 +109,11 @@
                                                         </td>
                                                     }
                                                     else
-                                                    {
+                                                    {*@
                                                         <td>
                                                             <a href="/AdminReports/DeclineKyc?Id=@Item.Fk_UserId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to decline this kyc?')">Decline</a>
                                                         </td>
-                                                    }
+                                                    @*}*@
                                                     @*@if (Item.IsVerified == "True")
                                                     {
                                                         <td>

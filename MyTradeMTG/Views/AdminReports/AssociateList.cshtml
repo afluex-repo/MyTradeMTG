@@ -126,6 +126,7 @@
                                         @*<th hidden="hidden"></th>*@
                                         @*<th>Hold/Unhold TPS</th>*@
                                         <th>Withdrawal Start/Stop</th>
+                                        <th>Welcome Letter</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -215,7 +216,12 @@
                                                                 </a>
                                                               }
                                                      </td>
-
+                                                    <td>
+                                                        @if (Item.Status == "Active")
+                                                        {
+                                                        <a href="/AdminReports/PrintWelcomeLetter?FK_UserID=@Item.Fk_UserId" class="btn btn-info btn-sm" target="_blank">Print</a>
+                                                        }
+</td>
                                                     @*<td>
                                                             <a href="/AdminProfile/WelcomeLetter?LoginID=@Item.LoginId" class="btn btn-info btn-sm">
                                                                 Print
