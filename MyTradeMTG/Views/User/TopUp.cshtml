@@ -43,7 +43,7 @@
                                     {
                                         <div class="col-md-4">
                                             <label for="LoginId">User Id</label>
-                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @readonly = "" })
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @readonly = "", @onchange = "return GetNameDetails();" })
                                             @Html.HiddenFor(m => m.Name)
                                             <label class="pt-2" style="color:#e49d31;" id="lblName">@Model.Name</label>
                                             <input type="hidden" id="Status" name="Status" value="@Model.Status" />
@@ -55,7 +55,8 @@
                                             <label for="LoginId">User Id</label>
                                             @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Login Id", @onchange = "return GetNameDetails();" })
                                             @Html.HiddenFor(m => m.Name)
-                                            <label class="pt-2" style="color:#e49d31;" id="lblName"></label>
+                                            <label class="pt-2" style="color:#e49d31;" id="lblName">@Model.Name</label>
+                                            <input type="hidden" id="Status" name="Status" value="@Model.Status" />
                                         </div>
                                     }
 

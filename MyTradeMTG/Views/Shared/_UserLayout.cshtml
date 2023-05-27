@@ -185,7 +185,7 @@
                                         <span class="btn btn-success">Franchise Registered : @Session["FirmName"]</span>
                                     }*@
 
-                                @if (Session["Franchisestatus"].ToString() == "" || Session["Franchisestatus"].ToString() == "Rejected")
+                                @if (Session["Status"].ToString() == "Inactive")
                                 {
                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm" onclick="openPopup();">Franchise Request</a>
                                 }
@@ -350,7 +350,10 @@
                             <span class="nav-text">My Profile</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/User/WelcomeLetter">Welcome Letter</a></li>
+                             @if(Session["TeamPermanent"].ToString() != "T")
+                             {
+                                <li><a href="/User/WelcomeLetter">Welcome Letter</a></li>
+                             }
                             <li><a href="/User/ViewProfile">View Profile</a></li>
                             <li><a href="/User/BankDetailsUpdate">KYC Details</a></li>
                             <li><a href="/User/ProfileInfo">Profile Info</a></li>
@@ -389,15 +392,16 @@
                                     <li><a href="javascript:void(0)"> Quick Send MTG<span class="btn btn-primary btn-xxs    coming_soon_txt mt-1">@Session["QuickSendMTGReason"]</span></a></li>
                                 }
                             
-                            @if (Session["Franchisestatus"].ToString() == "Approved")
+                            @if (Session["Franchisestatus"].ToString() != "Approved")
                             {
-                            <li><a href="/User/SaleRequest">Sale Request</a></li>
+                            @*<li><a href="/User/SaleRequest">Sale Request</a></li>*@
+                                <li><a href="/User/MTGPurchaseSell">MTG Sell</a></li>
+                                <li><a href="/User/SalesReport">Sell Report</a></li>
                             }
-                            else
+                            @*else
                             {
-                            <li><a href="/User/MTGPurchaseSell">MTG Sell</a></li>
-                            <li><a href="/User/SalesReport">Sell Report</a></li>
-                            }
+
+                            }*@
                         </ul>
                     </li>
                     @*<li>

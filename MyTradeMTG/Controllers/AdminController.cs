@@ -2020,7 +2020,7 @@ namespace MyTradeMTG.Controllers
             Admin model = new Admin();
             try
             {
-                model.IsVerified = "0";
+                model.IsVerified = "1";
                 List<Admin> lst = new List<Admin>();
                 DataSet ds = model.GetKYCUpdateDetailsOfUser();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

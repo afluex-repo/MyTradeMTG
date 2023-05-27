@@ -4,7 +4,9 @@
     ViewBag.Title = "WelcomeLetter";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+
 <link href="/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+
 <style>
 
 
@@ -590,6 +592,11 @@ hr {
     font-size: 22px;
   }
 }
+/*@@media print {
+        #print_btn {
+            display: none !important;
+        }
+    }*/
 
 /*--------------------------------------------------------------
   Will apply only print window
@@ -621,13 +628,13 @@ hr {
                                     </div>
                                     <div class="tm_invoice_right tm_text_right tm_mobile_hide pt-2">
                                         <div class="tm_f40 tm_text_uppercase text-white">Welcome Letter</div>
-                                        <p class="mb-2 text-white">Date: <b>01.07.2022</b></p>
+                                        <p class="mb-2 text-white">Date: <span id="datet">@ViewBag.PermanentDate</span></p>
                                     </div>
                                     <div class="tm_shape_bg tm_accent_bg tm_mobile_hide"></div>
                                 </div>
                                
                                 <div class="tm_invoice_head tm_mb10">
-                                    <div class="tm_invoice_left">
+                                    <div class="tm_invoice_left" style="margin-top: 40px;">
                                         <p class="mb-0"><span>User ID</span> : @Model.LoginId</p>
                                         <p class="mb-0"><span>Contact Address </span>: @ViewBag.CustomerId</p>
                                         <p class="mb-0"><span>Name </span>: @Session["FullName"]</p>
@@ -643,7 +650,7 @@ hr {
                                     <div class="tm_card_note"><b class="tm_primary_color">Subject: </b> Welcome to the team !</div>
                                    
                                 </div>
-                                <div class="mt-4 pr-md-4">
+                                <div class="mt-4 pr-md-4" style="text-align: justify; text-justify: inter-word;">
                                     <p>Dear <span class="text_warning">@Session["FullName"],</span></p>
                                     <p>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Congratulations on your decision to come with us
@@ -664,26 +671,26 @@ hr {
                                     </p>
                                     <label>Thanking You !</label><br />
                                     <label>My Trade Global</label>
-                                  
+                                    <a href="/User/PrintWelcomeLetter" class="btn btn-info btn-sm mt-3" style="float:right" target="_blank"><i class="fa fa-download"></i> Go to Download</a>
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-info btn-sm mt-3" style="float:right" id="print_btn" onclick="printIt('printableDiv1')"><i class="fa fa-download"></i> Download</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
-
-<script type="text/javascript">
-function printIt(divID) {
-    var divContent = document.getElementById(divID);
-    var WinPrint = window.open('', '', 'width=1200,height=600');
-    WinPrint.document.write(divContent.innerHTML);
-    WinPrint.document.close();
-    WinPrint.focus();
-    WinPrint.print();
-    WinPrint.close();
-}
-</script>
+<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+@*<script>
+        $(document).ready(function () {
+            debugger;
+            var today = new Date();
+            //var year = today.getFullYear();
+            //var mes = today.getMonth() + 1;
+            //var dia = today.getDate();
+            //var fecha = dia + "/" + mes + "/" + year;
+            document.getElementById('datet').innerHTML = today.toLocaleDateString('pt-PT');
+        })
+</script>*@

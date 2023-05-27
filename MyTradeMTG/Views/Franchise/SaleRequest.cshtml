@@ -4,7 +4,11 @@
     ViewBag.Title = "SaleRequest";
     Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
 }
-
+<style>
+    label{
+        margin-bottom:1rem;
+    }
+</style>
 
 @using (Html.BeginForm("SaleRequest", "Franchise", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

@@ -92,20 +92,26 @@
                     </li>                    
                     <li>
                         <a class="ai-icon" href="/Franchise/AddWallet" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
+                            <i class="fas fa-wallet"></i>
                             <span class="nav-text">Buy MTG</span>
                         </a>
                     </li>
                     <li>
                         <a class="ai-icon" href="/Franchise/WalletList" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
+                            <i class="flaticon-381-list"></i>
                             <span class="nav-text">Buy MTG List</span>
                         </a>
                     </li>
                     <li>
                         <a class="ai-icon" href="/Franchise/SaleRequest" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
+                            <i class="flaticon-381-receive"></i>
                             <span class="nav-text">Sale Request</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="ai-icon" href="/Franchise/WalletTransfer" aria-expanded="false">
+                            <i class="flaticon-381-notebook-4"></i>
+                            <span class="nav-text">Quick Send MTG</span>
                         </a>
                     </li>
                 </ul>
@@ -183,54 +189,54 @@
           
                 var barChart = function () {
                     if (jQuery('#morris_bar').length > 0) {
-                        //bar chart
-                        Morris.Bar({
-                            element: 'morris_bar',
-                            data: [{
-                                y: '2006',
-                                a: 100,
-                                b: 90,
-                                c: 60
-                            }, {
-                                y: '2007',
-                                a: 75,
-                                b: 65,
-                                c: 40
-                            }, {
-                                y: '2008',
-                                a: 50,
-                                b: 40,
-                                c: 30
-                            }, {
-                                y: '2009',
-                                a: 75,
-                                b: 65,
-                                c: 40
-                            }, {
-                                y: '2010',
-                                a: 50,
-                                b: 40,
-                                c: 30
-                            }, {
-                                y: '2011',
-                                a: 75,
-                                b: 65,
-                                c: 40
-                            }, {
-                                y: '2012',
-                                a: 100,
-                                b: 90,
-                                c: 40
-                            }],
-                            xkey: 'y',
-                            ykeys: ['a', 'b', 'c'],
-                            labels: ['A', 'B', 'C'],
-                            barColors: ['#363062', '#D8B9C3', '#ff9f00'],
-                            hideHover: 'auto',
-                            gridLineColor: 'transparent',
-                            resize: true,
-                            barSizeRatio: 0.25,
-                        });
+                        debugger;
+                        $.ajax({
+                            url: "/Franchise/GetChartFranchiseSaleRequest",
+                            type: "GET",
+                            dataType: 'JSON',
+                            data: JSON.stringify(),
+                            contentType: 'application/json;',
+                            success: function (d) {
+                                debugger;
+                                var TotalSaleRequest = [];
+                                var TotalApproved = [];
+                                var TotalRejected = [];
+                                var TotalPending = [];
+                                var AllYear = [];
+                                var t = JSON.parse(JSON.stringify(d));
+                                for (var i = 0; i < t.length; i++) {
+                                    AllYear.push(t[i].Year);
+                                    TotalSaleRequest.push(t[i].TotalSaleRequest);
+                                    TotalApproved.push(t[i].TotalApproved);
+                                    TotalRejected.push(t[i].TotalRejected);
+                                    TotalPending.push(t[i].TotalPending);
+                                    debugger;
+                                    var xs = AllYear;
+                                    var ys = 'Total Sale Request(MTG)- '+parseFloat(TotalSaleRequest);
+                                    var ya = parseFloat(TotalApproved);
+                                    var yr = parseFloat(TotalRejected);
+                                    var yp = parseFloat(TotalPending);
+                                    Morris.Bar({
+                                        element: 'morris_bar',
+                                        data: [{
+                                            y: ys,
+                                            a: ya,
+                                            b: yr,
+                                            c: yp
+                                        }],
+
+                                        xkey: 'y',
+                                        ykeys: ['a', 'b', 'c'],
+                                        labels: ['Total Approve(MTG)', 'Total Rejected(MTG)', 'Total Pending(MTG)'],
+                                        barColors: ['#363062', '#D8B9C3', '#ff9f00'],
+                                        hideHover: 'auto',
+                                        gridLineColor: 'transparent',
+                                        resize: true,
+                                        barSizeRatio: 0.45,
+                                    });
+                                }
+                            }
+                        })
                     }
                 }
 

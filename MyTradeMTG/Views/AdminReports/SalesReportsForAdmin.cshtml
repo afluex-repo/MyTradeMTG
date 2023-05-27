@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='20'>
+                                <table id="html5-extension" class="table table-hover non-hover" data-sortable="false" data-page-length='20'>
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
@@ -156,6 +156,9 @@
                                             <th>Sale Date</th>
                                             <th>Status</th>
                                             <th>Action</th>
+                                            <td colspan="8" hidden><td>
+
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -166,9 +169,6 @@
                                                 int i = 1;
                                                 foreach (var Item in Model.lstsalesreports)
                                                 {
-                                                    @*<div class="img1">
-                                                            <img src="@Item.DocumentUrl" height="100" />
-                                                        </div>*@
                                                     <tr class="text-left">
                                                         <td>@i</td>
                                                         <td id="UserContactAddress_@Item.Pk_FranchisetransferId">@Item.UserContactAddress</td>
@@ -179,8 +179,6 @@
                                                         <td>@Item.TransferCharge</td>
                                                         <td>@Item.SaleDate</td>
                                                         <td id="Status_@Item.Pk_FranchisetransferId">@Item.Status</td>
-
-
                                                         <td style="display:none" id="Pk_FranchisetransferId_@Item.Pk_FranchisetransferId">@Item.Pk_FranchisetransferId</td>
                                                         <td style="display:none" id="SaleRequestDate_@Item.Pk_FranchisetransferId">@Item.SaleRequestDate</td>
                                                         <td style="display:none" id="FranchiseApprovalRejectionDate_@Item.Pk_FranchisetransferId">@Item.FranchiseApprovalRejectionDate</td>
