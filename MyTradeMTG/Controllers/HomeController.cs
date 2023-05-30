@@ -673,6 +673,12 @@ namespace MyTradeMTG.Controllers
             DataSet ds = model.CalculateROI();
             return View();
         }
+        public ActionResult AutoUpgradeTR2()
+        {
+            Home model = new Home();
+            DataSet ds = model.AutoUpgradeTR2();
+            return View();
+        }
         public ActionResult CalculateDistributePaymentTPS()
         {
             Home model = new Home();

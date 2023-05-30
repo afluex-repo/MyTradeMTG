@@ -96,8 +96,8 @@
                                 @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
                             </div>
                             <div class="col-lg-3">
-                               PIN/PaymentId
-                                @Html.TextBoxFor(m => m.ActivationMode, new { @class = "form-control" })
+                               Contact Address
+                                @Html.TextBoxFor(m => m.CustomerId, new { @class = "form-control" })
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
@@ -115,6 +115,7 @@
                                         <th>Sponsor Details</th>
                                         <th>Password</th>
                                         <th>Joining Date</th>
+                                        <th>Contact Address</th>
                                         <th>Mobile No</th>
                                         <th>Email Id</th>
                                         <th>Member Status</th>
@@ -143,6 +144,7 @@
                                                     <td>@Item.SponsorName (@Item.SponsorId)</td>
                                                     <td>@Item.Password</td>
                                                     <td>@Item.JoiningDate</td>
+                                                    <td>@Item.CustomerId</td>
                                                     <td>@Item.Mobile</td>
                                                     <td>@Item.Email</td>
                                                     <td>@Item.MemberStatus</td>

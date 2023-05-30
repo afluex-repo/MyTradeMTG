@@ -261,6 +261,11 @@ namespace MyTradeMTG.Models
             DataSet ds = DBHelper.ExecuteQuery("CalculateROI");
             return ds;
         }
+        public DataSet AutoUpgradeTR2()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("AutoUpgradeTR2");
+            return ds;
+        }
         public DataSet AutoCalculateRewardBusiness()
         {
             DataSet ds = DBHelper.ExecuteQuery("AutoCalculateRewardBusiness");

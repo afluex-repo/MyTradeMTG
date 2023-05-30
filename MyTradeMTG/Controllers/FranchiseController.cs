@@ -314,6 +314,74 @@ namespace MyTradeMTG.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        [ActionName("SaleRequest")]
+        [OnAction(ButtonName = "btnSearch")]
+        public ActionResult SearchSaleRequest(User model)
+        {
+            #region ddlpaymentmode
+
+            int count1 = 0;
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet ds2 = model.GetPaymentMode();
+            if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds2.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select Payment Mode", Value = "0" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+
+            #endregion
+
+            Common objcomm = new Common();
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            DataSet ds1 = objcomm.GetWalletBalance();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.WalletBalance = ds1.Tables[0].Rows[0]["Amount"].ToString();
+            }
+            #endregion
+
+            List<User> lst = new List<User>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.FK_FranchiseUserId = Session["PK_UserId"].ToString();
+            DataSet ds = model.GetSaleRequest();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    User obj = new User();
+
+                    obj.Pk_FranchisetransferId = r["pk_franchisetransferid"].ToString();
+                    obj.Fk_UserId = r["fk_userid"].ToString();
+                    obj.UserContactAddressId = r["UserContactAddress"].ToString();
+                    obj.UserName = r["Username"].ToString();
+                    obj.MTGToken = r["mtgtoken"].ToString();
+                    obj.TransferCharge = r["TransferCharge"].ToString();
+                    obj.SalesDate = r["SaleRequestDate"].ToString();
+                    obj.Status = r["Status"].ToString();
+
+                    obj.BankName = r["MemberBankName"].ToString();
+                    obj.BranchName = r["MemberBranch"].ToString();
+                    obj.IFSCCode = r["IFSCCode"].ToString();
+                    obj.AccountNo = r["MemberAccNo"].ToString();
+                    obj.UPIID = r["UPIID"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstSaleRequest = lst;
+            }
+            return View(model);
+        }
         public ActionResult WalletTransfer()
         {
             Common objcomm = new Common();

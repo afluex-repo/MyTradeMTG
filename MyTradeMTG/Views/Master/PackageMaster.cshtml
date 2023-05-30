@@ -387,7 +387,8 @@
             $("#divPackage2").show();
             $("#divPackage3").show();
 
-
+            
+                
             $("#UpgPackage").click(function () {
                 debugger;
                 if ($("#UpgPackage").is(":checked")) {
@@ -641,24 +642,31 @@
             //$("#divReturnPercent2").hide();
             //$("#divReturnPercent3").hide();
 
+            $("#divfromamount").hide();
+            $("#divtoamount").hide();
+            $("#divmultiple").hide();
+            $("#divmtgtoken").hide();
+            $("#lblUpgradePackage").hide();
+            $("#divUpgradePackage").hide();
             $("#UpgPackage").click(function () {
                 debugger;
                 if ($(this).is(":checked")) {
-                    $("#divfromamount").hide();
-                    $("#divtoamount").hide();
-                    $("#divmultiple").hide();
-                    $("#divmtgtoken").hide();
-                    $("#lblUpgradePackage").hide();
-                    $("#divUpgradePackage").hide();
-
-                }
-                else {
                     $("#divfromamount").show();
                     $("#divtoamount").show();
                     $("#divmultiple").show();
                     $("#divmtgtoken").show();
                     $("#lblUpgradePackage").show();
                     $("#divUpgradePackage").show();
+                    
+
+                }
+                else {
+                    $("#divfromamount").hide();
+                    $("#divtoamount").hide();
+                    $("#divmultiple").hide();
+                    $("#divmtgtoken").hide();
+                    $("#lblUpgradePackage").hide();
+                    $("#divUpgradePackage").hide();
                 }
             });
 
