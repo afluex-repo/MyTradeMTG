@@ -529,10 +529,9 @@
                             <span class="nav-text">Reward & Club</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/User/userreward"> Trade Rewards</a></li>
-                            <li><a href="/Coming.html"> Auto Pool 1</a></li>
-                            <li><a href="/Coming.html"> Auto Pool 2</a></li>
-                            <li><a href="/Coming.html"> Member Award</a></li>
+                            <li><a href="/User/userreward"> Rewards</a></li>
+                            <li><a href="/Coming.html"> Auto Pool</a></li>
+                            <li><a href="/Coming.html"> Club</a></li>
                         </ul>
                     </li>
                     @*<li>
@@ -1390,38 +1389,42 @@
                             var PaidDramount = [];
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
-                                for (var i = 0; i < t.length; i++) {
-                                AllYear.push(t[i].Year);
-                                PaidCramount.push(t[i].Cramount);
-                                PaidDramount.push(t[i].Dramount);
+                            for (var i = 0; i < t.length; i++) {
+                                //    AllYear.push(t[i].Year);
+                                //    PaidCramount.push(t[i].Cramount);
+                                //    PaidDramount.push(t[i].Dramount);
+                                ////}
+                                //debugger;
+                                //let xs = AllYear;
+                                //let yb = parseFloat(PaidCramount);
+                                //let ys = parseFloat(PaidDramount);
+                                //let x = "";
                                 debugger;
-                                var xs = AllYear;
-                                var yb = parseFloat(PaidCramount);
-                                var ys = parseFloat(PaidDramount);
-                                var x="";
                                 var chartBarRunningOptions = {
                                     series: [{
                                         name: 'Buy',
                                         data: [{
-                                            x: xs,
-                                            y: [ys, yb]
+                                            x: t[i].Year,
+                                            y: [0.00, parseFloat(t[i].Cramount)]
                                         }]
                                     },
-                                    {
-                                        name: 'Sell',
-                                        data: [{
-                                            x: xs,
-                                            y: [ys, yb]
-                                        }]
-                                    }
+                                        {
+                                            name: 'Sell',
+                                            data: [{
+                                                x: t[i].Year,
+                                                y: [0.00, parseFloat(t[i].Dramount)]
+                                            }]
+                                        },
                                     ],
+                                    
                                     chart: {
                                         type: 'rangeBar',
                                         height: 370,
 
                                         toolbar: {
-                                            show: false, //download chart if true
+                                            show: false,
                                         },
+
                                     },
                                     plotOptions: {
                                         bar: {
@@ -1464,7 +1467,6 @@
                                         borderColor: '#eee',
                                     },
                                     xaxis: {
-                                        categories: xs,
                                         labels: {
                                             style: {
                                                 colors: '#787878',
@@ -1475,7 +1477,7 @@
                                             },
                                         },
                                         crosshairs: {
-                                            show: true,
+                                            show: false,
                                         }
                                     },
                                     yaxis: {
@@ -1495,15 +1497,13 @@
                                         opacity: 1,
                                         colors: ['#61C277', '#FF3E3E'],
                                     },
-
-
                                     tooltip: {
                                         x: {
                                             format: 'dd/MM/yy HH:mm'
                                         },
                                         y: {
                                             formatter: function (val) {
-                                                return "$ " + val + " thousands"
+                                                return "$" + val + " thousands"
                                             }
                                         }
                                     },
@@ -1520,31 +1520,186 @@
                                                 height: 250,
                                             },
                                             xaxis: {
-                                                categories: xs,
                                                 labels: {
                                                     style: {
                                                         fontSize: '10px',
                                                     },
                                                 },
                                             },
+
                                         }
                                     }]
                                 };
-                                
                            
+                            
                             debugger;
                             var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
-                                }
+
+                            
                             chartBarRunningObject.render();
-
+                            
+                            }
                         },
-
+                        
                         error: function (err) {
 
                         }
                     });
                 }
+             ////// fro testin chart
+             //   var chartBarRunning23 = function () {
+             //       debugger;
+             //       $.ajax({
+             //           url: "/User/GetchartBarRunning",
+             //           type: "GET",
+             //           dataType: 'JSON',
+             //           data: JSON.stringify(),
+             //           contentType: 'application/json;',
+             //           success: function (d) {
+             //               debugger;
+             //               var PaidCramount = [];
+             //               var PaidDramount = [];
+             //               var AllYear = [];
+             //               var t = JSON.parse(JSON.stringify(d));
+             //               for (var i = 0; i < t.length; i++) {
+             //                   var chartBarRunningOptions = {
+             //                       series: [{
+             //                           name: 'Buy',
+             //                           data: [{
+             //                               x: t[i].Year,
+             //                               y: [0.00, parseFloat(t[i].Cramount)]
+             //                           }, ]
+             //                       }, {
+             //                           name: 'Sell',
+             //                           data: [{
+             //                               x: t[i].Year,
+             //                               y: [0.00, parseFloat(t[i].Dramount)]
+             //                           }, ]
+             //                       }],
+             //                       chart: {
+             //                           type: 'rangeBar',
+             //                           height: 370,
 
+             //                           toolbar: {
+             //                               show: false,
+             //                           },
+
+             //                       },
+             //                       plotOptions: {
+             //                           bar: {
+             //                               horizontal: false,
+             //                               columnWidth: '55%',
+             //                               endingShape: "rounded",
+             //                               startingShape: "rounded",
+
+             //                           },
+             //                       },
+             //                       colors: ['#61C277', '#FF3E3E'],
+             //                       dataLabels: {
+             //                           enabled: false,
+             //                       },
+             //                       markers: {
+             //                           shape: "circle",
+             //                       },
+             //                       legend: {
+             //                           show: false,
+             //                           fontSize: '12px',
+             //                           labels: {
+             //                               colors: '#000000',
+
+             //                           },
+             //                           markers: {
+             //                               width: 18,
+             //                               height: 18,
+             //                               strokeWidth: 0,
+             //                               strokeColor: '#fff',
+             //                               fillColors: undefined,
+             //                               radius: 12,
+             //                           }
+             //                       },
+             //                       stroke: {
+             //                           show: true,
+             //                           width: 6,
+             //                           colors: ['transparent']
+             //                       },
+             //                       grid: {
+             //                           borderColor: '#eee',
+             //                       },
+             //                       xaxis: {
+             //                           labels: {
+             //                               style: {
+             //                                   colors: '#787878',
+             //                                   fontSize: '13px',
+             //                                   fontFamily: 'poppins',
+             //                                   fontWeight: 100,
+             //                                   cssClass: 'apexcharts-xaxis-label',
+             //                               },
+             //                           },
+             //                           crosshairs: {
+             //                               show: false,
+             //                           }
+             //                       },
+             //                       yaxis: {
+             //                           opposite: true,
+             //                           labels: {
+             //                               offsetX: 0,
+             //                               style: {
+             //                                   colors: '#787878',
+             //                                   fontSize: '12px',
+             //                                   fontFamily: 'poppins',
+             //                                   fontWeight: 100,
+             //                                   cssClass: 'apexcharts-xaxis-label',
+             //                               },
+             //                           },
+             //                       },
+             //                       fill: {
+             //                           opacity: 1,
+             //                           colors: ['#61C277', '#FF3E3E'],
+             //                       },
+             //                       tooltip: {
+             //                           x: {
+             //                               format: 'dd/MM/yy HH:mm'
+             //                           },
+             //                           y: {
+             //                               formatter: function (val) {
+             //                                   return "$ " + val + " thousands"
+             //                               }
+             //                           }
+             //                       },
+             //                       responsive: [{
+             //                           breakpoint: 575,
+             //                           options: {
+             //                               plotOptions: {
+             //                                   bar: {
+             //                                       columnWidth: '40%',
+
+             //                                   },
+             //                               },
+             //                               chart: {
+             //                                   height: 250,
+             //                               },
+             //                               xaxis: {
+             //                                   labels: {
+             //                                       style: {
+             //                                           fontSize: '10px',
+             //                                       },
+             //                                   },
+             //                               },
+             //                           }
+             //                       }]
+             //                   };
+
+             //       var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning23"), chartBarRunningOptions);
+             //       chartBarRunningObject.render();
+             //               }
+
+             //           },
+
+             //           error: function (err) {
+
+             //           }
+             //       });
+             //   }
 
                 /////////////////////////////////////////////////////////////////////
 
@@ -1560,6 +1715,32 @@
                 //            name: 'Sell',
                 //            data: [{
                 //                x: '2:00PM',
+                //                y: [9370.00, 9550.00]
+                //            }]
+                //        },
+                //        {
+                //            name: 'Buy',
+                //            data: [{
+                //                x: '3:00PM',
+                //                y: [9100.00, 9800.00]
+                //            }]
+                //        }, {
+                //            name: 'Sell',
+                //            data: [{
+                //                x: '3:00PM',
+                //                y: [7370.00, 7800.00]
+                //            }]
+                //        },
+                //        {
+                //            name: 'Buy',
+                //            data: [{
+                //                x: '4:00PM',
+                //                y: [6200.00, 6600.00]
+                //            }]
+                //        }, {
+                //            name: 'Sell',
+                //            data: [{
+                //                x: '4:00PM',
                 //                y: [9370.00, 9550.00]
                 //            }]
                 //        }],
@@ -1787,8 +1968,8 @@
                         widgetChart7();
                         widgetChart8();
                         chartBarRunning();
+                        chartBarRunning23();
                         chartBarRunning2();
-                        //chartBarRunning3();
                         lineChart();
                     },
 

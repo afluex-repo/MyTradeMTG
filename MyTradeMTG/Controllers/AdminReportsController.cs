@@ -52,6 +52,7 @@ namespace MyTradeMTG.Controllers
                     obj.IsHoldTPS = r["IsTPSHold"].ToString();
                     obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
                     obj.PermanentDate = r["PermanentDate"].ToString();
+                    obj.CustomerId = r["CustomerId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -62,7 +63,7 @@ namespace MyTradeMTG.Controllers
         [HttpPost]
         [ActionName("AssociateList")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult AssociateListBy(AdminReports model)
+        public ActionResult AssociateListBy(AdminReports model,string CustomerId)
         {
             if (model.LoginId == null)
             {
@@ -75,6 +76,7 @@ namespace MyTradeMTG.Controllers
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             // model.LoginId = model.ToLoginID;
             model.MemberStatus = model.MemberStatus == "0" ? null : model.MemberStatus;
+            model.CustomerId = CustomerId;
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -97,6 +99,8 @@ namespace MyTradeMTG.Controllers
                     obj.ActivationMode = r["ActivationMode"].ToString();
                     obj.IsHoldTPS = r["IsTPSHold"].ToString();
                     obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
+                    obj.PermanentDate = r["PermanentDate"].ToString();
+                    obj.CustomerId = r["CustomerId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -1955,6 +1959,7 @@ namespace MyTradeMTG.Controllers
                     ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
                     ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                    ViewBag.FirstTopUpMTG = ds.Tables[0].Rows[0]["FirstTopUpMTG"].ToString();
                 }
             }
             return View(model);

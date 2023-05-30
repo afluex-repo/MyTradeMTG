@@ -167,7 +167,7 @@ namespace MyTradeMTG.Models
                                      new SqlParameter("@MemberStatus",MemberStatus),
                                            new SqlParameter("@Mobile",MobileNo),
                                              new SqlParameter("@ActivateBy",ActivationMode),
-                                            
+                                             new SqlParameter("@ContactAddress",CustomerId),
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAssociateList", para);
             return ds;
