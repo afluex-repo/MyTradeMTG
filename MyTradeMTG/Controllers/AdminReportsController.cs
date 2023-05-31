@@ -63,7 +63,7 @@ namespace MyTradeMTG.Controllers
         [HttpPost]
         [ActionName("AssociateList")]
         [OnAction(ButtonName = "Search")]
-        public ActionResult AssociateListBy(AdminReports model,string CustomerId)
+        public ActionResult AssociateListBy(AdminReports model)
         {
             if (model.LoginId == null)
             {
@@ -76,7 +76,6 @@ namespace MyTradeMTG.Controllers
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             // model.LoginId = model.ToLoginID;
             model.MemberStatus = model.MemberStatus == "0" ? null : model.MemberStatus;
-            model.CustomerId = CustomerId;
             DataSet ds = model.GetAssociateList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

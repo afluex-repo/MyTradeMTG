@@ -1766,9 +1766,12 @@
 @*<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>*@
 
 <script>
-
+    debugger;
+    @*var datesdsdd = new Date('@ViewBag.TOPUpDate').toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" })
+    alert(datesdsdd);*@
 
     function getMonthName(monthNumber) {
+        debugger;
         const date = new Date();
         date.setMonth(monthNumber - 1);
         return date.toLocaleString('en-US', { month: 'long' });
@@ -1776,14 +1779,20 @@
 
 
     function nextDate(dayIndex) {
+        debugger;
         var today = new Date('@ViewBag.TOPUpDate');
-        //var today = new Date("Apr 02, 2023 16:37:52");
+        //var today = new Date("May 29, 2023 16:37:52");
         today.setDate(today.getDate() + (dayIndex - 1 - today.getDay() + 7) % 7 + 1 + 7);
-        var day = today.getDate();
-        var month = today.getMonth() + 1;
-        var year = today.getFullYear();
-        var secondmonday = day + '-' + getMonthName(month) + '-' + year;
-        return secondmonday;
+
+        var ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(today);
+        var mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(today);
+        var da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(today);
+        var dateformat= `${da}-${mo}-${ye}`;
+        //var day = today.getDate();
+        //var month = today.getMonth() + 1;
+        //var year = today.getFullYear();
+        //var secondmonday = day + '-' + getMonthName(month) + '-' + year;
+        return dateformat;
     }
 
 

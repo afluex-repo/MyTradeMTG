@@ -164,7 +164,7 @@ namespace MyTradeMTG.Controllers
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
             {
-                ViewBag.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
+                ViewBag.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TotalTradeBonus)", "").ToString()).ToString("n2");
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
             {
