@@ -112,6 +112,7 @@
                                         <th>Status</th>
                                         <th>Sponsor Income</th>
                                         <th>Is Upgrade Package</th>
+                                        <th>Is TopUp</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -192,6 +193,7 @@
                                                     <td>@Item.Status</td>
                                                     <td>@Item.SponsorIncome%</td>
                                                     <td>@Item.UpgPackage</td>
+                                                    <td>@Item.IsTopUp</td>
                                                     <td class="d-flex">
                                                         <a href="/Master/PackageMaster?PackageID=@Item.Packageid" class="btn btn-info btn-xxs m-1">Edit</a>
                                                         <a href="/Master/DeletePackage?id=@Item.Packageid" class="btn btn-danger btn-xxs m-1" onclick="return confirm('Are you sure you want to delete this Package?');" name="btnDelete">Delete</a>

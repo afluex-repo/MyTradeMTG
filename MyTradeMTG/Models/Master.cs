@@ -14,6 +14,7 @@ namespace MyTradeMTG.Models
         public List<Master> lstpackage { get; set; }
         public List<Master> lstbalancetransfer { get; set; }
         public List<Master> QRCodeList { get; set; }
+        public string IsTopUp { get; set; }
         public decimal BinaryPercent { get; set; }
         public decimal BV { get; set; }
         public decimal ActivationMTGToken { get; set; }
@@ -121,8 +122,8 @@ namespace MyTradeMTG.Models
                                  new SqlParameter("@Fk_PackageId1",Fk_PackageId1),
                                  new SqlParameter("@Fk_PackageId2",Fk_PackageId2),
                                  new SqlParameter("@Fk_PackageId3",Fk_PackageId3),
-                                 new SqlParameter("@IsUpgradePackage",UpgPackage)
-                                 
+                                 new SqlParameter("@IsUpgradePackage",UpgPackage),
+                                  new SqlParameter("@IsTopUp",IsTopUp)
         };
 
             DataSet ds = DBHelper.ExecuteQuery("AddProduct", para);
@@ -190,7 +191,7 @@ namespace MyTradeMTG.Models
                                  //new SqlParameter("@FinalAmount",FinalAmount),
                                  new SqlParameter("@SponsorIncome",SponsorIncome),
                                   new SqlParameter("@IscomboPackage",IscomboPackage),
-
+                                  new SqlParameter("@IsTopUp",IsTopUp),
 
 
                                     new SqlParameter("@DrAmount1",DrAmount1),

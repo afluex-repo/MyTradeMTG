@@ -351,6 +351,7 @@ namespace MyTradeMTG.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.TopUpAmount = r["TopUpAmount"].ToString();
                     obj.Date = r["TopUpDate"].ToString();
+                    obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
                     lst.Add(obj);
                 }
                 model.lstROIIncome = lst;
@@ -379,6 +380,7 @@ namespace MyTradeMTG.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.TopUpAmount = r["TopUpAmount"].ToString();
                     obj.Date = r["TopUpDate"].ToString();
+                    obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
                     lst.Add(obj);
                 }
                 model.lstROIIncome = lst;
