@@ -16,7 +16,12 @@ namespace MyTradeMTG.Models
         {
             try
             {
+                //For Live
+
                 //connectionString = "data source=103.48.51.111,1232;initial catalog=mytradeglobaldb;user id=mytradeuser; password=trade@9819#; integrated security=false;";
+
+
+                //For Local
 
                 connectionString = "data source=103.48.51.111,1232;initial catalog=mytradedbtest;user id=mytradeuser; password=trade@9819#; integrated security=false;";
 
