@@ -19,6 +19,18 @@ namespace MyTradeMTG.Controllers
         }
         public ActionResult PayoutWalletLedger()
         {
+
+            User objcomm = new User();
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            objcomm.LoginId = Session["LoginId"].ToString();
+            DataSet ds1 = objcomm.GetPayoutBalance();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.PayoutBalance = ds1.Tables[0].Rows[0]["Balance"].ToString();
+            }
+
+            #endregion
             List<UserReports> lst = new List<UserReports>();
             UserReports model = new UserReports();
             model.LoginId = Session["LoginId"].ToString();
@@ -34,6 +46,7 @@ namespace MyTradeMTG.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Balance = r["Balance"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;
@@ -59,6 +72,7 @@ namespace MyTradeMTG.Controllers
                     obj.DrAmount = r["DrAmount"].ToString();
                     obj.Narration = r["Narration"].ToString();
                     obj.TransactionDate = r["TransactionDate"].ToString();
+                    obj.Balance = r["Balance"].ToString();
                     lst.Add(obj);
                 }
                 model.lst = lst;

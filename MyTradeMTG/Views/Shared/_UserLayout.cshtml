@@ -991,9 +991,9 @@
                             <span class="nav-text">TR2 Reports</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li>
+                            @*<li>
                                 <a href="/Wallet/ROIWallet"> TR2 Wallet</a>
-                            </li>
+                            </li>*@
                             <li><a href="/Wallet/ROIIncomeReports"> TR2 Income</a></li>
                         </ul>
                     </li>
@@ -1016,9 +1016,9 @@
                             <span class="nav-text">Payout</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="/Report/PayoutWalletLedger"> Payout Wallet</a></li>
+                            <li><a href="/Report/PayoutWalletLedger"> Payout Wallet Ledger</a></li>
                             <li><a href="/Report/PayoutDetail"> Payout Detail</a></li>
-                            <li><a href="/Report/PayoutLedger"> Payout Ledger</a></li>
+                            @*<li><a href="/Report/PayoutLedger"> Payout Ledger</a></li>*@
                         </ul>
                     </li>
                     <li>
@@ -1888,32 +1888,36 @@
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
                             for (var i = 0; i < t.length; i++) {
-                                //    AllYear.push(t[i].Year);
-                                //    PaidCramount.push(t[i].Cramount);
-                                //    PaidDramount.push(t[i].Dramount);
-                                ////}
+                                    //AllYear.push(t[i].Year);
+                                    //PaidCramount.push(t[i].Cramount);
+                                    //PaidDramount.push(t[i].Dramount);
+                                
                                 //debugger;
-                                //let xs = AllYear;
-                                //let yb = parseFloat(PaidCramount);
-                                //let ys = parseFloat(PaidDramount);
-                                //let x = "";
+                                //let YY = AllYear;
+                                //let Cr = PaidCramount;
+                                //let Dr = PaidDramount;
+                                let x = "";
+                                
+                            
                                 debugger;
+
                                 var chartBarRunningOptions = {
-                                    series: [{
+                                    series:[{
                                         name: 'Buy',
                                         data: [{
                                             x: t[i].Year,
-                                            y: [0.00, parseFloat(t[i].Cramount)]
-                                        }]
+                                            y: [0.00, t[i].Cramount]
+                                        }],
                                     },
-                                        {
-                                            name: 'Sell',
-                                            data: [{
-                                                x: t[i].Year,
-                                                y: [0.00, parseFloat(t[i].Dramount)]
-                                            }]
-                                        },
-                                    ],
+
+                                            {
+                                                name: 'Sell',
+                                                data: [{
+                                                    x: t[i].Year,
+                                                    y: [0.00, t[i].Dramount]
+                                                }]
+                                            }],
+
                                     
                                     chart: {
                                         type: 'rangeBar',
@@ -1926,7 +1930,7 @@
                                     },
                                     plotOptions: {
                                         bar: {
-                                            horizontal: true,
+                                            horizontal: false,
                                             columnWidth: '54%',
                                             endingShape: "rounded",
                                             startingShape: "rounded",
@@ -1935,7 +1939,7 @@
                                     },
                                     colors: ['#61C277', '#FF3E3E'],
                                     dataLabels: {
-                                        enabled: true,
+                                        enabled: false,
                                     },
                                     markers: {
                                         shape: "circle",
@@ -1964,7 +1968,7 @@
                                     grid: {
                                         borderColor: '#eee',
                                     },
-                                    xaxis: {
+                                    xaxis: { 
                                         labels: {
                                             style: {
                                                 colors: '#787878',
@@ -1997,11 +2001,11 @@
                                     },
                                     tooltip: {
                                         x: {
-                                            format: 'dd/MM/yy HH:mm'
+                                            format: t[i].Year
                                         },
                                         y: {
                                             formatter: function (val) {
-                                                return "$" + val + " thousands"
+                                                return "$" + parseFloat(val) + " thousands"
                                             }
                                         }
                                     },
@@ -2011,7 +2015,6 @@
                                             plotOptions: {
                                                 bar: {
                                                     columnWidth: '40%',
-
                                                 },
                                             },
                                             chart: {
@@ -2027,23 +2030,24 @@
 
                                         }
                                     }]
-                                };
 
+                                }
+                               
                             }
-                            
-                            debugger;
-                            var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
-                            
-                   
-                            chartBarRunningObject.render();
-                            
+                           
+                                debugger;
+                                var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
+                               
+                           
+                          
+                                chartBarRunningObject.render();
                             
                         },
-                        
-                        error: function (err) {
+                    error: function (err) {
 
-                        }
-                    });
+                    } 
+                });    
+                        
                 }
              ////// fro testin chart
              //   var chartBarRunning23 = function () {

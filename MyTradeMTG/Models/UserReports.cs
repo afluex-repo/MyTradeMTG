@@ -9,6 +9,7 @@ namespace MyTradeMTG.Models
 {
     public class UserReports
     {
+        public string Balance { get; set; }
         public List<UserReports> lst { get; set; }
         public string LoginId { get; set; }
         public string FK_UserId { get; set; }
