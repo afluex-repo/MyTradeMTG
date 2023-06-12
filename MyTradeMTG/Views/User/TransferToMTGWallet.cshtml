@@ -119,10 +119,10 @@
 }
 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 @*<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>*@
 @*<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />*@
-<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+@*<script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>*@
 <script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
 <script src="~/assets/js/components/notification/custom-snackbar.js"></script>
 
@@ -131,7 +131,7 @@
     <script>
         $(document).ready(function () {
             debugger;
-            jQuery.noConflict();
+           
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
@@ -173,7 +173,7 @@
                 $('#LoginId').focus();
                 return false;
             }
-            if ($('#Amount').val() == '') {
+            if ($('#Amount').val() == '0') {
                 $("#Amount").addClass('errortext');
                 $('#Amount').focus();
                 return false;
