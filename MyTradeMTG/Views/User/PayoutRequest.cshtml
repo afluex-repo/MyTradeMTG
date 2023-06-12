@@ -9,6 +9,7 @@
 <link href="~/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
 <link href="~/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
 <link href="~/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+
 @using (Html.BeginForm("PayoutRequest", "User", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="content-body">
@@ -186,10 +187,11 @@
         </div>
     </div>
 }
-
+@*<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="~/plugins/flatpickr/flatpickr.js"></script>
 <script src="~/plugins/flatpickr/custom-flatpickr.js"></script>
-<script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
+
 @*<script src="~/plugins/sweetalerts/sweetalert2.min.js"></script>
     <script src="~/plugins/sweetalerts/custom-sweetalert.js"></script>*@
 <script>
@@ -427,14 +429,12 @@
 </script>
 
 
-
-
 @if (TempData["msg"] != null)
 {
     <script>
         $(document).ready(function () {
             debugger;
-            jQuery.noConflict();
+            //jQuery.noConflict();
             swal({
                 backdrop: true,
                 allowOutsideClick: false,
