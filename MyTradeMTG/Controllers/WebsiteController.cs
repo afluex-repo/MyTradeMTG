@@ -480,6 +480,36 @@ namespace MyTradeMTG.Controllers
             return RedirectToAction("Index", "Website");
         }
 
+        public ActionResult ContactUs(Home model)
+        {
+            try
+            {
+                model.AddedBy = "1";
+                DataSet ds = model.SaveContact();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["ContactUsMag"] = "Your Message sent successfully.";
+                    }
+
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["ContactUsErrorMsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["ContactUsErrorMsg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ContactUsErrorMsg"] = ex.Message;
+            }
+            //return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Website");
+        }
         
 
     }

@@ -189,6 +189,7 @@ namespace MyTradeMTG.Controllers
                     obj.Package2 = r["Package2"].ToString();
                     obj.Package3 = r["Package3"].ToString();
                     obj.UpgPackage = r["IsUpgradePackage"].ToString();
+                    obj.IsTopUp = r["IsTopUp"].ToString();
                     lst.Add(obj);
                 }
                 model.lstpackage = lst;
@@ -406,7 +407,7 @@ namespace MyTradeMTG.Controllers
             return View(obj);
         }
 
-        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3,string Fk_PackageId1,string Fk_PackageId2,string Fk_PackageId3,string IsUpgradePackage)
+        public ActionResult SaveProduct(string PackageType, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3,string Fk_PackageId1,string Fk_PackageId2,string Fk_PackageId3,string IsUpgradePackage,string IsTopUp)
         {
             Master obj = new Master();
             try
@@ -435,6 +436,7 @@ namespace MyTradeMTG.Controllers
                 obj.SponsorIncome = Convert.ToDecimal(SponsorIncome);
                 obj.IscomboPackage = IscomboPackage;
                 obj.UpgPackage = IsUpgradePackage;
+                obj.IsTopUp = IsTopUp;
 
                 obj.Fk_PackageId1 = Fk_PackageId1;
                 obj.Fk_PackageId2 = Fk_PackageId2;
@@ -463,7 +465,7 @@ namespace MyTradeMTG.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3,string IsUpgradePackage)
+        public ActionResult UpdateProduct(string PackageType, string Packageid, string ProductName, string ProductPrice, string IGST, string ROIPercent, string BV, string FromAmount, string ToAmount, string Days, string InMultipleOf, string HSNCode, string FinalAmount, string SponsorIncome, string IscomboPackage, string ActivationMTGToken, string BasisOn, string DrAmount1, string DrAmount2, string DrAmount3, string ReturnPercent1, string ReturnPercent2, string ReturnPercent3, string IsTopUp)
         {
             Master obj = new Master();
             try
@@ -496,7 +498,7 @@ namespace MyTradeMTG.Controllers
                 obj.ToAmount = Convert.ToDecimal(ToAmount);
                 obj.InMultipleOf = Convert.ToDecimal(InMultipleOf);
                 obj.IscomboPackage = IscomboPackage;
-                obj.UpgPackage = IsUpgradePackage;
+                obj.IsTopUp = IsTopUp;
                 //obj.FinalAmount = Convert.ToDecimal(FinalAmount);
                 DataSet ds = obj.UpdateProduct();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

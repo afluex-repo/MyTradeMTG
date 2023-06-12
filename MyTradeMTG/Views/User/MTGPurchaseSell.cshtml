@@ -265,8 +265,8 @@
         //var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
         $("#TransferCharge").attr("readonly", true);
 
-        if(Amount <= MinMTGSell){
-            alert("Minimum MTG should be less than or equal from MTG Token.");
+        if(Amount < MinMTGSell){
+            alert("MTG Token should be greater than from minimum MTG.");
             $("#MTGToken").addClass('errortext');
             $('#MTGToken').focus();
             $("#MTGToken").val('');

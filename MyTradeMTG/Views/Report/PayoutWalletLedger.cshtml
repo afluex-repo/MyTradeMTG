@@ -16,12 +16,15 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <h4>Payout Wallet</h4>
+                                    <h4>Payout Wallet Ledger</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                @*<div class="col-lg-12 col-md-12">
+                                    <p style="color:#ff0000">MTG /USDT Wallet(Payout): @ViewBag.PayoutBalance.00</p>
+                                </div>*@
                                 <div class="col-lg-3 col-md-3">
                                     <div class="form-group">
                                         <label>
@@ -38,11 +41,17 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3" style="margin-top:28px">
+                                <div class="col-lg-2 col-md-2" style="margin-top:40px">
                                     <div class="form-group">
-                                        <input type="submit" class="btn btn-success" value="Search" name="btnSearch" />
+                                        <input type="submit" class="btn btn-success btn-sm" value="Search" name="btnSearch" />
                                     </div>
                                 </div>
+                                <div class="col-lg-4 col-md-4" >
+                                <div class="form-group">
+                                    <p style="color:#ff0000">MTG /USDT Wallet(Payout): @ViewBag.PayoutBalance</p>
+                                    <a href="/User/TransferToMTGWallet" class="btn btn-info btn-sm">Transfer to MTG Wallet</a>
+                                </div>
+                            </div>
                             </div>
                             <div class="row mt-4">
                                 <table id="html5-extension" class="table table-hover non-hover" data-sortable="false" data-page-length='20'>
@@ -52,6 +61,7 @@
                                             <th>Narration</th>
                                             <th>Cr. MTG /USDT</th>
                                             <th>Dr. MTG /USDT</th>
+                                            <th>MTG /USDT Balance</th>
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
@@ -60,7 +70,7 @@
                                         {
                                             if (Model.lst != null)
                                             {
-                                                int i = 43;
+                                                int i = 1;
                                                 foreach (var Item in Model.lst)
                                                 {
                                                     <tr class="text-left">
@@ -68,9 +78,10 @@
                                                         <td>@Item.Narration</td>
                                                         <td>@Item.CrAmount</td>
                                                         <td>@Item.DrAmount</td>
+                                                        <td>@Item.Balance</td>
                                                         <td>@Item.TransactionDate</td>
                                                     </tr>
-                                                    i--;
+                                                    i++;
                                                 }
                                             }
                                         }

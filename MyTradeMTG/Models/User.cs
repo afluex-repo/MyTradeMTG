@@ -61,6 +61,7 @@ namespace MyTradeMTG.Models
 
 
         public List<User> lstBReports { get; set; }
+        public List<User> TransferMTGWallet { get; set; }
         public List<SelectListItem> ddlProductName { get; set; }
         public List<User> lstPayoutRequest { get; set; }
         public List<User> lstFranchise { get; set; }
@@ -433,6 +434,25 @@ namespace MyTradeMTG.Models
                 new SqlParameter("@Fk_UserId",Fk_UserId)
             };
             DataSet ds = DBHelper.ExecuteQuery("GetWalletTransfer", para);
+            return ds;
+        }
+        public DataSet GetTransferMTGWallet()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@Fk_UserId",Fk_UserId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetTransferMTGWallet", para);
+            return ds;
+        }
+        public DataSet SaveTransferMTGWallet()
+        {
+            SqlParameter[] para = {
+
+                new SqlParameter("@Fk_UserId",Fk_UserId),
+                new SqlParameter("@Amount",Amount),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveTransferMTGWallet", para);
             return ds;
         }
 

@@ -52,6 +52,7 @@ namespace MyTradeMTG.Controllers
                     obj.IsHoldTPS = r["IsTPSHold"].ToString();
                     obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
                     obj.PermanentDate = r["PermanentDate"].ToString();
+                    obj.CustomerId = r["CustomerId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -97,6 +98,8 @@ namespace MyTradeMTG.Controllers
                     obj.ActivationMode = r["ActivationMode"].ToString();
                     obj.IsHoldTPS = r["IsTPSHold"].ToString();
                     obj.WithdrawalStatus = r["WithdrawalStatus"].ToString();
+                    obj.PermanentDate = r["PermanentDate"].ToString();
+                    obj.CustomerId = r["CustomerId"].ToString();
                     lst.Add(obj);
                 }
                 model.lstassociate = lst;
@@ -1955,6 +1958,7 @@ namespace MyTradeMTG.Controllers
                     ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
                     ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                    ViewBag.FirstTopUpMTG = ds.Tables[0].Rows[0]["FirstTopUpMTG"].ToString();
                 }
             }
             return View(model);

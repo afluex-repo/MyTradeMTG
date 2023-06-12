@@ -1267,6 +1267,8 @@
     <Content Include="Views\User\PrintWelcomeLetter.cshtml" />
     <Content Include="Views\AdminReports\PrintWelcomeLetter.cshtml" />
     <Content Include="Views\Franchise\WalletTransfer.cshtml" />
+    <Content Include="Views\Home\AutoUpgradeTR2.cshtml" />
+    <Content Include="Views\User\TransferToMTGWallet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

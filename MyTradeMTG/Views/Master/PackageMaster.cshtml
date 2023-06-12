@@ -37,6 +37,13 @@
                                     <input name="UpgPackage" type="hidden" value="@Model.UpgPackage" />
                                 </div>
                             </div>
+                            <div class="col-md-3" id="divIsTopUp">
+                                <div class="example">
+                                    <br /><br />
+                                    <input type="checkbox" name="IsTopUp" id="IsTopUp" value="@Model.IsTopUp" /><span> Is TopUp</span>
+                                    <input name="IsTopUp" type="hidden" value="@Model.IsTopUp" />
+                                </div>
+                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Package Name <span style="color: red">*</span></label>
@@ -345,6 +352,7 @@
 
     $(document).ready(function () {
         debugger;
+        
         var packagetype = $("#PackageTypeId").val();
         if (packagetype == 2) {
             $("#divfromamount").show();
@@ -363,6 +371,7 @@
             $("#divsponsorpercent").show();
             $("#divUpgradePackage").show();
             $("#lblUpgradePackage").show();
+            $("#divIsTopUp").show();
 
             $("#divbasis").show();
 
@@ -387,7 +396,8 @@
             $("#divPackage2").show();
             $("#divPackage3").show();
 
-
+            
+                
             $("#UpgPackage").click(function () {
                 debugger;
                 if ($("#UpgPackage").is(":checked")) {
@@ -446,7 +456,7 @@
             $("#divPackage3").hide();
             $("#divUpgPackage").hide();
             $("#lblUpgradePackage").hide();
-
+            $("#divIsTopUp").hide();
 
             //var ComboPackage = $("#IscomboPackage").val();
             //debugger
@@ -493,7 +503,7 @@
             $("#divUpgPackage").hide();
             $("#divUpgradePackage").hide();
             $("#lblUpgradePackage").hide();
-
+            $("#divIsTopUp").hide();
         }
     });
     function validate() {
@@ -633,6 +643,7 @@
             $("#divPackage3").show();
             $("#divUpgPackage").show();
             $("#divUpgradePackage").show();
+            $("#divIsTopUp").show();
 
             //$("#divdramount1").hide();
             //$("#divdramount2").hide();
@@ -641,24 +652,31 @@
             //$("#divReturnPercent2").hide();
             //$("#divReturnPercent3").hide();
 
+            $("#divfromamount").hide();
+            $("#divtoamount").hide();
+            $("#divmultiple").hide();
+            $("#divmtgtoken").hide();
+            $("#lblUpgradePackage").hide();
+            $("#divUpgradePackage").hide();
             $("#UpgPackage").click(function () {
                 debugger;
                 if ($(this).is(":checked")) {
-                    $("#divfromamount").hide();
-                    $("#divtoamount").hide();
-                    $("#divmultiple").hide();
-                    $("#divmtgtoken").hide();
-                    $("#lblUpgradePackage").hide();
-                    $("#divUpgradePackage").hide();
-
-                }
-                else {
                     $("#divfromamount").show();
                     $("#divtoamount").show();
                     $("#divmultiple").show();
                     $("#divmtgtoken").show();
                     $("#lblUpgradePackage").show();
                     $("#divUpgradePackage").show();
+                    
+
+                }
+                else {
+                    $("#divfromamount").hide();
+                    $("#divtoamount").hide();
+                    $("#divmultiple").hide();
+                    $("#divmtgtoken").hide();
+                    $("#lblUpgradePackage").hide();
+                    $("#divUpgradePackage").hide();
                 }
             });
 
@@ -705,6 +723,7 @@
             $("#divUpgPackage").hide();
             $("#lblUpgradePackage").hide();
             $("#divUpgradePackage").hide();
+            $("#divIsTopUp").hide();
 
 
         }
@@ -744,6 +763,7 @@
             $("#divUpgPackage").hide();
             $("#divUpgradePackage").hide();
             $("#lblUpgradePackage").hide();
+            $("#divIsTopUp").hide();
 
         }
     }
@@ -797,6 +817,13 @@
         else {
             IsUpgradePackage = "0";
         }
+        var IsTopUp = 0;
+        if ($("#IsTopUp").is(":checked") == true) {
+            IsTopUp = "1";
+        }
+        else {
+            IsTopUp = "0";
+        }
 
         if ($('#PackageTypeId').val() == '0') {
             $("#PackageTypeId").addClass('errortext');
@@ -839,7 +866,7 @@
         //    return false;
         //}
 
-        if (IsUpgradePackage == '0' || IsUpgradePackage == '')
+        if (IsUpgradePackage == '1')
         {
             if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
                 $("#ActivationMTGToken").addClass('errortext');
@@ -1046,7 +1073,7 @@
             url: "/Master/SaveProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, Fk_PackageId1: $('#Fk_PackageId1').val(), Fk_PackageId2: $('#Fk_PackageId2').val(), Fk_PackageId3: $('#Fk_PackageId3').val(), IsUpgradePackage: IsUpgradePackage },
+            data: { PackageType: $("#PackageTypeId").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $('#FinalAmount').val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, Fk_PackageId1: $('#Fk_PackageId1').val(), Fk_PackageId2: $('#Fk_PackageId2').val(), Fk_PackageId3: $('#Fk_PackageId3').val(), IsUpgradePackage: IsUpgradePackage, IsTopUp: IsTopUp },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';
@@ -1221,14 +1248,21 @@
             IscomboPackage = "0";
         }
 
-        var IsUpgradePackage = 0;
-        if ($("#UpgPackage").is(":checked") == true) {
-            IsUpgradePackage = "1";
+        //var IsUpgradePackage = 0;
+        //if ($("#UpgPackage").is(":checked") == true) {
+        //    IsUpgradePackage = "1";
+        //}
+        //else {
+        //    IsUpgradePackage = "0";
+        //}
+        var IsTopUp = 0;
+        if ($("#IsTopUp").is(":checked") == true) {
+            IsTopUp = "1";
         }
         else {
-            IsUpgradePackage = "0";
+            IsTopUp = "0";
         }
-
+       
         if ($('#PackageTypeId').val() == '0') {
             $("#PackageTypeId").addClass('errortext');
             $('#PackageTypeId').focus();
@@ -1271,13 +1305,13 @@
         //    $('#BV').focus();
         //    return false;
         //}
-        if (IsUpgradePackage == '0' || IsUpgradePackage == '') {
-            if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
-                $("#ActivationMTGToken").addClass('errortext');
-                $('#ActivationMTGToken').focus();
-                return false;
-            }
-        }
+        //if ($("#UpgPackage").val() == '0' || $("#UpgPackage").val() == '') {
+        //    if ($('#ActivationMTGToken').val() == '' || $('#ActivationMTGToken').val() == '0') {
+        //        $("#ActivationMTGToken").addClass('errortext');
+        //        $('#ActivationMTGToken').focus();
+        //        return false;
+        //    }
+        //}
 
         //if ($('#BasisOn').val() == '' || $('#BasisOn').val() == '0') {
         //    $("#BasisOn").addClass('errortext');
@@ -1339,7 +1373,7 @@
                 return false;
             }
 
-            if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+            if ($('#SponsorIncome').val() == '' ){
                 $("#SponsorIncome").addClass('errortext');
                 $('#SponsorIncome').focus();
                 return false;
@@ -1419,7 +1453,7 @@
                 return false;
             }
 
-            if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+            if ($('#SponsorIncome').val() == '' ) {
                 $("#SponsorIncome").addClass('errortext');
                 $('#SponsorIncome').focus();
                 return false;
@@ -1452,7 +1486,7 @@
                     $('#Days').focus();
                     return false;
                 }
-                if ($('#SponsorIncome').val() == '' || $('#SponsorIncome').val() == '0') {
+                if ($('#SponsorIncome').val() == '') {
                     $("#SponsorIncome").addClass('errortext');
                     $('#SponsorIncome').focus();
                     return false;
@@ -1467,7 +1501,7 @@
             url: "/Master/UpdateProduct",
             Type: "Get",
             DataType: "JSON",
-            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, IsUpgradePackage: IsUpgradePackage },
+            data: { PackageType: $("#PackageTypeId").val(), Packageid: $("#Packageid").val(), ProductName: $("#ProductName").val(), ProductPrice: $("#ProductPrice").val(), BasisOn: $("#BasisOn :selected").val(), ROIPercent: $("#ROIPercent").val(), ActivationMTGToken: $("#ActivationMTGToken").val(), FromAmount: $("#FromAmount").val(), ToAmount: $("#ToAmount").val(), Days: $("#Days").val(), InMultipleOf: $('#InMultipleOf').val(), FinalAmount: $("#FinalAmount").val(), SponsorIncome: $('#SponsorIncome').val(), DrAmount1: $('#DrAmount1').val(), DrAmount2: $('#DrAmount2').val(), DrAmount3: $('#DrAmount3').val(), ReturnPercent1: $('#ReturnPercent1').val(), ReturnPercent2: $('#ReturnPercent2').val(), ReturnPercent3: $('#ReturnPercent3').val(), IscomboPackage: IscomboPackage, IsTopUp: IsTopUp },
             success: function (data) {
                 alert(data.Result);
                 window.location.href = '@Url.Action("PackageMaster", "Master")';

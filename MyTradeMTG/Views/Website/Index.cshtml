@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Website_LayoutPage.cshtml";
 }
+<link href="~/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"
         crossorigin="anonymous"></script>
@@ -492,19 +493,23 @@
                 <div class="contact">
                     <h4>How can we help you?</h4>
                     <p>Drop us a message for any query</p>
-                    <form class="form" name="enq" method="post" action="https://bestwpware.com/html/tf/coincap-demo/coincap/contact.php" onsubmit="return validation();">
+                    <form class="form" name="enq" method="post" action="/Website/ContactUs" onsubmit="return validation();">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Name" required="required">
+                                @*<input type="text" name="name" class="form-control" placeholder="Name" required="required">*@
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" ,@required = "required" })
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="email" name="email" class="form-control" placeholder="Email" required="required">
+                                @*<input type="email" name="email" class="form-control" placeholder="Email" required="required">*@
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email", @required = "required" })
                             </div>
                             <div class="form-group col-md-12">
-                                <input type="number" name="number" class="form-control" placeholder="Phone No." required="required">
+                                @*<input type="number" name="number" class="form-control" placeholder="Phone No." required="required">*@
+                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No.", @required = "required" })
                             </div>
                             <div class="form-group col-md-12">
-                                <textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
+                                @*<textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>*@
+                                @Html.TextAreaFor(m => m.Message, new { @class = "form-control", @Placeholder = "Your Message", @required = "required" })
                             </div>
                             <div class="col-md-12 text-center">
                                 <button type="submit" value="Send message" name="submit" id="submitButton" class="btn_one" title="Submit Your Message!">Send Message</button>
@@ -782,7 +787,8 @@
         </div>
     </div>
 </div>
-
+<script src="~/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/assets/js/components/notification/custom-snackbar.js"></script>
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
@@ -1138,6 +1144,32 @@
             $(".forget_form").show();
             return true;
         });
+    </script>
+}
+@if (TempData["ContactUsMag"] != null)
+{
+    <script>
+       $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["ContactUsMag"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#41D800',
+                    pos: 'top-right'
+                });
+            });
+    </script>
+}
+@if (TempData["ContactUsErrorMsg"] != null)
+{
+    <script>
+       $(document).ready(function () {
+                Snackbar.show({
+                    text: '@TempData["ContactUsErrorMsg"]',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-right'
+                });
+            });
     </script>
 }
 @if (TempData["PassErrMag"] != null)

@@ -164,7 +164,7 @@ namespace MyTradeMTG.Controllers
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
             {
-                ViewBag.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TopUpAmount)", "").ToString()).ToString("n2");
+                ViewBag.TotalTPSAmountTobeReceived = double.Parse(ds.Tables[3].Compute("sum(TotalTradeBonus)", "").ToString()).ToString("n2");
             }
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
             {
@@ -1641,7 +1641,8 @@ namespace MyTradeMTG.Controllers
             #endregion
             return View(model);
         }
-        public ActionResult PayoutRequest()    
+        public ActionResult PayoutRequest()
+
         {
             string FormName = "";
             string Controller = "";
@@ -1701,10 +1702,10 @@ namespace MyTradeMTG.Controllers
                 ViewBag.Reason = ds1.Tables[2].Rows[0]["Reason"].ToString();
             }
             #region Check Balance
-            DataSet ds11 = model.GetWalletBalance();
+            DataSet ds11 = model.GetPayoutBalance();
             if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
             {
-                model.PayoutBalance = ds11.Tables[0].Rows[0]["amount"].ToString();
+                model.PayoutBalance = ds11.Tables[0].Rows[0]["Balance"].ToString();
             }
             #endregion
             return View(model);
@@ -2826,6 +2827,7 @@ namespace MyTradeMTG.Controllers
                     ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
                     ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                    ViewBag.FirstTopUpMTG = ds.Tables[0].Rows[0]["FirstTopUpMTG"].ToString();
                 }
             }
             return View(model);
@@ -2848,9 +2850,70 @@ namespace MyTradeMTG.Controllers
                     ViewBag.PermanentDate = ds.Tables[0].Rows[0]["PermanentDate"].ToString();
                     ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
+                    ViewBag.FirstTopUpMTG = ds.Tables[0].Rows[0]["FirstTopUpMTG"].ToString();
                 }
             }
             return View(model);
+        }
+        public ActionResult TransferToMTGWallet()
+        {
+            User objcomm = new User();
+            #region Check Balance
+            objcomm.Fk_UserId = Session["Pk_UserId"].ToString();
+            objcomm.LoginId = Session["LoginId"].ToString();
+            DataSet ds = objcomm.GetPayoutBalance();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                ViewBag.PayoutBalance = ds.Tables[0].Rows[0]["Balance"].ToString();
+            }
+            #endregion
+
+            
+            User model = new User();
+            List<User> lst = new List<User>();
+            model.Name = Session["FullName"].ToString();
+            model.Fk_UserId = Session["Pk_UserId"].ToString();
+            model.LoginId = Session["LoginId"].ToString();
+            DataSet ds11 = model.GetTransferMTGWallet();
+            if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds11.Tables[0].Rows)
+                {
+                    User obj1 = new User();
+                    obj1.TransferDate = r["TransferDate"].ToString();
+                    obj1.MTG = r["TransferMTG"].ToString();
+                    lst.Add(obj1);
+                }
+                model.TransferMTGWallet = lst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("TransferToMTGWallet")]
+        [OnAction(ButtonName = "btnTransferMTG")]
+        public ActionResult TransferToMTGWallet(User model)
+        {
+            try
+            {
+                model.Fk_UserId = Session["PK_UserId"].ToString();
+                DataSet ds = model.SaveTransferMTGWallet();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["MTGwallettransfer"] = "Transferred  successfully";
+                    }
+                    else
+                    {
+                        TempData["MTGwallettransfererror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["MTGwallettransfererror"] = ex.Message;
+            }
+            return RedirectToAction("TransferToMTGWallet", "User");
         }
     }
 }
