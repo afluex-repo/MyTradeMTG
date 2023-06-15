@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @*<link href="/UserPanel/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">*@
     <link href="/UserPanel/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/UserPanel/vendor/chartist/css/chartist.min.css">
     <link href="/UserPanel/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/UserPanel/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
@@ -1084,6 +1085,8 @@
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/bootstrap/js/popper.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Chart Chartist plugin files -->
+
 
     <!-- Required vendors -->
     <script src="/UserPanel/vendor/global/global.min.js"></script>
@@ -1106,14 +1109,18 @@
     <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/UserPanel/icons/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/UserPanel/icons/font-awesome/css/all.min.css">
     <!-- Dashboard 2 -->
     @*<script src="/UserPanel/js/dashboard/dashboard-4.js"></script>*@
     <script src="/UserPanel/js/deznav-init.js"></script>
     @*<script src="/UserPanel/js/demo.js"></script>*@
+      <!-- Chart Chartist plugin files -->
+    <script src="/UserPanel/vendor/chartist/js/chartist.min.js"></script>
+    <script src="/UserPanel/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+    <script src="/UserPanel/js/plugins-init/chartist-init.js"></script>
+ 
 
-    @*<script src="~/UserPanel/js/plugins-init/chartist-init.js"></script>*@
-    <script src="~/UserPanel/vendor/chartist/js/chartist.min.js"></script>
-    <script src="~/UserPanel/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
     <script>
         jQuery(document).ready(function () {
@@ -1891,20 +1898,21 @@
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
                             for (var i = 0; i < t.length; i++) {
-                                //AllYear.push(t[i].Year);
-                                //PaidCramount.push(t[i].Cramount);
-                                //PaidDramount.push(t[i].Dramount);
-
+                                    //AllYear.push(t[i].Year);
+                                    //PaidCramount.push(t[i].Cramount);
+                                    //PaidDramount.push(t[i].Dramount);
+                                
                                 //debugger;
                                 //let YY = AllYear;
                                 //let Cr = PaidCramount;
                                 //let Dr = PaidDramount;
                                 let x = "";
                                 
+                            
                                 debugger;
 
                                 var chartBarRunningOptions = {
-                                    series: [{
+                                    series:[{
                                         name: 'Buy',
                                         data: [{
                                             x: t[i].Year,
@@ -1920,7 +1928,7 @@
                                                 }]
                                             }],
 
-
+                                    
                                     chart: {
                                         type: 'rangeBar',
                                         height: 370,
@@ -1941,7 +1949,7 @@
                                     },
                                     colors: ['#61C277', '#FF3E3E'],
                                     dataLabels: {
-                                        enabled: true,
+                                        enabled: false,
                                     },
                                     markers: {
                                         shape: "circle",
@@ -1970,7 +1978,7 @@
                                     grid: {
                                         borderColor: '#eee',
                                     },
-                                    xaxis: {
+                                    xaxis: { 
                                         labels: {
                                             style: {
                                                 colors: '#787878',
@@ -2034,22 +2042,22 @@
                                     }]
 
                                 }
-
+                               
                             }
-
-                            debugger;
-                            var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
-
-
-
-                            chartBarRunningObject.render();
-                       
+                           
+                                debugger;
+                                var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
+                               
+                           
+                          
+                                chartBarRunningObject.render();
+                            
                         },
-                        error: function (err) {
+                    error: function (err) {
 
-                        }
-                    });
-
+                    } 
+                });    
+                        
                 }
              ////// fro testin chart
              //   var chartBarRunning23 = function () {
@@ -2741,116 +2749,7 @@
             }
         })
     </script>
-    <script>
-        var dzChartlist = function () {
 
-            var screenWidth = $(window).width();
-
-            var setChartWidth = function () {
-
-                if (screenWidth <= 768) {
-                    var chartBlockWidth = 0;
-                    if (screenWidth >= 500) {
-                        chartBlockWidth = 250;
-                    } else {
-                        chartBlockWidth = 300;
-                    }
-
-                    jQuery('.chartlist-chart').css('min-width', chartBlockWidth - 31);
-                }
-            }
-
-
-            var labelPlacementChart = function () {
-                debugger;
-                $.ajax({
-                    url: "/User/GetchartBarRunning",
-                    type: "GET",
-                    dataType: 'JSON',
-                    data: JSON.stringify(),
-                    contentType: 'application/json;',
-                    success: function (d) {
-                        debugger;
-                        var PaidCramount = [];
-                        var PaidDramount = [];
-                        var AllYear = [];
-                        var t = JSON.parse(JSON.stringify(d));
-                        for (var i = 0; i < t.length; i++) {
-                            AllYear.push(t[i].Year);
-                            PaidCramount.push(t[i].Cramount);
-                            PaidDramount.push(t[i].Dramount);
-                        }
-                        debugger;
-                        let YY = AllYear;
-                        let Cr = PaidCramount;
-                        let Dr = PaidDramount;
-
-                        new Chartist.Bar('#label-placement-chart', {
-                            //labels: YY,
-                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                            //series: [
-                            //  Cr,
-                            //  Dr
-                            //]
-                            series: [
-                              [5, 4, 3, 7, 5, 10, 3],
-                              [3, 2, 9, 5, 4, 6, 4]
-                            ]
-                        }, {
-                            axisX: {
-                                // On the x-axis start means top and end means bottom
-                                position: 'start'
-                            },
-                            axisY: {
-                                // On the y-axis start means left and end means right
-                                position: 'end'
-                            },
-                            plugins: [
-                                  Chartist.plugins.tooltip()
-                            ]
-                        });
-                    },
-                    error: function (err) {
-
-                    }
-                });
-            }
-
-
-
-            /* Function ============ */
-            return {
-                init: function () {
-                },
-
-
-                load: function () {
-                    labelPlacementChart();
-                },
-
-                resize: function () {
-                    labelPlacementChart();
-                }
-            }
-
-        }();
-
-        jQuery(document).ready(function () {
-        });
-
-        jQuery(window).on('load', function () {
-            setTimeout(function () {
-                dzChartlist.resize();
-            }, 1000);
-        });
-
-        jQuery(window).on('resize', function () {
-            setTimeout(function () {
-                dzChartlist.resize();
-            }, 1000);
-
-        });
-
-    </script>
+   
 </body>
 </html>

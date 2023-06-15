@@ -20,6 +20,11 @@ namespace MyTradeMTG.Controllers
 {
     public class UserController : UserBaseController
     {
+
+        public ActionResult Test()
+        {
+            return View();
+        }
         // GET: User
         public ActionResult UserDashBoard()
         {
@@ -2915,5 +2920,7 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("TransferToMTGWallet", "User");
         }
+
+       
     }
 }
