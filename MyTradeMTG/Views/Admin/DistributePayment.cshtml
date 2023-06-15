@@ -61,7 +61,7 @@
                                         <th>Sr No.</th>
                                         <th>Login Id</th>
                                         <th>Name</th>
-                                        <th>TR1 Level Income</th>
+                                        @*<th>TR1 Level Income</th>*@
                                         <th>TR2 Level Income</th>
                                         <th>SB</th>
                                         <th>Gross MTG /USDT</th>
@@ -82,7 +82,7 @@
                                                     <td>@i</td>
                                                     <td>@Item.LoginId</td>
                                                     <td>@Item.Name</td>
-                                                    <td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPP('@Item.LoginId');">@Item.TPPLevelIncome</a></td>
+                                                    @*<td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPP('@Item.LoginId');">@Item.TPPLevelIncome</a></td>*@
                                                     <td><a href="javascript:void(0)" class="td-content product-brand text-danger" onclick="OpenTPS('@Item.LoginId');">@Item.TPSLevelIncome</a></td>
 
                                                     <td ><a  class="td-content product-brand text-secondary" target="_blank" href="/Admin/SponsorIncome?loginid=@Item.LoginId">@Item.SponsorBonus</a></td>

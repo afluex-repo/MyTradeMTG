@@ -18,6 +18,8 @@
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/MyTradeWebsite/assets/js/jquery.min.js"></script>
+    <!-- jsPDF library -->
+    <script src="js/jsPDF/dist/jspdf.min.js"></script>
     
     <style>
                 ul {
@@ -685,7 +687,7 @@
     </style>
 </head>
 
-<body>
+<body id="body">
     <div class="tm_container">
         <div class="tm_invoice_wrap">
             <div class="tm_invoice tm_style1 tm_type1" id="printableDiv1">
@@ -701,7 +703,7 @@
                         <div class="tm_shape_bg tm_accent_bg tm_mobile_hide"></div>
                        
                     </div>
-                    <a  class="btn btn-info btn-sm mt-3" style="float:right" id="print_btn" onclick="javascript: window.print()" ><i class="fa fa-print"></i> Print</a>
+                    <a  class="btn btn-info btn-sm mt-3 print" style="float:right" id="print_btn" onclick="Convert_HTML_To_PDF();"><i class="fa fa-print"></i> Print</a>
                     @*<a href="/User/PrintWelcomeLetter" download="Mytrade Welcome Letter.pdf" onclick="javascript: window.print()"  class="btn btn-info btn-sm mt-3">PDF</a>*@
                     @*<button class="btn btn-info btn-sm mt-3" style="float:right" id="print_btn" name="print_btn">Download</button>*@
                     <div class="tm_invoice_head tm_mb10">
@@ -750,5 +752,31 @@
             </div>
         </div>
     </div>
+    <script>
+        debugger;
+        window.jsPDF = window.jspdf.jsPDF;
+
+        // Convert HTML content to PDF
+        function Convert_HTML_To_PDF() {
+            var doc = new jsPDF();
+
+            // Source HTMLElement or a string containing HTML.
+            var elementHTML = document.querySelector("#body");
+
+            doc.html(elementHTML, {
+                callback: function (doc) {
+                    // Save the PDF
+                    doc.save('document-html.pdf');
+                },
+                margin: [10, 10, 10, 10],
+                autoPaging: 'text',
+                x: 0,
+                y: 0,
+                width: 190, //target width in the PDF document
+                windowWidth: 675 //window width in CSS pixels
+            });
+        }
+    </script>
 </body>
 </html>
+

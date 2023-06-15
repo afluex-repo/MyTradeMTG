@@ -393,6 +393,7 @@ namespace MyTradeMTG.Controllers
                         obj.SponsorIncome = Convert.ToDecimal(ds.Tables[0].Rows[0]["SponsorIncome"]);
                         obj.BasisOn = (ds.Tables[0].Rows[0]["BasisOn"].ToString());
                         obj.UpgPackage= ds.Tables[0].Rows[0]["IsUpgradePackage"].ToString();
+                        obj.IsTopUp = ds.Tables[0].Rows[0]["IsTopUp"].ToString();
                     }
                 }
                 catch (Exception ex)

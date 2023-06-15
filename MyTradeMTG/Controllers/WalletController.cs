@@ -434,6 +434,7 @@ namespace MyTradeMTG.Controllers
                     obj.Date = r["ROIDate"].ToString();
                     obj.Status = r["Status"].ToString();
                     obj.TopUpIdRandom = r["TopUpIdRandom"].ToString();
+                    obj.ClosingDate = r["ClosingDate"].ToString();
                     lst.Add(obj);
                 }
                 model.lstROI = lst;
