@@ -349,6 +349,7 @@
         {
             var BasisOn = $("#BasisOn").val($("#BasisOn123").val()).attr("selected", "selected");
         }
+    
 
     $(document).ready(function () {
         debugger;
@@ -383,7 +384,7 @@
             //$("#divReturnPercent3").hide();
 
 
-            $("#divdramount1").show();
+              ("#divdramount1").show();
             $("#divdramount2").show();
             $("#divdramount3").show();
             $("#divReturnPercent1").hide();
@@ -396,25 +397,47 @@
             $("#divPackage2").show();
             $("#divPackage3").show();
 
+            if ($("#IsTopUp").val() == "True") {
+                $("#IsTopUp").prop("checked", true);
+            } else {
+                $("#IsTopUp").prop("checked", false);
+            }
+            if ($("#UpgPackage").val() == "True") {
+                $("#UpgPackage").prop("checked", true);
+                $("#divfromamount").show();
+                $("#divtoamount").show();
+                $("#divmultiple").show();
+                $("#divmtgtoken").show();
+                $("#lblUpgradePackage").show();
+                $("#divUpgradePackage").show();
+            }
+            else {
+                $("#divfromamount").hide();
+                $("#divtoamount").hide();
+                $("#divmultiple").hide();
+                $("#divmtgtoken").hide();
+                $("#lblUpgradePackage").hide();
+                $("#divUpgradePackage").hide();
+            }
             
                 
             $("#UpgPackage").click(function () {
                 debugger;
                 if ($("#UpgPackage").is(":checked")) {
-                    $("#divfromamount").hide();
-                    $("#divtoamount").hide();
-                    $("#divmultiple").hide();
-                    $("#divmtgtoken").hide();
-                    $("#lblUpgradePackage").hide();
-                    $("#divUpgradePackage").hide();
-                }
-                else {
                     $("#divfromamount").show();
                     $("#divtoamount").show();
                     $("#divmultiple").show();
                     $("#divmtgtoken").show();
                     $("#lblUpgradePackage").show();
                     $("#divUpgradePackage").show();
+                }
+                else {
+                    $("#divfromamount").hide();
+                    $("#divtoamount").hide();
+                    $("#divmultiple").hide();
+                    $("#divmtgtoken").hide();
+                    $("#lblUpgradePackage").hide();
+                    $("#divUpgradePackage").hide();
                 }
             });
 
@@ -658,6 +681,9 @@
             $("#divmtgtoken").hide();
             $("#lblUpgradePackage").hide();
             $("#divUpgradePackage").hide();
+
+            
+
             $("#UpgPackage").click(function () {
                 debugger;
                 if ($(this).is(":checked")) {
