@@ -179,9 +179,10 @@
                 <div class="col-xl-6 mb-3">
                     <div class="example">
                         <p class="mb-1">Sale Charge<span style="color: red">*</span>
-                          (Sale % : <label id="BrokerTransferChargehdfgglabel"></label>) 
+                          (Sale % : <span id="BrokerTransferChargehdfgglabel"></span>) 
                          </p>
                         <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" readonly />
+                        <span id="TotalMTGTokens"></span>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -262,6 +263,7 @@
 
         var TransferCharge = ($("#TransferCharge").val(PercentValues));
 
+
         //var TransferCharge = ($("#TransferCharge").val(TotalSumValues));
         $("#TransferCharge").attr("readonly", true);
 
@@ -274,8 +276,10 @@
         }
         else
         {
-            $("#MTGToken").addClass('errortext');
+
+            $("#MTGToken").removeClass('errortext');
             $('#MTGToken').focus();
+            $("#TotalMTGTokens").text('Total MTG Sell : '+TotalSumValues);
         }
         if (TotalSumValues > WalletAmount) {
             alert("Transfer charge should be less than or equal from wallet balance.");
