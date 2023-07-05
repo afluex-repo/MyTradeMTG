@@ -65,7 +65,8 @@ namespace MyTradeMTG.Models
         public string PaymentType { get; set; }
         public string IsActive { get; set; }
         public string OtpVerify { get; set; }
-        
+        public string Emails { get; set; }
+
         #endregion
         #region Sponsor
         public DataSet GetMemberDetails()
@@ -303,7 +304,7 @@ namespace MyTradeMTG.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@Name", Name),
-                                      new SqlParameter("@Email", Email),
+                                      new SqlParameter("@Email", Emails),
                                        new SqlParameter("@Mobile",MobileNo) ,
                                       new SqlParameter("@Subject", Subject) ,
                                       new SqlParameter("@Message", Message),

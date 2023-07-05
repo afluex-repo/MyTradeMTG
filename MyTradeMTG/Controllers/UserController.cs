@@ -2856,7 +2856,7 @@ namespace MyTradeMTG.Controllers
                     ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
                     ViewBag.FirstTopUpMTG = ds.Tables[0].Rows[0]["FirstTopUpMTG"].ToString();
-                }
+               }
             }
             return View(model);
         }

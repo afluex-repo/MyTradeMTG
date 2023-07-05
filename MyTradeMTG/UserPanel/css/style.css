@@ -2875,7 +2875,7 @@ textarea.form-control {
   border-radius: 0.75rem; }
   .dropdown-menu[data-bs-popper] {
     top: 100%;
-    left: 0;
+    
     margin-top: 0.125rem; }
 
 .dropdown-menu-start {
@@ -36431,13 +36431,13 @@ $color_pallate_15: #ed0b4c; */
 .ct-chart .ct-series.ct-series-a .ct-line,
 .ct-chart .ct-series.ct-series-a .ct-point,
 .ct-chart .ct-series.ct-series-a .ct-slice-donut {
-  stroke: #363062; }
+  stroke: #3ecf22; }
 
 .ct-chart .ct-series.ct-series-b .ct-bar,
 .ct-chart .ct-series.ct-series-b .ct-line,
 .ct-chart .ct-series.ct-series-b .ct-point,
 .ct-chart .ct-series.ct-series-b .ct-slice-donut {
-  stroke: #68CF29; }
+  stroke: #df1f1f; }
 
 .ct-chart .ct-series.ct-series-c .ct-bar,
 .ct-chart .ct-series.ct-series-c .ct-line,
