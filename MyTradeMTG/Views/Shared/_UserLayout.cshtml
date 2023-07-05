@@ -34,7 +34,7 @@
     <style>
         .errortext {
             border: 2px solid red !important;
-            background-color: #ffd3c6 !important;
+            /*background-color: #ffd3c6 !important;*/
         }
 
         .alert.alert-icon-right.alert-light-red.navbar-nav.flex-row.ml-auto.mr-4 {
@@ -1884,7 +1884,6 @@
                 ///////////////////////////////////////////////////////////////////////////
 
                 var chartBarRunning = function () {
-                    debugger;
                     $.ajax({
                         url: "/User/GetchartBarRunning",
                         type: "GET",
@@ -1892,7 +1891,6 @@
                         data: JSON.stringify(),
                         contentType: 'application/json;',
                         success: function (d) {
-                            debugger;
                             var PaidCramount = [];
                             var PaidDramount = [];
                             var AllYear = [];
@@ -1908,9 +1906,6 @@
                                 //let Dr = PaidDramount;
                                 //let x = "";
                                 
-                            
-                                debugger;
-
                                 var chartBarRunningOptions = {
 
                                     series:[{
@@ -2049,7 +2044,7 @@
                            
                             }
                            
-                                debugger;
+
                                 var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
                                
                            
@@ -2611,7 +2606,6 @@
 
     <script>
         function FranchiseRequest() {
-            debugger;
             if ($("#FirmName").val() == "") {
                 $("#FirmName").addClass('errortextfor');
                 $("#FirmName").focus();
@@ -2775,7 +2769,6 @@
 
 
             var labelPlacementChart = function () {
-                debugger;
                 $.ajax({
                     url: "/User/GetchartBarRunning",
                     type: "GET",
@@ -2783,7 +2776,6 @@
                     data: JSON.stringify(),
                     contentType: 'application/json;',
                     success: function (d) {
-                        debugger;
                         var PaidCramount = [];
                         var PaidDramount = [];
                         var AllYear = [];
@@ -2793,7 +2785,6 @@
                             PaidCramount.push(t[i].Cramount);
                             PaidDramount.push(t[i].Dramount);
                         }
-                        debugger;
                         let YY = AllYear;
                         let Cr = PaidCramount;
                         let Dr = PaidDramount;

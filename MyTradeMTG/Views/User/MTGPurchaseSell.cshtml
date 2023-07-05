@@ -14,13 +14,6 @@
                     <div class="card-header">
                         <h4 class="card-title">User Details</h4>
                     </div>
-
-
-                    @*<div class="sweetalert mt-5">
-                        <button class="btn btn-success btn sweet-success">Sweet Success</button>
-                    </div>*@
-
-
                     <div class="card-body">
                         <label id="WalletBalance" style="color:red;">MTG Token/USDT Wallet Balance : @ViewBag.WalletBalance</label>
                         <div class="row">
@@ -104,12 +97,6 @@
 
                                 </tbody>
                             </table>
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -194,9 +181,6 @@
 <input type="hidden" id="BrokerTransferChargehtf" value="@Model.BrokerTransferCharge" />
 <script>
     function GetFranchiseDetails(i) {
-        debugger;
-
-        
         var Fk_UserId = $("#Fk_UserId_" + i).text();
         var CustomerId = $("#CustomerId_" + i).text();
         var FirmName = $("#FirmName_" + i).text();
@@ -224,7 +208,6 @@
     }
 
     function OnchangeMTGTokenGetTransferCharge() {
-        debugger;
         var WalletAmount = $("#WalletAmounteee").val();
         var Amount = parseFloat($("#MTGToken").val());
         var MinMTGSell = parseFloat($("#MinMTGSell").val());
@@ -317,7 +300,6 @@
     }
 
     function SaveMTGTransferCharge() {
-        debugger;
 
         var Fk_UserId = $("#Fk_UserIdddd").val();
         var CustomerId = $("#CustomerId").val();
@@ -369,14 +351,12 @@
 <style>
     .errortext {
         border: 1px solid red !important;
-        background-color: #fff0f0 !important;
     }
 </style>
 
 <style>
     .errortexteeee {
         border: 1px solid red !important;
-        background-color: #1b1919 !important;
     }
 </style>
 
@@ -393,7 +373,6 @@
 {
     <script>
         $(document).ready(function () {
-        debugger;
         swal({
             backdrop: true,
                 allowOutsideClick: false,
