@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @*<link href="/UserPanel/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">*@
     <link href="/UserPanel/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/UserPanel/vendor/chartist/css/chartist.min.css">
     <link href="/UserPanel/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/UserPanel/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
@@ -1084,6 +1085,8 @@
     <script src="~/assets/js/libs/jquery-3.1.1.min.js"></script>
     <script src="~/bootstrap/js/popper.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Chart Chartist plugin files -->
+
 
     <!-- Required vendors -->
     <script src="/UserPanel/vendor/global/global.min.js"></script>
@@ -1106,14 +1109,18 @@
     <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
     <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/UserPanel/icons/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/UserPanel/icons/font-awesome/css/all.min.css">
     <!-- Dashboard 2 -->
     @*<script src="/UserPanel/js/dashboard/dashboard-4.js"></script>*@
     <script src="/UserPanel/js/deznav-init.js"></script>
     @*<script src="/UserPanel/js/demo.js"></script>*@
+      <!-- Chart Chartist plugin files -->
+    <script src="/UserPanel/vendor/chartist/js/chartist.min.js"></script>
+    <script src="/UserPanel/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+    <script src="/UserPanel/js/plugins-init/chartist-init.js"></script>
+ 
 
-    @*<script src="~/UserPanel/js/plugins-init/chartist-init.js"></script>*@
-    <script src="~/UserPanel/vendor/chartist/js/chartist.min.js"></script>
-    <script src="~/UserPanel/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
     <script>
         jQuery(document).ready(function () {
@@ -1891,20 +1898,22 @@
                             var AllYear = [];
                             var t = JSON.parse(JSON.stringify(d));
                             for (var i = 0; i < t.length; i++) {
-                                //AllYear.push(t[i].Year);
-                                //PaidCramount.push(t[i].Cramount);
-                                //PaidDramount.push(t[i].Dramount);
-
+                                    //AllYear.push(t[i].Year);
+                                    //PaidCramount.push(t[i].Cramount);
+                                    //PaidDramount.push(t[i].Dramount);
+                                
                                 //debugger;
                                 //let YY = AllYear;
                                 //let Cr = PaidCramount;
                                 //let Dr = PaidDramount;
-                                let x = "";
+                                //let x = "";
                                 
+                            
                                 debugger;
 
                                 var chartBarRunningOptions = {
-                                    series: [{
+
+                                    series:[{
                                         name: 'Buy',
                                         data: [{
                                             x: t[i].Year,
@@ -1918,9 +1927,12 @@
                                                     x: t[i].Year,
                                                     y: [0.00, t[i].Dramount]
                                                 }]
-                                            }],
+                                            },
+                                   
 
+                                            ],
 
+                                    
                                     chart: {
                                         type: 'rangeBar',
                                         height: 370,
@@ -1941,7 +1953,7 @@
                                     },
                                     colors: ['#61C277', '#FF3E3E'],
                                     dataLabels: {
-                                        enabled: true,
+                                        enabled: false,
                                     },
                                     markers: {
                                         shape: "circle",
@@ -1970,7 +1982,7 @@
                                     grid: {
                                         borderColor: '#eee',
                                     },
-                                    xaxis: {
+                                    xaxis: { 
                                         labels: {
                                             style: {
                                                 colors: '#787878',
@@ -2003,7 +2015,7 @@
                                     },
                                     tooltip: {
                                         x: {
-                                            format: t[i].Year
+                                            format: 'dd/MM/yy HH:mm'
                                         },
                                         y: {
                                             formatter: function (val) {
@@ -2034,22 +2046,22 @@
                                     }]
 
                                 }
-
+                           
                             }
-
-                            debugger;
-                            var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
-
-
-
-                            chartBarRunningObject.render();
-                       
+                           
+                                debugger;
+                                var chartBarRunningObject = new ApexCharts(document.querySelector("#chartBarRunning"), chartBarRunningOptions);
+                               
+                           
+                          
+                                chartBarRunningObject.render();
+                            
                         },
-                        error: function (err) {
+                    error: function (err) {
 
-                        }
-                    });
-
+                    } 
+                });    
+                        
                 }
              ////// fro testin chart
              //   var chartBarRunning23 = function () {
@@ -2741,6 +2753,7 @@
             }
         })
     </script>
+
     <script>
         var dzChartlist = function () {
 
@@ -2786,16 +2799,16 @@
                         let Dr = PaidDramount;
 
                         new Chartist.Bar('#label-placement-chart', {
-                            //labels: YY,
-                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                            //series: [
-                            //  Cr,
-                            //  Dr
-                            //]
+                            labels: YY,
+                            //labels: ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
                             series: [
-                              [5, 4, 3, 7, 5, 10, 3],
-                              [3, 2, 9, 5, 4, 6, 4]
+                              cr,
+                              dr
                             ]
+                            //series: [
+                            //  [3, 5, 4, 3, 7, 5, 10, 3,30,20],
+                            //  [4, 3, 2, 9, 5, 4, 6, 4,15,10]
+                            //]
                         }, {
                             axisX: {
                                 // On the x-axis start means top and end means bottom
@@ -2852,5 +2865,471 @@
         });
 
     </script>
+    @*<script>
+        var dzChartlist = function () {
+
+            var screenWidth = $(window).width();
+
+            var widgetChart = function () {
+                if (jQuery('#widgetChart').length > 0) {
+                    const widgetChart = document.getElementById("widgetChart").getContext('2d');
+                    //generate gradient
+                    const widgetChartgradientStroke = widgetChart.createLinearGradient(1, 1, 500, 1);
+                    widgetChartgradientStroke.addColorStop(0, "rgba(255, 171, 45, 1)");
+                    widgetChartgradientStroke.addColorStop(1, "rgba(255, 247, 45, 0.5)");
+
+                    new Chart(widgetChart, {
+                        type: "line",
+                        data: {
+                            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September"],
+
+                            datasets: [{
+                                label: "Sales Stats",
+                                borderColor: 'transparent',
+                                pointBackgroundColor: '#FFAB2D',
+                                pointBorderColor: '#FFAB2D',
+                                borderWidth: 4,
+                                borderRadius: 10,
+                                pointHoverBackgroundColor: '#FFAB2D',
+                                pointHoverBorderColor: '#FFAB2D',
+                                backgroundColor: widgetChartgradientStroke,
+
+                                data: [10, 30, 20, 40, 30, 40, 30, 50, 35]
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: !1
+                            },
+                            tooltips: {
+                                intersect: !1,
+                                mode: "nearest",
+                                xPadding: 10,
+                                yPadding: 10,
+                                caretPadding: 10
+                            },
+
+                            legend: {
+                                display: !1
+                            },
+                            responsive: !0,
+                            maintainAspectRatio: !1,
+                            hover: {
+                                mode: "index"
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: !1,
+                                    gridLines: !1,
+                                    scaleLabel: {
+                                        display: !0,
+                                        labelString: "Month"
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: !1,
+                                    gridLines: !1,
+                                    scaleLabel: {
+                                        display: !0,
+                                        labelString: "Value"
+                                    },
+                                    ticks: {
+                                        beginAtZero: !0
+                                    }
+                                }]
+                            },
+                            elements: {
+                                point: {
+                                    radius: 0,
+                                    borderWidth: 0
+                                }
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 0,
+                                    top: 5,
+                                    bottom: 0
+                                }
+                            }
+                        }
+                    });
+
+                }
+            }
+
+            var widgetChart1 = function () {
+                var options = {
+                    series: [{
+                        data: [
+                          [1327359600000, 88],
+                          [1327532400000, 87.92],
+                          [1327878000000, 88.3],
+                          [1328050800000, 88.90],
+                          [1328223600000, 88.70],
+                          [1328569200000, 32.28],
+                          [1328742000000, 32.65],
+                          [1329087600000, 32.35],
+                          [1329260400000, 32.46],
+                          [1329433200000, 32.75],
+                          [1329865200000, 32.33],
+                          [1330038000000, 33.41],
+                          [1330383600000, 33.27],
+                          [1330556400000, 33.10],
+                          [1330902000000, 33.22],
+                          [1331074800000, 32.41],
+                          [1331247600000, 33.64],
+                          [1331593200000, 34.22],
+                          [1331766000000, 34.17],
+                          [1332111600000, 34.51],
+                          [1332284400000, 33.56],
+                          [1332457200000, 33.81],
+                          [1332799200000, 34.63],
+                          [1332972000000, 34.48],
+                          [1333317600000, 34.70],
+                          [1333490400000, 33.46],
+                          [1333922400000, 33.22],
+                          [1334095200000, 33.01],
+                          [1334268000000, 33.18],
+                          [1334613600000, 33.84],
+                          [1334786400000, 32.91],
+                          [1335132000000, 32.62],
+                          [1335304800000, 33.13],
+                          [1335477600000, 33.58],
+                          [1335823200000, 33.77],
+                          [1335996000000, 33.32],
+                          [1336082400000, 32.61],
+                          [1336428000000, 32.67],
+                          [1336600800000, 31.92],
+                          [1336946400000, 32.23],
+                          [1337119200000, 32.36],
+                        ]
+
+                    }],
+                    chart: {
+                        id: 'area-datetime',
+                        type: 'area',
+                        height: 150,
+                        width: '100%',
+                        zoom: {
+                            enabled: false
+                        },
+                        sparkline: {
+                            enabled: true
+                        },
+                        toolbar: {
+                            show: false
+                        },
+                    },
+                    colors: ['#AC4CBC', '#AC4CBC', '#AC4CBC'],
+                    dataLabels: {
+                        enabled: false
+                    },
+                    markers: {
+                        size: 0,
+                        style: 'hollow',
+                    },
+                    xaxis: {
+                        show: false,
+                        type: 'datetime',
+                        labels: {
+                            format: 'MMM',
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                    },
+
+                    yaxis: {
+                        show: false
+                    },
+                    grid: {
+                        show: false,
+                    },
+                    responsive: [{
+                        breakpoint: 1024,
+                        options: {
+                            chart: {
+                                width: '100%',
+                            }
+
+                        }
+                    }],
+                };
+
+
+
+                var chart = new ApexCharts(document.querySelector("#widget-chart1"), options);
+                chart.render();
+            }
+
+            var widgetChart2 = function () {
+                var options = {
+                    series: [{
+                        data: [
+                          [1327359600000, 31.95],
+                          [1327532400000, 32],
+                          [1327878000000, 33.00],
+                          [1328050800000, 32.50],
+                          [1328223600000, 31.85],
+                          [1328569200000, 32.28],
+                          [1328742000000, 32.65],
+                          [1329087600000, 32.35],
+                          [1329260400000, 32.46],
+                          [1329433200000, 32.75],
+                          [1329865200000, 32.33],
+                          [1330038000000, 33.41],
+                          [1330383600000, 33.27],
+                          [1330556400000, 33.10],
+                          [1330902000000, 33.22],
+                          [1331074800000, 32.41],
+                          [1331247600000, 33.64],
+                          [1331593200000, 34.22],
+                          [1331766000000, 34.17],
+                          [1332111600000, 34.51],
+                          [1332284400000, 33.56],
+                          [1332457200000, 33.81],
+                          [1332799200000, 34.63],
+                          [1332972000000, 34.48],
+                          [1333317600000, 34.70],
+                          [1333490400000, 33.46],
+                          [1333922400000, 33.22],
+                          [1334095200000, 33.01],
+                          [1334268000000, 33.18],
+                          [1334613600000, 33.84],
+                          [1334786400000, 32.91],
+                          [1335132000000, 32.62],
+                          [1335304800000, 33.13],
+                          [1335477600000, 33.58],
+                          [1335823200000, 33.77],
+                          [1335996000000, 33.32],
+                          [1336082400000, 32.61],
+                          [1336428000000, 32.67],
+                          [1336600800000, 31.92],
+                          [1336946400000, 32.23],
+                          [1337119200000, 32.36],
+                        ]
+
+                    }],
+                    chart: {
+                        id: 'area-datetime',
+                        type: 'area',
+                        height: 150,
+                        width: '100%',
+                        zoom: {
+                            enabled: false
+                        },
+                        sparkline: {
+                            enabled: true
+                        },
+                        toolbar: {
+                            show: false
+                        },
+                    },
+                    colors: ['#FFAB2D', '#FFAB2D', '#FFAB2D'],
+                    dataLabels: {
+                        enabled: false
+                    },
+                    markers: {
+                        size: 0,
+                        style: 'hollow',
+                    },
+                    xaxis: {
+                        show: false,
+                        type: 'datetime',
+                        labels: {
+                            format: 'MMM',
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                    },
+
+                    yaxis: {
+                        show: false
+                    },
+                    grid: {
+                        show: false,
+                    },
+                    responsive: [{
+                        breakpoint: 1024,
+                        options: {
+                            chart: {
+                                width: '100%',
+                            }
+
+                        }
+                    }],
+                };
+
+
+
+                var chart = new ApexCharts(document.querySelector("#widget-chart2"), options);
+                chart.render();
+            }
+            var widgetChart3 = function () {
+                var options = {
+                    series: [{
+                        data: [
+                          [1327359600000, 31.95],
+                          [1327532400000, 32],
+                          [1327878000000, 33.00],
+                          [1328050800000, 32.50],
+                          [1328223600000, 31.85],
+                          [1328569200000, 32.28],
+                          [1328742000000, 32.65],
+                          [1329087600000, 32.35],
+                          [1329260400000, 32.46],
+                          [1329433200000, 32.75],
+                          [1329865200000, 32.33],
+                          [1330038000000, 33.41],
+                          [1330383600000, 33.27],
+                          [1330556400000, 33.10],
+                          [1330902000000, 33.22],
+                          [1331074800000, 32.41],
+                          [1331247600000, 33.64],
+                          [1331593200000, 34.22],
+                          [1331766000000, 34.17],
+                          [1332111600000, 34.51],
+                          [1332284400000, 33.56],
+                          [1332457200000, 33.81],
+                          [1332799200000, 34.63],
+                          [1332972000000, 34.48],
+                          [1333317600000, 34.70],
+                          [1333490400000, 33.46],
+                          [1333922400000, 33.22],
+                          [1334095200000, 33.01],
+                          [1334268000000, 33.18],
+                          [1334613600000, 33.84],
+                          [1334786400000, 32.91],
+                          [1335132000000, 32.62],
+                          [1335304800000, 33.13],
+                          [1335477600000, 33.58],
+                          [1335823200000, 33.77],
+                          [1335996000000, 33.32],
+                          [1336082400000, 32.61],
+                          [1336428000000, 32.67],
+                          [1336600800000, 31.92],
+                          [1336946400000, 32.23],
+                          [1337119200000, 32.36],
+                        ]
+
+                    }],
+                    chart: {
+                        id: 'area-datetime',
+                        type: 'area',
+                        height: 150,
+                        width: '100%',
+                        zoom: {
+                            enabled: false
+                        },
+                        sparkline: {
+                            enabled: true
+                        },
+                        toolbar: {
+                            show: false
+                        },
+                    },
+                    colors: ['#3693FF', '#E91E63', '#9C27B0'],
+                    dataLabels: {
+                        enabled: false
+                    },
+                    markers: {
+                        size: 0,
+                        style: 'hollow',
+                    },
+                    xaxis: {
+                        show: false,
+                        type: 'datetime',
+                        labels: {
+                            format: 'MMM',
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                    },
+
+                    yaxis: {
+                        show: false
+                    },
+                    grid: {
+                        show: false,
+                    },
+                    responsive: [{
+                        breakpoint: 1024,
+                        options: {
+                            chart: {
+                                width: '100%',
+                            }
+
+                        }
+                    }],
+                };
+
+
+
+                var chart = new ApexCharts(document.querySelector("#widget-chart3"), options);
+                chart.render();
+            }
+
+          
+
+            var handleWebpicker = function () {
+                $('#crypto-webticker').webTicker({
+                    height: 'auto',
+                    duplicate: true,
+                    startEmpty: false,
+                    rssfrequency: 4
+                });
+            }
+            var handleDatePicker = function () {
+                $('.input-daterange-timepicker').daterangepicker({
+                    timePicker: true,
+                    format: 'MM/DD/YYYY h:mm A',
+                    timePickerIncrement: 30,
+                    timePicker12Hour: true,
+                    timePickerSeconds: false,
+                    buttonClasses: ['btn', 'btn-sm'],
+                    applyClass: 'btn-danger',
+                    cancelClass: 'btn-inverse'
+                });
+            }
+
+            /* Function ============ */
+            return {
+                init: function () {
+                },
+
+
+                load: function () {
+                    widgetChart();
+                    widgetChart1();
+                    widgetChart2();
+                    widgetChart3();
+                    handleWebpicker();
+                    handleDatePicker();
+                },
+
+                resize: function () {
+                }
+            }
+
+        }();
+
+        jQuery(document).ready(function () {
+        });
+
+        jQuery(window).on('load', function () {
+            setTimeout(function () {
+                dzChartlist.load();
+            }, 1000);
+
+        });
+
+        jQuery(window).on('resize', function () {
+
+
+        });
+    </script>*@
 </body>
 </html>

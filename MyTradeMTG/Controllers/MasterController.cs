@@ -1090,7 +1090,7 @@ namespace MyTradeMTG.Controllers
                     model.PK_QRCodeId = id;
                     model.IsActive1 = IsActive;
                     model.AddedBy = Session["Pk_AdminId"].ToString();
-                    DataSet ds = model.ActiveQRCodeMaster();
+                   DataSet ds = model.ActiveQRCodeMaster();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
                         if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
@@ -1143,11 +1143,5 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("QRCodeList", "Master");
         }
-
-
-        
-
-
-
     }
 }

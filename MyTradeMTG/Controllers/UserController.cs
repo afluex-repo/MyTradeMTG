@@ -20,6 +20,11 @@ namespace MyTradeMTG.Controllers
 {
     public class UserController : UserBaseController
     {
+
+        public ActionResult Test()
+        {
+            return View();
+        }
         // GET: User
         public ActionResult UserDashBoard()
         {
@@ -2851,7 +2856,7 @@ namespace MyTradeMTG.Controllers
                     ViewBag.ProductName = ds.Tables[0].Rows[0]["ProductName"].ToString();
                     ViewBag.PackageTypeName = ds.Tables[0].Rows[0]["PackageTypeName"].ToString();
                     ViewBag.FirstTopUpMTG = ds.Tables[0].Rows[0]["FirstTopUpMTG"].ToString();
-                }
+               }
             }
             return View(model);
         }
@@ -2915,5 +2920,7 @@ namespace MyTradeMTG.Controllers
             }
             return RedirectToAction("TransferToMTGWallet", "User");
         }
+
+       
     }
 }
