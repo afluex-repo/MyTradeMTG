@@ -6,7 +6,9 @@
 }
 <style>
     label{
+        margin-top:1rem;
         margin-bottom:1rem;
+        color:#ffffff;
     }
 </style>
 
@@ -26,12 +28,12 @@
 
                                     <div class="col-md-3">
                                         From Date
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = true })
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date",@autoComplete=true })
 
                                     </div>
                                     <div class="col-md-3">
                                         To Date
-                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = true })
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @autoComplete = true })
 
                                     </div>
                                     <div class="col-md-3">
@@ -42,7 +44,7 @@
                                 </div>
 
                             <div class="table-responsive">
-                                <table id="html5-extension" class="table table-hover non-hover" data-page-length='10'>
+                                <table id="html5-extension" class="table table-hover non-hover" data-sortable="false" data-page-length='20'>
                                     <thead>
                                         <tr>
                                             <th>Sr No.</th>
@@ -62,7 +64,7 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="sorting_desc">
                                         @if (Model != null)
                                         {
                                             if (Model.lstSaleRequest != null)
@@ -82,6 +84,8 @@
                                                         <td style="display:none" id="IFSCCode_@i">@Item.IFSCCode</td>
                                                         <td style="display:none" id="AccountNo_@i">@Item.AccountNo</td>
                                                         <td style="display:none" id="UPIID_@i">@Item.UPIID</td>
+                                                        <td style="display:none" id="Mobile_@i">@Item.Mobile</td>
+                                                        <td style="display:none" id="Email_@i">@Item.Email</td>
 
 
                                                         <td style="display:none;" id="TransferCharge_@i">@Item.TransferCharge</td>
@@ -116,6 +120,34 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span >Contact Address</span><br />
+                                                        <label id="CustomerId"></label>
+                                                       @*@Html.TextBoxFor(m => m.CustomerId, new { @class = "form-control", @Placeholder = "Contact Address", @style = "background:none;border:none;margin-top:-15px;    margin-left: -19px;",@readonly=true })*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span >Name</span><br />
+                                                        <label id="UserName"></label>
+                                                        @*@Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @Placeholder = "User Name", @style = "background:none;border:none;margin-top:-15px;    margin-left: -19px;", @readonly = true })*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span >Mobile No</span><br />
+                                                        <label id="Mobile"></label>
+                                                        @*@Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile No.", @style = "background:none;border:none;margin-top:-15px;    margin-left: -19px;", @readonly = true })*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <span >Email</span><br />
+                                                        <label id="Email"></label>
+                                                        @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email", @style = "background:none;border:none;margin-top:-15px;    margin-left: -19px;", @readonly = true })*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
 
                                                     <input id="Pk_FranchisetransferId" name="Pk_FranchisetransferId" class="form-control" type="text" @*style="display:none"*@ hidden />
                                                     <input id="Fk_UserIdddd" name="Fk_UserIdddd" class="form-control" type="text" @*style="display:none"*@ hidden />
@@ -126,20 +158,22 @@
 
                                                     <input id="TransferCharge" name="TransferCharge" class="form-control" type="text" @*style="display:none"*@ hidden />
                                                     <div class="form-group">
-                                                        <label>MTG <span style="color: red"></span></label>
-                                                        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony_dd()", @style = "background:none;border:none;margin-top:-15px" })
+                                                        @*<label>MTG <span style="color: red"></span></label>*@
+                                                        <span >MTG</span><br />
+                                                        <label id="Amount"></label>
+                                                        @*@Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "MTG /USDT", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return ConvertMony_dd()", @style = "background:none;border:none;margin-top:-30px;    margin-left: -19px;", @readonly = true })*@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4" style="display:none;">
                                                     <div class="form-group">
-                                                        In US Doller<span style="color: red"></span>
+                                                        <span>In US Doller</span>
                                                         <label id="InUsDoller" class="pt-3 form-control"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        In Rupess<span style="color: red"></span>
-                                                        <label id="result" class="pt-3 form-control" style="background:none;border:none;margin-top:-15px"></label>
+                                                        <span >In Rupees</span><br />
+                                                        <label id="results"></label>
 
                                                         @*<input type="hidden" id="IndianValue" name="IndianValue" value="@ViewBag.IndianValue" />*@
 
@@ -162,32 +196,42 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Bank Name</label>
-                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <span >Bank Name</span><br />
+                                                        <label id="Bank_Name"></label>
+                                                        @*<label>Bank Name</label>
+                                                        <input type="text" id="Bank_Name" name="Bank_Name" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-19px;    margin-left: -19px;" />*@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Branch Name</label>
-                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <span >Branch Name</span><br />
+                                                        <label id="Branch_Name"></label>
+                                                        @*<label>Branch Name</label>
+                                                        <input type="text" id="Branch_Name" name="Branch_Name" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-30px;    margin-left: -19px;" />*@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Account No.</label>
-                                                        <input type="text" id="AccountNo" name="AccountNo" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <span >Account No.</span><br />
+                                                        <label id="AccountNo"></label>
+                                                        @*<label>Account No.</label>
+                                                        <input type="text" id="AccountNo" name="AccountNo" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-30px;margin-left: -19px;" />*@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label> IFSC Code</label>
-                                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @readonly = true, @style = "background:none;border:none;margin-top:-15px" })
+                                                        <span >IFSC Code</span><br />
+                                                        <label id="IFSCCode"></label>
+                                                        @*<label> IFSC Code</label>
+                                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @readonly = true, @style = "background:none;border:none;margin-top:-30px;margin-left: -19px;" })*@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>UPI Id</label>
-                                                        <input type="text" id="UPI" name="UPI" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-15px" />
+                                                        <span >UPI Id</span><br />
+                                                        <label id="UPI"></label>
+                                                        @*<label>UPI Id</label>
+                                                        <input type="text" id="UPI" name="UPI" class="form-control" readonly="readonly" style="background:none;border:none;margin-top:-30px;    margin-left: -19px;" />*@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4" id="paymentmode">
@@ -269,7 +313,7 @@
         }
         debugger;
         //const convert = document.getElementById("convert");
-        const result = document.getElementById("result");
+        const results = document.getElementById("results");
         const from = document.getElementById("from");
         const to = document.getElementById("to");
         //const amount = document.getElementById("Amount");
@@ -289,9 +333,8 @@
             let rate = data.rates[toCurrency];
             let total = rate * amt;
 
-            //result.innerHTML = `${amt} ${fromCurrency} = ${total}
-            result.innerHTML = `${amt}$  = ${total}
-
+            //results.innerHTML = `${amt} ${fromCurrency} = ${total}
+            results.innerHTML = `${amt}$  = ${parseFloat(total).toFixed(2)}
             ${toCurrency}`;
             //IndianValue.innerHTML = total;
             $("#IndianValue").val(total);
@@ -312,20 +355,24 @@
         var UPI = $("#UPIID_" + i).text();
         var CustomerId = $("#CustomerId_" + i).text();
         var UserName = $("#UserName_" + i).text();
+        var Mobile = $("#Mobile_" + i).text();
+        var Email = $("#Email_" + i).text();
         var TransferCharge = $("#TransferCharge_" + i).text();
         var Pk_FranchisetransferId = $("#Pk_FranchisetransferId_" + i).text();
         ConvertMony();
 
         $("#Fk_UserIdddd").val(Fk_UserId);
         $("#Pk_FranchisetransferId").val(Pk_FranchisetransferId);
-        $("#Amount").val(Amount);
-        $("#Bank_Name").val(BankName);
-        $("#Branch_Name").val(BranchName);
-        $("#IFSCCode").val(IFSCCode);
-        $("#AccountNo").val(AccountNo);
-        $("#UPI").val(UPI);
-        $("#CustomerId").val(CustomerId);
-        $("#UserName").val(UserName);
+        $("#Amount").text(Amount);
+        $("#Bank_Name").text(BankName);
+        $("#Branch_Name").text(BranchName);
+        $("#IFSCCode").text(IFSCCode);
+        $("#AccountNo").text(AccountNo);
+        $("#UPI").text(UPI);
+        $("#CustomerId").text(CustomerId);
+        $("#UserName").text(UserName);
+        $("#Mobile").text(Mobile);
+        $("#Email").text(Email);
         $("#TransferCharge").val(TransferCharge);
     }
 
@@ -351,10 +398,11 @@
 
 </script>
 <script>
-
+   
     $('#FromDate').datepicker({
         dateFormat: 'dd/mm/yy',
     });
+   
 
     $('#ToDate').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -493,11 +541,11 @@
     //            data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, files: files },
 
     //            success: function (data) {
-    //                if (data.Result == "yes") {
+    //                if (data.results == "yes") {
     //                    alert("Sale Request Appproved Successfully !!");
     //                    window.location.reload();
     //                }
-    //                else if (data.Result == "no") {
+    //                else if (data.results == "no") {
     //                    alert("Some occured error.");
     //                }
     //                else {
@@ -576,11 +624,11 @@
                 contentType: false,
                 data: formData,
                 success: function (data) {
-                    if (data.Result == "yes") {
+                    if (data.results == "yes") {
                         alert("Sale Request Appproved Successfully !!");
                         window.location.reload();
                     }
-                    else if (data.Result == "no") {
+                    else if (data.results == "no") {
                         alert("Some occured error.");
                     }
                     else {
@@ -613,11 +661,11 @@
                 url: '/User/ApproveSaleRequest', type: 'post', datatype: 'json',
                 data: { Pk_FranchisetransferId: Pk_FranchisetransferId, PaymentMode: PaymentMode, BankName: BankName, BranchName: BranchName, Transaction: Transaction, TransactionDate: TransactionDate, Status: Status, documenturl: documenturl },
                 success: function (data) {
-                    if (data.Result == "yes") {
+                    if (data.results == "yes") {
                         alert("Sale Request Rejected Successfully !!");
                         window.location.reload();
                     }
-                    else if (data.Result == "no") {
+                    else if (data.results == "no") {
                         alert("Some occured error.");
                     }
                     else {
@@ -667,4 +715,3 @@
         background-color: #fff0f0 !important;
     }
 </style>
-

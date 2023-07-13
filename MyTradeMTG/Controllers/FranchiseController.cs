@@ -308,6 +308,8 @@ namespace MyTradeMTG.Controllers
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.AccountNo = r["MemberAccNo"].ToString();
                     obj.UPIID = r["UPIID"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.Email = r["Email"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSaleRequest = lst;
@@ -376,6 +378,8 @@ namespace MyTradeMTG.Controllers
                     obj.IFSCCode = r["IFSCCode"].ToString();
                     obj.AccountNo = r["MemberAccNo"].ToString();
                     obj.UPIID = r["UPIID"].ToString();
+                    obj.Mobile = r["Mobile"].ToString();
+                    obj.Email = r["Email"].ToString();
                     lst.Add(obj);
                 }
                 model.lstSaleRequest = lst;

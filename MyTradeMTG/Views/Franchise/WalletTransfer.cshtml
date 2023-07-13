@@ -85,8 +85,8 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="table-responsive mt-4">
-                                    <table class="table table-bordered w-100 mb-0" id="html5-extension" data-page-length='20'>
+                                <div class="table-responsive">
+                                    <table id="html5-extension" class="table table-hover non-hover" data-sortable="false" data-page-length='10'>
                                         <thead>
                                             <tr>
                                                 <th>Sr No.</th>
@@ -98,7 +98,7 @@
                                                 <th>Total MTG</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="sorting_desc">
                                             @if (Model != null)
                                             {
                                                 if (Model.QuickSendMTGList != null)
@@ -108,8 +108,7 @@
                                                     {
                                                         <tr class="text-left">
                                                             <td>
-                                                                @i
-                                                            </td>
+                                                                @i</td>
                                                             <td>@Item.TransferDate</td>
                                                             <td>@Item.CustomerId</td>
                                                             <td>@Item.TransfertoName (@Item.LoginId)</td>
