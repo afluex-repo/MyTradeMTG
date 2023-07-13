@@ -24,14 +24,14 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group row">
-                                        <label>Status</label>
-                                        <input type="hidden"  value="@Model.Status" id="st" />
-                                          <select id="Status" name="Status" class="default-select  form-control wide">
-                                              <option value="0">-Select-</option>
-                                              <option value="Pending">Pending</option>
-                                              <option value="Approved">Approved</option>
-                                              <option value="Rejected">Rejected</option>
-                                          </select>
+                                    <label>Status</label>
+                                    <input type="hidden" value="@Model.Status" id="st" />
+                                    <select id="Status" name="Status" class="default-select  form-control wide">
+                                        <option value="0">-Select-</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-3" style="margin-top:25px;">
@@ -41,68 +41,70 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="html5-extension" class="table table-hover non-hover table-responsive" data-page-length='20'>
-                                <thead>
-                                    <tr>
-                                        <th>Sr No.</th>
-                                        <th>LoginId</th>
-                                        <th>Name</th>
-                                        <th>Contact Address</th>
-                                        <th>Firm Name</th>
-                                        <th>Email Id</th>
-                                        <th>Mobile</th>
-                                        <th>Bank Name</th>
-                                        <th>Branch Name</th>
-                                        <th>Account No</th>
-                                        <th>IFSC Code</th>
-                                        <th>Address</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.lstFranchiseRequest != null)
+                            <div class="table-responsive">
+                                <table id="html5-extension" class="table table-hover non-hover" data-sortable="false" data-page-length='20'>
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>LoginId</th>
+                                            <th>Name</th>
+                                            <th>Contact Address</th>
+                                            <th>Firm Name</th>
+                                            <th>Email Id</th>
+                                            <th>Mobile</th>
+                                            <th>Bank Name</th>
+                                            <th>Branch Name</th>
+                                            <th>Account No</th>
+                                            <th>IFSC Code</th>
+                                            <th>Address</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sorting_desc">
+                                        @if (Model != null)
                                         {
-                                            int i = 1;
-                                            foreach (var Item in Model.lstFranchiseRequest)
+                                            if (Model.lstFranchiseRequest != null)
                                             {
-                                                <tr class="text-left">
-                                                    <td>@i</td>
-                                                    <td>@Item.LoginId</td>
-                                                    <td>@Item.Name</td>
-                                                    <td>@Item.CustomerId</td>
-                                                    <td>@Item.FirmName</td>
-                                                    <td>@Item.Email</td>
-                                                    <td>@Item.Mobile</td>
-                                                    <td>@Item.BankName</td>
-                                                    <td>@Item.BranchName</td>
-                                                    <td>@Item.AccountNo</td>
-                                                    <td>@Item.IFSCCode</td>
-                                                    <td>@Item.Address</td>
-                                                    <td>@Item.Status</td>
-                                                    @if (Item.Status=="Pending")
-                                                    {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstFranchiseRequest)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+                                                        <td>@Item.LoginId</td>
+                                                        <td>@Item.Name</td>
+                                                        <td>@Item.CustomerId</td>
+                                                        <td>@Item.FirmName</td>
+                                                        <td>@Item.Email</td>
+                                                        <td>@Item.Mobile</td>
+                                                        <td>@Item.BankName</td>
+                                                        <td>@Item.BranchName</td>
+                                                        <td>@Item.AccountNo</td>
+                                                        <td>@Item.IFSCCode</td>
+                                                        <td>@Item.Address</td>
+                                                        <td>@Item.Status</td>
+                                                        @if (Item.Status == "Pending")
+                                                        {
 
-                                                     <td>
-                                                            <a href= "/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a>  
-                                                         <a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a>                                         
-                                                    </td>
-                                                    }
-                                                    else
-                                                    {
-                                                        @*<td><a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a></td>*@
-                                                    }
-                                                 
+                                                            <td>
+                                                                <a href="/Admin/ApproveFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-success btn-sm " onclick="return confirm('Are you sure you want to approve this Franchise Request ?') ">Approve</a>
+                                                                <a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a>
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            @*<td><a href="/Admin/RejectFranchiseRequest?Id=@Item.Pk_FranchiseId" class="btn btn-danger btn-sm " onclick="return confirm('Are you sure you want to reject this  Franchise Request ?') ">Reject</a></td>*@
+                                                        }
 
-                                                </tr>
-                                                i++;
+
+                                                    </tr>
+                                                    i++;
+                                                }
                                             }
                                         }
-                                    }
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

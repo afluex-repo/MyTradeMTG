@@ -111,6 +111,7 @@ namespace MyTradeMTG.Models
         public string CurrencyName { get; set; }
         public string CurrencySymbol { get; set; }
         public string ISOcode { get; set; }
+        public string Count { get; set; }
 
 
 
